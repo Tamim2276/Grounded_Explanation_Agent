@@ -38,7 +38,7 @@ modalities is combined, and defines the evaluation plan.
 
 \subsection{The System as a State Machine}
 
-The agent is built on the ReAct paradigm, in which a model alternates between
+The agent is built on the ReAct paradigm~\cite{yao2023react}, in which a model alternates between
 reasoning about what it needs and acting to obtain it. Formally, the system is a
 state machine:
 \begin{equation}
@@ -157,19 +157,29 @@ exists as a separate tool.
 
 \begin{description}
     \item[\texttt{TextRetriever}.] Performs dense semantic retrieval over chunked
-    narrative text using scientific embeddings such as SciBERT. Domain-specific
-    embeddings are used rather than general-purpose ones because scientific
-    vocabulary is precisely where general embeddings are weakest.
+    narrative text using SPECTER2~\cite{singh2023scirepeval}, a model built on
+    SciBERT~\cite{beltagy2019scibert} and trained specifically for scientific
+    document retrieval. A retrieval-trained model is required because a
+    pre-trained language model such as SciBERT is not, on its own, trained to
+    place a query close to the passage that answers it; and a scientific model is
+    used rather than a general-purpose one because scientific vocabulary is
+    precisely where general embeddings are weakest.
 
-    \item[\texttt{TableRetriever}.] A structured parser that converts tables into a
-    normalised form \emph{while preserving the two-dimensional coordinates of every
-    cell}. Coordinate preservation is not incidental detail. The bounding boxes
+    \item[\texttt{TableRetriever}.] Works in two steps. First, it locates candidate
+    tables by querying the visual (ColPali) index and keeping pages whose
+    highest-scoring region is a table. Second, it runs a table-structure recogniser,
+    such as the Table Transformer~\cite{smock2022pubtables}, on that region; this
+    recovers rows, columns and a bounding box for every cell, and each cell's text
+    is read from the PDF's text layer at that position. The result is a normalised
+    table \emph{that preserves the two-dimensional coordinates of every cell}. Coordinate preservation is not incidental detail. The bounding boxes
     required by Objective~4 can only be produced if the spatial layout of the table
     survives parsing; a parser that returned a table as flat text would satisfy the
     reasoning requirement and silently destroy the attribution requirement.
 
     \item[\texttt{FigureRetriever} (ColPali).] Embeds entire PDF pages as grids of
-    visual patches using vision-language multi-vector retrieval, locating charts,
+    visual patches using ColPali~\cite{faysse2025colpali}, a vision-language model
+    that scores pages by late interaction between query tokens and page
+    patches~\cite{khattab2020colbert}, locating charts,
     plots and diagrams without depending on OCR. This matters because OCR fails
     most severely exactly where scientific documents are most information-dense ---
     multi-column headers, merged cells, and axis labels. Treating the page as an
@@ -190,34 +200,41 @@ appearing in a chart legend must be recognised as referring to the same quantity
 otherwise the system holds two disconnected facts rather than one linked piece of
 evidence.
 
-This linkage is performed by a cross-attention layer, in which the text
-representation queries the visual representation:
-\begin{equation}
-    \mathbf{Z}_{\text{fused}} = \text{Softmax}\left(\frac{\mathbf{Q}_t \mathbf{K}_v^{\top}}{\sqrt{d_k}}\right) \mathbf{V}_v + \mathbf{H}_t
-\end{equation}
+This linkage is performed in two places, neither of which requires training a new
+model component.
 
-\noindent Read plainly, this says: \emph{for each text token, measure how strongly
-it matches each visual patch; convert those match scores into weights; use the
-weights to build a summary of the visual evidence most relevant to that token; and
-add this summary to the token's own representation.} The three factors play the
-following roles:
+\begin{enumerate}
+    \item \textbf{Explicit linking in the evidence buffer.} Every item added to
+    $\mathcal{B}_t$ carries its provenance: source paper, page, retrieving tool,
+    and step. Items are additionally linked when they share a page or when one
+    explicitly references the other --- for example, a sentence containing
+    ``Table~3'' is linked to the table whose caption begins ``Table~3''. The buffer
+    is therefore a small graph of connected evidence rather than an unordered list.
 
-\begin{itemize}
-    \item $\mathbf{Q}_t \mathbf{K}_v^{\top}$ scores every text token against every
-    visual patch --- the raw compatibility between what the text says and what the
-    page shows.
-    \item Division by $\sqrt{d_k}$ keeps these scores in a numerically stable range
-    before the softmax, which is standard practice in scaled dot-product attention.
-    \item The final $+\,\mathbf{H}_t$ is a residual connection: the visual evidence
-    \emph{augments} the text representation rather than replacing it, so textual
-    meaning is not lost when visual grounding is added.
-\end{itemize}
+    \item \textbf{Joint reasoning in the generator.} The linked items are passed to
+    the vision-language generator as a single interleaved context, with each text
+    passage placed next to the table or figure crops it is linked to. The
+    generator's own attention layers then relate text tokens to image regions ---
+    this is the joint text--image reasoning such models are pre-trained to perform,
+    and no additional fusion layer is added on top of it.
+\end{enumerate}
 
 The practical consequence is that downstream generation is conditioned on linked
 multimodal evidence rather than on two independent evidence streams that happen to
 have been retrieved together.
 
+\section{Model Choice}
+
+Token attribution by integrated gradients (Section~\ref{sec:explainability})
+requires computing gradients of the generator's output with respect to its input,
+which is only possible with full access to the model's weights. The generator is
+therefore an open-weight vision-language model run locally, such as
+Qwen2-VL~\cite{wang2024qwen2vl}, rather than a model reached through a hosted API.
+For simplicity, the same model also serves as the planner and as the evaluator
+behind both gates.
+
 \section{Grounded Multimodal Explainability}
+\label{sec:explainability}
 
 A system that produces a correct answer without showing where it came from remains
 unusable for academic work, because a reader has no way to check it. The generation
@@ -226,7 +243,7 @@ Each answers a different verification question.
 
 \begin{enumerate}
     \item \textbf{Text Token Attribution} --- \emph{``Which sentences did this come
-    from?''} Integrated gradients identify the source sentences that most influenced
+    from?''} Integrated gradients~\cite{sundararajan2017axiomatic}, computed on the open-weight generator, identify the source sentences that most influenced
     each generated claim, which are returned as highlights in the original text.
 
     \item \textbf{Visual Saliency (Bounding Boxes)} --- \emph{``Where on the page is
@@ -252,7 +269,7 @@ by which both were found.
 
 \subsection{Dataset}
 
-The framework will be evaluated on \textbf{SPIQA}, a dataset of over 270{,}000
+The framework will be evaluated on \textbf{SPIQA}~\cite{pramanick2024spiqa}, a dataset of over 270{,}000
 questions over computer-science papers whose answers depend on the papers' figures
 and tables. SPIQA is appropriate here because each question is tied to a reference
 figure or table, so the system must locate specific visual evidence rather than
@@ -272,10 +289,11 @@ retrieval is expected to be largest.
 Two baselines isolate the two contributions of this work:
 
 \begin{itemize}
-    \item \textbf{Single-Pass Multimodal RAG} (e.g.\ LLaVA-RAG) --- multimodal but
+    \item \textbf{Single-Pass Multimodal RAG} (e.g.\ a LLaVA-based~\cite{liu2023llava}
+    pipeline that retrieves once, then answers) --- multimodal but
     not iterative. Comparison against this baseline isolates the contribution of
     \emph{agency}: what is gained by being permitted to retrieve more than once.
-    \item \textbf{Text-Only Agentic Reasoning} (e.g.\ ReAct) --- iterative but not
+    \item \textbf{Text-Only Agentic Reasoning} (e.g.\ ReAct~\cite{yao2023react}) --- iterative but not
     multimodal. Comparison against this baseline isolates the contribution of
     \emph{visual retrieval}: what is gained by being able to see tables and figures
     at all.

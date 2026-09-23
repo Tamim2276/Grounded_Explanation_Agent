@@ -3,7 +3,7 @@
 
 This chapter describes the system as a graph: a set of nodes, each with one job,
 connected by edges that show what flows between them. The goal is that this graph
-can be built node-for-node in a framework such as LangGraph, with nothing left to
+can be built node-for-node in a framework such as LangGraph~\cite{langgraph}, with nothing left to
 guess between what the thesis says and what the code does.
 
 \section{Design Rationale}
@@ -25,7 +25,7 @@ something up.
 
 \begin{figure}[p]
 \centering
-\resizebox{\textwidth}{!}{%
+\resizebox{!}{0.72\textheight}{%
 \begin{tikzpicture}[
   font=\sffamily,
   nd/.style={rectangle, rounded corners=3pt, draw, line width=0.7pt, minimum width=3.6cm, minimum height=1.15cm, align=center, inner sep=3pt, font=\sffamily\small},
@@ -47,16 +47,16 @@ something up.
 \node[enc] (n1) at (0,0)       {\textbf{N1} Query Intake\\\scriptsize Parse \& decompose};
 \node[enc] (n2) at (4.6,0)     {\textbf{N2} Query Encoder\\\scriptsize Intent + filters};
 
-\node[ret] (n4) at (-4.6,-2.3) {\textbf{N4} Dual Index Build\\\scriptsize ColPali + text FAISS};
+\node[ret] (n4) at (-4.6,-2.3) {\textbf{N4} Dual Index Build\\\scriptsize ColPali + SPECTER2};
 \node[sup] (n5) at (0,-2.3)    {\textbf{N5} Agentic Planner\\\scriptsize ReAct state machine};
 
 \node[ret] (n6a) at (-4.6,-4.9){\textbf{N6a} TextRetriever\\\scriptsize Narrative chunks};
-\node[ret] (n6b) at (0,-4.9)   {\textbf{N6b} TableRetriever\\\scriptsize Cell-coord parser};
+\node[ret] (n6b) at (0,-4.9)   {\textbf{N6b} TableRetriever\\\scriptsize Locate + cell parser};
 \node[ret] (n6c) at (4.6,-4.9) {\textbf{N6c} FigureRetriever\\\scriptsize ColPali patches};
 
 \node[ret] (n7) at (4.6,-6.9)  {\textbf{N7} Region Zoom\\\scriptsize Crop \& re-encode};
 
-\node[fus] (n8) at (0,-9.0)    {\textbf{N8} Cross-Modal Fusion\\\scriptsize Evidence buffer $\mathcal{B}_t$};
+\node[fus] (n8) at (0,-9.0)    {\textbf{N8} Cross-Modal Linking\\\scriptsize Evidence buffer $\mathcal{B}_t$};
 
 \node[gate] (g1) at (0,-10.9)  {\textbf{G1} Sufficiency\\Gate};
 
@@ -75,7 +75,13 @@ something up.
 \draw[ar] (n1) -- (n5);
 \draw[ar] (n2.south) |- ([yshift=0.3cm]n5.east);
 \draw[ar] (n3) -- (n4);
-\draw[ar] (n4) -- (n6a);
+
+\begin{scope}[on background layer]
+  \node[draw=retline, dashed, rounded corners=5pt, line width=0.6pt, fill=retbrown!25,
+        fit=(n6a)(n6b)(n6c)(n7), inner sep=0.3cm] (tier) {};
+\end{scope}
+\node[lbl, anchor=south, text=retline, align=center] at (-2.3,0 |- tier.south) {retrieval tier:\\reads both N4 indexes};
+\draw[ar] (n4.south) -- (n4.south |- tier.north) node[lbl, midway, left]{indexes};
 
 \draw[ar] (n5.south) -- ([xshift=0.9cm]n6a.north);
 \draw[ar] (n5) -- (n6b);
@@ -107,7 +113,8 @@ something up.
 }
 \caption{Full graph architecture of the proposed Agentic Multimodal RAG system.
 Blue nodes perform ingestion and query encoding; brown nodes are the retrieval
-tools that hold exclusive authority to introduce evidence; the teal node maintains
+tools that hold exclusive authority to introduce evidence, grouped in the shaded
+retrieval tier because all of them query the two indexes built by N4; the teal node maintains
 the evidence buffer that every downstream node reads from; the orange node is the
 grounded generator; violet nodes are the planner and the synthesiser; green nodes
 produce the three attribution artefacts. Red diamonds are the two validation gates
@@ -141,9 +148,11 @@ tables are exactly where OCR fails --- merged cells and multi-column headers bre
 text extraction. An image keeps the table's structure intact.
 
 \paragraph{N4 --- Dual Index Build.}
-Two search indexes are built from the same set of pages: one holds visual
-embeddings of each page image (for finding tables and figures), the other holds
-text embeddings of each chunk (for finding claims). Because both indexes point back
+Two search indexes are built from the same set of pages: one holds ColPali
+visual embeddings of each page image (for finding tables and figures), the other
+holds SPECTER2 text embeddings of each chunk, stored in FAISS~\cite{johnson2019faiss}
+(for finding claims). Every retrieval tool (N6a--N6c, N7) reads from these two
+indexes. Because both indexes point back
 to the same pages, a match in one can lead directly to the matching spot in the
 other --- which is what makes jumping from a text claim to its supporting table
 possible.
@@ -176,8 +185,11 @@ example, this is the first search: it finds the sentence claiming the accuracy
 gain, along with the page it appears on.
 
 \paragraph{N6b --- TableRetriever.}
-Extracts a table's structure while keeping track of exactly where each cell sits on
-the page. This matters because the bounding boxes generated later (N10b) are only
+Finds a table in two steps: it searches the visual index for pages whose best
+match is a table, then runs a table-structure recogniser (such as the Table
+Transformer) on that region to recover rows, columns and the position of every
+cell. Cell text is read from the PDF at those positions. It keeps track of exactly
+where each cell sits on the page. This matters because the bounding boxes generated later (N10b) are only
 possible if this spatial position is kept --- a plain-text version of the table
 would lose it.
 
@@ -195,10 +207,12 @@ the right page, zooming into the low-resource row so its cells become readable.
 
 \subsection{Evidence Buffer and Sufficiency Gate (N8, G1)}
 
-\paragraph{N8 --- Cross-Modal Fusion.}
+\paragraph{N8 --- Cross-Modal Linking.}
 Everything retrieved so far is converted into one shared format and added to the
 evidence buffer, along with where it came from --- which page, which tool, which
-step. This buffer is the only thing the generator will ever see; nothing after this
+step. Items that share a page, or where one refers to the other (a sentence citing
+``Table~3'' and the table captioned ``Table~3''), are linked, so that the generator
+receives connected evidence rather than a loose pile. This buffer is the only thing the generator will ever see; nothing after this
 point looks at the corpus again.
 
 \paragraph{G1 --- Sufficiency Gate.}
@@ -215,7 +229,9 @@ missing --- which is exactly how confident, wrong answers get produced.
 \subsection{Generation and Faithfulness Gate (N9, G2)}
 
 \paragraph{N9 --- Grounded Generator.}
-Writes the answer using only what is in the evidence buffer. It cannot search on
+An open-weight vision-language model (such as Qwen2-VL) run locally, so that N10a
+can compute gradients through it. It writes the answer using only what is in the
+evidence buffer. It cannot search on
 its own and cannot fill in numbers from memory --- everything it says has to trace
 back to something already retrieved.
 
@@ -230,7 +246,8 @@ the model might believe about the world.
 \subsection{Attribution and Output (N10--N12)}
 
 \paragraph{N10a --- Token Attribution.}
-Highlights which retrieved sentences most influenced each part of the answer.
+Highlights which retrieved sentences most influenced each part of the answer, using
+integrated gradients computed through the N9 generator.
 
 \paragraph{N10b --- Bounding Boxes.}
 Draws a box --- $[x_{\min}, y_{\min}, x_{\max}, y_{\max}]$ --- around the exact spot

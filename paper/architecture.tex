@@ -42,17 +42,17 @@ Figure~\ref{fig:architecture} illustrates the overall data flow. A user query en
 \end{figure}
 
 \section{Ingestion and Indexing Layer}
-Each PDF page in the corpus is rasterized into a page image, which is embedded using a visual document retriever (ColPali) to produce patch-level embeddings without requiring OCR or layout parsing. In parallel, narrative text is extracted and segmented into chunks, which are embedded using a dense text retriever. This produces two complementary indexes:
+Each PDF page in the corpus is rasterized into a page image, which is embedded using a visual document retriever (ColPali~\cite{faysse2025colpali}) to produce patch-level embeddings without requiring OCR or layout parsing. In parallel, narrative text is extracted and segmented into chunks, which are embedded using a retrieval-trained scientific text encoder (SPECTER2~\cite{singh2023scirepeval}) and stored in a FAISS~\cite{johnson2019faiss} index. This produces two complementary indexes:
 \begin{itemize}
     \item \textbf{Visual index:} Page-level patch embeddings for retrieving tables, figures, and dense visual content.
     \item \textbf{Textual index:} Chunk-level embeddings for retrieving narrative claims and discussion.
 \end{itemize}
 
 \section{Agentic Planner}
-The Agentic Planner is an LVLM-driven controller that operates an iterative reasoning loop (Thought $\rightarrow$ Action $\rightarrow$ Observation), inspired by the ReAct paradigm. At each step, the planner selects one of the following tools, which correspond to the action space $\mathcal{A}$ defined in Chapter~\ref{sec:methodology}:
+The Agentic Planner is an LVLM-driven controller that operates an iterative reasoning loop (Thought $\rightarrow$ Action $\rightarrow$ Observation), inspired by the ReAct paradigm~\cite{yao2023react}. At each step, the planner selects one of the following tools, which correspond to the action space $\mathcal{A}$ defined in Chapter~\ref{sec:methodology}:
 \begin{itemize}
     \item \texttt{TextRetriever(query)}: dense retrieval over the textual index.
-    \item \texttt{TableRetriever(query)}: locates a table and parses it into structured form, preserving the page coordinates of every cell.
+    \item \texttt{TableRetriever(query)}: locates a table through the visual index, then parses it with a table-structure recogniser~\cite{smock2022pubtables} into structured form, preserving the page coordinates of every cell.
     \item \texttt{FigureRetriever(query)}: visual retrieval over the ColPali index, returning pages together with their patch-similarity scores.
     \item \texttt{RegionZoom(page\_id, bbox)}: crops a sub-region of a retrieved page and re-encodes it at higher resolution for closer inspection of dense tables or charts.
 \end{itemize}
@@ -67,7 +67,7 @@ After each retrieval round, the Evidence Sufficiency Gate determines whether the
 If the gate reports insufficient evidence, control returns to the Agentic Planner for an additional retrieval iteration, bounded by a maximum iteration count to prevent unbounded looping. This mechanism directly implements Objective 3 and mitigates hallucination by preventing the system from answering without grounded proof.
 
 \section{Grounded Generator and Faithfulness Gate}
-Once the Sufficiency Gate confirms sufficiency, the system generates an answer strictly conditioned on the retrieved evidence pool; the generator has no other access to the corpus. The Faithfulness Gate then decomposes the draft into individual claims and checks each against the evidence pool. Any unsupported claim sends the draft back to the generator for rewriting, again bounded by a maximum iteration count.
+Once the Sufficiency Gate confirms sufficiency, an open-weight vision-language model run locally (such as Qwen2-VL~\cite{wang2024qwen2vl}) generates an answer strictly conditioned on the retrieved evidence pool; the generator has no other access to the corpus. Local weights are required so that token attribution can compute gradients through the generator. The Faithfulness Gate then decomposes the draft into individual claims and checks each against the evidence pool. Any unsupported claim sends the draft back to the generator for rewriting, again bounded by a maximum iteration count.
 
 \section{Attribution Layer}
 Visual attribution is produced from two sources preserved during retrieval: the cell coordinates recorded by \texttt{TableRetriever}, and the patch-level similarity scores from the ColPali retrieval step, which localize the most relevant region of a source figure. Together these yield bounding-box coordinates over the supporting table cell or figure region. This satisfies Objective 4 and provides the fine-grained visual grounding required for human verifiability (RQ3).

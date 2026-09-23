@@ -1,0 +1,15 @@
+# LaTeX build files (main.pdf is intentionally not ignored)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.xdv
+
+# Editor / OS
+.vscode/
+.DS_Store

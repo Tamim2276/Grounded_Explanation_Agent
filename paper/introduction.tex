@@ -4,7 +4,7 @@
 Researchers increasingly rely on AI-assisted literature review systems powered by Large Vision-Language Models (LVLMs) to synthesize information. However, scientific papers are highly multimodal. Vital findings are distributed across interleaved narrative text, dense statistical tables, and experimental plots. Comprehending these documents requires multi-hop reasoning across these distinct modalities. The motivation of this research stems from the urgent need to bridge the gap between text-only language models and the deeply multimodal reality of scientific research.
 
 \section{Problem Statement}
-Current multimodal Question Answering (QA) and Retrieval-Augmented Generation (RAG) systems fail on complex scientific literature due to two main reasons:
+Current multimodal Question Answering (QA) and Retrieval-Augmented Generation (RAG)~\cite{lewis2020rag} systems fail on complex scientific literature due to two main reasons:
 \begin{enumerate}
     \item \textbf{Passive Retrieval:} Existing pipelines retrieve context in a single pass. They lack the iterative agency to perform multi-step cross-modal navigation (e.g., jumping from a text claim to a supporting table), leading to severe factual hallucinations.
     \item \textbf{The Explainability Gap:} Current systems output answers with no verifiable visual grounding. They cannot point to the specific table cell or chart region used as evidence, making their generated reviews untrustworthy for academic use.
@@ -13,8 +13,8 @@ Current multimodal Question Answering (QA) and Retrieval-Augmented Generation (R
 \section{Research Questions}
 To address these limitations, this research is guided by the following questions:
 \begin{itemize}
-    \item \textbf{RQ 1:} How does an iterative, agentic reasoning loop improve factual accuracy and reduce hallucination on the SPIQA dataset compared to single-pass retrieval?
-    \item \textbf{RQ 2:} How effectively can visual document embeddings (e.g., ColPali) be utilized by a multimodal agent to fetch necessary tables and figures?
+    \item \textbf{RQ 1:} How does an iterative, agentic reasoning loop improve factual accuracy and reduce hallucination on the SPIQA dataset~\cite{pramanick2024spiqa} compared to single-pass retrieval?
+    \item \textbf{RQ 2:} How effectively can visual document embeddings (e.g., ColPali~\cite{faysse2025colpali}) be utilized by a multimodal agent to fetch necessary tables and figures?
     \item \textbf{RQ 3:} Can the agent generate precise visual attribution (bounding boxes) for its answers, and how does this affect human verifiability?
 \end{itemize}
 
