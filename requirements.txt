@@ -1,0 +1,39 @@
+# PyTorch is NOT listed here on purpose: each machine needs a different build.
+# Install it first (see PLAN.md):
+#   Intel Arc (Windows desktop): pip install torch torchvision --index-url https://download.pytorch.org/whl/xpu
+#   NVIDIA (university 3070):    pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
+#   CPU only (laptop):           pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# agent
+langgraph
+openai
+python-dotenv
+
+# PDFs and images
+pymupdf
+pillow
+opencv-python
+numpy
+
+# search
+# These three are pinned together: colpali-engine 0.3.8 is the newest release that works with
+# current PyTorch (later ones need torch < 2.14), and adapters 1.1.0 (for SPECTER2) supports
+# the same transformers version. Upgrading one of them alone breaks the others.
+colpali-engine[interpretability]==0.3.8   # [interpretability] adds the similarity maps used for N10b boxes
+transformers==4.47.1
+adapters==1.1.0
+faiss-cpu
+timm
+
+# data
+datasets
+huggingface_hub
+requests
+pandas
+
+# results, notebooks and tests
+matplotlib
+grandalf        # offline ASCII drawing of LangGraph graphs (show_graph fallback)
+tqdm
+pytest
+ipykernel

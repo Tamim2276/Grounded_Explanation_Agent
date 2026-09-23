@@ -10,6 +10,17 @@
 *.synctex.gz
 *.xdv
 
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
 # Editor / OS
 .vscode/
 .DS_Store
+
+# Personal planning notes
+PLAN.md
