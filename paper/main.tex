@@ -1,0 +1,75 @@
+\documentclass[12pt, a4paper]{report}
+
+% --- Essential Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo} % Uses a beautiful, readable font (Palatino)
+\usepackage{geometry}
+\geometry{a4paper, margin=1.2in} % Comfortable margins
+\usepackage{setspace}
+\setstretch{1.2} % Slight line spacing for readability
+\usepackage{amsmath}  % Required for \text{} inside equations
+\usepackage{amssymb}  % Extra math symbols
+\usepackage{booktabs} % Cleaner table rules
+\usepackage{xcolor}
+\usepackage{tikz}     % Required to draw the architecture diagrams
+\usetikzlibrary{positioning, arrows.meta, calc, shapes.geometric, fit, backgrounds}
+
+% --- Node palette for the graph architecture diagram ---
+\definecolor{encblue}{HTML}{D6E4F7}   \definecolor{encline}{HTML}{2C5AA0}
+\definecolor{fusteal}{HTML}{CCE9E2}   \definecolor{fusline}{HTML}{147A63}
+\definecolor{retbrown}{HTML}{EADBC8}  \definecolor{retline}{HTML}{8A6132}
+\definecolor{svcorange}{HTML}{FBE0C4} \definecolor{svcline}{HTML}{B5701A}
+\definecolor{supviolet}{HTML}{E2DAF5} \definecolor{supline}{HTML}{5B45A8}
+\definecolor{attgreen}{HTML}{DAECD0}  \definecolor{attline}{HTML}{4A7A2B}
+\definecolor{gatered}{HTML}{F8D7D7}   \definecolor{gateline}{HTML}{B32B2B}
+\definecolor{darkslate}{HTML}{D8DCE2} \definecolor{darkline}{HTML}{41505F}
+\usepackage{titlesec}
+\usepackage{hyperref} % hyperref should be loaded last
+
+% --- Styling for Chapter Headings ---
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\Huge}
+  {\hrulefill\vspace{2pt}\\ \chaptertitlename~\thechapter}
+  {10pt}
+  {\Huge}
+  [\vspace{2pt}\hrulefill]
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Thesis: Agentic Multimodal RAG}
+}
+
+\begin{document}
+
+% --- Custom Title Page ---
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+
+    {\Huge \textbf{Agentic Multimodal RAG with Grounded Explanations for Complex Scientific Reasoning}\par}
+    \vspace{2cm}
+
+    \vfill
+    {\large \today\par}
+\end{titlepage}
+
+% --- Abstract ---
+\begin{abstract}
+As the volume of scientific literature grows, researchers increasingly rely on AI-assisted literature review systems. However, current multimodal Retrieval-Augmented Generation (RAG) models operate on a passive, single-pass paradigm, leading to severe factual hallucinations on complex, multi-hop scientific queries. Furthermore, these systems act as ``black boxes,'' providing no verifiable visual grounding for their claims. In this thesis, we propose an Agentic Multimodal RAG framework that utilizes an iterative reasoning loop to dynamically fetch text, tables, and figures. By integrating an Evidence Sufficiency Gate before generation, a Faithfulness Gate after it, and a Grounded Explainability Module, our system generates precise spatial bounding boxes and retrieval execution logs. We outline a methodology to benchmark this framework on the SPIQA dataset, establishing a new standard for trust and verifiability in AI-assisted scientific document understanding.
+\end{abstract}
+
+% --- Table of Contents ---
+\tableofcontents
+\newpage
+
+% --- Main Content ---
+\input{introduction}
+\input{methodology}
+\input{architecture}
+\input{Graph}
+
+\end{document}

@@ -1,0 +1,93 @@
+\chapter{System Architecture}
+\label{sec:architecture}
+
+The proposed system is organized as a five-stage pipeline: an ingestion and indexing layer, an agentic planner, an evidence sufficiency gate, a grounded generator with a faithfulness gate, and an attribution layer. Unlike passive single-pass retrieval pipelines, the planner and sufficiency gate form a closed feedback loop, allowing the system to iteratively gather additional evidence before committing to an answer; the generator and faithfulness gate form a second loop that removes unsupported claims from the draft answer. Chapter~\ref{sec:graph} refines each stage into individual graph nodes.
+
+\section{Overview}
+Figure~\ref{fig:architecture} illustrates the overall data flow. A user query enters the Agentic Planner, which issues retrieval actions against a dual index built during ingestion. After each retrieval round, the Evidence Sufficiency Gate evaluates whether the collected evidence is adequate to answer the query. If not, control returns to the planner for another retrieval iteration; if so, the system generates an answer from the evidence alone. The Faithfulness Gate then checks every claim in that answer against the evidence, returning it for rewriting if needed, before attribution is produced.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.2cm and 2.5cm,
+        box/.style={rectangle, rounded corners, draw=black, thick, minimum width=6.5cm, minimum height=1.3cm, align=center, fill=gray!8},
+        arrow/.style={-{Latex[length=2.5mm]}, thick}
+    ]
+
+    \node[box] (ingest) {\textbf{Ingestion \& Indexing} \\ \small PDFs $\rightarrow$ ColPali + text index};
+    \node[box, below=of ingest] (planner) {\textbf{Agentic Planner} \\ \small Iterative retrieval loop};
+    \node[box, below=of planner] (gate) {\textbf{Evidence Sufficiency Gate} \\ \small Checks proof before answering};
+    \node[box, below=of gate] (gen) {\textbf{Grounded Generator} \\ \small Answers from evidence only};
+    \node[box, below=of gen] (faith) {\textbf{Faithfulness Gate} \\ \small Checks each claim against evidence};
+    \node[box, below=of faith] (answer) {\textbf{Attribution \& Output} \\ \small Text, bounding boxes, audit log};
+
+    \draw[arrow] (ingest) -- (planner);
+    \draw[arrow] (planner) -- (gate);
+    \draw[arrow] (gate) -- (gen);
+    \draw[arrow] (gen) -- (faith);
+    \draw[arrow] (faith) -- (answer);
+
+    \node[right=1.6cm of planner] (query) {\small User query};
+    \draw[arrow] (query) -- (planner);
+
+    \draw[arrow] (gate.west) -- ++(-2.3,0) coordinate (loopPoint) |- (planner.west);
+    \node[anchor=east, font=\small, text width=2.6cm, align=right] at ($(loopPoint) + (-0.15,1.25)$) {insufficient evidence};
+
+    \draw[arrow] (faith.east) -- ++(1.2,0) coordinate (loopPoint2) |- (gen.east);
+    \node[anchor=west, font=\small, text width=2.2cm, align=left] at ($(loopPoint2) + (0.15,1.25)$) {unsupported claim};
+
+    \end{tikzpicture}
+    \caption{High-level architecture of the multimodal agentic literature review system.}
+    \label{fig:architecture}
+\end{figure}
+
+\section{Ingestion and Indexing Layer}
+Each PDF page in the corpus is rasterized into a page image, which is embedded using a visual document retriever (ColPali) to produce patch-level embeddings without requiring OCR or layout parsing. In parallel, narrative text is extracted and segmented into chunks, which are embedded using a dense text retriever. This produces two complementary indexes:
+\begin{itemize}
+    \item \textbf{Visual index:} Page-level patch embeddings for retrieving tables, figures, and dense visual content.
+    \item \textbf{Textual index:} Chunk-level embeddings for retrieving narrative claims and discussion.
+\end{itemize}
+
+\section{Agentic Planner}
+The Agentic Planner is an LVLM-driven controller that operates an iterative reasoning loop (Thought $\rightarrow$ Action $\rightarrow$ Observation), inspired by the ReAct paradigm. At each step, the planner selects one of the following tools, which correspond to the action space $\mathcal{A}$ defined in Chapter~\ref{sec:methodology}:
+\begin{itemize}
+    \item \texttt{TextRetriever(query)}: dense retrieval over the textual index.
+    \item \texttt{TableRetriever(query)}: locates a table and parses it into structured form, preserving the page coordinates of every cell.
+    \item \texttt{FigureRetriever(query)}: visual retrieval over the ColPali index, returning pages together with their patch-similarity scores.
+    \item \texttt{RegionZoom(page\_id, bbox)}: crops a sub-region of a retrieved page and re-encodes it at higher resolution for closer inspection of dense tables or charts.
+\end{itemize}
+Multi-hop navigation (for example, from a textual claim to its supporting table) requires no dedicated tool: it arises from the loop itself, since each retrieved observation informs the query the planner issues next. All tool invocations and their results are recorded in a structured scratchpad, which later serves as the auditable retrieval log referenced in Chapter~\ref{sec:introduction}.
+
+\section{Evidence Sufficiency Gate}
+After each retrieval round, the Evidence Sufficiency Gate determines whether the evidence accumulated in the scratchpad is sufficient to answer the query. Two candidate implementations are considered:
+\begin{itemize}
+    \item \textbf{LLM-as-judge gate:} A prompted model evaluates the query and current evidence, returning a structured judgment of sufficiency and any missing information.
+    \item \textbf{Learned gate:} A lightweight classifier trained on retrieval confidence scores and evidence coverage features.
+\end{itemize}
+If the gate reports insufficient evidence, control returns to the Agentic Planner for an additional retrieval iteration, bounded by a maximum iteration count to prevent unbounded looping. This mechanism directly implements Objective 3 and mitigates hallucination by preventing the system from answering without grounded proof.
+
+\section{Grounded Generator and Faithfulness Gate}
+Once the Sufficiency Gate confirms sufficiency, the system generates an answer strictly conditioned on the retrieved evidence pool; the generator has no other access to the corpus. The Faithfulness Gate then decomposes the draft into individual claims and checks each against the evidence pool. Any unsupported claim sends the draft back to the generator for rewriting, again bounded by a maximum iteration count.
+
+\section{Attribution Layer}
+Visual attribution is produced from two sources preserved during retrieval: the cell coordinates recorded by \texttt{TableRetriever}, and the patch-level similarity scores from the ColPali retrieval step, which localize the most relevant region of a source figure. Together these yield bounding-box coordinates over the supporting table cell or figure region. This satisfies Objective 4 and provides the fine-grained visual grounding required for human verifiability (RQ3).
+
+\section{Mapping to Research Objectives}
+Table~\ref{tab:objective-mapping} summarizes how each architectural component addresses the research objectives introduced in Chapter~\ref{sec:introduction}.
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Component} & \textbf{Research Objective} \\
+        \midrule
+        Ingestion and Indexing Layer & Objective 2 \\
+        Agentic Planner & Objective 1 \\
+        Evidence Sufficiency Gate & Objective 3 \\
+        Grounded Generator and Faithfulness Gate & Objective 3 \\
+        Attribution Layer & Objective 4 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Mapping of architectural components to research objectives.}
+    \label{tab:objective-mapping}
+\end{table}

@@ -1,0 +1,317 @@
+\chapter{Methodology}
+\label{sec:methodology}
+
+This chapter describes how the proposed system works and how it will be evaluated.
+The presentation is deliberately ordered from intuition to formalism: each mechanism
+is first described in plain terms, then stated precisely. Every equation is followed
+by a reading of what it says in words, so that the formal notation documents the
+design rather than substituting for an explanation of it.
+
+\section{The Central Idea}
+
+A conventional Retrieval-Augmented Generation system behaves like a student who
+visits the library exactly once. Whatever material is gathered in that single trip
+is all the material available when the essay is written. If a claim turns out to
+need a supporting table that was not collected, the student cannot go back --- and
+the most likely outcome is that the missing number is invented rather than the gap
+admitted.
+
+The proposed system behaves instead like a careful researcher. It gathers some
+evidence, stops to ask whether that evidence is actually enough, returns for more
+when it is not, and refuses to write until the question can be answered from what it
+has in hand. Three mechanisms make this behaviour concrete:
+
+\begin{enumerate}
+    \item An \textbf{agent} that decides, at each step, which kind of evidence to
+    fetch next --- and may fetch repeatedly rather than once.
+    \item An \textbf{Evidence Sufficiency Gate} that stands between gathering and
+    writing, and only opens when the gathered evidence can support an answer.
+    \item A \textbf{Faithfulness Gate} that checks the written answer against the
+    gathered evidence, and sends it back for rewriting if any claim is unsupported.
+\end{enumerate}
+
+The remainder of this chapter formalises these mechanisms, describes the
+retrieval tools available to the agent, explains how evidence from different
+modalities is combined, and defines the evaluation plan.
+
+\section{Agentic System Architecture}
+
+\subsection{The System as a State Machine}
+
+The agent is built on the ReAct paradigm, in which a model alternates between
+reasoning about what it needs and acting to obtain it. Formally, the system is a
+state machine:
+\begin{equation}
+    \mathcal{M} = \langle \mathcal{S}, \mathcal{A}, \mathcal{T}, \mathcal{O}, \mathcal{E} \rangle
+\end{equation}
+
+\noindent In words, the system is fully described by five things: what it currently
+knows, what it is able to do, how doing something changes what it knows, what it
+gets back when it acts, and how it decides when to stop. Each component is defined
+below.
+
+\begin{description}
+    \item[$\mathcal{S}$ --- the state.] Everything the system currently knows. This
+    comprises the interpreted intent of the query, the record of which retrievals
+    have already been performed, and the evidence buffer $\mathcal{B}_t$ holding
+    every piece of evidence gathered so far.
+
+    \item[$\mathcal{A}$ --- the action space.] The set of tools the agent may
+    invoke. Each tool retrieves a different modality.
+
+    \item[$\mathcal{T}$ --- the transition function.] How the state changes once a
+    tool has been used: new evidence is added to the buffer and the retrieval
+    history is extended.
+
+    \item[$\mathcal{O}$ --- the observation space.] What comes back from a tool ---
+    a text passage, a parsed table, or a page region.
+
+    \item[$\mathcal{E}$ --- the Evidence Sufficiency Gate.] The decision procedure
+    that determines whether gathering should continue or generation may begin.
+\end{description}
+
+\subsection{Query Decomposition}
+
+Given a complex scientific query $Q$, the agent does not attempt to satisfy it in
+one retrieval. It first breaks the query into a sequence of smaller, individually
+answerable sub-goals:
+\begin{equation}
+    Q \longrightarrow \{q_1, q_2, \dots, q_k\}
+\end{equation}
+
+\noindent For example, the query \emph{``Does the accuracy gain reported in
+Section~4 hold for the low-resource subset?''} decomposes into two sub-goals: first
+locate the claim about the accuracy gain in the narrative text, then locate the
+table that reports results broken down by subset. Decomposition matters because the
+second sub-goal cannot even be formulated until the first has been answered --- it is
+the retrieved claim that tells the agent which table to look for. This is what is
+meant by \emph{multi-hop} reasoning, and it is the reason a single retrieval pass is
+structurally incapable of answering such questions.
+
+\subsection{The Reasoning Loop}
+
+At each time step $t$ the agent selects one action $a_t$ from the action space:
+\begin{equation}
+    \mathcal{A} = \{\texttt{TextRetriever}, \texttt{TableRetriever}, \texttt{FigureRetriever}, \texttt{RegionZoom}\}
+\end{equation}
+
+\noindent Executing $a_t$ returns an observation $o_t$, which is appended to the
+evidence buffer. After $t$ steps the buffer therefore contains the accumulated
+result of every retrieval performed so far:
+\begin{equation}
+    \mathcal{B}_t = \bigcup_{i=1}^{t} o_i
+\end{equation}
+
+\noindent The union notation simply says that nothing is discarded: evidence
+retrieved at step 1 is still available at step 5. The agent then consults the
+Sufficiency Gate, and either loops back to select another tool or proceeds to
+generation.
+
+\subsection{The Evidence Sufficiency Gate}
+
+The Sufficiency Gate is the principal novelty of the architecture, and its purpose
+is best stated as a question the system asks itself before writing anything:
+\emph{``Can I answer this from what I have actually retrieved?''}
+
+Concretely, a meta-evaluator inspects the query $Q$ alongside the current buffer
+$\mathcal{B}_t$ and returns a judgement of sufficiency. Consider the running
+example. After the first retrieval the buffer contains the narrative sentence
+asserting an accuracy gain, but nothing about the low-resource subset. The claim is
+present; the evidence qualifying it is not. The gate therefore fails, the agent
+reformulates and dispatches the \texttt{TableRetriever}, and the gate is
+re-evaluated against the enlarged buffer.
+
+The significance of this design is that it is \emph{preventative}. A conventional
+pipeline would forward the incomplete buffer to the generator and depend on the
+generator to notice what was missing --- which is precisely the situation that
+produces fluent, confident, unsupported answers. The gate removes the opportunity to
+make that error rather than attempting to detect it afterwards.
+
+The loop is bounded by a maximum iteration count. If sufficiency is not reached
+before the bound is exhausted, the system reports that the evidence is inadequate
+rather than answering anyway. For a literature review tool this is the correct
+failure behaviour: a researcher can act on a stated gap, but cannot detect a
+fabrication.
+
+\subsection{The Faithfulness Gate}
+
+The Sufficiency Gate guarantees that the evidence needed for an answer is present;
+it does not guarantee that the generator uses only that evidence. A second gate
+therefore runs after generation. The draft answer is split into individual factual
+claims, and each claim is checked against the evidence buffer $\mathcal{B}_t$. If
+any claim is not supported by an item in the buffer, the gate fails and the
+generator is asked to rewrite the unsupported part using only buffered evidence.
+
+Because the generator has no access to the corpus other than through
+$\mathcal{B}_t$, this check is bounded: each claim is compared against a fixed,
+finite set of retrieved items rather than against the world at large. Like the
+retrieval loop, the rewrite loop has a maximum iteration count; if it is exhausted,
+unsupported claims are removed and reported as unconfirmed rather than kept.
+
+\section{Modality-Specific Retrieval Tools}
+
+Scientific PDFs are not uniform documents, and a single retrieval mechanism handles
+them poorly. The action space therefore provides four tools, three matched to a
+different kind of content and one for inspecting a page in finer detail. Each is described below together with the reason it
+exists as a separate tool.
+
+\begin{description}
+    \item[\texttt{TextRetriever}.] Performs dense semantic retrieval over chunked
+    narrative text using scientific embeddings such as SciBERT. Domain-specific
+    embeddings are used rather than general-purpose ones because scientific
+    vocabulary is precisely where general embeddings are weakest.
+
+    \item[\texttt{TableRetriever}.] A structured parser that converts tables into a
+    normalised form \emph{while preserving the two-dimensional coordinates of every
+    cell}. Coordinate preservation is not incidental detail. The bounding boxes
+    required by Objective~4 can only be produced if the spatial layout of the table
+    survives parsing; a parser that returned a table as flat text would satisfy the
+    reasoning requirement and silently destroy the attribution requirement.
+
+    \item[\texttt{FigureRetriever} (ColPali).] Embeds entire PDF pages as grids of
+    visual patches using vision-language multi-vector retrieval, locating charts,
+    plots and diagrams without depending on OCR. This matters because OCR fails
+    most severely exactly where scientific documents are most information-dense ---
+    multi-column headers, merged cells, and axis labels. Treating the page as an
+    image sidesteps that failure mode entirely.
+
+    \item[\texttt{RegionZoom}.] Crops a sub-region of a page already returned by
+    the \texttt{FigureRetriever} and re-encodes it at higher resolution. A
+    page-level match identifies which page holds a table or chart, but not which
+    row or data point answers the question; zooming supplies that finer level of
+    detail.
+\end{description}
+
+\section{Cross-Modal Evidence Fusion}
+
+Once evidence has been retrieved from different modalities, the system must relate
+the pieces to one another. A symbol appearing in a sentence and the same symbol
+appearing in a chart legend must be recognised as referring to the same quantity;
+otherwise the system holds two disconnected facts rather than one linked piece of
+evidence.
+
+This linkage is performed by a cross-attention layer, in which the text
+representation queries the visual representation:
+\begin{equation}
+    \mathbf{Z}_{\text{fused}} = \text{Softmax}\left(\frac{\mathbf{Q}_t \mathbf{K}_v^{\top}}{\sqrt{d_k}}\right) \mathbf{V}_v + \mathbf{H}_t
+\end{equation}
+
+\noindent Read plainly, this says: \emph{for each text token, measure how strongly
+it matches each visual patch; convert those match scores into weights; use the
+weights to build a summary of the visual evidence most relevant to that token; and
+add this summary to the token's own representation.} The three factors play the
+following roles:
+
+\begin{itemize}
+    \item $\mathbf{Q}_t \mathbf{K}_v^{\top}$ scores every text token against every
+    visual patch --- the raw compatibility between what the text says and what the
+    page shows.
+    \item Division by $\sqrt{d_k}$ keeps these scores in a numerically stable range
+    before the softmax, which is standard practice in scaled dot-product attention.
+    \item The final $+\,\mathbf{H}_t$ is a residual connection: the visual evidence
+    \emph{augments} the text representation rather than replacing it, so textual
+    meaning is not lost when visual grounding is added.
+\end{itemize}
+
+The practical consequence is that downstream generation is conditioned on linked
+multimodal evidence rather than on two independent evidence streams that happen to
+have been retrieved together.
+
+\section{Grounded Multimodal Explainability}
+
+A system that produces a correct answer without showing where it came from remains
+unusable for academic work, because a reader has no way to check it. The generation
+phase therefore emits three audit artefacts alongside the natural-language response.
+Each answers a different verification question.
+
+\begin{enumerate}
+    \item \textbf{Text Token Attribution} --- \emph{``Which sentences did this come
+    from?''} Integrated gradients identify the source sentences that most influenced
+    each generated claim, which are returned as highlights in the original text.
+
+    \item \textbf{Visual Saliency (Bounding Boxes)} --- \emph{``Where on the page is
+    the proof?''} Explicit coordinates $[x_{\min}, y_{\min}, x_{\max}, y_{\max}]$
+    mark the exact table cell or chart region the claim rests on. For tables, these
+    come directly from the cell coordinates preserved by the \texttt{TableRetriever};
+    for figures, they are obtained by thresholding the ColPali patch-similarity map
+    computed by the \texttt{FigureRetriever} (or \texttt{RegionZoom}) and taking
+    the enclosing box of the highest-scoring patches. This is the artefact that
+    discharges Objective~4.
+
+    \item \textbf{Retrieval DAG Trace} --- \emph{``How did the system get here?''} A
+    logged execution graph recording which tools were called, in what order, and how
+    many times each gate rejected the buffer or the draft before opening. This makes
+    the reasoning path auditable rather than merely asserted.
+\end{enumerate}
+
+Together these mean a reader need not trust the system's answer. They can check it
+against the highlighted sentence, look at the boxed table cell, and inspect the path
+by which both were found.
+
+\section{Experimental Setup and Evaluation Plan}
+
+\subsection{Dataset}
+
+The framework will be evaluated on \textbf{SPIQA}, a dataset of over 270{,}000
+questions over computer-science papers whose answers depend on the papers' figures
+and tables. SPIQA is appropriate here because each question is tied to a reference
+figure or table, so the system must locate specific visual evidence rather than
+answer from narrative text alone. Each question is annotated with that reference
+figure or table, which provides figure-level ground truth for retrieval.
+
+SPIQA does not annotate \emph{regions} within a figure or table. Evaluating
+bounding-box precision (CGS, below) therefore requires a manually annotated subset
+in which the supporting cell or chart region is marked for each question.
+Similarly, since not every SPIQA question is multi-hop, results will also be
+reported separately on the subset of questions that require combining text with a
+figure or table, which is where the difference between iterative and single-pass
+retrieval is expected to be largest.
+
+\subsection{Baselines}
+
+Two baselines isolate the two contributions of this work:
+
+\begin{itemize}
+    \item \textbf{Single-Pass Multimodal RAG} (e.g.\ LLaVA-RAG) --- multimodal but
+    not iterative. Comparison against this baseline isolates the contribution of
+    \emph{agency}: what is gained by being permitted to retrieve more than once.
+    \item \textbf{Text-Only Agentic Reasoning} (e.g.\ ReAct) --- iterative but not
+    multimodal. Comparison against this baseline isolates the contribution of
+    \emph{visual retrieval}: what is gained by being able to see tables and figures
+    at all.
+\end{itemize}
+
+\noindent Because each baseline holds one contribution fixed and removes the other,
+an improvement over both cannot be attributed to either factor alone.
+
+\subsection{Evaluation Metrics}
+
+Four metrics are proposed. Accuracy alone is insufficient here, because a system may
+reach a correct answer through unverifiable means --- and such an answer does not
+satisfy the aims of this work.
+
+\begin{description}
+    \item[Retrieval Faithfulness (RF).] The precision of the retrieved evidence
+    against the ground-truth evidence for each question. A low score indicates the
+    system reached its answer without ever holding the material that justifies it.
+    \emph{Addresses RQ1 and RQ2.}
+
+    \item[Modality Attribution Precision (MAP).] How accurately generated content is
+    traced back to the correct source modality. A low score indicates the system
+    cannot reliably distinguish what it read in the text from what it read in a
+    figure. \emph{Addresses RQ2.}
+
+    \item[Agent Efficiency Score (AES).] The ratio of necessary retrieval hops to
+    total tool calls. This guards against a degenerate solution in which the agent
+    achieves high accuracy by retrieving indiscriminately; such a system would be
+    accurate but neither efficient nor interpretable. \emph{Addresses RQ1.}
+
+    \item[Cross-modal Grounding Score (CGS).] Intersection-over-Union between
+    generated bounding boxes and ground-truth regions, measuring how precisely the
+    system localises its visual evidence. Computed on the manually annotated subset
+    described above. \emph{Addresses RQ3.}
+\end{description}
+
+\noindent Taken together, RF and AES measure whether the agentic loop works, MAP
+measures whether cross-modal retrieval works, and CGS measures whether the
+attribution is precise enough to be genuinely verifiable by a human reader.

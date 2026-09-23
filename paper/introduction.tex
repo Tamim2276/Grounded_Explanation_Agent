@@ -1,0 +1,36 @@
+\chapter{Introduction}
+\label{sec:introduction}
+
+Researchers increasingly rely on AI-assisted literature review systems powered by Large Vision-Language Models (LVLMs) to synthesize information. However, scientific papers are highly multimodal. Vital findings are distributed across interleaved narrative text, dense statistical tables, and experimental plots. Comprehending these documents requires multi-hop reasoning across these distinct modalities. The motivation of this research stems from the urgent need to bridge the gap between text-only language models and the deeply multimodal reality of scientific research.
+
+\section{Problem Statement}
+Current multimodal Question Answering (QA) and Retrieval-Augmented Generation (RAG) systems fail on complex scientific literature due to two main reasons:
+\begin{enumerate}
+    \item \textbf{Passive Retrieval:} Existing pipelines retrieve context in a single pass. They lack the iterative agency to perform multi-step cross-modal navigation (e.g., jumping from a text claim to a supporting table), leading to severe factual hallucinations.
+    \item \textbf{The Explainability Gap:} Current systems output answers with no verifiable visual grounding. They cannot point to the specific table cell or chart region used as evidence, making their generated reviews untrustworthy for academic use.
+\end{enumerate}
+
+\section{Research Questions}
+To address these limitations, this research is guided by the following questions:
+\begin{itemize}
+    \item \textbf{RQ 1:} How does an iterative, agentic reasoning loop improve factual accuracy and reduce hallucination on the SPIQA dataset compared to single-pass retrieval?
+    \item \textbf{RQ 2:} How effectively can visual document embeddings (e.g., ColPali) be utilized by a multimodal agent to fetch necessary tables and figures?
+    \item \textbf{RQ 3:} Can the agent generate precise visual attribution (bounding boxes) for its answers, and how does this affect human verifiability?
+\end{itemize}
+
+\section{Research Objectives}
+Mapping to the research questions, this work aims to achieve the following:
+\begin{itemize}
+    \item \textbf{Objective 1:} Develop a Multimodal Agentic Planner that iteratively fetches text, tables, and figures.
+    \item \textbf{Objective 2:} Integrate a vision-document retriever to dynamically fetch ground-truth visual data from PDFs.
+    \item \textbf{Objective 3:} Implement an Evidence Sufficiency Gate to verify proof before answering, and a Faithfulness Gate to check the drafted answer against that proof, mitigating hallucinations.
+    \item \textbf{Objective 4:} Engineer the output layer to generate spatial bounding-box coordinates on charts and tables to ensure verifiability.
+\end{itemize}
+
+\section{Contributions}
+By bridging visual document retrieval with iterative agentic reasoning, this thesis proposes a system designed to:
+\begin{itemize}
+    \item \textbf{Improve on Baselines:} Achieve higher QA accuracy on multi-hop scientific inquiries than single-pass multimodal and text-only agentic baselines.
+    \item \textbf{Reduce Hallucinations:} Employ active sufficiency and faithfulness checks so that answers rely strictly on retrieved context.
+    \item \textbf{Mitigate the Trust Gap:} Generate fine-grained visual attributions (exact bounding boxes) and an auditable retrieval log for every claim, making every answer verifiable by a human reader.
+\end{itemize}

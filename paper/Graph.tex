@@ -1,0 +1,293 @@
+\chapter{Graph Architecture and Node Specification}
+\label{sec:graph}
+
+This chapter describes the system as a graph: a set of nodes, each with one job,
+connected by edges that show what flows between them. The goal is that this graph
+can be built node-for-node in a framework such as LangGraph, with nothing left to
+guess between what the thesis says and what the code does.
+
+\section{Design Rationale}
+
+Two design choices set this system apart from a standard single-pass RAG pipeline.
+
+\textbf{Retrieval can repeat.} A standard pipeline searches once and answers once,
+so it only works if that one search happens to find everything needed. Here, the
+planner (N5) can call retrieval tools again and again, and the Sufficiency Gate
+sends it back until the evidence is actually enough. Multi-hop reasoning is not a
+prompting trick; it is simply how the loop is built.
+
+\textbf{Only certain nodes can add evidence.} Nodes N6a--N7 are the only ones
+allowed to bring anything into the evidence buffer (N8), and the generator (N9) can
+only read from that buffer --- it has no other way to see the corpus. This
+separation is what makes the Faithfulness Gate work: it only has to check claims
+against one fixed source of truth, instead of guessing whether the generator made
+something up.
+
+\begin{figure}[p]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\sffamily,
+  nd/.style={rectangle, rounded corners=3pt, draw, line width=0.7pt, minimum width=3.6cm, minimum height=1.15cm, align=center, inner sep=3pt, font=\sffamily\small},
+  enc/.style={nd, fill=encblue, draw=encline},
+  ret/.style={nd, fill=retbrown, draw=retline},
+  fus/.style={nd, fill=fusteal, draw=fusline},
+  svc/.style={nd, fill=svcorange, draw=svcline},
+  sup/.style={nd, fill=supviolet, draw=supline},
+  att/.style={nd, fill=attgreen, draw=attline},
+  fin/.style={nd, fill=darkslate, draw=darkline},
+  gate/.style={diamond, aspect=2.0, draw=gateline, line width=0.7pt, fill=gatered, align=center, inner sep=1pt, font=\sffamily\scriptsize},
+  ar/.style={-{Latex[length=2mm]}, line width=0.6pt},
+  loop/.style={-{Latex[length=2mm]}, line width=0.7pt, draw=gateline, dashed},
+  back/.style={-{Latex[length=2mm]}, line width=0.6pt, draw=attline, dashed},
+  lbl/.style={font=\sffamily\scriptsize, inner sep=2pt}
+]
+
+\node[enc] (n3) at (-4.6,0)    {\textbf{N3} Corpus Ingestion\\\scriptsize PDF $\rightarrow$ page rasters};
+\node[enc] (n1) at (0,0)       {\textbf{N1} Query Intake\\\scriptsize Parse \& decompose};
+\node[enc] (n2) at (4.6,0)     {\textbf{N2} Query Encoder\\\scriptsize Intent + filters};
+
+\node[ret] (n4) at (-4.6,-2.3) {\textbf{N4} Dual Index Build\\\scriptsize ColPali + text FAISS};
+\node[sup] (n5) at (0,-2.3)    {\textbf{N5} Agentic Planner\\\scriptsize ReAct state machine};
+
+\node[ret] (n6a) at (-4.6,-4.9){\textbf{N6a} TextRetriever\\\scriptsize Narrative chunks};
+\node[ret] (n6b) at (0,-4.9)   {\textbf{N6b} TableRetriever\\\scriptsize Cell-coord parser};
+\node[ret] (n6c) at (4.6,-4.9) {\textbf{N6c} FigureRetriever\\\scriptsize ColPali patches};
+
+\node[ret] (n7) at (4.6,-6.9)  {\textbf{N7} Region Zoom\\\scriptsize Crop \& re-encode};
+
+\node[fus] (n8) at (0,-9.0)    {\textbf{N8} Cross-Modal Fusion\\\scriptsize Evidence buffer $\mathcal{B}_t$};
+
+\node[gate] (g1) at (0,-10.9)  {\textbf{G1} Sufficiency\\Gate};
+
+\node[svc] (n9) at (0,-12.7)   {\textbf{N9} Grounded Generator\\\scriptsize Answers from $\mathcal{B}_t$ only};
+
+\node[gate] (g2) at (0,-14.5)  {\textbf{G2} Faithfulness\\Gate};
+
+\node[att] (n10a) at (-4.6,-16.6){\textbf{N10a} Token Attrib.\\\scriptsize Integrated gradients};
+\node[att] (n10b) at (0,-16.6)   {\textbf{N10b} Bounding Boxes\\\scriptsize Cell coords + patch sim.};
+\node[att] (n10c) at (4.6,-16.6) {\textbf{N10c} DAG Trace\\\scriptsize Retrieval log};
+
+\node[sup] (n11) at (0,-18.8)  {\textbf{N11} Report Synthesis\\\scriptsize Merge answer + proof};
+\node[fin] (n12) at (0,-20.6)  {\textbf{N12} Final Output\\\scriptsize Verifiable answer};
+
+\draw[ar] (n1) -- (n2);
+\draw[ar] (n1) -- (n5);
+\draw[ar] (n2.south) |- ([yshift=0.3cm]n5.east);
+\draw[ar] (n3) -- (n4);
+\draw[ar] (n4) -- (n6a);
+
+\draw[ar] (n5.south) -- ([xshift=0.9cm]n6a.north);
+\draw[ar] (n5) -- (n6b);
+\draw[ar] (n5.south) -- ([xshift=-0.9cm]n6c.north);
+\draw[ar] (n6c) -- (n7);
+
+\draw[ar] (n6a.south) -- (-4.6,-7.9) -| (n8.north);
+\draw[ar] (n7.south) -- (4.6,-7.9) -| (n8.north);
+\draw[ar] (n6b) -- (n8);
+
+\draw[ar] (n8) -- (g1);
+\draw[ar] (g1) -- node[lbl, midway, right]{sufficient} (n9);
+\draw[ar] (n9) -- (g2);
+
+\draw[loop] (g1.east) -- node[lbl, pos=0.5, above, black]{insufficient} (7.3,-10.9) -- (7.3,-2.3) -- ([yshift=-0.3cm]n5.east);
+\draw[loop] (g2.east) -- node[lbl, pos=0.5, above, black]{unfaithful} (7.3,-14.5) -- (7.3,-12.7) -- (n9.east);
+
+\draw[ar] (g2.south) -- node[lbl, pos=0.55, right]{faithful} (0,-15.7);
+\draw[ar] (0,-15.7) -- (-4.6,-15.7) -- (n10a.north);
+\draw[ar] (0,-15.7) -- (4.6,-15.7) -- (n10c.north);
+\draw[ar] (0,-15.7) -- (n10b.north);
+
+\draw[back] (n10a.south) -- (-4.6,-18.0) -- (0,-18.0) -- (n11.north);
+\draw[back] (n10c.south) -- (4.6,-18.0) -- (0,-18.0);
+\draw[back] (n10b) -- (n11);
+\draw[ar] (n11) -- (n12);
+
+\end{tikzpicture}%
+}
+\caption{Full graph architecture of the proposed Agentic Multimodal RAG system.
+Blue nodes perform ingestion and query encoding; brown nodes are the retrieval
+tools that hold exclusive authority to introduce evidence; the teal node maintains
+the evidence buffer that every downstream node reads from; the orange node is the
+grounded generator; violet nodes are the planner and the synthesiser; green nodes
+produce the three attribution artefacts. Red diamonds are the two validation gates
+and red dashed edges are the two correction loops. Green dashed edges carry
+attribution artefacts forward to synthesis. The planner may traverse the retrieval
+tier arbitrarily many times before the Sufficiency Gate permits generation.}
+\label{fig:graph}
+\end{figure}
+
+\section{Node-by-Node Specification}
+
+Here is how one query moves through the graph, start to finish.
+
+\begin{quote}
+\textbf{Running example.} \emph{``Does the reported accuracy gain in Section~4 hold
+for the low-resource subset, and which table reports it?''}
+\end{quote}
+
+This question needs two different kinds of evidence: a claim from the text and a
+number from a table. A single search cannot answer it alone, which is exactly why
+it is used here.
+
+\subsection{Ingestion Path (N3--N4)}
+
+This part runs once per corpus, offline, before any query arrives.
+
+\paragraph{N3 --- Corpus Ingestion.}
+Every PDF page is converted into an image, and its text is separately pulled out
+and split into chunks. Pages become images rather than parsed layouts because
+tables are exactly where OCR fails --- merged cells and multi-column headers break
+text extraction. An image keeps the table's structure intact.
+
+\paragraph{N4 --- Dual Index Build.}
+Two search indexes are built from the same set of pages: one holds visual
+embeddings of each page image (for finding tables and figures), the other holds
+text embeddings of each chunk (for finding claims). Because both indexes point back
+to the same pages, a match in one can lead directly to the matching spot in the
+other --- which is what makes jumping from a text claim to its supporting table
+possible.
+
+\subsection{Query Encoding Path (N1--N2)}
+
+\paragraph{N1 --- Query Intake.}
+The question is broken into smaller steps before any search happens. For the
+running example, that is two steps: find the accuracy claim, then find the table
+that reports the low-resource breakdown. Doing this upfront gives the planner a
+plan to follow instead of improvising one.
+
+\paragraph{N2 --- Query Encoder.}
+The query is embedded, and filters are pulled out of it --- here, ``Section 4'' and
+``low-resource subset.'' This has to finish before any retrieval starts, since
+every search the planner runs afterward depends on these filters.
+
+\subsection{Planning and Retrieval (N5--N7)}
+
+\paragraph{N5 --- Agentic Planner.}
+This is the only node that decides what happens next. It keeps track of the plan,
+what has already been searched, and what evidence has been found, then picks one
+retrieval tool to run. After seeing the result, it either searches again or moves
+on to the Sufficiency Gate. It never adds evidence itself --- only a retrieval tool
+can do that.
+
+\paragraph{N6a --- TextRetriever.}
+Searches the text index for narrative chunks matching the query. On the running
+example, this is the first search: it finds the sentence claiming the accuracy
+gain, along with the page it appears on.
+
+\paragraph{N6b --- TableRetriever.}
+Extracts a table's structure while keeping track of exactly where each cell sits on
+the page. This matters because the bounding boxes generated later (N10b) are only
+possible if this spatial position is kept --- a plain-text version of the table
+would lose it.
+
+\paragraph{N6c --- FigureRetriever (ColPali).}
+Searches the visual index to find charts, plots, or dense tables without needing
+OCR. It also keeps the match scores it computed, because those scores are reused
+later to draw bounding boxes.
+
+\paragraph{N7 --- Region Zoom.}
+Crops in on part of a page and re-encodes it at higher resolution. This exists
+because finding the right page and reading a specific row inside it need different
+levels of detail --- a page-level match tells you which page has the table, not
+which row answers the question. On the running example, this runs after N6c finds
+the right page, zooming into the low-resource row so its cells become readable.
+
+\subsection{Evidence Buffer and Sufficiency Gate (N8, G1)}
+
+\paragraph{N8 --- Cross-Modal Fusion.}
+Everything retrieved so far is converted into one shared format and added to the
+evidence buffer, along with where it came from --- which page, which tool, which
+step. This buffer is the only thing the generator will ever see; nothing after this
+point looks at the corpus again.
+
+\paragraph{G1 --- Sufficiency Gate.}
+Before generation is allowed, a check runs: is there enough evidence here to
+actually answer the question? On the running example, the first check fails --- the
+text claim is there, but the table that would confirm or deny it for the
+low-resource subset is not. Control goes back to N5, which fetches the table. Only
+once both pieces are present does the gate let the process continue.
+
+This check happens \emph{before} generation, not after. A standard pipeline would
+hand the incomplete evidence to the generator and hope it notices something is
+missing --- which is exactly how confident, wrong answers get produced.
+
+\subsection{Generation and Faithfulness Gate (N9, G2)}
+
+\paragraph{N9 --- Grounded Generator.}
+Writes the answer using only what is in the evidence buffer. It cannot search on
+its own and cannot fill in numbers from memory --- everything it says has to trace
+back to something already retrieved.
+
+\paragraph{G2 --- Faithfulness Gate.}
+Checks every factual claim in the draft answer against the evidence buffer. If the
+answer states something that is not actually backed by retrieved evidence, the
+gate fails and N9 is sent back to rewrite that part using only what is really
+there. Because the buffer is the only source allowed, each claim is checked
+against one fixed, finite list of retrieved items, rather than against everything
+the model might believe about the world.
+
+\subsection{Attribution and Output (N10--N12)}
+
+\paragraph{N10a --- Token Attribution.}
+Highlights which retrieved sentences most influenced each part of the answer.
+
+\paragraph{N10b --- Bounding Boxes.}
+Draws a box --- $[x_{\min}, y_{\min}, x_{\max}, y_{\max}]$ --- around the exact spot
+on the page a claim came from. For a table cell, the box is the cell position N6b
+recorded; for a figure, it encloses the highest-scoring patches from N6c (or N7).
+This only works because N6b kept cell positions and N6c kept its match scores.
+
+\paragraph{N10c --- DAG Trace.}
+Logs what actually happened: which tools ran, in what order, and how many times the
+Sufficiency Gate sent things back. On the running example, this log shows two
+search rounds and one rejection --- so the process can be checked, not just
+trusted.
+
+\paragraph{N11 --- Report Synthesis.}
+Combines the answer with its three proof artefacts into one readable report.
+
+\paragraph{N12 --- Final Output.}
+What the user actually sees: the answer, the highlighted source text, a box on the
+source page, and the log of how it was found.
+
+\section{Control Loops}
+
+There are exactly two loops in this graph, and each catches a different kind of
+mistake.
+
+\paragraph{The retrieval loop (not enough evidence).}
+Triggered by the Sufficiency Gate. Sends control back to N5 to search again. This
+stops the system from confidently answering using incomplete evidence.
+
+\paragraph{The regenerate loop (wrong evidence used).}
+Triggered by the Faithfulness Gate. Sends control back to N9 to rewrite. This stops
+the system from stating something the evidence does not actually support.
+
+Both loops have a limit on how many times they can repeat. If that limit is
+reached, the system says the evidence is not enough instead of guessing. For a
+literature review tool, this is the right trade-off: ``I could not confirm this''
+is useful. A confident wrong answer is not.
+
+\section{Mapping to Research Objectives}
+
+Table~\ref{tab:node-mapping} shows which objective each part of the graph is
+responsible for.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{llp{5.4cm}}
+\toprule
+\textbf{Nodes} & \textbf{Objective} & \textbf{Contribution} \\
+\midrule
+N3, N4, N6c & Objective 2 & Vision-document retrieval over rasterised pages \\
+N1, N2, N5, N7 & Objective 1 & Iterative agentic planning and multi-hop navigation \\
+N8, Sufficiency Gate & Objective 3 & Evidence verification prior to generation \\
+N9, Faithfulness Gate & Objective 3 & Claim-level grounding of generated output \\
+N10a--N10c, N11 & Objective 4 & Spatial, textual, and procedural attribution \\
+\bottomrule
+\end{tabular}
+\caption{Mapping of graph nodes to research objectives.}
+\label{tab:node-mapping}
+\end{table}
