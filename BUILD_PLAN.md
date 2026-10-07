@@ -522,15 +522,26 @@ kernel (top right in VS Code), then **Run All**. Every test cell should print `O
 says "SKIPPED: no llama.cpp server". That is fine for now.
 
 **1.7 🔌 Install llama.cpp and start the model** (15 min, after the GGUF files have downloaded).
-Option A: `winget install llama.cpp`, then open a new terminal.
-Option B: download `llama-<version>-bin-win-vulkan-x64.zip` from
-https://github.com/ggml-org/llama.cpp/releases and unzip it to `D:\tools\llama.cpp`
-(in Git Bash: `/d/tools/llama.cpp/`; the start script looks there if `llama-server` is not on
-the PATH).
+Unzip the Vulkan build into `D:\tools\llama.cpp`. That is where `start_llm.sh` looks, so
+nothing has to be added to the PATH (a PATH change would only reach VS Code's terminals after
+a full VS Code restart, the same trap as `UV_CACHE_DIR` in step 1.2):
 
 ```bash
-llama-server --version
-llama-server --list-devices        # should list the B580 (Vulkan)
+# the newest numbered build ("b11476" etc.); GitHub's "latest" label points at a different product
+url=$(curl -s "https://api.github.com/repos/ggml-org/llama.cpp/releases?per_page=10" \
+      | grep -o 'https://[^"]*-bin-win-vulkan-x64\.zip' | head -1)
+echo "$url"
+mkdir -p /d/tools/llama.cpp
+curl -L --fail -o /d/tools/llama-vulkan.zip "$url"            # ~33 MB
+unzip -o -q /d/tools/llama-vulkan.zip -d /d/tools/llama.cpp
+
+/d/tools/llama.cpp/llama-server.exe --version                  # write the build number in notes/journal.md
+/d/tools/llama.cpp/llama-server.exe --list-devices             # should list the B580 (Vulkan)
+```
+
+Once the two Qwen files have finished downloading:
+
+```bash
 bash scripts/start_llm.sh          # keep this terminal open; use a second one for your work
 ```
 
@@ -2040,7 +2051,7 @@ retrieval across many papers instead of within one.
 | "requires the ipykernel package" | VS Code picked another Python | choose the `.venv` kernel (top right) |
 | notebook variables gone after a power cut | the kernel died with the PC | Run All again; heavy steps load their saved files |
 | `start_llm.sh`: "Missing …gguf" | the GGUF download is not finished | run `download_all.py` again |
-| `start_llm.sh`: "llama-server not found" | llama.cpp not installed, or not on the PATH | Day 1, step 1.7; after `winget`, open a new terminal |
+| `llama-server: command not found` or `start_llm.sh`: "llama-server not found" | llama.cpp is not unzipped in `D:\tools\llama.cpp` | Day 1, step 1.7; call it by its full path `/d/tools/llama.cpp/llama-server.exe` |
 | llama-server: out of memory | context too big, or ColQwen2 also on the GPU | stop other GPU programs; `bash scripts/start_llm.sh 6144`; ColQwen2 on the CPU |
 | llama-server slow | Vulkan build on Arc | try the SYCL release build; keep `-np 1` |
 | model replies are not valid JSON | `response_format` missing | always go through `call_llm` |

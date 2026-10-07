@@ -1,0 +1,1 @@
+- 2026-10-08: llama.cpp build 11476 (commit 988190680), Vulkan build; B580 visible, 12190 MiB

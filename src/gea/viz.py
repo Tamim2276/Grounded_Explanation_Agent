@@ -159,7 +159,9 @@ def draw_timeline(timeline: list, notes: dict = None, hatched: set = None, save_
         ax.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, 0.0), ncol=2,
                   frameon=False, fontsize=6, handlelength=1.6, handleheight=1.0, columnspacing=1.2)
         if save_to is not None:
-            fig.savefig(save_to)
+            # No creation date in the PDF: the same run then gives the same bytes, so
+            # re-running the notebook does not show up as a changed file in git.
+            fig.savefig(save_to, metadata={"CreationDate": None})
     return fig
 
 
