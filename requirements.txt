@@ -1,8 +1,8 @@
-# PyTorch is NOT listed here on purpose: each machine needs a different build.
-# Install it first (see PLAN.md):
-#   Intel Arc (Windows desktop): pip install torch torchvision --index-url https://download.pytorch.org/whl/xpu
-#   NVIDIA (university 3070):    pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
-#   CPU only (laptop):           pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# PyTorch is NOT listed here on purpose: the Intel Arc B580 needs PyTorch's xpu build, which
+# is not on PyPI. Install it FIRST, then this file, then the gea package (BUILD_PLAN.md, Day 1):
+#   uv pip install torch torchvision --index-url https://download.pytorch.org/whl/xpu
+#   uv pip install -r requirements.txt
+#   uv pip install -e .
 
 # agent
 langgraph

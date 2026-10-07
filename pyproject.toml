@@ -1,0 +1,18 @@
+# Makes src/gea importable from anywhere in the virtual environment:
+#   uv pip install -e .
+# Dependencies are installed from requirements.txt (torch first -- see BUILD_PLAN.md, Day 1).
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gea"
+version = "0.1.0"
+description = "Grounded Explanation Agent: agentic multimodal RAG with grounded explanations"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

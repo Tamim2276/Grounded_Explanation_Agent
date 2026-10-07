@@ -1,0 +1,4 @@
+# Bash scripts must keep Unix line endings. Git for Windows converts text files to
+# Windows line endings on checkout (core.autocrlf=true), and bash then fails with
+# "$'\r': command not found".
+*.sh text eol=lf
