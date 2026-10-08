@@ -1,0 +1,26 @@
+{
+ "dev": {
+  "questions": 20,
+  "found": 20,
+  "share": 1.0,
+  "misses": []
+ },
+ "test": {
+  "questions": 150,
+  "found": 150,
+  "share": 1.0,
+  "misses": []
+ },
+ "corpus": {
+  "papers": 36,
+  "pages": 475,
+  "chunks": 2168,
+  "tables": 159,
+  "figures": 205,
+  "found_by": {
+   "table-finder": 63,
+   "content": 300,
+   "last-resort": 1
+  }
+ }
+}

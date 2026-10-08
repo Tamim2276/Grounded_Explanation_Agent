@@ -762,6 +762,24 @@ must be able to rerun exactly the same questions.
 7. **Sections:** short blocks matching `^\d+(\.\d+)*\s+[A-Z]` are headings; each chunk
    remembers the last heading's number.
 
+> **What real papers needed (built on Day 2, in [ingest.py](src/gea/ingest.py)).** Looking
+> at real pages showed that the simple version above fails in several ways, each now fixed
+> and kept fixed by [tests/test_ingest.py](tests/test_ingest.py):
+>
+> - Captions are found **per row**, not per block: PyMuPDF glues a caption to the table rows
+>   under it. A caption stops at the first row whose pieces are more than one font size
+>   apart (a table row). IEEE captions ("TABLE II" alone, title on the next line) count too.
+> - `find_tables()` misses many tables and splits others, so a guess is used only right next
+>   to a table caption, then **grown** over table text beside it (a missed column, header).
+> - A paper puts its tables either under or over their captions; the reader **counts which**
+>   over the whole paper (two passes) and searches that side first.
+> - Table rows that look like text (body font, several lines) are recognised as
+>   **table-like** (mostly gapped rows or mostly numbers), so they are not paragraphs.
+> - Page numbers and running headers (the top and bottom 40 points) are ignored; a region
+>   under 1% of the page, or found only by the last-resort search, is marked `doubtful`.
+> - Each paragraph keeps the section it is in; text before the first heading is `front`;
+>   words broken at a line end are joined ("be-" + "tween").
+
 Save with `atomic_write_json(out_dir / "corpus.json", ...)` **as the very last step**.
 `scripts/build_corpus.py` loops over the chosen papers and **skips any paper whose
 `corpus.json` already exists**.
@@ -778,6 +796,11 @@ the detected regions on the page image (PIL `ImageDraw.rectangle`), save the dra
 **🔋 Look at them during the next outage**: why was the region missed? Fix the biggest cause
 in the next power window. If a few remain, drop those questions and **write down how many and
 why**; the thesis must report it.
+
+> **Result:** [scripts/build_corpus.py](scripts/build_corpus.py) reads all 36 papers (475
+> pages, about 90 seconds on the CPU) and reports **100% coverage: 20/20 dev and 150/150
+> test**, with no question dropped. Of all 364 tables and figures, 3 are marked `doubtful`.
+> The numbers are in `results/day2_coverage.json`.
 
 **2.4 🔌 Connect it to the graph** (30 min). In [corpus.py](src/gea/corpus.py), make
 `get_corpus` load `data/corpus/<paper_id>/corpus.json` when `cfg.BACKEND == "real"`.

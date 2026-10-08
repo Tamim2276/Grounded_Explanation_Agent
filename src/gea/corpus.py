@@ -1,4 +1,5 @@
 # The offline path (N3 -> N4) and get_corpus(), which every retriever searches.
+import json
 import math
 from collections import Counter
 from typing import TypedDict
@@ -93,17 +94,38 @@ def build_ingest_graph():
 _CORPORA = {}
 
 
+def keyword_index(docs: list) -> dict:
+    # IDF of every word over the paper's texts: the stand-in similarity behind
+    # text.score(). The stub G1 and N9 still use it until Days 5-6.
+    df = Counter(t for d in docs for t in set(terms(d)))
+    return {t: math.log(1 + len(docs) / (1 + n)) for t, n in df.items()}
+
+
+def load_real_corpus(paper_id: str) -> dict:
+    # A real paper as scripts/build_corpus.py saved it (N3, Day 2), plus its keyword
+    # index. Day 3 adds the SPECTER2 and ColQwen2 indexes here.
+    path = cfg.DATA_DIR / "corpus" / paper_id / "corpus.json"
+    if not path.exists():
+        raise FileNotFoundError(f"{path} -- run: python scripts/build_corpus.py")
+    paper = json.loads(path.read_text(encoding="utf-8"))
+    docs = ([c["text"] for c in paper["chunks"]]
+            + [r["caption"] for r in paper["tables"] + paper["figures"]])
+    paper["text_index"] = {"idf": keyword_index(docs)}
+    return paper
+
+
 def get_corpus(paper_id: str) -> dict:
     # Everything one paper offers the retrievers: N3's records plus N4's two
     # indexes. Built once per paper and kept for the rest of the session.
     #
     # Stub backend: run the offline graph on the fake paper.
-    # Real backend: load what the Day 2-3 ingestion saved under data/.
+    # Real backend: load what scripts/build_corpus.py saved under data/corpus/.
     key = (cfg.BACKEND, paper_id)
     if key not in _CORPORA:
         if cfg.BACKEND == "stub":
             _CORPORA[key] = build_ingest_graph().invoke({"paper_id": paper_id})
+        elif cfg.BACKEND == "real":
+            _CORPORA[key] = load_real_corpus(paper_id)
         else:
-            raise NotImplementedError(
-                f"backend {cfg.BACKEND!r}: load data/corpus/{paper_id} (BUILD_PLAN.md Days 2-3)")
+            raise ValueError(f"unknown BACKEND {cfg.BACKEND!r}")
     return _CORPORA[key]
