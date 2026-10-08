@@ -296,8 +296,15 @@ need in the thesis.
 | ColQwen2 encoding a short text query | 0 (it runs on the CPU) | at question time |
 | SPECTER2, Table Transformer | 0 (CPU; they are small) | at question time |
 
-**Rule:** never run the page indexing (Day 3) while llama-server is running.
+**Rule:** one big GPU job at a time. Never run the page indexing (Day 3) while llama-server
+is running, and never run either while **another project trains on the B580** (for example
+your OrdinalFed experiments, which take about 6.7 GB). `start_llm.sh` checks this before it
+starts and names the programs using the GPU.
 **Check:** Task Manager → Performance → GPU → "Dedicated GPU memory".
+
+**While another project has the GPU,** do the steps that need none: Day 2 entirely (PyMuPDF
+runs on the CPU), the SPECTER2 text index of Day 3, and every 🔋 part. Save the GPU steps (the
+model server, the ColQwen2 page index, the evaluation) for when the GPU is free.
 
 ### RAM (16 GB)
 
@@ -2046,13 +2053,15 @@ retrieval across many papers instead of within one.
 | a Windows program reads `/something` as a file path | Git Bash converts arguments that look like paths | put `MSYS_NO_PATHCONV=1` in front of that command |
 | `download_all.py` says STOP, cache on C: | `HF_HOME` not seen by this terminal | open a new terminal (it was set while the old one was open) |
 | some PDFs failed to download | internet dropped, or arXiv refused | run `download_all.py` again later; finished files are skipped |
+| downloads warn "hf_xet is not installed" or "symlinks … not supported" | Hugging Face's faster download tool is missing; Windows blocks symlinks without Developer Mode | both harmless: the normal download is used, and the cache stores plain files (each model still only once) |
 | a model "cannot be found" or hangs while loading | internet down and `HF_HUB_OFFLINE` not set | `setx HF_HUB_OFFLINE 1` (Day 1, 1.9); for a new download, `HF_HUB_OFFLINE=0 python scripts/download_all.py` |
 | notebook can't find `gea` | wrong kernel, or `-e .` not installed | choose the `.venv` kernel; `uv pip install -e .` |
 | "requires the ipykernel package" | VS Code picked another Python | choose the `.venv` kernel (top right) |
 | notebook variables gone after a power cut | the kernel died with the PC | Run All again; heavy steps load their saved files |
 | `start_llm.sh`: "Missing …gguf" | the GGUF download is not finished | run `download_all.py` again |
 | `llama-server: command not found` or `start_llm.sh`: "llama-server not found" | llama.cpp is not unzipped in `D:\tools\llama.cpp` | Day 1, step 1.7; call it by its full path `/d/tools/llama.cpp/llama-server.exe` |
-| llama-server: out of memory | context too big, or ColQwen2 also on the GPU | stop other GPU programs; `bash scripts/start_llm.sh 6144`; ColQwen2 on the CPU |
+| `start_llm.sh`: "The GPU already has … MB in use" | another program (often another project's training) is using the B580 | let it finish or stop it; meanwhile do the no-GPU steps (see "The B580 budget") |
+| llama-server: out of memory (`ErrorOutOfDeviceMemory`) | another program on the GPU, context too big, or ColQwen2 also on the GPU | stop other GPU programs; `bash scripts/start_llm.sh 6144`; ColQwen2 on the CPU |
 | llama-server slow | Vulkan build on Arc | try the SYCL release build; keep `-np 1` |
 | model replies are not valid JSON | `response_format` missing | always go through `call_llm` |
 | `read_jsonl` raises "line N is damaged" | a damaged line in the middle (not a power cut, which only hits the last line) | open the file, delete that one line, re-run: the runner redoes that question |
