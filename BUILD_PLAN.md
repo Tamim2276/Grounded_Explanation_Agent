@@ -918,25 +918,21 @@ to the same place in the other.
 
 **3.1 🔌 Stop llama-server** (Ctrl+C in its window). You need the GPU memory for ColQwen2.
 
-**3.2 🔌 SPECTER2 encoder:** `src/gea/indexes.py` (1 h).
+**3.2 🔌 SPECTER2 encoder:** [src/gea/indexes.py](src/gea/indexes.py) (1 h). Runs on the CPU.
 
 ```python
-from functools import lru_cache
-import torch
-from adapters import AutoAdapterModel
-from transformers import AutoTokenizer
-
 @lru_cache(maxsize=1)
-def _specter():
-    tok = AutoTokenizer.from_pretrained("allenai/specter2_base")
-    model = AutoAdapterModel.from_pretrained("allenai/specter2_base")
-    model.load_adapter("allenai/specter2", source="hf", load_as="proximity")
-    model.load_adapter("allenai/specter2_adhoc_query", source="hf", load_as="adhoc_query")
+def specter():                                              # loaded once per session (~4 s)
+    base = local_snapshot("allenai/specter2_base")          # the downloaded folder, never the internet
+    tok = AutoTokenizer.from_pretrained(base)
+    model = AutoAdapterModel.from_pretrained(base)
+    model.load_adapter(local_snapshot("allenai/specter2"), load_as="proximity")
+    model.load_adapter(local_snapshot("allenai/specter2_adhoc_query"), load_as="adhoc_query")
     return tok, model.eval()
 
 @torch.inference_mode()
 def embed_text(texts: list, kind: str = "doc"):
-    tok, model = _specter()
+    tok, model = specter()
     model.set_active_adapters("proximity" if kind == "doc" else "adhoc_query")
     out = []
     for i in range(0, len(texts), 16):
@@ -945,6 +941,27 @@ def embed_text(texts: list, kind: str = "doc"):
         out.append(torch.nn.functional.normalize(cls, dim=-1))
     return torch.cat(out).numpy().astype("float32")         # (n, 768), length 1 each
 ```
+
+> **Built on Day 3.** The model loads from the local download only (`local_files_only`): a
+> power cut often takes the internet with it, and a missing model should fail at once, not
+> hang. It stays on the CPU (110M weights, about 4 chunks a second while another job uses the
+> machine). [tests/test_indexes.py](tests/test_indexes.py) checks length-1 vectors, that
+> batching and padding change nothing, that the two adapters differ, and the 512-token cut.
+>
+> **What it does and does not understand** (real scores, question: "How well does the method
+> work when only a few labelled examples are available?"):
+>
+> | paragraph | shared words | SPECTER2 |
+> |---|---|---|
+> | A answers it ("low-resource setting … 71.3% accuracy") | none | 0.769 |
+> | B only shares words ("labelled examples were collected by three annotators") | 2 | **0.779** |
+> | C unrelated ("20 epochs on four GPUs") | none | 0.733 |
+>
+> Over four such questions the unrelated paragraph was always last, but the answer beat the
+> word-sharer only twice. **SPECTER2 matches topics, not answers**: it was trained to match
+> a search with papers on the same topic. That is why the agent keeps the top 3, asks the
+> page index for a second opinion, and lets G1 check the evidence. Step 3.6 measures it on
+> real questions.
 
 **3.3 🔌 Text index per paper** (30 min). Embed every chunk **and** every caption with
 `kind="doc"`. Then `faiss.IndexFlatIP(768)` → `add` → save with

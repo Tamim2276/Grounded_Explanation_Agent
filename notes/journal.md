@@ -20,3 +20,11 @@
     - "be- tween" -> words broken at a line end joined (before a lowercase letter)
   - Known limitations: "state-of-the-" + "art" -> "state-of-theart"; 1706.00633v4 draws Table 2 and
     Figure 2 in one frame (Figure 2 region doubtful); one table's rules invisible to PyMuPDF (last resort).
+- 2026-10-09, Day 3 (N4 indexes, N6a text search):
+  - 3.2 SPECTER2 encoder: src/gea/indexes.py, embed_text(texts, kind="doc"|"query"). Loads from the
+    local HF download only (local_files_only), ~4 s; CPU, ~4 real chunks/s (with OrdinalFed training
+    running on the same machine). tests/test_indexes.py: 6 tests.
+  - Finding: SPECTER2 matches topics, not answers. 4 hand-made questions x (answer, word-sharer,
+    unrelated): unrelated always last; answer above word-sharer 2 of 4 (e.g. "few labelled examples":
+    answer 0.769, word-sharer 0.779, unrelated 0.733). Scores bunch between 0.65 and 0.78: only the
+    order means anything. Keyword search cannot tell the answer from the unrelated text (both 0).
