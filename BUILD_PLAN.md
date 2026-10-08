@@ -314,8 +314,10 @@ VS Code take about 5 GB. That fits, but **close the browser during long runs**.
 
 ### Disk
 
-C: has only about 12 GB free, so nothing large goes there. Your `HF_HOME` already points to
-`D:\huggingface_cache`.
+**Rule: install nothing on C:.** Programs go to `D:\tools\`, Python packages to `.venv` in the
+repo, caches to `D:\ml-cache` and `D:\huggingface_cache`. If an installer offers no choice
+(for example `winget`), use its portable or zip version instead, as Day 1 does for llama.cpp
+and MiKTeX.
 
 | What | Size | Where |
 |---|---|---|
@@ -324,6 +326,7 @@ C: has only about 12 GB free, so nothing large goes there. Your `HF_HOME` alread
 | ColQwen2 base + adapter, SPECTER2, Table Transformer | ~8.9 GB | `D:\huggingface_cache` |
 | Qwen2.5-VL GGUF + vision part | ~5.6 GB | `data/models/qwen2.5-vl-7b` (D:) |
 | SPIQA test-A + 118 PDFs + page images + indexes | ~3 GB | `data/` (D:) |
+| llama.cpp + portable MiKTeX | ~1.1 GB | `D:\tools\` |
 
 ### Time (rough; you measure the real numbers on Day 7)
 
@@ -568,9 +571,28 @@ should print the model's plan.
 *Why Vulkan:* it is the simplest GPU backend for Intel Arc on Windows and needs no extra
 toolkit. If it is slow later, the SYCL build is the faster Intel-specific alternative.
 
-**1.8 🔌 LaTeX** (30 min). Install **MiKTeX** from miktex.org and choose "install missing
-packages on-the-fly: Yes". Build the thesis once while you have internet, so every package
-it needs gets downloaded now:
+**1.8 🔌 LaTeX** (30 min). **MiKTeX**, installed as a *portable* installation in
+`D:\tools\MiKTeX`. Portable means every MiKTeX file, setting and later-downloaded package
+stays in that one folder: nothing goes to C:, and nothing goes into the Windows registry.
+(A normal install, including `winget install MiKTeX.MiKTeX`, puts it on C:.)
+
+```bash
+mkdir -p /d/tools/installers /d/tools/tmp
+curl -L --fail -o /d/tools/installers/basic-miktex-25.12-x64.exe \
+  https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-25.12-x64.exe
+# its SHA-256 must match winget's record: winget show --id MiKTeX.MiKTeX | grep SHA256
+sha256sum /d/tools/installers/basic-miktex-25.12-x64.exe
+TEMP='D:\tools\tmp' TMP='D:\tools\tmp' /d/tools/installers/basic-miktex-25.12-x64.exe \
+  --portable='D:\tools\MiKTeX' --unattended                     # a few minutes; ~1 GB on D:
+
+MT=/d/tools/MiKTeX/texmfs/install/miktex/bin/x64
+"$MT/initexmf.exe" --set-config-value="[MPM]AutoInstall=1"      # fetch missing packages by itself
+echo "export PATH=\"\$PATH:$MT\"" >> ~/.bashrc && source ~/.bashrc   # pdflatex for Git Bash
+powershell.exe -NoProfile -Command "[Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path','User') + ';D:\tools\MiKTeX\texmfs\install\miktex\bin\x64', 'User')"   # ... and for VS Code
+```
+
+Build the thesis once while you have internet, so every package it needs is downloaded now
+(the first run takes about 2 minutes for that; it built 29 pages here):
 
 ```bash
 cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main; cd ..
