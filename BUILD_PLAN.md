@@ -1074,6 +1074,12 @@ evidence for **RQ2** ("can visual embeddings find the right tables and figures?"
 **3.7 🔌 Notebook section "Day 3: the indexes"**: one dev question, its top-3 pages with
 scores, and its top-3 chunks.
 
+> **Built on Day 3: Section 18.** 18A shows what is inside one paper's two indexes. 18B is the
+> page search for "Which dataset has the most 4-hop triples?": page 6 first, with Table 1 boxed,
+> using the saved scores so ColQwen2 is not loaded. 18C runs the hybrid text search live: the
+> paragraph naming Table 1 comes 3rd. 18D shows Day 3's numbers. The point: both searches find
+> *where* the answer is, but the answer is a table cell, which is Day 4's job.
+
 ### Check it works
 
 - [ ] a chunk searched with its own text comes back first, with similarity ≈ 1.0

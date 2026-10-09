@@ -56,3 +56,8 @@
     keyword @3, robust to reworded planner queries). Revisit on Day 5 with planner sub-queries.
   - Slip: a sed range delete truncated scripts/eval_retrieval.py (end pattern did not match -> deleted to EOF);
     restored from git and re-applied with exact edits. Rule: no sed range deletes.
+  - 3.7 notebook Section 18 (6 cells, tag day3-cell): index contents, page search for dev 1803.03467v4#0 from the
+    saved scores (page 6 first, Table 1 boxed), live hybrid N6a (c46 "names Table 1" in 3rd place), Day 3 numbers.
+    Whole notebook runs (130 cells, 33 s). 17C kept as Day 2's keyword search so it loads no model.
+  - Keyword mode now needs no model and no index (no SPECTER2 tie-break); compare_text_search re-run: numbers
+    unchanged (45/70/90%). Model loads in tests/notebook skip the memory check when SPECTER2 is already loaded.

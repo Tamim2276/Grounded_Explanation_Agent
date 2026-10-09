@@ -6,7 +6,7 @@ import pytest
 from gea import config as cfg
 from gea.corpus import get_corpus
 from gea.device import free_memory_gb
-from gea.indexes import text_index_is_current
+from gea.indexes import specter_loaded, text_index_is_current
 from gea.retrieval import in_section, n6a_text_retriever, ranks, text_retriever, text_scores
 
 PAPER = "1804.07931v2"
@@ -37,7 +37,7 @@ def test_hybrid_prefers_what_both_searches_rank_high():
 def real():
     if not text_index_is_current(cfg.DATA_DIR / "corpus" / PAPER):
         pytest.skip("run: python scripts/build_indexes.py text")
-    if free_memory_gb() < 2.5:
+    if not specter_loaded() and free_memory_gb() < 2.5:
         pytest.skip("less than 2.5 GB of memory free; SPECTER2 not loaded")
     with cfg.override(BACKEND="real", TRACE=False):
         yield get_corpus(PAPER)
@@ -63,3 +63,14 @@ def test_the_unchanged_node_runs_on_the_real_backend(real):
              "query_filters": {"refs": {}, "entities": []}}
     found = n6a_text_retriever(state)["new_evidence"]
     assert ANSWER in [e.source for e in found]
+
+
+def test_keyword_search_needs_no_model_and_no_index():
+    tiny = {"paper_id": "tiny", "text_index": {"idf": {"clicks": 2.0, "impressions": 1.5}},
+            "chunks": [{"id": "c1", "page": 1, "section": "1", "bbox": [0, 0, 1, 1],
+                        "text": "We report results."},
+                       {"id": "c2", "page": 2, "section": "2", "bbox": [0, 0, 1, 1],
+                        "text": "Clicks are a subset of impressions."}]}
+    with cfg.override(BACKEND="real", TEXT_SEARCH="keyword"):
+        found = text_retriever(tiny, QUESTION, k=1)
+    assert [e.source for e in found] == ["c2"]

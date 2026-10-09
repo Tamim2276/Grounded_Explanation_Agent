@@ -75,14 +75,17 @@ def real_text_retriever(corpus: dict, query: str, section: Optional[str] = None,
     # table and figure tools -- inside N2's section when one was named and matches.
     from gea.indexes import embed_text
     k = k or cfg.TEXT_TOP_K
-    index = corpus["text_index"]
-    if "faiss" not in index:
-        raise FileNotFoundError(f"{corpus['paper_id']}: no text index -- run: python scripts/build_indexes.py text")
     pool = [c for c in corpus["chunks"] if section and in_section(c, section)] or corpus["chunks"]
-    sims, rows = index["faiss"].search(embed_text([query], kind="query"), index["faiss"].ntotal)
-    similarity = {index["ids"][r]: float(s) for s, r in zip(sims[0], rows[0])}
-    meaning = {c["id"]: similarity[c["id"]] for c in pool}
     words = {c["id"]: score(query, c["text"], corpus) for c in pool}
+    if cfg.TEXT_SEARCH == "keyword":
+        meaning = {c["id"]: 0.0 for c in pool}          # keyword search needs no model and no index
+    else:
+        index = corpus["text_index"]
+        if "faiss" not in index:
+            raise FileNotFoundError(f"{corpus['paper_id']}: no text index -- run: python scripts/build_indexes.py text")
+        sims, rows = index["faiss"].search(embed_text([query], kind="query"), index["faiss"].ntotal)
+        similarity = {index["ids"][r]: float(s) for s, r in zip(sims[0], rows[0])}
+        meaning = {c["id"]: similarity[c["id"]] for c in pool}
     final = text_scores(meaning, words, cfg.TEXT_SEARCH)
     ranked = sorted(pool, key=lambda c: (-final[c["id"]], -meaning[c["id"]]))
     return [Evidence("text", c["id"], c["page"], c["text"], tuple(c["bbox"]), "TextRetriever",

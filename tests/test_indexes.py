@@ -9,7 +9,7 @@ import pytest
 from gea import config as cfg
 from gea.device import free_memory_gb
 from gea.indexes import (TEXT_INDEX, build_text_index, embed_text, load_text_index, specter,
-                         text_index_is_current, text_records)
+                         specter_loaded, text_index_is_current, text_records)
 
 QUESTION = "Which dataset has the most users?"
 ON_TOPIC = "MovieLens-1M is the largest of the three datasets, with 6,040 users and one million ratings."
@@ -20,7 +20,7 @@ UNRELATED = "The learning rate is set to 0.001 and decayed every ten epochs."
 def loaded():
     # Loading SPECTER2 takes ~1 GB at once; with less free, skip rather than crash
     # whatever else is running on this PC.
-    if free_memory_gb() < 2.5:
+    if not specter_loaded() and free_memory_gb() < 2.5:
         pytest.skip(f"only {free_memory_gb():.1f} GB of memory free; SPECTER2 tests skipped")
     try:
         specter()

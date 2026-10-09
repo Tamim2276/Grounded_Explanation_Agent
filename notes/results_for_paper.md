@@ -136,7 +136,7 @@ it names the label ("Table 2", "Fig. 2"); **lenient** also counts a paragraph on
 
 | method | strict@1 | strict@3 | lenient@3 |
 |---|---|---|---|
-| keyword (IDF-weighted word overlap) | 45% | **70%** | **90%** |
+| keyword (IDF-weighted word overlap; ties in paper order, no model) | 45% | **70%** | **90%** |
 | SPECTER2 (question adapter + FAISS) | 15% | 35% | 70% |
 | hybrid (reciprocal rank fusion, k = 60) | **50%** | 60% | 80% |
 

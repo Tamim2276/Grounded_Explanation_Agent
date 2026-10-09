@@ -50,6 +50,11 @@ def specter(device: str = "cpu"):
     return tok, model.to(device).eval()      # float32 on both devices: the same vectors
 
 
+def specter_loaded() -> bool:
+    # True once SPECTER2 is in memory: using it again needs no more room.
+    return specter.cache_info().currsize > 0
+
+
 @torch.inference_mode()
 def embed_text(texts: list, kind: str = "doc", device: str = "cpu") -> np.ndarray:
     # One SPECTER2 vector per text, shape (len(texts), 768), each scaled to length 1,
