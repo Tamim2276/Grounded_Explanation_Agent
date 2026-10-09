@@ -970,6 +970,14 @@ the matching record ids in the same order. Also keep the IDF keyword table from 
 the stub G1 and N9 still use `score()` until Days 5–6. Skip papers whose `text.faiss` already
 exists.
 
+> **Built on Day 3:** `python scripts/build_indexes.py text` (CPU, ~10 min) or `... text --gpu`
+> (B580, **0.9 min** for 2,532 texts from 36 papers). Each paper gets `text.faiss` plus
+> `text_ids.json` (which record each row is: chunk `c3`, or the caption of `t1`/`f2`). The ids
+> are written first and the index last, so an index that exists is complete; an index older
+> than its `corpus.json` is refused. Before loading a model the script checks free memory and
+> the GPU memory other programs hold, and refuses if they are short: running out crashes
+> *every* program on the PC, including another experiment.
+
 **3.4 🔌 Page index per paper** (1–2 h, mostly waiting; resumable). On the GPU:
 
 ```python
@@ -999,6 +1007,13 @@ Do one page per call: it is simpler, and nothing gets padded.
 
 Then **unload**: `del model; empty_cache(DEVICE)`.
 
+> **Built on Day 3:** `python scripts/build_indexes.py pages`: **475 pages in 3.0 minutes** on
+> the B580 (about 0.3 s a page; the 1–2 h above was far too cautious). The model is
+> `colqwen2-base` with the `v1.0` add-on merged in, loaded from the local download only. A
+> 150-dpi page (1275×1650 px) is shrunk to 672×868 and becomes **31 × 24 = 744 patch
+> vectors**. Each patch is about 25.5 points (9 mm) square, stored row by row, so patch `k` sits
+> at row `k // 24`, column `k % 24`. About 1.6 MB per paper.
+
 **3.5 🔌 Real N6a** (1 h). In [retrieval.py](src/gea/retrieval.py), at the top of
 `text_retriever`:
 
@@ -1025,6 +1040,18 @@ def maxsim(q, pages):                       # q: (q_tokens, 128); pages: list of
 
 Save the numbers with `atomic_write_json` to `results/day3_retrieval.json`. They are early
 evidence for **RQ2** ("can visual embeddings find the right tables and figures?").
+
+> **Result (Day 3):** `python scripts/eval_retrieval.py` (20 s on the B580) →
+> `results/day3_retrieval.json`:
+>
+> | | measured | random guess |
+> |---|---|---|
+> | page hit@1 (ColQwen2) | **75%** | 12% |
+> | page hit@3 (ColQwen2) | **95%** | 37% |
+> | text hit@3 (SPECTER2) | **75%** | |
+>
+> Only one question's page fell outside the top 3 (1708.00160v2, Figure 2: rank 10 of 15).
+> First evidence for RQ2: looking at page *images* finds the right page far better than chance.
 
 **3.7 🔌 Notebook section "Day 3: the indexes"**: one dev question, its top-3 pages with
 scores, and its top-3 chunks.

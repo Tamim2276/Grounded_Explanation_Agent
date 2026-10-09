@@ -28,3 +28,18 @@
     unrelated): unrelated always last; answer above word-sharer 2 of 4 (e.g. "few labelled examples":
     answer 0.769, word-sharer 0.779, unrelated 0.733). Scores bunch between 0.65 and 0.78: only the
     order means anything. Keyword search cannot tell the answer from the unrelated text (both 0).
+  - Memory: the PC is shared (OrdinalFed training queue, other projects); RAM 15.6 GB + 15 GB page file,
+    free commit fell to 0.6-2 GB. A SPECTER2 test run hit MemoryError at the moment an OrdinalFed run
+    crashed (02:35; its queue resumed it, one round lost). Since then every model load checks first:
+    gea.device.room_problems() (free memory + GPU memory other programs hold); the SPECTER2 tests skip
+    below 2.5 GB free.
+  - 3.3 text index: scripts/build_indexes.py text --gpu -> 36 papers, 2,532 texts (chunks + captions),
+    0.9 min on the B580 (~10 min on the CPU). text.faiss (IndexFlatIP) + text_ids.json per paper.
+  - 3.4 page index: scripts/build_indexes.py pages -> 475 pages in 3.0 min on the B580 (~0.3 s/page;
+    planned 1-2 h). ColQwen2 = colqwen2-base + v1.0 LoRA merged, bf16, loaded from local files only.
+    A 150-dpi page (1275x1650) -> 672x868 -> 31 x 24 = 744 patch vectors of 128 (bf16, row by row);
+    ~1.6 MB per paper. Patch ~25.5 pt (9 mm) square on a 612x792 pt page.
+  - 3.6 first retrieval numbers (results/day3_retrieval.json, dev, 20 questions, 20 s on the B580):
+    page hit@1 75% (random 12%), page hit@3 95% (random 37%), text hit@3 75%.
+    Only miss outside the top 3: 1708.00160v2#1 (Figure 2, page 7, rank 10 of 15).
+    Dev Q 1803.03467v4#0 (4-hop triples, Table 1 p.6): page 6 first, but close (13.48 vs 13.27 for p.7).
