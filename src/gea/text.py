@@ -30,3 +30,10 @@ def score(query: str, text: str, corpus: dict) -> float:
     # Deterministic, so every run retrieves the same items.
     idf = corpus["text_index"]["idf"]
     return round(sum(idf.get(t, 0.0) for t in set(terms(query)) & set(terms(text))), 2)
+
+
+def names_label(text: str, label: str) -> bool:
+    # Does the text name this table or figure? "Table 2" or "Fig. 2" as a whole word,
+    # not "Table 21".
+    variants = {label, label.replace("Figure", "Fig.")}
+    return any(re.search(rf"\b{re.escape(v)}(?![\w])", text, re.IGNORECASE) for v in variants)

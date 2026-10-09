@@ -1,0 +1,725 @@
+{
+ "split": "dev",
+ "questions": 20,
+ "k": 3,
+ "rrf_k": 60,
+ "summary": {
+  "keyword": {
+   "strict@1": 0.45,
+   "strict@3": 0.7,
+   "lenient@3": 0.9
+  },
+  "specter2": {
+   "strict@1": 0.15,
+   "strict@3": 0.35,
+   "lenient@3": 0.7
+  },
+  "hybrid": {
+   "strict@1": 0.5,
+   "strict@3": 0.6,
+   "lenient@3": 0.8
+  }
+ },
+ "per_question": [
+  {
+   "qid": "1803.03467v4#0",
+   "ref_label": "Table 1",
+   "ref_page": 6,
+   "keyword": {
+    "top3": [
+     "c46",
+     "c57",
+     "c39"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c42",
+     "c56",
+     "c57"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c57",
+     "c42",
+     "c46"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1803.03467v4#1",
+   "ref_label": "Figure 4",
+   "ref_page": 7,
+   "keyword": {
+    "top3": [
+     "c51",
+     "c21",
+     "c57"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c51",
+     "c21",
+     "c19"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c51",
+     "c21",
+     "c19"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1803.03467v4#2",
+   "ref_label": "Table 3",
+   "ref_page": 8,
+   "keyword": {
+    "top3": [
+     "c11",
+     "c55",
+     "c60"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c60",
+     "c44",
+     "c52"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c60",
+     "c50",
+     "c45"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   }
+  },
+  {
+   "qid": "1803.03467v4#3",
+   "ref_label": "Figure 2",
+   "ref_page": 4,
+   "keyword": {
+    "top3": [
+     "c17",
+     "c38",
+     "c21"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c16",
+     "c56",
+     "c32"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "hybrid": {
+    "top3": [
+     "c17",
+     "c38",
+     "c56"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1812.06589v2#0",
+   "ref_label": "Figure 6",
+   "ref_page": 6,
+   "keyword": {
+    "top3": [
+     "c32",
+     "c10",
+     "c27"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "specter2": {
+    "top3": [
+     "c32",
+     "c10",
+     "c35"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c32",
+     "c10",
+     "c4"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   }
+  },
+  {
+   "qid": "1812.06589v2#1",
+   "ref_label": "Table 3",
+   "ref_page": 6,
+   "keyword": {
+    "top3": [
+     "c35",
+     "c34",
+     "c3"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c33",
+     "c36",
+     "c38"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c35",
+     "c33",
+     "c36"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1812.06589v2#2",
+   "ref_label": "Table 2",
+   "ref_page": 6,
+   "keyword": {
+    "top3": [
+     "c32",
+     "c31",
+     "c3"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c33",
+     "c36",
+     "c38"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c32",
+     "c36",
+     "c33"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1812.06589v2#3",
+   "ref_label": "Figure 2",
+   "ref_page": 3,
+   "keyword": {
+    "top3": [
+     "c8",
+     "c35",
+     "c15"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c13",
+     "c15",
+     "c32"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c13",
+     "c15",
+     "c35"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1804.07931v2#0",
+   "ref_label": "Figure 2",
+   "ref_page": 2,
+   "keyword": {
+    "top3": [
+     "c28",
+     "c9",
+     "c16"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c24",
+     "c1",
+     "c27"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "hybrid": {
+    "top3": [
+     "c24",
+     "c28",
+     "c9"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1804.07931v2#1",
+   "ref_label": "Figure 1",
+   "ref_page": 1,
+   "keyword": {
+    "top3": [
+     "c13",
+     "c12",
+     "c7"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c11",
+     "c13",
+     "c12"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "hybrid": {
+    "top3": [
+     "c13",
+     "c12",
+     "c7"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1804.07931v2#2",
+   "ref_label": "Table 1",
+   "ref_page": 4,
+   "keyword": {
+    "top3": [
+     "c22",
+     "c25",
+     "c7"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c2",
+     "c22",
+     "c14"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c22",
+     "c7",
+     "c4"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1804.07931v2#3",
+   "ref_label": "Table 2",
+   "ref_page": 4,
+   "keyword": {
+    "top3": [
+     "c25",
+     "c24",
+     "c27"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c24",
+     "c27",
+     "c20"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c24",
+     "c27",
+     "c25"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1708.00160v2#0",
+   "ref_label": "Figure 4",
+   "ref_page": 14,
+   "keyword": {
+    "top3": [
+     "c62",
+     "c63",
+     "c51"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c44",
+     "c62",
+     "c36"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "hybrid": {
+    "top3": [
+     "c62",
+     "c36",
+     "c49"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   }
+  },
+  {
+   "qid": "1708.00160v2#1",
+   "ref_label": "Figure 2",
+   "ref_page": 7,
+   "keyword": {
+    "top3": [
+     "c62",
+     "c29",
+     "c30"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c62",
+     "c33",
+     "c31"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c62",
+     "c33",
+     "c34"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1708.00160v2#2",
+   "ref_label": "Table 4",
+   "ref_page": 8,
+   "keyword": {
+    "top3": [
+     "c4",
+     "c53",
+     "c22"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c53",
+     "c4",
+     "c58"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c53",
+     "c4",
+     "c57"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1708.00160v2#3",
+   "ref_label": "Table 2",
+   "ref_page": 4,
+   "keyword": {
+    "top3": [
+     "c4",
+     "c57",
+     "c22"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c65",
+     "c22",
+     "c48"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c22",
+     "c65",
+     "c57"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1706.04269v2#0",
+   "ref_label": "Figure 3",
+   "ref_page": 7,
+   "keyword": {
+    "top3": [
+     "c17",
+     "c26",
+     "c18"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c17",
+     "c32",
+     "c33"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c17",
+     "c26",
+     "c18"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1706.04269v2#1",
+   "ref_label": "Figure 4",
+   "ref_page": 10,
+   "keyword": {
+    "top3": [
+     "c7",
+     "c3",
+     "c26"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c4",
+     "c12",
+     "c5"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "hybrid": {
+    "top3": [
+     "c26",
+     "c7",
+     "c6"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1706.04269v2#2",
+   "ref_label": "Figure 5",
+   "ref_page": 14,
+   "keyword": {
+    "top3": [
+     "c24",
+     "c32",
+     "c18"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "specter2": {
+    "top3": [
+     "c1",
+     "c33",
+     "c32"
+    ],
+    "strict@1": false,
+    "strict@3": true,
+    "lenient@3": true
+   },
+   "hybrid": {
+    "top3": [
+     "c32",
+     "c18",
+     "c24"
+    ],
+    "strict@1": true,
+    "strict@3": true,
+    "lenient@3": true
+   }
+  },
+  {
+   "qid": "1706.04269v2#3",
+   "ref_label": "Table 1",
+   "ref_page": 12,
+   "keyword": {
+    "top3": [
+     "c30",
+     "c31",
+     "c27"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "specter2": {
+    "top3": [
+     "c17",
+     "c26",
+     "c24"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   },
+   "hybrid": {
+    "top3": [
+     "c24",
+     "c26",
+     "c17"
+    ],
+    "strict@1": false,
+    "strict@3": false,
+    "lenient@3": false
+   }
+  }
+ ]
+}

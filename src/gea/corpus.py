@@ -103,7 +103,7 @@ def keyword_index(docs: list) -> dict:
 
 def load_real_corpus(paper_id: str) -> dict:
     # A real paper as scripts/build_corpus.py saved it (N3, Day 2), plus its keyword
-    # index. Day 3 adds the SPECTER2 and ColQwen2 indexes here.
+    # table and, once scripts/build_indexes.py has run, its SPECTER2 index (N4, Day 3).
     path = cfg.DATA_DIR / "corpus" / paper_id / "corpus.json"
     if not path.exists():
         raise FileNotFoundError(f"{path} -- run: python scripts/build_corpus.py")
@@ -111,6 +111,9 @@ def load_real_corpus(paper_id: str) -> dict:
     docs = ([c["text"] for c in paper["chunks"]]
             + [r["caption"] for r in paper["tables"] + paper["figures"]])
     paper["text_index"] = {"idf": keyword_index(docs)}
+    from gea.indexes import TEXT_INDEX, load_text_index    # here: the stub never needs faiss
+    if (path.parent / TEXT_INDEX).exists():
+        paper["text_index"].update(load_text_index(path.parent))   # refuses a stale index
     return paper
 
 

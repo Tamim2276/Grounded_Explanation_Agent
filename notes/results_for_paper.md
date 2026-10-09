@@ -96,20 +96,57 @@ The reference is the table or figure each question's answer lives in.
 | page hit@1: ColQwen2 ranks the reference's page first | **75%** (15/20) | 12% |
 | page hit@3 | **95%** (19/20) | 37% |
 | mean reciprocal rank of the reference's page | **0.847** | |
-| text hit@3: one of SPECTER2's top 3 rows is on that page, is the caption, or names the label | **75%** (15/20) | |
-| page hit@3 **or** text hit@3 | **100%** (20/20) | |
+| text hit@3, lenient: one of SPECTER2's top 3 rows is the caption, names the label, or is on that page | 75% (15/20) | |
+| text hit@3, **strict**: the caption, or a paragraph naming the label ("Table 2", "Fig. 2") | **50%** (10/20) | |
+| page hit@3 **or** strict text hit@3 | **100%** (20/20) | |
 
-| by kind | page hit@1 | page hit@3 | text hit@3 |
+**Report the strict text number.** The 15 lenient hits split evenly: 5 were the reference's own
+caption, 5 were paragraphs naming it, and 5 were *only on the same page*, which can be
+coincidence. In 1803.03467v4#0, for example, the page-6 paragraph is about semantic matching
+models, not the dataset table. (Classified from `top3_text` in `results/day3_retrieval.json`,
+2026-10-09. From now on `scripts/eval_retrieval.py` records `text_match` and
+`text_hit@3_strict` itself.)
+
+**The measure can also undercount.** For 1804.07931v2#1 ("What is the relationship between
+clicks and impressions?", reference Figure 1 on page 1), SPECTER2's top 3 included the page-2
+sentence "S_c is a subset of S" (clicked impressions are a subset of all impressions), which
+states the answer. It counts as a miss because it is neither the figure nor on its page.
+Retrieval here is measured against the *reference figure*, not against whether the answer is
+stated somewhere.
+
+| by kind | page hit@1 | page hit@3 | text hit@3 (lenient) |
 |---|---|---|---|
 | tables (9) | 8/9 | 9/9 | 8/9 |
 | figures (11) | 7/11 | 10/11 | 7/11 |
 
 **What to say about it:**
 - Looking at page *images* finds the right page far above chance. That is first evidence for RQ2.
-- **The two indexes complement each other.** Every dev question was within reach of at least one of them, which supports the dual-index design (N4).
+- **Page images beat text for finding tables and figures:** 95% page hit@3, against a strict 50% for text.
+- **The two indexes complement each other.** The one page outside the top 3 (1708.00160v2, Figure 2) was found by text: a paragraph naming "Figure 2". So every dev question was within reach of at least one index, which supports the dual-index design (N4).
 - Figures are harder than tables.
 - The only page outside the top 3 was 1708.00160v2, Figure 2 (rank 10 of 15). Worth an error-analysis look on Day 4.
 - Margins can be thin. For 1803.03467v4#0 (Table 1, page 6), page 6 scored 13.48 and page 7 scored 13.27.
+
+### Text search for N6a: keyword vs SPECTER2 vs hybrid (Day 3, dev, pilot)
+
+Source: `results/day3_text_search.json`, from `python scripts/compare_text_search.py` (CPU, 5 s,
+2026-10-09). This is the real N6a code, returning the top **3 paragraphs**; caption rows are
+excluded. A hit means a returned paragraph is about the question's reference: **strict** means
+it names the label ("Table 2", "Fig. 2"); **lenient** also counts a paragraph on the same page.
+
+| method | strict@1 | strict@3 | lenient@3 |
+|---|---|---|---|
+| keyword (IDF-weighted word overlap) | 45% | **70%** | **90%** |
+| SPECTER2 (question adapter + FAISS) | 15% | 35% | 70% |
+| hybrid (reciprocal rank fusion, k = 60) | **50%** | 60% | 80% |
+
+**What to say about it:**
+- **Within one paper, exact-word matching beats the scientific text embedder for finding paragraphs.** SPIQA questions reuse the paper's own terms: "GRID", "DA", "ripple sets", "CVR and CTCVR", "{head=F, ant=NAM}". SPECTER2 encodes topic, and every paragraph of a paper shares the topic. SPECTER2 alone won on only one question (1803.03467v4#2, "AUC on MovieLens-1M").
+- **Choice made: hybrid** (`cfg.TEXT_SEARCH`).
+  - It is best at putting a correct paragraph first.
+  - It is 2 questions of 20 behind keyword at top 3 (1812.06589v2#3, 1708.00160v2#0), within noise for n = 20.
+  - It keeps a meaning signal for queries that do not reuse the paper's words. From Day 5 the planner writes sub-queries in its own words, and on Day 3.2's "few labelled examples" vs "low-resource", keyword scores 0.
+- **To revisit:** re-run this comparison with the planner's own sub-queries on Day 5, and report all three on the test split as a retrieval ablation (Days 7–8; it costs seconds).
 
 ### SPECTER2: topics, not answers (Day 3, hand-made examples)
 
@@ -120,6 +157,15 @@ Question: "How well does the method work when only a few labelled examples are a
 | A, answers it ("low-resource setting … 71.3% accuracy") | none | 0.769 |
 | B, only shares words ("labelled examples were collected by three annotators") | 2 | **0.779** |
 | C, unrelated ("20 epochs on four GPUs") | none | 0.733 |
+
+**A real case** (dev 1804.07931v2#1, "What is the relationship between clicks and impressions?",
+answer: clicks are a subset of impressions; 2026-10-09). The answer-stating chunk c13 ("M is
+the number of clicks over all impressions. Obviously, S_c is a subset of S") ranks:
+
+- **1st by keyword search**, with IDF score 4.07; the next chunk scores 1.21;
+- **2nd by SPECTER2**, at 0.783, behind c11 (0.797), a paragraph about CVR modelling on the same topic.
+
+Both have it in the top 3, so keep more than one paragraph and consider mixing the two scores.
 
 Over 4 such questions, the unrelated paragraph always came last, but the answer beat the
 word-sharer only 2 times out of 4. All the scores fall between 0.65 and 0.78. SPECTER2 was

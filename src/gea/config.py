@@ -22,6 +22,12 @@ MAX_REWRITES = 2              # bound on the regenerate loop  (G2 -> rewrite_pre
 TOP_K        = 1              # items each retriever returns per call
 ZOOM_IF_AREA_BELOW = 0.30     # N7 runs when a figure covers less than 30% of its page
 
+# --- the real text search (N6a on the real backend, BUILD_PLAN.md Day 3) ------
+TEXT_SEARCH = "hybrid"        # how paragraphs are ranked: "specter2" | "keyword" | "hybrid"
+                              # (dev: results/day3_text_search.json, notes/results_for_paper.md)
+TEXT_TOP_K  = 3               # paragraphs per call: SPECTER2 ranks topic, not answer, so keep 3
+RRF_K       = 60              # hybrid: a paragraph earns 1 / (RRF_K + its rank) from each search
+
 # --- index shapes ---------------------------------------------------------------
 SPECTER2_DIM = 768            # SPECTER2 embedding width (text index)
 COLPALI_DIM  = 128            # ColQwen2 multi-vector width (page index)

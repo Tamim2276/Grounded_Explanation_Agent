@@ -43,3 +43,16 @@
     page hit@1 75% (random 12%), page hit@3 95% (random 37%), text hit@3 75%.
     Only miss outside the top 3: 1708.00160v2#1 (Figure 2, page 7, rank 10 of 15).
     Dev Q 1803.03467v4#0 (4-hop triples, Table 1 p.6): page 6 first, but close (13.48 vs 13.27 for p.7).
+  - Text hit@3 checked again: of the 15 lenient hits, 5 = the reference's caption, 5 = a paragraph naming
+    the label, 5 = only on the same page (can be coincidence). Strict text hit@3 = 10/20 = 50%; report that.
+    eval_retrieval.py now records text_match and text_hit@3_strict. Undercount example: 1804.07931v2#1
+    (clicks vs impressions) -- the top-3 chunk c13 states the answer but is on page 2, not Figure 1's page.
+  - 3.5 real N6a: retrieval.real_text_retriever (cfg.BACKEND="real"); n6a node unchanged. Returns the top
+    cfg.TEXT_TOP_K=3 paragraphs (caption rows excluded), section filter = the section and its subsections,
+    falling back to the whole paper. get_corpus("real") now loads text.faiss (refuses a stale one).
+    Ranking compared on dev (scripts/compare_text_search.py -> results/day3_text_search.json):
+    strict@3 keyword 70%, SPECTER2 35%, hybrid (RRF, k=60) 60%; strict@1 45 / 15 / 50%.
+    Keyword wins because SPIQA questions reuse the paper's exact terms. Chosen: hybrid (best @1, 2/20 behind
+    keyword @3, robust to reworded planner queries). Revisit on Day 5 with planner sub-queries.
+  - Slip: a sed range delete truncated scripts/eval_retrieval.py (end pattern did not match -> deleted to EOF);
+    restored from git and re-applied with exact edits. Rule: no sed range deletes.

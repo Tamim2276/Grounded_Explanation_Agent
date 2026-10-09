@@ -31,6 +31,8 @@ def describe_found(found: list) -> str:
 
 def text_retriever(corpus: dict, query: str, section: Optional[str] = None, k: int = None) -> list:
     # Rank narrative chunks against the query, inside one section if N2 found one.
+    if cfg.BACKEND == "real":
+        return real_text_retriever(corpus, query, section, k)
     k = k or cfg.TOP_K
     pool = [c for c in corpus["chunks"] if c["section"] == section] or corpus["chunks"]
     ranked = sorted(pool, key=lambda c: -score(query, c["text"], corpus))
@@ -39,9 +41,59 @@ def text_retriever(corpus: dict, query: str, section: Optional[str] = None, k: i
             for c in ranked[:k] if score(query, c["text"], corpus) > 0]
 
 
+def in_section(chunk: dict, section: str) -> bool:
+    # "Section 4" means section 4 and its subsections 4.1, 4.2, ...
+    return chunk["section"] == section or chunk["section"].startswith(section + ".")
+
+
+def ranks(scores: dict) -> dict:
+    # 1 = best; ties share the better rank, so equal scores never get an arbitrary order.
+    values = list(scores.values())
+    return {key: 1 + sum(v > s for v in values) for key, s in scores.items()}
+
+
+def text_scores(meaning: dict, words: dict, how: str) -> dict:
+    # The score each paragraph is ranked by. "hybrid" is reciprocal rank fusion: a
+    # paragraph earns 1 / (RRF_K + its rank) from each search, so one that BOTH searches
+    # rank high wins, and the two scales (cosine about 0.7, keyword 0-10) never have to
+    # be made comparable.
+    if how == "specter2":
+        return dict(meaning)
+    if how == "keyword":
+        return dict(words)
+    if how == "hybrid":
+        by_meaning, by_words = ranks(meaning), ranks(words)
+        return {key: round(1 / (cfg.RRF_K + by_meaning[key]) + 1 / (cfg.RRF_K + by_words[key]), 5)
+                for key in meaning}
+    raise ValueError(f"unknown TEXT_SEARCH {how!r}")
+
+
+def real_text_retriever(corpus: dict, query: str, section: Optional[str] = None, k: int = None) -> list:
+    # N6a on a real paper (BUILD_PLAN.md Day 3): the query's SPECTER2 vector (question
+    # adapter, on the CPU) against the paper's FAISS index, and/or the keyword score,
+    # as cfg.TEXT_SEARCH says. Only paragraphs come back -- caption rows are for the
+    # table and figure tools -- inside N2's section when one was named and matches.
+    from gea.indexes import embed_text
+    k = k or cfg.TEXT_TOP_K
+    index = corpus["text_index"]
+    if "faiss" not in index:
+        raise FileNotFoundError(f"{corpus['paper_id']}: no text index -- run: python scripts/build_indexes.py text")
+    pool = [c for c in corpus["chunks"] if section and in_section(c, section)] or corpus["chunks"]
+    sims, rows = index["faiss"].search(embed_text([query], kind="query"), index["faiss"].ntotal)
+    similarity = {index["ids"][r]: float(s) for s, r in zip(sims[0], rows[0])}
+    meaning = {c["id"]: similarity[c["id"]] for c in pool}
+    words = {c["id"]: score(query, c["text"], corpus) for c in pool}
+    final = text_scores(meaning, words, cfg.TEXT_SEARCH)
+    ranked = sorted(pool, key=lambda c: (-final[c["id"]], -meaning[c["id"]]))
+    return [Evidence("text", c["id"], c["page"], c["text"], tuple(c["bbox"]), "TextRetriever",
+                     round(final[c["id"]], 4), query=query, section=c["section"])
+            for c in ranked[:k]]
+
+
 def n6a_text_retriever(state: AgentState) -> dict:
     # N6a -- TextRetriever: narrative chunks from the text index.
-    # Real version (BUILD_PLAN.md Day 3): SPECTER2 query vector against FAISS.
+    # With cfg.BACKEND = "real", text_retriever runs real_text_retriever (Day 3);
+    # this node is the same for both.
     action = state.get("action")
     assert action and action["tool"] == "text", "N6a: the planner did not ask for text"
     corpus = get_corpus(state["paper_id"])

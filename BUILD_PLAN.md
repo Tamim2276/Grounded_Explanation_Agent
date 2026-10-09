@@ -1028,6 +1028,21 @@ if cfg.BACKEND == "real":
 chunks from N2's section when one was named (otherwise all chunks), and returns the same
 `Evidence` objects as the stub. **The node body does not change.**
 
+> **Built on Day 3.** `real_text_retriever` returns the top **3** paragraphs
+> (`cfg.TEXT_TOP_K`; caption rows are left for the table and figure tools). "Section 4" keeps
+> 4, 4.1, 4.2… and falls back to the whole paper when nothing matches. The ranking is chosen by
+> `cfg.TEXT_SEARCH`, and `python scripts/compare_text_search.py` measured all three on dev:
+>
+> | ranking | a correct paragraph 1st | in the top 3 |
+> |---|---|---|
+> | keyword | 45% | **70%** |
+> | SPECTER2 | 15% | 35% |
+> | hybrid (both, by rank fusion) | **50%** | 60% |
+>
+> Keyword search wins because SPIQA questions reuse the paper's own words ("GRID", "ripple
+> sets"). **Chosen: hybrid.** It is best at first place, 2 of 20 behind keyword at top 3, and
+> it keeps a meaning signal for the planner's reworded sub-queries (Day 5). Re-check it then.
+
 **3.6 🔌 First retrieval numbers** (1 h). On the 20 dev questions:
 - **Page hit@k:** load ColQwen2 *on the CPU* (`.to("cpu")`, bf16), embed the question, score
   every page of the paper with MaxSim, and check whether the reference's page is in the top
@@ -1050,7 +1065,8 @@ evidence for **RQ2** ("can visual embeddings find the right tables and figures?"
 > |---|---|---|
 > | page hit@1 (ColQwen2) | **75%** | 12% |
 > | page hit@3 (ColQwen2) | **95%** | 37% |
-> | text hit@3 (SPECTER2) | **75%** | |
+> | text hit@3 (SPECTER2), strict: caption or label named | **50%** | |
+> | text hit@3, lenient: also "on the same page" | 75% | |
 >
 > Only one question's page fell outside the top 3 (1708.00160v2, Figure 2: rank 10 of 15).
 > First evidence for RQ2: looking at page *images* finds the right page far better than chance.
