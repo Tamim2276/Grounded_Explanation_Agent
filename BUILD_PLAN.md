@@ -633,7 +633,9 @@ which function runs first, what it writes, who reads it next.
 ### Write 🔋 (30 min)
 
 Start `notes/journal.md`: a short note every day on *what broke and how you fixed it*.
-This becomes your Implementation chapter on Day 9.
+This becomes your Implementation chapter on Day 9. Every result (a number, a timing, a
+finding, a limitation) also goes into `notes/results_for_paper.md`, under the thesis chapter
+it belongs to and with its source, so the Results chapter is assembled, not reconstructed.
 
 ### Explain it back 🔋
 
@@ -1911,7 +1913,9 @@ verifiability" was not measured with a user study.
 | Graph.tex, caption of Figure 4.1 | the N1 → N5 arrow is data flow; execution order is N1 → N2 → N5 |
 | [references.bib](paper/references.bib) | add Qwen2.5-VL (Bai et al., 2025, arXiv:2502.13923), llama.cpp, PyMuPDF and the Related Work papers |
 
-**9.3 🔋 New chapters** (4 h): *Implementation* (from `notes/journal.md`, including the stub-first
+**9.3 🔋 New chapters** (4 h). Every number so far is in
+[notes/results_for_paper.md](notes/results_for_paper.md), grouped by chapter with its source.
+*Implementation* (from `notes/journal.md`, including the stub-first
 method, the power-cut-safe design, the execution profile table `tab_execution_profile.tex` and
 the trace figure `fig_execution_trace.pdf`), *Results* (per RQ), *Discussion* (error analysis
 from 7.1, the G2 boundary, limitations).

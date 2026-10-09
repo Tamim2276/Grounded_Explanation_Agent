@@ -1,0 +1,174 @@
+# Results for the thesis
+
+Every number the build has produced, grouped by the thesis chapter it belongs to. Each
+one names its **source** (a file in the repository, or the command that made it), so it
+can be checked and regenerated. The journal (`notes/journal.md`) keeps the same facts in
+date order, together with what broke and how it was fixed.
+
+**Dev or test?** Numbers on the **dev** split (20 questions) are development results. They
+guided design choices, so the thesis should call them *pilot* or *development* results. The
+final Results chapter uses the **test** split (150 questions), which is run once on Days 7–8.
+
+---
+
+## 1. Experimental setup → Methodology, *Experimental Setup*; Implementation
+
+### Hardware and software
+
+| item | value | source |
+|---|---|---|
+| GPU | Intel Arc B580, 12 GB (12,190 MiB visible to Vulkan) | llama.cpp start log, 2026-10-08 |
+| RAM | 15.6 GB, plus a 15 GB page file | Windows, 2026-10-09 |
+| Python / PyTorch | 3.12.12 / 2.14.1+xpu | `.venv` |
+| Agent framework | LangGraph 1.2.14 | `.venv` |
+| PDF reading | PyMuPDF 1.28.2, pages rendered at 150 dpi | `src/gea/ingest.py` |
+| Text embedder | SPECTER2: `allenai/specter2_base` + `proximity` adapter (paragraphs) + `adhoc_query` adapter (questions), 768 dimensions, float32 | `src/gea/indexes.py` |
+| Text index | FAISS 1.15.1 `IndexFlatIP` (exact inner product = cosine on length-1 vectors) | `src/gea/indexes.py` |
+| Page embedder | ColQwen2: `vidore/colqwen2-base` + `vidore/colqwen2-v1.0` LoRA, merged; bfloat16; 128 dimensions per patch | `src/gea/indexes.py` |
+| Libraries pinned together | transformers 4.47.1, adapters 1.1.0, colpali-engine 0.3.8 | `requirements.txt` |
+| Language model (from Day 5) | Qwen2.5-VL-7B-Instruct, Q4_K_M GGUF + f16 vision projector, llama.cpp build 11476 (commit 988190680), Vulkan | `scripts/start_llm.sh` |
+| Operation | fully offline: every model loads from the local download only | `local_snapshot()` in `src/gea/indexes.py` |
+
+### Data → Methodology, *Dataset*
+
+| item | value | source |
+|---|---|---|
+| Source | SPIQA test-A: 118 papers, 666 questions | `scripts/download_all.py` |
+| Question selection | seed 42; **whole papers per split** (no paper in both); at most 4 (dev) / 8 (test) questions per paper | `scripts/select_questions.py`, `eval/splits/summary.json` |
+| Dev split | 20 questions from 5 papers: 9 table, 11 figure | `eval/splits/summary.json` |
+| Test split | 150 questions from 31 papers: 71 table, 79 figure | `eval/splits/summary.json` |
+| Roman-numeral labels ("Table II") | 7 of the 666 references; 1 in test | journal, Day 2 |
+| Annotated subset (CGS) | 50 questions, still to annotate (Day 6–7) | plan |
+
+---
+
+## 2. Ingestion (N3) → Implementation, *Data and Ingestion* (Day 2)
+
+| item | value | source |
+|---|---|---|
+| Papers read | 36 (all dev and test papers), 475 pages | `results/day2_coverage.json` |
+| Records | 2,168 text chunks (≤ 150 words, never crossing a page, section, column or table), 159 tables, 205 figures | same |
+| **Coverage**: the answer's table/figure was found | **dev 20/20, test 150/150 (100%)**; target was 85% | same |
+| How the 364 regions were found | 63 PyMuPDF table finder (then grown), 300 caption strip, 1 last resort | same |
+| Regions marked doubtful | 3 of 364 | `corpus.json` files |
+| Time | about 90 s on the CPU for all 36 papers | `scripts/build_corpus.py` output |
+
+**Problems found on real papers, each fixed and kept by a test** (`tests/test_ingest.py`). Good
+material for the Implementation chapter; the details are in the journal:
+
+1. A caption glued to the table rows under it in one PyMuPDF block. Fixed by finding captions per row and stopping at the first row whose pieces are more than one font size apart.
+2. Two regions claiming the same content (a table stacked on a figure). Fixed by placing tables first and treating them as walls.
+3. PyMuPDF's table finder missing or splitting tables. Its guess is used only next to a table caption, then grown over neighbouring table text.
+4. Papers that put table captions *under* their tables. Fixed by a per-paper vote over two passes.
+5. Table rows taken for paragraphs. Fixed by a "table-like" test: mostly gapped rows, or at least 40% numbers.
+6. A page number taken for a table. Fixed by ignoring the top and bottom 40 pt margins.
+7. IEEE captions ("TABLE I", with the title on the next line).
+8. Words broken at a line end ("be- tween").
+
+**Known limitations:**
+- "state-of-the-" + "art" becomes "state-of-theart".
+- 1706.00633v4 draws Table 2 and Figure 2 in one frame, so the Figure 2 region is doubtful.
+- One table's ruling lines are invisible to PyMuPDF; it was found by the last-resort search.
+
+---
+
+## 3. Indexing (N4) → Implementation, *Indexing* (Day 3)
+
+| item | value | source |
+|---|---|---|
+| Text index rows | 2,532 = 2,168 chunks + 364 captions | `scripts/build_indexes.py text` |
+| Text index build | **0.9 min on the B580**; the CPU managed ~4 chunks/s while another job ran (~10 min) | build output, 2026-10-09 |
+| Page index | 475 pages; a 150-dpi page (1275×1650 px) is resized to 672×868, giving **31 × 24 = 744 patch vectors** of 128 numbers | `scripts/build_indexes.py pages` |
+| Patch size on the page | about 25.5 pt (9 mm) square on a 612×792 pt page | computed |
+| Page index build | **3.0 min on the B580** (~0.3 s a page); planned 1–2 h | build output, 2026-10-09 |
+| Page index size | ~1.6 MB per paper (bfloat16) | `data/corpus/*/pages.pt` |
+| Model load time | SPECTER2 ~4 s; ColQwen2 ~7 s (two weight shards) | logs |
+
+---
+
+## 4. Retrieval → Results, *RQ2* (Day 3, dev, pilot)
+
+Source: `results/day3_retrieval.json`, from `python scripts/eval_retrieval.py` (20 s on the B580).
+The reference is the table or figure each question's answer lives in.
+
+| measure (20 dev questions) | measured | random guess |
+|---|---|---|
+| page hit@1: ColQwen2 ranks the reference's page first | **75%** (15/20) | 12% |
+| page hit@3 | **95%** (19/20) | 37% |
+| mean reciprocal rank of the reference's page | **0.847** | |
+| text hit@3: one of SPECTER2's top 3 rows is on that page, is the caption, or names the label | **75%** (15/20) | |
+| page hit@3 **or** text hit@3 | **100%** (20/20) | |
+
+| by kind | page hit@1 | page hit@3 | text hit@3 |
+|---|---|---|---|
+| tables (9) | 8/9 | 9/9 | 8/9 |
+| figures (11) | 7/11 | 10/11 | 7/11 |
+
+**What to say about it:**
+- Looking at page *images* finds the right page far above chance. That is first evidence for RQ2.
+- **The two indexes complement each other.** Every dev question was within reach of at least one of them, which supports the dual-index design (N4).
+- Figures are harder than tables.
+- The only page outside the top 3 was 1708.00160v2, Figure 2 (rank 10 of 15). Worth an error-analysis look on Day 4.
+- Margins can be thin. For 1803.03467v4#0 (Table 1, page 6), page 6 scored 13.48 and page 7 scored 13.27.
+
+### SPECTER2: topics, not answers (Day 3, hand-made examples)
+
+Question: "How well does the method work when only a few labelled examples are available?"
+
+| paragraph | words shared with the question | SPECTER2 cosine |
+|---|---|---|
+| A, answers it ("low-resource setting … 71.3% accuracy") | none | 0.769 |
+| B, only shares words ("labelled examples were collected by three annotators") | 2 | **0.779** |
+| C, unrelated ("20 epochs on four GPUs") | none | 0.733 |
+
+Over 4 such questions, the unrelated paragraph always came last, but the answer beat the
+word-sharer only 2 times out of 4. All the scores fall between 0.65 and 0.78. SPECTER2 was
+trained to match a search with papers *on the same topic*, so it ranks topic, not
+answerhood. Inside one paper almost everything is on-topic. This motivates the top-3
+retrieval, the page index as a second opinion, and G1's sufficiency check. Keyword
+matching scores A and C the same (both 0).
+
+---
+
+## 5. The agent design on the stub → Implementation, *design validation* (Day 1)
+
+`paper/tables/tab_execution_profile.tex`, generated by the notebook (test 11I).
+R = retrieval rounds, Z = zooms, W = rewrites.
+
+| scenario | R | Z | W | steps | node runs | model calls |
+|---|---|---|---|---|---|---|
+| Text, 1 round | 1 | 0 | 0 | 11 | 13 | 6 |
+| Figure, zoom | 1 | 1 | 0 | 12 | 14 | 6 |
+| Running example | 2 | 0 | 0 | 16 | 18 | 8 |
+| Running ex., 1 misquote | 2 | 0 | 1 | 19 | 21 | 10 |
+| Running ex., never corrected | 2 | 0 | 2 | 23 | 25 | 12 |
+| Unanswerable | 3 | 0 | 0 | 20 | 20 | 8 |
+| Worst case (3 sub-goals) | 3 | 1 | 2 | 29 | 31 | 14 |
+
+Figures already made: `paper/figures/fig_execution_trace.pdf` (byte-identical on every run)
+and `paper/figures/fig_grounded_answer.png`.
+
+---
+
+## 6. Practical constraints → Implementation / Discussion, *limitations*
+
+- **One consumer GPU (12 GB).** Only one big model fits at a time: the 7B language model takes about 7.5 GB, and ColQwen2 about 4.5 GB plus working space. So page images are embedded once, offline, on the GPU. At question time ColQwen2 runs on the CPU, which needs about 5 GB of free RAM.
+- **Unreliable power (load shedding, no UPS).**
+  - Every expensive file is written to a temporary name, forced to disk, then renamed (`src/gea/safeio.py`).
+  - Every long job skips finished work. A power cut costs at most one paper (indexing) or one question (evaluation).
+  - Model replies are cached in git (`results/llm_cache`).
+- **A shared machine.** Other experiments ran on the same PC. Loading SPECTER2 while memory was nearly full coincided with another job crashing (2026-10-09). Since then every model load first checks free memory and the GPU memory other programs hold (`gea.device.room_problems`).
+- **Offline by design.** No model is fetched from the internet at run time.
+
+---
+
+## 7. Still to measure
+
+| result | metric in Methodology | when |
+|---|---|---|
+| Table/figure region quality and the zoom tool | (supports RF, CGS) | Day 4 |
+| Answer accuracy: agentic loop vs single pass | accuracy, RF, AES (RQ1) | Days 7–8, test |
+| Text-only agent baseline | (RQ2) | Days 7–8, test |
+| Modality attribution | MAP (RQ2) | Days 7–8, test |
+| Box precision on the 50 annotated questions | CGS (RQ3) | Days 6–8 |
+| Time and model calls per question on the real backend | AES, efficiency | Days 7–8 |
