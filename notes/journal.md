@@ -61,3 +61,28 @@
     Whole notebook runs (130 cells, 33 s). 17C kept as Day 2's keyword search so it loads no model.
   - Keyword mode now needs no model and no index (no SPECTER2 tie-break); compare_text_search re-run: numbers
     unchanged (45/70/90%). Model loads in tests/notebook skip the memory check when SPECTER2 is already loaded.
+- 2026-10-10, Day 4 (N6b, N6c, N7 real):
+  - PC busy: another project's training held 7 GB of the B580 and memory was 4-5 GB free all day, so
+    ColQwen2 (~5 GB) could not load. Built so it degrades: page_query_vectors() returns cached vectors,
+    or computes them when ColQwen2 fits (B580 free, else >= 7 GB RAM), else None -> tables/figures are
+    chosen by their words alone and figure boxes fall back to the N3 region.
+  - 4.3 tables: src/gea/tables.py; Table Transformer (v1.1-all) on 150-dpi crops, CPU; cell = row x column;
+    text from the PDF words whose CENTRE is in the cell (get_textbox took the next row's words: TATR row
+    boxes overlap); words grouped into lines within 3 pt (fixed "et al. [2017] Chung"). The download's
+    preprocessor config ({"longest_edge": 1000}) needs size set by hand for transformers 4.47.
+    scripts/build_indexes.py tables: 159 tables in 0.9 min; 157 by TATR, 2 without a grid (a boxed text
+    example; one table TATR saw as 1 column) -> raw region text kept. Checked by eye: 3 dev tables match.
+  - Orientation (4.2): a model-free check (patch vectors vs page ink) was too weak (corr 0.12 vs 0.08);
+    instead read Qwen2-VL's image processor: tokens are ordered (row block, column block) -> view(rows, cols)
+    is right. The empirical check (pointing / IoU) runs with ColQwen2: scripts/eval_regions.py.
+  - Bug found: hybrid rank fusion gave credit to items a search did not find (keyword score 0 -> tied
+    2nd); with 5 tables SPECTER2's slight preference for Table 5 beat the only keyword match (Table 1).
+    Fixed: score 0 earns nothing. Day 3 text numbers re-run: unchanged.
+  - Captions alone missed Table 1 ("Basic statistics ..." vs "4-hop triples" in its cells): tables and
+    figures are now scored on caption + the words printed inside their region.
+  - 4.5 zoom: PNG from the PDF at <= 300 dpi, long side <= 1024 px; route_zoom uses the real page size.
+  - Results: scripts/eval_regions.py (text only so far): right table/figure 1st 80% (random 26%), top 3
+    90%; tables 8/9, 9/9; figures 8/11, 9/11. Caption-only ablation: tables 6/9 -> 8/9 with region words.
+  - 4.6 smoke: scripts/smoke_real.py, 5 dev questions through the whole graph (rules planner, 4 with
+    cfg.SUB_GOAL_MODALITY set): all ran, reference reached the buffer in 4/5, 0.1-7.6 s each.
+  - 4.7 notebook Section 19 (135 cells, 47 s). Tests: 84.

@@ -28,6 +28,13 @@ TEXT_SEARCH = "hybrid"        # how paragraphs are ranked: "specter2" | "keyword
 TEXT_TOP_K  = 3               # paragraphs per call: SPECTER2 ranks topic, not answer, so keep 3
 RRF_K       = 60              # hybrid: a paragraph earns 1 / (RRF_K + its rank) from each search
 
+# --- the real table and figure tools (N6b, N6c, N7 on the real backend, Day 4) -
+REGION_SEARCH = "both"        # how a table/figure is chosen: "text" | "visual" | "both"
+ZOOM_DPI      = 300           # N7 re-renders a figure at this resolution ...
+ZOOM_MAX_PX   = 1024          # ... but no larger than this on its long side (image tokens)
+SUB_GOAL_MODALITY = None      # testing knob for N1's stand-in: force every sub-goal's
+                              # modality ("table" / "figure") so a tool can be exercised
+
 # --- index shapes ---------------------------------------------------------------
 SPECTER2_DIM = 768            # SPECTER2 embedding width (text index)
 COLPALI_DIM  = 128            # ColQwen2 multi-vector width (page index)

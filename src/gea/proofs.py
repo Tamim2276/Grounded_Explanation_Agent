@@ -8,14 +8,16 @@ from gea.state import AgentState
 from gea.trace import step
 
 
-def patches_to_bbox(sim: np.ndarray, keep: float = 0.5) -> tuple:
-    # Turn a patch similarity map into one box in PDF points: keep every patch
-    # scoring at least `keep` x the best one, take the smallest rectangle around
-    # them, and scale patch indices to page coordinates. This is the algorithm the
-    # real N10b runs on ColQwen2's map.
+def patches_to_bbox(sim: np.ndarray, keep: float = 0.5, page_size: tuple = None) -> tuple:
+    # Turn a patch similarity map into one box in PDF points: keep every patch at least
+    # `keep` of the way from the coolest to the hottest, take the smallest rectangle
+    # around them, and scale patch indices to the page (x = column x width / columns).
+    # Real maps sit in a narrow band (0.2-0.5), so the band is stretched to 0-1 first.
     rows, cols = sim.shape
-    ys, xs = np.nonzero(sim >= keep * sim.max())
-    ph, pw = cfg.PAGE_H / rows, cfg.PAGE_W / cols
+    span = sim.max() - sim.min()
+    ys, xs = np.nonzero((sim - sim.min()) >= keep * span) if span > 0 else np.nonzero(sim == sim.max())
+    page_w, page_h = page_size or (cfg.PAGE_W, cfg.PAGE_H)
+    ph, pw = page_h / rows, page_w / cols
     return (round(float(xs.min() * pw), 1), round(float(ys.min() * ph), 1),
             round(float((xs.max() + 1) * pw), 1), round(float((ys.max() + 1) * ph), 1))
 
@@ -65,9 +67,13 @@ def n10b_bounding_boxes(state: AgentState) -> dict:
                 cell = next(c for c in ev.cells if (c["row"], c["col"]) == tuple(cite["cell"]))
                 box, what = cell["bbox"], f"{ev.label} cell {cite['cell'][0]} / {cite['cell'][1]}"
             elif ev.kind == "figure" and ev.similarity is not None:
-                box, what = patches_to_bbox(ev.similarity), f"{ev.label} (patch map)"
-            elif ev.kind == "figure":
+                box, what = patches_to_bbox(ev.similarity, page_size=ev.page_size), f"{ev.label} (patch map)"
+            elif ev.tool == "RegionZoom":
                 continue                    # a zoomed view points at the same region as its figure
+            elif ev.kind == "figure":
+                box, what = ev.bbox, f"{ev.label} (region)"     # no heat map (ColQwen2 did not run)
+            elif ev.kind == "table":
+                box, what = ev.bbox, f"{ev.label} (region)"      # a quote of the table, not a cell
             else:
                 box, what = ev.bbox, f"Section {ev.section} paragraph"
             boxes.append({"claim": i, "evidence": ev.id, "page": ev.page,

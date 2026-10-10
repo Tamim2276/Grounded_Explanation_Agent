@@ -21,7 +21,7 @@ def n1_query_intake(state: AgentState) -> dict:
         modality = ("table" if re.search(r"\btables?\b", text, re.I)
                     else "figure" if re.search(r"\b(figures?|plots?|charts?|curves?)\b", text, re.I)
                     else "text")
-        goals.append({"text": text[0].upper() + text[1:], "modality": modality})
+        goals.append({"text": text[0].upper() + text[1:], "modality": cfg.SUB_GOAL_MODALITY or modality})
     listing = "; ".join(f"({i}) {g['modality']}: {g['text']}" for i, g in enumerate(goals, 1))
     return {"sub_goals": goals, "events": step("N1", f"{len(goals)} sub-goal(s): {listing}")}
 

@@ -1,0 +1,210 @@
+{
+ "cases": [
+  {
+   "qid": "1803.03467v4#0",
+   "question": "Which dataset has the most 4-hop triples?",
+   "forced_modality": "table",
+   "reference": "Table 1",
+   "seconds": 7.6,
+   "path": [
+    "N1",
+    "N2",
+    "N5",
+    "TableRetriever",
+    "N8",
+    "G1 pass",
+    "draft 1",
+    "G2 pass",
+    "N10a",
+    "N10b",
+    "N10c",
+    "N11",
+    "N12"
+   ],
+   "evidence": [
+    "table/Table 1 p.6 (TableRetriever)"
+   ],
+   "reference_in_buffer": true,
+   "table_cells": 28,
+   "zoom_px": [],
+   "heat_maps": 0,
+   "claims": 1,
+   "rejected": 0,
+   "boxes": [
+    "p.6 Section None paragraph (316.0, 92.8, 561.8, 186.3)"
+   ],
+   "status": "ok",
+   "answer": "The most relevant table is Table 1: Basic statistics of the three datasets."
+  },
+  {
+   "qid": "1812.06589v2#2",
+   "question": "Which method performed the best on the GRID dataset?",
+   "forced_modality": "table",
+   "reference": "Table 2",
+   "seconds": 2.2,
+   "path": [
+    "N1",
+    "N2",
+    "N5",
+    "TableRetriever",
+    "N8",
+    "G1 pass",
+    "draft 1",
+    "G2 pass",
+    "N10a",
+    "N10b",
+    "N10c",
+    "N11",
+    "N12"
+   ],
+   "evidence": [
+    "table/Table 2 p.6 (TableRetriever)"
+   ],
+   "reference_in_buffer": true,
+   "table_cells": 20,
+   "zoom_px": [],
+   "heat_maps": 0,
+   "claims": 1,
+   "rejected": 0,
+   "boxes": [
+    "p.6 Section None paragraph (63.9, 55.7, 287.1, 133.4)"
+   ],
+   "status": "ok",
+   "answer": "The most relevant table is Table 2: Cross-dataset evaluation of our method on GRID dataset pre-trained on LRW dataset."
+  },
+  {
+   "qid": "1803.03467v4#1",
+   "question": "How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?",
+   "forced_modality": "figure",
+   "reference": "Figure 4",
+   "seconds": 1.6,
+   "path": [
+    "N1",
+    "N2",
+    "N5",
+    "FigureRetriever",
+    "RegionZoom",
+    "N8",
+    "G1 pass",
+    "draft 1",
+    "G2 pass",
+    "N10a",
+    "N10b",
+    "N10c",
+    "N11",
+    "N12"
+   ],
+   "evidence": [
+    "figure/Figure 4 p.7 (FigureRetriever)",
+    "figure/Figure 4 p.7 (RegionZoom)"
+   ],
+   "reference_in_buffer": true,
+   "table_cells": 0,
+   "zoom_px": [
+    [
+     1025,
+     770
+    ]
+   ],
+   "heat_maps": 0,
+   "claims": 3,
+   "rejected": 0,
+   "boxes": [
+    "p.7 Figure 4 (region) (49.5, 81.6, 296.0, 266.7)",
+    "p.7 Figure 4 (region) (49.5, 81.6, 296.0, 266.7)",
+    "p.7 Figure 4 (region) (49.5, 81.6, 296.0, 266.7)"
+   ],
+   "status": "ok",
+   "answer": "whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets."
+  },
+  {
+   "qid": "1804.07931v2#0",
+   "question": "What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?",
+   "forced_modality": "figure",
+   "reference": "Figure 2",
+   "seconds": 2.2,
+   "path": [
+    "N1",
+    "N2",
+    "N5",
+    "FigureRetriever",
+    "RegionZoom",
+    "N8",
+    "G1 pass",
+    "draft 1",
+    "G2 pass",
+    "N10a",
+    "N10b",
+    "N10c",
+    "N11",
+    "N12"
+   ],
+   "evidence": [
+    "figure/Figure 2 p.2 (FigureRetriever)",
+    "figure/Figure 2 p.2 (RegionZoom)"
+   ],
+   "reference_in_buffer": true,
+   "table_cells": 0,
+   "zoom_px": [
+    [
+     911,
+     703
+    ]
+   ],
+   "heat_maps": 0,
+   "claims": 5,
+   "rejected": 0,
+   "boxes": [
+    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
+    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
+    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
+    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
+    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)"
+   ],
+   "status": "ok",
+   "answer": "In ESMM, two auxiliary tasks of CTR and CTCVR are introduced which: i) help to model CVR over entire input space, ii) provide feature representation transfer learning."
+  },
+  {
+   "qid": "1804.07931v2#1",
+   "question": "What is the relationship between clicks and impressions?",
+   "forced_modality": null,
+   "reference": "Figure 1",
+   "seconds": 0.1,
+   "path": [
+    "N1",
+    "N2",
+    "N5",
+    "TextRetriever",
+    "N8",
+    "G1 pass",
+    "draft 1",
+    "G2 pass",
+    "N10a",
+    "N10b",
+    "N10c",
+    "N11",
+    "N12"
+   ],
+   "evidence": [
+    "text/c13 p.2 (TextRetriever)",
+    "text/c7 p.1 (TextRetriever)",
+    "text/c12 p.2 (TextRetriever)"
+   ],
+   "reference_in_buffer": false,
+   "table_cells": 0,
+   "zoom_px": [],
+   "heat_maps": 0,
+   "claims": 3,
+   "rejected": 0,
+   "boxes": [
+    "p.2 Section 2.2 paragraph (317.7, 378.0, 559.7, 606.8)",
+    "p.1 Section 1 paragraph (318.0, 349.5, 559.7, 533.7)",
+    "p.2 Section 2.2 paragraph (53.5, 604.3, 295.6, 691.0)"
+   ],
+   "status": "ok",
+   "answer": "Section 2.2 states: \"M is the number of clicks over all impressions.\""
+  }
+ ],
+ "all_ran": true,
+ "reference_found": 4
+}

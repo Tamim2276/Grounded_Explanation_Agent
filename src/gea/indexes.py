@@ -153,8 +153,10 @@ def unload_models() -> None:
     # another experiment).
     import gc
     from gea.device import empty_cache
+    global _colqwen_on
     specter.cache_clear()
     colqwen.cache_clear()
+    _colqwen_on = None
     gc.collect()
     if hasattr(torch, "xpu") and torch.xpu.is_available():
         empty_cache(torch.device("xpu"))
@@ -191,6 +193,55 @@ def maxsim(query: torch.Tensor, pages: list) -> list:
     # then the sum of those best matches. query (tokens, 128); pages: list of (patches, 128).
     q = query.float()
     return [float((q @ p.float().T).max(dim=1).values.sum()) for p in pages]
+
+
+def similarity_map(query: torch.Tensor, page: dict) -> np.ndarray:
+    # The heat map (BUILD_PLAN.md Day 4): for every patch, its best match over the query
+    # tokens, laid out in the page's grid. Patches are stored row by row -- Qwen2-VL's
+    # image processor orders them (row block, column block) -- so view(rows, cols).
+    rows, cols = page["grid"]
+    sim = (query.float() @ page["vectors"].float().T).max(dim=0).values
+    return sim.view(rows, cols).numpy()
+
+
+# --- ColQwen2 at question time (Day 4) ---------------------------------------------
+# A query's vectors are small (~20 x 128) and cheap to keep, while loading ColQwen2 costs
+# ~5 GB. So every query embedded is saved here, and a query seen before -- a rerun after
+# a power cut, a dev question, a notebook demo -- needs no model at all.
+QUERY_CACHE = cfg.DATA_DIR / "cache" / "page_queries"
+_colqwen_on = None          # the device ColQwen2 is loaded on, once it is
+
+
+def colqwen_device():
+    # Where ColQwen2 can run now: where it is already loaded; else the B580 if other
+    # programs leave room; else the CPU if memory allows; else None (the caller then
+    # works without page heat maps).
+    from gea.device import room_problems
+    if _colqwen_on:
+        return _colqwen_on
+    if hasattr(torch, "xpu") and torch.xpu.is_available() and not room_problems(7, 4_500):
+        return "xpu"
+    if not room_problems(7):
+        return "cpu"
+    return None
+
+
+def page_query_vectors(query: str):
+    # ColQwen2's vectors for a query, (tokens, 128): from the cache, or computed (and
+    # cached) when ColQwen2 fits; None when it cannot be loaded now.
+    global _colqwen_on
+    import hashlib
+    path = QUERY_CACHE / f"{hashlib.sha1(query.encode('utf-8')).hexdigest()}.pt"
+    if path.exists():
+        return torch.load(path, weights_only=True)
+    device = colqwen_device()
+    if device is None:
+        return None
+    vectors = embed_page_query(query, device)
+    _colqwen_on = device
+    with atomic_path(path) as tmp:
+        torch.save(vectors, tmp)
+    return vectors
 
 
 def page_index_is_current(folder: Path) -> bool:

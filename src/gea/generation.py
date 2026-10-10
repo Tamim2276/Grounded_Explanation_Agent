@@ -31,6 +31,10 @@ def text_claims(ev: Evidence, corpus: dict) -> list:
 
 def table_claims(ev: Evidence, entities: list) -> list:
     # Report the row the question asks about, then compare it with the overall row.
+    if not ev.cells:                                       # a table read without a grid
+        first_line = ev.content.splitlines()[0]
+        return [{"text": f"The most relevant table is {first_line}",
+                 "cites": [{"evidence": ev.id, "quote": first_line}]}]
     rows = list(dict.fromkeys(c["row"] for c in ev.cells))
     header = [c["col"] for c in ev.cells if c["row"] == rows[0]]
     asked = [r for r in rows if r.lower() in {x.lower() for x in entities}]
@@ -63,7 +67,8 @@ def figure_claims(ev: Evidence, evidence: list) -> list:
     # What the figure shows. A vision-language model reads the zoomed crop; the
     # stand-in states the caption, citing the figure and its zoomed view.
     zooms = [z.id for z in evidence if z.tool == "RegionZoom" and z.source == ev.source]
-    what, *rest = sentences(ev.content.split(":", 1)[1])
+    body = re.sub(r"^(Figure|Fig\.|FIGURE)\s*\w+\s*[:.|]?\s*", "", ev.content)   # drop "Figure 3:"
+    what, *rest = sentences(body) or [ev.content]
     claims = [{"text": f"{ev.label} plots the {what[0].lower() + what[1:]}",
                "cites": [{"evidence": ev.id, "quote": what}]}]
     for s in rest:

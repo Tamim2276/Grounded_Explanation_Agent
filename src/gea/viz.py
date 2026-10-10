@@ -266,3 +266,20 @@ def draw_proof(state: AgentState, pdf, dpi: int = 110) -> list:
 def claim_legend(state: AgentState) -> str:
     claims = sorted({b["claim"] for b in state["boxes"] if "paragraph" not in b["what"]})
     return ", ".join(f"claim {n} = rgb{CLAIM_COLOURS[(n - 1) % len(CLAIM_COLOURS)]}" for n in claims)
+
+
+# --- Day 4: heat maps ------------------------------------------------------------
+
+def heat_overlay(image, heat, box=None, size=None, alpha=0.45):
+    # A ColQwen2 heat map (rows x cols) laid over its page image, bright = matches the
+    # query best; `box` (PDF points on a page of `size`) is drawn in green.
+    import numpy as np
+    h = (heat - heat.min()) / (np.ptp(heat) or 1.0)
+    rgb = (plt.colormaps["inferno"](h)[..., :3] * 255).astype("uint8")
+    layer = PILImage.fromarray(rgb).resize(image.size, PILImage.NEAREST)
+    out = PILImage.blend(image.convert("RGB"), layer, alpha)
+    if box and size:
+        zx, zy = image.size[0] / size[0], image.size[1] / size[1]
+        ImageDraw.Draw(out).rectangle([box[0] * zx, box[1] * zy, box[2] * zx, box[3] * zy],
+                                      outline=(0, 200, 0), width=6)
+    return out

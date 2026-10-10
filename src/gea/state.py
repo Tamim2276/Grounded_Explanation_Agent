@@ -116,6 +116,7 @@ class Evidence:
     cells:      list = field(default_factory=list, repr=False)   # tables: every cell + bbox
     similarity: Any = field(default=None, repr=False)            # figures: patch map (N6c)
     crop:       Any = field(default=None, repr=False)            # zoomed view (N7)
+    page_size:  Optional[tuple] = field(default=None, repr=False)  # (width, height) in points; real papers
 
     @property
     def key(self) -> tuple:

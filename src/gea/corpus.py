@@ -111,9 +111,14 @@ def load_real_corpus(paper_id: str) -> dict:
     docs = ([c["text"] for c in paper["chunks"]]
             + [r["caption"] for r in paper["tables"] + paper["figures"]])
     paper["text_index"] = {"idf": keyword_index(docs)}
-    from gea.indexes import TEXT_INDEX, load_text_index    # here: the stub never needs faiss
+    from gea.indexes import (TEXT_INDEX, load_page_index, load_text_index,   # here: the stub
+                             page_index_is_current)                           # never needs them
+    from gea.tables import load_tables
     if (path.parent / TEXT_INDEX).exists():
         paper["text_index"].update(load_text_index(path.parent))   # refuses a stale index
+    if page_index_is_current(path.parent):
+        paper["page_index"] = load_page_index(path.parent)         # ColQwen2 patch vectors (Day 3)
+    paper["parsed_tables"] = load_tables(path.parent)              # cells of each table (Day 4)
     return paper
 
 

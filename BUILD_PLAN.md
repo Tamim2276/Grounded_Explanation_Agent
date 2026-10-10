@@ -1230,6 +1230,23 @@ through every node** without crashing.
 figure with its heat map laid over the page. Save both images to `data/debug/` and check
 them 🔋 during the next outage.
 
+> **Built on Day 4.**
+>
+> - **Tables.** [src/gea/tables.py](src/gea/tables.py) parses every table once:
+>   `python scripts/build_indexes.py tables`, 159 tables in 0.9 min on the CPU, 157 by the
+>   Table Transformer. A word belongs to the cell that holds its *centre*, because touching
+>   a box would take the next row's words.
+> - **Choosing a table or figure.** By its *words* (the caption plus the text printed inside
+>   it) and, when ColQwen2 can run, by its heat. On dev, the right one comes 1st for **80%** of
+>   questions (random 26%): tables 8/9, figures 8/11. Captions alone gave tables only 6/9.
+> - **When ColQwen2 does not fit** (another job holds the GPU or memory), query vectors come
+>   from `data/cache/page_queries/` or are skipped. The words then decide, and a figure's box
+>   is its N3 region.
+> - **The heat-map measurements** (`python scripts/eval_regions.py`) need one run with the
+>   B580 free.
+> - **Smoke test.** `python scripts/smoke_real.py` ran 5 dev questions through the whole
+>   graph without errors. Notebook Section 19 shows the work.
+
 ### Check it works
 
 - [ ] for 3 dev tables, the text in each cell box equals what you see in the PDF
