@@ -1237,13 +1237,17 @@ them 🔋 during the next outage.
 >   Table Transformer. A word belongs to the cell that holds its *centre*, because touching
 >   a box would take the next row's words.
 > - **Choosing a table or figure.** By its *words* (the caption plus the text printed inside
->   it) and, when ColQwen2 can run, by its heat. On dev, the right one comes 1st for **80%** of
->   questions (random 26%): tables 8/9, figures 8/11. Captions alone gave tables only 6/9.
+>   it) and by ColQwen2's score for its **page**. On dev, the right one comes 1st for **85%** of
+>   questions (random 26%): words alone 80%, page score alone 80%. Captions alone gave tables
+>   only 6/9.
+> - **The heat map is noisy.** It lights up the question's words wherever they appear (the
+>   figure, its caption, the paragraph about it), so its hottest patch lands on the reference
+>   only 15% of the time (random 8%). Choosing by the heat inside a region scored 55%. So the
+>   heat only narrows the box *inside* the chosen region (median IoU 0.81 with the region).
+>   The orientation was checked: the swapped grid is half as hot on the reference.
 > - **When ColQwen2 does not fit** (another job holds the GPU or memory), query vectors come
 >   from `data/cache/page_queries/` or are skipped. The words then decide, and a figure's box
 >   is its N3 region.
-> - **The heat-map measurements** (`python scripts/eval_regions.py`) need one run with the
->   B580 free.
 > - **Smoke test.** `python scripts/smoke_real.py` ran 5 dev questions through the whole
 >   graph without errors. Notebook Section 19 shows the work.
 

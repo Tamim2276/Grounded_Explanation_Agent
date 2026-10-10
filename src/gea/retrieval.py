@@ -119,9 +119,13 @@ def n6a_text_retriever(state: AgentState) -> dict:
 # rank, as in N6a's hybrid search:
 #   text   -- N6a's ranking on its words: SPECTER2 on the caption, keyword on the caption
 #             plus the words printed inside its region (a table's cells, a chart's labels)
-#   visual -- how hot ColQwen2's heat map is inside its region on its page
-# cfg.REGION_SEARCH picks "text", "visual" or "both". Without ColQwen2 (no room on this
-# PC and no cached query), "visual" is unavailable and the text decides alone.
+#   visual -- how well ColQwen2 matches its PAGE (MaxSim, Day 3's page search)
+# cfg.REGION_SEARCH picks "text", "visual" or "both". ColQwen2 is strong at WHICH page
+# (trained for it) but its patch-level heat map is noisy -- a paragraph that repeats the
+# question's words often outshines the table -- so the heat inside a region is not used to
+# choose; it only narrows the box inside the chosen one. On dev: words 80%, page 80%,
+# both 85%, words + region heat 75% ("heat", "text+heat" stay measurable). Without
+# ColQwen2 (no room on this PC and no cached query) the text decides alone.
 
 def page_size(corpus: dict, page: int) -> tuple:
     return tuple(corpus["pages"][page - 1]["size"])
@@ -140,14 +144,22 @@ def region_words(corpus: dict, record: dict) -> str:
     return f"{record['caption']} {cache.get(record['id'], '')}"
 
 
-def page_heat(corpus: dict, query: str):
-    # {page: heat map} for this query, or None when ColQwen2 cannot run now.
-    from gea.indexes import page_query_vectors, similarity_map
+def page_signals(corpus: dict, query: str):
+    # ColQwen2 for this query: ({page: MaxSim score}, {page: heat map}), or None when it
+    # cannot run now.
+    from gea.indexes import maxsim, page_query_vectors, similarity_map
     pages = corpus.get("page_index")
     q = page_query_vectors(query) if pages else None
     if q is None:
         return None
-    return {p["page"]: similarity_map(q, p) for p in pages}
+    scores = maxsim(q, [p["vectors"] for p in pages])
+    return ({p["page"]: s for p, s in zip(pages, scores)}, {p["page"]: similarity_map(q, p) for p in pages})
+
+
+def page_heat(corpus: dict, query: str):
+    # {page: heat map} for this query, or None when ColQwen2 cannot run now.
+    signals = page_signals(corpus, query)
+    return signals[1] if signals else None
 
 
 def inside_mask(heat: np.ndarray, bbox: tuple, size: tuple) -> np.ndarray:
@@ -181,17 +193,24 @@ def rank_regions(corpus: dict, query: str, kind: str, how: str = None) -> tuple:
     records = corpus[kind + "s"]
     if not records:
         return [], None, how
-    heat = page_heat(corpus, query) if how in ("visual", "both") else None   # None: no ColQwen2
-    if heat is None and how != "text":
+    signals = page_signals(corpus, query) if how != "text" else None      # None: no ColQwen2
+    if signals is None and how != "text":
         how = "text"                                          # no ColQwen2 now: the words decide
+    page_score, heat = signals or ({}, None)
     similarity = meaning_scores(corpus, query)
     words = text_scores({r["id"]: similarity.get(r["id"], 0.0) for r in records},
                         {r["id"]: score(query, region_words(corpus, r), corpus) for r in records},
                         cfg.TEXT_SEARCH)
-    visual = ({r["id"]: region_heat(heat[r["page"]], r["bbox"], page_size(corpus, r["page"])) for r in records}
-              if heat else {})
-    final = {"text": words, "visual": visual,
-             "both": text_scores(visual, words, "hybrid") if visual else words}[how]
+    if how == "text":
+        final = words
+    elif how in ("visual", "both"):
+        visual = {r["id"]: page_score[r["page"]] for r in records}
+        final = visual if how == "visual" else text_scores(visual, words, "hybrid")
+    elif how in ("heat", "text+heat"):                        # measured alternatives (dev: weaker)
+        hot = {r["id"]: region_heat(heat[r["page"]], r["bbox"], page_size(corpus, r["page"])) for r in records}
+        final = hot if how == "heat" else text_scores(hot, words, "hybrid")
+    else:
+        raise ValueError(f"unknown REGION_SEARCH {how!r}")
     ranked = sorted(records, key=lambda r: (-final[r["id"]], -words[r["id"]]))
     return [(r, final[r["id"]]) for r in ranked], heat, how
 

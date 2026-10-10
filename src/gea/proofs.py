@@ -22,6 +22,11 @@ def patches_to_bbox(sim: np.ndarray, keep: float = 0.5, page_size: tuple = None)
             round(float((xs.max() + 1) * pw), 1), round(float((ys.max() + 1) * ph), 1))
 
 
+def clip(box: tuple, frame: tuple) -> tuple:
+    # The part of `box` inside `frame` (patches are 25 points wide; the edge ones stick out).
+    return (max(box[0], frame[0]), max(box[1], frame[1]), min(box[2], frame[2]), min(box[3], frame[3]))
+
+
 def iou(a: tuple, b: tuple) -> float:
     # Intersection over union of two boxes -- the CGS metric of the thesis.
     ix = max(0.0, min(a[2], b[2]) - max(a[0], b[0]))
@@ -67,7 +72,10 @@ def n10b_bounding_boxes(state: AgentState) -> dict:
                 cell = next(c for c in ev.cells if (c["row"], c["col"]) == tuple(cite["cell"]))
                 box, what = cell["bbox"], f"{ev.label} cell {cite['cell'][0]} / {cite['cell'][1]}"
             elif ev.kind == "figure" and ev.similarity is not None:
-                box, what = patches_to_bbox(ev.similarity, page_size=ev.page_size), f"{ev.label} (patch map)"
+                box = patches_to_bbox(ev.similarity, page_size=ev.page_size)
+                if ev.page_size:                # real map, kept to the figure: clip the patch edges to it
+                    box = clip(box, ev.bbox)
+                what = f"{ev.label} (patch map)"
             elif ev.tool == "RegionZoom":
                 continue                    # a zoomed view points at the same region as its figure
             elif ev.kind == "figure":

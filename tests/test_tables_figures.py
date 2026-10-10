@@ -131,3 +131,19 @@ def test_the_whole_graph_runs_on_a_real_table_question(real):
                                                             "1803.03467v4"))
     assert any(e.label == "Table 1" for e in out["evidence"])
     assert out["answer"] and out["boxes"]
+
+
+def test_both_combines_the_words_with_colqwen2s_page_score(monkeypatch):
+    # Two tables: t1's words match the query, t2 sits on the page ColQwen2 prefers.
+    import gea.retrieval as R
+    tiny = {"paper_id": "tiny", "text_index": {"idf": {"triples": 2.0}},
+            "pages": [{"page": 1, "size": [612.0, 792.0]}, {"page": 2, "size": [612.0, 792.0]}],
+            "tables": [{"id": "t1", "label": "Table 1", "page": 1, "bbox": [0, 0, 10, 10], "caption": "Table 1: Statistics."},
+                       {"id": "t2", "label": "Table 2", "page": 2, "bbox": [0, 0, 10, 10], "caption": "Table 2: Settings."}],
+            "_region_words": {"t1": "# 4-hop triples 6,322,548", "t2": "d = 16"}}
+    monkeypatch.setattr(R, "page_signals", lambda corpus, query: ({1: 9.0, 2: 9.5}, {1: np.zeros((2, 2)), 2: np.zeros((2, 2))}))
+    with cfg.override(TEXT_SEARCH="keyword"):
+        order = {how: [r["id"] for r, _ in R.rank_regions(tiny, "most triples", "table", how)[0]]
+                 for how in ("text", "visual", "both")}
+    assert order["text"][0] == "t1" and order["visual"][0] == "t2"
+    assert order["both"][0] == "t1"          # t2 has no matching word: the keyword search gives it nothing

@@ -86,3 +86,14 @@
   - 4.6 smoke: scripts/smoke_real.py, 5 dev questions through the whole graph (rules planner, 4 with
     cfg.SUB_GOAL_MODALITY set): all ran, reference reached the buffer in 4/5, 0.1-7.6 s each.
   - 4.7 notebook Section 19 (135 cells, 47 s). Tests: 84.
+- 2026-10-11, Day 4 finished with the B580 free (user ran scripts/eval_regions.py; query vectors cached):
+  - First result: the heat map did not point at the reference (pointing 15%, random 8%; map-box IoU 0.07),
+    and choosing regions by the heat inside them was worse than words alone (75% vs 80%).
+  - Investigated: orientation is right (reference hotter than the rest by +0.035 row-major vs +0.016 swapped;
+    per-word best patches land on Table 1's rows). Max over content words / mean / z-mean: no better (10%).
+    The map lights up the question's words wherever they are -- figure, caption, the paragraph about it,
+    margins (data/debug/day4/figure4_heat.png, heat_tokens_p6.png).
+  - Changed: "visual" = ColQwen2's MaxSim score of the region's PAGE (what it is trained for); the heat only
+    narrows the box inside the chosen region, clipped to it. Dev, right table/figure 1st: text 80%, page 80%,
+    both 85% (default), heat 55%, text+heat 75%; top 3: 90 / 95 / 95 / 90 / 90%. Tables by page score: 9/9.
+    N10b box vs whole region: IoU median 0.81. Tests 85; notebook Section 19 shows the heat map.

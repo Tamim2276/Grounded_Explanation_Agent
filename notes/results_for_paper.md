@@ -195,27 +195,46 @@ matching scores A and C the same (both 0).
 
 ### Choosing the right table or figure
 
-Source: `results/day4_regions.json`, from `python scripts/eval_regions.py` (9 s, 2026-10-10).
-The reference's kind decides the tool (table → N6b, figure → N6c). A hit means the reference
-is ranked 1st (hit@1) or in the top 3 among all tables or figures of its paper.
+Source: `results/day4_regions.json`, from `python scripts/eval_regions.py` (2026-10-11, with
+ColQwen2's query vectors; about 10 s once they are cached). The reference's kind decides the
+tool (table → N6b, figure → N6c). A hit means the reference is ranked 1st (hit@1) or in the top
+3 among all tables or figures of its paper.
 
-| | "text" ranking: hit@1 | hit@3 | random hit@1 |
+| how the table/figure is chosen | tables (9): hit@1 / @3 | figures (11) | all (20) |
 |---|---|---|---|
-| tables (9) | **89%** (8/9) | **100%** | 35% |
-| figures (11) | **73%** (8/11) | 82% | 19% |
-| all (20) | **80%** | 90% | 26% |
+| **text**: caption (SPECTER2) + caption and the words inside the region (keyword) | 89% / 100% | 73% / 82% | 80% / 90% |
+| **visual**: ColQwen2's MaxSim score of the region's *page* (ties by text) | **100%** / 100% | 64% / 91% | 80% / 95% |
+| **both** (rank fusion of the two; `cfg.REGION_SEARCH`, the default) | 89% / 100% | **82%** / 91% | **85% / 95%** |
+| heat: ColQwen2's heat *inside* the region (mean of its 5 hottest patches) | 56% / 100% | 55% / 82% | 55% / 90% |
+| text + heat | 78% / 100% | 73% / 82% | 75% / 90% |
+| random | 35% | 19% | 26% |
 
-"text" = N6a's hybrid ranking applied to the caption (SPECTER2) and to the caption **plus the
-words printed inside the region** (keyword): a table's cells, a chart's axis labels and legend.
+**Ablation, captions only** (no words from inside the region): tables 6/9 first, figures 8/11.
+**Adding the region's words lifted tables to 8/9.** For example, "Which dataset has the most
+4-hop triples?" matches Table 1's *cells*, while its caption only says "Basic statistics of the
+three datasets."
 
-**Ablation, captions only:** tables 6/9 first, figures 8/11. **Adding the region's words lifted
-tables to 8/9.** Example: "Which dataset has the most 4-hop triples?" matches Table 1's
-*cells*; its caption only says "Basic statistics of the three datasets."
+### What ColQwen2's heat map can and cannot do (RQ2, RQ3)
 
-**Still to measure, once ColQwen2 can load:** the "visual" (heat inside the region) and "both"
-rankings, and whether the heat map points at the reference (pointing accuracy, and IoU of the
-heat-map box with the region). On 2026-10-10 another job held the GPU and memory, so ColQwen2
-could not run. The same script measures all of this when it can.
+| measure (dev, 20 questions) | value | random |
+|---|---|---|
+| pointing: the hottest patch of the reference's page lies inside the reference | 15% (tables 22%, figures 9%) | 8% (the reference's share of its page) |
+| IoU of the box around the page's hottest patches with the reference | median 0.07 | |
+| IoU of N10b's box (hot patches kept to the chosen region, clipped to it) with the whole region | median **0.81** (tables 0.79, figures 0.84) | |
+
+**What to say about it:**
+- **ColQwen2 is strong at *which page*** (Day 3: right page 1st 75%, top 3 95%; here its page score alone picks the right table 9/9). That is what it was trained for.
+- **Its patch-level heat map is noisy.**
+  - The words of the question light up wherever they appear: in the figure, in its caption, and in the paragraph that discusses it. Blank margins light up too.
+  - Example: `data/debug/day4/figure4_heat.png`, and the per-word best patches on the Table 1 page, `data/debug/day4/heat_tokens_p6.png`. Individual words ("triples", "4") do land on the right table rows.
+  - So the heat inside a region is a poor way to *choose* between regions (55% vs 85%). It is used only to narrow the box inside the chosen region.
+- **Tried, no better** (dev pointing / heat choice):
+  - max over content words only: 10% / 50%;
+  - mean over content words: 10% / 60%;
+  - z-scored mean: 10% / 45%;
+  - the current max over all query tokens: 15% / 55%.
+- **Orientation is right.** With the grid read row by row, the reference is hotter than the rest of its page by +0.035 on average (hotter in 70% of questions). With rows and columns swapped, that drops to +0.016, and pointing falls from 15% to 10%. This matches the code reading of Qwen2-VL's patch order.
+- **For RQ3:** the heat-map box is a *refinement inside* a region chosen by other signals. Whether it beats the whole region as a box is a CGS question for the annotated subset (Days 6–8). Report both.
 
 **Bug fixed on the way (also affects N6a):** in hybrid rank fusion, items that a search did not
 find at all (keyword score 0) tied for a rank and still earned credit. With 5 tables, that let
@@ -229,16 +248,19 @@ unchanged.
 - **Smoke test** (`python scripts/smoke_real.py` → `results/day4_smoke.json`):
   - 5 dev questions ran through the **whole graph** on real papers with the rules planner.
   - 4 of them had N1's modality set from the reference kind, a testing knob, because N1's regex stand-in cannot tell a table question from a text one.
-  - All 5 ran end to end in 0.1–7.6 s each, and the reference table or figure reached the evidence buffer in 4 of 5.
+  - All 5 ran end to end. With ColQwen2 on the free B580 (2026-10-11) they took 0.0–26 s; the 26 s is loading ColQwen2 once. The reference table or figure reached the evidence buffer in 4 of 5.
+  - Figure boxes now come from the heat map kept to the figure ("patch map"); table boxes are the region or the cited cell.
   - The answers are template sentences until the language model arrives (Days 5–6).
 
 ### Heat-map orientation
 
-The saved patch vectors are read as a rows × columns grid, row by row. This is confirmed from
-the code: Qwen2-VL's image processor orders tokens as (row block, column block). A model-free
-check, predicting each patch's ink from its vector, was too weak to decide (correlation 0.12 vs
-0.08): ColQwen2's patch vectors encode meaning, not ink. The empirical check is the pointing/IoU
-measurement above.
+The saved patch vectors are read as a rows × columns grid, row by row. Two checks agree:
+
+- **The code:** Qwen2-VL's image processor orders tokens as (row block, column block).
+- **The data:** with this layout the reference is hotter than the rest of its page by +0.035; swapped, by only +0.016 (see above).
+
+A model-free check, predicting each patch's ink from its vector, was too weak to decide
+(correlation 0.12 vs 0.08): ColQwen2's patch vectors encode meaning, not ink.
 
 ---
 
@@ -278,7 +300,7 @@ and `paper/figures/fig_grounded_answer.png`.
 
 | result | metric in Methodology | when |
 |---|---|---|
-| Heat maps: "visual"/"both" region choice, pointing accuracy, heat-map box IoU (`scripts/eval_regions.py`) | (supports RQ2, CGS) | next time ColQwen2 fits (B580 free) |
+| Figure box: heat-map box inside the region vs the whole region, against annotated regions | CGS (RQ3) | Days 6–8, annotated subset |
 | Answer accuracy: agentic loop vs single pass | accuracy, RF, AES (RQ1) | Days 7–8, test |
 | Text-only agent baseline | (RQ2) | Days 7–8, test |
 | Modality attribution | MAP (RQ2) | Days 7–8, test |

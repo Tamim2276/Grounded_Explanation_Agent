@@ -5,7 +5,7 @@
    "question": "Which dataset has the most 4-hop triples?",
    "forced_modality": "table",
    "reference": "Table 1",
-   "seconds": 7.6,
+   "seconds": 4.6,
    "path": [
     "N1",
     "N2",
@@ -27,11 +27,11 @@
    "reference_in_buffer": true,
    "table_cells": 28,
    "zoom_px": [],
-   "heat_maps": 0,
+   "heat_maps": 1,
    "claims": 1,
    "rejected": 0,
    "boxes": [
-    "p.6 Section None paragraph (316.0, 92.8, 561.8, 186.3)"
+    "p.6 Table 1 (region) (316.0, 92.8, 561.8, 186.3)"
    ],
    "status": "ok",
    "answer": "The most relevant table is Table 1: Basic statistics of the three datasets."
@@ -41,7 +41,7 @@
    "question": "Which method performed the best on the GRID dataset?",
    "forced_modality": "table",
    "reference": "Table 2",
-   "seconds": 2.2,
+   "seconds": 0.6,
    "path": [
     "N1",
     "N2",
@@ -63,11 +63,11 @@
    "reference_in_buffer": true,
    "table_cells": 20,
    "zoom_px": [],
-   "heat_maps": 0,
+   "heat_maps": 1,
    "claims": 1,
    "rejected": 0,
    "boxes": [
-    "p.6 Section None paragraph (63.9, 55.7, 287.1, 133.4)"
+    "p.6 Table 2 (region) (63.9, 55.7, 287.1, 133.4)"
    ],
    "status": "ok",
    "answer": "The most relevant table is Table 2: Cross-dataset evaluation of our method on GRID dataset pre-trained on LRW dataset."
@@ -77,7 +77,7 @@
    "question": "How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?",
    "forced_modality": "figure",
    "reference": "Figure 4",
-   "seconds": 1.6,
+   "seconds": 0.1,
    "path": [
     "N1",
     "N2",
@@ -106,13 +106,13 @@
      770
     ]
    ],
-   "heat_maps": 0,
+   "heat_maps": 1,
    "claims": 3,
    "rejected": 0,
    "boxes": [
-    "p.7 Figure 4 (region) (49.5, 81.6, 296.0, 266.7)",
-    "p.7 Figure 4 (region) (49.5, 81.6, 296.0, 266.7)",
-    "p.7 Figure 4 (region) (49.5, 81.6, 296.0, 266.7)"
+    "p.7 Figure 4 (patch map) (76.5, 81.6, 296.0, 255.5)",
+    "p.7 Figure 4 (patch map) (76.5, 81.6, 296.0, 255.5)",
+    "p.7 Figure 4 (patch map) (76.5, 81.6, 296.0, 255.5)"
    ],
    "status": "ok",
    "answer": "whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets."
@@ -122,7 +122,7 @@
    "question": "What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?",
    "forced_modality": "figure",
    "reference": "Figure 2",
-   "seconds": 2.2,
+   "seconds": 0.5,
    "path": [
     "N1",
     "N2",
@@ -151,15 +151,15 @@
      703
     ]
    ],
-   "heat_maps": 0,
+   "heat_maps": 1,
    "claims": 5,
    "rejected": 0,
    "boxes": [
-    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
-    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
-    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
-    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)",
-    "p.2 Figure 2 (region) (328.9, 81.7, 547.3, 250.1)"
+    "p.2 Figure 2 (patch map) (331.5, 81.7, 535.5, 250.1)",
+    "p.2 Figure 2 (patch map) (331.5, 81.7, 535.5, 250.1)",
+    "p.2 Figure 2 (patch map) (331.5, 81.7, 535.5, 250.1)",
+    "p.2 Figure 2 (patch map) (331.5, 81.7, 535.5, 250.1)",
+    "p.2 Figure 2 (patch map) (331.5, 81.7, 535.5, 250.1)"
    ],
    "status": "ok",
    "answer": "In ESMM, two auxiliary tasks of CTR and CTCVR are introduced which: i) help to model CVR over entire input space, ii) provide feature representation transfer learning."
@@ -169,7 +169,7 @@
    "question": "What is the relationship between clicks and impressions?",
    "forced_modality": null,
    "reference": "Figure 1",
-   "seconds": 0.1,
+   "seconds": 0.0,
    "path": [
     "N1",
     "N2",

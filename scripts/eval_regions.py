@@ -5,11 +5,14 @@
 #
 # Each question's reference kind decides the tool (table -> N6b, figure -> N6c):
 #   hit@1, hit@3  the reference is the 1st / among the first 3 of its kind in the paper
-#   by method     "text"   caption + the words inside the region
-#                 "visual" ColQwen2's heat inside the region
-#                 "both"   the two combined by rank (cfg.REGION_SEARCH)
+#   by method     "text"      caption + the words inside the region
+#                 "visual"    ColQwen2's score for the region's page (MaxSim)
+#                 "both"      the two combined by rank (cfg.REGION_SEARCH)
+#                 "heat", "text+heat"  ColQwen2's heat INSIDE the region (alternatives)
 #   pointing      the hottest patch of the reference's page lies inside the reference
+#                 (random pointing would score the reference's share of its page)
 #   map IoU       the box around the page's hottest patches vs the reference region (N3)
+#   box in region the box N10b draws (hot patches kept to the region) vs the whole region
 # "visual", "both", pointing and IoU need ColQwen2's query vectors: computed when ColQwen2
 # fits on this PC (B580 free, or ~7 GB of memory), cached in data/cache/page_queries/, and
 # otherwise reported as unavailable. Writes results/day4_regions.json.
@@ -21,12 +24,12 @@ import numpy as np
 from gea import config as cfg
 from gea.corpus import get_corpus
 from gea.indexes import page_query_vectors, unload_models
-from gea.proofs import iou, patches_to_bbox
-from gea.retrieval import page_heat, page_size, rank_regions
+from gea.proofs import clip, iou, patches_to_bbox
+from gea.retrieval import masked_heat, page_heat, page_size, rank_regions
 from gea.safeio import atomic_write_json, read_jsonl
 
 OUT = cfg.PROJECT_ROOT / "results" / "day4_regions.json"
-METHODS = ("text", "visual", "both")
+METHODS = ("text", "visual", "both", "heat", "text+heat")
 
 
 def main() -> int:
@@ -53,6 +56,10 @@ def main() -> int:
                 row["pointing"] = bool(ref["bbox"][0] <= centre[0] <= ref["bbox"][2]
                                        and ref["bbox"][1] <= centre[1] <= ref["bbox"][3])
                 row["map_iou"] = round(iou(patches_to_bbox(heat, page_size=size), tuple(ref["bbox"])), 3)
+                row["area_share"] = round((ref["bbox"][2] - ref["bbox"][0]) * (ref["bbox"][3] - ref["bbox"][1])
+                                          / (size[0] * size[1]), 4)
+                box = clip(patches_to_bbox(masked_heat(heat, ref["bbox"], size), page_size=size), tuple(ref["bbox"]))
+                row["box_in_region_iou"] = round(iou(box, tuple(ref["bbox"])), 3)
             rows.append(row)
     unload_models()
 
@@ -69,6 +76,8 @@ def main() -> int:
             summary[kind][f"{how}_hit@3"] = share(sub, lambda r: r[how]["rank"] <= 3)
         if visual_ok:
             summary[kind]["pointing"] = share(sub, lambda r: r["pointing"])
+            summary[kind]["random_pointing"] = round(float(np.mean([r["area_share"] for r in sub])), 4)
+            summary[kind]["box_in_region_iou_median"] = round(float(np.median([r["box_in_region_iou"] for r in sub])), 3)
             summary[kind]["map_iou_median"] = round(float(np.median([r["map_iou"] for r in sub])), 3)
             summary[kind]["map_iou>=0.5"] = share(sub, lambda r: r["map_iou"] >= 0.5)
     atomic_write_json(OUT, {"split": "dev", "visual_available": visual_ok, "methods": list(methods),
@@ -82,8 +91,9 @@ def main() -> int:
         print(f"  {kind:6s} ({s['questions']:2d} q): right one 1st / in top 3 -- " + ",  ".join(parts)
               + f"   (random 1st: {s['random_hit@1']:.0%})")
         if visual_ok:
-            print(f"         heat map: hottest patch on the reference {s['pointing']:.0%}, "
-                  f"box IoU median {s['map_iou_median']:.2f}, IoU >= 0.5 for {s['map_iou>=0.5']:.0%}")
+            print(f"         heat map: hottest patch on the reference {s['pointing']:.0%} (random {s['random_pointing']:.0%}), "
+                  f"page-map box IoU median {s['map_iou_median']:.2f}; box kept to the region vs region: "
+                  f"IoU median {s['box_in_region_iou_median']:.2f}")
     print(f"saved {OUT.relative_to(cfg.PROJECT_ROOT).as_posix()}")
     return 0
 
