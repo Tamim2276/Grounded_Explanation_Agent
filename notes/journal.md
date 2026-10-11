@@ -97,3 +97,22 @@
     narrows the box inside the chosen region, clipped to it. Dev, right table/figure 1st: text 80%, page 80%,
     both 85% (default), heat 55%, text+heat 75%; top 3: 90 / 95 / 95 / 90 / 90%. Tables by page score: 9/9.
     N10b box vs whole region: IoU median 0.81. Tests 85; notebook Section 19 shows the heat map.
+- 2026-10-11, Day 5 (model in N1, N2, N5, G1):
+  - llama-server reserves ~7.5 GB of Windows commit memory (RAM + page file; ~4.3 GB in RAM) whatever the flags
+    (--no-host, --load-mode mmap: no change). With another project's job (tools.mask_quality, ~5.6-7 GB) running,
+    free commit fell to 0.6-0.8 GB, so the server was stopped each time (twice it started in a brief window).
+    start_llm.sh now refuses below 10 GB free commit and names the biggest users. On Windows, stopping the bash
+    wrapper does not stop llama-server.exe (taskkill //IM llama-server.exe //F). Lasting fix: a page file on D:.
+  - llm.call_llm: temperature 0, seed, JSON schema, cache results/llm_cache/<2 hex>/<sha256>.json with the prompt
+    text, model, seconds, usage; PROMPT_VERSION in the key; cfg.LLM_CACHE switch for tests. N1/N2/G1 behind
+    cfg.LLM_MODE ("rules"|"llm"), N5 behind PLANNER_MODE; each falls back to rules and says so in the trace.
+  - N1 v1 6/20 kinds right (figures 1/11) -> v2 with examples 8/20; regex 2/20. N2: names only if in the question;
+    "Table 2"-style refs stay regex. G1 v1 lenient (GRID) -> v3 must name item + fact; code checks item and numbers.
+  - Traces: 10 dev, 42 calls, 147 s; rerun 6.9 s (cache); power-cut test (server stopped): 10/10 identical, an
+    uncached question falls back. Rule floor fixed the GRID question (gold answer named by G1).
+  - Tools now search with sub-goal words + the planner's query (the model's queries are short keyword lists).
+  - ColQwen2 page score now uses the QUESTION's cached vectors (computed before the server starts): it cannot load
+    beside llama-server on this PC.
+  - Chart reading probe: 2/2 wrong (12 vs ~55; 25 vs ~4) on the 4-panel Figure 4 crop.
+  - Known glitch: one chunk's section is "L" (1812.06589v2) -- a heading mis-read on Day 2; cosmetic.
+  - Tests: 95 (10 new, model-free with a fake server). Notebook Section 20 replays a model run from the cache.

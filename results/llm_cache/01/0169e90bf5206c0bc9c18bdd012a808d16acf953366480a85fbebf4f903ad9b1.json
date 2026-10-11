@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v1",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 25,
+  "prompt_tokens": 922,
+  "total_tokens": 947,
+  "prompt_tokens_details": {
+   "cached_tokens": 660
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?\nSub-questions:\n1. [text] What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?\nEvidence:\nE1 [text, Section 2.3, page 4]: compare different CVR modeling methods over entire input space, which reflects the model performance corresponding to SSB problem. In CTCVR task, all models calculate pCTCVR by pCTR × pCVR , where: i) pCVR is estimated by each model respectively, ii) pCTR is estimated with a same independently trained CTR network (same structure and hyper parameters as BASE model). Both of the two tasks split the first 1/2 data in the time sequence to be training set while the rest to be test set. Area under the ROC curve (AUC) is adopted as performance metrics. All experiments are repeated 10 times and averaged results are reported.\nE2 [text, Section 4, page 4]: In this paper, we propose a novel approach ESMM for CVR modeling task. ESMM makes good use of sequential patten of user actions. With the help of two auxiliary tasks of CTR and CTCVR, ESMM elegantly tackles challenges of sample selection bias and data sparsity for CVR modeling encountered in real practice. Experiments on real dataset demonstrate the superior performance of the proposed ESMM. This method can be easily generalized to user action prediction in scenario with sequential dependence. In the future, we intend to design global optimization models in applications with multistage actions like request → impression → click → conversion .\nE3 [text, Section 1, page 2]: been well addressed in the scenario of CVR modeling, and none of above methods exploits the information of sequential actions. In this paper, by making good use of sequential pattern of user actions, we propose a novel approach named Entire Space Multitask Model (ESMM), which is able to eliminate the SSB and DS problems simultaneously. In ESMM, two auxiliary tasks of predicting the post-view click-through rate (CTR) and post-view clickthrough&conversion rate (CTCVR) are introduced. Instead of training CVR model directly with samples of clicked impressions, ESMM treats pCVR as an intermediate variable which multiplied by pCTR equals to pCTCVR . Both pCTCVR and pCTR are estimated over the entire space with samples of all impressions, thus the derived pCVR is also applicable over the entire space. It indicates that SSB problem is eliminated. Besides, parameters of feature representation of CVR network is shared with CTR network. The latter one is trained with much richer samples. This kind of parameter transfer learning [ 7 ] helps to alleviate the DS trouble remarkablely.\nE4 [table, Table 2, page 4]: Table 2: Comparison of different models on Public Dataset.\nModel | AUC(mean ± std) on CVR task | AUC(mean ± std) on CTCVR task\nBASE | 66.00 ± 0.37 | 62.07 ± 0.45\nAMAN | 65.21 ± 0.59 | 63.53 ± 0.57\nOVERSAMPLING | 67.18 ± 0.32 | 63.05 ± 0.48\nUNBIAS | 66.65 ± 0.28 | 63.56 ± 0.70\nDIVISION | 67.56 ± 0.48 | 63.62 ± 0.09\nESMM-NS | 68.25 ± 0.44 | 64.44 ± 0.62\nESMM | 68.56 ± 0.37 | 65.32 ± 0.49"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "uncovered": [],
+  "missing": ""
+ }
+}

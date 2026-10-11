@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v3",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 86,
+  "prompt_tokens": 368,
+  "total_tokens": 454,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nSub-questions:\n1. [table] Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nEvidence:\nE1 [table, Table 4, page 9]: Table 4: The results of AUC w.r.t. different sizes of a user’s ripple set.\nSize of ripple set | 2 | 4 | 8 | 16 | 32 | 64\nMovieLens-1M | 0.903 | 0.908 | 0.911 | 0.918 | 0.920 | 0.919\nBook-Crossing | 0.694 | 0.696 | 0.708 | 0.726 | 0.706 | 0.711\nBing-News | 0.659 | 0.672 | 0.670 | 0.673 | 0.678 | 0.671"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The MovieLens-1M dataset has an AUC of 0.920 with a ripple set size of 32."
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

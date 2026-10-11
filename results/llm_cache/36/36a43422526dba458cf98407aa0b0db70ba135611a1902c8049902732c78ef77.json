@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v3",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 81,
+  "prompt_tokens": 406,
+  "total_tokens": 487,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the most 4-hop triples?\nSub-questions:\n1. [table] Which dataset has the most 4-hop triples?\nEvidence:\nE1 [table, Table 1, page 6]: Table 1: Basic statistics of the three datasets.\n | MovieLens-1M | Book-Crossing | Bing-News\n# users | 6,036 | 17,860 | 141,487\n# items | 2,445 | 14,967 | 535,145\n# interactions | 753,772 | 139,746 | 1,025,192\n# 1-hop triples | 20,782 | 19,876 | 503,112\n# 2-hop triples | 178,049 | 65,360 | 1,748,562\n# 3-hop triples | 318,266 | 84,299 | 3,997,736\n# 4-hop triples | 923,718 | 71,628 | 6,322,548"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Bing-News has the most 4-hop triples with 6,322,548."
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

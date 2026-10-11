@@ -1,0 +1,42 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v3",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 124,
+  "prompt_tokens": 1420,
+  "total_tokens": 1544,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?\nSub-questions:\n1. [figure] How does the number of common k-hop neighbors change as the hop distance increases for items with common raters?\n2. [figure] How does the number of common k-hop neighbors change as the hop distance increases for items without common raters?\nEvidence:\nE1 [figure, Figure 4, page 7] (image attached): Figure 4: The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets. (d) The ratio of the two average numbers with different hops.\nE2 [figure, Figure 4, page 7]: Zoomed view (300 dpi) of: Figure 4: The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets. (d) The ratio of the two average numbers with different hops. [image]"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The number of common k-hop neighbors increases as the hop distance increases for items with common raters."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "The number of common k-hop neighbors increases as the hop distance increases for items without common raters."
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

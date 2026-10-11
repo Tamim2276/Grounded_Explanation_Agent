@@ -1,0 +1,33 @@
+{
+ "name": "n1_sub_goals",
+ "prompt_version": "v1",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 45,
+  "prompt_tokens": 165,
+  "total_tokens": 210,
+  "prompt_tokens_details": {
+   "cached_tokens": 150
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You prepare questions about one scientific paper for a search agent. Split the question into sub-questions only when it clearly asks two or three different things; most questions stay ONE sub-question. Give each sub-question the ONE kind of evidence most likely to answer it:\n- table: exact numbers that compare methods, models, datasets or settings (scores, accuracy, error, counts, statistics, which one is best, highest or lowest);\n- figure: how something changes as another thing varies (trends, curves, plots), diagrams of an architecture, framework or pipeline, and examples shown as images;\n- text: definitions, explanations, motivations and descriptions written in paragraphs.\nKeep the question's own words."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed the best on the GRID dataset?"
+  }
+ ],
+ "answer": {
+  "sub_goals": [
+   {
+    "text": "Which method performed the best on the GRID dataset?",
+    "modality": "text"
+   }
+  ]
+ }
+}

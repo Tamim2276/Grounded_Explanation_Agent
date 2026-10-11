@@ -141,7 +141,7 @@ def test_both_combines_the_words_with_colqwen2s_page_score(monkeypatch):
             "tables": [{"id": "t1", "label": "Table 1", "page": 1, "bbox": [0, 0, 10, 10], "caption": "Table 1: Statistics."},
                        {"id": "t2", "label": "Table 2", "page": 2, "bbox": [0, 0, 10, 10], "caption": "Table 2: Settings."}],
             "_region_words": {"t1": "# 4-hop triples 6,322,548", "t2": "d = 16"}}
-    monkeypatch.setattr(R, "page_signals", lambda corpus, query: ({1: 9.0, 2: 9.5}, {1: np.zeros((2, 2)), 2: np.zeros((2, 2))}))
+    monkeypatch.setattr(R, "page_signals", lambda corpus, query, question=None: ({1: 9.0, 2: 9.5}, {1: np.zeros((2, 2)), 2: np.zeros((2, 2))}))
     with cfg.override(TEXT_SEARCH="keyword"):
         order = {how: [r["id"] for r, _ in R.rank_regions(tiny, "most triples", "table", how)[0]]
                  for how in ("text", "visual", "both")}

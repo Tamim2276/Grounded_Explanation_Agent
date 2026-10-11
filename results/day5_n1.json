@@ -1,0 +1,517 @@
+{
+ "v1": {
+  "questions": 20,
+  "model_right": 6,
+  "rules_right": 2,
+  "model_kinds": {
+   "table": 7,
+   "figure": 2,
+   "text": 12
+  },
+  "by_kind": {
+   "table": "5/9",
+   "figure": "1/11"
+  },
+  "rows": [
+   {
+    "qid": "1803.03467v4#0",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1803.03467v4#1",
+    "ref_kind": "figure",
+    "model": [
+     "figure"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1803.03467v4#2",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1803.03467v4#3",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#1",
+    "ref_kind": "table",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#2",
+    "ref_kind": "table",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#3",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#1",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#2",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#3",
+    "ref_kind": "table",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1708.00160v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1708.00160v2#1",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1708.00160v2#2",
+    "ref_kind": "table",
+    "model": [
+     "table",
+     "table"
+    ],
+    "rules": [
+     "table"
+    ],
+    "model_right": true,
+    "rules_right": true
+   },
+   {
+    "qid": "1708.00160v2#3",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "table"
+    ],
+    "model_right": true,
+    "rules_right": true
+   },
+   {
+    "qid": "1706.04269v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1706.04269v2#1",
+    "ref_kind": "figure",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1706.04269v2#2",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1706.04269v2#3",
+    "ref_kind": "table",
+    "model": [
+     "figure"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   }
+  ]
+ },
+ "v2": {
+  "questions": 20,
+  "model_right": 8,
+  "rules_right": 2,
+  "model_kinds": {
+   "table": 7,
+   "figure": 4,
+   "text": 11
+  },
+  "by_kind": {
+   "table": "6/9",
+   "figure": "2/11"
+  },
+  "rows": [
+   {
+    "qid": "1803.03467v4#0",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1803.03467v4#1",
+    "ref_kind": "figure",
+    "model": [
+     "figure",
+     "figure"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1803.03467v4#2",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1803.03467v4#3",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#1",
+    "ref_kind": "table",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#2",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1812.06589v2#3",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#1",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#2",
+    "ref_kind": "table",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1804.07931v2#3",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1708.00160v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1708.00160v2#1",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1708.00160v2#2",
+    "ref_kind": "table",
+    "model": [
+     "table",
+     "text"
+    ],
+    "rules": [
+     "table"
+    ],
+    "model_right": true,
+    "rules_right": true
+   },
+   {
+    "qid": "1708.00160v2#3",
+    "ref_kind": "table",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "table"
+    ],
+    "model_right": true,
+    "rules_right": true
+   },
+   {
+    "qid": "1706.04269v2#0",
+    "ref_kind": "figure",
+    "model": [
+     "figure"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": true,
+    "rules_right": false
+   },
+   {
+    "qid": "1706.04269v2#1",
+    "ref_kind": "figure",
+    "model": [
+     "table"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1706.04269v2#2",
+    "ref_kind": "figure",
+    "model": [
+     "text"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   },
+   {
+    "qid": "1706.04269v2#3",
+    "ref_kind": "table",
+    "model": [
+     "figure"
+    ],
+    "rules": [
+     "text"
+    ],
+    "model_right": false,
+    "rules_right": false
+   }
+  ]
+ }
+}

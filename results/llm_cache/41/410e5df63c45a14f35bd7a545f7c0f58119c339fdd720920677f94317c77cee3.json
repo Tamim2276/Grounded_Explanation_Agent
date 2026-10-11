@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v3",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 52,
+  "prompt_tokens": 130,
+  "total_tokens": 182,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed the best on the GRID dataset?\nSub-goals:\n1. [table] Which method performed the best on the GRID dataset?\nAlready tried: sub-goal 1 with text\nStill missing: table evidence for sub-goal 1 (rule floor)"
+  }
+ ],
+ "answer": {
+  "reason": "To find the best-performing method on the GRID dataset, I need to search the table section of the paper as it likely contains comparative data.",
+  "tool": "table",
+  "query": "best method GRID dataset"
+ }
+}

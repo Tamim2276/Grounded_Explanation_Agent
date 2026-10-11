@@ -20,6 +20,19 @@ def route_tool(state: AgentState) -> str:
     return state["action"]["tool"]
 
 
+def search_query(state: AgentState) -> str:
+    # What a tool searches with: the planner's query, plus the words of the sub-goal it
+    # works on when the query left them out. A model planner writes short keyword queries
+    # ("AUC MovieLens-1M dataset"), but SPIQA questions reuse the paper's own terms ("which
+    # model performs the best"), which the searches match best (Day 3). The rule planner's
+    # query already contains the sub-goal, so it is unchanged.
+    action, goals = state["action"], state.get("sub_goals") or []
+    if "sub_goal" not in action or action["sub_goal"] >= len(goals):
+        return action["query"]
+    goal = goals[action["sub_goal"]]["text"]
+    return action["query"] if goal.lower() in action["query"].lower() else f"{goal} {action['query']}"
+
+
 def describe_found(found: list) -> str:
     if not found:
         return "found nothing"
@@ -109,7 +122,7 @@ def n6a_text_retriever(state: AgentState) -> dict:
     action = state.get("action")
     assert action and action["tool"] == "text", "N6a: the planner did not ask for text"
     corpus = get_corpus(state["paper_id"])
-    found = text_retriever(corpus, action["query"], section=state["query_filters"]["refs"].get("section"))
+    found = text_retriever(corpus, search_query(state), section=state["query_filters"]["refs"].get("section"))
     return {"new_evidence": found,
             "events": step("N6a", describe_found(found), short="TextRetriever")}
 
@@ -144,12 +157,19 @@ def region_words(corpus: dict, record: dict) -> str:
     return f"{record['caption']} {cache.get(record['id'], '')}"
 
 
-def page_signals(corpus: dict, query: str):
-    # ColQwen2 for this query: ({page: MaxSim score}, {page: heat map}), or None when it
-    # cannot run now.
+def page_signals(corpus: dict, query: str, question: Optional[str] = None):
+    # ColQwen2 for this question: ({page: MaxSim score}, {page: heat map}), or None when it
+    # cannot run now. The QUESTION's vectors are preferred: they are known before the
+    # language model starts, so they can be cached in a GPU window (scripts/eval_regions.py
+    # does it for dev) -- while llama-server holds the B580, ColQwen2 does not fit on this
+    # PC. The tool's own query is the fallback.
     from gea.indexes import maxsim, page_query_vectors, similarity_map
     pages = corpus.get("page_index")
-    q = page_query_vectors(query) if pages else None
+    q = None
+    for text in [t for t in (question, query) if t] if pages else []:
+        q = page_query_vectors(text)
+        if q is not None:
+            break
     if q is None:
         return None
     scores = maxsim(q, [p["vectors"] for p in pages])
@@ -186,14 +206,14 @@ def masked_heat(heat: np.ndarray, bbox: tuple, size: tuple) -> np.ndarray:
     return np.where(inside_mask(heat, bbox, size), heat, heat.min())
 
 
-def rank_regions(corpus: dict, query: str, kind: str, how: str = None) -> tuple:
+def rank_regions(corpus: dict, query: str, kind: str, how: str = None, question: Optional[str] = None) -> tuple:
     # All tables (kind="table") or figures of the paper, best first, as (record, score),
     # plus the heat maps used ({page: map}, or None) and the method actually applied.
     how = how or cfg.REGION_SEARCH
     records = corpus[kind + "s"]
     if not records:
         return [], None, how
-    signals = page_signals(corpus, query) if how != "text" else None      # None: no ColQwen2
+    signals = page_signals(corpus, query, question) if how != "text" else None   # None: no ColQwen2
     if signals is None and how != "text":
         how = "text"                                          # no ColQwen2 now: the words decide
     page_score, heat = signals or ({}, None)
@@ -238,23 +258,25 @@ def region_evidence(corpus: dict, record: dict, kind: str, s: float, query: str,
                     "TableRetriever", round(s, 4), cells=cells, **common)
 
 
-def real_region_retriever(corpus: dict, query: str, kind: str, ref: Optional[str] = None, k: int = None) -> list:
+def real_region_retriever(corpus: dict, query: str, kind: str, ref: Optional[str] = None, k: int = None,
+                          question: Optional[str] = None) -> list:
     # Real N6b / N6c: the table or figure the question names ("Table 2"), else the best
     # ranked ones.
     k = k or cfg.TOP_K
     label = f"{kind.capitalize()} {ref}" if ref else None
     named = [r for r in corpus[kind + "s"] if label and r["label"] == label]
-    ranked, heat, _ = rank_regions(corpus, query, kind)
+    ranked, heat, _ = rank_regions(corpus, query, kind, question=question)
     chosen = [(r, 1.0) for r in named] or ranked[:k]
     return [region_evidence(corpus, r, kind, s, query, heat) for r, s in chosen]
 
 
 # --- N6b: tables -------------------------------------------------------------------
 
-def table_retriever(corpus: dict, query: str, k: int = None, ref: Optional[str] = None) -> list:
+def table_retriever(corpus: dict, query: str, k: int = None, ref: Optional[str] = None,
+                    question: Optional[str] = None) -> list:
     # Rank tables by caption + cell text; return each with every cell's box.
     if cfg.BACKEND == "real":
-        return real_region_retriever(corpus, query, "table", ref, k)
+        return real_region_retriever(corpus, query, "table", ref, k, question)
     k = k or cfg.TOP_K
     ranked = sorted(corpus["tables"], key=lambda t: -score(query, table_text(t), corpus))
     found = []
@@ -278,8 +300,8 @@ def n6b_table_retriever(state: AgentState) -> dict:
     # PDF at its position. Keeping the cell boxes is what makes N10b possible.
     action = state.get("action")
     assert action and action["tool"] == "table", "N6b: the planner did not ask for a table"
-    found = table_retriever(get_corpus(state["paper_id"]), action["query"],
-                            ref=state["query_filters"]["refs"].get("table"))
+    found = table_retriever(get_corpus(state["paper_id"]), search_query(state),
+                            ref=state["query_filters"]["refs"].get("table"), question=state["question"])
     return {"new_evidence": found,
             "events": step("N6b", describe_found(found), short="TableRetriever")}
 
@@ -300,10 +322,11 @@ def fake_similarity_map(figure: dict, strength: float = 0.8) -> np.ndarray:
     return np.where(inside, strength, 0.1 * strength) + noise
 
 
-def figure_retriever(corpus: dict, query: str, ref: Optional[str] = None, k: int = None) -> list:
+def figure_retriever(corpus: dict, query: str, ref: Optional[str] = None, k: int = None,
+                     question: Optional[str] = None) -> list:
     # Find figures: by number if the question names one, otherwise by caption.
     if cfg.BACKEND == "real":
-        return real_region_retriever(corpus, query, "figure", ref, k)
+        return real_region_retriever(corpus, query, "figure", ref, k, question)
     k = k or cfg.TOP_K
     if ref:
         ranked = [(1.0, f) for f in corpus["figures"] if f["label"] == f"Figure {ref}"]
@@ -323,8 +346,8 @@ def n6c_figure_retriever(state: AgentState) -> dict:
     # N10b turns that map into a bounding box.
     action = state.get("action")
     assert action and action["tool"] == "figure", "N6c: the planner did not ask for a figure"
-    found = figure_retriever(get_corpus(state["paper_id"]), action["query"],
-                             ref=state["query_filters"]["refs"].get("figure"))
+    found = figure_retriever(get_corpus(state["paper_id"]), search_query(state),
+                             ref=state["query_filters"]["refs"].get("figure"), question=state["question"])
     return {"new_evidence": found,
             "events": step("N6c", describe_found(found), short="FigureRetriever")}
 

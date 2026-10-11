@@ -33,7 +33,21 @@ if [ -z "$FORCE" ]; then
         echo "Stop them or wait until they finish, then run this again."
         exit 1
     fi
+    # On Windows the server also RESERVES about 7.5 GB of memory (RAM + page file), roughly
+    # its GPU share, although only ~4.3 GB is really in RAM. When the reservations of all
+    # programs reach Windows' limit, ANY program asking for more crashes -- such as another
+    # experiment. So ask Windows how much can still be reserved.
+    free_mb=$(powershell.exe -NoProfile -Command '[int]((Get-CimInstance Win32_OperatingSystem).FreeVirtualMemory / 1KB)' 2>/dev/null | tr -d '\r')
+    # 7500 MB for the server + 2500 MB of headroom: other jobs' use swings by a few GB
+    if [ -n "$free_mb" ] && [ "$free_mb" -lt 10000 ]; then
+        echo "Only $free_mb MB of memory can still be reserved; the model server reserves about 7500 MB (+2500 MB headroom)."
+        echo "Biggest reservations now:"
+        powershell.exe -NoProfile -Command 'Get-Process | Sort-Object PagedMemorySize64 -Descending | Select-Object -First 5 | ForEach-Object { "  {0,6:N0} MB  {1} (pid {2})" -f ($_.PagedMemorySize64 / 1MB), $_.ProcessName, $_.Id }' 2>/dev/null | tr -d '\r'
+        echo "Close programs you do not need or wait for a job to finish (or give Windows a page file on D:)."
+        exit 1
+    fi
 fi
 
 # -ngl 99: every layer on the GPU   -c: context tokens   -np 1: one request at a time
-exec "$server" -m "$model" --mmproj "$mmproj" -ngl 99 -c "$context" -np 1 --port "$port"
+# --image-min-tokens 1024: llama.cpp's advice for Qwen-VL; fewer image tokens hurt accuracy
+exec "$server" -m "$model" --mmproj "$mmproj" -ngl 99 -c "$context" -np 1 --port "$port" --image-min-tokens 1024

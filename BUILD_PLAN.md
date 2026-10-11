@@ -1393,6 +1393,26 @@ traces into `notes/traces_day5.md` so you can also read them 🔋 during an outa
 **prompt changelog** in `notes/prompts.md`: what you changed and why. Raise `PROMPT_VERSION`
 after each change.
 
+> **Built on Day 5.**
+>
+> - **Memory.** `llama-server` reserves **~7.5 GB** of Windows memory (RAM + page file)
+>   besides its ~6.8 GB of GPU. So `start_llm.sh` refuses below 10 GB free, and ColQwen2
+>   embeds the *questions* before the server starts. The page score then comes from those
+>   cached vectors. A page file on D: would lift the limit.
+> - **Switches.** `cfg.LLM_MODE` switches N1, N2 and G1; `cfg.PLANNER_MODE` switches N5. Every
+>   reply is cached with its prompt (`results/llm_cache/`). The tests use a fake server.
+> - **Prompts** (history in `notes/prompts.md`):
+>   - v2 gave N1 examples. It now picks the reference's kind of evidence on **8/20** dev
+>     questions (v1 6/20, regex 2/20).
+>   - v3 makes G1 *name the evidence item and the fact*, and code checks both.
+> - **Traces.** `python scripts/run_traces.py`: 10 dev questions, 42 calls, all valid JSON.
+>   The rerun takes 6.9 s from the cache. The power-cut test passed. The traces are in
+>   `notes/traces_day5.md`, and notebook Section 20 replays one without the server.
+> - **Two limits found:**
+>   - the judge can accept a true but irrelevant fact;
+>   - the 7B model misread both bar values it was asked about in a 4-panel chart (12 for ~55,
+>     25 for ~4). Day 6 should prefer text and table values.
+
 ### Check it works
 
 - [ ] 10 dev questions: every model reply is valid JSON (the schema guarantees it; check anyway)
