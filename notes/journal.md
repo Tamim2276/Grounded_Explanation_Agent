@@ -116,3 +116,9 @@
   - Chart reading probe: 2/2 wrong (12 vs ~55; 25 vs ~4) on the 4-panel Figure 4 crop.
   - Known glitch: one chunk's section is "L" (1812.06589v2) -- a heading mis-read on Day 2; cosmetic.
   - Tests: 95 (10 new, model-free with a fake server). Notebook Section 20 replays a model run from the cache.
+  - N1's kind of evidence by vote (src/gea/kinds.py): the 9 most similar of 469 labelled SPIQA questions from the
+    82 test-A papers outside dev/test (SPECTER2 question vectors, cached in data/cache/kind_examples.npz, rebuilt
+    if the splits change). Dev: 17/20 (model v2 8/20, regex 2/20). Real backend only (stub keeps its rules).
+    10 traces: right kind 4/10 -> 9/10, right table/figure in the buffer 3/10 -> 7/10, 0 abstained. Tests: 98.
+  - Decision (user, 2026-10-11): no fine-tuning of the 7B; keep the local 7B as the evaluated system; add a
+    Gemini API run as a "stronger model" comparison on Day 7 (switch in the evaluation runner).

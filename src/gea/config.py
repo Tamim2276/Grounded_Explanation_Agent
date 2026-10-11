@@ -33,6 +33,10 @@ REGION_SEARCH = "both"        # how a table/figure is chosen: "text" (its words)
                               # (ColQwen2's page score) | "both" (dev: results/day4_regions.json)
 ZOOM_DPI      = 300           # N7 re-renders a figure at this resolution ...
 ZOOM_MAX_PX   = 1024          # ... but no larger than this on its long side (image tokens)
+KIND_ROUTER = "vote"          # N1 on the real backend: each sub-goal's kind of evidence from the
+                              # vote of similar labelled SPIQA questions ("vote", gea/kinds.py), or
+                              # as the splitter (model or rules) said ("split")
+KIND_VOTE_K = 9               # examples that vote; fixed on dev BEFORE the test split is run
 SUB_GOAL_MODALITY = None      # testing knob for N1's stand-in: force every sub-goal's
                               # modality ("table" / "figure") so a tool can be exercised
 

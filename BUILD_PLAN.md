@@ -1667,6 +1667,27 @@ for q in questions:
 - Measure seconds per question on dev, then multiply by 150. That is how many power-window
   hours the run needs.
 
+> **Added on Day 5.**
+>
+> - **First, while the B580 is free (before llama-server starts):** cache ColQwen2's vectors
+>   for the 150 test questions.
+>   - The page score now comes from the question's cached vectors (`retrieval.page_signals`),
+>     and ColQwen2 cannot load beside llama-server on this PC.
+>   - A run like `scripts/eval_regions.py`, but over the test questions, does it without
+>     printing them.
+> - **A "stronger model" comparison with Gemini (decided 2026-10-11).**
+>   - The local 7B stays the evaluated system. Gemini runs the same test questions as an
+>     extra system, to show how many remaining errors come from the small model (e.g. chart
+>     reading).
+>   - Add `cfg.LLM_PROVIDER = "local" | "gemini"`. `call_llm` then sends the same request to
+>     Gemini's OpenAI-compatible endpoint.
+>   - The API key is read from an environment variable (`setx GEMINI_API_KEY ...`), never
+>     from a file in git. `LLM_MODEL` names the Gemini model, so its cache entries are kept
+>     apart from the 7B's.
+>   - It needs internet. The runner's wait-and-retry loop covers outages, and the cache
+>     means no question is paid for twice. Check current prices and rate limits in Google AI
+>     Studio first.
+
 **7.4 🔌 The resume script:** `scripts/resume_eval.sh` (30 min). One command for after every
 power cut: start llama-server in the background, wait until it answers, then run the three
 systems in order. Each one skips what is already done.

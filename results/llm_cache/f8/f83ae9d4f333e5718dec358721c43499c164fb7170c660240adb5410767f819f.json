@@ -1,0 +1,33 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v3",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 43,
+  "prompt_tokens": 1271,
+  "total_tokens": 1314,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of adding DA to the baseline method?\nSub-questions:\n1. [figure] What is the effect of adding DA to the baseline method?\nEvidence:\nE1 [figure, Figure 2, page 3] (image attached): Figure 2: Pipeline of our proposed method.\nE2 [figure, Figure 2, page 3]: Zoomed view (300 dpi) of: Figure 2: Pipeline of our proposed method. [image]"
+  }
+ ],
+ "answer": {
+  "sufficient": false,
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The effect of adding DA to the baseline method."
+ }
+}

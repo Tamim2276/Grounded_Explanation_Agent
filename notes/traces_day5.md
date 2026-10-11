@@ -5,7 +5,7 @@
 Reference: Table 1 (table). Gold answer: Bing-News.
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) table: Which dataset has the most 4-hop triples?
+N1     1 sub-goal(s) (model, cached); kinds by vote 6/9 table: (1) table: Which dataset has the most 4-hop triples?
 N2     query -> (768,), refs={}, must mention=[] (model, cached)
 N5     round 1: table <- "dataset with most 4-hop triples"
 N6b    t1 (page 6, score 0.0328): "Table 1: Basic statistics of the three datasets...."
@@ -27,7 +27,7 @@ N12    status=ok: The most relevant table is Table 1: Basic statistics of the th
 Reference: Figure 4 (figure). Gold answer: The number of common k-hop neighbors generally decreases as the hop distance increases for both items with and without common raters. However, the number of common k-hop neighbors is consistently higher for items with common raters than for items without common raters.
 
 ```text
-N1     2 sub-goal(s) (model, cached): (1) figure: How does the number of common k-hop neighbors change as the hop distance increases for items with common raters?; (2) figure: How does the number of common k-hop neighbors change as the hop distance increases for items without common raters?
+N1     2 sub-goal(s) (model, cached); kinds by vote 6/9 figure, 6/9 figure: (1) figure: How does the number of common k-hop neighbors change as the hop distance increases for items with common raters?; (2) figure: How does the number of common k-hop neighbors change as the hop distance increases for items without common raters?
 N2     query -> (768,), refs={}, must mention=[] (model, cached)
 N5     round 1: figure <- "How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?"
 N6c    f4 (page 7, score 0.0328): "Figure 4: The average number of k -hop neighbors..."
@@ -50,7 +50,7 @@ N12    status=ok: whether they have common raters in (a) MovieLens-1M, (b) Book-
 Reference: Table 3 (table). Gold answer: RippleNet*
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) table: Which model performs the best in terms of AUC on the MovieLens-1M dataset?
+N1     1 sub-goal(s) (model, cached); kinds by vote 6/9 table: (1) table: Which model performs the best in terms of AUC on the MovieLens-1M dataset?
 N2     query -> (768,), refs={}, must mention=['model', 'dataset'] (model, cached)
 N5     round 1: table <- "AUC MovieLens-1M dataset"
 N6b    t4 (page 9, score 0.0325): "Table 4: The results of AUC w.r.t. different siz..."
@@ -72,73 +72,86 @@ N12    status=ok: The most relevant table is Table 4: The results of AUC w.r.t. 
 Reference: Figure 2 (figure). Gold answer: The ripple sets are used to propagate a user's preferences from his or her click history to his or her relevant entities.
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) text: What is the role of the ripple sets in the RippleNet framework?
+N1     1 sub-goal(s) (model, cached); kinds by vote 9/9 figure: (1) figure: What is the role of the ripple sets in the RippleNet framework?
 N2     query -> (768,), refs={}, must mention=[] (model, cached)
 N5     round 1: text <- "role of ripple sets in RippleNet framework"
 N6a    c17 (page 3, score 0.0307): "The framework of RippleNet is illustrated in Fig..."; c38 (page 5, score 0.0302): "directs −−−−−−−→ Back to the Future ", if the it..."; c56 (page 8, score 0.0298): "Size of ripple set in each hop . We vary the siz..."
 N8     added E1=text/c17, E2=text/c38, E3=text/c56; buffer holds 3 item(s)
-G1     SUFFICIENT (model, cached)
-N9     draft 1: 3 claim(s)
-G2     all 3 claim(s) verified against the buffer
-N10a   3 claim(s) linked to 3 source(s)
-N10b   3 box(es) over 3 region(s)
-N10c   TextRetriever -> G1 pass -> draft 1 -> G2 pass
-N11    report written (16 lines)
-N12    status=ok: Section 3.1 states: "For the input user u , his historical set o...
+G1     INSUFFICIENT: missing figure evidence for sub-goal 1 (rule floor) (model, 3.9 s)
+REPLN  round 2/3: back to the planner
+N5     round 2: figure <- "RippleNet framework ripple sets role"  [G1: missing figure evidence for sub-goal 1 (rule floor)]
+N6c    f2 (page 4, score 0.0328): "Figure 2: The overall framework of the RippleNet..."
+N7     re-rendered 1 region(s) at 300 dpi -> (392, 1022, 3)
+N8     added E4=figure/f2, E5=figure/f2; buffer holds 5 item(s); links E1-E4, E1-E5, E2-E4, E2-E5, E4-E5
+G1     SUFFICIENT (model, 5.8 s)
+N9     draft 1: 6 claim(s)
+G2     all 6 claim(s) verified against the buffer
+N10a   6 claim(s) linked to 8 source(s)
+N10b   6 box(es) over 4 region(s)
+N10c   TextRetriever -> G1 reject -> FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 pass
+N11    report written (22 lines)
+N12    status=ok: It takes one user and one item as input, and outputs the predict...
 ```
 
-**Answer:** Section 3.1 states: "For the input user u , his historical set of interests V u is treated as seeds in the KG, then extended along links to form multiple ripple sets S k u ( k = 1 , 2 , ..., H )."
+**Answer:** It takes one user and one item as input, and outputs the predicted probability that the user will click the item.
 
 ## 1812.06589v2#0: How do the different methods compare in terms of their ability to generate realistic faces?
 
 Reference: Figure 6 (figure). Gold answer: The baseline method generates faces that are blurry and unrealistic, while the other methods generate faces that are more realistic.
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) text: How do the different methods compare in terms of their ability to generate realistic faces?
+N1     1 sub-goal(s) (model, cached); kinds by vote 9/9 figure: (1) figure: How do the different methods compare in terms of their ability to generate realistic faces?
 N2     query -> (768,), refs={}, must mention=['methods'] (model, cached)
-N5     round 1: text <- "comparison of methods in terms of generating realistic faces"
-N6a    c32 (page 5, score 0.0328): "4.2 Quantitative Results We compare our model wi..."; c10 (page 2, score 0.032): "2 Related Works In this section, we brieﬂy revie..."; c4 (page 1, score 0.031): "1 Introduction Talking face generation, which ai..."
-N8     added E1=text/c32, E2=text/c10, E3=text/c4; buffer holds 3 item(s)
-G1     SUFFICIENT (model, cached)
-N9     draft 1: 3 claim(s)
-G2     all 3 claim(s) verified against the buffer
-N10a   3 claim(s) linked to 3 source(s)
-N10b   3 box(es) over 3 region(s)
-N10c   TextRetriever -> G1 pass -> draft 1 -> G2 pass
-N11    report written (16 lines)
-N12    status=ok: Section L states: "4.2 Quantitative Results We compare our model...
+N5     round 1: figure <- "Comparison of methods in generating realistic faces"
+N6c    f5 (page 5, score 0.0328): "Figure 5: Generation examples of our method comp..."
+N7     re-rendered 1 region(s) at 300 dpi -> (765, 979, 3)
+N8     added E1=figure/f5, E2=figure/f5; buffer holds 2 item(s); links E1-E2
+G1     SUFFICIENT (model, 5.2 s)
+N9     draft 1: 4 claim(s)
+G2     all 4 claim(s) verified against the buffer
+N10a   4 claim(s) linked to 7 source(s)
+N10b   4 box(es) over 1 region(s)
+N10c   FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 pass
+N11    report written (18 lines)
+N12    status=ok: and Chen et al....
 ```
 
-**Answer:** Section L states: "4.2 Quantitative Results We compare our model with four recent state-of-the-art methods, including Chung et al."
+**Answer:** and Chen et al.
 
 ## 1812.06589v2#1: What is the effect of adding DA to the baseline method?
 
 Reference: Table 3 (table). Gold answer: Adding DA to the baseline method improves the PSNR and SSIM values, while slightly decreasing the LMD value.
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) text: What is the effect of adding DA to the baseline method?
+N1     1 sub-goal(s) (model, cached); kinds by vote 5/9 figure: (1) figure: What is the effect of adding DA to the baseline method?
 N2     query -> (768,), refs={}, must mention=[] (model, cached)
-N5     round 1: text <- "effect of adding DA to the baseline method"
+N5     round 1: figure <- "effect of adding DA to baseline method"
+N6c    f2 (page 3, score 0.0318): "Figure 2: Pipeline of our proposed method...."
+N7     re-rendered 1 region(s) at 300 dpi -> (473, 1022, 3)
+N8     added E1=figure/f2, E2=figure/f2; buffer holds 2 item(s); links E1-E2
+G1     INSUFFICIENT: missing The effect of adding DA to the baseline method. (model, 4.1 s)
+REPLN  round 2/3: back to the planner
+N5     round 2: text <- "effect of adding DA to the baseline method"  [G1: missing The effect of adding DA to the baseline method.]
 N6a    c35 (page 6, score 0.032): "In order to quantify the effect of each componen..."; c33 (page 5, score 0.0318): "4.3 Qualitative Results To present the superiori..."; c36 (page 6, score 0.0315): "We conduct a user study on the LRW dataset with ..."
-N8     added E1=text/c35, E2=text/c33, E3=text/c36; buffer holds 3 item(s); links E1-E3
-G1     SUFFICIENT (model, cached)
-N9     draft 1: 3 claim(s)
-G2     all 3 claim(s) verified against the buffer
-N10a   3 claim(s) linked to 3 source(s)
-N10b   3 box(es) over 3 region(s)
-N10c   TextRetriever -> G1 pass -> draft 1 -> G2 pass
-N11    report written (16 lines)
-N12    status=ok: Section 4.4 states: "In order to quantify the effect of each com...
+N8     added E3=text/c35, E4=text/c33, E5=text/c36; buffer holds 5 item(s); links E1-E2, E3-E5
+G1     SUFFICIENT (model, 4.9 s)
+N9     draft 1: 4 claim(s)
+G2     all 4 claim(s) verified against the buffer
+N10a   4 claim(s) linked to 4 source(s)
+N10b   4 box(es) over 4 region(s)
+N10c   FigureRetriever -> RegionZoom -> G1 reject -> TextRetriever -> G1 pass -> draft 1 -> G2 pass
+N11    report written (18 lines)
+N12    status=ok: Figure 2 plots the pipeline of our proposed method....
 ```
 
-**Answer:** Section 4.4 states: "In order to quantify the effect of each component of our method, we conduct ablation study experiments to verify the contributions of the two key components in our model: Asymmetric Mutual Information Estimator (AMIE) and Dynamic Attention (DA), and the two important strategies in AMIE: the asymmetric training strategy ( Asy."
+**Answer:** Figure 2 plots the pipeline of our proposed method.
 
 ## 1812.06589v2#2: Which method performed the best on the GRID dataset?
 
 Reference: Table 2 (table). Gold answer: AMIE (Ours)
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) table: Which method performed the best on the GRID dataset?
+N1     1 sub-goal(s) (model, cached); kinds by vote 5/9 table: (1) table: Which method performed the best on the GRID dataset?
 N2     query -> (768,), refs={}, must mention=['GRID', 'method'] (model, cached)
 N5     round 1: text <- "best method GRID dataset"
 N6a    c32 (page 5, score 0.032): "4.2 Quantitative Results We compare our model wi..."; c36 (page 6, score 0.0318): "We conduct a user study on the LRW dataset with ..."; c33 (page 5, score 0.0311): "4.3 Qualitative Results To present the superiori..."
@@ -165,18 +178,24 @@ N12    status=ok: Section L states: "To further verify the robustness for arbitr
 Reference: Figure 2 (figure). Gold answer: The frame discriminator is used to detect whether the generated frame and audio are matched or not.
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) text: What is the role of the frame discriminator in the proposed method?
+N1     1 sub-goal(s) (model, cached); kinds by vote 9/9 figure: (1) figure: What is the role of the frame discriminator in the proposed method?
 N2     query -> (768,), refs={}, must mention=[] (model, cached)
 N5     round 1: text <- "frame discriminator role in the proposed method"
 N6a    c13 (page 3, score 0.0315): "Our model consists of three parts: a Talking Fac..."; c35 (page 6, score 0.0313): "In order to quantify the effect of each componen..."; c15 (page 3, score 0.0308): "shall elaborate on the details of the proposed A..."
 N8     added E1=text/c13, E2=text/c35, E3=text/c15; buffer holds 3 item(s); links E1-E3
-G1     SUFFICIENT (model, cached)
-N9     draft 1: 3 claim(s)
-G2     all 3 claim(s) verified against the buffer
-N10a   3 claim(s) linked to 3 source(s)
-N10b   3 box(es) over 3 region(s)
-N10c   TextRetriever -> G1 pass -> draft 1 -> G2 pass
-N11    report written (16 lines)
+G1     INSUFFICIENT: missing figure evidence for sub-goal 1 (rule floor) (model, 4.4 s)
+REPLN  round 2/3: back to the planner
+N5     round 2: figure <- "frame discriminator role in the proposed method"  [G1: missing figure evidence for sub-goal 1 (rule floor)]
+N6c    f2 (page 3, score 0.0328): "Figure 2: Pipeline of our proposed method...."
+N7     re-rendered 1 region(s) at 300 dpi -> (473, 1022, 3)
+N8     added E4=figure/f2, E5=figure/f2; buffer holds 5 item(s); links E1-E3, E1-E4, E1-E5, E3-E4, E3-E5, E4-E5
+G1     SUFFICIENT (model, 5.5 s)
+N9     draft 1: 4 claim(s)
+G2     all 4 claim(s) verified against the buffer
+N10a   4 claim(s) linked to 4 source(s)
+N10b   4 box(es) over 4 region(s)
+N10c   TextRetriever -> G1 reject -> FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 pass
+N11    report written (18 lines)
 N12    status=ok: Section 3.1 states: "Our model consists of three parts: a Talkin...
 ```
 
@@ -187,41 +206,48 @@ N12    status=ok: Section 3.1 states: "Our model consists of three parts: a Talk
 Reference: Figure 2 (figure). Gold answer: The two auxiliary tasks are CTR and CTCVR.
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) text: What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?
+N1     1 sub-goal(s) (model, cached); kinds by vote 8/9 figure: (1) figure: What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?
 N2     query -> (768,), refs={}, must mention=['auxiliary tasks', 'ESMM architecture', 'CVR modeling'] (model, cached)
-N5     round 1: text <- "two auxiliary tasks ESMM architecture CVR modeling"
-N6a    c9 (page 2, score 0.0315): "been well addressed in the scenario of CVR model..."; c28 (page 4, score 0.0313): "In this paper, we propose a novel approach ESMM ..."; c24 (page 4, score 0.0311): "compare different CVR modeling methods over enti..."
-N8     added E1=text/c9, E2=text/c28, E3=text/c24; buffer holds 3 item(s); links E2-E3
-G1     SUFFICIENT (model, cached)
-N9     draft 1: 3 claim(s)
-G2     all 3 claim(s) verified against the buffer
-N10a   3 claim(s) linked to 3 source(s)
-N10b   3 box(es) over 3 region(s)
-N10c   TextRetriever -> G1 pass -> draft 1 -> G2 pass
-N11    report written (16 lines)
-N12    status=ok: Section 1 states: "In ESMM, two auxiliary tasks of predicting th...
+N5     round 1: text <- "auxiliary tasks ESMM architecture CVR modeling"
+N6a    c28 (page 4, score 0.0315): "In this paper, we propose a novel approach ESMM ..."; c24 (page 4, score 0.0313): "compare different CVR modeling methods over enti..."; c9 (page 2, score 0.0313): "been well addressed in the scenario of CVR model..."
+N8     added E1=text/c28, E2=text/c24, E3=text/c9; buffer holds 3 item(s); links E1-E2
+G1     INSUFFICIENT: missing figure evidence for sub-goal 1 (rule floor) (model, 3.9 s)
+REPLN  round 2/3: back to the planner
+N5     round 2: figure <- "ESMM architecture for CVR modeling auxiliary tasks"  [G1: missing figure evidence for sub-goal 1 (rule floor)]
+N6c    f2 (page 2, score 0.0328): "Figure 2: Architecture overview of ESMM for CVR ..."
+N7     re-rendered 1 region(s) at 300 dpi -> (703, 911, 3)
+N8     added E4=figure/f2, E5=figure/f2; buffer holds 5 item(s); links E1-E2, E3-E4, E3-E5, E4-E5
+G1     SUFFICIENT (model, 4.9 s)
+N9     draft 1: 8 claim(s)
+G2     all 8 claim(s) verified against the buffer
+N10a   8 claim(s) linked to 12 source(s)
+N10b   8 box(es) over 4 region(s)
+N10c   TextRetriever -> G1 reject -> FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 pass
+N11    report written (26 lines)
+N12    status=ok: In ESMM, two auxiliary tasks of CTR and CTCVR are introduced whi...
 ```
 
-**Answer:** Section 1 states: "In ESMM, two auxiliary tasks of predicting the post-view click-through rate (CTR) and post-view clickthrough&conversion rate (CTCVR) are introduced."
+**Answer:** In ESMM, two auxiliary tasks of CTR and CTCVR are introduced which: i) help to model CVR over entire input space, ii) provide feature representation transfer learning.
 
 ## 1804.07931v2#1: What is the relationship between clicks and impressions?
 
 Reference: Figure 1 (figure). Gold answer: Clicks are a subset of impressions.
 
 ```text
-N1     1 sub-goal(s) (model, cached): (1) text: What is the relationship between clicks and impressions?
+N1     1 sub-goal(s) (model, cached); kinds by vote 9/9 figure: (1) figure: What is the relationship between clicks and impressions?
 N2     query -> (768,), refs={}, must mention=[] (model, cached)
-N5     round 1: text <- "relationship between clicks and impressions"
-N6a    c13 (page 2, score 0.0323): "M is the number of clicks over all impressions. ..."; c12 (page 2, score 0.0323): "Recently deep learning based methods have been p..."; c7 (page 1, score 0.0318): "buy some of them. In other words, user actions f..."
-N8     added E1=text/c13, E2=text/c12, E3=text/c7; buffer holds 3 item(s); links E1-E2
-G1     SUFFICIENT (model, cached)
+N5     round 1: figure <- "relationship between clicks and impressions"
+N6c    f1 (page 1, score 0.0325): "Figure 1: Illustration of sample selection bias ..."
+N7     re-rendered 1 region(s) at 300 dpi -> (396, 912, 3)
+N8     added E1=figure/f1, E2=figure/f1; buffer holds 2 item(s); links E1-E2
+G1     SUFFICIENT (model, 4.7 s)
 N9     draft 1: 3 claim(s)
 G2     all 3 claim(s) verified against the buffer
-N10a   3 claim(s) linked to 3 source(s)
-N10b   3 box(es) over 3 region(s)
-N10c   TextRetriever -> G1 pass -> draft 1 -> G2 pass
+N10a   3 claim(s) linked to 5 source(s)
+N10b   3 box(es) over 1 region(s)
+N10c   FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 pass
 N11    report written (16 lines)
-N12    status=ok: Section 2.2 states: "M is the number of clicks over all impressi...
+N12    status=ok: Training space is composed of samples with clicked impressions....
 ```
 
-**Answer:** Section 2.2 states: "M is the number of clicks over all impressions."
+**Answer:** Training space is composed of samples with clicked impressions.

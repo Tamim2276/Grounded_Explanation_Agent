@@ -288,7 +288,26 @@ A model-free check, predicting each patch's ink from its vector, was too weak to
 |---|---|---|---|
 | regex stand-in | 2/20 | | |
 | model, prompt v1 | 6/20 | 5/9 | 1/11 |
-| model, prompt v2 (with examples) | **8/20** | 6/9 | 2/11 |
+| model, prompt v2 (with examples) | 8/20 | 6/9 | 2/11 |
+| always "figure" (the majority kind) | 11/20 | 0/9 | 11/11 |
+| **vote of the k nearest labelled questions** (SPECTER2 question vectors; 469 questions from the 82 SPIQA test-A papers *not* used for dev/test: 180 table, 289 figure); k = 5 / 9 / 15 | 16 / **17** / 17 of 20 | 5 / 6 / 6 of 9 | 11/11 |
+
+**Adopted (2026-10-11): N1's kind of evidence comes from this vote**, with k = 9 fixed before
+the test split is run (`src/gea/kinds.py`, `cfg.KIND_ROUTER = "vote"`, real papers only). The
+model or the rules still split the question into sub-questions. The vote learns from labelled
+questions on held-out papers, so there is no dev/test leakage:
+`tests/test_kinds.py` checks that none of the 469 examples is a dev or test question.
+`python scripts/eval_n1.py` reproduces the 17/20 (`results/day5_n1.json`, key `vote`).
+
+**Caveats:**
+- It can only answer table or figure, never text, because SPIQA labels every reference as one
+  of these. It is a *learned router* for questions about a paper's tables and figures.
+- 20 dev questions is a small sample; the honest number is the test split's.
+
+**Design note, for the Method/Discussion chapters:** a 7B model asked "where would the answer
+be printed?" defaults to "text". The same decision learned from ~470 labelled questions is
+right 17/20 times. The language model is used where it is good (splitting, judging with
+named evidence), and simple supervised data where it is not.
 
 - The model mostly answers "text" (11 of 20 with v2).
 - Many "misses" are fair: the paper's prose also answers "What is the role of the ripple sets?" or "What is the relationship between clicks and impressions?". The measure is rough because SPIQA labels every question with a figure or table.
@@ -299,8 +318,17 @@ A model-free check, predicting each patch's ink from its vector, was too weak to
 - **Runs:** 10 questions, 42 model calls, 0 invalid replies, 147 s on the first run (12–21 s per question).
 - **Rerun from the cache:** **6.9 s**, identical.
 - **Power-cut test:** with the server stopped, all 10 replayed **identically** from the cache. A new question fell back to the rules on N1, N2 and G1, and its trace said so.
-- **Outcome:** the reference reached the buffer in 3/10, 0 abstained. These are the template answers of the stand-in generator; the model writes answers from Day 6.
-- The planner's first tool matched N1's kind in 9/10.
+- **Outcome, before and after the vote:**
+
+  | 10 dev questions (prompt v3, model in N1, N2, N5, G1) | N1 gives the right kind | right table/figure reaches the buffer | abstained |
+  |---|---|---|---|
+  | kinds from the model | 4/10 | 3/10 | 0 |
+  | **kinds from the vote** (`cfg.KIND_ROUTER = "vote"`) | **9/10** | **7/10** | 0 |
+
+  With the vote, 50 model calls were made (30 from the cache) in 89 s, with 0 fallbacks
+  (`results/day5_traces.json`). The answers are still template sentences of the stand-in
+  generator; the model writes answers from Day 6.
+- With the model's kinds, the planner's first tool matched N1's kind in 9/10.
 - **G1's rule floor at work** (1812.06589v2#2, "Which method performed the best on the GRID dataset?", gold "AMIE (Ours)", Table 2):
   - N1 said table, but the planner tried text first.
   - G1 → INSUFFICIENT: "missing table evidence for sub-goal 1 (rule floor)".
