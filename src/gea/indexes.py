@@ -226,12 +226,23 @@ def colqwen_device():
     return None
 
 
+def query_cache_path(query: str) -> Path:
+    import hashlib
+    return QUERY_CACHE / f"{hashlib.sha1(query.encode('utf-8')).hexdigest()}.pt"
+
+
+def cached_query_vectors(query: str):
+    # ColQwen2's vectors for a query if they are cached, else None -- never loads the model
+    # (N10b's claim maps: made after the language model has finished, scripts/claim_vectors.py).
+    path = query_cache_path(query)
+    return torch.load(path, weights_only=True) if path.exists() else None
+
+
 def page_query_vectors(query: str):
     # ColQwen2's vectors for a query, (tokens, 128): from the cache, or computed (and
     # cached) when ColQwen2 fits; None when it cannot be loaded now.
     global _colqwen_on
-    import hashlib
-    path = QUERY_CACHE / f"{hashlib.sha1(query.encode('utf-8')).hexdigest()}.pt"
+    path = query_cache_path(query)
     if path.exists():
         return torch.load(path, weights_only=True)
     device = colqwen_device()

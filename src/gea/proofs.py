@@ -146,13 +146,15 @@ def n10b_bounding_boxes(state: AgentState) -> dict:
     # narrows it to the quoted sentence). On the real backend (Day 6) a quote is found on
     # the page -- the exact sentence, the exact label inside a diagram, or the caption --
     # and an observation boxes the diagram labels it names; the map is the fallback (a
-    # photo has no printed words). Every box also records its page size and cite kind
-    # (the website draws them itself).
+    # photo has no printed words): the claim's OWN map when its ColQwen2 vectors are cached
+    # (Day 7's second pass), else the question's. Every box also records its page size and
+    # cite kind (the website draws them itself).
     evidence = {e.id: e for e in state["evidence"]}
-    doc, records = None, {}
+    doc, records, corpus = None, {}, None
     if cfg.BACKEND == "real":
         import pymupdf
         from gea.corpus import get_corpus
+        from gea.retrieval import claim_heat
         corpus = get_corpus(state["paper_id"])
         doc, records = pymupdf.open(corpus["pdf"]), {r["id"]: r for r in corpus["figures"]}
     boxes = []
@@ -177,6 +179,8 @@ def n10b_bounding_boxes(state: AgentState) -> dict:
                 box, what = cell["bbox"], f"{ev.label} {part} {cite['cell'][0]} / {cite['cell'][1]}"
             elif found is not None:
                 box, what = found
+            elif ev.kind == "figure" and (own := claim_heat(corpus, claim["text"], ev) if doc is not None else None) is not None:
+                box, what = clip(patches_to_bbox(own, page_size=ev.page_size), ev.bbox), f"{ev.label} (claim map)"
             elif ev.kind == "figure" and heat is not None:
                 box = patches_to_bbox(heat, page_size=ev.page_size)
                 if ev.page_size:                # real map, kept to the figure: clip the patch edges to it

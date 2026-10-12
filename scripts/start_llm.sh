@@ -50,4 +50,8 @@ fi
 
 # -ngl 99: every layer on the GPU   -c: context tokens   -np 1: one request at a time
 # --image-min-tokens 1024: llama.cpp's advice for Qwen-VL; fewer image tokens hurt accuracy
-exec "$server" -m "$model" --mmproj "$mmproj" -ngl 99 -c "$context" -np 1 --port "$port" --image-min-tokens 1024
+# --cache-ram 1024: the server keeps old prompts in RAM to reuse them, up to 8 GB by default --
+#   on 2026-10-12 it grew from 7.5 to 12.7 GB in 30 questions and left 0.8 GB free. 1 GB still
+#   reuses the shared system prompts.
+exec "$server" -m "$model" --mmproj "$mmproj" -ngl 99 -c "$context" -np 1 --port "$port" --image-min-tokens 1024 \
+    --cache-ram 1024

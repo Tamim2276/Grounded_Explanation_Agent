@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 104,
+  "total_tokens": 164,
+  "prompt_tokens_details": {
+   "cached_tokens": 63
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between clicks and impressions?\nSub-goals:\n1. [text] What is the relationship between clicks and impressions?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the relationship between clicks and impressions, which is a specific topic within the paper. A text search is suitable for finding this information directly within the paper's content.",
+  "tool": "text",
+  "query": "relationship between clicks and impressions"
+ }
+}

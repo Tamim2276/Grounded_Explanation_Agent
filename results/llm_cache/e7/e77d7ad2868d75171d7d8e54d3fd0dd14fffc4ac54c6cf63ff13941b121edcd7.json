@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 169,
+  "total_tokens": 227,
+  "prompt_tokens_details": {
+   "cached_tokens": 96
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of adding DA to the baseline method?\nSub-goals:\n1. [text] What is the effect of adding DA to the baseline method?\nAlready tried: sub-goal 1 with text\nStill missing: The effect of adding DA to the baseline method in terms of specific metrics or values is not provided in the evidence. The evidence only indicates that DA plays an important role in talking face generation, but does not specify the effect on the metrics or values of the baseline method when DA is 'd"
+  }
+ ],
+ "answer": {
+  "reason": "To find specific metrics or values related to the effect of adding DA to the baseline method.",
+  "tool": "text",
+  "query": "effect of adding DA to the baseline method in terms of specific metrics or values"
+ }
+}

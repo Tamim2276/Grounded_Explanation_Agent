@@ -32,21 +32,28 @@ def rule_verdict(state: AgentState) -> dict:
     return {"sufficient": not missing, "uncovered": uncovered, "missing": "; ".join(missing)}
 
 
-G1_SYSTEM = (                                   # v2 (notes/prompts.md)
+G1_SYSTEM = (                                   # v7 (notes/prompts.md; v8 was tried and dropped)
     "You check whether the evidence collected so far is enough to answer a question about a "
     "scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains "
-    "the specific fact, number or picture that answers it -- not merely the same topic. If "
-    "sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the "
-    "answering fact in a few words. Otherwise list the numbers of the sub-questions still "
-    "uncovered and say in a few words what is missing.")
-G1_SCHEMA = {"type": "object", "required": ["sufficient", "answers", "uncovered", "missing"],
-             "properties": {"sufficient": {"type": "boolean"},
-                            "answers": {"type": "array", "items": {
+    "the specific fact, number or picture that answers it -- not merely the same topic. The fact "
+    "must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the "
+    "effect of A' it states the direction or size of the change; for 'how many' or 'what value' "
+    "it gives the number. A fact that only restates the question or describes the topic does not "
+    "answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) "
+    "and the answering fact in a few words; then list the numbers of the sub-questions still "
+    "uncovered, say in a few words what is missing, and only then decide.")
+# Written in this order -- the facts first, the verdict last -- because llama.cpp makes the model
+# write the fields in schema order: a verdict written first is only justified afterwards (dev, Day 7).
+# maxLength: the 7B once repeated itself inside "missing" for 5,800 tokens (88 s) until the
+# reply broke off as invalid JSON; llama.cpp enforces the limit token by token.
+G1_SCHEMA = {"type": "object", "required": ["answers", "uncovered", "missing", "sufficient"],
+             "properties": {"answers": {"type": "array", "items": {
                                 "type": "object", "required": ["sub_question", "evidence", "fact"],
                                 "properties": {"sub_question": {"type": "integer"}, "evidence": {"type": "string"},
-                                               "fact": {"type": "string"}}}},
+                                               "fact": {"type": "string", "maxLength": 300}}}},
                             "uncovered": {"type": "array", "items": {"type": "integer"}},
-                            "missing": {"type": "string"}}}
+                            "missing": {"type": "string", "maxLength": 300},
+                            "sufficient": {"type": "boolean"}}}
 
 
 def describe_evidence(ev, limit: int = 1500) -> str:
@@ -105,12 +112,12 @@ def backed(answer: dict, n: int, evidence: list) -> bool:
     # The judge's "sufficient" holds for sub-question n only if it named an item that is in
     # the buffer and a fact whose numbers (if any) appear in that item -- except a figure,
     # whose numbers are in the picture. A vague or invented "yes" does not pass.
-    from gea.text import CLAIM_NUMBER
+    from gea.text import CLAIM_NUMBER, loose
     items = {e.id: e for e in evidence}
     for a in answer["answers"]:
         ev = items.get(a["evidence"].strip())
         if a["sub_question"] == n and ev and a["fact"].strip():
-            if ev.kind == "figure" or all(x in ev.content for x in CLAIM_NUMBER.findall(a["fact"])):
+            if ev.kind == "figure" or all(x in loose(ev.content) for x in CLAIM_NUMBER.findall(a["fact"])):
                 return True
     return False
 

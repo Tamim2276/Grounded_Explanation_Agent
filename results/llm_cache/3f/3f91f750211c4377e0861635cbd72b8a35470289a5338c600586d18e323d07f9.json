@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 143,
+  "total_tokens": 196,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How much more prevalent are click events compared to conversion events in the Product Dataset?\nSub-goals:\n1. [text] How much more prevalent are click events compared to conversion events in the Product Dataset?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide a specific number or ratio comparing the prevalence of click events to conversion events in the Product Dataset."
+  }
+ ],
+ "answer": {
+  "reason": "To find a specific number or ratio comparing click events to conversion events in the Product Dataset.",
+  "tool": "text",
+  "query": "How much more prevalent are click events compared to conversion events in the Product Dataset?"
+ }
+}

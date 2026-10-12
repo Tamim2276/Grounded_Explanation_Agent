@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 131,
+  "prompt_tokens": 770,
+  "total_tokens": 901,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best overall on both the CVR and CTCVR tasks?\nSub-questions:\n1. [text] Which model performs best overall on both the CVR and CTCVR tasks?\nEvidence:\nE1 [text, Section 2.3, page 4]: compare different CVR modeling methods over entire input space, which reflects the model performance corresponding to SSB problem. In CTCVR task, all models calculate pCTCVR by pCTR × pCVR , where: i) pCVR is estimated by each model respectively, ii) pCTR is estimated with a same independently trained CTR network (same structure and hyper parameters as BASE model). Both of the two tasks split the first 1/2 data in the time sequence to be training set while the rest to be test set. Area under the ROC curve (AUC) is adopted as performance metrics. All experiments are repeated 10 times and averaged results are reported.\nE2 [text, Section 3.3, page 4]: sampling rates. In particular, ESMM maintains a large margin of AUC promotion over all competitors on both CVR and CTCVR tasks. BASE model is the latest version which serves the main traffic in our real system. Trained with the whole dataset, ESMM achieves absolute AUC gain of 2.18% on CVR task and 2.32% on CTCVR task over BASE model. This is a significant improvement for industrial applications where 0.1% AUC gain is remarkable.\nE3 [text, Section 3.2, page 4]: Table 2 shows results of different models on public dataset. (1) Among all the three variations of BASE model, only AMAN performs a little worse on CVR task, which may be due to the sensitive of random sampling. OVERSAMPLING and UNBIAS show improvement over BASE model on both CVR and CTCVR tasks. (2) Both DIVISION and ESMM-NS estimate pCVR over entire space and achieve remarkable promotions over BASE model. Due to the avoidance of numerical instability, ESMM-NS performs better than DIVISION. (3) ESMM further improves ESMM-NS. By exploiting the sequential patten of user actions and learning from un-clicked data with transfer mechanism, ESMM provides an elegant solution for CVR modeling to eliminate SSB and DS problems simultaneously and beats all the competitors. Compared with BASE model, ESMM achieves absolute AUC gain of 2.56% on CVR task, which indicates its good generalization performance even for biased samples. On CTCVR task with full samples, it brings 3.25% AUC gain. These results validate the effectiveness of our modeling method."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "ESMM performs best overall on both the CVR and CTCVR tasks."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine which model performs best overall on both tasks. The evidence only indicates that ESMM achieves the highest AUC gains compared to BASE model on both tasks, but it does not explicitly state which model is the best overall among all models tested.",
+  "sufficient": false
+ }
+}

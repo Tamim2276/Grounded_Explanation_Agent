@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 210,
+  "prompt_tokens": 642,
+  "total_tokens": 852,
+  "prompt_tokens_details": {
+   "cached_tokens": 282
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The two auxiliary tasks used in the ESMM architecture for CVR modeling are CTR and CTCVR.\" -- cites: E1 (Section Figure 2): quote \"In ESMM, two auxiliary tasks of CTR and CTCVR are introduced which: i) help to model CVR over entire input space, ii) provide feature representation transfer learning.\"\n2. \"The CTR task is estimated with a same independently trained CTR network.\" -- cites: E2 (Section 2.3): quote \"pCTR is estimated with a same independently trained CTR network (same structure and hyper parameters as BASE model).\"\n3. \"The CTCVR task calculates pCTCVR by pCTR × pCVR.\" -- cites: E2 (Section 2.3): quote \"all models calculate pCTCVR by pCTR × pCVR\"\n\nCited evidence:\n[E1] (text, Section Figure 2, page 2): Figure 2: Architecture overview of ESMM for CVR model- ing. In ESMM, two auxiliary tasks of CTR and CTCVR are introduced which: i) help to model CVR over entire input space, ii) provide feature representation transfer learning. ESMM mainly consists of two sub-networks: CVR network illustrated in the left part of this figure and CTR network in the right part. Embedding parameters of CTR and CVR net- work are shared. CTCVR takes the product of outputs from CTR and CVR network as the output. Concatenate � Concatenate CVR-task features Main Task Auxiliary Tasks pCVR pCTR pCTCVR � Embedding Layer Field-wise Pooling Layer MultiLayer Perception item field user field item field user field CTR-task features Shared Lookup Table element-wise + element-wise + element-wise x � � �\n[E2] (text, Section 2.3, page 4): compare different CVR modeling methods over entire input space, which reflects the model performance corresponding to SSB problem. In CTCVR task, all models calculate pCTCVR by pCTR × pCVR , where: i) pCVR is estimated by each model respectively, ii) pCTR is estimated with a same independently trained CTR network (same structure and hyper parameters as BASE model). Both of the two tasks split the first 1/2 data in the time sequence to be training set while the rest to be test set. Area under the ROC curve (AUC) is adopted as performance metrics. All experiments are repeated 10 times and averaged results are reported."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section Figure 2) states that in ESMM, two auxiliary tasks of CTR and CTCVR are introduced, which aligns with the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 2.3) states that pCTR is estimated with a same independently trained CTR network, which matches the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E2 (Section 2.3) states that all models calculate pCTCVR by pCTR × pCVR, but it does not specify that this calculation is done by the CTCVR task. The claim incorrectly attributes this calculation to the CTCVR task."
+   }
+  ]
+ }
+}

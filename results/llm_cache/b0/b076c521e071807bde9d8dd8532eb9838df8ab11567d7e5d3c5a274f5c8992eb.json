@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 149,
+  "prompt_tokens": 513,
+  "total_tokens": 662,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The 'MUC' model performed best with a ranking score of 63.10 and a top-pairs score of 63.09 on the WikiCoref dataset.\" -- cites: E1 (Table 2): row 'ranking', column 'MUC' = 63.10; E1 (Table 2): row 'top-pairs', column 'MUC' = 63.09\n2. \"The 'CoNLL' model had the highest '+linguistic' score of 53.40 on the WikiCoref dataset.\" -- cites: E1 (Table 2): row '+linguistic', column 'CoNLL' = 53.40\n\nCited evidence:\n[E1] (table, Table 2, page 4): Table 2 : Out-of-domain evaluation of deep-coref models on the WikiCoref dataset.\nValues (cite as cells):\n  row 'ranking': 'MUC' = 63.10; 'B3' = 48.43; 'CEAFe' = 47.18; 'CoNLL' = 52.90; 'LEA' = 44.40\n  row 'top-pairs': 'MUC' = 63.09; 'B3' = 48.42; 'CEAFe' = 46.05; 'CoNLL' = 52.52; 'LEA' = 44.21\n  row '+linguistic': 'MUC' = 63.99; 'B3' = 49.63; 'CEAFe' = 46.60; 'CoNLL' = 53.40; 'LEA' = 45.66"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Table 2) shows that the 'MUC' model indeed has a ranking score of 63.10 and a top-pairs score of 63.09, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Table 2) shows that the 'CoNLL' model has a '+linguistic' score of 53.40, which matches the claim."
+   }
+  ]
+ }
+}

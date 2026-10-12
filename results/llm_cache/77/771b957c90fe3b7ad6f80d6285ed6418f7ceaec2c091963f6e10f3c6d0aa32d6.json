@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 91,
+  "prompt_tokens": 1097,
+  "total_tokens": 1188,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How much more prevalent are click events compared to conversion events in the Product Dataset?\nSub-questions:\n1. [text] How much more prevalent are click events compared to conversion events in the Product Dataset?\nEvidence:\nE1 [text, Section 2.3, page 3]: Datasets. During our survey, no public datasets with sequential labels of click and conversion are found in CVR modeling area. To evaluate the proposed approach, we collect traffic logs from Taobao’s recommender system and release a 1% random sampling version of the whole dataset, whose size still reaches 38GB (without compression). In the rest of the paper, we refer to the released dataset as Public Dataset and the whole one as Product Dataset . Table 1 summarizes the statistics of the two datasets. Detailed descriptions can be found in the website of Public Dataset 1 . Competitors. We conduct experiments with several competitive methods on CVR modeling. (1) BASE is the baseline model introduced in section 2.2. (2) AMAN [ 6 ] applies negative sampling strategy and best results are reported with sampling rate searched in { 10% , 20% , 50% , 100% } . (3) OVERSAMPLING [ 11 ] copies positive examples to reduce difficulty of training with sparse data, with sampling rate searched in { 2 , 3 , 5 , 10 } . (4) UNBIAS follows [ 10 ] to fit the truly underlying distribution from observations via rejection sampling. pCTR is taken as the rejection probability. (5) DIVISION estimates pCTR and pCTCVR with individually trained CTR and CTCVR networks and calculates pCVR by Eq.(2). (6) ESMM-NS is a lite version of ESMM without sharing of embedding parameters.\nE2 [text, Section 1, page 1]: buy some of them. In other words, user actions follow a sequential pattern of impression → click → conversion . In this way, CVR modeling refers to the task of estimating the post-click conversion rate, i.e., pCVR = p ( conversion | click , impression ) . In general, conventional CVR modeling methods employ similar techniques developed in click-through rate (CTR) prediction task, for example, recently popular deep networks [ 2 , 3 ]. However, there exist several task-specific problems, making CVR modeling challenging. Among them, we report two critical ones encountered in our real practice: i) sample selection bias ( SSB ) problem [ 12 ]. As illustrated in Fig.1, conventional CVR models are trained on dataset composed of clicked impressions, while are utilized to make inference on the entire space with samples of all impressions. SSB problem will hurt the generalization performance of trained models. ii) data sparsity ( DS ) problem. In practice, data gathered for training CVR model is generally much less than CTR task. Sparsity of training data makes CVR model fitting rather difficult.\nE3 [text, Section abstract, page 1]: Estimating post-click conversion rate (CVR) accurately is crucial for ranking systems in industrial applications such as recommendation and advertising. Conventional CVR modeling applies popular deep learning methods and achieves state-of-the-art performance. However it encounters several task-specific problems in practice, making CVR modeling challenging. For example, conventional CVR models are trained with samples of clicked impressions while utilized to make inference on the entire space with samples of all impressions. This causes a sample selection bias problem. Besides, there exists an extreme data sparsity problem, making the model fitting rather difficult. In this paper, we model CVR in a brand-new perspective by making good use of sequential pattern of user actions, i.e., impression → click → conversion . The proposed E ntire S pace M ulti-task M odel (ESMM) can eliminate the two problems simultaneously by i) modeling CVR directly over the entire space, ii) employing a feature representation transfer learning strategy. Experiments on dataset gathered from traffic logs of Taobao’s recommender system demonstrate that ESMM significantly outperforms competitive methods. We also release a sampling version of this dataset to enable future research. To the best of our knowledge, this is the first public dataset which contains samples with sequential dependence of click and conversion labels for CVR modeling."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "click events are more prevalent"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide a specific number or ratio comparing the prevalence of click events to conversion events in the Product Dataset.",
+  "sufficient": false
+ }
+}

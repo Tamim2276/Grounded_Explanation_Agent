@@ -98,6 +98,15 @@ def meaning_scores(corpus: dict, query: str) -> dict:
     return {index["ids"][r]: float(s) for s, r in zip(sims[0], rows[0])}
 
 
+def region_texts(corpus: dict) -> list:
+    # The text-only baseline (Day 7) reads every table and figure as plain text, as a PDF
+    # text extractor gives it: the caption and the words printed in the region (a table's
+    # values, a diagram's labels), as one more "paragraph" -- no cells, no image. Its
+    # SPECTER2 row is the caption's (the text index holds captions under the region's id).
+    return [{"id": r["id"], "page": r["page"], "text": region_words(corpus, r), "bbox": r["bbox"],
+             "section": r["label"]} for r in corpus["tables"] + corpus["figures"]]
+
+
 def real_text_retriever(corpus: dict, query: str, section: Optional[str] = None, k: int = None) -> list:
     # N6a on a real paper (BUILD_PLAN.md Day 3): the query's SPECTER2 vector (question
     # adapter, on the CPU) against the paper's FAISS index, and/or the keyword score,
@@ -105,6 +114,8 @@ def real_text_retriever(corpus: dict, query: str, section: Optional[str] = None,
     # table and figure tools -- inside N2's section when one was named and matches.
     k = k or cfg.TEXT_TOP_K
     pool = [c for c in corpus["chunks"] if section and in_section(c, section)] or corpus["chunks"]
+    if cfg.VARIANT == "text_only":
+        pool = pool + region_texts(corpus)
     words = {c["id"]: score(query, c["text"], corpus) for c in pool}
     similarity = meaning_scores(corpus, query)
     meaning = {c["id"]: similarity.get(c["id"], 0.0) for c in pool}
@@ -207,6 +218,16 @@ def region_heat(heat: np.ndarray, bbox: tuple, size: tuple, top: int = 5) -> flo
 def masked_heat(heat: np.ndarray, bbox: tuple, size: tuple) -> np.ndarray:
     # The map kept inside the region only, so N10b's box falls on the chosen table/figure.
     return np.where(inside_mask(heat, bbox, size), heat, heat.min())
+
+
+def claim_heat(corpus: dict, claim: str, ev: Evidence):
+    # The heat map of a CLAIM's own words on its figure (kept to the figure), or None. Only
+    # from cached vectors: ColQwen2 cannot load beside llama-server, so the vectors are made
+    # after the answers (scripts/claim_vectors.py) and a replay draws the boxes (Day 7).
+    from gea.indexes import cached_query_vectors, similarity_map
+    page = next((p for p in corpus.get("page_index") or [] if p["page"] == ev.page), None)
+    vectors = cached_query_vectors(claim) if page is not None and ev.page_size else None
+    return masked_heat(similarity_map(vectors, page), ev.bbox, ev.page_size) if vectors is not None else None
 
 
 def rank_regions(corpus: dict, query: str, kind: str, how: str = None, question: Optional[str] = None) -> tuple:
@@ -410,6 +431,24 @@ def route_zoom(state: AgentState) -> str:
     x0, y0, x1, y1 = figures[0].bbox
     page_w, page_h = figures[0].page_size or (cfg.PAGE_W, cfg.PAGE_H)     # real papers: often US Letter
     return "zoom" if (x1 - x0) * (y1 - y0) / (page_w * page_h) < cfg.ZOOM_IF_AREA_BELOW else "buffer"
+
+
+# --- the single-pass baseline (BUILD_PLAN.md Day 7) ---------------------------------
+
+def n6_all_tools(state: AgentState) -> dict:
+    # Single pass: no planner and no loop. The text, table and figure tools each run ONCE
+    # with the question itself, a small figure is zoomed as in the full graph, and all
+    # of it goes to N8 together -- a standard RAG pipeline built from the same parts.
+    found, events = [], []
+    for tool, node in (("text", n6a_text_retriever), ("table", n6b_table_retriever),
+                       ("figure", n6c_figure_retriever)):
+        out = node({**state, "sub_goals": [], "action": {"tool": tool, "query": state["question"]}})
+        new, events = out["new_evidence"], events + out["events"]
+        if tool == "figure" and route_zoom(out) == "zoom":
+            out = n7_region_zoom({**state, "new_evidence": new})
+            new, events = out["new_evidence"], events + out["events"]
+        found += new
+    return {"new_evidence": found, "events": events}
 
 
 # --- N8: the evidence buffer -------------------------------------------------------

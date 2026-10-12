@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 163,
+  "total_tokens": 245,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which coreference model performs best on the CoNLL test set according to the F$_1$ score? Is this performance statistically significant compared to all other models in the table?\nSub-goals:\n1. [text] Which coreference model performs best on the CoNLL test set according to the F$_1$ score?\n2. [text] Is this performance statistically significant compared to all other models in the table?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the coreference model with the best F1 score on the CoNLL test set, which requires a search through the text to identify the relevant model and its score.",
+  "tool": "text",
+  "query": "Which coreference model performs best on the CoNLL test set according to the F1 score?"
+ }
+}

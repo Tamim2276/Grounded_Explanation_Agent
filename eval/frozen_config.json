@@ -1,0 +1,48 @@
+{
+ "frozen_at": "2026-10-12T22:56:26",
+ "git_commit": "96c5bc1",
+ "uncommitted_changes": true,
+ "settings": {
+  "COLPALI_DIM": 128,
+  "GEMINI_MODEL": "gemini-3.8-flash",
+  "KIND_ROUTER": "vote",
+  "KIND_VOTE_K": 9,
+  "LLM_CACHE": true,
+  "LLM_MAX_TOKENS": 2048,
+  "LLM_MODEL": "qwen2.5-vl-7b",
+  "MAX_REWRITES": 2,
+  "MAX_ROUNDS": 3,
+  "MODALITIES": [
+   "text",
+   "table",
+   "figure"
+  ],
+  "PAGE_H": 842.0,
+  "PAGE_W": 595.0,
+  "PATCH_GRID": [
+   32,
+   32
+  ],
+  "REGION_SEARCH": "both",
+  "RRF_K": 60,
+  "SEED": 42,
+  "SPECTER2_DIM": 768,
+  "SUB_GOAL_MODALITY": null,
+  "SUPPORT_CHECK": "auto",
+  "TEXT_SEARCH": "hybrid",
+  "TEXT_TOP_K": 3,
+  "TOP_K": 1,
+  "ZOOM_DPI": 300,
+  "ZOOM_IF_AREA_BELOW": 0.3,
+  "ZOOM_MAX_PX": 1024,
+  "PROMPT_VERSION": "v7",
+  "model_files": {
+   "mmproj-Qwen2.5-VL-7B-Instruct-f16.gguf": 1354162912,
+   "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf": 4683072032
+  },
+  "splits": {
+   "dev.jsonl": "639a5a24c1798762",
+   "test.jsonl": "8664b3debc4b779f"
+  }
+ }
+}

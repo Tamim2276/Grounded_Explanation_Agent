@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 87,
+  "prompt_tokens": 226,
+  "total_tokens": 313,
+  "prompt_tokens_details": {
+   "cached_tokens": 155
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which coreference model performs best on the CoNLL test set according to the F$_1$ score? Is this performance statistically significant compared to all other models in the table?\nSub-goals:\n1. [text] Which coreference model performs best on the CoNLL test set according to the F$_1$ score?\n2. [text] Is this performance statistically significant compared to all other models in the table?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The specific F1 score values for the models and the statistical significance of the performance are not provided in the evidence. The evidence only mentions the models and their performance on the CoNLL test set but does not provide the F1 scores or the statistical significance of the performance."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide the specific F1 scores or the statistical significance of the performance, so a text search is necessary to find this information.",
+  "tool": "text",
+  "query": "Which coreference model performs best on the CoNLL test set according to the F1 score? Is this performance statistically significant compared to all other models in the table?"
+ }
+}

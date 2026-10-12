@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 114,
+  "prompt_tokens": 2036,
+  "total_tokens": 2150,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three main components of the Action Search model architecture?\nSub-questions:\n1. [figure] What are the three main components of the Action Search model architecture?\nEvidence:\nE1 [figure, Figure 3, page 7] (image attached): Fig. 3: Our model harnesses the temporal context from its current location and the history of what it has observed to predict the next search location in the video. At each step, (i) a visual encoder transforms the visual observation ex- tracted from the model’s current temporal location to a representative feature vector; (ii) an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location; (iv) the model moves to the new temporal location.\nWords printed in the figure: Action Search: Spotting Actions in Videos 7 𝐡𝑖 𝑓(𝐗𝑖) 𝐡𝑖+1 𝑓(𝐗𝑖+1) 𝐡𝑖−2 𝑓(𝐗𝑖−2) 𝐗𝑖 𝐗𝑖+1 𝐗𝑖−1 𝐗𝑖−2 𝐯𝑖 𝐯𝑖+1 𝐯𝑖−1 𝐯𝑖−2 𝐡𝑖−3 𝑓(𝐗𝑖−3) 𝑓(𝐗𝑖) 𝑓(𝐗𝑖−2) 𝑓(𝐗𝑖−3) LSTM Visual Encoder Spotting Target 𝐗𝒊: Visual Observation 𝐯𝒊: Feature Vector 𝐡𝒊: LSTM State 𝑓𝐗𝒊: Temporal Location Video Time . . . . . . . . . . . . 𝑓(𝐗𝑖+1) 𝑓(𝐗𝑖−1) Video Time 𝐡𝑖−1 𝑓(X𝑖−1)\nE2 [figure, Figure 3, page 7]: Zoomed view (300 dpi) of: Fig. 3: Our model harnesses the temporal context from its current location and the history of what it has observed to predict the next search location in the video. At each step, (i) a visual encoder transforms the visual observation ex- tracted from the model’s current temporal location to a representative feature vector; (ii) an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location; (iv) the model moves to the new temporal location.\nWords printed in the figure: Action Search: Spotting Actions in Videos 7 𝐡𝑖 𝑓(𝐗𝑖) 𝐡𝑖+1 𝑓(𝐗𝑖+1) 𝐡𝑖−2 𝑓(𝐗𝑖−2) 𝐗𝑖 𝐗𝑖+1 𝐗𝑖−1 𝐗𝑖−2 𝐯𝑖 𝐯𝑖+1 𝐯𝑖−1 𝐯𝑖−2 𝐡𝑖−3 𝑓(𝐗𝑖−3) 𝑓(𝐗𝑖) 𝑓(𝐗𝑖−2) 𝑓(𝐗𝑖−3) LSTM Visual Encoder Spotting Target 𝐗𝒊: Visual Observation 𝐯𝒊: Feature Vector 𝐡𝒊: LSTM State 𝑓𝐗𝒊: Temporal Location Video Time . . . . . . . . . . . . 𝑓(𝐗𝑖+1) 𝑓(𝐗𝑖−1) Video Time 𝐡𝑖−1 𝑓(X𝑖−1) [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "LSTM, Visual Encoder, Spotting Target"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to answer the sub-question about the three main components of the Action Search model architecture. The figure only describes the components and their roles but does not explicitly list them as the three main components.",
+  "sufficient": false
+ }
+}

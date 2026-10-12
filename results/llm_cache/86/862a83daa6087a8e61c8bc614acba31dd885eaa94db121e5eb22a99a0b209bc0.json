@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 176,
+  "prompt_tokens": 3346,
+  "total_tokens": 3522,
+  "prompt_tokens_details": {
+   "cached_tokens": 1495
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three main components of the Action Search model architecture?\nSub-questions:\n1. [figure] What are the three main components of the Action Search model architecture?\nEvidence:\nE1 [figure, Figure 3, page 7] (image attached): Fig. 3: Our model harnesses the temporal context from its current location and the history of what it has observed to predict the next search location in the video. At each step, (i) a visual encoder transforms the visual observation ex- tracted from the model’s current temporal location to a representative feature vector; (ii) an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location; (iv) the model moves to the new temporal location.\nWords printed in the figure: Action Search: Spotting Actions in Videos 7 𝐡𝑖 𝑓(𝐗𝑖) 𝐡𝑖+1 𝑓(𝐗𝑖+1) 𝐡𝑖−2 𝑓(𝐗𝑖−2) 𝐗𝑖 𝐗𝑖+1 𝐗𝑖−1 𝐗𝑖−2 𝐯𝑖 𝐯𝑖+1 𝐯𝑖−1 𝐯𝑖−2 𝐡𝑖−3 𝑓(𝐗𝑖−3) 𝑓(𝐗𝑖) 𝑓(𝐗𝑖−2) 𝑓(𝐗𝑖−3) LSTM Visual Encoder Spotting Target 𝐗𝒊: Visual Observation 𝐯𝒊: Feature Vector 𝐡𝒊: LSTM State 𝑓𝐗𝒊: Temporal Location Video Time . . . . . . . . . . . . 𝑓(𝐗𝑖+1) 𝑓(𝐗𝑖−1) Video Time 𝐡𝑖−1 𝑓(X𝑖−1)\nE2 [figure, Figure 3, page 7]: Zoomed view (300 dpi) of: Fig. 3: Our model harnesses the temporal context from its current location and the history of what it has observed to predict the next search location in the video. At each step, (i) a visual encoder transforms the visual observation ex- tracted from the model’s current temporal location to a representative feature vector; (ii) an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location; (iv) the model moves to the new temporal location.\nWords printed in the figure: Action Search: Spotting Actions in Videos 7 𝐡𝑖 𝑓(𝐗𝑖) 𝐡𝑖+1 𝑓(𝐗𝑖+1) 𝐡𝑖−2 𝑓(𝐗𝑖−2) 𝐗𝑖 𝐗𝑖+1 𝐗𝑖−1 𝐗𝑖−2 𝐯𝑖 𝐯𝑖+1 𝐯𝑖−1 𝐯𝑖−2 𝐡𝑖−3 𝑓(𝐗𝑖−3) 𝑓(𝐗𝑖) 𝑓(𝐗𝑖−2) 𝑓(𝐗𝑖−3) LSTM Visual Encoder Spotting Target 𝐗𝒊: Visual Observation 𝐯𝒊: Feature Vector 𝐡𝒊: LSTM State 𝑓𝐗𝒊: Temporal Location Video Time . . . . . . . . . . . . 𝑓(𝐗𝑖+1) 𝑓(𝐗𝑖−1) Video Time 𝐡𝑖−1 𝑓(X𝑖−1)\nE3 [text, Section 4, page 7]: In this section, we discuss the Action Search model architecture, the approach used to train it, and some speciﬁc implementation details. Figure 3 gives an overview of the main architecture of our approach.\nE4 [text, Section 5.1, page 10]: Results and Analysis. We run Action Search and the two baseline methods for 1000 independent search trials per test video to compute the action spotting metric. At each trial, we initialize each model at a random temporal location in the video, and we reinitialize the search model if it fails to spot an action after 500 steps. Figure 4 shows the cumulative performance of all three models over videos with diﬀerent action coverage ( i.e. the percentage of the video length that contains action instances). Unlike both the Direction Baseline and Random Baseline , Action Search is able to harness temporal context to expedite the search process and, as a result, takes on average 16 . 6 % and 22 . 3 % less observations, respectively, before successfully spotting actions. Notably, there is a great performance diﬀerence between our model and the two baselines in videos with very sparse actions ( i.e. action coverage ≤ 1%). We attribute this to the importance of temporal context when searching for sparse actions in video.\nE5 [text, Section 4.1, page 7]: The input to Action Search is a sequence of visual observations ( X 1 , X 2 , . . . , X n ) and the output is a sequence of temporal locations ( f ( X 1 ) , f ( X 2 ) , . . . , f ( X n )), i.e. a search sequence, produced by the search process. For a given video and at the i th search step, a visual encoder represents the observation X i extracted from the model’s current temporal location in the video by a feature vector v i . We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation. Finally, a fully-connected layer transforms h i (the updated state) to produce f ( X i ), the next location to search in the video.\nE6 [table, Table 1, page 12]: Table 1: Temporal localization results (mAP at tIoU) on the THUMOS14 testing set. We assign ‘–’ to unavailable mAP values. We report the average percentage of observed frames ( S ) for each approach. (a) Comparison against state-of-the- art methods: Our method ( Action Search + Priors + Res3D + S-CNN) achieves state-of-the-art results while observing only 17 . 3% of the video; (b) Video fea- tures eﬀect: We compare C3D for Action Search visual encoder + the C3D-based classiﬁer from [35] vs. ResNet for Action Search visual encoder + the Res3D- based classiﬁer from [41]; (c) The trade-oﬀbetween Action Search training size and performance: mAP and S score improve as we increase the training size.\n |  | mAP | at | tIoU |  |  | Backbone |  | mAP | at | tIoU |  | \nMethod | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | S | Arch. | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | S\nFrame Glimpses [44] | 36.0 | 26.4 | 17.1 | – | – | 40 ∗ | C3D | 43.7 | 35.2 | 23.9 | 18.8 | 4.3 | 45.1\nShou et al. [35] | 36.3 | 28.7 | 19.0 | – | – | 100 | ResNet | 51.8 | 42.4 | 30.8 | 20.2 | 11.1 | 17.3\nShou et al. [34] | 40.1 | 29.4 | 23.3 | 13.1 | 7.9 | 100 |  |  |  |  |  |  | \nGao et al. [17] | 44.1 | 34.9 | 25.6 | – | – | 100 |  | (c) | (c) |  |  |  | \nDai et al. [11] | – | 33.3 | 25.6 | 15.9 | 9.0 | 100 | Training |  | mAP | at | tIoU |  | \nXu et al. [43] | 44.8 | 35.6 | 28.9 | – | – | 100 | Size | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | S\nBuch et al. [3] | 45.7 | – | 29.2 | – | 9.6 | 100 | 0% [41] | 40.6 | 32.6 | 22.5 | 12.3 | 6.4 | 100\nZhao ... [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The three main components are: (i) a visual encoder, (ii) an LSTM, and (iii) the LSTM outputs its updated state and the next search location."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The sub-question 2 is not answered. It asks for the three main components of the Action Search model architecture, which is already answered in sub-question 1. The answer is the same as in sub-question 1, which is the three main components: (i) a visual encoder, (ii) an LSTM, and (iii) the LSTM's (L",
+  "sufficient": true
+ }
+}

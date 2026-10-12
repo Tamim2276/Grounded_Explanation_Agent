@@ -1,0 +1,77 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 402,
+  "prompt_tokens": 2844,
+  "total_tokens": 3246,
+  "prompt_tokens_details": {
+   "cached_tokens": 1744
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the different methods compare in terms of their ability to generate realistic faces?\nEvidence:\n[E1] (figure, Figure 5, page 5) (image attached): Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\n[E2] (figure, Figure 5, page 5): a zoomed view of Figure 5 (image attached)\n[E3] (table, Table 1, page 5): Table 1: Quantitative results.\nValues (cite as cells):\n  row 'Methods': '' = PSNR ↑; 'Evaluation on' = SSIM ↑; 'LRW' = LMD ↓\n  row 'Chung et al. [2017]': '' = 28.06; 'Evaluation on' = 0.46; 'LRW' = 2.23\n  row 'Chen et al. [2018]': '' = 28.65; 'Evaluation on' = 0.53; 'LRW' = 1.92\n  row 'Zhou et al. [2019]': '' = 26.80; 'Evaluation on' = 0.88; 'LRW' = —\n  row 'Chen et al. [2019]': '' = 30.91; 'Evaluation on' = 0.81; 'LRW' = 1.37\n  row 'AMIE (Ours)': '' = 32.08; 'Evaluation on' = 0.92; 'LRW' = 1.21\n[E4] (text, Section L, page 5): 4.2 Quantitative Results We compare our model with four recent state-of-the-art methods, including Chung et al. [2017], Chen et al. [2018] Zhou et al. [2019], and Chen et al. [2019]. Table 1 shows the quantitative results of our method and its competitors with higher PSNR, SSIM and lower LMD, suggesting the best quality of the generated video frames of the talking faces. Although Zhou et al. [Zhou et al. , 2019] obtains the lowest PSNR, it obtains the second highest SSIM and its SSIM is signiﬁcantly better than Chung et al. [Chung et al. , 2017] and Chen et al. [Chen et al. , 2018]. To further verify the robustness for arbitrary person generation, we evaluate our method on another benchmark dataset GRID [Cooke et al. , 2006] and report the comparison results in Table 2. From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method. Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD. Therefore, our method always achieves the highest PSNR and SSIM, demonstrating our method is able to generate high-quality videos.\n[E5] (text, Section abstract, page 2): 2 Related Works In this section, we brieﬂy review the related works on talking face generation and mutual information estimation. 2.1 Talking Face Generation Earlier works on talking face generation mainly synthesized the speciﬁc identity from the dataset by given arbitrary speech audio. Rithesh et al. [2017] used a time-delayed LSTM to generate key points synced to the audio and use another network to generate the video frames conditioned on the key points. Supasorn et al. [2017] proposed a teeth proxy to improve the quality of the teeth during generation. Next, some works tried to synthesized the talking faces for the identities from the dataset [Chung et al. , 2017; Vougioukas et al. , 2018; Chen et al. , 2018]. Recently, the synthesis of the talking face for the arbitrary identities out of the dataset has drawn much attention. Zhou et al. [2019] proposed an adversarial learning method to disentangle the different information for one image during generation. Chen et al. [2019] proposed to leverage landmark as middle information to better guide face generation. However, they mainly focused on the inner-modal coherence, while lacking of discovering the cross-modal coherence.\n[E6] (text, Section L, page 5): To focus on the lip movement, we only utilize the lip area of the frame for L 1 reconstruction loss, While L perc and L lip measure the distance between visual concept, it is also important to shorten the distance between audio and visual modalities in high-level representation. We implement mutual information as described before. We try to maximize it between generated frames and audios, Θ ( ˆ F, A ) . (12) Our full model is optimized according to the following objective function: 4 Experiments 4.1 Dataset and Metrics We evaluate our method on prevalent benchmark datasets LRW [Chung and Zisserman, 2016] and GRID [Cooke et al. , 2006]. Frames are aligned into 256 × 256 faces and audios are processed into (Mel Frequency Cepstrum Coefﬁcient) MFCC features at the sampling rate of 5000Hz. Then we match each frame with an MFCC audio input with a size of 20 × 13 . We use common reconstruction metrics such as PSNR and SSIM [Wang et al. , 2004] to evaluate the quality of the synthesized talking faces. Furthermore, we use Landmark Distance (LMD) to evaluate the accuracy of the generated lip by calculating the landmark distance between the generated video and the original video. The lower LMD, the better of the generation.\n\nThese claims are already verified and kept:\n- The AMIE method (Ours) is compared with four recent state-of-the-art methods in terms of their ability to generate realistic faces.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The AMIE method (Ours) achieves the highest PSNR and SSIM, demonstrating its ability to generate high-quality videos.\": E3 AMIE (Ours)/PSNR ↑ is None, the claim says 32.08\n- \"The AMIE method (Ours) has the lowest LMD, indicating its accuracy in generating lip movements.\": E3 AMIE (Ours)/LMD ↓ is None, the claim says 1.21\n- \"The AMIE method (Ours) outperforms Zhou et al. [2019] in terms of SSIM, which is a measure of the similarity between the generated and the ground truth images.\": E3 AMIE (Ours)/SSIM ↑ is None, the claim says 0.92 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The AMIE method (Ours) achieves the highest PSNR and SSIM, demonstrating its ability to generate high-quality videos.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "AMIE (Ours)",
+      "col": "PSNR ↑",
+      "value": "32.08"
+     },
+     {
+      "evidence": "E3",
+      "row": "AMIE (Ours)",
+      "col": "SSIM ↑",
+      "value": "0.92"
+     }
+    ]
+   },
+   {
+    "text": "The AMIE method (Ours) has the lowest LMD, indicating its accuracy in generating lip movements.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "AMIE (Ours)",
+      "col": "LMD ↓",
+      "value": "1.21"
+     }
+    ]
+   },
+   {
+    "text": "The AMIE method (Ours) outperforms Zhou et al. [2019] in terms of SSIM, which is a measure of the similarity between the generated and the ground truth images.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "AMIE (Ours)",
+      "col": "SSIM ↑",
+      "value": "0.92"
+     },
+     {
+      "evidence": "E3",
+      "row": "Zhou et al. [2019]",
+      "col": "SSIM ↑",
+      "value": "0.88"
+     }
+    ]
+   }
+  ]
+ }
+}

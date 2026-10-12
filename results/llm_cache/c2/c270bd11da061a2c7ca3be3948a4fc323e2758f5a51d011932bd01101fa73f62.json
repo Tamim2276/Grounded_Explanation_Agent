@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 228,
+  "prompt_tokens": 1654,
+  "total_tokens": 1882,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the support value of the node \"ana=NAM\"?\nEvidence:\n[E1] (figure, Figure 2, page 14) (image attached): Figure 2 : FP-Tree with corresponding support values of the nodes.\nWords printed in the figure: ROOT ana=NAM (2,1) ant=NAM (1,1) head=F (1,0) head=T (0,1) head=F (1,0) ant=NOM (1,0)\n[E2] (figure, Figure 2, page 14): a zoomed view of Figure 2 (image attached)\n[E3] (table, Table 2, page 4): Table 2 : Out-of-domain evaluation of deep-coref models on the WikiCoref dataset.\nValues (cite as cells):\n  row 'ranking': 'MUC' = 63.10; 'B3' = 48.43; 'CEAFe' = 47.18; 'CoNLL' = 52.90; 'LEA' = 44.40\n  row 'top-pairs': 'MUC' = 63.09; 'B3' = 48.42; 'CEAFe' = 46.05; 'CoNLL' = 52.52; 'LEA' = 44.21\n  row '+linguistic': 'MUC' = 63.99; 'B3' = 49.63; 'CEAFe' = 46.60; 'CoNLL' = 53.40; 'LEA' = 45.66 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The support value of the node 'ana=NAM' is (2,1).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "ana=NAM (2,1)"
+     }
+    ]
+   },
+   {
+    "text": "The figure shows the FP-Tree with corresponding support values of the nodes.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The figure displays the FP-Tree with support values."
+     }
+    ]
+   },
+   {
+    "text": "The zoomed view of Figure 2 does not provide additional information about the support values.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "observation": "The zoomed view of Figure 2 does not provide additional information."
+     }
+    ]
+   }
+  ]
+ }
+}

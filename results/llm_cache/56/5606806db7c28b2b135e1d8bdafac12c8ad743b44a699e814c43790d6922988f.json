@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 195,
+  "prompt_tokens": 1059,
+  "total_tokens": 1254,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which coreference model performs best on the CoNLL test set according to the F$_1$ score? Is this performance statistically significant compared to all other models in the table?\nSub-questions:\n1. [text] Which coreference model performs best on the CoNLL test set according to the F$_1$ score?\n2. [text] Is this performance statistically significant compared to all other models in the table?\nEvidence:\nE1 [text, Section 1, page 1]: scores on the CoNLL ofﬁcial test set. However, the superiority of a coreference resolver on the CoNLL evaluation sets does not necessarily indicate that it also performs better on new datasets. For instance, the ranking model of Clark and Manning ( 2016a ), the reinforcement learning model of Clark and Manning ( 2016b ) and the end-to-end model of Lee et al. ( 2017 ) are three recent coreference resolvers, among which the model of Lee et al. ( 2017 ) performs the best and that of Clark and Manning ( 2016b ) performs the second best on the CoNLL development and test sets. However, if we evaluate these systems on the WikiCoref dataset ( Ghaddar and Langlais , 2016a ), which is consistent with CoNLL with regard to coreference deﬁnition and annotation scheme, the performance ranking would be in a reverse order 1 . In Moosavi and Strube ( 2017a ), we investigate the generalization problem in coreference resolution and show that there is a large overlap between the coreferring mentions in the CoNLL training and evaluation sets. Therefore, higher scores on the CoNLL evaluation sets do not necessarily indicate a better coreference model. They may be due to better memorization of the training data. As a result, despite the remarkable improvements in coreference resolution, the use of coreference resolution in other applications is mainly limited to the use of simple rule-based systems, e.g. Lapata and Barzilay ( 2005 ), Yu and Ji ( 2016 ), and Elsner and Charniak ( 2008 ).\nE2 [text, Section 8.2, page 8]: The performance of the “+EPM” model compared to recent state-of-the-art coreference models on the CoNLL test set is presented in Table 4 . The “single” and “ensemble” rows represent the results of the single and ensemble models of e2e-coref. We also compare EPM with the pattern mining approach used by Uryupina and Moschitti ( 2015 ), i.e. Jaccard Item Mining (JIM). For a fair comparison, while Uryupina and Moschitti ( 2015 ) used mined patterns for extracting feature templates, we use them for selecting feature-values. We run the JIM algorithm on the same data and with the same setup as that of EPM. 14 This results in nine pairwise features, 260 POS tags, 38 dependency relations, 32 mention types, and 18 named entity tags. The “+JIM” row shows the results of deep-coref top-pairs model in which these feature-values are incorporated. As we see, EPM feature-values result in signiﬁcantly better performance than those of JIM while the number of EPM feature-values is considerably less than JIM.\nE3 [text, Section 3, page 2]: deep-coref ( Clark and Manning , 2016a ) and e2ecoref ( Lee et al. , 2017 ) are among the best performing coreference resolvers from which e2ecoref performs better on the CoNLL test set. deepcoref is a pipelined system, i.e. a mention detection ﬁrst determines the list of candidate mentions with their corresponding features. It contains various coreference models including the mention-pair, mention-ranking, and entity-based"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The 'single' and 'ensemble' rows represent the results of the single and ensemble models of e2e-coref."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E2",
+    "fact": "The 'single' and 'ensemble' rows represent the results of the single and ensemble models of e2e-coref."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The specific F1 score values for the models and the statistical significance of the performance are not provided in the evidence. The evidence only mentions the models and their performance on the CoNLL test set but does not provide the F1 scores or the statistical significance of the performance.",
+  "sufficient": false
+ }
+}

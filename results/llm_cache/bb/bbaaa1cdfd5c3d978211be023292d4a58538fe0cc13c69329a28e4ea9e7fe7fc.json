@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 1716,
+  "total_tokens": 1790,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the training size of the Action Search model affect its performance?\nSub-questions:\n1. [figure] How does the training size of the Action Search model affect its performance?\nEvidence:\nE1 [figure, Figure 1, page 2] (image attached): Fig. 1: Left: A partial search sequence a human performed to ﬁnd the start of a Long Jump action (the shaded green area). Notably, humans are eﬃcient in spot- ting actions without observing a large portion of the video. Right: An eﬃciency comparison between humans, Action Search , and other detection/proposal meth- ods on THUMOS14 [24]. Our model is 5 . 8x more eﬃcient than other methods.\nWords printed in the figure: 2 H. Alwassel et al. Spotting Target Video Time t = 15 sec t = 67 sec t = 42 sec t = 63 sec t = 59 sec Human Search Step Task: Find the beginning of a Long Jump action 18 19 20 21 22 Average Precentage of Video Frames Observed to Localize Actions 5.0% 17.3% 100.0% Humans Action Search Detection/Proposal Methods\nE2 [figure, Figure 1, page 2]: Zoomed view (300 dpi) of: Fig. 1: Left: A partial search sequence a human performed to ﬁnd the start of a Long Jump action (the shaded green area). Notably, humans are eﬃcient in spot- ting actions without observing a large portion of the video. Right: An eﬃciency comparison between humans, Action Search , and other detection/proposal meth- ods on THUMOS14 [24]. Our model is 5 . 8x more eﬃcient than other methods.\nWords printed in the figure: 2 H. Alwassel et al. Spotting Target Video Time t = 15 sec t = 67 sec t = 42 sec t = 63 sec t = 59 sec Human Search Step Task: Find the beginning of a Long Jump action 18 19 20 21 22 Average Precentage of Video Frames Observed to Localize Actions 5.0% 17.3% 100.0% Humans Action Search Detection/Proposal Methods [image]"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The Action Search model is 5.8x more efficient than other methods."
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

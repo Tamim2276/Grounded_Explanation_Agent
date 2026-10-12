@@ -117,3 +117,44 @@ attached to the wrong subject or row is NOT supported". One call per draft over 
 passed layer 1, with the cited cells shown by row and column name, the cited items in full, and
 figure images. A missing verdict counts as unsupported. On the stub boundary cases it rejected the
 misattributed claim and nothing else (`results/day6_g2_boundary.json`).
+
+## v7 (2026-10-12): G1 must state the answer itself; dev error analysis (Day 7.1)
+
+Made after the error analysis of the 20 dev questions (`results/runs/full_dev_v6.jsonl`,
+`notes/results_for_paper.md` §4e). G1 had said "sufficient" with a fact that was on the topic but
+did not answer: "DA plays an important role" for "what is the *effect* of adding DA", an AUC by
+ripple-set size for "*which model* performs best".
+
+**G1** (`sufficiency.G1_SYSTEM`): added "The fact must BE the answer: for 'which X' it names the X;
+for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the
+change; for 'how many' or 'what value' it gives the number. A fact that only restates the question
+or describes the topic does not answer it." The **schema order** changed too: `answers`,
+`uncovered`, `missing`, then `sufficient` last. llama.cpp fills the fields in schema order, so
+before this the verdict was written first and the facts only justified it afterwards.
+
+Every other prompt is unchanged; the version is global, so every reply is new under v7.
+
+**Not a prompt, but it changes G2 layer 1:** a quote is compared with its evidence after undoing
+PDF text-extraction quirks on both sides (`text.loose`): ligatures, curly quotes, line-end
+hyphenation, spaces before punctuation, spaced decimals. Four correct claims had been withheld for
+these (e.g. "in- ference", "0 . 5%"). A changed word or number still fails. And a rewrite no
+longer repeats a kept claim (the same claim appeared up to 3 times).
+
+**Gemini (comparison system):** the same prompts and schemas, sent to `gemini-3.8-flash` through
+Google's OpenAI-compatible endpoint. `seed` is not accepted there (HTTP 400), so it is left out
+for Gemini only; temperature is 0 and every reply is cached as for the local model.
+
+**Length limits (still v7):** the first v7 run showed G1 repeating itself inside `missing` for
+5,800 tokens (88 s) until the reply broke off as invalid JSON, and G1 then fell back to its rules.
+So `fact` and `missing` have `maxLength: 300` (llama.cpp enforces it token by token), and every
+request has `max_tokens: 2048` (`cfg.LLM_MAX_TOKENS`; the longest real reply on dev was about 460).
+The v7 numbers are from the run with these limits.
+
+## v8 (2026-10-12): tried and dropped
+
+v7 refused 13 of 20 dev questions, including the GRID table, because it did not "explicitly
+state" the best method. v8 added "The answer may need a simple reading of the evidence: comparing
+the values in a table or chart, or a description in the text", named 'what is the role of X'
+questions, and made `evidence` an enum of the buffer's ids (v7 once wrote "E1, E2, E5, E6"). On
+dev: 5 right, 2 partly, **3 wrong**, 10 none (v7: 6, 1, **0**, 13). **v7 restored**, and tuning
+stopped (`notes/error_analysis_dev.md`).

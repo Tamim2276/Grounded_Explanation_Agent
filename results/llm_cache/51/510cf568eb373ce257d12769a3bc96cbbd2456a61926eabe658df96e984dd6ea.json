@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 193,
+  "prompt_tokens": 1952,
+  "total_tokens": 2145,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Action Search requires the fewest observations to spot an action in a video with 2.5% action coverage.\" -- cites: E1 (Figure 4): quote \"Action Search takes 22%, 17%, and 13% fewer observations than the Direction Baseline on videos with at most 0.5%, 2.5%, and 5% action coverage, respectively.\"\n2. \"The Direction Baseline method requires more observations than Action Search for spotting actions in videos with 2.5% action coverage.\" -- cites: E1 (Figure 4): quote \"Action Search takes 22%, 17%, and 13% fewer observations than the Direction Baseline on videos with at most 0.5%, 2.5%, and 5% action coverage, respectively.\"\n\nCited evidence:\n[E1] (figure, Figure 4, page 10) (image attached): Fig. 4: Action spotting results for the AVA testing set for 1000 independent search trials per video. We report the cumulative spotting metric results on videos with action coverage ( i.e. the percentage of video containing actions) ≤ 5%. Action Search takes 22%, 17%, and 13% fewer observations than the Direction Baseline on videos with at most 0 . 5%, 2 . 5%, and 5% action coverage, respectively.\nWords printed in the figure: 10 H. Alwassel et al. 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 Max Action Coverage per Video (%) 75 100 125 150 175 200 225 Expected Number of Observations Until Spotting an Action Action Search Direction Baseline Random Baseline\nValues (cite as cells):\n  row 'Random Baseline': '0.5' = 217.9; '1.0' = 169.6; '1.5' = 158.8; '2.0' = 136.9; '2.5' = 133.2; '3.0' = 125.2; '3.5' = 121.9; '4.0' = 118.5; '4.5' = 115.2; '5.0' = 113.1\n  row 'Direction Baseline': '0.5' = 208; '1.0' = 161.2; '1.5' = 150; '2.0' = 127.7; '2.5' = 124.3; '3.0' = 116.5; '3.5' = 112.9; '4.0' = 109.4; '4.5' = 105.6; '5.0' = 103.3\n  row 'Action Search': '0.5' = 162.7; '1.0' = 126.3; '1.5' = 126.3; '2.0' = 106.1; '2.5' = 103; '3.0' = 97.7; '3.5' = 94.7; '4.0' = 93.8; '4.5' = 91.5; '5.0' = 90 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that Action Search requires the fewest observations to spot an action in a video with 2.5% action coverage. However, the evidence indicates that Action Search takes 13% fewer observations than the Direction Baseline, not the fewest. The Direction Baseline method actually requires more observations than Action Search for videos with 2.5% action coverage."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence states that Action Search takes 13% fewer observations than the Direction Baseline on videos with 2.5% action coverage, which implies that the Direction Baseline method requires more observations than Action Search for spotting actions in videos with 2.5% action coverage."
+   }
+  ]
+ }
+}

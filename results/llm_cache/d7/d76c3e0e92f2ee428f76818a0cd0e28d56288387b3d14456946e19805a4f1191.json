@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 211,
+  "total_tokens": 276,
+  "prompt_tokens_details": {
+   "cached_tokens": 128
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nSub-goals:\n1. [table] Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: No evidence provided for sub-question 2, which asks about the performance of the 'top-pairs' model on the WikiCoref dataset in comparison to other models. The table only shows the ranking and top-pairs scores for the 'top-pairs' model, but not in comparison to other models. The text provides some of"
+  }
+ ],
+ "answer": {
+  "reason": "The table provides the necessary data to determine the best-performing deep-coref model on the WikiCoref dataset.",
+  "tool": "table",
+  "query": "Which deep-coref model performed best on the WikiCoref dataset according to the table?"
+ }
+}

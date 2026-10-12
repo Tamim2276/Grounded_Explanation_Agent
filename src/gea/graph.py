@@ -6,13 +6,14 @@
 # a box in show_graph() can be found in the code by searching for its label.
 from langgraph.graph import END, START, StateGraph
 
+from gea import config as cfg
 from gea.generation import (drop_unsupported, faithfulness_gate, g2_faithfulness_check,
                             gate_until_proofs, n9_grounded_generator, rewrite_prep)
 from gea.planner import n5_agentic_planner
 from gea.proofs import (n10a_claim_links, n10b_bounding_boxes, n10c_dag_trace,
                         n11_report_synthesis, n12_final_output)
 from gea.question import n1_query_intake, n2_query_encoder
-from gea.retrieval import (TOOL_NODES, n6a_text_retriever, n6b_table_retriever,
+from gea.retrieval import (TOOL_NODES, n6_all_tools, n6a_text_retriever, n6b_table_retriever,
                            n6c_figure_retriever, n7_region_zoom, n8_evidence_buffer,
                            route_tool, route_zoom)
 from gea.state import AgentState
@@ -149,3 +150,42 @@ def build_grounded_agent_graph():
     g.add_edge("n11_report_synthesis", "n12_final_output")
     g.add_edge("n12_final_output", END)
     return g.compile()
+
+
+def build_single_pass_graph():
+    # The single-pass baseline (BUILD_PLAN.md Day 7): the same nodes without agency.
+    # N1 -> N2 -> every tool once -> N8 -> N9 -> the three proofs -> N11 -> N12: no
+    # planner, no G1 (so it never abstains), no G2 (so no claim is checked or rewritten).
+    g = StateGraph(AgentState)
+    for name, fn in [("n1_query_intake", n1_query_intake),
+                     ("n2_query_encoder", n2_query_encoder),
+                     ("n6_all_tools", n6_all_tools),
+                     ("n8_evidence_buffer", n8_evidence_buffer),
+                     ("n9_grounded_generator", n9_grounded_generator),
+                     ("n10a_claim_links", n10a_claim_links),
+                     ("n10b_bounding_boxes", n10b_bounding_boxes),
+                     ("n10c_dag_trace", n10c_dag_trace),
+                     ("n11_report_synthesis", n11_report_synthesis),
+                     ("n12_final_output", n12_final_output)]:
+        g.add_node(name, fn)
+    for a, b in [(START, "n1_query_intake"), ("n1_query_intake", "n2_query_encoder"),
+                 ("n2_query_encoder", "n6_all_tools"), ("n6_all_tools", "n8_evidence_buffer"),
+                 ("n8_evidence_buffer", "n9_grounded_generator"),
+                 ("n11_report_synthesis", "n12_final_output"), ("n12_final_output", END)]:
+        g.add_edge(a, b)
+    for proof in ("n10a_claim_links", "n10b_bounding_boxes", "n10c_dag_trace"):
+        g.add_edge("n9_grounded_generator", proof)          # siblings of one fan-out, as in the full graph
+        g.add_edge(proof, "n11_report_synthesis")
+    return g.compile()
+
+
+def build_graph(variant: str = None):
+    # The graph of one evaluated system (cfg.VARIANT by default). "text_only" is the full
+    # graph: its difference is in the nodes (one tool, sub-goals all "text", tables and
+    # figures read as plain text), so run it inside cfg.override(VARIANT="text_only").
+    variant = variant or cfg.VARIANT
+    if variant in ("full", "text_only"):
+        return build_grounded_agent_graph()
+    if variant == "single_pass":
+        return build_single_pass_graph()
+    raise ValueError(f"unknown VARIANT {variant!r}")

@@ -1,0 +1,31 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 19,
+  "prompt_tokens": 84,
+  "total_tokens": 103,
+  "prompt_tokens_details": {
+   "cached_tokens": 71
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between clicks and impressions?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "clicks",
+   "impressions"
+  ]
+ }
+}

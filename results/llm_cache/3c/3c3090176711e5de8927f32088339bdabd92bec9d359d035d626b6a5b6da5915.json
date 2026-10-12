@@ -1,0 +1,33 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 1534,
+  "total_tokens": 1587,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: How much more prevalent are click events compared to conversion events in the Product Dataset?\nSub-questions:\n1. [figure] How much more prevalent are click events compared to conversion events in the Product Dataset?\nEvidence:\nE1 [figure, Figure 3, page 4] (image attached): Figure 3: Comparison of different models w.r.t. different sampling rates on Product Dataset.\nWords printed in the figure: 1 20 40 100 66 68 70 72 74 76 AUC CVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM 1 20 40 100 Train Set Size(%) 62 64 66 68 70 72 74 AUC CTCVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM\nE2 [figure, Figure 3, page 4]: Zoomed view (300 dpi) of: Figure 3: Comparison of different models w.r.t. different sampling rates on Product Dataset.\nWords printed in the figure: 1 20 40 100 66 68 70 72 74 76 AUC CVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM 1 20 40 100 Train Set Size(%) 62 64 66 68 70 72 74 AUC CTCVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM [image]"
+  }
+ ],
+ "answer": {
+  "sufficient": false,
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide the specific prevalence comparison between click events and conversion events in the Product Dataset."
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.8-flash",
+ "seconds": 7.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 196,
+  "total_tokens": 461
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nSub-goals:\n1. [table] How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nAlready tried: sub-goal 1 with table\nStill missing: any mention of 'two-phase framework'; any mention of 'classifier tweaking'; any mention of 'sample size'"
+  }
+ ],
+ "answer": {
+  "reason": "Since searching tables was already attempted, searching the text will identify descriptions of the experimental results comparing MSG and DI across sample sizes.",
+  "tool": "text",
+  "query": "MSG DI classifier tweaking sample size 2000 discrimination"
+ }
+}

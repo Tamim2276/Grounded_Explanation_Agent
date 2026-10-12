@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 39,
+  "prompt_tokens": 176,
+  "total_tokens": 215,
+  "prompt_tokens_details": {
+   "cached_tokens": 108
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between clicks and impressions?\nSub-goals:\n1. [figure] What is the relationship between clicks and impressions?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with table\nStill missing: The relationship between clicks and impressions in terms of their numerical values or a direct comparison is not provided in the evidence items. The figure only illustrates the concept of sample selection bias and the composition of training and inference spaces, but does not provide a direct link,比"
+  }
+ ],
+ "answer": {
+  "reason": "The figure does not provide the numerical relationship between clicks and impressions.",
+  "tool": "text",
+  "query": "relationship between clicks and impressions numerical values"
+ }
+}

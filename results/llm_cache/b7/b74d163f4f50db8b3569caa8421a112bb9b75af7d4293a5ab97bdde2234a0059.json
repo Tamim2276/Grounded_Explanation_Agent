@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 181,
+  "prompt_tokens": 804,
+  "total_tokens": 985,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The 'ESMM' model achieves the highest AUC(mean ± std) on both the CVR and CTCVR tasks.\" -- cites: E1 (Table 2): row 'ESMM', column 'AUC(mean ± std) on CVR task' = 68.56 ± 0.37; E1 (Table 2): row 'ESMM', column 'AUC(mean ± std) on CTCVR task' = 65.32 ± 0.49\n2. \"The 'BASE' model has an AUC(mean ± std) of 66.00 ± 0.37 on the CVR task and 62.07 ± 0.45 on the CTCVR task.\" -- cites: E1 (Table 2): row 'BASE', column 'AUC(mean ± std) on CVR task' = 66.00 ± 0.37; E1 (Table 2): row 'BASE', column 'AUC(mean ± std) on CTCVR task' = 62.07 ± 0.45\n\nCited evidence:\n[E1] (table, Table 2, page 4): Table 2: Comparison of different models on Public Dataset.\nValues (cite as cells):\n  row 'BASE': 'AUC(mean ± std) on CVR task' = 66.00 ± 0.37; 'AUC(mean ± std) on CTCVR task' = 62.07 ± 0.45\n  row 'AMAN': 'AUC(mean ± std) on CVR task' = 65.21 ± 0.59; 'AUC(mean ± std) on CTCVR task' = 63.53 ± 0.57\n  row 'OVERSAMPLING': 'AUC(mean ± std) on CVR task' = 67.18 ± 0.32; 'AUC(mean ± std) on CTCVR task' = 63.05 ± 0.48\n  row 'UNBIAS': 'AUC(mean ± std) on CVR task' = 66.65 ± 0.28; 'AUC(mean ± std) on CTCVR task' = 63.56 ± 0.70\n  row 'DIVISION': 'AUC(mean ± std) on CVR task' = 67.56 ± 0.48; 'AUC(mean ± std) on CTCVR task' = 63.62 ± 0.09\n  row 'ESMM-NS': 'AUC(mean ± std) on CVR task' = 68.25 ± 0.44; 'AUC(mean ± std) on CTCVR task' = 64.44 ± 0.62\n  row 'ESMM': 'AUC(mean ± std) on CVR task' = 68.56 ± 0.37; 'AUC(mean ± std) on CTCVR task' = 65.32 ± 0.49"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence shows that the 'ESMM' model achieves an AUC(mean ± std) of 68.56 ± 0.37 on the CVR task and 65.32 ± 0.49 on the CTCVR task, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence shows that the 'BASE' model achieves an AUC(mean ± std) of 66.00 ± 0.37 on the CVR task and 62.07 ± 0.45 on the CTCVR task, which matches the claim."
+   }
+  ]
+ }
+}

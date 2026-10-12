@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 234,
+  "prompt_tokens": 1822,
+  "total_tokens": 2056,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The three main components of the Action Search model architecture are the Visual Encoder, LSTM, and Spotting Target.\" -- cites: E1 (Figure 3): quote \"At each step, (i) a visual encoder transforms the visual observation extracted from the model’s current temporal location to a representative feature vector; (ii) an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location; (iv) the model moves to the new temporal location.\"\n2. \"The Visual Encoder is responsible for transforming visual observations into feature vectors.\" -- cites: E1 (Figure 3): quote \"At each step, (i) a visual encoder transforms the visual observation extracted from the model’s current temporal location to a representative feature vector;\"\n3. \"The LSTM processes the feature vector and the state to predict the next search location.\" -- cites: E1 (Figure 3): quote \"an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location;\"\n4. \"The Spotting Target is used to predict the next search location in the video.\" -- cites: E1 (Figure 3): quote \"the model moves to the new temporal location.\"\n\nCited evidence:\n[E1] (figure, Figure 3, page 7) (image attached): Fig. 3: Our model harnesses the temporal context from its current location and the history of what it has observed to predict the next search location in the video. At each step, (i) a visual encoder transforms the visual observation ex- tracted from the model’s current temporal location to a representative feature vector; (ii) an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location; (iv) the model moves to the new temporal location.\nWords printed in the figure: Action Search: Spotting Actions in Videos 7 𝐡𝑖 𝑓(𝐗𝑖) 𝐡𝑖+1 𝑓(𝐗𝑖+1) 𝐡𝑖−2 𝑓(𝐗𝑖−2) 𝐗𝑖 𝐗𝑖+1 𝐗𝑖−1 𝐗𝑖−2 𝐯𝑖 𝐯𝑖+1 𝐯𝑖−1 𝐯𝑖−2 𝐡𝑖−3 𝑓(𝐗𝑖−3) 𝑓(𝐗𝑖) 𝑓(𝐗𝑖−2) 𝑓(𝐗𝑖−3) LSTM Visual Encoder Spotting Target 𝐗𝒊: Visual Observation 𝐯𝒊: Feature Vector 𝐡𝒊: LSTM State 𝑓𝐗𝒊: Temporal Location Video Time . . . . . . . . . . . . 𝑓(𝐗𝑖+1) 𝑓(𝐗𝑖−1) Video Time 𝐡𝑖−1 𝑓(X𝑖−1) [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence lists the three main components of the Action Search model architecture as the Visual Encoder, LSTM, and Spotting Target, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence states that the Visual Encoder transforms the visual observation into a feature vector, which aligns with the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The cited evidence indicates that the LSTM consumes the feature vector and the state to output the updated state and the next search location, which supports the claim."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The cited evidence does not mention the Spotting Target being used to predict the next search location. Instead, it states that the model moves to the new temporal location, which is not the same as predicting the next search location."
+   }
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 125,
+  "prompt_tokens": 2612,
+  "total_tokens": 2737,
+  "prompt_tokens_details": {
+   "cached_tokens": 700
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the fact, number or picture that answers it -- not merely the same topic. The answer may need a simple reading of the evidence: comparing the values in a table or chart, or a description in the text. Name the answer itself: for 'which X' the X; for 'how does A affect B' or 'what is the effect of A' the direction or size of the change; for 'what is the role of X' or 'how does X work' what X does; for 'how many' or 'what value' the number. A fact that only restates the question does not answer it. First give, for each sub-question you can answer, the id of ONE item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How much more prevalent are click events compared to conversion events in the Product Dataset?\nSub-questions:\n1. [figure] How much more prevalent are click events compared to conversion events in the Product Dataset?\nEvidence:\nE1 [figure, Figure 3, page 4] (image attached): Figure 3: Comparison of different models w.r.t. different sampling rates on Product Dataset.\nWords printed in the figure: 1 20 40 100 66 68 70 72 74 76 AUC CVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM 1 20 40 100 Train Set Size(%) 62 64 66 68 70 72 74 AUC CTCVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM\nE2 [figure, Figure 3, page 4]: Zoomed view (300 dpi) of: Figure 3: Comparison of different models w.r.t. different sampling rates on Product Dataset.\nWords printed in the figure: 1 20 40 100 66 68 70 72 74 76 AUC CVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM 1 20 40 100 Train Set Size(%) 62 64 66 68 70 72 74 AUC CTCVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM\nE3 [table, Table 1, page 4]: Table 1: Statistics of experimental datasets.\ndataset | #user | #item | #impression | #click | #conversion\nPublic Dataset | 0.4M | 4.3M | 84M | 3.4M | 18k\nProduct Dataset | 48M | 23.5M | 8950M | 324M | 1774k\nE4 [text, Section 2.3, page 3]: Datasets. During our survey, no public datasets with sequential labels of click and conversion are found in CVR modeling area. To evaluate the proposed approach, we collect traffic logs from Taobao’s recommender system and release a 1% random sampling version of the whole dataset, whose size still reaches 38GB (without compression). In the rest of the paper, we refer to the released dataset as Public Dataset and the whole one as Product Dataset . Table 1 summarizes the statistics of the two datasets. Detailed descriptions can be found in the website of Public Dataset 1 . Competitors. We conduct experiments with several competitive methods on CVR modeling. (1) BASE is the baseline model introduced in section 2.2. (2) AMAN [ 6 ] applies negative sampling strategy and best results are reported with sampling rate searched in { 10% , 20% , 50% , 100% } . (3) OVERSAMPLING [ 11 ] copies positive examples to reduce difficulty of training with sparse data, with sampling rate searched in { 2 , 3 , 5 , 10 } . (4) UNBIAS follows [ 10 ] to fit the truly underlying distribution from observations via rejection sampling. pCTR is taken as the rejection probability. (5) DIVISION estimates pCTR and pCTCVR with individually trained CTR and CTCVR networks and calculates pCVR by Eq.(2). (6) ESMM-NS is a lite version of ESMM without sharing of embedding parameters.\nE5 [text, Section 1, page 1]: buy some of them. In other words, user actions follow a sequential pattern of impression → click → conversion . In this way, CVR modeling refers to the task of estimating the post-click conversion rate, i.e., pCVR = p ( conversion | click , impression ) . In general, conventional CVR modeling methods employ similar techniques developed in click-through rate (CTR) prediction task, for example, recently popular deep networks [ 2 , 3 ]. However, there exist several task-specific problems, making CVR modeling challenging. Among them, we report two critical ones encountered in our real practice: i) sample selection bias ( SSB ) problem [ 12 ]. As illustrated in Fig.1, conventional CVR models are trained on dataset composed of clicked impressions, while are utilized to make inference on the entire space with samples of all impressions. SSB problem will hurt the generalization performance of trained models. ii) data sparsity ( DS ) problem. In practice, data gathered for training CVR model is generally much less than CTR task. Sparsity of training data makes CVR model fitting rather difficult.\nE6 [text, Section abstract, page 1]: Estimating post-click conversion rate (CVR) accurately is crucial for ranking systems in industrial applications such as recommendation and advertising. Conventional CVR modeling applies popular deep learning methods and achieves state-of-the-art performance. However it encounters several task-specific problems in practice, making CVR modeling challenging. For example, conventional CVR models are trained with samples of clicked impressions while utilized to make inference on the entire space with samples of all impressions. This causes a sample selection bias problem. Besides, there exists an extreme data sparsity problem, making the model fitting rather difficult. In this paper, we model CVR in a brand-new perspective by making good use of sequential pattern of user actions, i.e., impression → click → conversion . The proposed E ntire S pace M ulti-task M odel (ESMM) can eliminate the two problems simultaneously by i) modeling CVR directly over the entire space, ii) employing a feature representation transfer learning strategy. Experiments on dataset gathered from traffic logs of Taobao’s recommender system demonstrate that ESMM significantly outperforms competitive methods. We also release a sampling version of this dataset to enable future research. To the best of our knowledge, this is the first public dataset which contains samples with sequential dependence of click and conversion labels for CVR modeling. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Click events are more prevalent than conversion events in the Product Dataset."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide a specific numerical difference between click events and conversion events in the Product Dataset. It only shows a comparison of different models with respect to different sampling rates on the Product Dataset. To answer the question, we need a specific numerical value,",
+  "sufficient": false
+ }
+}

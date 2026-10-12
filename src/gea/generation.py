@@ -10,7 +10,7 @@ from typing import Optional
 from gea import config as cfg
 from gea.corpus import get_corpus
 from gea.state import AgentState, Evidence
-from gea.text import CLAIM_NUMBER, score, sentences
+from gea.text import CLAIM_NUMBER, loose, score, sentences
 from gea.trace import step, trace
 
 
@@ -219,8 +219,14 @@ def llm_draft(state: AgentState) -> list:
                            [e.id for e in evidence if e.kind == "figure"])
     answer = call_llm([{"role": "system", "content": N9_SYSTEM}, {"role": "user", "content": user}],
                       schema, "n9_claims", images=tuple(png for _, png in images))
-    return kept + [{"text": c["text"].strip(), "cites": [as_cite(x) for x in c["cites"]],
-                    "conclusion": bool(c.get("conclusion"))} for c in answer["claims"]]
+    drafted = [{"text": c["text"].strip(), "cites": [as_cite(x) for x in c["cites"]],
+                "conclusion": bool(c.get("conclusion"))} for c in answer["claims"]]
+    claims, seen = [], set()
+    for c in kept + drafted:        # a rewrite often repeats the kept claims (dev, Day 7): each once
+        if (key := loose(c["text"]).lower()) not in seen:
+            seen.add(key)
+            claims.append(c)
+    return claims
 
 
 def n9_grounded_generator(state: AgentState) -> dict:
@@ -259,7 +265,7 @@ def check_claim(claim: dict, evidence: dict) -> Optional[str]:
         ev = evidence.get(cite["evidence"])
         if ev is None:
             return f"cites {cite['evidence']}, which is not in the buffer"
-        if "quote" in cite and cite["quote"] not in ev.content:
+        if "quote" in cite and loose(cite["quote"]) not in loose(ev.content):   # word for word; PDF quirks undone
             return f"the quote is not in {ev.id}"
         if "cell" in cite:
             row, col = cite["cell"]

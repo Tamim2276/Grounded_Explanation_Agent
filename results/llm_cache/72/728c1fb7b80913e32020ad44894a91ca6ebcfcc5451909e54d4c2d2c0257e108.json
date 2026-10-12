@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 192,
+  "prompt_tokens": 1136,
+  "total_tokens": 1328,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?\nSub-questions:\n1. [text] How does the number of common k-hop neighbors change as the hop distance increases for items with common raters?\n2. [text] How does the number of common k-hop neighbors change as the hop distance increases for items without common raters?\nEvidence:\nE1 [text, Section 4.4, page 7]: We conduct an empirical study to investigate the correlation between the average number of common neighbors of an item pair in the KG and whether they have common rater(s) in RS. For each dataset, we first randomly sample one million item pairs, then count the average number of k -hop neighbors that the two items share in the KG under the following two circumstances: (1) the two items have at least one common rater in RS; (2) the two items have no common rater in RS. The results are presented in Figures 4a, 4b, 4c, respectively, which clearly show that if two items have common rater(s) in RS, they likely share more common k -hop neighbors in the KG for fixed k . The above findings empirically demonstrate that the similarity of proximity structures of two items in the KG could assist in measuring their relatedness in RS . In addition, we plot the ratio of the two average numbers with different hops (i.e., dividing the higher bar by its immediate lower bar for each hop number) in Figure 4d, from which we observe that the proximity structures of two items under the two circumstances become more similar with the increase of the hop number. This is because any two items are probable to share a large amount of k -hop neighbors in the KG for a large k , even if there is no direct similarity between them in reality. The result motivates us to find a moderate hop number in RippleNet to explore users’ potential interests as far as possible while avoiding introducing too much noise.\nE2 [text, Section Figure 4, page 7]: Figure 4: The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets. (d) The ratio of the two average numbers with different hops. 1 2 3 4 Hop 0 20 40 60 # common k-hop neighbors with common rater(s) without common rater (a) MovieLens-1M 1 2 3 4 Hop 0 5 10 15 # common k-hop neighbors with common rater(s) without common rater (b) Book-Crossing 1 2 3 4 Hop 0 20 40 60 # common k-hop neighbors with common rater(s) without common rater (c) Bing-News 1 2 3 4 Hop 0 2 4 6 8 Ratio MovieLens-1M Book-Crossing Bing-News (d) Ratio of two average numbers\nE3 [text, Section 3.2, page 3]: Figure 3 shows the decreasing relatedness between the center and surrounding entities. One concern about ripple sets is their sizes may get too large with the increase of hop number k . To address the concern, note that: (1) A large number of entities in a real KG are sink entities , meaning they only have incoming links but no outgoing links, such as \"2004\" and \"PG-13\" in Figure 3. (2) In specific recommendation scenarios such as movie or book recommendations, relations can be limited to scenario-related categories to reduce the size of ripple sets and improve relevance among entities. For example, in Figure 3, all relations are movie-related and contain the word \"film\" in their names. (3) The number of maximal hop H is usually not too large in practice, since entities that are too distant from a user’s history may bring more noise than positive signals. We will discuss the choice of H in the experiments part. (4) In RippleNet, we can sample a fixed-size set of neighbors instead of using a full ripple set to further reduce the computation overhead. Designing such samplers is an important direction of future work, especially the non-uniform samplers for better capturing user’s hierarchical potential interests."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The number of common k-hop neighbors increases as the hop distance increases for items with common raters."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E2",
+    "fact": "The number of common k-hop neighbors increases as the hop distance increases for items without common raters."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide specific numerical values or a clear direction of change for the number of common k-hop neighbors as the hop distance increases for items with and without common raters. It only shows a general trend of increase with the hop distance, but does not specify the magnitude,",
+  "sufficient": false
+ }
+}

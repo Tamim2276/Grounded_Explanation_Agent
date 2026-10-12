@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 150,
+  "prompt_tokens": 1322,
+  "total_tokens": 1472,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The figure shows the pipeline of the proposed method, which includes a Dynamic Attention Block (DA) as part of the talking face generator.\" -- cites: E1 (Figure 2): quote \"Figure 2: Pipeline of our proposed method.\"\n2. \"The Dynamic Attention Block (DA) is highlighted in the zoomed view of the pipeline.\" -- cites: E2 (Figure 2): observation \"The Dynamic Attention Block (DA) is highlighted in the zoomed view of the pipeline.\"\n\nCited evidence:\n[E1] (figure, Figure 2, page 3) (image attached): Figure 2: Pipeline of our proposed method.\n[E2] (figure, Figure 2, page 3): a zoomed view of Figure 2 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The figure cited in E1 (Figure 2) shows the pipeline of the proposed method, and the claim states that the Dynamic Attention Block (DA) is part of the pipeline, which is consistent with the evidence."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 (Figure 2) mentions a zoomed view of the pipeline, and the claim states that the Dynamic Attention Block (DA) is highlighted in this zoomed view, which is consistent with the evidence."
+   }
+  ]
+ }
+}

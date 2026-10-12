@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 147,
+  "prompt_tokens": 3213,
+  "total_tokens": 3360,
+  "prompt_tokens_details": {
+   "cached_tokens": 1446
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method requires the fewest observations to spot an action in a video with 2.5% action coverage?\nSub-questions:\n1. [figure] Which method requires the fewest observations to spot an action in a video with 2.5% action coverage?\nEvidence:\nE1 [figure, Figure 4, page 10] (image attached): Fig. 4: Action spotting results for the AVA testing set for 1000 independent search trials per video. We report the cumulative spotting metric results on videos with action coverage ( i.e. the percentage of video containing actions) ≤ 5%. Action Search takes 22%, 17%, and 13% fewer observations than the Direction Baseline on videos with at most 0 . 5%, 2 . 5%, and 5% action coverage, respectively.\nWords printed in the figure: 10 H. Alwassel et al. 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 Max Action Coverage per Video (%) 75 100 125 150 175 200 225 Expected Number of Observations Until Spotting an Action Action Search Direction Baseline Random Baseline\nBar values read from the PDF: Random Baseline -> 0.5: 217.9, 1.0: 169.6, 1.5: 158.8, 2.0: 136.9, 2.5: 133.2, 3.0: 125.2, 3.5: 121.9, 4.0: 118.5, 4.5: 115.2, 5.0: 113.1; Direction Baseline -> 0.5: 208, 1.0: 161.2, 1.5: 150, 2.0: 127.7, 2.5: 124.3, 3.0: 116.5, 3.5: 112.9, 4.0: 109.4, 4.5: 105.6, 5.0: 103.3; Action Search -> 0.5: 162.7, 1.0: 126.3, 1.5: 126.3, 2.0: 106.1, 2.5: 103, 3.0: 97.7, 3.5: 94.7, 4.0: 93.8, 4.5: 91.5, 5.0: 90\nE2 [figure, Figure 4, page 10]: Zoomed view (300 dpi) of: Fig. 4: Action spotting results for the AVA testing set for 1000 independent search trials per video. We report the cumulative spotting metric results on videos with action coverage ( i.e. the percentage of video containing actions) ≤ 5%. Action Search takes 22%, 17%, and 13% fewer observations than the Direction Baseline on videos with at most 0 . 5%, 2 . 5%, and 5% action coverage, respectively.\nWords printed in the figure: 10 H. Alwassel et al. 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 Max Action Coverage per Video (%) 75 100 125 150 175 200 225 Expected Number of Observations Until Spotting an Action Action Search Direction Baseline Random Baseline\nBar values read from the PDF: Random Baseline -> 0.5: 217.9, 1.0: 169.6, 1.5: 158.8, 2.0: 136.9, 2.5: 133.2, 3.0: 125.2, 3.5: 121.9, 4.0: 118.5, 4.5: 115.2, 5.0: 113.1; Direction Baseline -> 0.5: 208, 1.0: 161.2, 1.5: 150, 2.0: 127.7, 2.5: 124.3, 3.0: 116.5, 3.5: 112.9, 4.0: 109.4, 4.5: 105.6, 5.0: 103.3; Action Search -> 0.5: 162.7, 1.0: 126.3, 1.5: 126.3, 2.0: 106.1, 2.5: 103, 3.0: 97.7, 3.5: 94.7, 4.0: 93.8, 4.5: 91.5, 5.0: 90\nE3 [text, Section 5.1, page 10]: Results and Analysis. We run Action Search and the two baseline methods for 1000 independent search trials per test video to compute the action spotting metric. At each trial, we initialize each model at a random temporal location in the video, and we reinitialize the search model if it fails to spot an action after 500 steps. Figure 4 shows the cumulative performance of all three models over videos with diﬀerent action coverage ( i.e. the percentage of the video length that contains action instances). Unlike both the Direction Baseline and Random Baseline , Action Search is able to harness temporal context to expedite the search process and, as a result, takes on average 16 . 6 % and 22 . 3 % less observations, respectively, before successfully spotting actions. Notably, there is a great performance diﬀerence between our model and the two baselines in videos with very sparse actions ( i.e. action coverage ≤ 1%). We attribute this to the importance of temporal context when searching for sparse actions in video.\nE4 [text, Section 1, page 3]: Inspired by the observation that humans are extremely eﬃcient and accurate in ﬁnding individual action instances in a video, we aim to solve the action spotting problem in this paper by imitating how humans search in videos. Contributions. (i) To address the lack of data on the behavior of human annotators, we put forward the Human Searches dataset, a new dataset composed of the search sequences of human annotators for the AVA [21] and THUMOS14 [24] datasets (Section 3). (ii) We propose Action Search , a novel Recurrent Neural Network approach that mimics the way humans spot actions in untrimmed videos (Section 4). (iii) We validate Action Search in the action spotting problem by demonstrating it requires on average 16 . 6 % and 22 . 3 % fewer observations to successfully spot an action than two baseline models (Section 5.1). Moreover, when our model is used in the domain of temporal action localization, it achieves state-of-the-art detection results on the THUMOS14 [24] dataset with 30 . 8 % mAP while only observing on average 17 . 3 % of the video (Section 5.2).\nE5 [text, Section 1, page 2]: Obviously, the overall computational cost of such an action search can be reduced by making the per-observation computation faster, as done in many previous work; however, as the video becomes long and the action instances sparse in the video, the number of observations needed dominates this cost. To get intuitions on how to automatically perform an eﬃcient action search in video, we take notice of how humans approach the problem. In Figure 1 (left), we show part of a search sequence a human observer carries out when asked to ﬁnd the beginning of a Long Jump action in a long video. This sequence reveals that the person can quickly ﬁnd the spotting target (in 22 search steps) without observing the entire video, which indicates the possible role temporal context plays in searching for actions. In this case, only a very small portion of the video is observed before the search successfully terminates. In fact, we observe a similar search pattern for diﬀerent action targets and across diﬀerent annotators. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Action Search takes 22% fewer observations than the Direction Baseline on videos with 2.5% action coverage."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide the number of observations for Action Search on videos with 2.5% action coverage. It only states the percentage reduction in observations compared to the Direction Baseline. The specific number of observations for Action Search is not provided in the evidence items. The",
+  "sufficient": false
+ }
+}

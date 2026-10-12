@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 349,
+  "prompt_tokens": 1853,
+  "total_tokens": 2202,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the training size of the Action Search model affect its performance?\nEvidence:\n[E1] (figure, Figure 1, page 2) (image attached): Fig. 1: Left: A partial search sequence a human performed to ﬁnd the start of a Long Jump action (the shaded green area). Notably, humans are eﬃcient in spot- ting actions without observing a large portion of the video. Right: An eﬃciency comparison between humans, Action Search , and other detection/proposal meth- ods on THUMOS14 [24]. Our model is 5 . 8x more eﬃcient than other methods.\nWords printed in the figure: 2 H. Alwassel et al. Spotting Target Video Time t = 15 sec t = 67 sec t = 42 sec t = 63 sec t = 59 sec Human Search Step Task: Find the beginning of a Long Jump action 18 19 20 21 22 Average Precentage of Video Frames Observed to Localize Actions 5.0% 17.3% 100.0% Humans Action Search Detection/Proposal Methods\n[E2] (figure, Figure 1, page 2): a zoomed view of Figure 1 (image attached)\n\nThese claims are already verified and kept:\n- The figure shows a comparison of the average percentage of video frames observed by humans, Action Search, and other detection/proposal methods at specific time points.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The figure shows a comparison of the average percentage of video frames observed by humans, Action Search, and other detection/proposal methods.\": support check: The figure does not show a comparison of the average percentage across all video frames observed by humans, Action Search, and other detection/proposal methods. Instead, it shows a comparison at specific time points (t = 15 sec, t = 42 sec, t = 59 sec).\n- \"The Action Search model is 5.8x more efficient than other methods in spotting actions.\": the quote is not in E1\n- \"The figure does not provide a comparison of the average percentage across all video frames observed by humans, Action Search, and other detection/proposal methods.\": support check: The figure in E1 (Figure 1) does show a comparison of the average percentage of video frames observed by humans, Action Search, and other detection/proposal methods at specific time points (t = 15 sec, t = 42 sec, t = 59 sec). [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The figure shows a comparison of the average percentage of video frames observed by humans, Action Search, and other detection/proposal methods at specific time points.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The figure shows a comparison of the average percentage of video frames observed by humans, Action Search, and other detection/proposal methods at specific time points (t = 15 sec, t = 42 sec, t = 59 sec)."
+     }
+    ]
+   },
+   {
+    "text": "The Action Search model is 5.8x more efficient than other methods in spotting actions.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The figure shows that the Action Search model is 5.8x more efficient than other methods in spotting actions."
+     }
+    ]
+   },
+   {
+    "text": "The figure does not provide a comparison of the average percentage across all video frames observed by humans, Action Search, and other detection/proposal methods.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The figure shows a comparison of the average percentage of video frames observed by humans, Action Search, and other detection/proposal methods at specific time points (t = 15 sec, t = 42 sec, t = 59 sec)."
+     }
+    ]
+   }
+  ]
+ }
+}

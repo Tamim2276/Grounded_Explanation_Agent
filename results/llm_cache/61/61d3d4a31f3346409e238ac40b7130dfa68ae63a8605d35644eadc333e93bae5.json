@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 173,
+  "total_tokens": 247,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best overall on both the CVR and CTCVR tasks?\nSub-goals:\n1. [text] Which model performs best overall on both the CVR and CTCVR tasks?\nAlready tried: sub-goal 1 with text\nStill missing: No further evidence is provided to determine which model performs best overall on both tasks. The evidence only indicates that ESMM achieves the highest AUC gains compared to BASE model on both tasks, but it does not explicitly state which model is the best overall among all models tested."
+  }
+ ],
+ "answer": {
+  "reason": "To find the model that performs best overall on both CVR and CTCVR tasks, we need to look for a direct comparison or ranking of models across these tasks.",
+  "tool": "text",
+  "query": "Which model performs best overall on both the CVR and CTCVR tasks?"
+ }
+}

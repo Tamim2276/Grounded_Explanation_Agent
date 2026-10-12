@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 149,
+  "prompt_tokens": 1040,
+  "total_tokens": 1189,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the training size of the Action Search model affect its performance?\nSub-questions:\n1. [text] How does the training size of the Action Search model affect its performance?\nEvidence:\nE1 [text, Section 5.1, page 9]: In this subsection, we demonstrate that our model is able to mimic the human search process when spotting actions in the AVA dataset [21]. We ﬁrst introduce our experimental protocol including a brief description of the dataset and metric used. Then, we compare Action Search against two spotting baseline models. Dataset. We conduct this experiment using the AVA v1.0 dataset [21], which is among the largest annotated action datasets and is composed of feature ﬁlms. We pick 15 action categories out of the original 80 set of actions. We train our model using the collected AVA searches from our Human Searches dataset. However, we prune oﬀthe search sequences with less than 8 steps. Refer to Section 3 for a description of the AVA searches and details about the action categories selection criteria. We evaluate our model on 35 testing videos. We use AVA 3-second annotations to deﬁne temporal boundaries for each action instance. Metric. We compare our model against other approaches according to the action spotting metric, which we deﬁne to be the expected number of unique observations made per video until spotting an action. An action is spotted if the model lands anywhere between its ground truth temporal bounds. Baseline Methods. To demonstrate the eﬀectiveness of our approach in learning to search eﬃciently, we consider two baseline models, Random Baseline and Direction Baseline (refer to the supplementary material for more baselines). Random Baseline : This model picks both the s ...\nE2 [text, Section 5.1, page 10]: Results and Analysis. We run Action Search and the two baseline methods for 1000 independent search trials per test video to compute the action spotting metric. At each trial, we initialize each model at a random temporal location in the video, and we reinitialize the search model if it fails to spot an action after 500 steps. Figure 4 shows the cumulative performance of all three models over videos with diﬀerent action coverage ( i.e. the percentage of the video length that contains action instances). Unlike both the Direction Baseline and Random Baseline , Action Search is able to harness temporal context to expedite the search process and, as a result, takes on average 16 . 6 % and 22 . 3 % less observations, respectively, before successfully spotting actions. Notably, there is a great performance diﬀerence between our model and the two baselines in videos with very sparse actions ( i.e. action coverage ≤ 1%). We attribute this to the importance of temporal context when searching for sparse actions in video.\nE3 [text, Section 4.4, page 9]: Here, we present diﬀerent variants of Action Search network structure and training. Experiments using these ﬂavors show minimal eﬀects on the ﬁnal results. Training with Weighted Loss. In order to put more emphasis on learning the steps towards the end of the ground truth search sequence, each term in the loss L is weighted inversely proportional to how close the search step is to the target action instance. We consider this variant to give less weight to learning the ﬁrst search steps a human annotator makes (seemingly random) before accumulating enough temporal context knowledge to guide subsequent search steps. Early Stopping Conﬁdence Score. Another ﬂavor integrates a new module that consumes the LSTM state h along with the feature vector v at each step and produces a probability p to determine if the search sequence has reached the spotting target. To train this model variant, we assign a probability p = 1 to all frames inside the spotting targets and p = 0 elsewhere. We add to L a new term that computes the softmax cross-entropy loss of this conﬁdence score."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "Action Search takes on average 16.6% and 22.3% less observations before successfully spotting actions compared to the Direction Baseline and Random Baseline, respectively."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide information about how the training size of the Action Search model affects its performance. It only compares the model's performance with two baseline methods and does not mention the effect of training size on the model's performance directly.",
+  "sufficient": false
+ }
+}

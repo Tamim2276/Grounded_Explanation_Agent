@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 84,
+  "prompt_tokens": 224,
+  "total_tokens": 308,
+  "prompt_tokens_details": {
+   "cached_tokens": 150
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nSub-goals:\n1. [text] How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nAlready tried: sub-goal 1 with text\nStill missing: The discrimination in the prediction of the two-phase framework (MSG) compared to that of DI when the sample size is 2000, both with and without classifier tweaking, is not explicitly stated in the provided evidence. The evidence only compares the two methods in general terms without specifying the "
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a specific comparison of discrimination in the prediction of MSG and DI with and without classifier tweaking for a sample size of 2000, which is not directly addressed in the provided evidence.",
+  "tool": "text",
+  "query": "discrimination prediction two-phase framework MSG DI sample size 2000 classifier tweaking"
+ }
+}

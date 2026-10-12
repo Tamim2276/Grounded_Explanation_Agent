@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 837,
+  "total_tokens": 905,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does Action Search use temporal context to reason about where to search next?\nSub-questions:\n1. [figure] How does Action Search use temporal context to reason about where to search next?\nEvidence:\nE1 [text, Section 5.3, page 13]: Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly. For example, it uses information about scenes/concepts such as gala dinner and ﬁghts to spot actions such as clink glass and shoot , respectively (top two rows, left column). Furthermore, when spotting the start times of actions, our model seems to understand the\nE2 [text, Section 5.1, page 9]: In this subsection, we demonstrate that our model is able to mimic the human search process when spotting actions in the AVA dataset [21]. We ﬁrst introduce our experimental protocol including a brief description of the dataset and metric used. Then, we compare Action Search against two spotting baseline models. Dataset. We conduct this experiment using the AVA v1.0 dataset [21], which is among the largest annotated action datasets and is composed of feature ﬁlms. We pick 15 action categories out of the original 80 set of actions. We train our model using the collected AVA searches from our Human Searches dataset. However, we prune oﬀthe search sequences with less than 8 steps. Refer to Section 3 for a description of the AVA searches and details about the action categories selection criteria. We evaluate our model on 35 testing videos. We use AVA 3-second annotations to deﬁne temporal boundaries for each action instance. Metric. We compare our model against other approaches according to the action spotting metric, which we deﬁne to be the expected number of unique observations made per video until spotting an action. An action is spotted if the model lands anywhere between its ground truth temporal bounds. Baseline Methods. To demonstrate the eﬀectiveness of our approach in learning to search eﬃciently, we consider two baseline models, Random Baseline and Direction Baseline (refer to the supplementary material for more baselines). Random Baseline : This model picks both the s ...\nE3 [text, Section 4.1, page 7]: The input to Action Search is a sequence of visual observations ( X 1 , X 2 , . . . , X n ) and the output is a sequence of temporal locations ( f ( X 1 ) , f ( X 2 ) , . . . , f ( X n )), i.e. a search sequence, produced by the search process. For a given video and at the i th search step, a visual encoder represents the observation X i extracted from the model’s current temporal location in the video by a feature vector v i . We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation. Finally, a fully-connected layer transforms h i (the updated state) to produce f ( X i ), the next location to search in the video."
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Action Search uses temporal context to spot actions quickly."
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

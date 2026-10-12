@@ -1,0 +1,57 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 217,
+  "prompt_tokens": 1723,
+  "total_tokens": 1940,
+  "prompt_tokens_details": {
+   "cached_tokens": 563
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How much more prevalent are click events compared to conversion events in the Product Dataset?\nEvidence:\n[E1] (figure, Figure 3, page 4) (image attached): Figure 3: Comparison of different models w.r.t. different sampling rates on Product Dataset.\nWords printed in the figure: 1 20 40 100 66 68 70 72 74 76 AUC CVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM 1 20 40 100 Train Set Size(%) 62 64 66 68 70 72 74 AUC CTCVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM\n[E2] (figure, Figure 3, page 4): a zoomed view of Figure 3 (image attached)\n[E3] (table, Table 1, page 4): Table 1: Statistics of experimental datasets.\nValues (cite as cells):\n  row 'Public Dataset': '#user' = 0.4M; '#item' = 4.3M; '#impression' = 84M; '#click' = 3.4M; '#conversion' = 18k\n  row 'Product Dataset': '#user' = 48M; '#item' = 23.5M; '#impression' = 8950M; '#click' = 324M; '#conversion' = 1774k\n\nThese claims are already verified and kept:\n- The Product Dataset has 324M click events and 1774k conversion events.\n- The figure does not provide direct evidence for the prevalence of click events compared to conversion events in the Product Dataset.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The ratio of click events to conversion events in the Product Dataset is approximately 185.5.\": the number 185.5 is in no citation [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The ratio of click events to conversion events in the Product Dataset is approximately 185.5.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Product Dataset",
+      "col": "#click",
+      "value": "324M"
+     },
+     {
+      "evidence": "E3",
+      "row": "Product Dataset",
+      "col": "#conversion",
+      "value": "1774k"
+     }
+    ]
+   },
+   {
+    "text": "The figure does not provide direct evidence for the prevalence of click events compared to conversion events in the Product Dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "observation": "The figure does not show the number of click events or conversion events."
+     }
+    ]
+   }
+  ]
+ }
+}

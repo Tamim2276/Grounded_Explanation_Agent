@@ -66,7 +66,7 @@ def n1_query_intake(state: AgentState) -> dict:
     q = state.get("question")
     assert q, "N1: no question in state"
     goals, how = model_or_rules(llm_sub_goals, rule_sub_goals, q)
-    if cfg.BACKEND == "real" and cfg.KIND_ROUTER == "vote":
+    if cfg.BACKEND == "real" and cfg.KIND_ROUTER == "vote" and cfg.VARIANT != "text_only":
         # The splitter's words, the examples' kind: the 7B model mostly answers "text" (8/20
         # right on dev), the vote of labelled SPIQA questions 17/20. Real papers only: the
         # stub's fake paper is not SPIQA.
@@ -74,8 +74,9 @@ def n1_query_intake(state: AgentState) -> dict:
         voted = [kind_of(g["text"]) for g in goals]
         goals = [{**g, "modality": kind} for g, (kind, _, _) in zip(goals, voted)]
         how += "; kinds by vote " + ", ".join(f"{votes}/{k} {kind}" for kind, votes, k in voted)
-    if cfg.SUB_GOAL_MODALITY:                         # testing knob (scripts/smoke_real.py)
-        goals = [{**g, "modality": cfg.SUB_GOAL_MODALITY} for g in goals]
+    forced = "text" if cfg.VARIANT == "text_only" else cfg.SUB_GOAL_MODALITY   # the baseline; a testing knob
+    if forced:
+        goals = [{**g, "modality": forced} for g in goals]
     listing = "; ".join(f"({i}) {g['modality']}: {g['text']}" for i, g in enumerate(goals, 1))
     return {"sub_goals": goals, "events": step("N1", f"{len(goals)} sub-goal(s){how}: {listing}")}
 

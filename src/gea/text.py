@@ -1,5 +1,6 @@
 # Small text helpers shared by the retrievers, the gates and the generator.
 import re
+import unicodedata
 
 STOPWORDS = set('''a an and are as at be by did do does for from has have how in is it its
 many much of on or our over than that the their this to was we were what when which who
@@ -40,3 +41,21 @@ def names_label(text: str, label: str) -> bool:
     # not "Table 21".
     variants = {label, label.replace("Figure", "Fig.")}
     return any(re.search(rf"\b{re.escape(v)}(?![\w])", text, re.IGNORECASE) for v in variants)
+
+
+QUOTE_MARKS = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"'})
+
+
+def loose(text: str) -> str:
+    # Text as G2 compares a quote with its evidence (Day 7): the quirks of PDF text
+    # extraction undone on BOTH sides -- ligatures ("classiﬁer"), curly quotes, words
+    # hyphenated at a line end ("in- ference"; then every hyphen, so "state-of-the- art"
+    # still matches), spaces before punctuation ("item v ."), spaced decimals ("0 . 5%")
+    # and runs of whitespace. Still a word-for-word comparison: no word may differ.
+    t = unicodedata.normalize("NFKC", text).translate(QUOTE_MARKS)
+    t = re.sub(r"-\s+", "", t).replace("-", "")
+    t = re.sub(r"\s+([.,;:!?%)\]])", r"\1", t)
+    t = re.sub(r"([(\[])\s+", r"\1", t)
+    t = re.sub(r"(\d)\.\s+(\d)", r"\1.\2", t)
+    return " ".join(t.split())
+

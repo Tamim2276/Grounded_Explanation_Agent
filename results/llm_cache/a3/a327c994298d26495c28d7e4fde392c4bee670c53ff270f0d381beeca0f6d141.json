@@ -1,0 +1,41 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 116,
+  "prompt_tokens": 1120,
+  "total_tokens": 1236,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nEvidence:\n[E1] (text, Section 5.2, page 7): D ∗ . Then, a decision tree h ∗ is built on D ∗ , and the RandomFlip algorithm is executed to tweak the classiﬁer so that the error bias is less than 0.05, i.e., The results are shown in Table 2. By using the two-phase framework, discrimination is removed from the training data as shown by DE D ∗ , and more importantly, removed from the prediction as shown by DE M h ∗ . We also see that, if the classiﬁer tweaking is not performed, the prediction still contains discrimination. However, for DI, even when the discrimination is removed from the training data, and the error bias in the classiﬁer is also removed, there still exists discrimination in prediction. These results are consistent with our theoretical conclusions.\n[E2] (text, Section 5.2, page 6): We ﬁrst measure the discrimination in each training data set, i.e., DE D . Then, we learn the classiﬁer h from the training data where two classiﬁers, decision tree (DT) and support vector machine (SVM) are used. By replacing the labels in the training data with the labels predicted by the classiﬁer, we obtain D h whose discrimination is measured as DE D h . Finally, we measure the discrimination in prediction, i.e., DE M h according to Proposition 3. For each sample size, we repeat the experiments 100 times by randomly generating 100 di ﬀ erent sets of training data. We report the average and variance of each measured quantity of discrimination. The results are shown in Table 1. As expected, with the increase of the sample size, the di ﬀ erence between DE M and DE D decreases as shown by the variance. Since DE D > 0 . 05, the training data contains discrimination. As a result, both the training data with predicted labels, i.e., D h , and the prediction, i.e., M h , also contain discrimination.\n[E3] (text, Section 5.2, page 6): To show the e ﬀ ectiveness of the two-phase framework, we ﬁrst apply MSG to completely remove the discrimination in the above training data, obtaining the modiﬁed training data\n[E4] (table, Table 2, page 6): Table 2: Measured discrimination after discrimination removal (decision tree as the classiﬁer).\nValues (cite as cells):\n  row 'DED∗': 'Two-phase' = DEMh∗; 'framework (MSG)' = DEMh∗(w/o classiﬁer tweaking); '' = DEMh∗\n  row '0.004 ± 3.7E−6': 'Two-phase' = 0.015 ± 1.0E−3; 'framework (MSG)' = 0.068 ± 4.6E−3; 'DI' = 2E−4 ± 1.4E−3; '' = 0.092 ± 6.1E−3\n  row '0.001 ± 1.7E−7': 'Two-phase' = 0.016 ± 5.3E−4; 'framework (MSG)' = 0.067 ± 4.3E−3; 'DI' = 0.001 ± 3.4E−4; '' = 0.095 ± 1.6E−3\n  row '2E−4 ± 9.7E−9': 'Two-phase' = 0.013 ± 3.3E−4; 'framework (MSG)' = 0.061 ± 3.3E−3; 'DI' = 0.001 ± 6.8E−5; '' = 0.107 ± 5.4E−4"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The discrimination in the prediction of the two-phase framework (MSG) with classifier tweaking is shown by the value DEMh∗ in Table 2.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "DED∗",
+      "col": "framework (MSG)",
+      "value": "DEMh∗"
+     }
+    ]
+   }
+  ]
+ }
+}

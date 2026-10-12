@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 182,
+  "total_tokens": 236,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nSub-goals:\n1. [text] Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nAlready tried: sub-goal 1 with text\nStill missing: No further evidence is provided to determine which specific task-oriented dialog system performs the best when the percentage of unseen information in the KB is high. The evidence only indicates that B O S S N E T is highly robust and competitive across all percentage levels, but it does not specify"
+  }
+ ],
+ "answer": {
+  "reason": "To find the specific task-oriented dialog system that performs best under high unseen information in the KB.",
+  "tool": "text",
+  "query": "task-oriented dialog system performs best high unseen information KB"
+ }
+}

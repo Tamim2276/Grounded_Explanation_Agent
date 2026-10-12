@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 100,
+  "prompt_tokens": 237,
+  "total_tokens": 337,
+  "prompt_tokens_details": {
+   "cached_tokens": 167
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which coreference model performs best on the CoNLL test set according to the F$_1$ score? Is this performance statistically significant compared to all other models in the table?\nSub-goals:\n1. [table] Which coreference model performs best on the CoNLL test set according to the F$_1$ score?\n2. [table] Is this performance statistically significant compared to all other models in the table?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: The evidence does not provide information about the performance of the +EPM model compared to other models in the table in terms of statistical significance. It only states that the performance is statistically significant compared to all other models in the table, but it does not specify which of '"
+  }
+ ],
+ "answer": {
+  "reason": "The question requires comparing the performance of the +EPM model to other models in terms of statistical significance, which is not directly provided in the table or text. Additional analysis or a different tool might be needed.",
+  "tool": "table",
+  "query": "Which coreference model performs best on the CoNLL test set according to the F1 score and is this performance statistically significant compared to all other models in the table?"
+ }
+}

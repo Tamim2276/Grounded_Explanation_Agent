@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 184,
+  "total_tokens": 238,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the support value of the node \"ana=NAM\"?\nSub-goals:\n1. [text] What is the support value of the node 'ana=NAM'?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The support value of the node 'ana=NAM' is not explicitly stated in the provided evidence for sub-question 2. It only provides the support values for other nodes in the tree structure, but not for 'ana=NAM'. The evidence does not contain the specific support value for 'ana=NAM'."
+  }
+ ],
+ "answer": {
+  "reason": "The support value for the node 'ana=NAM' is not directly mentioned in the provided evidence.",
+  "tool": "text",
+  "query": "support value of the node 'ana=NAM'"
+ }
+}

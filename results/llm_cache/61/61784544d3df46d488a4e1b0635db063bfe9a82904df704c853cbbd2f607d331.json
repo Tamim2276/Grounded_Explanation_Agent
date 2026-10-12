@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.8-flash",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 580,
+  "total_tokens": 1248
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nSub-questions:\n1. [table] How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nEvidence:\nE1 [table, Table 2, page 6]: Table 2: Measured discrimination after discrimination removal (decision tree as the classiﬁer).\n | Two-phase | framework (MSG) | DI | \nDED∗ | DEMh∗ | DEMh∗(w/o classiﬁer tweaking) | DED∗ | DEMh∗\n0.004 ± 3.7E−6 | 0.015 ± 1.0E−3 | 0.068 ± 4.6E−3 | 2E−4 ± 1.4E−3 | 0.092 ± 6.1E−3\n0.001 ± 1.7E−7 | 0.016 ± 5.3E−4 | 0.067 ± 4.3E−3 | 0.001 ± 3.4E−4 | 0.095 ± 1.6E−3\n2E−4 ± 9.7E−9 | 0.013 ± 3.3E−4 | 0.061 ± 3.3E−3 | 0.001 ± 6.8E−5 | 0.107 ± 5.4E−4"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The row labels in Table 2 indicating which row corresponds to a sample size of 2000 are missing.",
+  "sufficient": false
+ }
+}

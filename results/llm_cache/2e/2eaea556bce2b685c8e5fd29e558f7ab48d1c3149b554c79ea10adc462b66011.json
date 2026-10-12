@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 2314,
+  "total_tokens": 2391,
+  "prompt_tokens_details": {
+   "cached_tokens": 1059
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the probability of finding the pattern {head=F, ant=NAM} in the data?\nSub-questions:\n1. [figure] What is the probability of finding the pattern {head=F, ant=NAM} in the data?\nEvidence:\nE1 [table, Table 4, page 8]: Table 4 : Comparisons on the CoNLL test set. The F 1 gains that are statistically signiﬁcant: (1) “+EPM” compared to “top- pairs”, “ranking” and “JIM”, (2) “+EPM” compared to “reinforce” based on MUC, B 3 and LEA, (3) “single” compared to “+EPM” based on MUC and B 3 , and (4) “ensemble” compared to other systems. Signiﬁcance is measured based on the approximate randomization test ( p < 0 . 05 ) ( Noreen , 1989 ).\n |  |  | MUC |  |  | B3 |  |  | CEAFe |  | CoNLL |  | LEA | \n |  | R | P | F1 | R | P | F1 | R | P | F1 |  | R | P | F1\n | ranking | 70.43 | 79.57 | 74.72 | 58.08 | 69.26 | 63.18 | 54.43 | 64.17 | 58.90 | 65.60 | 54.55 | 65.68 | 59.60\n | reinforce | 69.84 | 79.79 | 74.48 | 57.41 | 70.96 | 63.47 | 55.63 | 63.83 | 59.45 | 65.80 | 53.78 | 67.23 | 59.76\ndeep-coref | top-pairs | 69.41 | 79.90 | 74.29 | 57.01 | 70.80 | 63.16 | 54.43 | 63.74 | 58.72 | 65.39 | 53.31 | 67.09 | 59.41\n | +EPM | 71.16 | 79.35 | 75.03 | 59.28 | 69.70 | 64.07 | 56.52 | 64.02 | 60.04 | 66.38 | 55.63 | 66.11 | 60.42\n | +JIM | 69.89 | 80.45 | 74.80 | 57.08 | 71.58 | 63.51 | 55.36 | 64.20 | 59.45 | 65.93 | 53.46 | 67.97 | 59.85\n | single | 74.02 | 77.82 | 75.88 | 62.58 | 67.45 | 64.92 | 59.16 | 62.96 | 61.00 | 67.27 | 58.90 | 63.79 | 61.25\ne2e | ensemble | 73.73 | 80.95 | 77.17 | 61.83 | 72.10 | 66.57 | 60.11 | 65.62 | 62.74 | 68.83 | 58.48 | 68.81 | 63.23\nE2 [figure, Figure 4, page 14] (image attached): Figure 4 : Conditional FP-Tree for the p = { head=F , ant=NAM } pattern.\nWords printed in the figure: ROOT ana=NAM (1,0) ant=NAM (1,0) head=F (1,0) head=T (0,1) head=F (1,0) ant=NOM (1,0)\nE3 [figure, Figure 4, page 14]: Zoomed view (300 dpi) of: Figure 4 : Conditional FP-Tree for the p = { head=F , ant=NAM } pattern.\nWords printed in the figure: ROOT ana=NAM (1,0) ant=NAM (1,0) head=F (1,0) head=T (0,1) head=F (1,0) ant=NOM (1,0) [image]"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The pattern {head=F, ant=NAM} appears 1 time in the data."
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

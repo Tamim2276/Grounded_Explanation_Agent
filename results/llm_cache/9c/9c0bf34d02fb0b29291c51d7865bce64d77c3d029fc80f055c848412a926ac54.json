@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 167,
+  "prompt_tokens": 1188,
+  "total_tokens": 1355,
+  "prompt_tokens_details": {
+   "cached_tokens": 912
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nSub-questions:\n1. [text] How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nEvidence:\nE1 [text, Section 5.2, page 6]: We ﬁrst measure the discrimination in each training data set, i.e., DE D . Then, we learn the classiﬁer h from the training data where two classiﬁers, decision tree (DT) and support vector machine (SVM) are used. By replacing the labels in the training data with the labels predicted by the classiﬁer, we obtain D h whose discrimination is measured as DE D h . Finally, we measure the discrimination in prediction, i.e., DE M h according to Proposition 3. For each sample size, we repeat the experiments 100 times by randomly generating 100 di ﬀ erent sets of training data. We report the average and variance of each measured quantity of discrimination. The results are shown in Table 1. As expected, with the increase of the sample size, the di ﬀ erence between DE M and DE D decreases as shown by the variance. Since DE D > 0 . 05, the training data contains discrimination. As a result, both the training data with predicted labels, i.e., D h , and the prediction, i.e., M h , also contain discrimination.\nE2 [text, Section 5.2, page 7]: D ∗ . Then, a decision tree h ∗ is built on D ∗ , and the RandomFlip algorithm is executed to tweak the classiﬁer so that the error bias is less than 0.05, i.e., The results are shown in Table 2. By using the two-phase framework, discrimination is removed from the training data as shown by DE D ∗ , and more importantly, removed from the prediction as shown by DE M h ∗ . We also see that, if the classiﬁer tweaking is not performed, the prediction still contains discrimination. However, for DI, even when the discrimination is removed from the training data, and the error bias in the classiﬁer is also removed, there still exists discrimination in prediction. These results are consistent with our theoretical conclusions.\nE3 [text, Section 3.1, page 4]: 3.2 Bounding Discrimination in prediction To approximate DE M h from D , sampling error cannot be avoided since D is only a subset of the entire population. Although exact measurement of sampling error is generally not feasible as M is unknown, it can be probabilistically bounded. In the following we ﬁrst bound the di ﬀ erence between DE M and its approximation DE D , and then extend the result to the di ﬀ erence between DE M h and its approximation DE D h . Proposition 5. Given a causal model M and a sample dataset D with size of n, the probability of the di ﬀ erence between DE M and DE D no larger than t is bounded by where n + and n − (n + + n − = n) are the numbers of individuals with c + and c − in D .\nE4 [text, Section Table 2, page 6]: Table 2: Measured discrimination after discrimination removal (decision tree as the classiﬁer). Two-phase framework (MSG) DI DED∗ DEMh∗ DEMh∗(w/o classifier tweaking) DED∗ DEMh∗ 0.004 ± 3.7E−6 0.015 ± 1.0E−3 0.068 ± 4.6E−3 2E−4 ± 1.4E−3 0.092 ± 6.1E−3 0.001 ± 1.7E−7 0.016 ± 5.3E−4 0.067 ± 4.3E−3 0.001 ± 3.4E−4 0.095 ± 1.6E−3 2E−4 ± 9.7E−9 0.013 ± 3.3E−4 0.061 ± 3.3E−3 0.001 ± 6.8E−5 0.107 ± 5.4E−4"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "The discrimination in the prediction of the two-phase framework (MSG) is lower than that of DI, both with and without classifier tweaking, when the sample size is 2000."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to compare the discrimination in the prediction of the two-phase framework (MSG) and DI with and without classifier tweaking when the sample size is 2000. The evidence only provides a comparison for the sample size of 2000, not for other sample sizes or without the DI",
+  "sufficient": false
+ }
+}

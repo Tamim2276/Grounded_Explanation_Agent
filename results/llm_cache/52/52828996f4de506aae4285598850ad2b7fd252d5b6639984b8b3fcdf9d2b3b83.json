@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 200,
+  "total_tokens": 274,
+  "prompt_tokens_details": {
+   "cached_tokens": 130
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nSub-goals:\n1. [table] Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nAlready tried: sub-goal 1 with text, sub-goal 1 with table\nStill missing: The evidence does not provide a specific task-oriented dialog system that performs the best when the percentage of unseen information in the KB is high. It only states that B O S S N ET is competitive or significantly better on standard metrics in all datasets and highly robust across all percentage"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence suggests that B O S S N ET is competitive or significantly better on standard metrics in all datasets and highly robust across all percentages of unseen information in the KB.",
+  "tool": "table",
+  "query": "B O S S N ET performance on standard metrics across datasets and percentages of unseen information in the KB."
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 78,
+  "prompt_tokens": 152,
+  "total_tokens": 230,
+  "prompt_tokens_details": {
+   "cached_tokens": 72
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why did Seq2Seq and Mem2Seq models perform poorly when the percentage of unseen entities in the knowledge base (KB) increased?\nSub-goals:\n1. [table] Why did Seq2Seq and Mem2Seq models perform poorly when the percentage of unseen entities in the knowledge base (KB) increased?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the performance of Seq2Seq and Mem2Seq models in relation to the percentage of unseen entities in the KB, which is likely to be found in the tables of the paper.",
+  "tool": "table",
+  "query": "performance of Seq2Seq and Mem2Seq models with increasing percentage of unseen entities in the KB"
+ }
+}

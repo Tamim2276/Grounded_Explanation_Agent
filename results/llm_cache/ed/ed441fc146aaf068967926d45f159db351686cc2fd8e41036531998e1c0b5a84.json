@@ -1,0 +1,83 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 386,
+  "prompt_tokens": 1958,
+  "total_tokens": 2344,
+  "prompt_tokens_details": {
+   "cached_tokens": 773
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of adding DA to the baseline method?\nEvidence:\n[E1] (figure, Figure 2, page 3) (image attached): Figure 2: Pipeline of our proposed method.\n[E2] (figure, Figure 2, page 3): a zoomed view of Figure 2 (image attached)\n[E3] (table, Table 3, page 6): Table 3: Ablation study of the key components AMIE and DA in our method as well as two strategies applied in AMIE: Asymmetric Training ( Asy. ) and JS represented estimator (JS). Ours = Baseline + AMIE + DA, and AMIE = MINE + Asy. + JS.\nValues (cite as cells):\n  row 'Methods': '' = PSNR ↑; 'Evaluation on' = SSIM ↑; 'LRW' = LMD ↓\n  row 'Baseline': '' = 28.88; 'Evaluation on' = 0.89; 'LRW' = 1.36\n  row '(a) + MINE': '' = 29.05; 'Evaluation on' = 0.89; 'LRW' = 1.38\n  row '(b) + DA': '' = 29.19; 'Evaluation on' = 0.90; 'LRW' = 1.37\n  row '(c) + MINE + DA': '' = 29.08; 'Evaluation on' = 0.89; 'LRW' = 1.32\n  row '(d) + MINE + JS': '' = 29.33; 'Evaluation on' = 0.90; 'LRW' = 1.50\n  row '(e) + MINE + JS + DA': '' = 29.12; 'Evaluation on' = 0.91; 'LRW' = 1.21\n  row '(f) + MINE + Asy. + DA': '' = 29.30; 'Evaluation on' = 0.90; 'LRW' = 1.33\n  row '(g) + AMIE': '' = 29.41; 'Evaluation on' = 0.92; 'LRW' = 1.22\n  row 'Ours (+ AMIE + DA)': '' = 29.64; 'Evaluation on' = 0.92; 'LRW' = 1.18\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"Adding DA to the baseline method increases the PSNR by 0.36 points.\": E3 Baseline/PSNR ↑ is None, the claim says 28.88\n- \"Adding DA to the baseline method slightly increases the SSIM by 0.01 points.\": the number 0.01 is in no citation\n- \"Adding DA to the baseline method decreases the LRW by 0.01 points.\": the number 0.01 is in no citation [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Adding DA to the baseline method increases the PSNR by 0.36 points.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Baseline",
+      "col": "PSNR ↑",
+      "value": "28.88"
+     },
+     {
+      "evidence": "E3",
+      "row": "(b) + DA",
+      "col": "PSNR ↑",
+      "value": "29.19"
+     }
+    ]
+   },
+   {
+    "text": "Adding DA to the baseline method slightly increases the SSIM by 0.01 points.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Baseline",
+      "col": "Evaluation on",
+      "value": "0.89"
+     },
+     {
+      "evidence": "E3",
+      "row": "(b) + DA",
+      "col": "Evaluation on",
+      "value": "0.90"
+     }
+    ]
+   },
+   {
+    "text": "Adding DA to the baseline method decreases the LRW by 0.01 points.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Baseline",
+      "col": "LRW",
+      "value": "1.36"
+     },
+     {
+      "evidence": "E3",
+      "row": "(b) + DA",
+      "col": "LRW",
+      "value": "1.37"
+     }
+    ]
+   }
+  ]
+ }
+}

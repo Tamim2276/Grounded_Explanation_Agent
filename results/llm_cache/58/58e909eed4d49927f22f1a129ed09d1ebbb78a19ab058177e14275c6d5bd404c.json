@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 113,
+  "prompt_tokens": 1531,
+  "total_tokens": 1644,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the fact, number or picture that answers it -- not merely the same topic. The answer may need a simple reading of the evidence: comparing the values in a table or chart, or a description in the text. Name the answer itself: for 'which X' the X; for 'how does A affect B' or 'what is the effect of A' the direction or size of the change; for 'what is the role of X' or 'how does X work' what X does; for 'how many' or 'what value' the number. A fact that only restates the question does not answer it. First give, for each sub-question you can answer, the id of ONE item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between clicks and impressions?\nSub-questions:\n1. [figure] What is the relationship between clicks and impressions?\nEvidence:\nE1 [figure, Figure 1, page 1] (image attached): Figure 1: Illustration of sample selection bias problem in conventional CVR modeling. Training space is composed of samples with clicked impressions. It is only part of the in- ference space which is composed of all impressions.\nWords printed in the figure: ���������� �� � � ��������� ��������� ��� � ������� � ��� �\nE2 [figure, Figure 1, page 1]: Zoomed view (300 dpi) of: Figure 1: Illustration of sample selection bias problem in conventional CVR modeling. Training space is composed of samples with clicked impressions. It is only part of the in- ference space which is composed of all impressions.\nWords printed in the figure: ���������� �� � � ��������� ��������� ��� � ������� � ��� � [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Clicks are a subset of impressions."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The relationship between clicks and impressions in terms of numbers or percentages is not provided in the evidence. The figure only illustrates the concept of sample selection bias in conventional CVR modeling, not the quantitative relationship between clicks and impressions.",
+  "sufficient": false
+ }
+}

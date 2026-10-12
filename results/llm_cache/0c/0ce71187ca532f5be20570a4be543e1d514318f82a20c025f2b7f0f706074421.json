@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 133,
+  "prompt_tokens": 803,
+  "total_tokens": 936,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nSub-questions:\n1. [table] Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nEvidence:\nE1 [text, Section 1, page 1]: Task-oriented dialog agents converse with a user with the goal of accomplishing a speciﬁc task and often interact with a knowledge-base (KB). For example, a restaurant reservation agent ( Henderson et al. , 2014 ) will be grounded to a KB that contains the names of restaurants, and their details. In real-world applications, the KB information could change over time. For example, (1) a KB associated with a movie ticket booking system gets updated every week based on new ﬁlm releases, and (2) a restaurant reservation agent, trained with the knowledge of eateries in one city, may be deployed in other cities with an entirely different range of establishments. In such situations, the system should have the ability to conform to new-found knowledge unseen during its training. Ideally, the training algorithm must learn to disentangle the language\nE2 [text, Section 1, page 2]: We perform evaluations over three datasets – bAbI ( Bordes and Weston , 2017 ), CamRest ( Wen et al. , 2016 ), and Stanford Multi-Domain Dataset ( Eric et al. , 2017 ). Of these, the last two are realworld datasets. We ﬁnd that B O S S N ET is competitive or signiﬁcantly better on standard metrics in all datasets as compared to state-of-the-art baselines. We also introduce a knowledge adaptability (KA) evaluation, in which we systematically increase the percentage of previously unseen entities in the KB. We ﬁnd that B O S S N ET is highly robust across all percentage levels. Finally, we also report a humanbased evaluation and ﬁnd that B O S S N ET responses are frequently rated higher than other baselines. 1. We propose B O S S N ET , a novel architecture to disentangle the language model from knowledge incorporation in task-oriented dialogs.\nE3 [text, Section 3.1, page 4]: Each bAbI dialog task has an additional OOV test set, which helps to evaluate a model’s robustness to change in information in the KB. A model that perfectly disentangles language and knowledge should have no drop in accuracy on the OOV test set when compared to the non-OOV test set. To measure the degree of disentanglement in a model, we generated 10 additional test sets for each real-world corpus by varying the percentage (in multiples of 10) of unseen entities in the KB. We systematically picked random KB entities and replaced all their occurrences in the dialog with new entity names. We"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "B O S S N E T performs the best"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide the specific task-oriented dialog system that performs the best when the percentage of unseen information in the KB is high. It only states that B O S S N E T is competitive or significantly better on standard metrics in all datasets and highly robust across all levels.",
+  "sufficient": false
+ }
+}

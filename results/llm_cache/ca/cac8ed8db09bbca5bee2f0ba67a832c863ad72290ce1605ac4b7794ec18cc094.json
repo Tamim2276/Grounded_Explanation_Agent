@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 343,
+  "prompt_tokens": 2442,
+  "total_tokens": 2785,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does Action Search use temporal context to reason about where to search next?\nEvidence:\n[E1] (text, Section 5.3, page 13): Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly. For example, it uses information about scenes/concepts such as gala dinner and ﬁghts to spot actions such as clink glass and shoot , respectively (top two rows, left column). Furthermore, when spotting the start times of actions, our model seems to understand the\n[E2] (text, Section 5.1, page 9): In this subsection, we demonstrate that our model is able to mimic the human search process when spotting actions in the AVA dataset [21]. We ﬁrst introduce our experimental protocol including a brief description of the dataset and metric used. Then, we compare Action Search against two spotting baseline models. Dataset. We conduct this experiment using the AVA v1.0 dataset [21], which is among the largest annotated action datasets and is composed of feature ﬁlms. We pick 15 action categories out of the original 80 set of actions. We train our model using the collected AVA searches from our Human Searches dataset. However, we prune oﬀthe search sequences with less than 8 steps. Refer to Section 3 for a description of the AVA searches and details about the action categories selection criteria. We evaluate our model on 35 testing videos. We use AVA 3-second annotations to deﬁne temporal boundaries for each action instance. Metric. We compare our model against other approaches according to the action spotting metric, which we deﬁne to be the expected number of unique observations made per video until spotting an action. An action is spotted if the model lands anywhere between its ground truth temporal bounds. Baseline Methods. To demonstrate the eﬀectiveness of our approach in learning to search eﬃciently, we consider two baseline models, Random Baseline and Direction Baseline (refer to the supplementary material for more baselines). Random Baseline : This model picks both the search direction and step size randomly. In particular, if the current search step is at time t of the video, it\n[E3] (text, Section 4.1, page 7): The input to Action Search is a sequence of visual observations ( X 1 , X 2 , . . . , X n ) and the output is a sequence of temporal locations ( f ( X 1 ) , f ( X 2 ) , . . . , f ( X n )), i.e. a search sequence, produced by the search process. For a given video and at the i th search step, a visual encoder represents the observation X i extracted from the model’s current temporal location in the video by a feature vector v i . We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation. Finally, a fully-connected layer transforms h i (the updated state) to produce f ( X i ), the next location to search in the video.\n[E4] (figure, Figure 5, page 14) (image attached): Fig. 5: Qualitative search sequences produced by Action Search . The left column corresponds to AVA [21] testing videos, and the right column corresponds to THUMOS14 [24] testing videos. The top two rows depict examples when our model successfully spots the target action location (in green). The last row illus- trate failure cases, i.e. when the action location (in red) is not spotted exactly. We observe that Action Search uses temporal context to reason about where to search next. In failure cases, we notice that our model often oscillates around actions without spotting frames within the exact temporal location.\nWords printed in the figure: 14 H. Alwassel et al. t=674.6 sec t=659.9 sec t=694.7 sec t=689.9 sec t=698.2 sec Model Search Step Video Time t=34.3 sec t=85.6 sec t=122.7 sec t=141.8 sec t=133.1 sec Model Search Step Video Time t=345.0 sec t=453.6 sec t=567.4 sec t=611.7 sec t=616.7 sec Model Search Step Video Time t=122.5 sec t=191.9 sec t=440.6 sec t=538.3 sec t=669.6 sec Model Search Step Video Time t=603.6 sec t=718.2 sec t=513.3 sec t=595.1 sec t=468.3 sec Model Search Step Video Time t=128.9 sec t=136.0 sec t=137.1 sec t=150.5 sec t=178.1 sec Model Search Step Video Time\n[E5] (figure, Figure 5, page 14): a zoomed view of Figure 5 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Action Search uses temporal context to reason about where to search next.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly."
+     }
+    ]
+   },
+   {
+    "text": "The model's search steps are shown in Figure 5.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows the search steps of the Action Search model."
+     }
+    ]
+   },
+   {
+    "text": "The model successfully spots the target action location in the top two rows of Figure 5.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The top two rows of Figure 5 show the model successfully spotting the target action location."
+     }
+    ]
+   },
+   {
+    "text": "In failure cases, the model often oscillates around actions without spotting frames within the exact temporal location.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The last row of Figure 5 illustrates failure cases where the action location is not spotted exactly."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 110,
+  "prompt_tokens": 1218,
+  "total_tokens": 1328,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the fact, number or picture that answers it -- not merely the same topic. The answer may need a simple reading of the evidence: comparing the values in a table or chart, or a description in the text. Name the answer itself: for 'which X' the X; for 'how does A affect B' or 'what is the effect of A' the direction or size of the change; for 'what is the role of X' or 'how does X work' what X does; for 'how many' or 'what value' the number. A fact that only restates the question does not answer it. First give, for each sub-question you can answer, the id of ONE item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which coreference model performs best on the CoNLL test set according to the F$_1$ score? Is this performance statistically significant compared to all other models in the table?\nSub-questions:\n1. [table] Which coreference model performs best on the CoNLL test set according to the F$_1$ score?\n2. [table] Is this performance statistically significant compared to all other models in the table?\nEvidence:\nE1 [table, Table 4, page 8]: Table 4 : Comparisons on the CoNLL test set. The F 1 gains that are statistically signiﬁcant: (1) “+EPM” compared to “top- pairs”, “ranking” and “JIM”, (2) “+EPM” compared to “reinforce” based on MUC, B 3 and LEA, (3) “single” compared to “+EPM” based on MUC and B 3 , and (4) “ensemble” compared to other systems. Signiﬁcance is measured based on the approximate randomization test ( p < 0 . 05 ) ( Noreen , 1989 ).\n |  |  | MUC |  |  | B3 |  |  | CEAFe |  | CoNLL |  | LEA | \n |  | R | P | F1 | R | P | F1 | R | P | F1 |  | R | P | F1\n | ranking | 70.43 | 79.57 | 74.72 | 58.08 | 69.26 | 63.18 | 54.43 | 64.17 | 58.90 | 65.60 | 54.55 | 65.68 | 59.60\n | reinforce | 69.84 | 79.79 | 74.48 | 57.41 | 70.96 | 63.47 | 55.63 | 63.83 | 59.45 | 65.80 | 53.78 | 67.23 | 59.76\ndeep-coref | top-pairs | 69.41 | 79.90 | 74.29 | 57.01 | 70.80 | 63.16 | 54.43 | 63.74 | 58.72 | 65.39 | 53.31 | 67.09 | 59.41\n | +EPM | 71.16 | 79.35 | 75.03 | 59.28 | 69.70 | 64.07 | 56.52 | 64.02 | 60.04 | 66.38 | 55.63 | 66.11 | 60.42\n | +JIM | 69.89 | 80.45 | 74.80 | 57.08 | 71.58 | 63.51 | 55.36 | 64.20 | 59.45 | 65.93 | 53.46 | 67.97 | 59.85\n | single | 74.02 | 77.82 | 75.88 | 62.58 | 67.45 | 64.92 | 59.16 | 62.96 | 61.00 | 67.27 | 58.90 | 63.79 | 61.25\ne2e | ensemble | 73.73 | 80.95 | 77.17 | 61.83 | 72.10 | 66.57 | 60.11 | 65.62 | 62.74 | 68.83 | 58.48 | 68.81 | 63.23"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "single"
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "single"
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The table does not provide statistical significance information for the models compared to each other.",
+  "sufficient": false
+ }
+}

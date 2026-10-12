@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 498,
+  "prompt_tokens": 2521,
+  "total_tokens": 3019,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the different methods compare in terms of their ability to generate realistic faces?\nEvidence:\n[E1] (text, Section L, page 5): 4.2 Quantitative Results We compare our model with four recent state-of-the-art methods, including Chung et al. [2017], Chen et al. [2018] Zhou et al. [2019], and Chen et al. [2019]. Table 1 shows the quantitative results of our method and its competitors with higher PSNR, SSIM and lower LMD, suggesting the best quality of the generated video frames of the talking faces. Although Zhou et al. [Zhou et al. , 2019] obtains the lowest PSNR, it obtains the second highest SSIM and its SSIM is signiﬁcantly better than Chung et al. [Chung et al. , 2017] and Chen et al. [Chen et al. , 2018]. To further verify the robustness for arbitrary person generation, we evaluate our method on another benchmark dataset GRID [Cooke et al. , 2006] and report the comparison results in Table 2. From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method. Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD. Therefore, our method always achieves the highest PSNR and SSIM, demonstrating our method is able to generate high-quality videos.\n[E2] (text, Section abstract, page 2): 2 Related Works In this section, we brieﬂy review the related works on talking face generation and mutual information estimation. 2.1 Talking Face Generation Earlier works on talking face generation mainly synthesized the speciﬁc identity from the dataset by given arbitrary speech audio. Rithesh et al. [2017] used a time-delayed LSTM to generate key points synced to the audio and use another network to generate the video frames conditioned on the key points. Supasorn et al. [2017] proposed a teeth proxy to improve the quality of the teeth during generation. Next, some works tried to synthesized the talking faces for the identities from the dataset [Chung et al. , 2017; Vougioukas et al. , 2018; Chen et al. , 2018]. Recently, the synthesis of the talking face for the arbitrary identities out of the dataset has drawn much attention. Zhou et al. [2019] proposed an adversarial learning method to disentangle the different information for one image during generation. Chen et al. [2019] proposed to leverage landmark as middle information to better guide face generation. However, they mainly focused on the inner-modal coherence, while lacking of discovering the cross-modal coherence.\n[E3] (text, Section abstract, page 1): 1 Introduction Talking face generation, which aims to generate a realistic talking video for the given still face image and speech clip, has been an active research topic. It has wide potential applications such as movie animation, teleconferencing, talking agents, and enhancing speech comprehension while preserving privacy. Although recent efforts have achieved impressive talking face synthesis for arbitrary identities, it is still a huge challenge due to the heterogeneous between audio and video, together with the appearance diversity of arbitrary identities. Existing state-of-the-art works [Zhou et al. , 2019; Chen et al. , 2019] either try to disentangle the content and identity features from the speech for the video generation step or leverage the landmark as a middle feature to bridge the gap between audio and video. Despite the great progress on feature representation for video generation, they usually leverage reconstruct loss between generated and real frames, while neglecting an essential problem in talking face generation: how\n[E4] (table, Table 1, page 5): Table 1: Quantitative results.\nValues (cite as cells):\n  row 'Methods': '' = PSNR ↑; 'Evaluation on' = SSIM ↑; 'LRW' = LMD ↓\n  row 'Chung et al. [2017]': '' = 28.06; 'Evaluation on' = 0.46; 'LRW' = 2.23\n  row 'Chen et al. [2018]': '' = 28.65; 'Evaluation on' = 0.53; 'LRW' = 1.92\n  row 'Zhou et al. [2019]': '' = 26.80; 'Evaluation on' = 0.88; 'LRW' = —\n  row 'Chen et al. [2019]': '' = 30.91; 'Evaluation on' = 0.81; 'LRW' = 1.37\n  row 'AMIE (Ours)': '' = 32.08; 'Evaluation on' = 0.92; 'LRW' = 1.21\n[E5] (figure, Figure 5, page 5) (image attached): Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\n[E6] (figure, Figure 5, page 5): a zoomed view of Figure 5 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Our method achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method."
+     }
+    ]
+   },
+   {
+    "text": "The quantitative results in Table 1 show that our method has the highest PSNR and SSIM, and the lowest LMD, indicating its superior ability to generate realistic faces.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Table 1 shows the quantitative results of our method and its competitors with higher PSNR, SSIM and lower LMD, suggesting the best quality of the generated video frames of the talking faces."
+     }
+    ]
+   },
+   {
+    "text": "The zoomed view of Figure 5 shows that our method produces smoother and more natural-looking faces compared to Zhou et al. and Chen et al., which have visible artifacts in the mouth area.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E6",
+      "observation": "The zoomed view of Figure 5 shows that our method produces smoother and more natural-looking faces compared to Zhou et al. and Chen et al., which have visible artifacts in the mouth area."
+     }
+    ]
+   },
+   {
+    "text": "The quantitative results in Table 1 indicate that our method has the highest PSNR and SSIM, and the lowest LMD, suggesting that it is the most effective in generating realistic faces.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "Table 1: Quantitative results. row 'AMIE (Ours)': '' = 32.08; 'Evaluation on' = 0.92; 'LRW' = 1.21"
+     }
+    ]
+   }
+  ]
+ }
+}

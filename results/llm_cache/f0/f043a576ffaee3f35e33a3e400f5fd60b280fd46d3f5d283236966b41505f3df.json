@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 178,
+  "prompt_tokens": 1728,
+  "total_tokens": 1906,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the fact, number or picture that answers it -- not merely the same topic. The answer may need a simple reading of the evidence: comparing the values in a table or chart, or a description in the text. Name the answer itself: for 'which X' the X; for 'how does A affect B' or 'what is the effect of A' the direction or size of the change; for 'what is the role of X' or 'how does X work' what X does; for 'how many' or 'what value' the number. A fact that only restates the question does not answer it. First give, for each sub-question you can answer, the id of ONE item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of adding DA to the baseline method?\nSub-questions:\n1. [figure] What is the effect of adding DA to the baseline method?\nEvidence:\nE1 [figure, Figure 2, page 3] (image attached): Figure 2: Pipeline of our proposed method.\nE2 [figure, Figure 2, page 3]: Zoomed view (300 dpi) of: Figure 2: Pipeline of our proposed method.\nE3 [table, Table 3, page 6]: Table 3: Ablation study of the key components AMIE and DA in our method as well as two strategies applied in AMIE: Asymmetric Training ( Asy. ) and JS represented estimator (JS). Ours = Baseline + AMIE + DA, and AMIE = MINE + Asy. + JS.\n |  | Evaluation on | LRW\nMethods | PSNR ↑ | SSIM ↑ | LMD ↓\nBaseline | 28.88 | 0.89 | 1.36\n(a) + MINE | 29.05 | 0.89 | 1.38\n(b) + DA | 29.19 | 0.90 | 1.37\n(c) + MINE + DA | 29.08 | 0.89 | 1.32\n(d) + MINE + JS | 29.33 | 0.90 | 1.50\n(e) + MINE + JS + DA | 29.12 | 0.91 | 1.21\n(f) + MINE + Asy. + DA | 29.30 | 0.90 | 1.33\n(g) + AMIE | 29.41 | 0.92 | 1.22\nOurs (+ AMIE + DA) | 29.64 | 0.92 | 1.18 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "Adding DA improves PSNR and SSIM, and slightly decreases LMD."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The effect of adding DA to the baseline method is not explicitly stated in the evidence provided. The table shows improvements in PSNR and SSIM, and a slight decrease in LMD, but it does not directly state the effect of adding DA to the baseline method. Additional information or a direct statement, ",
+  "sufficient": true
+ }
+}

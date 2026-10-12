@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 231,
+  "total_tokens": 290,
+  "prompt_tokens_details": {
+   "cached_tokens": 122
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nSub-goals:\n1. [table] Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nAlready tried: sub-goal 1 with table\nStill missing: The specific model that achieves the highest AUC on the MovieLens-1M dataset is not mentioned in the provided evidence. The table only shows AUC values for different sizes of a user’s ripple set for three datasets: MovieLens-1M, Book-Crossing, and Bing-News. The highest AUC value of 0.920 is for MovieLens-1M, but it does not specify which model achieves this AUC value."
+  }
+ ],
+ "answer": {
+  "reason": "The table does not specify which model achieves the highest AUC on the MovieLens-1M dataset.",
+  "tool": "text",
+  "query": "Which model performs the best in terms of AUC on the MovieLens-1M dataset?"
+ }
+}

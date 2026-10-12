@@ -7,8 +7,10 @@
 #   bash scripts/start_llm.sh               # first, in its own terminal
 #   python scripts/run_answers.py           # 10 dev questions
 #   python scripts/run_answers.py --n 20 --proofs 3
+#   python scripts/run_answers.py --n 20 --tag day7_dev   # Day 7.1: all dev, own files
 #
-# Writes results/day6_answers.json, notes/answers_day6.md and data/debug/day6/proof_*.png.
+# Writes results/<tag>_answers.json, notes/answers_<tag>.md and data/debug/<tag>/proof_*.png
+# (tag "day6" by default).
 # Re-running is instant: every model reply comes back from results/llm_cache.
 import argparse
 import sys
@@ -24,9 +26,6 @@ from gea.safeio import atomic_write_json, atomic_write_text, read_jsonl
 from gea.state import new_state
 from gea.viz import draw_proof
 
-OUT = cfg.PROJECT_ROOT / "results" / "day6_answers.json"
-NOTES = cfg.PROJECT_ROOT / "notes" / "answers_day6.md"
-PROOFS = cfg.DATA_DIR / "debug" / "day6"
 
 
 def cite_text(c: dict) -> str:
@@ -61,13 +60,17 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--n", type=int, default=10)
     ap.add_argument("--proofs", type=int, default=3)
+    ap.add_argument("--tag", default="day6", help="names the output files (results/<tag>_answers.json, ...)")
     args = ap.parse_args()
+    out_file = cfg.PROJECT_ROOT / "results" / f"{args.tag}_answers.json"
+    notes_file = cfg.PROJECT_ROOT / "notes" / f"answers_{args.tag}.md"
+    proofs_dir = cfg.DATA_DIR / "debug" / args.tag
     if not llm.llm_ready():
         print(f"No model server at {cfg.LLM_URL} (bash scripts/start_llm.sh): cached replies are used, "
               f"new calls fall back to the rules and the trace says so.\n")
     questions = read_jsonl(cfg.PROJECT_ROOT / "eval" / "splits" / "dev.jsonl")[:args.n]
-    agent, runs, md, drawn = build_grounded_agent_graph(), [], ["# Day 6: real grounded answers (dev)", ""], 0
-    PROOFS.mkdir(parents=True, exist_ok=True)
+    agent, runs, md, drawn = build_grounded_agent_graph(), [], [f"# Real grounded answers (dev, {args.tag})", ""], 0
+    proofs_dir.mkdir(parents=True, exist_ok=True)
     with cfg.override(BACKEND="real", LLM_MODE="llm", PLANNER_MODE="llm", TRACE=False):
         for q in questions:
             before, start = dict(llm.stats), time.time()
@@ -85,7 +88,7 @@ def main() -> int:
             if drawn < args.proofs and out.get("boxes"):
                 with pymupdf.open(get_corpus(q["paper_id"])["pdf"]) as doc:
                     for k, image in enumerate(draw_proof(out, doc)):
-                        image.save(PROOFS / f"proof_{q['qid'].replace('#', '_')}_{k + 1}.png")
+                        image.save(proofs_dir / f"proof_{q['qid'].replace('#', '_')}_{k + 1}.png")
                 drawn += 1
     n = len(runs)
     summary = {"questions": n, "prompt_version": llm.PROMPT_VERSION,
@@ -97,10 +100,10 @@ def main() -> int:
                "rewrites": sum(r["rewrites"] for r in runs),
                "reference_in_buffer": sum(r["reference_in_buffer"] for r in runs),
                "model_calls": sum(r["model_calls"] for r in runs), "seconds": round(sum(r["seconds"] for r in runs), 1)}
-    atomic_write_json(OUT, {"summary": summary, "runs": runs})
-    atomic_write_text(NOTES, "\n".join(md))
-    print(f"\n{summary}\nsaved {OUT.relative_to(cfg.PROJECT_ROOT).as_posix()}, "
-          f"{NOTES.relative_to(cfg.PROJECT_ROOT).as_posix()}, {drawn} proof image set(s) in data/debug/day6/")
+    atomic_write_json(out_file, {"summary": summary, "runs": runs})
+    atomic_write_text(notes_file, "\n".join(md))
+    print(f"\n{summary}\nsaved {out_file.relative_to(cfg.PROJECT_ROOT).as_posix()}, "
+          f"{notes_file.relative_to(cfg.PROJECT_ROOT).as_posix()}, {drawn} proof image set(s) in data/debug/{args.tag}/")
     return 0
 
 

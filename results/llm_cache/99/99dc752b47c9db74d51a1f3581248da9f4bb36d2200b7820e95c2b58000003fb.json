@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 126,
+  "total_tokens": 190,
+  "prompt_tokens_details": {
+   "cached_tokens": 74
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the training size of the Action Search model affect its performance?\nSub-goals:\n1. [figure] How does the training size of the Action Search model affect its performance?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the effect of training size on the model's performance, which is typically visualized in a figure showing performance metrics across different training sizes.",
+  "tool": "figure",
+  "query": "How does the training size of the Action Search model affect its performance?"
+ }
+}

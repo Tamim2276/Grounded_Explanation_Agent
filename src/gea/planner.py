@@ -13,8 +13,10 @@ def rule_based_action(state: AgentState) -> dict:
     uncovered = verdict["uncovered"] if verdict else list(range(len(goals)))
     target = uncovered[0] if uncovered else 0
     goal = goals[target]
-    order = [goal["modality"]] + [m for m in cfg.MODALITIES if m != goal["modality"]]
-    tool = next((m for m in order if (target, m) not in state.get("tried", [])), goal["modality"])
+    tools = cfg.tools()                               # text alone in the text-only baseline
+    first = goal["modality"] if goal["modality"] in tools else tools[0]
+    order = [first] + [m for m in tools if m != first]
+    tool = next((m for m in order if (target, m) not in state.get("tried", [])), first)
     extra = [e for e in state["query_filters"]["entities"] if e.lower() not in goal["text"].lower()]
     return {"tool": tool, "query": " ".join([goal["text"], *extra]), "sub_goal": target,
             "reason": f"sub-goal {target + 1} needs {goal['modality']} evidence"}
@@ -47,7 +49,10 @@ def n5_agentic_planner(state: AgentState) -> dict:
     assert state.get("sub_goals"), "N5: N1 has not run (no sub_goals in state)"
     assert state.get("query_filters") is not None, "N5: N2 has not run (no query_filters in state)"
     action = propose_action(state)
-    if action["tool"] not in cfg.MODALITIES or (action["sub_goal"], action["tool"]) in state["tried"]:
+    # The text-only baseline has one tool, so "never repeat a (sub-goal, tool) pair" would make
+    # every later round the same search; there a repeat may search again with the new query.
+    repeat = (action["sub_goal"], action["tool"]) in state["tried"] and cfg.VARIANT != "text_only"
+    if action["tool"] not in cfg.tools() or repeat:
         action = {**rule_based_action(state), "planner": action["planner"] + ", overruled by rules"}
     missing = (state.get("sufficiency") or {}).get("missing")
     msg = (f"round {state['round']}: {action['tool']} <- \"{action['query']}\""

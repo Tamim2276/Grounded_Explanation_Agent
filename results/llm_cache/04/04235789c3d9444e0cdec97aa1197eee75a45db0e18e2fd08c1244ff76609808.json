@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 119,
+  "prompt_tokens": 951,
+  "total_tokens": 1070,
+  "prompt_tokens_details": {
+   "cached_tokens": 695
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nSub-questions:\n1. [text] Which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high?\nEvidence:\nE1 [text, Section Figure 1, page 1]: Figure 1: Performance of various task-oriented dialog systems on the CamRest dataset as the percentage of unseen information in the KB changes. \nE2 [text, Section 1, page 1]: Task-oriented dialog agents converse with a user with the goal of accomplishing a speciﬁc task and often interact with a knowledge-base (KB). For example, a restaurant reservation agent ( Henderson et al. , 2014 ) will be grounded to a KB that contains the names of restaurants, and their details. In real-world applications, the KB information could change over time. For example, (1) a KB associated with a movie ticket booking system gets updated every week based on new ﬁlm releases, and (2) a restaurant reservation agent, trained with the knowledge of eateries in one city, may be deployed in other cities with an entirely different range of establishments. In such situations, the system should have the ability to conform to new-found knowledge unseen during its training. Ideally, the training algorithm must learn to disentangle the language\nE3 [text, Section 1, page 2]: We perform evaluations over three datasets – bAbI ( Bordes and Weston , 2017 ), CamRest ( Wen et al. , 2016 ), and Stanford Multi-Domain Dataset ( Eric et al. , 2017 ). Of these, the last two are realworld datasets. We ﬁnd that B O S S N ET is competitive or signiﬁcantly better on standard metrics in all datasets as compared to state-of-the-art baselines. We also introduce a knowledge adaptability (KA) evaluation, in which we systematically increase the percentage of previously unseen entities in the KB. We ﬁnd that B O S S N ET is highly robust across all percentage levels. Finally, we also report a humanbased evaluation and ﬁnd that B O S S N ET responses are frequently rated higher than other baselines. 1. We propose B O S S N ET , a novel architecture to disentangle the language model from knowledge incorporation in task-oriented dialogs.\nE4 [text, Section 4.1, page 5]: In Table 2 , we report results on the real-world datasets. B O S S N ET greatly outperforms other models in both Entity F1 metric and BLEU scores on CamRest. On SMD, B O S S N ET achieves the best only in Entity F1. On further analysis of the generated responses we observe that B O S S - N ET responses often convey the necessary entity information from the KB. However, they consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores. We investigate this further in our human evaluation. Human Evaluation: We summarize the human evaluation results for real-world datasets in Table 3 . B O S S N ET shows the best performance on Camrest, and is judged useful 77 times out of 100. Also, it has the highest average grammatical correctness score of 2.28 (very close to Seq2Seq and Mem2Seq). B O S S N ET performs on par with Mem2Seq and Seq2Seq in its ability to relay appropriate information to solve SMD dialog tasks, and has a slightly higher grammaticality score."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "B O S S N E T"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine which task-oriented dialog system performs the best when the percentage of unseen information in the KB is high beyond B O S S N E T. Additional information or comparisons with other systems are needed to answer this question fully.",
+  "sufficient": false
+ }
+}

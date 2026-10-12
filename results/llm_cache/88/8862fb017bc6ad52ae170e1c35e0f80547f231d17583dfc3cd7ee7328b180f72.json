@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 184,
+  "prompt_tokens": 874,
+  "total_tokens": 1058,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The relationship between clicks and impressions is that clicks are a subset of impressions, where impressions without conversion are treated as negative samples and those with conversion are positive samples.\" -- cites: E1 (Section 2.2): quote \"M is the number of clicks over all impressions. Obviously, S c is a subset of S . Note that in S c , (clicked) impressions without conversion are treated as negative samples and impressions with conversion (also clicked) as positive samples.\"\n2. \"The sequential pattern of user actions in CVR modeling is impression → click → conversion, indicating that clicks follow impressions.\" -- cites: E3 (Section 1): quote \"In other words, user actions follow a sequential pattern of impression → click → conversion.\"\n\nCited evidence:\n[E1] (text, Section 2.2, page 2): M is the number of clicks over all impressions. Obviously, S c is a subset of S . Note that in S c , (clicked) impressions without conversion are treated as negative samples and impressions with conversion (also clicked) as positive samples. In practice, CVR modeling encounters several task-specific problems, making it challenging. Sample selection bias (SSB) [ 12 ]. In fact, conventional CVR modeling makes an approximation of p ( z = 1 | y = 1 , x ) ≈ q ( z = 1 | x c ) by introducing an auxiliary feature space X c . X c represents a limited 2 space associated with S c . ∀ x c ∈X c there exists a pair ( x = x c , y x = 1 ) where x ∈X and y x is the click label of x . In this way, q ( z = 1 | x c ) is trained over space X c with clicked samples of S c . At inference stage, the prediction of p ( z = 1 | y = 1 , x ) over entire space X is calculated as q ( z = 1 | x ) under the assumption that for any pair of ( x , y x = 1 ) where x ∈X , x belongs to X c . This assumption would be violated with a large probability as X c is just a small part of entire space X . It is affected heavily by the randomness of rarely occurred click event, whose probability varies over regions in space X . Moreover, without enough observations in practice, space X c may be quite different from X . This would bring the drift of distribution of training samples from truly underling distribution and hurt the generalization performance for CVR modeling.\n[E3] (text, Section 1, page 1): buy some of them. In other words, user actions follow a sequential pattern of impression → click → conversion . In this way, CVR modeling refers to the task of estimating the post-click conversion rate, i.e., pCVR = p ( conversion | click , impression ) . In general, conventional CVR modeling methods employ similar techniques developed in click-through rate (CTR) prediction task, for example, recently popular deep networks [ 2 , 3 ]. However, there exist several task-specific problems, making CVR modeling challenging. Among them, we report two critical ones encountered in our real practice: i) sample selection bias ( SSB ) problem [ 12 ]. As illustrated in Fig.1, conventional CVR models are trained on dataset composed of clicked impressions, while are utilized to make inference on the entire space with samples of all impressions. SSB problem will hurt the generalization performance of trained models. ii) data sparsity ( DS ) problem. In practice, data gathered for training CVR model is generally much less than CTR task. Sparsity of training data makes CVR model fitting rather difficult."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 2.2) states that 'S c is a subset of S', which aligns with the claim that 'clicks are a subset of impressions'. The evidence also mentions that 'impressions without conversion are treated as negative samples and those with conversion are positive samples', which supports the claim about the treatment of impressions without conversion as negative samples and those with conversion as positive samples."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 1) explicitly states that 'user actions follow a sequential pattern of impression → click → conversion', which directly supports the claim that 'clicks follow impressions'."
+   }
+  ]
+ }
+}

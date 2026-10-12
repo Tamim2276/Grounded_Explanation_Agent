@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 332,
+  "total_tokens": 407,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nSub-questions:\n1. [table] Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nEvidence:\nE1 [table, Table 2, page 4]: Table 2 : Out-of-domain evaluation of deep-coref models on the WikiCoref dataset.\n | MUC | B3 | CEAFe | CoNLL | LEA\nranking | 63.10 | 48.43 | 47.18 | 52.90 | 44.40\ntop-pairs | 63.09 | 48.42 | 46.05 | 52.52 | 44.21\n+linguistic | 63.99 | 49.63 | 46.60 | 53.40 | 45.66"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "MUC model performed best with a ranking score of 63.10"
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

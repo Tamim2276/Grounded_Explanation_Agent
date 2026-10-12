@@ -155,3 +155,25 @@
   - Replay from the cache (100/100 cached, same 34 claims): map boxes 3 -> 1, unboxed claims 1 -> 0. The one left
     is a photo (no printed words): the Day 7 runner gets a two-pass step (answer; stop the server; cache ColQwen2
     vectors of figure claims; replay) for per-claim maps. Tests: 115.
+- 2026-10-12, Day 7 (baselines, runner, error analysis):
+  - ColQwen2 vectors of the 150 test questions cached before llama-server (36 s on the B580;
+    scripts/cache_question_vectors.py; the runner refuses to start without them).
+  - 7.2 variants: cfg.VARIANT + graph.build_graph; single_pass (N1 -> N2 -> every tool once with the
+    question -> N8 -> N9 -> proofs; no N5, G1, G2); text_only (planner offered "text" only, sub-goals
+    forced to text, tables and figures searchable as plain text: caption + printed words). The full
+    system's planner prompt stays byte-identical. 6 stub tests.
+  - 7.3 runner scripts/run_eval.py: one JSON line per question (gea/runs.record, website-ready),
+    resume by qid, a question during which the model was unreachable (no server, timeout, 429, 5xx)
+    is thrown away and redone after waiting; refused/bad replies are recorded as "fallbacks"; crashes
+    recorded as status "error"; test split prints no text and must match eval/frozen_config.json;
+    --rebox second pass (claim maps, scripts/claim_vectors.py). Gemini switch (cfg.LLM_PROVIDER;
+    key from env or .env; no seed: HTTP 400; gemini-2.5-flash closed to new keys -> gemini-3.8-flash;
+    frequent 503 "high demand", handled by the wait-and-redo loop).
+  - 7.1 error analysis (notes/error_analysis_dev.md): v6 7 right / 4 partly / 6 wrong / 3 none. Top
+    causes: G2 too strict on PDF quirks (4), G1 too lenient (3). Fixes: text.loose for G2 layer 1;
+    G1 v7 (the fact must be the answer; facts before verdict). Bug: rewrites duplicated kept claims.
+    v7: 6 / 1 / 0 / 13. v8 (calibration) 5 / 2 / 3 / 10 -> dropped; v7 kept, tuning stopped.
+  - Found while running: llama-server's prompt cache in RAM (--cache-ram, default 8 GB) grew the
+    server from 7.5 to 12.7 GB and left 0.8 GB free -> --cache-ram 1024 (holds at 8.3 GB). G1 once
+    generated 5,800 tokens (88 s) of repetition -> maxLength on G1's strings, max_tokens 2048.
+    The proof drawing crashed on 4 claims citing one line (nested rings inverted) -> rings outwards.

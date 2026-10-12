@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 186,
+  "total_tokens": 248,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How much more prevalent are click events compared to conversion events in the Product Dataset?\nSub-goals:\n1. [figure] How much more prevalent are click events compared to conversion events in the Product Dataset?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide a comparison of click events to conversion events in the Product Dataset. It only shows AUC values for different models and sampling rates on the Product Dataset, but does not include the specific comparison of click events to conversion events required to answer the问. "
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a comparison of click events to conversion events, which is not provided in the figure. Therefore, a text search is needed to find this specific information.",
+  "tool": "text",
+  "query": "click events compared to conversion events in the Product Dataset"
+ }
+}

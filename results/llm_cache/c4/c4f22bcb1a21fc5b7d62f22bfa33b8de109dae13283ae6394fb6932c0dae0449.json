@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 150,
+  "prompt_tokens": 1242,
+  "total_tokens": 1392,
+  "prompt_tokens_details": {
+   "cached_tokens": 446
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nSub-questions:\n1. [table] Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nEvidence:\nE1 [table, Table 4, page 9]: Table 4: The results of AUC w.r.t. different sizes of a user’s ripple set.\nSize of ripple set | 2 | 4 | 8 | 16 | 32 | 64\nMovieLens-1M | 0.903 | 0.908 | 0.911 | 0.918 | 0.920 | 0.919\nBook-Crossing | 0.694 | 0.696 | 0.708 | 0.726 | 0.706 | 0.711\nBing-News | 0.659 | 0.672 | 0.670 | 0.673 | 0.678 | 0.671\nE2 [text, Section 4.7, page 9]: In this section, we investigate the influence of parameters d and λ 2 in RippleNet. We vary d from 2 to 64 and λ 2 from 0 . 0 to 1 . 0, respectively, while keeping other parameters fixed. The results of AUC on MovieLens-1M are presented in Figure 9. We observe from Figure 9a that, with the increase of d , the performance is boosted at first since embeddings with a larger dimension can encode more useful information, but drops after d = 16 due to possible overfitting. From Figure 9b, we can see that RippleNet achieves the best performance when λ 2 = 0 . 01. This is because the KGE term with a small weight cannot provide enough regularization constraints, while a large weight will mislead the objective function.\nE3 [text, Section 4.3, page 7]: hardly improves performance but does incur heavier computational overhead according to experiment results. The complete hyper-parameter settings are given in Table 2, where d denotes the dimension of embedding for items and the knowledge graph, and η denotes the learning rate. The hyper-parameters are determined by optimizing AUC on a validation set. For fair consideration, the latent dimensions of all compared baselines are set the same as in Table 2, while other hyper-parameters of baselines are set based on grid search. For each dataset, the ratio of training, evaluation, and test set is 6 : 2 : 2. Each experiment is repeated 5 times, and the average performance is reported. We evaluate our method in two experiment scenarios: (1) In click-through rate (CTR) prediction, we apply the trained model to each piece of interactions in the test set and output the predicted click probability. We use Accuracy and AUC to evaluate the performance of CTR prediction. (2) In top- K recommendation, we use the trained model to select K items with highest predicted click probability for each user in the test set, and choose Precision @ K , Recall @ K , F 1@ K to evaluate the recommended sets.\nE4 [text, Section 4.1, page 6]: • MovieLens-1M 6 is a widely used benchmark dataset in movie recommendations, which consists of approximately 1 million explicit ratings (ranging from 1 to 5) on the MovieLens website. • Book-Crossing dataset 7 contains 1,149,780 explicit ratings (ranging from 0 to 10) of books in the Book-Crossing community. • Bing-News dataset contains 1,025,192 pieces of implicit feedback collected from the server logs of Bing News 8 from October 16, 2016 to August 11, 2017. Each piece of news has a title and a snippet. Since MovieLens-1M and Book-Crossing are explicit feedback data, we transform them into implicit feedback where each entry is marked with 1 indicating that the user has rated the item (the threshold of rating is 4 for MovieLens-1M, while no threshold is set for Book-Crossing due to its sparsity), and sample an unwatched set marked as 0 for each user, which is of equal size with the rated ones. For MovieLens-1M and Book-Crossing, we use the ID embeddings of users and items as raw input, while for Bing-News, we concatenate the ID embedding of a piece of news and the averaged word embedding of its title as raw input for the item, since news titles are typically much longer than names of movies or books, hence providing more useful information for recommendation."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The model performs the best with an AUC of 0.920 on the MovieLens-1M dataset."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine which specific model performs the best in terms of AUC on the MovieLens-1M dataset. The table only shows AUC values for different sizes of a user’s ripple set, not for specific models. Additional information about the models being compared and their AUCs,",
+  "sufficient": false
+ }
+}

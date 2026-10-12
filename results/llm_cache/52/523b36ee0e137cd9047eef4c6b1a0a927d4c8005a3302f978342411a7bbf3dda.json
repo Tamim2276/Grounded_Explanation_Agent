@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 112,
+  "total_tokens": 166,
+  "prompt_tokens_details": {
+   "cached_tokens": 63
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the frame discriminator in the proposed method?\nSub-goals:\n1. [text] What is the role of the frame discriminator in the proposed method?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question is about a specific component in a scientific paper, which can be effectively searched through text-based queries.",
+  "tool": "text",
+  "query": "What is the role of the frame discriminator in the proposed method?"
+ }
+}

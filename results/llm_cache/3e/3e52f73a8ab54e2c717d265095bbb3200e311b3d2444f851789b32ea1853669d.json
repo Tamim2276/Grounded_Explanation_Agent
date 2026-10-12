@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 234,
+  "prompt_tokens": 506,
+  "total_tokens": 740,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The model 'Ripple' achieves the best performance in terms of AUC on the MovieLens-1M dataset.\" -- cites: E1 (Table 4): row 'MovieLens-1M', column '32' = 0.920\n2. \"The AUC values for the MovieLens-1M dataset increase with the size of the user’s ripple set, peaking at 32.\" -- cites: E1 (Table 4): row 'MovieLens-1M', column '32' = 0.920\n\nCited evidence:\n[E1] (table, Table 4, page 9): Table 4: The results of AUC w.r.t. different sizes of a user’s ripple set.\nValues (cite as cells):\n  row 'MovieLens-1M': '2' = 0.903; '4' = 0.908; '8' = 0.911; '16' = 0.918; '32' = 0.920; '64' = 0.919\n  row 'Book-Crossing': '2' = 0.694; '4' = 0.696; '8' = 0.708; '16' = 0.726; '32' = 0.706; '64' = 0.711\n  row 'Bing-News': '2' = 0.659; '4' = 0.672; '8' = 0.670; '16' = 0.673; '32' = 0.678; '64' = 0.671"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that 'Ripple' achieves the best performance in terms of AUC on the MovieLens-1M dataset. The evidence provided shows that the AUC value for the 'MovieLens-1M' dataset at the size of '32' is 0.920, which is the highest value among the sizes listed for this dataset."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim suggests that the AUC values for the MovieLens-1M dataset increase with the size of the user’s ripple set, peaking at 32. However, the evidence shows that the AUC value for '32' is 0.920, which is not the highest value for this dataset. The highest value is 0.920 at '32', but the claim implies that it is the peak, which is not supported by the evidence."
+   }
+  ]
+ }
+}

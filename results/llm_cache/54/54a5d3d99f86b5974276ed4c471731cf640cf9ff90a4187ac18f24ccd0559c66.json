@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 167,
+  "total_tokens": 234,
+  "prompt_tokens_details": {
+   "cached_tokens": 92
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed the best on the GRID dataset?\nSub-goals:\n1. [text] Which method performed the best on the GRID dataset?\nAlready tried: sub-goal 1 with text\nStill missing: No evidence provided for sub-question 2, which asks about the method's performance on the GRID dataset in terms of PSNR, SSIM, and LMD. The evidence only provides a comparison of methods on the GRID dataset but does not specify the performance metrics for each method individually or the overall best"
+  }
+ ],
+ "answer": {
+  "reason": "The text search has already been used to find the method that performed best on the GRID dataset. Now, we need to find specific performance metrics for each method to determine the best overall method.",
+  "tool": "text",
+  "query": "performance metrics GRID dataset"
+ }
+}

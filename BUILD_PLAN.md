@@ -1813,6 +1813,46 @@ From now on, every cut ends the same way: the power returns, the PC starts, logs
 task runs this script again. Watch it live with `tail -f data/logs/resume_eval.log` (Ctrl+C
 stops watching, not the run).
 
+> **Built on Day 7.**
+>
+> - **7.1 error analysis** (`notes/error_analysis_dev.md`):
+>   - Before, the full system scored 7 right, 4 partly, 6 wrong, 3 no answer.
+>   - The top two causes: G2 rejected faithful quotes over PDF text quirks (4), and G1 was too
+>     lenient (3).
+>   - Fixed both: `text.loose` for G2; G1 v7 says the fact must *be* the answer and writes its
+>     facts before its verdict. Also fixed a bug where rewrites repeated claims.
+>   - After: 6 right, 1 partly, **0 wrong**, 13 no answer. A calibration step (v8) brought back 3
+>     wrong answers, so it was dropped and tuning stopped.
+> - **7.2 baselines:** `cfg.VARIANT` and `graph.build_graph`.
+>   - Single-pass: every tool once, no planner, no gates.
+>   - Text-only: the text tool only, with tables and figures as plain text, and a repeat search
+>     allowed with a new query.
+>   - On dev: single-pass 12 / 3 / 5 / 0, text-only 3 / 1 / 0 / 16 (`notes/results_for_paper.md` §4e).
+> - **7.3 runner** (`scripts/run_eval.py`):
+>   - resumes by qid;
+>   - redoes a question when the model was unreachable; one busy reply (429/5xx) is retried
+>     after 10/20/40/60 s;
+>   - records fallbacks and errors;
+>   - prints no test text, and checks the freeze;
+>   - `--rebox` with `scripts/claim_vectors.py` gives photos their own heat-map boxes.
+>
+>   Test-question ColQwen2 vectors are cached (`scripts/cache_question_vectors.py`). Gemini is
+>   `cfg.LLM_PROVIDER="gemini"`, using `gemini-3.8-flash` (2.5 Flash is closed to new keys).
+> - **7.4 `scripts/resume_eval.sh`:**
+>   1. starts the server when there is room;
+>   2. runs the three systems, then Gemini;
+>   3. does the photo-box pass and a checkpoint.
+> - **7.6 frozen** at 22:56 (prompt v7, 28 settings): `eval/frozen_config.json`, made by
+>   `scripts/freeze_config.py`, which refuses to re-freeze without `--again`.
+> - **7.7 smoke test** on 3 test questions per system: nothing crashed.
+> - **Found while running:**
+>   - llama-server's RAM prompt cache grew it to 12.7 GB, so `--cache-ram 1024` is now in
+>     `start_llm.sh`;
+>   - a 5,800-token runaway G1 reply, so `maxLength` and `max_tokens` 2048 are now set.
+> - **Gemini:** the free tier's daily quota ran out after about 30 calls (HTTP 429). The full run
+>   needs about 1,350 calls, about $4 on a paid key. Enabling billing is your decision.
+> - **Left for you:** 7.5 (BIOS, auto sign-in, Task Scheduler), then 7.8 (start).
+
 ### Check it works
 
 - [ ] **power-cut test:** switch the PC off at the wall in the middle of a question (or wait for the next real cut): when the power is back it starts, logs in and continues by itself, and no qid appears twice in the file

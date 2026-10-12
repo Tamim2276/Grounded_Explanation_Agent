@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 104,
+  "prompt_tokens": 499,
+  "total_tokens": 603,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best overall on both the CVR and CTCVR tasks?\nSub-questions:\n1. [table] Which model performs best overall on both the CVR and CTCVR tasks?\nEvidence:\nE1 [table, Table 2, page 4]: Table 2: Comparison of different models on Public Dataset.\nModel | AUC(mean ± std) on CVR task | AUC(mean ± std) on CTCVR task\nBASE | 66.00 ± 0.37 | 62.07 ± 0.45\nAMAN | 65.21 ± 0.59 | 63.53 ± 0.57\nOVERSAMPLING | 67.18 ± 0.32 | 63.05 ± 0.48\nUNBIAS | 66.65 ± 0.28 | 63.56 ± 0.70\nDIVISION | 67.56 ± 0.48 | 63.62 ± 0.09\nESMM-NS | 68.25 ± 0.44 | 64.44 ± 0.62\nESMM | 68.56 ± 0.37 | 65.32 ± 0.49"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "ESMM performs best overall on both the CVR and CTCVR tasks."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is needed to answer the sub-question as the table provides the necessary information for the best-performing model on both tasks.",
+  "sufficient": true
+ }
+}

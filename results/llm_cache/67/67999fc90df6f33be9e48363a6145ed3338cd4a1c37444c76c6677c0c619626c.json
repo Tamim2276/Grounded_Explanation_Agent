@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 217,
+  "prompt_tokens": 427,
+  "total_tokens": 644,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Action Search uses temporal context to reason about where to search next.\" -- cites: E1 (Section 5.3): quote \"Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly.\"\n2. \"The model's search steps are shown in Figure 5.\" -- cites: E5 (Figure 5): observation \"The figure shows the search steps of the Action Search model.\"\n3. \"The model successfully spots the target action location in the top two rows of Figure 5.\" -- cites: E5 (Figure 5): observation \"The top two rows of Figure 5 show the model successfully spotting the target action location.\"\n4. \"In failure cases, the model often oscillates around actions without spotting frames within the exact temporal location.\" -- cites: E5 (Figure 5): observation \"The last row of Figure 5 illustrates failure cases where the action location is not spotted exactly.\"\n\nCited evidence:\n[E1] (text, Section 5.3, page 13): Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly. For example, it uses information about scenes/concepts such as gala dinner and ﬁghts to spot actions such as clink glass and shoot , respectively (top two rows, left column). Furthermore, when spotting the start times of actions, our model seems to understand the\n[E5] (figure, Figure 5, page 14): a zoomed view of Figure 5"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 states that the Action Search model exploits temporal context to spot actions quickly, which aligns with the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E5 confirms that Figure 5 shows the search steps of the Action Search model."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E5 states that the top two rows of Figure 5 show the model successfully spotting the target action location, which supports the claim."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence in E5 mentions that the last row of Figure 5 illustrates failure cases where the action location is not spotted exactly, which supports the claim about oscillation in failure cases."
+   }
+  ]
+ }
+}

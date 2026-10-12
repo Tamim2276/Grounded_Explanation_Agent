@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 114,
+  "total_tokens": 187,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the ripple sets in the RippleNet framework?\nSub-goals:\n1. [text] What is the role of the ripple sets in the RippleNet framework?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the role of ripple sets in the RippleNet framework, which is a specific topic within the paper. A text search is appropriate for finding this information directly within the paper's content.",
+  "tool": "text",
+  "query": "What is the role of the ripple sets in the RippleNet framework?"
+ }
+}

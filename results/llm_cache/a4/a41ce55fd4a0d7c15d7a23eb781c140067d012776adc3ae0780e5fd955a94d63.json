@@ -1,0 +1,59 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 363,
+  "prompt_tokens": 2610,
+  "total_tokens": 2973,
+  "prompt_tokens_details": {
+   "cached_tokens": 586
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the fact, number or picture that answers it -- not merely the same topic. The answer may need a simple reading of the evidence: comparing the values in a table or chart, or a description in the text. Name the answer itself: for 'which X' the X; for 'how does A affect B' or 'what is the effect of A' the direction or size of the change; for 'what is the role of X' or 'how does X work' what X does; for 'how many' or 'what value' the number. A fact that only restates the question does not answer it. First give, for each sub-question you can answer, the id of ONE item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the different methods compare in terms of their ability to generate realistic faces?\nSub-questions:\n1. [figure] How do the different methods compare in terms of their ability to generate realistic faces?\nEvidence:\nE1 [figure, Figure 5, page 5] (image attached): Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\nE2 [figure, Figure 5, page 5]: Zoomed view (300 dpi) of: Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\nE3 [table, Table 1, page 5]: Table 1: Quantitative results.\n |  | Evaluation on | LRW\nMethods | PSNR ↑ | SSIM ↑ | LMD ↓\nChung et al. [2017] | 28.06 | 0.46 | 2.23\nChen et al. [2018] | 28.65 | 0.53 | 1.92\nZhou et al. [2019] | 26.80 | 0.88 | —\nChen et al. [2019] | 30.91 | 0.81 | 1.37\nAMIE (Ours) | 32.08 | 0.92 | 1.21\nE4 [text, Section L, page 5]: 4.2 Quantitative Results We compare our model with four recent state-of-the-art methods, including Chung et al. [2017], Chen et al. [2018] Zhou et al. [2019], and Chen et al. [2019]. Table 1 shows the quantitative results of our method and its competitors with higher PSNR, SSIM and lower LMD, suggesting the best quality of the generated video frames of the talking faces. Although Zhou et al. [Zhou et al. , 2019] obtains the lowest PSNR, it obtains the second highest SSIM and its SSIM is signiﬁcantly better than Chung et al. [Chung et al. , 2017] and Chen et al. [Chen et al. , 2018]. To further verify the robustness for arbitrary person generation, we evaluate our method on another benchmark dataset GRID [Cooke et al. , 2006] and report the comparison results in Table 2. From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method. Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD. Therefore, our method always achieves the highest PSNR and SSIM, demonstrating our method is able to generate high-quality videos.\nE5 [text, Section abstract, page 2]: 2 Related Works In this section, we brieﬂy review the related works on talking face generation and mutual information estimation. 2.1 Talking Face Generation Earlier works on talking face generation mainly synthesized the speciﬁc identity from the dataset by given arbitrary speech audio. Rithesh et al. [2017] used a time-delayed LSTM to generate key points synced to the audio and use another network to generate the video frames conditioned on the key points. Supasorn et al. [2017] proposed a teeth proxy to improve the quality of the teeth during generation. Next, some works tried to synthesized the talking faces for the identities from the dataset [Chung et al. , 2017; Vougioukas et al. , 2018; Chen et al. , 2018]. Recently, the synthesis of the talking face for the arbitrary identities out of the dataset has drawn much attention. Zhou et al. [2019] proposed an adversarial learning method to disentangle the different information for one image during generation. Chen et al. [2019] proposed to leverage landmark as middle information to better guide face generation. However, they mainly focused on the inner-modal coherence, while lacking of discovering the cross-modal coherence.\nE6 [text, Section L, page 5]: To focus on the lip movement, we only utilize the lip area of the frame for L 1 reconstruction loss, While L perc and L lip measure the distance between visual concept, it is also important to shorten the distance between audio and visual modalities in high-level representation. We implement mutual information as described before. We try to maximize it between generated frames and audios, Θ ( ˆ F, A ) . (12) Our full model is optimized according to the following objective function: 4 Experiments 4.1 Dataset and Metrics We evaluate our method on prevalent benchmark datasets LRW [Chung and Zisserman, 2016] and GRID [Cooke et al. , 2006]. Frames are aligned into 256 × 256 faces and audios are processed into (Mel Frequency Cepstrum Coefﬁcient) MFCC features at the sampling rate of 5000Hz. Then we match each frame with an MFCC audio input with a size of 20 × 13 . We use common reconstruction metrics such as PSNR and SSIM [Wang et al. , 2004] to evaluate the quality of the synthesized talking faces. Furthermore, we use Landmark Distance (LMD) to evaluate the accuracy of the generated lip by calculating the landmark distance between the generated video and the original video. The lower LMD, the better of the generation. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The figure shows generation examples of our method compared with Ground Truth (G.T.) and Zhou et al. and Chen et al."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The zoomed view of the figure shows the detail of the generation examples of our method compared with Ground Truth (G.T.) and Zhou et al. and Chen et al."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The table shows quantitative results with higher PSNR, SSIM, and lower LMD for our method compared to other methods."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "The table shows the quantitative results of our method and its competitors with higher PSNR, SSIM, and lower LMD, suggesting the best quality of the generated video frames of the talking faces."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E6",
+    "fact": "The full model is optimized to maximize mutual information between generated frames and audios, Θ ( ˆ F, A ) ."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide a direct comparison of the methods in terms of their ability to generate realistic faces. It only shows examples and quantitative results, but does not explicitly state which method is more realistic in terms of face generation quality.",
+  "sufficient": true
+ }
+}

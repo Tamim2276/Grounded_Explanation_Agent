@@ -1,0 +1,44 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 160,
+  "prompt_tokens": 1666,
+  "total_tokens": 1826,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the fact, number or picture that answers it -- not merely the same topic. The answer may need a simple reading of the evidence: comparing the values in a table or chart, or a description in the text. Name the answer itself: for 'which X' the X; for 'how does A affect B' or 'what is the effect of A' the direction or size of the change; for 'what is the role of X' or 'how does X work' what X does; for 'how many' or 'what value' the number. A fact that only restates the question does not answer it. First give, for each sub-question you can answer, the id of ONE item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the different methods compare in terms of their ability to generate realistic faces?\nSub-questions:\n1. [figure] How do the different methods compare in terms of their ability to generate realistic faces?\nEvidence:\nE1 [figure, Figure 5, page 5] (image attached): Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\nE2 [figure, Figure 5, page 5]: Zoomed view (300 dpi) of: Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\nE3 [table, Table 1, page 5]: Table 1: Quantitative results.\n |  | Evaluation on | LRW\nMethods | PSNR ↑ | SSIM ↑ | LMD ↓\nChung et al. [2017] | 28.06 | 0.46 | 2.23\nChen et al. [2018] | 28.65 | 0.53 | 1.92\nZhou et al. [2019] | 26.80 | 0.88 | —\nChen et al. [2019] | 30.91 | 0.81 | 1.37\nAMIE (Ours) | 32.08 | 0.92 | 1.21 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The figure shows generation examples of different methods compared with Ground Truth and Zhou et al. and Chen et al."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The table provides quantitative results on PSNR, SSIM, and LMD for different methods."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The quantitative comparison in terms of PSNR, SSIM, and LMD is not provided in the figure. The figure only shows qualitative comparison of generation examples.",
+  "sufficient": false
+ }
+}

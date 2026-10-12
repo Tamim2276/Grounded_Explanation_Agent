@@ -158,6 +158,21 @@ def test_a_caption_quote_is_boxed_in_the_caption():
     assert box[3] - box[1] < 21       # two lines, not the third ("zoom in to see the detail")
 
 
+def test_one_sentence_cited_by_many_claims_can_be_drawn():
+    # dev 1812.06589v2#1: four claims cite one line of text; nested rings used to turn inside out
+    import pymupdf
+    from gea.viz import draw_proof
+    sentence = Evidence("text", "c1", 1, "A sentence.", (54, 480, 297, 700), "TextRetriever")
+    sentence.id = "E1"
+    claims = [{"text": f"claim {i}", "cites": [{"evidence": "E1", "quote": "A sentence."}]} for i in range(1, 6)]
+    boxes = [{"claim": i, "evidence": "E1", "page": 1, "bbox": (54.0, 584.9, 225.8, 594.8), "what": "Section 4 sentence"}
+             for i in range(1, 6)]
+    with pymupdf.open() as doc:
+        doc.new_page()
+        [image] = draw_proof({"evidence": [sentence], "claims": claims, "boxes": boxes}, doc)
+    assert image.height > 0
+
+
 def test_a_zoomed_view_cited_alone_is_boxed_like_its_figure():
     import numpy as np
     from gea.proofs import n10b_bounding_boxes
@@ -175,3 +190,28 @@ def test_a_zoomed_view_cited_alone_is_boxed_like_its_figure():
         out = n10b_bounding_boxes({"paper_id": "demo-2026-001", "evidence": [figure, zoom], "claims": [alone, both]})
     assert [(b["claim"], b["evidence"], b["what"]) for b in out["boxes"]] == \
         [(1, "E2", "Figure 2 (patch map)"), (2, "E1", "Figure 2 (patch map)")]    # one box per region
+
+
+def test_g2_accepts_a_faithful_quote_despite_pdf_quirks():
+    # dev, Day 7: four correct claims were withheld because the PDF text has "in- ference",
+    # "0 . 5%", "classi(fi)er" ligatures and "item v ." -- the writer quotes the words as read.
+    from gea.generation import check_claim
+    caption = Evidence("figure", "f1", 1, "It is only part of the in- ference space, at most 0 . 5% of it.",
+                       (0, 0, 9, 9), "FigureRetriever", label="Figure 1")
+    caption.id = "E1"
+    ok = {"text": "Training covers part of the inference space.",
+          "cites": [{"evidence": "E1", "quote": "It is only part of the inference space, at most 0.5% of it."}]}
+    changed = {"text": "x", "cites": [{"evidence": "E1", "quote": "It is only part of the outference space"}]}
+    assert check_claim(ok, {"E1": caption}) is None
+    assert check_claim(changed, {"E1": caption}) == "the quote is not in E1"      # still word for word
+
+
+def test_a_rewrite_does_not_repeat_a_kept_claim(server):
+    kept = {"text": "Table 2 reports gains.", "cites": [{"evidence": "E1", "quote": "Table 2: Results"}]}
+    server({"claims": [{"text": "Table 2 reports gains.", "conclusion": False,
+                        "cites": [{"evidence": "E1", "quote": "Table 2: Results"}]},
+                       {"text": "The low-resource gain is +1.7.", "conclusion": True,
+                        "cites": [{"evidence": "E1", "row": "Low-resource", "col": "Gain", "value": "+1.7"}]}]})
+    bad = {"text": "The low-resource gain is +4.4.", "cites": []}
+    claims = llm_draft(state_with([kept, bad], [{"claim": 1, "reason": "wrong row"}], rewrite=1))
+    assert [c["text"] for c in claims] == ["Table 2 reports gains.", "The low-resource gain is +1.7."]

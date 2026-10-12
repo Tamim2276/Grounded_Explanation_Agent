@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 203,
+  "total_tokens": 274,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nSub-goals:\n1. [text] Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide a direct comparison of the 'top-pairs' model's performance against other models on the WikiCoref dataset. It only shows the performance of the 'top-pairs' model and the 'ranking' model, but not the 'top-pairs' model's performance relative to other models like 'MUC', 'B3"
+  }
+ ],
+ "answer": {
+  "reason": "The table does not provide a direct comparison of the 'top-pairs' model's performance against other models on the WikiCoref dataset.",
+  "tool": "text",
+  "query": "Which deep-coref model performed best on the WikiCoref dataset, according to the table?"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 193,
+  "total_tokens": 268,
+  "prompt_tokens_details": {
+   "cached_tokens": 118
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the ripple sets in the RippleNet framework?\nSub-goals:\n1. [figure] What is the role of the ripple sets in the RippleNet framework?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The role of ripple sets in the RippleNet framework is illustrated in Figure 2, which shows how ripple sets are used to propagate knowledge from the user's click history to form user embeddings. However, the specific details of how ripple sets are used in the framework are not explicitly stated in E4"
+  }
+ ],
+ "answer": {
+  "reason": "The role of ripple sets in the RippleNet framework is illustrated in Figure 2, which shows how ripple sets are used to propagate knowledge from the user's click history to form user embeddings.",
+  "tool": "figure",
+  "query": "Figure 2: Role of ripple sets in RippleNet framework"
+ }
+}

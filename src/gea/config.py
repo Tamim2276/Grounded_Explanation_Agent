@@ -50,6 +50,9 @@ SEED = 42
 
 # --- switches -------------------------------------------------------------------
 BACKEND      = "stub"         # "stub": the fake paper; "real": SPIQA papers (BUILD_PLAN.md Day 2 on)
+VARIANT      = "full"         # the system evaluated (BUILD_PLAN.md Day 7): "full"; "single_pass" (no
+                              # loops, no gates: graph.build_graph); "text_only" (the full graph with
+                              # the text tool only -- it reads tables and figures as plain text)
 PLANNER_MODE = "rules"        # N5: "rules" (stand-in) or "llm" (the local model)
 TRACE        = True           # print one line per node as the graph runs
 
@@ -67,6 +70,19 @@ SUPPORT_CHECK = "auto"        # G2's layer 2, the model's support check: "auto" 
                               # is "llm"), "on" (also with the stub writer: Day 6.3) or "off"
 LLM_CACHE = True              # reuse cached replies (results/llm_cache); tests switch it off to
                               # see what happens when the server is gone
+LLM_MAX_TOKENS = 2048         # a cap on every reply: a 7B can repeat itself without end (G1 once ran
+                              # 5,800 tokens, 88 s); the longest real reply on dev is ~460 tokens
+LLM_PROVIDER = "local"        # "local" (llama-server above) or "gemini": the stronger-model comparison
+                              # (Day 7) -- the same requests to Gemini's OpenAI-compatible endpoint
+GEMINI_URL   = "https://generativelanguage.googleapis.com/v1beta/openai"
+GEMINI_MODEL = "gemini-3.8-flash"   # a fixed version, never a "-latest" name (2.5 Flash is closed to
+                              # new keys, 2026-10-12); the key is read from GEMINI_API_KEY
+                              # (environment, else .env -- which git ignores)
+
+
+def tools() -> tuple:
+    # The retrieval tools N5 may choose: all three, or text alone in the text-only baseline.
+    return ("text",) if VARIANT == "text_only" else MODALITIES
 
 
 @contextmanager

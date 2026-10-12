@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 432,
+  "prompt_tokens": 2364,
+  "total_tokens": 2796,
+  "prompt_tokens_details": {
+   "cached_tokens": 1133
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the ripple sets in the RippleNet framework?\nEvidence:\n[E1] (text, Section 3.1, page 3): The framework of RippleNet is illustrated in Figure 2. RippleNet takes a user u and an item v as input, and outputs the predicted probability that user u will click item v . For the input user u , his historical set of interests V u is treated as seeds in the KG, then extended along links to form multiple ripple sets S k u ( k = 1 , 2 , ..., H ). A ripple set S k u is the set of knowledge triples that are k -hop(s) away from the seed set V u . These ripple sets are used to interact with the item embedding (the yellow block) iteratively for obtaining the responses of user u with respect to item v (the green blocks), which are then combined to form the final user embedding (the grey block). Lastly, we use the embeddings of user u and item v together to compute the predicted probability ˆ y uv .\n[E2] (text, Section 3.5, page 5): directs −−−−−−−→ Back to the Future \", if the item \"Back to the Future\" is of high relevance probability with \"Forrest Gump\" and \"Robert Zemeckis\" in the user’s 1-hop and 2-hop ripple set, respectively. Note that different from pathbased methods [ 42 , 45 ] where the patterns of path are manually designed, RippleNet automatically discovers the possible explanation paths according to relevance probability. We will further present a visualized example in the experiments section to intuitively demonstrate the explainability of RippleNet. 3.5.2 Ripple Superposition. A common phenomenon in RippleNet is that a user’s ripple sets may be large in size, which dilutes his potential interests inevitably in preference propagation. However, we observe that relevant entities of different items in a user’s click history often highly overlap. In other words, an entity could be reached by multiple paths in the KG starting from a user’s click history. For example, \"Saving Private Ryan\" is connected to a user who has watched \"The Terminal\", \"Jurassic Park\" and \"Braveheart\" through actor \"Tom Hanks\", director \"Steven Spielberg\" and genre \"War\", respectively. These parallel paths greatly increase a user’s interests in overlapped entities. We refer to the case as ripple superposition , as it is analogous to the interference phenomenon in physics in which two waves superpose to form a resultant wave of greater amplitude in particular areas. The phenomenon of ripple superposition is illustrated in the second KG in Figure 2, where the darker red around the two lower middle entities indicates higher strength of the user’s possible interests. We will also discuss ripple superposition in the experiments section.\n[E3] (text, Section 4.5, page 8): Size of ripple set in each hop . We vary the size of a user’s ripple set in each hop to further investigate the robustness of RippleNet. The results of AUC on the three datasets are presented in Table 4,\n[E4] (figure, Figure 2, page 4) (image attached): Figure 2: The overall framework of the RippleNet. It takes one user and one item as input, and outputs the predicted probability that the user will click the item. The KGs in the upper part illustrate the corresponding ripple sets activated by the user’s click history.\nWords printed in the figure: item 𝒗 user 𝒖 𝑣 user click history 𝓥𝒖 𝑣 (𝒉, 𝒓) →𝒕 …… 𝑣 (𝒉, 𝒓) →𝒕 …… propagation ∙∙∙ ∙∙∙ Knowledge graph propagation ∙∙∙ Seeds Hop 1 Hop 2 Hop 𝐻 𝑣 (𝒉, 𝒓) →𝒕 …… user embedding item embedding 𝐑𝐡 𝐭 softmax weighted average ො𝑦 predicted probability ripple set 𝓢𝒖𝟐 ripple set 𝓢𝒖𝟏 ripple set 𝓢𝒖𝑯 gure 2: The overall framework of the RippleNet. It takes one user and one item as input, and outputs the predicted probabili\n[E5] (figure, Figure 2, page 4): a zoomed view of Figure 2 (image attached)\n\nThese claims are already verified and kept:\n- The ripple sets in RippleNet are used to interact with the item embedding iteratively for obtaining the responses of user u with respect to item v.\n- The ripple sets in RippleNet are used to propagate user interests through the knowledge graph.\n- The size of the ripple sets in RippleNet can be varied to investigate the robustness of the framework.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The ripple sets in RippleNet are automatically discovered by the framework according to relevance probability.\": support check: The evidence in E2 (Section 3.5) states that 'RippleNet automatically discovers the possible explanation paths according to relevance probability.' This does not directly support the claim that the ripple sets are automatically discovered by the framework according to relevance probability. The claim is more about the automatic discovery of paths, not the discovery of ripple sets. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The ripple sets in RippleNet are used to interact with the item embedding iteratively for obtaining the responses of user u with respect to item v.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "These ripple sets are used to interact with the item embedding (the yellow block) iteratively for obtaining the responses of user u with respect to item v (the green blocks), which are then combined to form the final user embedding (the grey block)."
+     }
+    ]
+   },
+   {
+    "text": "The ripple sets in RippleNet are used to propagate user interests through the knowledge graph.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "RippleNet takes a user u and an item v as input, and outputs the predicted probability that user u will click item v. For the input user u, his historical set of interests V u is treated as seeds in the KG, then extended along links to form multiple ripple sets S k u (k = 1, 2, ..., H)."
+     }
+    ]
+   },
+   {
+    "text": "The size of the ripple sets in RippleNet can be varied to investigate the robustness of the framework.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "We vary the size of a user’s ripple set in each hop to further investigate the robustness of RippleNet."
+     }
+    ]
+   },
+   {
+    "text": "The ripple sets in RippleNet are automatically discovered by the framework according to relevance probability.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "RippleNet automatically discovers the possible explanation paths according to relevance probability."
+     }
+    ]
+   }
+  ]
+ }
+}

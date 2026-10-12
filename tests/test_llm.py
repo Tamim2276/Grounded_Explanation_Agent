@@ -135,3 +135,78 @@ def test_g1_keeps_the_judges_reason_when_it_says_no(server):
     table.id = "E1"
     verdict = judged([table], {"sufficient": False, "uncovered": [1], "missing": "the error values", "answers": []}, server)
     assert not verdict["sufficient"] and verdict["uncovered"] == [0] and verdict["missing"] == "the error values"
+
+
+def failing_server(monkeypatch, error):
+    def fail(request, timeout=None):
+        raise error
+    monkeypatch.setattr(llm.urllib.request, "urlopen", fail)
+
+
+@pytest.mark.parametrize("code, counter", [(503, "unreachable"), (429, "unreachable"), (400, "refused")])
+def test_an_outage_is_told_apart_from_a_bad_request(monkeypatch, tmp_path, code, counter):
+    # Day 7: the runner redoes a question after an outage (503 busy, 429 rate limit), but a
+    # refused request is the system's own behaviour (its node falls back to the rules).
+    import urllib.error
+    failing_server(monkeypatch, urllib.error.HTTPError("u", code, "x", {}, None))
+    monkeypatch.setattr(llm, "RETRY_WAITS", (0, 0))           # retried, then given up
+    before = dict(llm.stats)
+    with cfg.override(LLM_CACHE_DIR=tmp_path), pytest.raises(OSError):
+        llm.call_llm(ASK, SCHEMA, "plan")
+    assert llm.stats[counter] == before[counter] + 1
+
+
+def test_no_server_at_all_counts_as_unreachable(monkeypatch, tmp_path):
+    failing_server(monkeypatch, ConnectionRefusedError())
+    before = llm.stats["unreachable"]
+    with cfg.override(LLM_CACHE_DIR=tmp_path), pytest.raises(OSError):
+        llm.call_llm(ASK, SCHEMA, "plan")
+    assert llm.stats["unreachable"] == before + 1
+
+
+def test_gemini_gets_the_key_from_env_and_no_seed(monkeypatch, tmp_path):
+    sent = []
+
+    def fake(request, timeout=None):
+        sent.append((request.full_url, request.get_header("Authorization"), json.loads(request.data)))
+        reply = {"choices": [{"message": {"content": json.dumps({"tool": "table"})}}], "usage": {}}
+        return io.BytesIO(json.dumps(reply).encode("utf-8"))
+    monkeypatch.setattr(llm.urllib.request, "urlopen", fake)
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    (tmp_path / ".env").write_text("# secrets\nGEMINI_API_KEY=test-key-123\n", encoding="utf-8")
+    with cfg.override(LLM_CACHE_DIR=tmp_path / "cache", PROJECT_ROOT=tmp_path, LLM_PROVIDER="gemini"):
+        assert llm.call_llm(ASK, SCHEMA, "plan") == {"tool": "table"}
+    url, auth, body = sent[0]
+    assert url.startswith(cfg.GEMINI_URL) and auth == "Bearer test-key-123"
+    assert "seed" not in body and body["model"] == cfg.GEMINI_MODEL
+
+
+def test_a_missing_gemini_key_stops_the_run_instead_of_falling_back(monkeypatch, tmp_path):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    (tmp_path / ".env").write_text("GEMINI_API_KEY=paste-your-key-here\n", encoding="utf-8")
+    with cfg.override(PROJECT_ROOT=tmp_path, LLM_PROVIDER="gemini"), pytest.raises(RuntimeError):
+        llm.endpoint()
+
+
+def test_g1_writes_its_facts_before_its_verdict():
+    # llama.cpp fills the fields in schema order: the verdict must come last (dev, Day 7)
+    from gea.sufficiency import G1_SCHEMA
+    assert list(G1_SCHEMA["properties"])[-1] == "sufficient"
+
+
+def test_a_busy_reply_is_retried_before_anything_is_counted(monkeypatch, tmp_path):
+    # Gemini answers 503 "high demand" often; one retry usually gets through (Day 7)
+    import urllib.error
+    replies = [urllib.error.HTTPError("u", 503, "busy", {}, None), {"tool": "table"}]
+
+    def flaky(request, timeout=None):
+        r = replies.pop(0)
+        if isinstance(r, Exception):
+            raise r
+        return io.BytesIO(json.dumps({"choices": [{"message": {"content": json.dumps(r)}}], "usage": {}}).encode())
+    monkeypatch.setattr(llm.urllib.request, "urlopen", flaky)
+    monkeypatch.setattr(llm, "RETRY_WAITS", (0,))
+    before = dict(llm.stats)
+    with cfg.override(LLM_CACHE_DIR=tmp_path):
+        assert llm.call_llm(ASK, SCHEMA, "plan") == {"tool": "table"}
+    assert llm.stats["unreachable"] == before["unreachable"]

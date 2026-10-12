@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 152,
+  "prompt_tokens": 1262,
+  "total_tokens": 1414,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nSub-questions:\n1. [text] Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nEvidence:\nE1 [text, Section Table 2, page 4]: Table 2 : Out-of-domain evaluation of deep-coref models on the WikiCoref dataset. MUC B3 CEAFe CoNLL LEA ranking 63.10 48.43 47.18 52.90 44.40 top-pairs 63.09 48.42 46.05 52.52 44.21 +linguistic 63.99 49.63 46.60 53.40 45.66\nE2 [text, Section Table 6, page 9]: Table 6 : Out-of-domain evaluation on the WikiCoref dataset. The highest F 1 scores are boldfaced. MUC B3 CEAFe CoNLL LEA R P F1 R P F1 R P F1 R P F1 ranking 57.72 69.57 63.10 41.42 58.30 48.43 42.20 53.50 47.18 52.90 37.57 54.27 44.40 reinforce 62.12 58.98 60.51 46.98 45.79 46.38 44.28 46.35 45.29 50.73 42.28 41.70 41.98 top-pairs 56.31 71.74 63.09 39.78 61.85 48.42 40.80 52.85 46.05 52.52 35.87 57.58 44.21 +EPM 58.23 74.05 65.20 43.33 63.90 51.64 43.44 56.33 49.05 55.30 39.70 59.81 47.72 single 60.14 64.46 62.22 45.20 51.75 48.25 38.18 43.50 40.67 50.38 40.70 47.56 43.86 ensemble 59.58 71.60 65.04 44.64 60.91 51.52 40.38 49.17 44.35 53.63 40.73 56.97 47.50 G&L 66.06 62.93 64.46 57.73 48.58 52.76 46.76 49.54 48.11 55.11 - - -\nE3 [text, Section 5, page 4]: The rows “ranking” and “top-pairs” show the base results of deep-coref’s “ranking” and “toppairs” models, respectively. “+linguistic” rows represents the results for each of the mentionranking models in which the feature set of Section 4 is employed. The gender, number, animacy and mention type features, which have less than ﬁve values, are converted to binary features. Named entity and POS tags, and dependency relations are represented as learned embeddings. We observe that incorporating all the linguistic features bridges the gap between the performance of “top-pairs” and “ranking”. However, it does not improve signiﬁcantly over “ranking”. Henceforth, we use the “top-pairs” model of deep-coref as the baseline model to incorporate linguistic features. To assess the impact on generalization, we evaluate “top-pairs” and “+linguistic” 8 models that are trained on CoNLL, on WikiCoref (see Table 2 ). We observe that the impact on generalization is also not notable, i.e. the CoNLL score improves only by 0.5pp over “ranking”."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The 'top-pairs' model performed best on the WikiCoref dataset."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide a direct comparison of the 'top-pairs' model's performance against other models on the WikiCoref dataset. It only shows the performance of the 'top-pairs' model and the 'ranking' model, but not the 'top-pairs' model's performance relative to other models like 'MUC', 'B3",
+  "sufficient": false
+ }
+}

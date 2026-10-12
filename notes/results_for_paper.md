@@ -492,6 +492,100 @@ pCTCVR / pCTR". Tests: `tests/test_writer.py` (labels, caption, zoom alone).
 
 ---
 
+## 4e. Dev error analysis, the baselines and the runner → Results (*error analysis*, RQ1, RQ2 pilot); Experimental Setup (Day 7, dev)
+
+All judged by hand against SPIQA's gold answers (one annotator, dev only; Day 8 scores the test
+set formally). Per-question table: `notes/error_analysis_dev.md`. Run files in `results/runs/`.
+
+### Error analysis of the full system (prompt v6, 20 dev questions)
+
+7 right, 4 partly, 6 wrong (incl. vague), 3 no answer. The causes of the 13 not right:
+
+| cause | count |
+|---|---|
+| G2 too strict: a faithful quote rejected for PDF text quirks ("in- ference", "0 . 5%", ligatures, "item v .") | 4 |
+| G1 too lenient: "sufficient" with a fact that does not answer ("DA plays an important role" for "what is the *effect* of DA") | 2 (+1 shared) |
+| N9 misread or vague | 3 |
+| wrong table or figure chosen | 2 |
+| table read wrong (two-level header) | 1 |
+| a computed ratio cannot be checked (the model's 185.5 was wrong; true 182.6) | 1 |
+
+Also found: rewrites repeated already-verified claims (up to 3 times); fixed as a bug.
+
+### The two fixes, and one calibration step
+
+1. **G2 layer 1** compares a quote with its evidence after undoing PDF extraction quirks on both
+   sides (`text.loose`). It is still word for word: a changed word or number fails.
+2. **G1 v7:** "the fact must BE the answer" (named per question type), and the judge writes its
+   facts *before* its verdict. llama.cpp fills JSON fields in schema order, so a verdict written
+   first was only justified afterwards.
+
+| G1 version (full system, dev) | right | partly | **wrong** | no answer |
+|---|---|---|---|---|
+| v6 (before) | 7 | 4 | **6** | 3 |
+| **v7 (frozen)** | 6 | 1 | **0** | 13 |
+| v8 (calibration: "a simple reading of the evidence"; one id) | 5 | 2 | **3** | 10 |
+
+v7 was kept because it is the only version with no wrong answer, and the thesis's priority is
+"I could not confirm" over a confident error. Tuning then stopped: v8's differences from v7 are
+noise on 20 questions. **The cost:** v7 refuses often, including 2 questions v6 got right. One of
+them is the GRID table, where it wanted an explicit statement of the best method.
+
+### The three systems on dev (prompt v7; a pilot for RQ1/RQ2, not the result)
+
+| system | right | partly | wrong | no answer | model calls / question | seconds / question |
+|---|---|---|---|---|---|---|
+| **Full** | 6 | 1 | 0 | 13 | 8.5 | 39 |
+| Single-pass (no planner, no G1, no G2) | 12 | 3 | 5 | 0 | 3.0 | 11 |
+| Text-only (text tool only; tables and figures as plain text) | 3 | 1 | 0 | 16 | 8.7 | ~20 |
+
+Seconds are for uncached runs. No node fell back to its rules in any of the 60 runs (`fallbacks` = 0).
+
+- **RQ2 (seeing):** with the same loop and gates, the full system answers twice as many correctly
+  as text-only (6 vs 3), and neither is ever wrong.
+- **RQ1 (agency):** single-pass answers more questions correctly but is wrong 5 times. Its claims
+  are never checked. It also fetches text, a table and a figure in its one round. The full system
+  fetches one kind per round, chosen by N1's vote, so a wrong kind ("figure" for a table question)
+  costs it rounds.
+- This is the System A / System B trade-off of the thesis, already visible on dev. The test set
+  (150 questions, 3 systems) measures it with confidence intervals on Day 8.
+
+Making text-only fair: with one tool, N5's rule "never repeat a (sub-goal, tool) pair" made rounds
+2 and 3 the same search. In text-only, a repeat may now search again with the planner's new query.
+Before this, it refused 18/20 (`text_only_dev_norepeat.jsonl`).
+
+### Problems found while running (Implementation; Discussion, *limitations*)
+
+- **llama-server's RAM prompt cache** (`--cache-ram`, 8 GB by default) grew the server from 7.5 to
+  12.7 GB within 30 questions and left 0.8 GB free. Capped at 1 GB, it holds at 8.3 GB.
+- **A runaway reply:** G1 once wrote 5,800 tokens of repetition (88 s) inside one JSON string and
+  broke off as invalid JSON. Fixed with `maxLength` on G1's strings and `max_tokens` 2048 on every
+  call. Question time fell from 120–165 s back to about 35 s.
+- **Gemini** (the stronger-model comparison):
+  - `gemini-2.5-flash` is closed to new API keys, so the comparison uses `gemini-3.8-flash`;
+  - Gemini's endpoint rejects `seed`;
+  - it often answers 503 "high demand", so the runner waits and redoes the question.
+  - Price (2026-10-12): free tier, or $0.75 / $3.75 per 1M input / output tokens, about $4 for 150
+    questions.
+  - The free tier's daily quota ran out after about 30 calls (HTTP 429). The full run needs about
+    1,350, so it needs a paid key. The runner stops after 5 refused redos instead of looping.
+  - The smoke test answered 1 test question end to end with Gemini.
+
+### The runner (Experimental Setup)
+
+`scripts/run_eval.py` writes one JSON line per question. Each line holds the claims with their
+cites, the boxes with page sizes, G1/G2 verdicts and reasons, the path, model calls, fallbacks and
+seconds. The line is forced to disk before the next question starts, and a restart skips finished
+qids.
+- A question during which the model was unreachable (no server, timeout, 429, 5xx) is thrown away
+  and redone after waiting, so no stand-in answer enters the results.
+- Refused or malformed replies are behaviour of the system and are recorded as `fallbacks`.
+- The ColQwen2 vectors of all 150 test questions were cached before llama-server started (36 s).
+- On the test split, the runner prints no question or answer text, and refuses to start unless the
+  settings equal `eval/frozen_config.json`.
+
+---
+
 ## 5. The agent design on the stub → Implementation, *design validation* (Day 1)
 
 `paper/tables/tab_execution_profile.tex`, generated by the notebook (test 11I).

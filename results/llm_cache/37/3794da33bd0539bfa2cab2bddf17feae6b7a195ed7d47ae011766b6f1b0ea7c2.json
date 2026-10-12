@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 207,
+  "total_tokens": 281,
+  "prompt_tokens_details": {
+   "cached_tokens": 136
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method requires the fewest observations to spot an action in a video with 2.5% action coverage?\nSub-goals:\n1. [figure] Which method requires the fewest observations to spot an action in a video with 2.5% action coverage?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The evidence does not provide the number of observations for Action Search on videos with 2.5% action coverage. It only states the percentage reduction in observations compared to the Direction Baseline. The specific number of observations for Action Search is not provided in the evidence items. The"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide the number of observations for Action Search on videos with 2.5% action coverage. It only states the percentage reduction in observations compared to the Direction Baseline.",
+  "tool": "table",
+  "query": "Action Search observations with 2.5% action coverage"
+ }
+}

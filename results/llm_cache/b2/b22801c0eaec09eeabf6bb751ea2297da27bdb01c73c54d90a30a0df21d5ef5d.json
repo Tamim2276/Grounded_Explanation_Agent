@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 124,
+  "prompt_tokens": 1603,
+  "total_tokens": 1727,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Product Dataset has 324M click events and 1774k conversion events.\" -- cites: E3 (Table 1): row 'Product Dataset', column '#click' = 324M; E3 (Table 1): row 'Product Dataset', column '#conversion' = 1774k\n2. \"The figure does not provide direct evidence for the prevalence of click events compared to conversion events in the Product Dataset.\" -- cites: E1 (Figure 3): observation \"The figure shows AUC and CVR values for different models and train set sizes, but does not directly compare click events to conversion events.\"\n\nCited evidence:\n[E1] (figure, Figure 3, page 4) (image attached): Figure 3: Comparison of different models w.r.t. different sampling rates on Product Dataset.\nWords printed in the figure: 1 20 40 100 66 68 70 72 74 76 AUC CVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM 1 20 40 100 Train Set Size(%) 62 64 66 68 70 72 74 AUC CTCVR Task BASE AMAN OVERSAMPLING UNBIAS DIVISION ESMM-NS ESMM\n[E3] (table, Table 1, page 4): Table 1: Statistics of experimental datasets.\nValues (cite as cells):\n  row 'Public Dataset': '#user' = 0.4M; '#item' = 4.3M; '#impression' = 84M; '#click' = 3.4M; '#conversion' = 18k\n  row 'Product Dataset': '#user' = 48M; '#item' = 23.5M; '#impression' = 8950M; '#click' = 324M; '#conversion' = 1774k [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence from E3 (Table 1) confirms that the Product Dataset has 324M click events and 1774k conversion events."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence from E1 (Figure 3) states that the figure does not directly compare click events to conversion events, which aligns with the claim."
+   }
+  ]
+ }
+}

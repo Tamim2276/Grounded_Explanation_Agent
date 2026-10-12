@@ -1,0 +1,30 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 17,
+  "prompt_tokens": 88,
+  "total_tokens": 105,
+  "prompt_tokens_details": {
+   "cached_tokens": 70
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three main components of the Action Search model architecture?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "Action Search model architecture"
+  ]
+ }
+}

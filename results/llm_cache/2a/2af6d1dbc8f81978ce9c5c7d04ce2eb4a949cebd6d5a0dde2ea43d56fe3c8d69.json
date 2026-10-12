@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v8",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 48,
+  "prompt_tokens": 182,
+  "total_tokens": 230,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How much more prevalent are click events compared to conversion events in the Product Dataset?\nSub-goals:\n1. [figure] How much more prevalent are click events compared to conversion events in the Product Dataset?\nAlready tried: sub-goal 1 with figure\nStill missing: No further evidence is provided to quantify the difference in prevalence between click events and conversion events in the Product Dataset. The figure only shows AUC values for different models and sampling rates, not the specific counts or prevalence of click and conversion events in the dataset."
+  }
+ ],
+ "answer": {
+  "reason": "The figure does not provide the specific counts or prevalence of click and conversion events in the Product Dataset.",
+  "tool": "table",
+  "query": "click events vs conversion events prevalence in Product Dataset"
+ }
+}

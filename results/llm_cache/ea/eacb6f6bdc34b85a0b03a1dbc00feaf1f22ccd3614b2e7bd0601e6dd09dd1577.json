@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 213,
+  "total_tokens": 267,
+  "prompt_tokens_details": {
+   "cached_tokens": 130
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method requires the fewest observations to spot an action in a video with 2.5% action coverage?\nSub-goals:\n1. [figure] Which method requires the fewest observations to spot an action in a video with 2.5% action coverage?\nAlready tried: sub-goal 1 with figure\nStill missing: No evidence provided for sub-question 2, which asks for the method requiring the fewest observations for a different percentage of action coverage (e.g., 0.5%, 1.0%, etc.). The evidence only covers 2.5% action coverage and does not provide a comparison for other percentages of action coverage. The '"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison across different action coverage percentages, which requires searching through the text to find relevant comparisons.",
+  "tool": "text",
+  "query": "method requires fewest observations 2.5% action coverage"
+ }
+}

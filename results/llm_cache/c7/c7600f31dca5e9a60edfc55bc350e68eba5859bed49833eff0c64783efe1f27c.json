@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 87,
+  "prompt_tokens": 235,
+  "total_tokens": 322,
+  "prompt_tokens_details": {
+   "cached_tokens": 162
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nSub-goals:\n1. [table] How does the discrimination in the prediction of the two-phase framework (MSG) compare to that of DI, both with and without classifier tweaking, when the sample size is 2000?\nAlready tried: sub-goal 1 with table\nStill missing: No further evidence is provided to compare the discrimination of MSG and DI with and without classifier tweaking when the sample size is 2000. The table only provides discrimination values for the two-phase framework (MSG) and DI, but not for the comparison with and without classifier tweaking for a"
+  }
+ ],
+ "answer": {
+  "reason": "The table provides discrimination values for the two-phase framework (MSG) and DI, but not for the comparison with and without classifier tweaking for a sample size of 2000. Therefore, a text search is needed to find the relevant information.",
+  "tool": "text",
+  "query": "discrimination prediction two-phase framework MSG DI classifier tweaking sample size 2000"
+ }
+}

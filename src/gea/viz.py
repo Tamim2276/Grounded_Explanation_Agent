@@ -251,7 +251,7 @@ def draw_proof(state: AgentState, pdf, dpi: int = 110) -> list:
                 per_box[b["bbox"]].add(b["claim"])
         for (x0, y0, x1, y1), claims in per_box.items():
             for j, claim in enumerate(sorted(claims)):      # a cell used by two claims gets two boxes
-                pad = 1 - 4 * j
+                pad = 1 + 4 * j                             # rings outwards: inwards, a thin line's box inverts
                 box = [x0 * s - pad, y0 * s - pad, x1 * s + pad, y1 * s + pad]
                 colour = CLAIM_COLOURS[(claim - 1) % len(CLAIM_COLOURS)]
                 draw.rectangle(box, outline=colour + (255,), width=3 if j == 0 else 2)
