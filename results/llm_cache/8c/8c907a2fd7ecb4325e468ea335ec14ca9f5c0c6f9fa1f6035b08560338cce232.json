@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v3",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 227,
+  "prompt_tokens": 591,
+  "total_tokens": 818,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"\" -- cites: E1 (Section 4): quote \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"\n2. \"Table 3 reports the low-resource subset separately: Baseline 71.3, Ours 73.0, Gain +1.7.\" -- cites: E2 (Table 3): row 'Low-resource', column 'Baseline' = 71.3; E2 (Table 3): row 'Low-resource', column 'Ours' = 73.0; E2 (Table 3): row 'Low-resource', column 'Gain' = +1.7\n3. \"So the gain does hold for the low-resource subset, but it is smaller: +1.7 points versus +3.9 overall.\" -- cites: E2 (Table 3): row 'Low-resource', column 'Gain' = +1.7; E2 (Table 3): row 'All', column 'Gain' = +3.9\n\nCited evidence:\n[E1] (text, Section 4, page 2): Table 3 compares our model with the baseline on each test subset. Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline. Most of this gain comes from high-resource languages, where training data is plentiful.\n[E2] (table, Table 3, page 2): Table 3: Accuracy (%) of the baseline and our model on each test subset.\nValues:\n  row 'High-resource': 'Subset' = High-resource; 'Baseline' = 88.1; 'Ours' = 92.5; 'Gain' = +4.4\n  row 'Low-resource': 'Subset' = Low-resource; 'Baseline' = 71.3; 'Ours' = 73.0; 'Gain' = +1.7\n  row 'All': 'Subset' = All; 'Baseline' = 84.7; 'Ours' = 88.6; 'Gain' = +3.9"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 4) states that the model achieves an accuracy gain of 3.9 points over the baseline when averaged over all test data, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 (Table 3) shows that the baseline has an accuracy of 71.3 and the model has an accuracy of 73.0 for the low-resource subset, with a gain of +1.7, which matches the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E2 (Table 3) shows that the gain for the low-resource subset is +1.7 and the gain for all subsets is +3.9, which supports the claim that the gain is smaller for the low-resource subset."
+   }
+  ]
+ }
+}

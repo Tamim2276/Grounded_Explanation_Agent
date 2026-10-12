@@ -111,7 +111,8 @@ def real_text_retriever(corpus: dict, query: str, section: Optional[str] = None,
     final = text_scores(meaning, words, cfg.TEXT_SEARCH)
     ranked = sorted(pool, key=lambda c: (-final[c["id"]], -meaning[c["id"]]))
     return [Evidence("text", c["id"], c["page"], c["text"], tuple(c["bbox"]), "TextRetriever",
-                     round(final[c["id"]], 4), query=query, section=c["section"])
+                     round(final[c["id"]], 4), query=query, section=c["section"],
+                     page_size=page_size(corpus, c["page"]))
             for c in ranked[:k]]
 
 
@@ -140,8 +141,10 @@ def n6a_text_retriever(state: AgentState) -> dict:
 # both 85%, words + region heat 75% ("heat", "text+heat" stay measurable). Without
 # ColQwen2 (no room on this PC and no cached query) the text decides alone.
 
-def page_size(corpus: dict, page: int) -> tuple:
-    return tuple(corpus["pages"][page - 1]["size"])
+def page_size(corpus: dict, page: int):
+    # (width, height) in points, or None for a corpus without page records
+    pages = corpus.get("pages")
+    return tuple(pages[page - 1]["size"]) if pages else None
 
 
 def region_words(corpus: dict, record: dict) -> str:
@@ -243,8 +246,15 @@ def region_evidence(corpus: dict, record: dict, kind: str, s: float, query: str,
     similarity = masked_heat(heat[record["page"]], record["bbox"], size) if heat else None
     common = dict(query=query, label=record["label"], similarity=similarity, page_size=size)
     if kind == "figure":
-        return Evidence("figure", record["id"], record["page"], record["caption"], tuple(record["bbox"]),
-                        "FigureRetriever", round(s, 4), **common)
+        # The caption, the words printed in the figure (a diagram's labels, which the writer
+        # can quote and G2 can check), and for a vector bar chart its values as cells (Day 6).
+        from gea.charts import chart_cells, chart_text
+        chart = corpus.get("charts", {}).get(record["id"])
+        printed = region_words(corpus, record)[len(record["caption"]):].strip()
+        content = "\n".join([record["caption"]] + ([f"Words printed in the figure: {printed}"] if printed else [])
+                            + ([chart_text(chart)] if chart else []))
+        return Evidence("figure", record["id"], record["page"], content, tuple(record["bbox"]),
+                        "FigureRetriever", round(s, 4), cells=chart_cells(chart) if chart else [], **common)
     parsed = corpus.get("parsed_tables", {}).get(record["id"], {})
     if parsed.get("header"):
         table = {**record, **parsed}

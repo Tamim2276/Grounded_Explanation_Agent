@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 236,
+  "prompt_tokens": 1989,
+  "total_tokens": 2225,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 4 plots the the average number of k -hop neighbors that two items share in the KG w.r.t.\" -- cites: E1 (Figure 4): quote \"The average number of k -hop neighbors that two items share in the KG w.r.t.\"\n2. \"whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets.\" -- cites: E1 (Figure 4): quote \"whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets.\"; E2 (Figure 4): quote \"whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets.\"\n3. \"(d) The ratio of the two average numbers with different hops.\" -- cites: E1 (Figure 4): quote \"(d) The ratio of the two average numbers with different hops.\"; E2 (Figure 4): quote \"(d) The ratio of the two average numbers with different hops.\"\n\nCited evidence:\n[E1] (figure, Figure 4, page 7) (image attached): Figure 4: The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets. (d) The ratio of the two average numbers with different hops.\nWords printed in the figure: 1 2 3 4 Hop 0 20 40 60 # common k-hop neighbors with common rater(s) without common rater (a) MovieLens-1M 1 2 3 4 Hop 0 5 10 15 # common k-hop neighbors with common rater(s) without common rater (b) Book-Crossing 1 2 3 4 Hop 0 20 40 60 # common k-hop neighbors with common rater(s) without common rater (c) Bing-News 1 2 3 4 Hop 0 2 4 6 8 Ratio MovieLens-1M Book-Crossing Bing-News (d) Ratio of two average numbers\nValues (cite as cells):\n  row '(a) MovieLens-1M with common rater(s)': '1' = 4.3; '2' = 25.8; '3' = 42.6; '4' = 59.3\n  row '(a) MovieLens-1M without common rater': '1' = 1.1; '2' = 9.3; '3' = 27; '4' = 45.9\n  row '(b) Book-Crossing with common rater(s)': '1' = 2.7; '2' = 4.6; '3' = 6.8; '4' = 10.9\n  row '(b) Book-Crossing without common rater': '1' = 0.5; '2' = 1; '3' = 3.1; '4' = 6.3\n  row '(c) Bing-News with common rater(s)': '1' = 1.5; '2' = 10.8; '3' = 38.5; '4' = 55.8\n  row '(c) Bing-News without common rater': '1' = 0.6; '2' = 5; '3' = 32.8; '4' = 50.3\n[E2] (figure, Figure 4, page 7): a zoomed view of Figure 4 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 4) states: 'The average number of k-hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing-News datasets.' This matches the claim exactly."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 4) states: 'whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing-News datasets.' This matches the claim exactly."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 4) states: '(d) The ratio of the two average numbers with different hops.' This matches the claim exactly."
+   }
+  ]
+ }
+}

@@ -6,6 +6,9 @@ many much of on or our over than that the their this to was we were what when wh
 why with'''.split())
 
 NUMBER = re.compile(r"\d+(?:\.\d+)?")
+# A number standing on its own in a claim: "6,322,548", "0.920", "+4.4", "61%" -- but not the
+# digits inside a name ("MovieLens-1M", "GPT-4", "F1"), which no citation needs to vouch for.
+CLAIM_NUMBER = re.compile(r"(?<![\w.,-])\d+(?:[.,]\d+)*(?![\w-])")
 
 
 def terms(text: str) -> list:

@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 200,
+  "prompt_tokens": 1468,
+  "total_tokens": 1668,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The figure shows examples of generated faces by the method compared to the ground truth and other methods.\" -- cites: E1 (Figure 5): quote \"Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b).\"\n2. \"The figure shows examples of generated faces by the method compared to the ground truth and other methods.\" -- cites: E1 (Figure 5): quote \"Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\"\n3. \"The zoomed view of Figure 5 highlights the differences in the details of the generated faces.\" -- cites: E2 (Figure 5): observation \"The zoomed view of Figure 5 shows more detail in the generated faces, indicating differences in realism.\"\n\nCited evidence:\n[E1] (figure, Figure 5, page 5) (image attached): Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail).\n[E2] (figure, Figure 5, page 5): a zoomed view of Figure 5 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 5) shows examples of generated faces by the method compared to the ground truth and other methods, which supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 5) shows examples of generated faces by the method compared to the ground truth and other methods, which supports the claim. The additional note about zooming in to see the detail is also present in the evidence."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E2 (Figure 5) shows a zoomed view of Figure 5, which highlights the differences in the details of the generated faces, supporting the claim."
+   }
+  ]
+ }
+}

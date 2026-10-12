@@ -61,8 +61,10 @@ TABLE_CLAIM_STYLE  = "honest" # "honest" | "misattributed" | "uncited" (notebook
 # --- the local language model (llama.cpp llama-server, BUILD_PLAN.md Day 5) -----
 LLM_URL   = "http://localhost:8080/v1"
 LLM_MODEL = "qwen2.5-vl-7b"   # informational: the server answers with what it loaded
-LLM_MODE  = "rules"           # N1, N2 (names) and G1: "rules" (stand-ins) or "llm" (the model);
+LLM_MODE  = "rules"           # N1, N2 (names), G1, N9 and G2's support check: "rules" or "llm";
                               # N5 has its own switch, PLANNER_MODE, so each can be tested alone
+SUPPORT_CHECK = "auto"        # G2's layer 2, the model's support check: "auto" (on when LLM_MODE
+                              # is "llm"), "on" (also with the stub writer: Day 6.3) or "off"
 LLM_CACHE = True              # reuse cached replies (results/llm_cache); tests switch it off to
                               # see what happens when the server is gone
 

@@ -347,6 +347,105 @@ On Figure 4 of 1803.03467v4 (four bar-chart panels; zoomed crop, 1025 × 770 px)
 
 Both were wrong, with and without `--image-min-tokens 1024`. So **figure answers that depend on reading exact values are unreliable**; Day 6 should prefer values written in text or tables. The G2 faithfulness check cannot verify numbers read from an image. This is an honest limitation for RQ1/RQ3.
 
+**A fix for vector charts: read the values from the PDF itself** (exploratory prototype, 2026-10-11;
+it becomes package code with tests on Day 6).
+
+Many CS papers embed plots as *vector graphics*: every bar is an exact rectangle and every axis
+number is PDF text. Calibrating each panel's y-axis from its tick labels (a straight-line fit of
+value against height), then converting each bar's top, gives:
+
+| bar (Figure 4, 1803.03467v4) | 7B model from the image | read from the PDF |
+|---|---|---|
+| (c) Bing-News, hop 4, with common raters (true ≈ 55) | 12 | **55.8** |
+| (a) MovieLens-1M, hop 1, with common raters (true ≈ 4) | 25 | **4.3** |
+
+All 22 bars of panels (a)–(c) were read correctly, each with its exact rectangle as a box. Panel (d)
+is a line chart, which the bar reader does not cover.
+
+**How many figures this helps** (205 figures of the 36 papers, a rough heuristic classification):
+
+| kind | share | what can be checked exactly |
+|---|---|---|
+| vector diagrams (architecture, pipeline, tree) | 94 (46%) | their text labels (PDF text) |
+| raster pictures (photos, screenshots, pasted plots) | 67 (33%) | nothing; only a vision model can read them |
+| vector charts with axes and lines/points | 34 (17%) | values, with a line-chart reader (more work) |
+| vector bar charts | 10 (5%) | values, with the prototype as is |
+
+So exact values are possible for ~22% of figures (bar + line charts), exact labels for ~46%
+(diagrams), and ~33% stay with the model's eyes.
+
+The same heuristic on the 11 dev figure questions gives 1 bar chart, 1 line chart, 7 diagrams
+and 2 pictures. The heuristic is rough and **undercounts charts**: 1706.04269v2 Figure 4
+(action-spotting results, 35 filled bars, 18 numbers) was classed as a diagram, probably
+because its bars do not start at a zero line.
+
+---
+
+## 4d. Writing and checking the answer (N9, G2, N10b) → Implementation, *Generation and verification*; Results, *RQ1/RQ3* (Day 6, dev, pilot)
+
+### Bar charts read from the PDF (`src/gea/charts.py`, `python scripts/build_indexes.py charts`)
+
+- **How it reads a chart:**
+  - each panel's y-axis is calibrated from its tick labels (a straight-line fit; log axes are rejected);
+  - each bar's top gives its value, and each bar's rectangle is its box;
+  - series names come from the legend swatches, x labels from the tick row, panel names from "(c) …".
+- **Accepted:** 7 of the 205 figures, with exact values. Three safety rules keep wrong values out, since G2 would treat them as exact:
+  1. line-chart markers resting near zero are not bars (square shapes);
+  2. a chart is skipped when most bars have no x label (rotated category labels);
+  3. histograms with hundreds of bars stay checkable, but the text shown to the writer is capped.
+- **Checked by eye:** RippleNet Fig. 4 (24 bars, e.g. (c) Bing-News hop 4 = 55.8, which the 7B model read as 12); Action Search Fig. 4 (30 bars; this axis starts at 75 and matplotlib clips bars drawn from 0); histograms (1706.00633v4 Fig. 5); a 5-series grouped chart (1705.10667v4 Fig. 2).
+- **Rejected after inspection:** the 1809.01246v1 line charts (markers), and 1804.01429v3 Fig. 7 (rotated labels).
+- Tests: `tests/test_charts.py`.
+
+### Where G2 stops protecting, with and without the support check (`scripts/g2_boundary.py` → `results/day6_g2_boundary.json`)
+
+The four claim styles of notebook Section 15 on the stub paper, from the template writer, with
+the real 7B model as the support checker (2026-10-12):
+
+| claim style | layer 1 (equality tests) | layers 1 + 2 (model support check) |
+|---|---|---|
+| honest | nothing rejected | nothing rejected (no false alarm) |
+| fabricated (a number +1) | rejected (L1) | rejected (L1) |
+| uncited number | rejected (L1) | rejected (L1) |
+| **misattributed** (a real cell from the **wrong row**) | **missed** | **rejected (L2)**: "+4.4 is the gain for the high-resource subset…" |
+
+**Finding:** the support check closes exactly the gap the equality tests leave, with no false
+alarm on the honest draft. This is n = 4 hand-made cases on one stub paper; Day 8 measures it on real answers.
+
+### Real answers on 10 dev questions (`scripts/run_answers.py` → `results/day6_answers.json`, `notes/answers_day6.md`)
+
+All model-driven (N1, N2, N5, G1, N9, G2 layer 2), on real papers. Three prompt versions of the
+writer were tried (`notes/prompts.md`):
+
+| writer prompt | claims passing both G2 layers | questions fully verified | rewrites | model calls |
+|---|---|---|---|---|
+| v4 | 39/51 (76%) | 5/10 | 12 | 95 |
+| v5 ("cite listed values as cells") | 24/38 (63%) | 4/10 | 13 | 94 |
+| **v6** (final: values marked not quotable; name cleaning) | 34/52 (65%) | 4/10 | 13 | 100 |
+
+The differences are small and noisy on 10 questions; tuning was stopped there to avoid fitting
+dev. In every version, 9 of 10 questions ended with at least one verified claim.
+
+**What the answers show (v6; qualitative, the formal scoring is Day 8):**
+- Right and fully grounded:
+  - "Which dataset has the most 4-hop triples?" → "Bing-News … 6,322,548", boxed on Table 1's cell;
+  - ESMM's two auxiliary tasks → "CTR and CTCVR";
+  - GRID → "Our method" (= AMIE (Ours)).
+- **No answer rather than a wrong one:** "Which model performs best in AUC on MovieLens-1M?" retrieved the wrong table (Table 4, AUC by ripple-set size). Every claim failed G2, and the system said nothing could be stated.
+- **The SPIQA gold answer disagrees with the figure:** for "How does the number of common k-hop neighbors change as the hop distance increases…", the gold says it *decreases*. The bar values read from the PDF *increase* (MovieLens-1M with common raters: 4.3, 25.8, 42.6, 59.3), and the agent says "increases", citing those four bars. The gold probably describes panel (d), the ratio. Report gold-label disagreements found during the error analysis.
+- Too vague: the faces comparison and "the effect of adding DA" (no numbers).
+
+**Failure modes found in the traces, and the fixes** (all kept by tests):
+1. Digits inside names counted as unsourced numbers ("1" in "MovieLens-1M"). Fixed: only standalone numbers are checked (`text.CLAIM_NUMBER`).
+2. Rewrites replaced verified claims and got worse. Fixed: a rewrite keeps the claims that passed and replaces only the failed ones.
+3. Citation misuse (an "observation" of a paragraph; six values in one cell). Fixed: the JSON schema allows cells only for items with cells, observations only of figures, one value per cell.
+4. The writer quoted the "Values" lines it was shown (not paper text). Fixed: they are labelled "cite as cells" and are not quotable.
+5. Quote marks copied into cell names ("'Bing-News'"). Fixed: names are cleaned before checking.
+6. A heat-map box wholly outside its figure clipped to an empty box. Fixed: it falls back to the figure.
+
+**Proof images:** `data/debug/day6/proof_*.png`, e.g. the three "# 4-hop triples" cells boxed one
+colour per claim, and the cited bars of RippleNet Fig. 4 boxed exactly.
+
 ---
 
 ## 5. The agent design on the stub → Implementation, *design validation* (Day 1)

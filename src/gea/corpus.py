@@ -119,6 +119,8 @@ def load_real_corpus(paper_id: str) -> dict:
     if page_index_is_current(path.parent):
         paper["page_index"] = load_page_index(path.parent)         # ColQwen2 patch vectors (Day 3)
     paper["parsed_tables"] = load_tables(path.parent)              # cells of each table (Day 4)
+    from gea.charts import load_charts
+    paper["charts"] = load_charts(path.parent)                     # bar values of vector charts (Day 6)
     return paper
 
 

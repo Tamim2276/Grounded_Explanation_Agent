@@ -57,17 +57,24 @@ def describe_evidence(ev, limit: int = 1500) -> str:
     return f"{ev.id} [{ev.kind}, {where}]{image}: {body}"
 
 
-def figure_images(state: AgentState, limit: int = 2) -> list:
-    # PNGs of the figures in the buffer (the zoomed crop if N7 made one, otherwise the
-    # region re-rendered), only when a sub-goal needs a figure. Real backend only.
-    if cfg.BACKEND != "real" or not any(g["modality"] == "figure" for g in state["sub_goals"]):
+def evidence_images(state: AgentState, limit: int = 2) -> list:
+    # (figure evidence, PNG) for the figures in the buffer: the zoomed crop if N7 made one,
+    # otherwise the region re-rendered. Real backend only (the stub has no PDF).
+    if cfg.BACKEND != "real":
         return []
     from gea.retrieval import zoom_crop
     corpus, images = get_corpus(state["paper_id"]), []
     for ev in [e for e in state["evidence"] if e.tool == "FigureRetriever"][:limit]:
         zoom = next((z.crop for z in state["evidence"] if z.tool == "RegionZoom" and z.source == ev.source), None)
-        images.append(zoom if isinstance(zoom, bytes) else zoom_crop(corpus, ev)[0])
+        images.append((ev, zoom if isinstance(zoom, bytes) else zoom_crop(corpus, ev)[0]))
     return images
+
+
+def figure_images(state: AgentState, limit: int = 2) -> list:
+    # The judge sees figure images only when a sub-goal needs a figure.
+    if not any(g["modality"] == "figure" for g in state["sub_goals"]):
+        return []
+    return [png for _, png in evidence_images(state, limit)]
 
 
 def llm_verdict(state: AgentState) -> dict:
@@ -98,12 +105,12 @@ def backed(answer: dict, n: int, evidence: list) -> bool:
     # The judge's "sufficient" holds for sub-question n only if it named an item that is in
     # the buffer and a fact whose numbers (if any) appear in that item -- except a figure,
     # whose numbers are in the picture. A vague or invented "yes" does not pass.
-    from gea.text import NUMBER
+    from gea.text import CLAIM_NUMBER
     items = {e.id: e for e in evidence}
     for a in answer["answers"]:
         ev = items.get(a["evidence"].strip())
         if a["sub_question"] == n and ev and a["fact"].strip():
-            if ev.kind == "figure" or all(x in ev.content for x in NUMBER.findall(a["fact"])):
+            if ev.kind == "figure" or all(x in ev.content for x in CLAIM_NUMBER.findall(a["fact"])):
                 return True
     return False
 

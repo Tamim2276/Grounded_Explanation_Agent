@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v5",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 52,
+  "prompt_tokens": 133,
+  "total_tokens": 185,
+  "prompt_tokens_details": {
+   "cached_tokens": 108
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of adding DA to the baseline method?\nSub-goals:\n1. [figure] What is the effect of adding DA to the baseline method?\nAlready tried: sub-goal 1 with figure\nStill missing: The effect of adding DA to the baseline method."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the effect of adding DA to the baseline method, which is likely discussed in the text of the paper.",
+  "tool": "text",
+  "query": "effect of adding DA to the baseline method"
+ }
+}

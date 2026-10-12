@@ -5,6 +5,7 @@
 #   python scripts/build_indexes.py text --gpu    # the same on the B580 (~1 min), when it is free
 #   python scripts/build_indexes.py pages         # ColQwen2 page vectors, always on the B580
 #   python scripts/build_indexes.py tables        # every table's cells (Table Transformer, CPU)
+#   python scripts/build_indexes.py charts        # every vector bar chart's values (CPU, seconds)
 #   ... --force                                   # build every paper again
 #
 # Power-cut safe: a paper counts as done only when its index file exists, and that file
@@ -24,6 +25,7 @@ from gea import config as cfg
 from gea.device import report_no_room, room_problems
 from gea.indexes import (build_page_index, build_text_index, page_index_is_current,
                          text_index_is_current, unload_models)
+from gea.charts import CHARTS_DIR, build_chart_cache, charts_are_current
 from gea.tables import TABLES_DIR, build_table_cache, tables_are_current
 
 CORPUS = cfg.DATA_DIR / "corpus"
@@ -32,11 +34,13 @@ CORPUS = cfg.DATA_DIR / "corpus"
 NEEDS = {("text", "cpu"): (2, None),
          ("text", "xpu"): (3, 10_000),        # SPECTER2 takes ~1 GB of the 12 GB
          ("pages", "xpu"): (8, 4_500),        # ColQwen2 takes ~4.5 GB + working space; loads via RAM
-         ("tables", "cpu"): (1.5, None)}      # the Table Transformer is small
+         ("tables", "cpu"): (1.5, None),      # the Table Transformer is small
+         ("charts", "cpu"): (0.5, None)}      # no model: PDF shapes and text only
 
 JOBS = {"text": (build_text_index, text_index_is_current, "texts"),
         "pages": (build_page_index, page_index_is_current, "pages"),
-        "tables": (build_table_cache, tables_are_current, "tables")}
+        "tables": (build_table_cache, tables_are_current, "tables"),
+        "charts": (build_chart_cache, charts_are_current, "figures")}
 
 
 def build(what: str, folders: list, device: str, force: bool) -> None:
@@ -45,8 +49,8 @@ def build(what: str, folders: list, device: str, force: bool) -> None:
     for n, folder in enumerate(folders, 1):
         if is_current(folder) and not force:
             continue
-        if force and what == "tables":
-            shutil.rmtree(folder / TABLES_DIR, ignore_errors=True)     # parse every table again
+        if force and what in ("tables", "charts"):                     # read every one again
+            shutil.rmtree(folder / (TABLES_DIR if what == "tables" else CHARTS_DIR), ignore_errors=True)
         t = time.time()
         count = build_one(folder, device)
         built, total = built + 1, total + count
@@ -57,7 +61,7 @@ def build(what: str, folders: list, device: str, force: bool) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("what", choices=["text", "pages", "tables"], help="which index to build")
+    ap.add_argument("what", choices=["text", "pages", "tables", "charts"], help="which index to build")
     ap.add_argument("--gpu", action="store_true", help="text index: use the B580 instead of the CPU")
     ap.add_argument("--force", action="store_true", help="build every paper again")
     ap.add_argument("--skip-checks", action="store_true", help="start even if memory looks short")

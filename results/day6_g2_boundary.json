@@ -1,0 +1,107 @@
+{
+ "model": "qwen2.5-vl-7b",
+ "cases": {
+  "honest": {
+   "layer 1 only": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 71.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, but it is smaller: +1.7 points versus +3.9 overall."
+    ],
+    "rejected": []
+   },
+   "layers 1 + 2": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 71.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, but it is smaller: +1.7 points versus +3.9 overall."
+    ],
+    "rejected": []
+   }
+  },
+  "fabricated": {
+   "layer 1 only": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 72.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, but it is smaller: +1.7 points versus +3.9 overall."
+    ],
+    "rejected": [
+     {
+      "claim": 2,
+      "layer": 1,
+      "reason": "E2 Low-resource/Baseline is 71.3, the claim says 72.3"
+     }
+    ]
+   },
+   "layers 1 + 2": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 72.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, but it is smaller: +1.7 points versus +3.9 overall."
+    ],
+    "rejected": [
+     {
+      "claim": 2,
+      "layer": 1,
+      "reason": "E2 Low-resource/Baseline is 71.3, the claim says 72.3"
+     }
+    ]
+   }
+  },
+  "uncited": {
+   "layer 1 only": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 71.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, but it is smaller: +1.7 points versus +3.9 overall. That is 61% of the high-resource gain."
+    ],
+    "rejected": [
+     {
+      "claim": 3,
+      "layer": 1,
+      "reason": "the number 61 is in no citation"
+     }
+    ]
+   },
+   "layers 1 + 2": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 71.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, but it is smaller: +1.7 points versus +3.9 overall. That is 61% of the high-resource gain."
+    ],
+    "rejected": [
+     {
+      "claim": 3,
+      "layer": 1,
+      "reason": "the number 61 is in no citation"
+     }
+    ]
+   }
+  },
+  "misattributed": {
+   "layer 1 only": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 71.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, and it is at least as large: +4.4 points versus +3.9 overall."
+    ],
+    "rejected": []
+   },
+   "layers 1 + 2": {
+    "claims": [
+     "Section 4 states: \"Averaged over all test data, our model achieves an accuracy gain of 3.9 points over the baseline.\"",
+     "Table 3 reports the low-resource subset separately: Baseline 71.3, Ours 73.0, Gain +1.7.",
+     "So the gain does hold for the low-resource subset, and it is at least as large: +4.4 points versus +3.9 overall."
+    ],
+    "rejected": [
+     {
+      "claim": 3,
+      "layer": 2,
+      "reason": "support check: The evidence in E2 (Table 3) shows a gain of +4.4 for the high-resource subset and +3.9 for the overall gain, but the claim states that the gain for the low-resource subset is +4.4 and the overall gain is +3.9. This is not supported by the evidence."
+     }
+    ]
+   }
+  }
+ }
+}

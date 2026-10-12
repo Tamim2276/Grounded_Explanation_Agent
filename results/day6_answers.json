@@ -1,0 +1,2441 @@
+{
+ "summary": {
+  "questions": 10,
+  "prompt_version": "v6",
+  "answered": 4,
+  "abstained": 0,
+  "claims_dropped_runs": 6,
+  "claims": 52,
+  "claims_kept": 34,
+  "rewrites": 13,
+  "reference_in_buffer": 7,
+  "model_calls": 100,
+  "seconds": 281.6
+ },
+ "runs": [
+  {
+   "qid": "1803.03467v4#0",
+   "paper_id": "1803.03467v4",
+   "question": "Which dataset has the most 4-hop triples?",
+   "gold": "Bing-News.",
+   "reference": "Table 1",
+   "ref_kind": "table",
+   "status": "ok",
+   "answer": "The 'Bing-News' dataset has the most 4-hop triples with 6,322,548 triples.",
+   "rounds": 1,
+   "drafts": 1,
+   "rewrites": 0,
+   "claims": [
+    {
+     "text": "The 'Bing-News' dataset has the most 4-hop triples with 6,322,548 triples.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "# 4-hop triples",
+        "Bing-News"
+       ],
+       "value": "6,322,548"
+      }
+     ]
+    },
+    {
+     "text": "The 'MovieLens-1M' dataset has 923,718 4-hop triples.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "# 4-hop triples",
+        "MovieLens-1M"
+       ],
+       "value": "923,718"
+      }
+     ]
+    },
+    {
+     "text": "The 'Book-Crossing' dataset has 71,628 4-hop triples.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "# 4-hop triples",
+        "Book-Crossing"
+       ],
+       "value": "71,628"
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 6,
+     "bbox": [
+      510.2,
+      172.7,
+      555.6,
+      183.0
+     ],
+     "what": "Table 1 cell # 4-hop triples / Bing-News",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 2,
+     "evidence": "E1",
+     "page": 6,
+     "bbox": [
+      380.4,
+      172.7,
+      445.6,
+      183.0
+     ],
+     "what": "Table 1 cell # 4-hop triples / MovieLens-1M",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 3,
+     "evidence": "E1",
+     "page": 6,
+     "bbox": [
+      445.6,
+      172.7,
+      509.9,
+      183.0
+     ],
+     "what": "Table 1 cell # 4-hop triples / Book-Crossing",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "table",
+     "label": "Table 1",
+     "page": 6,
+     "tool": "TableRetriever"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E1",
+      "fact": "Bing-News has the most 4-hop triples with 6,322,548."
+     }
+    ]
+   },
+   "g2_last_failures": [],
+   "path": "TableRetriever -> G1 pass -> draft 1 -> G2 pass",
+   "reference_in_buffer": true,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 6,
+   "cached": 5,
+   "seconds": 9.8
+  },
+  {
+   "qid": "1803.03467v4#1",
+   "paper_id": "1803.03467v4",
+   "question": "How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?",
+   "gold": "The number of common k-hop neighbors generally decreases as the hop distance increases for both items with and without common raters. However, the number of common k-hop neighbors is consistently higher for items with common raters than for items without common raters.",
+   "reference": "Figure 4",
+   "ref_kind": "figure",
+   "status": "ok",
+   "answer": "The number of common k-hop neighbors increases as the hop distance increases for items with common raters in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+   "rounds": 1,
+   "drafts": 1,
+   "rewrites": 0,
+   "claims": [
+    {
+     "text": "The number of common k-hop neighbors increases as the hop distance increases for items with common raters in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M with common rater(s)",
+        "1"
+       ],
+       "value": "4.3"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M with common rater(s)",
+        "2"
+       ],
+       "value": "25.8"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M with common rater(s)",
+        "3"
+       ],
+       "value": "42.6"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M with common rater(s)",
+        "4"
+       ],
+       "value": "59.3"
+      }
+     ]
+    },
+    {
+     "text": "The number of common k-hop neighbors increases as the hop distance increases for items without common raters in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M without common rater",
+        "1"
+       ],
+       "value": "1.1"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M without common rater",
+        "2"
+       ],
+       "value": "9.3"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M without common rater",
+        "3"
+       ],
+       "value": "27"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(a) MovieLens-1M without common rater",
+        "4"
+       ],
+       "value": "45.9"
+      }
+     ]
+    },
+    {
+     "text": "The number of common k-hop neighbors increases as the hop distance increases for items with common raters in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing with common rater(s)",
+        "1"
+       ],
+       "value": "2.7"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing with common rater(s)",
+        "2"
+       ],
+       "value": "4.6"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing with common rater(s)",
+        "3"
+       ],
+       "value": "6.8"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing with common rater(s)",
+        "4"
+       ],
+       "value": "10.9"
+      }
+     ]
+    },
+    {
+     "text": "The number of common k-hop neighbors increases as the hop distance increases for items without common raters in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing without common rater",
+        "1"
+       ],
+       "value": "0.5"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing without common rater",
+        "2"
+       ],
+       "value": "1"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing without common rater",
+        "3"
+       ],
+       "value": "3.1"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "(b) Book-Crossing without common rater",
+        "4"
+       ],
+       "value": "6.3"
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      75.4,
+      140.1,
+      80.9,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M with common rater(s) / 1",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      99.8,
+      119.7,
+      105.3,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M with common rater(s) / 2",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      124.2,
+      103.7,
+      129.7,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M with common rater(s) / 3",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      148.6,
+      87.9,
+      154.1,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M with common rater(s) / 4",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 2,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      82.3,
+      143.1,
+      87.9,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M without common rater / 1",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 2,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      106.7,
+      135.3,
+      112.3,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M without common rater / 2",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 2,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      131.1,
+      118.5,
+      136.7,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M without common rater / 3",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 2,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      155.5,
+      100.6,
+      161.1,
+      144.0
+     ],
+     "what": "Figure 4 bar (a) MovieLens-1M without common rater / 4",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 3,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      198.5,
+      134.0,
+      204.2,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing with common rater(s) / 1",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 3,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      223.3,
+      126.9,
+      229.0,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing with common rater(s) / 2",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 3,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      248.1,
+      118.7,
+      253.8,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing with common rater(s) / 3",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 3,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      272.9,
+      103.0,
+      278.6,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing with common rater(s) / 4",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 4,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      205.6,
+      142.5,
+      211.3,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing without common rater / 1",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 4,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      230.4,
+      140.5,
+      236.1,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing without common rater / 2",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 4,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      255.2,
+      132.5,
+      260.9,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing without common rater / 3",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 4,
+     "evidence": "E1",
+     "page": 7,
+     "bbox": [
+      280.0,
+      120.5,
+      285.6,
+      144.2
+     ],
+     "what": "Figure 4 bar (b) Book-Crossing without common rater / 4",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "figure",
+     "label": "Figure 4",
+     "page": 7,
+     "tool": "FigureRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "figure",
+     "label": "Figure 4",
+     "page": 7,
+     "tool": "RegionZoom"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E1",
+      "fact": "The number of common k-hop neighbors increases as the hop distance increases for items with common raters."
+     },
+     {
+      "sub_question": 2,
+      "evidence": "E1",
+      "fact": "The number of common k-hop neighbors increases as the hop distance increases for items without common raters."
+     }
+    ]
+   },
+   "g2_last_failures": [],
+   "path": "FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 pass",
+   "reference_in_buffer": true,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 6,
+   "cached": 4,
+   "seconds": 27.3
+  },
+  {
+   "qid": "1803.03467v4#2",
+   "paper_id": "1803.03467v4",
+   "question": "Which model performs the best in terms of AUC on the MovieLens-1M dataset?",
+   "gold": "RippleNet*",
+   "reference": "Table 3",
+   "ref_kind": "table",
+   "status": "unsupported_claims_dropped",
+   "answer": "Every claim failed verification; nothing can be stated.",
+   "rounds": 1,
+   "drafts": 3,
+   "rewrites": 2,
+   "claims": [
+    {
+     "text": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "MovieLens-1M",
+        "32"
+       ],
+       "value": "0.920"
+      }
+     ]
+    },
+    {
+     "text": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "MovieLens-1M",
+        "32"
+       ],
+       "value": "0.920"
+      }
+     ]
+    },
+    {
+     "text": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "MovieLens-1M",
+        "32"
+       ],
+       "value": "0.920"
+      }
+     ]
+    },
+    {
+     "text": "The AUC values for the MovieLens-1M dataset are 0.903, 0.908, 0.911, 0.918, 0.920, and 0.919 for ripple set sizes of 2, 4, 8, 16, 32, and 64, respectively.",
+     "conclusion": false,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "cell": [
+        "MovieLens-1M",
+        "2"
+       ],
+       "value": "0.903"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "MovieLens-1M",
+        "4"
+       ],
+       "value": "0.908"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "MovieLens-1M",
+        "8"
+       ],
+       "value": "0.911"
+      },
+      {
+       "evidence": "E1",
+       "cell": [
+        "MovieLens-1M",
+        "16"
+       ],
+       "value": "0.918"
+      }
+     ]
+    }
+   ],
+   "boxes": [],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "table",
+     "label": "Table 4",
+     "page": 9,
+     "tool": "TableRetriever"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E1",
+      "fact": "MovieLens-1M has an AUC of 0.920 with a ripple set size of 32."
+     }
+    ]
+   },
+   "g2_last_failures": [
+    {
+     "claim": 0,
+     "text": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.",
+     "reason": "support check: The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32."
+    },
+    {
+     "claim": 1,
+     "text": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.",
+     "reason": "support check: The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32."
+    },
+    {
+     "claim": 2,
+     "text": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.",
+     "reason": "support check: The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32."
+    },
+    {
+     "claim": 3,
+     "text": "The AUC values for the MovieLens-1M dataset are 0.903, 0.908, 0.911, 0.918, 0.920, and 0.919 for ripple set sizes of 2, 4, 8, 16, 32, and 64, respectively.",
+     "reason": "the number 0.920, 0.919, 32, 64 is in no citation"
+    }
+   ],
+   "path": "TableRetriever -> G1 pass -> draft 1 -> G2 reject -> draft 2 -> G2 reject -> draft 3 -> G2 reject -> drop",
+   "reference_in_buffer": false,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 10,
+   "cached": 10,
+   "seconds": 0.1
+  },
+  {
+   "qid": "1803.03467v4#3",
+   "paper_id": "1803.03467v4",
+   "question": "What is the role of the ripple sets in the RippleNet framework?",
+   "gold": "The ripple sets are used to propagate a user's preferences from his or her click history to his or her relevant entities.",
+   "reference": "Figure 2",
+   "ref_kind": "figure",
+   "status": "unsupported_claims_dropped",
+   "answer": "The ripple sets in RippleNet are used to interact with the item embedding iteratively for obtaining the responses of user u with respect to item v.",
+   "rounds": 2,
+   "drafts": 3,
+   "rewrites": 2,
+   "claims": [
+    {
+     "text": "The ripple sets in RippleNet are used to interact with the item embedding iteratively for obtaining the responses of user u with respect to item v.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "These ripple sets are used to interact with the item embedding (the yellow block) iteratively for obtaining the responses of user u with respect to item v (the green blocks), which are then combined to form the final user embedding (the grey block)."
+      }
+     ]
+    },
+    {
+     "text": "The ripple sets in RippleNet are used to propagate user interests through the knowledge graph.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "RippleNet takes a user u and an item v as input, and outputs the predicted probability that user u will click item v . For the input user u , his historical set of interests V u is treated as seeds in the KG, then extended along links to form multiple ripple sets S k u ( k = 1 , 2 , ..., H )."
+      }
+     ]
+    },
+    {
+     "text": "The ripple sets in RippleNet are used to interact with the item embedding iteratively for obtaining the responses of user u with respect to item v.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "These ripple sets are used to interact with the item embedding (the yellow block) iteratively for obtaining the responses of user u with respect to item v (the green blocks), which are then combined to form the final user embedding (the grey block)."
+      }
+     ]
+    },
+    {
+     "text": "The size of the ripple sets in RippleNet can be varied to investigate the robustness of the framework.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "We vary the size of a user’s ripple set in each hop to further investigate the robustness of RippleNet."
+      }
+     ]
+    },
+    {
+     "text": "The ripple sets in RippleNet are used to propagate user interests through the knowledge graph.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "RippleNet takes a user u and an item v as input, and outputs the predicted probability that user u will click item v. For the input user u, his historical set of interests V u is treated as seeds in the KG, then extended along links to form multiple ripple sets S k u (k = 1, 2, ..., H). A ripple set S k u is the set of knowledge triples that are k-hop(s) away from the seed set V u. These ripple sets are used to interact with the item embedding (the yellow block) iteratively for obtaining the responses of user u with respect to item v (the green blocks), which are then combined to form the final user embedding (the grey block). Lastly, we use the embeddings of user u and item v together to compute the predicted probability ˆ y uv."
+      }
+     ]
+    },
+    {
+     "text": "The ripple sets in RippleNet are automatically discovered by the framework according to relevance probability.",
+     "conclusion": false,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E2",
+       "quote": "RippleNet automatically discovers the possible explanation paths according to relevance probability."
+      }
+     ]
+    },
+    {
+     "text": "The ripple sets in RippleNet are used to interact with the item embedding iteratively for obtaining the responses of user u with respect to item v.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "These ripple sets are used to interact with the item embedding (the yellow block) iteratively for obtaining the responses of user u with respect to item v (the green blocks), which are then combined to form the final user embedding (the grey block)."
+      }
+     ]
+    },
+    {
+     "text": "The size of the ripple sets in RippleNet can be varied to investigate the robustness of the framework.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "We vary the size of a user’s ripple set in each hop to further investigate the robustness of RippleNet."
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 3,
+     "bbox": [
+      53.5,
+      221.6,
+      294.0,
+      274.5
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 3,
+     "evidence": "E1",
+     "page": 3,
+     "bbox": [
+      53.5,
+      221.6,
+      294.0,
+      274.5
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 4,
+     "evidence": "E3",
+     "page": 8,
+     "bbox": [
+      318.0,
+      676.0,
+      559.6,
+      695.8
+     ],
+     "what": "Section 4.5 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 7,
+     "evidence": "E1",
+     "page": 3,
+     "bbox": [
+      53.5,
+      221.6,
+      294.0,
+      274.5
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 8,
+     "evidence": "E3",
+     "page": 8,
+     "bbox": [
+      318.0,
+      676.0,
+      559.6,
+      695.8
+     ],
+     "what": "Section 4.5 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "text",
+     "label": "c17",
+     "page": 3,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "text",
+     "label": "c38",
+     "page": 5,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E3",
+     "kind": "text",
+     "label": "c56",
+     "page": 8,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E4",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 4,
+     "tool": "FigureRetriever"
+    },
+    {
+     "id": "E5",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 4,
+     "tool": "RegionZoom"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E4",
+      "fact": "RippleNet uses ripple sets to extend user's historical interests along the knowledge graph to form multiple ripple sets."
+     }
+    ]
+   },
+   "g2_last_failures": [
+    {
+     "claim": 1,
+     "text": "The ripple sets in RippleNet are used to propagate user interests through the knowledge graph.",
+     "reason": "support check: The evidence does not mention propagating user interests through the knowledge graph. It only describes the ripple sets as seeds in the KG and extending along links to form ripple sets."
+    },
+    {
+     "claim": 4,
+     "text": "The ripple sets in RippleNet are used to propagate user interests through the knowledge graph.",
+     "reason": "the quote is not in E1"
+    },
+    {
+     "claim": 5,
+     "text": "The ripple sets in RippleNet are automatically discovered by the framework according to relevance probability.",
+     "reason": "support check: The evidence does not state that ripple sets are automatically discovered by the framework according to relevance probability. It only mentions that RippleNet automatically discovers possible explanation paths according to relevance probability."
+    }
+   ],
+   "path": "TextRetriever -> G1 reject -> FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 reject -> draft 2 -> G2 reject -> draft 3 -> G2 reject -> drop",
+   "reference_in_buffer": true,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 12,
+   "cached": 12,
+   "seconds": 0.3
+  },
+  {
+   "qid": "1812.06589v2#0",
+   "paper_id": "1812.06589v2",
+   "question": "How do the different methods compare in terms of their ability to generate realistic faces?",
+   "gold": "The baseline method generates faces that are blurry and unrealistic, while the other methods generate faces that are more realistic.",
+   "reference": "Figure 6",
+   "ref_kind": "figure",
+   "status": "ok",
+   "answer": "The figure shows examples of generated faces by the method compared to the ground truth and other methods.",
+   "rounds": 1,
+   "drafts": 2,
+   "rewrites": 1,
+   "claims": [
+    {
+     "text": "The figure shows examples of generated faces by the method compared to the ground truth and other methods.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b)."
+      }
+     ]
+    },
+    {
+     "text": "The figure shows examples of generated faces by the method compared to the ground truth and other methods.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zhou et al. and Chen et al. (b). (Better zoom in to see the detail)."
+      }
+     ]
+    },
+    {
+     "text": "The zoomed view of Figure 5 highlights the differences in the details of the generated faces.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E2",
+       "observation": "The zoomed view of Figure 5 shows more detail in the generated faces, indicating differences in realism."
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 5,
+     "bbox": [
+      331.5,
+      127.7,
+      553.9,
+      229.9
+     ],
+     "what": "Figure 5 (patch map)",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 2,
+     "evidence": "E1",
+     "page": 5,
+     "bbox": [
+      331.5,
+      127.7,
+      553.9,
+      229.9
+     ],
+     "what": "Figure 5 (patch map)",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "figure",
+     "label": "Figure 5",
+     "page": 5,
+     "tool": "FigureRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "figure",
+     "label": "Figure 5",
+     "page": 5,
+     "tool": "RegionZoom"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E1",
+      "fact": "The figure shows generation examples of the methods compared with Ground Truth and Zhou et al. and Chen et al., highlighting the realism of the faces generated."
+     }
+    ]
+   },
+   "g2_last_failures": [],
+   "path": "FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 reject -> draft 2 -> G2 pass",
+   "reference_in_buffer": false,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 8,
+   "cached": 8,
+   "seconds": 0.8
+  },
+  {
+   "qid": "1812.06589v2#1",
+   "paper_id": "1812.06589v2",
+   "question": "What is the effect of adding DA to the baseline method?",
+   "gold": "Adding DA to the baseline method improves the PSNR and SSIM values, while slightly decreasing the LMD value.",
+   "reference": "Table 3",
+   "ref_kind": "table",
+   "status": "unsupported_claims_dropped",
+   "answer": "DA plays an important role in talking face generation.",
+   "rounds": 2,
+   "drafts": 3,
+   "rewrites": 2,
+   "claims": [
+    {
+     "text": "DA plays an important role in talking face generation.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "DA plays an important role in talking face generation, comparing Table 3 (b) to baseline."
+      }
+     ]
+    },
+    {
+     "text": "The ablation study experiments show that DA contributes to the performance improvement.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "DA plays an important role in talking face generation, comparing Table 3 (b) to baseline."
+      }
+     ]
+    },
+    {
+     "text": "The evidence does not directly state the effect of adding DA to the baseline method.",
+     "conclusion": false,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "observation": "The figure shows the pipeline of the proposed method, but does not specify the effect of DA on the baseline method."
+      }
+     ]
+    },
+    {
+     "text": "The ablation study experiments show that DA contributes to the performance improvement.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "DA plays an important role in talking face generation, comparing Table 3 (b) to baseline."
+      }
+     ]
+    },
+    {
+     "text": "The evidence does not directly state the effect of adding DA to the baseline method.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "DA plays an important role in talking face generation, comparing Table 3 (b) to baseline."
+      }
+     ]
+    },
+    {
+     "text": "The effect of adding DA to the baseline method is significant, as it improves the results.",
+     "conclusion": false,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "DA plays an important role in talking face generation, comparing Table 3 (b) to baseline."
+      }
+     ]
+    },
+    {
+     "text": "The ablation study experiments show that DA contributes to the performance improvement.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "DA plays an important role in talking face generation, comparing Table 3 (b) to baseline."
+      }
+     ]
+    },
+    {
+     "text": "The evidence does not directly state the effect of adding DA to the baseline method.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "DA plays an important role in talking face generation, comparing Table 3 (b) to baseline."
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E3",
+     "page": 6,
+     "bbox": [
+      54.0,
+      584.9,
+      225.8,
+      594.8
+     ],
+     "what": "Section 4.4 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 2,
+     "evidence": "E3",
+     "page": 6,
+     "bbox": [
+      54.0,
+      584.9,
+      225.8,
+      594.8
+     ],
+     "what": "Section 4.4 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 4,
+     "evidence": "E3",
+     "page": 6,
+     "bbox": [
+      54.0,
+      584.9,
+      225.8,
+      594.8
+     ],
+     "what": "Section 4.4 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 7,
+     "evidence": "E3",
+     "page": 6,
+     "bbox": [
+      54.0,
+      584.9,
+      225.8,
+      594.8
+     ],
+     "what": "Section 4.4 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 3,
+     "tool": "FigureRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 3,
+     "tool": "RegionZoom"
+    },
+    {
+     "id": "E3",
+     "kind": "text",
+     "label": "c35",
+     "page": 6,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E4",
+     "kind": "text",
+     "label": "c33",
+     "page": 5,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E5",
+     "kind": "text",
+     "label": "c36",
+     "page": 6,
+     "tool": "TextRetriever"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E3",
+      "fact": "DA plays an important role in talking face generation."
+     }
+    ]
+   },
+   "g2_last_failures": [
+    {
+     "claim": 2,
+     "text": "The evidence does not directly state the effect of adding DA to the baseline method.",
+     "reason": "support check: The evidence in E1 (Figure 2) states: 'The figure shows the pipeline of the proposed method, but does not specify the effect of DA on the baseline method.' This does not directly state the effect of adding DA to the baseline method, but rather the pipeline of the proposed method. The claim is not supported by the evidence."
+    },
+    {
+     "claim": 4,
+     "text": "The evidence does not directly state the effect of adding DA to the baseline method.",
+     "reason": "support check: The evidence in E3 (Section 4.4) states: 'DA plays an important role in talking face generation, comparing Table 3 (b) to baseline.' This does not directly state the effect of adding DA to the baseline method, but rather the role of DA in talking face generation. The claim is not supported by the evidence."
+    },
+    {
+     "claim": 5,
+     "text": "The effect of adding DA to the baseline method is significant, as it improves the results.",
+     "reason": "support check: The evidence in E3 (Section 4.4) states: 'DA plays an important role in talking face generation, comparing Table 3 (b) to baseline.' This does not directly state the effect of adding DA to the baseline method, but rather the role of DA in talking face generation. The claim is not supported by the evidence."
+    },
+    {
+     "claim": 7,
+     "text": "The evidence does not directly state the effect of adding DA to the baseline method.",
+     "reason": "support check: The evidence in E3 (Section 4.4) states: 'DA plays an important role in talking face generation, comparing Table 3 (b) to baseline.' This does not directly state the effect of adding DA to the baseline method, but rather the role of DA in talking face generation. The claim is not supported by the evidence."
+    }
+   ],
+   "path": "FigureRetriever -> RegionZoom -> G1 reject -> TextRetriever -> G1 pass -> draft 1 -> G2 reject -> draft 2 -> G2 reject -> draft 3 -> G2 reject -> drop",
+   "reference_in_buffer": false,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 12,
+   "cached": 12,
+   "seconds": 0.2
+  },
+  {
+   "qid": "1812.06589v2#2",
+   "paper_id": "1812.06589v2",
+   "question": "Which method performed the best on the GRID dataset?",
+   "gold": "AMIE (Ours)",
+   "reference": "Table 2",
+   "ref_kind": "table",
+   "status": "unsupported_claims_dropped",
+   "answer": "Our method achieved the highest SSIM and the lowest LMD on the GRID dataset, demonstrating the effectiveness and robustness of our method.",
+   "rounds": 2,
+   "drafts": 3,
+   "rewrites": 2,
+   "claims": [
+    {
+     "text": "Our method achieved the highest SSIM and the lowest LMD on the GRID dataset, demonstrating the effectiveness and robustness of our method.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method."
+      }
+     ]
+    },
+    {
+     "text": "The quantitative results in Table 2 show that our method outperforms other methods on the GRID dataset.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method."
+      }
+     ]
+    },
+    {
+     "text": "Our method achieved the highest SSIM and the lowest LMD on the GRID dataset, demonstrating the effectiveness and robustness of our method.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method."
+      }
+     ]
+    },
+    {
+     "text": "The quantitative results in Table 2 show that our method outperforms other methods on the GRID dataset.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method."
+      }
+     ]
+    },
+    {
+     "text": "The user study on the LRW dataset indicates that our model achieves the highest rating in both realistic and synchronization.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E2",
+       "quote": "Table 4 clearly demonstrates that our model achieves the highest rating in both realistic and synchronization."
+      }
+     ]
+    },
+    {
+     "text": "Our method achieved the highest SSIM and the lowest LMD on the GRID dataset, demonstrating the effectiveness and robustness of our method.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E4",
+       "cell": [
+        "AMIE (Ours)",
+        "Evaluation on"
+       ],
+       "value": "0.97"
+      },
+      {
+       "evidence": "E4",
+       "cell": [
+        "AMIE (Ours)",
+        "GRID"
+       ],
+       "value": "0.78"
+      }
+     ]
+    },
+    {
+     "text": "The quantitative results in Table 2 show that our method outperforms other methods on the GRID dataset.",
+     "conclusion": true,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E4",
+       "cell": [
+        "AMIE (Ours)",
+        "Evaluation on"
+       ],
+       "value": "0.97"
+      },
+      {
+       "evidence": "E4",
+       "cell": [
+        "AMIE (Ours)",
+        "GRID"
+       ],
+       "value": "0.78"
+      }
+     ]
+    },
+    {
+     "text": "The user study on the LRW dataset indicates that our model achieves the highest rating in both realistic and synchronization.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E2",
+       "quote": "Table 4 clearly demonstrates that our model achieves the highest rating in both realistic and synchronization."
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E1",
+     "page": 5,
+     "bbox": [
+      315.0,
+      571.5,
+      558.0,
+      603.3
+     ],
+     "what": "Section L sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 3,
+     "evidence": "E1",
+     "page": 5,
+     "bbox": [
+      315.0,
+      571.5,
+      558.0,
+      603.3
+     ],
+     "what": "Section L sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 5,
+     "evidence": "E2",
+     "page": 6,
+     "bbox": [
+      315.0,
+      453.9,
+      558.0,
+      474.8
+     ],
+     "what": "Section 4.5 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 8,
+     "evidence": "E2",
+     "page": 6,
+     "bbox": [
+      315.0,
+      453.9,
+      558.0,
+      474.8
+     ],
+     "what": "Section 4.5 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "text",
+     "label": "c32",
+     "page": 5,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "text",
+     "label": "c36",
+     "page": 6,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E3",
+     "kind": "text",
+     "label": "c33",
+     "page": 5,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E4",
+     "kind": "table",
+     "label": "Table 2",
+     "page": 6,
+     "tool": "TableRetriever"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E4",
+      "fact": "AMIE (Ours) performed the best on the GRID dataset."
+     }
+    ]
+   },
+   "g2_last_failures": [
+    {
+     "claim": 1,
+     "text": "The quantitative results in Table 2 show that our method outperforms other methods on the GRID dataset.",
+     "reason": "support check: The claim cites E1 (Section L) and the evidence from E1 does not mention other methods being outperformed. It only states that the model achieves the highest SSIM and the lowest LMD."
+    },
+    {
+     "claim": 3,
+     "text": "The quantitative results in Table 2 show that our method outperforms other methods on the GRID dataset.",
+     "reason": "support check: The claim cites E1 (Section L) and the evidence from E1 does not mention other methods being outperformed. It only states that the model achieves the highest SSIM and the lowest LMD."
+    },
+    {
+     "claim": 5,
+     "text": "Our method achieved the highest SSIM and the lowest LMD on the GRID dataset, demonstrating the effectiveness and robustness of our method.",
+     "reason": "support check: The claim cites E4 (Table 2) and the evidence from E4 only shows the SSIM and LMD values for the 'AMIE (Ours)' method on the GRID dataset. It does not provide a comparison with other methods."
+    },
+    {
+     "claim": 6,
+     "text": "The quantitative results in Table 2 show that our method outperforms other methods on the GRID dataset.",
+     "reason": "support check: The claim cites E4 (Table 2) and the evidence from E4 only shows the SSIM and LMD values for the 'AMIE (Ours)' method on the GRID dataset. It does not provide a comparison with other methods."
+    }
+   ],
+   "path": "TextRetriever -> G1 reject -> TableRetriever -> G1 pass -> draft 1 -> G2 reject -> draft 2 -> G2 reject -> draft 3 -> G2 reject -> drop",
+   "reference_in_buffer": true,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 12,
+   "cached": 0,
+   "seconds": 65.3
+  },
+  {
+   "qid": "1812.06589v2#3",
+   "paper_id": "1812.06589v2",
+   "question": "What is the role of the frame discriminator in the proposed method?",
+   "gold": "The frame discriminator is used to detect whether the generated frame and audio are matched or not.",
+   "reference": "Figure 2",
+   "ref_kind": "figure",
+   "status": "unsupported_claims_dropped",
+   "answer": "The Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } .",
+   "rounds": 2,
+   "drafts": 3,
+   "rewrites": 2,
+   "claims": [
+    {
+     "text": "The Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } .",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } . The output of the discriminator is the probability of whether the inputs (audio and frame) are matched."
+      }
+     ]
+    },
+    {
+     "text": "The Frame Discriminator outputs the probability of whether the inputs (audio and frame) are matched.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "The output of the discriminator is the probability of whether the inputs (audio and frame) are matched."
+      }
+     ]
+    },
+    {
+     "text": "The Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } .",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } ."
+      }
+     ]
+    },
+    {
+     "text": "The Frame Discriminator outputs the probability of whether the inputs (audio and frame) are matched.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "The output of the discriminator is the probability of whether the inputs (audio and frame) are matched."
+      }
+     ]
+    },
+    {
+     "text": "The Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } .",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } ."
+      }
+     ]
+    },
+    {
+     "text": "The Frame Discriminator outputs the probability of whether the inputs (audio and frame) are matched.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "The output of the discriminator is the probability of whether the inputs (audio and frame) are matched."
+      }
+     ]
+    },
+    {
+     "text": "The Frame Discriminator is part of the proposed method and is used to distinguish between real and generated frames.",
+     "conclusion": false,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } ."
+      }
+     ]
+    },
+    {
+     "text": "The Frame Discriminator consists of an Image CNN, an Audio FC, and a classifier.",
+     "conclusion": false,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "The discriminator consists of an Image CNN, an Audio FC, and a classifier."
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E3",
+     "page": 3,
+     "bbox": [
+      315.0,
+      306.5,
+      558.0,
+      327.4
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 2,
+     "evidence": "E3",
+     "page": 3,
+     "bbox": [
+      315.0,
+      341.5,
+      558.0,
+      362.4
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 3,
+     "evidence": "E3",
+     "page": 3,
+     "bbox": [
+      315.0,
+      306.5,
+      558.0,
+      327.4
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 4,
+     "evidence": "E3",
+     "page": 3,
+     "bbox": [
+      315.0,
+      341.5,
+      558.0,
+      362.4
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 5,
+     "evidence": "E3",
+     "page": 3,
+     "bbox": [
+      315.0,
+      306.5,
+      558.0,
+      327.4
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 6,
+     "evidence": "E3",
+     "page": 3,
+     "bbox": [
+      315.0,
+      341.5,
+      558.0,
+      362.4
+     ],
+     "what": "Section 3.1 sentence",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "text",
+     "label": "c13",
+     "page": 3,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "text",
+     "label": "c35",
+     "page": 6,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E3",
+     "kind": "text",
+     "label": "c15",
+     "page": 3,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E4",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 3,
+     "tool": "FigureRetriever"
+    },
+    {
+     "id": "E5",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 3,
+     "tool": "RegionZoom"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E3",
+      "fact": "Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } . The output of the discriminator is the probability of whether the inputs (audio and frame) are matched."
+     }
+    ]
+   },
+   "g2_last_failures": [
+    {
+     "claim": 6,
+     "text": "The Frame Discriminator is part of the proposed method and is used to distinguish between real and generated frames.",
+     "reason": "support check: The evidence does not state that the Frame Discriminator is part of the proposed method and is used to distinguish between real and generated frames. It only states that the Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } ."
+    },
+    {
+     "claim": 7,
+     "text": "The Frame Discriminator consists of an Image CNN, an Audio FC, and a classifier.",
+     "reason": "the quote is not in E3"
+    }
+   ],
+   "path": "TextRetriever -> G1 reject -> FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 reject -> draft 2 -> G2 reject -> draft 3 -> G2 reject -> drop",
+   "reference_in_buffer": true,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 12,
+   "cached": 0,
+   "seconds": 71.1
+  },
+  {
+   "qid": "1804.07931v2#0",
+   "paper_id": "1804.07931v2",
+   "question": "What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?",
+   "gold": "The two auxiliary tasks are CTR and CTCVR.",
+   "reference": "Figure 2",
+   "ref_kind": "figure",
+   "status": "ok",
+   "answer": "The two auxiliary tasks used in the ESMM architecture for CVR modeling are CTR and CTCVR.",
+   "rounds": 2,
+   "drafts": 1,
+   "rewrites": 0,
+   "claims": [
+    {
+     "text": "The two auxiliary tasks used in the ESMM architecture for CVR modeling are CTR and CTCVR.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "quote": "In ESMM, two auxiliary tasks of predicting the post-view click-through rate (CTR) and post-view clickthrough&conversion rate (CTCVR) are introduced."
+      },
+      {
+       "evidence": "E4",
+       "observation": "The figure shows two auxiliary tasks: pCTR and pCTCVR."
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E3",
+     "page": 2,
+     "bbox": [
+      53.8,
+      87.0,
+      295.6,
+      271.2
+     ],
+     "what": "Section 1 paragraph",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 1,
+     "evidence": "E4",
+     "page": 2,
+     "bbox": [
+      331.5,
+      81.7,
+      535.5,
+      250.1
+     ],
+     "what": "Figure 2 (patch map)",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "observation"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "text",
+     "label": "c28",
+     "page": 4,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "text",
+     "label": "c24",
+     "page": 4,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E3",
+     "kind": "text",
+     "label": "c9",
+     "page": 2,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E4",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 2,
+     "tool": "FigureRetriever"
+    },
+    {
+     "id": "E5",
+     "kind": "figure",
+     "label": "Figure 2",
+     "page": 2,
+     "tool": "RegionZoom"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E1",
+      "fact": "The two auxiliary tasks are CTR and CTCVR."
+     },
+     {
+      "sub_question": 2,
+      "evidence": "E2",
+      "fact": "The CTCVR task is used in the ESMM architecture for CVR modeling."
+     },
+     {
+      "sub_question": 3,
+      "evidence": "E3",
+      "fact": "The CTR task is used in the ESMM architecture for CVR modeling."
+     },
+     {
+      "sub_question": 4,
+      "evidence": "E4",
+      "fact": "The CTR and CTCVR tasks are introduced in the ESMM architecture for CVR modeling."
+     },
+     {
+      "sub_question": 5,
+      "evidence": "E5",
+      "fact": "The CTR and CTCVR tasks are introduced in the ESMM architecture for CVR modeling."
+     }
+    ]
+   },
+   "g2_last_failures": [],
+   "path": "TextRetriever -> G1 reject -> FigureRetriever -> RegionZoom -> G1 pass -> draft 1 -> G2 pass",
+   "reference_in_buffer": true,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 8,
+   "cached": 0,
+   "seconds": 34.4
+  },
+  {
+   "qid": "1804.07931v2#1",
+   "paper_id": "1804.07931v2",
+   "question": "What is the relationship between clicks and impressions?",
+   "gold": "Clicks are a subset of impressions.",
+   "reference": "Figure 1",
+   "ref_kind": "figure",
+   "status": "unsupported_claims_dropped",
+   "answer": "The number of clicks is significantly smaller than the number of impressions.",
+   "rounds": 3,
+   "drafts": 3,
+   "rewrites": 2,
+   "claims": [
+    {
+     "text": "The number of clicks is significantly smaller than the number of impressions.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#impression"
+       ],
+       "value": "84M"
+      },
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#click"
+       ],
+       "value": "3.4M"
+      }
+     ]
+    },
+    {
+     "text": "The relationship between clicks and impressions is not one-to-one, as there are many impressions that do not result in a click.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#impression"
+       ],
+       "value": "84M"
+      },
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#click"
+       ],
+       "value": "3.4M"
+      }
+     ]
+    },
+    {
+     "text": "The relationship between clicks and impressions is that clicks are a subset of impressions.",
+     "conclusion": false,
+     "rejected": true,
+     "cites": [
+      {
+       "evidence": "E1",
+       "quote": "Training space is composed of samples with clicked impressions. It is only part of the inference space which is composed of all impressions."
+      }
+     ]
+    },
+    {
+     "text": "The number of clicks is significantly smaller than the number of impressions.",
+     "conclusion": false,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#impression"
+       ],
+       "value": "84M"
+      },
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#click"
+       ],
+       "value": "3.4M"
+      }
+     ]
+    },
+    {
+     "text": "The relationship between clicks and impressions is not one-to-one, as there are many impressions that do not result in a click.",
+     "conclusion": true,
+     "rejected": false,
+     "cites": [
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#impression"
+       ],
+       "value": "84M"
+      },
+      {
+       "evidence": "E3",
+       "cell": [
+        "Public Dataset",
+        "#click"
+       ],
+       "value": "3.4M"
+      }
+     ]
+    }
+   ],
+   "boxes": [
+    {
+     "claim": 1,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      171.1,
+      120.7,
+      217.6,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #impression",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 1,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      218.0,
+      120.7,
+      245.4,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #click",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 2,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      171.1,
+      120.7,
+      217.6,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #impression",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 2,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      218.0,
+      120.7,
+      245.4,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #click",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 4,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      171.1,
+      120.7,
+      217.6,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #impression",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 4,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      218.0,
+      120.7,
+      245.4,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #click",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 5,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      171.1,
+      120.7,
+      217.6,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #impression",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    },
+    {
+     "claim": 5,
+     "evidence": "E3",
+     "page": 4,
+     "bbox": [
+      218.0,
+      120.7,
+      245.4,
+      132.5
+     ],
+     "what": "Table 1 cell Public Dataset / #click",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "cell"
+    }
+   ],
+   "evidence": [
+    {
+     "id": "E1",
+     "kind": "figure",
+     "label": "Figure 1",
+     "page": 1,
+     "tool": "FigureRetriever"
+    },
+    {
+     "id": "E2",
+     "kind": "figure",
+     "label": "Figure 1",
+     "page": 1,
+     "tool": "RegionZoom"
+    },
+    {
+     "id": "E3",
+     "kind": "table",
+     "label": "Table 1",
+     "page": 4,
+     "tool": "TableRetriever"
+    },
+    {
+     "id": "E4",
+     "kind": "text",
+     "label": "c13",
+     "page": 2,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E5",
+     "kind": "text",
+     "label": "c12",
+     "page": 2,
+     "tool": "TextRetriever"
+    },
+    {
+     "id": "E6",
+     "kind": "text",
+     "label": "c7",
+     "page": 1,
+     "tool": "TextRetriever"
+    }
+   ],
+   "g1": {
+    "sufficient": true,
+    "uncovered": [],
+    "missing": "",
+    "answers": [
+     {
+      "sub_question": 1,
+      "evidence": "E1",
+      "fact": "Training space is composed of samples with clicked impressions."
+     }
+    ]
+   },
+   "g2_last_failures": [
+    {
+     "claim": 2,
+     "text": "The relationship between clicks and impressions is that clicks are a subset of impressions.",
+     "reason": "the quote is not in E1"
+    }
+   ],
+   "path": "FigureRetriever -> RegionZoom -> G1 reject -> TableRetriever -> G1 reject -> TextRetriever -> G1 pass -> draft 1 -> G2 reject -> draft 2 -> G2 reject -> draft 3 -> G2 reject -> drop",
+   "reference_in_buffer": true,
+   "model": "qwen2.5-vl-7b",
+   "prompt_version": "v6",
+   "model_calls": 14,
+   "cached": 0,
+   "seconds": 72.3
+  }
+ ]
+}

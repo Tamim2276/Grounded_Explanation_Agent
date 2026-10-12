@@ -1,0 +1,32 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 20,
+  "prompt_tokens": 99,
+  "total_tokens": 119,
+  "prompt_tokens_details": {
+   "cached_tokens": 70
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "datasets",
+   "variables",
+   "settings"
+  ]
+ }
+}

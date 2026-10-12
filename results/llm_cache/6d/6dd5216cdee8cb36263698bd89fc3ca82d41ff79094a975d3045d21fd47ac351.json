@@ -1,0 +1,75 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 344,
+  "prompt_tokens": 2331,
+  "total_tokens": 2675,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between clicks and impressions?\nEvidence:\n[E1] (figure, Figure 1, page 1) (image attached): Figure 1: Illustration of sample selection bias problem in conventional CVR modeling. Training space is composed of samples with clicked impressions. It is only part of the in- ference space which is composed of all impressions.\nWords printed in the figure: ���������� �� � � ��������� ��������� ��� � ������� � ��� �\n[E2] (figure, Figure 1, page 1): a zoomed view of Figure 1 (image attached)\n[E3] (table, Table 1, page 4): Table 1: Statistics of experimental datasets.\nValues (cite as cells):\n  row 'Public Dataset': '#user' = 0.4M; '#item' = 4.3M; '#impression' = 84M; '#click' = 3.4M; '#conversion' = 18k\n  row 'Product Dataset': '#user' = 48M; '#item' = 23.5M; '#impression' = 8950M; '#click' = 324M; '#conversion' = 1774k\n[E4] (text, Section 2.2, page 2): M is the number of clicks over all impressions. Obviously, S c is a subset of S . Note that in S c , (clicked) impressions without conversion are treated as negative samples and impressions with conversion (also clicked) as positive samples. In practice, CVR modeling encounters several task-specific problems, making it challenging. Sample selection bias (SSB) [ 12 ]. In fact, conventional CVR modeling makes an approximation of p ( z = 1 | y = 1 , x ) ≈ q ( z = 1 | x c ) by introducing an auxiliary feature space X c . X c represents a limited 2 space associated with S c . ∀ x c ∈X c there exists a pair ( x = x c , y x = 1 ) where x ∈X and y x is the click label of x . In this way, q ( z = 1 | x c ) is trained over space X c with clicked samples of S c . At inference stage, the prediction of p ( z = 1 | y = 1 , x ) over entire space X is calculated as q ( z = 1 | x ) under the assumption that for any pair of ( x , y x = 1 ) where x ∈X , x belongs to X c . This assumption would be violated with a large probability as X c is just a small part of entire space X . It is affected heavily by the randomness of rarely occurred click event, whose probability varies over regions in space X . Moreover, without enough observations in practice, space X c may be quite different from X . This would bring the drift of distribution of training samples from truly underling distribution and hurt the generalization performance for CVR modeling.\n[E5] (text, Section 2.2, page 2): Recently deep learning based methods have been proposed for CVR modeling, achieving state-of-the-art performance. Most of them follow a similar Embedding&MLP network architecture, as introduced in [ 3 ]. The left part of Fig.2 illustrates this kind of architecture, which we refer to as BASE model, for the sake of simplicity. In brief, conventional CVR modeling methods directly estimate the post-click conversion rate p ( z = 1 | y = 1 , x ) . They train models with samples of clicked impressions, i.e., S c = {( x j , z j )| y j = 1 }| M\n[E6] (text, Section 1, page 1): buy some of them. In other words, user actions follow a sequential pattern of impression → click → conversion . In this way, CVR modeling refers to the task of estimating the post-click conversion rate, i.e., pCVR = p ( conversion | click , impression ) . In general, conventional CVR modeling methods employ similar techniques developed in click-through rate (CTR) prediction task, for example, recently popular deep networks [ 2 , 3 ]. However, there exist several task-specific problems, making CVR modeling challenging. Among them, we report two critical ones encountered in our real practice: i) sample selection bias ( SSB ) problem [ 12 ]. As illustrated in Fig.1, conventional CVR models are trained on dataset composed of clicked impressions, while are utilized to make inference on the entire space with samples of all impressions. SSB problem will hurt the generalization performance of trained models. ii) data sparsity ( DS ) problem. In practice, data gathered for training CVR model is generally much less than CTR task. Sparsity of training data makes CVR model fitting rather difficult. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The relationship between clicks and impressions is that clicks are a subset of impressions.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Training space is composed of samples with clicked impressions. It is only part of the inference space which is composed of all impressions."
+     }
+    ]
+   },
+   {
+    "text": "The number of clicks is significantly smaller than the number of impressions.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Public Dataset",
+      "col": "#impression",
+      "value": "84M"
+     },
+     {
+      "evidence": "E3",
+      "row": "Public Dataset",
+      "col": "#click",
+      "value": "3.4M"
+     }
+    ]
+   },
+   {
+    "text": "The relationship between clicks and impressions is not one-to-one, as there are many impressions that do not result in a click.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Public Dataset",
+      "col": "#impression",
+      "value": "84M"
+     },
+     {
+      "evidence": "E3",
+      "row": "Public Dataset",
+      "col": "#click",
+      "value": "3.4M"
+     }
+    ]
+   }
+  ]
+ }
+}

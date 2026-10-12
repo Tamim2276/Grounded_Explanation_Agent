@@ -23,8 +23,10 @@ def patches_to_bbox(sim: np.ndarray, keep: float = 0.5, page_size: tuple = None)
 
 
 def clip(box: tuple, frame: tuple) -> tuple:
-    # The part of `box` inside `frame` (patches are 25 points wide; the edge ones stick out).
-    return (max(box[0], frame[0]), max(box[1], frame[1]), min(box[2], frame[2]), min(box[3], frame[3]))
+    # The part of `box` inside `frame` (patches are 25 points wide; the edge ones stick out),
+    # or the frame itself when the box lies wholly outside it.
+    inner = (max(box[0], frame[0]), max(box[1], frame[1]), min(box[2], frame[2]), min(box[3], frame[3]))
+    return inner if inner[0] < inner[2] and inner[1] < inner[3] else tuple(frame)
 
 
 def iou(a: tuple, b: tuple) -> float:
@@ -48,7 +50,8 @@ def n10a_claim_links(state: AgentState) -> dict:
         for cite in claim["cites"]:
             ev = evidence[cite["evidence"]]
             where = (f"\"{cite['quote'][:40]}...\"" if "quote" in cite
-                     else f"cell {cite['cell'][0]} / {cite['cell'][1]}")
+                     else f"cell {cite['cell'][0]} / {cite['cell'][1]}" if "cell" in cite
+                     else f"observation \"{cite['observation'][:40]}...\"")      # a figure, as seen (Day 6)
             sources.append({"evidence": ev.id, "kind": ev.kind, "page": ev.page, "where": where})
         links.append({"claim": i, "sources": sources})
     n_sources = sum(len(link["sources"]) for link in links)
@@ -56,21 +59,57 @@ def n10a_claim_links(state: AgentState) -> dict:
             "events": step("N10a", f"{len(links)} claim(s) linked to {n_sources} source(s)")}
 
 
+def quote_box(page, quote: str, frame: tuple = None):
+    # The box around a quote as printed on the page, or None: its first occurrence, joined
+    # with the next lines when the quote wraps (a label can occur several times in a
+    # diagram). If the whole quote is not found (a word split at a line end), its first
+    # eight words are tried.
+    import pymupdf
+    clip = pymupdf.Rect(frame) if frame else None
+    words = quote.split()
+    for text in (quote, " ".join(words[:8]) if len(words) > 8 else None):
+        hits = sorted(page.search_for(text, clip=clip) if text else [], key=lambda r: (r.y0, r.x0))
+        if hits:
+            group = [hits[0]]
+            for r in hits[1:]:
+                if 0 <= r.y0 - group[-1].y1 < 3:         # the quote continues on the next line
+                    group.append(r)
+                elif r.y0 > group[-1].y1:
+                    break
+            return (min(r.x0 for r in group), min(r.y0 for r in group), max(r.x1 for r in group), max(r.y1 for r in group))
+    return None
+
+
 def n10b_bounding_boxes(state: AgentState) -> dict:
     # N10b -- boxes [x_min, y_min, x_max, y_max] on the page, in PDF points.
-    # Table claims: the exact cells they cite (N6b kept every cell's box). Figure
-    # claims: the box around the best patches of N6c's similarity map. Text claims:
-    # the paragraph (notebook Section 13 narrows it to the quoted sentence).
+    # Table claims: the exact cells they cite (N6b kept every cell's box); a bar of a
+    # chart read from the PDF is a cell too. Figure claims: the box around the best
+    # patches of N6c's similarity map. Text claims: the paragraph (notebook Section 13
+    # narrows it to the quoted sentence). On the real backend (Day 6) a quote is found on
+    # the page -- the exact sentence, or the exact label inside a diagram -- and every box
+    # also records its page size and cite kind (the website draws them itself).
     evidence = {e.id: e for e in state["evidence"]}
+    doc = None
+    if cfg.BACKEND == "real":
+        import pymupdf
+        from gea.corpus import get_corpus
+        doc = pymupdf.open(get_corpus(state["paper_id"])["pdf"])
     boxes = []
     for i, claim in enumerate(state["claims"], 1):
         if claim.get("rejected"):
             continue
         for cite in claim["cites"]:
             ev = evidence[cite["evidence"]]
+            found = quote_box(doc[ev.page - 1], cite["quote"], ev.bbox if ev.kind == "figure" else None) \
+                if doc is not None and "quote" in cite and ev.kind in ("text", "figure") else None
             if "cell" in cite:
-                cell = next(c for c in ev.cells if (c["row"], c["col"]) == tuple(cite["cell"]))
-                box, what = cell["bbox"], f"{ev.label} cell {cite['cell'][0]} / {cite['cell'][1]}"
+                cell = next((c for c in ev.cells if (c["row"], c["col"]) == tuple(cite["cell"])), None)
+                if cell is None:
+                    continue
+                part = "bar" if ev.kind == "figure" else "cell"
+                box, what = cell["bbox"], f"{ev.label} {part} {cite['cell'][0]} / {cite['cell'][1]}"
+            elif found is not None:
+                box, what = found, (f"Section {ev.section} sentence" if ev.kind == "text" else f"{ev.label} label")
             elif ev.kind == "figure" and ev.similarity is not None:
                 box = patches_to_bbox(ev.similarity, page_size=ev.page_size)
                 if ev.page_size:                # real map, kept to the figure: clip the patch edges to it
@@ -84,8 +123,14 @@ def n10b_bounding_boxes(state: AgentState) -> dict:
                 box, what = ev.bbox, f"{ev.label} (region)"      # a quote of the table, not a cell
             else:
                 box, what = ev.bbox, f"Section {ev.section} paragraph"
-            boxes.append({"claim": i, "evidence": ev.id, "page": ev.page,
-                          "bbox": tuple(round(v, 1) for v in box), "what": what})
+            record = {"claim": i, "evidence": ev.id, "page": ev.page,
+                      "bbox": tuple(round(v, 1) for v in box), "what": what}
+            if doc is not None:
+                record.update(page_size=ev.page_size,
+                              cite=next(k for k in ("cell", "quote", "observation") if k in cite))
+            boxes.append(record)
+    if doc is not None:
+        doc.close()
     regions = len({(b["page"], b["bbox"]) for b in boxes})
     return {"boxes": boxes, "events": step("N10b", f"{len(boxes)} box(es) over {regions} region(s)")}
 

@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 124,
+  "prompt_tokens": 516,
+  "total_tokens": 640,
+  "prompt_tokens_details": {
+   "cached_tokens": 167
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.\" -- cites: E1 (Table 4): row 'MovieLens-1M', column '32' = 0.920\n2. \"The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32.\" -- cites: E1 (Table 4): row 'MovieLens-1M', column '32' = 0.920\n\nCited evidence:\n[E1] (table, Table 4, page 9): Table 4: The results of AUC w.r.t. different sizes of a user’s ripple set.\nValues (cite as cells):\n  row 'MovieLens-1M': '2' = 0.903; '4' = 0.908; '8' = 0.911; '16' = 0.918; '32' = 0.920; '64' = 0.919\n  row 'Book-Crossing': '2' = 0.694; '4' = 0.696; '8' = 0.708; '16' = 0.726; '32' = 0.706; '64' = 0.711\n  row 'Bing-News': '2' = 0.659; '4' = 0.672; '8' = 0.670; '16' = 0.673; '32' = 0.678; '64' = 0.671"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The highest AUC value for the MovieLens-1M dataset is 0.920, achieved with a ripple set size of 32."
+   }
+  ]
+ }
+}

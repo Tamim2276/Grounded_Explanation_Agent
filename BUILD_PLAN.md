@@ -1,4 +1,4 @@
-# Build Plan: 10 Days to a Finished Thesis
+# Build Plan: 10 Days to a Finished Thesis (and a website after it)
 
 **Project:** Agentic Multimodal RAG with Grounded Explanations for Complex Scientific Reasoning
 **Machine:** one Windows 11 desktop with an Intel Arc B580 (12 GB of video memory), 16 GB of RAM, a Ryzen 5 7500F
@@ -71,6 +71,7 @@ Git Bash** (Day 1, step 1.2).
 - [Day 8: Measure everything](#day-8-measure-everything)
 - [Day 9: Results into the thesis](#day-9-results-into-the-thesis)
 - [Day 10: Finish line](#day-10-finish-line)
+- [After the thesis: the website (Days 11–13)](#after-the-thesis-the-website-days-1113)
 - [Appendix A: Defence practice](#appendix-a-defence-practice)
 - [Appendix B: Glossary](#appendix-b-glossary)
 - [Appendix C: Troubleshooting](#appendix-c-troubleshooting)
@@ -361,6 +362,9 @@ the rest of Day 9 is spare.
 | 8 | **evaluation (restarts itself after cuts)**, judge, metrics | **annotating 50 questions**, Related Work | `results/summary.json` |
 | 9 | (spare evaluation time) thesis tables, PDF build | Results and Discussion chapters | thesis PDF with real numbers |
 | 10 | reproducibility check, final build | conclusion, read-through, defence practice | tagged release, final PDF, Q&A practised |
+| 11 | `export_site.py`, the explorer and results pages | sketching pages, page texts, showcase questions | the site runs from the folder |
+| 12 | polish (phones, dark mode, accessibility), deploy | checking pages on the phone | public URL on GitHub Pages |
+| 13 | *(optional)* live demo backend | — | ask a new question on the site |
 
 ---
 
@@ -1540,7 +1544,34 @@ its map points more precisely than the question's map.
 pymupdf.open(pdf_path))` for 3 of them and save them to `data/debug/`. 🔋 Look at them during
 the next outage: are the boxes on the right cells?
 
+> **For the website (Days 11–13):** keep every proof as *data* as well as a picture. N10b's
+> boxes carry the page number, the box in PDF points, the page size, the claim and the cite
+> kind (quote, cell, bar, observation). The site draws the boxes itself over small crops, so a
+> visitor can hover a claim and see its box light up.
+
 **6.6 🔌 Notebook section "Day 6: a real grounded answer"**: the report and the proof image.
+
+> **Built on Day 6.**
+>
+> - **Bar charts are read from the PDF** (`src/gea/charts.py`, `build_indexes.py charts`):
+>   7 of the 205 figures have exact values. The bars become *cells*, so the writer cites them
+>   like table cells, G2 checks them exactly, and N10b boxes the bar.
+> - **The writer (N9)** answers in a JSON shape built for each call: only buffer ids, cells
+>   only where there are cells, observations only of figures. A rewrite keeps the verified
+>   claims.
+> - **G2's support check** (`cfg.SUPPORT_CHECK`): on the stub boundary cases it **catches the
+>   misattributed claim** (a real cell from the wrong row) with no false alarm
+>   (`scripts/g2_boundary.py`).
+> - **10 dev answers** (`scripts/run_answers.py`): 34/52 claims pass both layers with the
+>   final prompt v6. Examples:
+>   - "Bing-News, 6,322,548" boxed on Table 1;
+>   - the wrong table retrieved gave *no* answer rather than a wrong one;
+>   - SPIQA's gold for one chart question disagrees with the bars in the PDF.
+> - **Six failure modes** found in the traces were fixed. They are listed in
+>   `notes/results_for_paper.md` §4d.
+> - **Not done:** maps for each claim's own wording (the plan's 6.4 figure step). They need
+>   ColQwen2 at answer time, which does not fit beside llama-server. Figure boxes use the
+>   question's map (the fallback), and charts use exact bars.
 
 ### Check it works
 
@@ -1661,6 +1692,12 @@ for q in questions:
 - **One JSON line per question:** `qid, system, status, answer, claims, evidence` (id,
   kind, label, page, tool), `boxes, rounds, rewrites, tool_calls, model_calls, seconds,
   dag_path`. Drop numpy arrays and image bytes before writing.
+- **Website-ready** (Days 11–13 read these lines directly). Also store:
+  - G1's and G2's verdicts with their reasons;
+  - each claim's cites (quote, cell, bar or observation);
+  - each box's page size;
+  - the prompt version and the model name.
+  Then `scripts/export_site.py` needs nothing but the run files, the summary and the corpus.
 - If llama-server is not reachable, the runner **waits and retries** every 30 s instead of
   recording fallback answers. A fallback answer in the test results would be a wrong
   measurement. Use `llm_ready()` before each question.
@@ -2057,6 +2094,102 @@ loud.
 - [ ] a fresh clone + Day 1 setup + `pytest -q` passes
 - [ ] `make_thesis_tables.py` regenerates exactly the committed tables
 - [ ] `v1.0-thesis` tag pushed
+
+---
+
+## After the thesis: the website (Days 11–13)
+
+**Power plan.** 🔌 about 5 h a day for building and checking pages, and internet for deploying.
+🔋: sketching the pages on paper, writing the page texts (they come from the thesis), and
+choosing the showcase questions.
+
+**Goal:** a public website where anyone can browse the agent's answers on real papers, each
+claim with its proof on the page, together with the thesis results. No server has to run.
+
+**By the end:** `site/` built by `scripts/export_site.py` · deployed on GitHub Pages ·
+(optional) a live demo.
+
+### Understand it first 🔋
+
+**Static first, live later.** There are two kinds of website:
+
+| | Static showcase (build first) | Live demo (optional) |
+|---|---|---|
+| What visitors do | browse the answers the agent already gave: the 150 test and 20 dev questions, every system, the Gemini comparison | type their own question about one of the 36 papers |
+| Needs a running server | no, just files | yes: the model, SPECTER2 and ColQwen2 |
+| Survives a power cut at home | yes (hosted on GitHub) | no, if it runs on your PC |
+| Cost | free (GitHub Pages) | free on your PC (unreliable), or limited/paid in the cloud |
+
+The static site shows everything the thesis proves and is always online. The live demo is an
+extra.
+
+**What the site needs is saved along the way.**
+- Every answer of the evaluation is one JSON line (Day 7), and every model reply is in the cache.
+- Every box is stored in PDF points with its page size (Days 6–7). So the site draws the boxes
+  itself over a small page image: hover a claim, and its box lights up.
+
+**Respect the papers' licences.** The papers are on arXiv under different licences. Show only
+small crops around the evidence, not whole pages, always with the paper's title and a link to
+its arXiv page. Check SPIQA's licence for the questions and answers too.
+
+### Steps
+
+**11.1 🔋 Sketch the pages** (1 h, on paper):
+
+- **Home:** the idea in three sentences, the graph diagram (thesis Figure 4.1), and one hero
+  example (question → answer → proof).
+- **Explorer:** every question in a list, with filters (paper, table or figure question,
+  system, right or wrong). A question's page shows:
+  - the answer, and every claim with its source and box;
+  - the agent's path (N1 → … → N12) as a timeline;
+  - what G1 and G2 decided, and the time and model calls.
+- **Compare:** one question answered by the full agent, single-pass, text-only and Gemini, side
+  by side.
+- **Results:** the thesis numbers as charts (RQ1–RQ3), read straight from
+  `results/summary.json`.
+- **About:** the thesis PDF, the code, how to cite it, and the limitations.
+
+**11.2 🔌 `scripts/export_site.py`** (2 h). It reads `results/runs/*.jsonl`,
+`results/summary.json` and the corpus, and writes:
+
+- `site/data/questions.json` (the list) and one `site/data/q/<qid>.json` per question;
+- the crops: the page region around each box at 100 dpi as WebP, a few hundred KB per question,
+  with the boxes converted to crop coordinates.
+
+Writes are atomic, and reruns overwrite.
+
+**11.3 🔌 The pages** (4 h).
+- Plain HTML, CSS and JavaScript, with no build step: the site also runs from the folder,
+  offline, on the laptop.
+- Boxes are SVG rectangles over the crop; hovering a claim highlights its box.
+- Charts come from a small library loaded from a CDN, or are SVGs made with matplotlib.
+
+**12.1 🔌 Polish** (3 h): phones (one column), dark mode, keyboard navigation, alt text on every
+image, and a page weight of a few MB at most.
+
+**12.2 🔌 Deploy** (1 h, needs internet). Use GitHub Pages from the `site/` folder (repository
+Settings → Pages), or a separate public repository if the thesis repository stays private.
+Open every page on the live URL, on a phone too.
+
+**13 🔌 Optional: the live demo** (a day). A small FastAPI backend with one endpoint,
+`/ask {paper_id, question}`, runs the graph and returns the same JSON the explorer already
+shows, so the same page displays it. It can run in two ways:
+
+- on your PC, through a tunnel, while the power is on: free, but down during every outage;
+- on a free cloud CPU with the Gemini provider (the Day 7 switch). SPECTER2 and ColQwen2's
+  question embedding need about 6 GB of RAM there, and only the 36 indexed papers can be asked
+  about.
+
+### Check it works
+
+- [ ] every question page opens without errors (a script loads every `q/*.json`)
+- [ ] the boxes sit on the right cells or figures on 5 hand-checked questions
+- [ ] the numbers on the results page equal `results/summary.json`
+- [ ] the site works on a phone, and from the folder without internet
+
+### If you're behind
+
+Ship the explorer with 20 hand-picked questions and the results page; add the rest later.
 
 ---
 

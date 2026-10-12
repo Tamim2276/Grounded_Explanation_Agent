@@ -1,0 +1,54 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v4",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 350,
+  "prompt_tokens": 707,
+  "total_tokens": 1057,
+  "prompt_tokens_details": {
+   "cached_tokens": 383
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } .\" -- cites: E3 (Section 3.1): quote \"Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } . The output of the discriminator is the probability of whether the inputs (audio and frame) are matched.\"\n2. \"The Frame Discriminator outputs the probability of whether the inputs (audio and frame) are matched.\" -- cites: E3 (Section 3.1): quote \"The output of the discriminator is the probability of whether the inputs (audio and frame) are matched.\"\n3. \"The Frame Discriminator is part of the proposed method and is used to distinguish between real and generated frames.\" -- cites: E3 (Section 3.1): quote \"Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } . The output of the discriminator is the probability of whether the inputs (audio and frame) are matched.\"\n4. \"The Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } .\" -- cites: E3 (Section 3.1): quote \"Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } .\"\n5. \"The Frame Discriminator outputs the probability of whether the inputs (audio and frame) are matched.\" -- cites: E3 (Section 3.1): quote \"The output of the discriminator is the probability of whether the inputs (audio and frame) are matched.\"\n\nCited evidence:\n[E3] (text, Section 3.1, page 3): shall elaborate on the details of the proposed AMIE in the following section. Frame Discriminator. Frame discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } . The output of the discriminator is the probability of whether the inputs (audio and frame) are matched. The discriminator consists of an Image CNN, an Audio FC, and a classiﬁer. We ﬂatten the output of Image CNN, and the Audio FC then feed concatenated features to the ﬁnal classiﬁer to produce 1-dimensional output."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence directly states that the Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } ."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence directly states that the output of the discriminator is the probability of whether the inputs (audio and frame) are matched."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence does not state that the Frame Discriminator is part of the proposed method or used to distinguish between real and generated frames. It only mentions that the Frame Discriminator is fed by the pairs of the real frame and audio clip or the pairs of the generated frame and corresponding audio clip, and that its output is the probability of whether the inputs are matched."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence directly states that the Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } ."
+   },
+   {
+    "claim": 5,
+    "supported": true,
+    "reason": "The evidence directly states that the output of the discriminator is the probability of whether the inputs (audio and frame) are matched."
+   }
+  ]
+ }
+}

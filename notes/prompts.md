@@ -93,3 +93,27 @@ best). The code can check that a fact exists; it cannot check that the fact answ
 The tools now search with the planner's query plus the words of the sub-goal it works on
 (`retrieval.search_query`). The model planner writes short keyword queries ("AUC MovieLens-1M
 dataset"), and SPIQA questions reuse the paper's own words (Day 3).
+
+## v4–v6 (2026-10-12): the writer (N9) and G2's support check
+
+**N9** (`generation.N9_SYSTEM`): answer only from the evidence items; 1–4 claims; every claim
+cites quotes, cells or (figures only) observations; never a number that is not in a cited quote
+or cell; never read exact numbers off images; mark the conclusion. The JSON schema is built per
+call: `evidence` is an enum of the buffer's ids, cells only for items with cells, observations
+only for figures. On a rewrite, verified claims are kept and the failed ones are listed with
+G2's reasons.
+
+- **v4:** first real version. 39/51 claims passed both G2 layers (10 dev questions).
+- **v5:** added "back claims about listed values with cells (for a trend, the first and last
+  values)". Worse: 24/38. The model then quoted the formatted values lines, which are not
+  paper text.
+- **v6 (kept):** v5's sentence removed; "the 'Values (cite as cells)' lines are not text of the
+  paper: cite them as cells, never quote them"; the row-label cells are dropped from the list.
+  34/52. Not tuned further: the differences are within noise for 10 questions.
+
+**G2 support check** (`generation.SUPPORT_SYSTEM`, layer 2): "supported only if the cited
+evidence says it AS WRITTEN: the same subject, row, column, setting and number; a correct value
+attached to the wrong subject or row is NOT supported". One call per draft over every claim that
+passed layer 1, with the cited cells shown by row and column name, the cited items in full, and
+figure images. A missing verdict counts as unsupported. On the stub boundary cases it rejected the
+misattributed claim and nothing else (`results/day6_g2_boundary.json`).

@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v4",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 452,
+  "prompt_tokens": 828,
+  "total_tokens": 1280,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Our method achieves the highest SSIM and the lowest LMD on the GRID dataset, demonstrating the effectiveness and robustness of our method.\" -- cites: E1 (Section L): quote \"From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method.\"\n2. \"The PSNR of our method is a little lower than that of Chen et al. [2019], but our method surpasses them on the metrics of both SSIM and LMD.\" -- cites: E1 (Section L): quote \"Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD.\"\n3. \"Our method achieves the highest SSIM and the lowest LMD on the GRID dataset, demonstrating the effectiveness and robustness of our method.\" -- cites: E1 (Section L): quote \"From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method.\"\n4. \"The PSNR of our method is a little lower than that of Chen et al. [2019], but our method surpasses them on the metrics of both SSIM and LMD.\" -- cites: E1 (Section L): quote \"Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD.\"\n\nCited evidence:\n[E1] (text, Section L, page 5): 4.2 Quantitative Results We compare our model with four recent state-of-the-art methods, including Chung et al. [2017], Chen et al. [2018] Zhou et al. [2019], and Chen et al. [2019]. Table 1 shows the quantitative results of our method and its competitors with higher PSNR, SSIM and lower LMD, suggesting the best quality of the generated video frames of the talking faces. Although Zhou et al. [Zhou et al. , 2019] obtains the lowest PSNR, it obtains the second highest SSIM and its SSIM is signiﬁcantly better than Chung et al. [Chung et al. , 2017] and Chen et al. [Chen et al. , 2018]. To further verify the robustness for arbitrary person generation, we evaluate our method on another benchmark dataset GRID [Cooke et al. , 2006] and report the comparison results in Table 2. From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method. Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD. Therefore, our method always achieves the highest PSNR and SSIM, demonstrating our method is able to generate high-quality videos."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the method achieves the highest SSIM and the lowest LMD on the GRID dataset, which is supported by the evidence that states 'From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method.'"
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the PSNR of the method is a little lower than that of Chen et al. [2019], but the method surpasses them on the metrics of both SSIM and LMD. This is supported by the evidence that states 'Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD.'"
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The claim states that the method achieves the highest SSIM and the lowest LMD on the GRID dataset, which is supported by the evidence that states 'From Table 2, we observe that our model achieves the highest SSIM and the lowest LMD, demonstrating the effectiveness and robustness of our method.'"
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The claim states that the PSNR of the method is a little lower than that of Chen et al. [2019], but the method surpasses them on the metrics of both SSIM and LMD. This is supported by the evidence that states 'Although the PSNR of our method is a little lower than that of Chen et al. [Chen et al. , 2019], our method surpass [Chen et al. , 2019] on the metrics of both SSIM and LMD.'"
+   }
+  ]
+ }
+}

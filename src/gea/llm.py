@@ -16,7 +16,7 @@ from gea import config as cfg
 from gea.safeio import atomic_write_json
 from gea.state import AgentState
 
-PROMPT_VERSION = "v3"     # raise it whenever a prompt changes (notes/prompts.md): old entries stop matching
+PROMPT_VERSION = "v6"     # raise it whenever a prompt changes (notes/prompts.md): old entries stop matching
 last_call = {}            # {"name", "cached", "seconds"} of the most recent call, for the traces
 stats = {"calls": 0, "cached": 0, "seconds": 0.0}     # since the session started (scripts report it)
 

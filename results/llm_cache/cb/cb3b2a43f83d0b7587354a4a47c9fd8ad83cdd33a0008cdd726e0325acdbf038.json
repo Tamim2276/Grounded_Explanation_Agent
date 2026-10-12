@@ -1,0 +1,59 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v4",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 262,
+  "prompt_tokens": 829,
+  "total_tokens": 1091,
+  "prompt_tokens_details": {
+   "cached_tokens": 313
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"DA plays an important role in talking face generation, comparing Table 3 (b) to baseline.\" -- cites: E3 (Section 4.4): quote \"DA plays an important role in talking face generation, comparing Table 3 (b) to baseline.\"\n2. \"Simply adopting MI into our baseline did not significantly improve the results, comparing Table 3 (a) to baseline.\" -- cites: E3 (Section 4.4): quote \"Simply adopting MI into our baseline did not signiﬁcantly improve the results, comparing Table 3 (a) to baseline.\"\n3. \"Introducing either Asy. or JS strategy shows the great improvement on almost metrics, comparing Table 3 (e) and (f) to Table 3 (c).\" -- cites: E3 (Section 4.4): quote \"Introducing either Asy. or JS strategy shows the great improvement on almost metrics, comparing Table 3 (e) and (f) to Table 3 (c).\"\n4. \"DA plays an important role in talking face generation, comparing Table 3 (b) to baseline.\" -- cites: E3 (Section 4.4): quote \"DA plays an important role in talking face generation, comparing Table 3 (b) to baseline.\"\n5. \"Simply adopting MI into our baseline did not significantly improve the results, comparing Table 3 (a) to baseline.\" -- cites: E3 (Section 4.4): quote \"Simply adopting MI into our baseline did not signiﬁcantly improve the results, comparing Table 3 (a) to baseline.\"\n6. \"Introducing either Asy. or JS strategy shows the great improvement on almost metrics, comparing Table 3 (e) and (f) to Table 3 (c).\" -- cites: E3 (Section 4.4): quote \"Introducing either Asy. or JS strategy shows the great improvement on almost metrics, comparing Table 3 (e) and (f) to Table 3 (c).\"\n\nCited evidence:\n[E3] (text, Section 4.4, page 6): In order to quantify the effect of each component of our method, we conduct ablation study experiments to verify the contributions of the two key components in our model: Asymmetric Mutual Information Estimator (AMIE) and Dynamic Attention (DA), and the two important strategies in AMIE: the asymmetric training strategy ( Asy. ) and JS represented estimator. From Table 3, it is clear to see that, (1) Simply adopting MI into our baseline did not signiﬁcantly improve the results, comparing Table 3 (a) to baseline. (2) DA plays an important role in talking face generation, comparing Table 3 (b) to baseline. (3) Introducing either Asy. or JS strategy shows the great improvement on almost metrics, comparing Table 3 (e) and (f) to Table 3 (c). (4) After integrating the asymmetric training strategy ( Asy. ) and JS represented estimator into the MINE, our AMIE can further improve the performance on all the metrics, as shown in Table 3 (g). (5) Integrating AMIE (comparing Table 3 ’Ours’ to Table (b)) can further boost the performance, while simply integrating MINE (comparing Table 3 (c) to (b)) the performance declined, that veriﬁes the contribution of proposed"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim cites the same subject, row, column, setting, and number as the evidence."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim cites the same subject, row, column, setting, and number as the evidence."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The claim cites the same subject, row, column, setting, and number as the evidence."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The claim cites the same subject, row, column, setting, and number as the evidence."
+   },
+   {
+    "claim": 5,
+    "supported": true,
+    "reason": "The claim cites the same subject, row, column, setting, and number as the evidence."
+   },
+   {
+    "claim": 6,
+    "supported": true,
+    "reason": "The claim cites the same subject, row, column, setting, and number as the evidence."
+   }
+  ]
+ }
+}

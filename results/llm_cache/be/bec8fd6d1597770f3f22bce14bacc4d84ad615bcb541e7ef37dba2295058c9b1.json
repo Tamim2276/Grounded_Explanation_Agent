@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 69,
+  "prompt_tokens": 2274,
+  "total_tokens": 2343,
+  "prompt_tokens_details": {
+   "cached_tokens": 435
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. If sufficient, give for each sub-question the id of that item (E1, E2, ...) and copy the answering fact in a few words. Otherwise list the numbers of the sub-questions still uncovered and say in a few words what is missing."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between clicks and impressions?\nSub-questions:\n1. [figure] What is the relationship between clicks and impressions?\nEvidence:\nE1 [figure, Figure 1, page 1] (image attached): Figure 1: Illustration of sample selection bias problem in conventional CVR modeling. Training space is composed of samples with clicked impressions. It is only part of the in- ference space which is composed of all impressions.\nWords printed in the figure: ���������� �� � � ��������� ��������� ��� � ������� � ��� �\nE2 [figure, Figure 1, page 1]: Zoomed view (300 dpi) of: Figure 1: Illustration of sample selection bias problem in conventional CVR modeling. Training space is composed of samples with clicked impressions. It is only part of the in- ference space which is composed of all impressions.\nWords printed in the figure: ���������� �� � � ��������� ��������� ��� � ������� � ��� �\nE3 [table, Table 1, page 4]: Table 1: Statistics of experimental datasets.\ndataset | #user | #item | #impression | #click | #conversion\nPublic Dataset | 0.4M | 4.3M | 84M | 3.4M | 18k\nProduct Dataset | 48M | 23.5M | 8950M | 324M | 1774k\nE4 [text, Section 2.2, page 2]: M is the number of clicks over all impressions. Obviously, S c is a subset of S . Note that in S c , (clicked) impressions without conversion are treated as negative samples and impressions with conversion (also clicked) as positive samples. In practice, CVR modeling encounters several task-specific problems, making it challenging. Sample selection bias (SSB) [ 12 ]. In fact, conventional CVR modeling makes an approximation of p ( z = 1 | y = 1 , x ) ≈ q ( z = 1 | x c ) by introducing an auxiliary feature space X c . X c represents a limited 2 space associated with S c . ∀ x c ∈X c there exists a pair ( x = x c , y x = 1 ) where x ∈X and y x is the click label of x . In this way, q ( z = 1 | x c ) is trained over space X c with clicked samples of S c . At inference stage, the prediction of p ( z = 1 | y = 1 , x ) over entire space X is calculated as q ( z = 1 | x ) under the assumption that for any pair of ( x , y x = 1 ) where x ∈X , x belongs to X c . This assumption would be violated with a large probability as X c is just a small part of entire space X . It is affected heavily by the randomness of rarely occurred click event, whose probability varies over regions in space X . Moreover, without enough observations in practice, space X c may be quite different from X . This would bring the drift of distribution of training samples from truly underling distribution and hurt the generalization performance for CVR modeling.\nE5 [text, Section 2.2, page 2]: Recently deep learning based methods have been proposed for CVR modeling, achieving state-of-the-art performance. Most of them follow a similar Embedding&MLP network architecture, as introduced in [ 3 ]. The left part of Fig.2 illustrates this kind of architecture, which we refer to as BASE model, for the sake of simplicity. In brief, conventional CVR modeling methods directly estimate the post-click conversion rate p ( z = 1 | y = 1 , x ) . They train models with samples of clicked impressions, i.e., S c = {( x j , z j )| y j = 1 }| M\nE6 [text, Section 1, page 1]: buy some of them. In other words, user actions follow a sequential pattern of impression → click → conversion . In this way, CVR modeling refers to the task of estimating the post-click conversion rate, i.e., pCVR = p ( conversion | click , impression ) . In general, conventional CVR modeling methods employ similar techniques developed in click-through rate (CTR) prediction task, for example, recently popular deep networks [ 2 , 3 ]. However, there exist several task-specific problems, making CVR modeling challenging. Among them, we report two critical ones encountered in our real practice: i) sample selection bias ( SSB ) problem [ 12 ]. As illustrated in Fig.1, conventional CVR models are trained on dataset composed of clicked impressions, while are utilized to make inference on the entire space with samples of all impressions. SSB problem will hurt the generalization performance of trained models. ii) data sparsity ( DS ) problem. In practice, data gathered for training CVR model is generally much less than CTR task. Sparsity of training data makes CVR model fitting rather difficult. [image]"
+  }
+ ],
+ "answer": {
+  "sufficient": true,
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Training space is composed of samples with clicked impressions."
+   }
+  ],
+  "uncovered": [],
+  "missing": ""
+ }
+}

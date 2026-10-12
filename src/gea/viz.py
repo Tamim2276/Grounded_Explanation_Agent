@@ -256,6 +256,8 @@ def draw_proof(state: AgentState, pdf, dpi: int = 110) -> list:
                 colour = CLAIM_COLOURS[(claim - 1) % len(CLAIM_COLOURS)]
                 draw.rectangle(box, outline=colour + (255,), width=3 if j == 0 else 2)
                 drawn.append(box)
+        if not drawn:                                     # only whole-paragraph boxes on this page
+            continue
         merged = PILImage.alpha_composite(image, overlay).convert("RGB")
         top = max(0, min(b[1] for b in drawn) - 100)      # room for the heading above
         bottom = min(merged.height, max(b[3] for b in drawn) + 40)

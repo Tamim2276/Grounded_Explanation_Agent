@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 136,
+  "total_tokens": 198,
+  "prompt_tokens_details": {
+   "cached_tokens": 72
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nSub-goals:\n1. [table] Which model performs the best in terms of AUC on the MovieLens-1M dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The goal is to find the model with the highest AUC on the MovieLens-1M dataset, which is likely to be found in a table summarizing performance metrics.",
+  "tool": "table",
+  "query": "AUC MovieLens-1M dataset"
+ }
+}

@@ -122,3 +122,27 @@
     10 traces: right kind 4/10 -> 9/10, right table/figure in the buffer 3/10 -> 7/10, 0 abstained. Tests: 98.
   - Decision (user, 2026-10-11): no fine-tuning of the 7B; keep the local 7B as the evaluated system; add a
     Gemini API run as a "stronger model" comparison on Day 7 (switch in the evaluation runner).
+  - Figure weak spot (asked by the user): prototype reads vector bar charts from the PDF itself (tick labels give
+    each panel's y-axis by a straight-line fit; each filled rectangle's top gives its value): Figure 4 of
+    1803.03467v4, all 22 bars of panels (a)-(c) right, e.g. (c) hop 4 = 55.8 (model 12), (a) hop 1 = 4.3 (model 25).
+    First try failed: panels (a) and (c) share an axis x-position, so their tick columns merged -> split a column
+    where values stop falling. Corpus figures (rough heuristic): 46% vector diagrams, 33% raster, 17% vector line
+    charts, 5% vector bar charts; it undercounts charts (1706.04269v2 Fig. 4 missed). Prototype in the scratchpad;
+    to become src/gea/charts.py with tests on Day 6.
+- 2026-10-12: plan updated -- the user wants a website after the thesis: Days 11-13 (static showcase from the run files on GitHub Pages first, optional live demo); Days 6-7 now save proofs/run records website-ready.
+- 2026-10-12, Day 6 (N9, G2, N10b real):
+  - charts.py: vector bar charts read from the PDF (tick-label calibration, bar tops, legend names, x labels,
+    panel names). Bugs found by looking: panels sharing an axis x merged (split columns where values rise);
+    axis starting at 75 with bars drawn from 0 (use the visible floor); axis titles taken as x labels (first
+    row only, >= 2 pt below the axis); line-chart markers taken as bars (square shapes, unclipped size); rotated
+    labels (skip charts without x labels); garbled multi-line legends (2.5 pt line tolerance). 7 charts kept.
+  - Bars become cells, so the writer cites them like table cells, G2 checks them exactly, N10b boxes the bar.
+  - N9 model writer (schema per call: id enum, cell/observation only where valid), rewrite keeps verified
+    claims; G2 layer 2 support check (cfg.SUPPORT_CHECK auto/on/off); N10a handles observations; N10b boxes
+    quotes where printed (sentence, diagram label; first occurrence + wrapped lines) and records page size + cite.
+  - g2_boundary.py: support check catches the misattributed claim, no false alarm (stub, real model).
+  - run_answers.py on 10 dev: v4 39/51 claims kept, v5 24/38, v6 34/52 (kept v6); fixes from the traces:
+    standalone-number rule, keep verified claims, cite kinds by schema, values lines not quotable, name
+    cleaning, empty clipped box. SPIQA gold for 1803.03467v4#1 says "decreases"; the PDF's bars increase.
+  - Proofs in data/debug/day6/. Notebook Section 21 (146 cells). Tests: 112.
+  - Lesson: backslashes in bash heredocs get mangled in this environment -- use the editor for code edits.

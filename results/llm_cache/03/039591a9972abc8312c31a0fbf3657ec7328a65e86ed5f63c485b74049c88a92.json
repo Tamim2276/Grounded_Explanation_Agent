@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v6",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 292,
+  "prompt_tokens": 537,
+  "total_tokens": 829,
+  "prompt_tokens_details": {
+   "cached_tokens": 308
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The number of clicks is significantly smaller than the number of impressions.\" -- cites: E3 (Table 1): row 'Public Dataset', column '#impression' = 84M; E3 (Table 1): row 'Public Dataset', column '#click' = 3.4M\n2. \"The relationship between clicks and impressions is not one-to-one, as there are many impressions that do not result in a click.\" -- cites: E3 (Table 1): row 'Public Dataset', column '#impression' = 84M; E3 (Table 1): row 'Public Dataset', column '#click' = 3.4M\n3. \"The number of clicks is significantly smaller than the number of impressions.\" -- cites: E3 (Table 1): row 'Public Dataset', column '#impression' = 84M; E3 (Table 1): row 'Public Dataset', column '#click' = 3.4M\n4. \"The relationship between clicks and impressions is not one-to-one, as there are many impressions that do not result in a click.\" -- cites: E3 (Table 1): row 'Public Dataset', column '#impression' = 84M; E3 (Table 1): row 'Public Dataset', column '#click' = 3.4M\n\nCited evidence:\n[E3] (table, Table 1, page 4): Table 1: Statistics of experimental datasets.\nValues (cite as cells):\n  row 'Public Dataset': '#user' = 0.4M; '#item' = 4.3M; '#impression' = 84M; '#click' = 3.4M; '#conversion' = 18k\n  row 'Product Dataset': '#user' = 48M; '#item' = 23.5M; '#impression' = 8950M; '#click' = 324M; '#conversion' = 1774k"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence shows '#impression' = 84M and '#click' = 3.4M, which supports the claim that the number of clicks is significantly smaller than the number of impressions."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence shows '#impression' = 84M and '#click' = 3.4M, which supports the claim that the relationship between clicks and impressions is not one-to-one, as there are many impressions that do not result in a click."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence shows '#impression' = 84M and '#click' = 3.4M, which supports the claim that the number of clicks is significantly smaller than the number of impressions."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence shows '#impression' = 84M and '#click' = 3.4M, which supports the claim that the relationship between clicks and impressions is not one-to-one, as there are many impressions that do not result in a click."
+   }
+  ]
+ }
+}
