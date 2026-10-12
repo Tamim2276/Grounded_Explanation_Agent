@@ -120,3 +120,58 @@ def test_a_quote_is_boxed_where_it_is_printed():
         sentence = quote_box(doc[5], "We use Microsoft Satori to construct the knowledge graph for each dataset.")
     assert label and label[2] - label[0] < 40                       # one label, not every occurrence
     assert sentence and sentence[1] > 500 and sentence[3] - sentence[1] < 25
+
+
+def figure_record(paper_id: str, label: str):
+    path = cfg.DATA_DIR / "corpus" / paper_id / "corpus.json"
+    if not path.exists():
+        pytest.skip(f"{paper_id} not read")
+    paper = json.loads(path.read_text(encoding="utf-8"))
+    return paper["pdf"], next(r for r in paper["figures"] if r["label"] == label)
+
+
+def test_an_observation_is_boxed_on_the_labels_it_names():
+    import pymupdf
+    from gea.proofs import label_box
+    pdf, figure = figure_record("1804.07931v2", "Figure 2")      # the ESMM architecture diagram
+    with pymupdf.open(pdf) as doc:
+        page = doc[figure["page"] - 1]
+        box, labels = label_box(page, "The figure shows two auxiliary tasks: pCTR and pCTCVR.", tuple(figure["bbox"]))
+        none, _ = label_box(page, "The two networks look alike.", tuple(figure["bbox"]))
+    assert labels == ["Auxiliary Tasks", "pCTR", "pCTCVR"]     # not "Main Task": a label needs ALL its words
+    assert box[2] - box[0] < 50 and box[3] - box[1] < 35         # a corner of the diagram, not all of it
+    assert none is None
+
+
+def test_a_caption_quote_is_boxed_in_the_caption():
+    import pymupdf
+    from gea.proofs import exact_box
+    pdf, figure = figure_record("1812.06589v2", "Figure 5")      # photos of faces: no printed words
+    ev = Evidence("figure", figure["id"], figure["page"], figure["caption"], tuple(figure["bbox"]),
+                  "FigureRetriever", label="Figure 5")
+    quote = ("Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), "
+             "and Zhou et al. and Chen et al. (b).")
+    with pymupdf.open(pdf) as doc:
+        box, what = exact_box(doc[figure["page"] - 1], ev, {"quote": quote}, figure)
+    assert what == "Figure 5 caption" and box[1] >= figure["caption_bbox"][1] - 1
+    assert box[2] > 555               # line 1 runs to "with": justified text splits it, both parts count
+    assert box[3] - box[1] < 21       # two lines, not the third ("zoom in to see the detail")
+
+
+def test_a_zoomed_view_cited_alone_is_boxed_like_its_figure():
+    import numpy as np
+    from gea.proofs import n10b_bounding_boxes
+    heat = np.zeros((4, 4))
+    heat[0, 0] = 1.0
+    figure = Evidence("figure", "f2", 5, "Figure 2: Loss", (60, 300, 535, 520), "FigureRetriever",
+                      label="Figure 2", similarity=heat)
+    zoom = Evidence("figure", "f2", 5, "Zoomed view (300 dpi) of: Figure 2: Loss", (60, 300, 535, 520),
+                    "RegionZoom", label="Figure 2")
+    figure.id, zoom.id = "E1", "E2"
+    alone = {"text": "The curve flattens.", "cites": [{"evidence": "E2", "observation": "the curve flattens"}]}
+    both = {"text": "The curve flattens.", "cites": [{"evidence": "E1", "observation": "the curve flattens"},
+                                                     {"evidence": "E2", "observation": "the curve flattens"}]}
+    with cfg.override(BACKEND="stub", TRACE=False):
+        out = n10b_bounding_boxes({"paper_id": "demo-2026-001", "evidence": [figure, zoom], "claims": [alone, both]})
+    assert [(b["claim"], b["evidence"], b["what"]) for b in out["boxes"]] == \
+        [(1, "E2", "Figure 2 (patch map)"), (2, "E1", "Figure 2 (patch map)")]    # one box per region

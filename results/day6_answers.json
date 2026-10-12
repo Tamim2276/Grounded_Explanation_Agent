@@ -10,7 +10,7 @@
   "rewrites": 13,
   "reference_in_buffer": 7,
   "model_calls": 100,
-  "seconds": 281.6
+  "seconds": 8.3
  },
  "runs": [
   {
@@ -152,8 +152,8 @@
    "model": "qwen2.5-vl-7b",
    "prompt_version": "v6",
    "model_calls": 6,
-   "cached": 5,
-   "seconds": 9.8
+   "cached": 6,
+   "seconds": 5.1
   },
   {
    "qid": "1803.03467v4#1",
@@ -638,8 +638,8 @@
    "model": "qwen2.5-vl-7b",
    "prompt_version": "v6",
    "model_calls": 6,
-   "cached": 4,
-   "seconds": 27.3
+   "cached": 6,
+   "seconds": 0.2
   },
   {
    "qid": "1803.03467v4#2",
@@ -901,7 +901,7 @@
      "bbox": [
       53.5,
       221.6,
-      294.0,
+      295.0,
       274.5
      ],
      "what": "Section 3.1 sentence",
@@ -918,7 +918,7 @@
      "bbox": [
       53.5,
       221.6,
-      294.0,
+      295.0,
       274.5
      ],
      "what": "Section 3.1 sentence",
@@ -952,7 +952,7 @@
      "bbox": [
       53.5,
       221.6,
-      294.0,
+      295.0,
       274.5
      ],
      "what": "Section 3.1 sentence",
@@ -1107,12 +1107,12 @@
      "evidence": "E1",
      "page": 5,
      "bbox": [
-      331.5,
-      127.7,
-      553.9,
-      229.9
+      315.0,
+      243.5,
+      558.0,
+      262.4
      ],
-     "what": "Figure 5 (patch map)",
+     "what": "Figure 5 caption",
      "page_size": [
       612.0,
       792.0
@@ -1122,6 +1122,23 @@
     {
      "claim": 2,
      "evidence": "E1",
+     "page": 5,
+     "bbox": [
+      315.0,
+      243.5,
+      558.0,
+      272.4
+     ],
+     "what": "Figure 5 caption",
+     "page_size": [
+      612.0,
+      792.0
+     ],
+     "cite": "quote"
+    },
+    {
+     "claim": 3,
+     "evidence": "E2",
      "page": 5,
      "bbox": [
       331.5,
@@ -1134,7 +1151,7 @@
       612.0,
       792.0
      ],
-     "cite": "quote"
+     "cite": "observation"
     }
    ],
    "evidence": [
@@ -1172,7 +1189,7 @@
    "prompt_version": "v6",
    "model_calls": 8,
    "cached": 8,
-   "seconds": 0.8
+   "seconds": 0.9
   },
   {
    "qid": "1812.06589v2#1",
@@ -1690,8 +1707,8 @@
    "model": "qwen2.5-vl-7b",
    "prompt_version": "v6",
    "model_calls": 12,
-   "cached": 0,
-   "seconds": 65.3
+   "cached": 12,
+   "seconds": 0.2
   },
   {
    "qid": "1812.06589v2#3",
@@ -1965,8 +1982,8 @@
    "model": "qwen2.5-vl-7b",
    "prompt_version": "v6",
    "model_calls": 12,
-   "cached": 0,
-   "seconds": 71.1
+   "cached": 12,
+   "seconds": 0.3
   },
   {
    "qid": "1804.07931v2#0",
@@ -2020,12 +2037,12 @@
      "evidence": "E4",
      "page": 2,
      "bbox": [
-      331.5,
-      81.7,
-      535.5,
-      250.1
+      484.3,
+      85.1,
+      524.9,
+      114.5
      ],
-     "what": "Figure 2 (patch map)",
+     "what": "Figure 2 labels: Auxiliary Tasks, pCTR, pCTCVR",
      "page_size": [
       612.0,
       792.0
@@ -2108,8 +2125,8 @@
    "model": "qwen2.5-vl-7b",
    "prompt_version": "v6",
    "model_calls": 8,
-   "cached": 0,
-   "seconds": 34.4
+   "cached": 8,
+   "seconds": 0.7
   },
   {
    "qid": "1804.07931v2#1",
@@ -2434,8 +2451,8 @@
    "model": "qwen2.5-vl-7b",
    "prompt_version": "v6",
    "model_calls": 14,
-   "cached": 0,
-   "seconds": 72.3
+   "cached": 14,
+   "seconds": 0.3
   }
  ]
 }

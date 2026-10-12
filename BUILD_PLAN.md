@@ -1572,6 +1572,14 @@ the next outage: are the boxes on the right cells?
 > - **Not done:** maps for each claim's own wording (the plan's 6.4 figure step). They need
 >   ColQwen2 at answer time, which does not fit beside llama-server. Figure boxes use the
 >   question's map (the fallback), and charts use exact bars.
+> - **Follow-up: exact boxes first** (2026-10-12). N10b now finds more boxes in the PDF:
+>   - caption quotes, in the caption;
+>   - an observation, on the diagram labels it names;
+>   - a zoomed view cited alone, like its figure.
+>
+>   Also fixed: in justified text, the second part of a split line was dropped. On dev, map
+>   boxes fell from 3 to 1 and unboxed claims from 1 to 0. The one left is a photo. Its
+>   per-claim map is a second pass in the Day 7 runner (see 7.3).
 
 ### Check it works
 
@@ -1724,6 +1732,23 @@ for q in questions:
 >   - It needs internet. The runner's wait-and-retry loop covers outages, and the cache
 >     means no question is paid for twice. Check current prices and rate limits in Google AI
 >     Studio first.
+>
+> **Added on Day 6 (follow-up).** **The second pass: per-claim heat maps for photos.**
+>
+> - **Why.** Photos have no printed words. A claim about a photo is boxed by a heat map, and
+>   that map should come from the claim's own words, not the question. ColQwen2 cannot
+>   load beside llama-server, so this runs as a second pass:
+>   1. The runner answers with llama-server.
+>   2. Stop the server. `scripts/claim_vectors.py results/runs/<run>.jsonl` loads ColQwen2
+>      and caches the vectors of every figure claim that still has a map box. It uses the same
+>      cache as the question vectors (`indexes.page_query_vectors`).
+>   3. Re-run the runner with `--rebox`. Replies come from the cache, so no server is needed.
+>      N10b uses a claim's cached vectors when they exist and the question's map otherwise.
+>      It never loads ColQwen2 at answer time.
+> - **Small: on dev, 1 of 51 boxes needs it.** Cells, bars, sentences, captions and the
+>   diagram labels an observation names are already boxed exactly from the PDF
+>   (`proofs.exact_box`).
+> - **Record** how many boxes come from each source, for CGS by source on Day 8.
 
 **7.4 🔌 The resume script:** `scripts/resume_eval.sh` (30 min). One command for after every
 power cut: start llama-server in the background, wait until it answers, then run the three

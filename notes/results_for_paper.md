@@ -446,6 +446,50 @@ dev. In every version, 9 of 10 questions ended with at least one verified claim.
 **Proof images:** `data/debug/day6/proof_*.png`, e.g. the three "# 4-hop triples" cells boxed one
 colour per claim, and the cited bars of RippleNet Fig. 4 boxed exactly.
 
+### Where do the boxes come from? Exact boxes first, the heat map last (2026-10-12)
+
+The plan's figure boxes came from a heat map for each claim's own words (ColQwen2). That needs
+ColQwen2 while the model server runs, which does not fit in this PC's memory. So the replay
+first asked how many boxes depended on the map at all. Only 3 of 50 boxes did, and one
+verified claim had no box. Three exact sources were then added to N10b (`src/gea/proofs.py`):
+
+- **Caption quotes** are searched in the caption. Captions lie outside a figure's box, so they used to fall back to the map.
+- **An observation** ("the figure shows two auxiliary tasks: pCTR and pCTCVR") is boxed on the **diagram labels it names** (`label_box`). A label is one printed line inside the figure, and it counts only when *all* its words occur in the observation. "Auxiliary Tasks" counts here; "Main Task" does not.
+- **A zoomed view cited alone** is boxed like its figure. It used to get no box.
+
+A bug was also fixed. In justified text, PDF search returns one line in two pieces when there is a
+wide gap, and the second piece was dropped. A caption box stopped at "comparing" instead of the end
+of the line.
+
+10 dev answers, replayed from the cache (same 34 verified claims, 100/100 replies cached):
+
+| box source | before | after |
+|---|---|---|
+| table cell / chart bar (exact) | 11 / 16 | 11 / 16 |
+| quoted sentence (exact) | 19 | 19 |
+| caption quote (exact) | 0 | 2 |
+| diagram labels named by an observation (exact) | 0 | 1 |
+| **question's heat map (rough)** | **3** | **1** |
+| paragraph (no quote found) | 1 | 1 |
+| verified claims with no box | 1 | 0 |
+
+The one map box left is an observation of a **photo** (generated faces, 1812.06589v2 Fig. 5). Photos
+have no printed words, so only a heat map can point inside them. Pictures without words are about a
+third of the corpus figures (§4c: 67/205 raster), so this case will be common on test. The fix is planned as
+a **two-pass run** in the Day 7 runner:
+
+1. Answer with the model server.
+2. Stop the server, and cache ColQwen2 vectors of each figure claim's text.
+3. Replay from the cache, so each claim's own map gives its box.
+
+Day 4 showed the heat map is noisy inside a page (pointing 15% vs random 8%), so these boxes are
+the roughest kind. **For the thesis:** box precision depends on what a claim cites. Cells, bars,
+sentences, captions and diagram labels are boxed exactly from the PDF. Only photos fall back to the
+learned heat map.
+
+Visual check: `data/debug/day6/` proof images; the ESMM box sits exactly on "Auxiliary Tasks /
+pCTCVR / pCTR". Tests: `tests/test_writer.py` (labels, caption, zoom alone).
+
 ---
 
 ## 5. The agent design on the stub → Implementation, *design validation* (Day 1)
@@ -485,6 +529,7 @@ and `paper/figures/fig_grounded_answer.png`.
 | result | metric in Methodology | when |
 |---|---|---|
 | Figure box: heat-map box inside the region vs the whole region, against annotated regions | CGS (RQ3) | Days 6–8, annotated subset |
+| Box precision by source: exact (cell, bar, sentence, caption, label) vs heat map (photos, two-pass claim maps) | CGS (RQ3) | Days 7–8 |
 | Answer accuracy: agentic loop vs single pass | accuracy, RF, AES (RQ1) | Days 7–8, test |
 | Text-only agent baseline | (RQ2) | Days 7–8, test |
 | Modality attribution | MAP (RQ2) | Days 7–8, test |

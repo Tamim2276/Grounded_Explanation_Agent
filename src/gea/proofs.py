@@ -1,4 +1,5 @@
 # N10a-N10c, the three proofs, and N11-N12, the report and the answer.
+import unicodedata
 from collections import Counter, defaultdict
 
 import numpy as np
@@ -72,11 +73,68 @@ def quote_box(page, quote: str, frame: tuple = None):
         if hits:
             group = [hits[0]]
             for r in hits[1:]:
-                if 0 <= r.y0 - group[-1].y1 < 3:         # the quote continues on the next line
+                if abs(r.y0 - group[-1].y0) < 1 and 0 <= r.x0 - group[-1].x1 < 12:
+                    group.append(r)                      # the same line, split at a wide justified gap
+                elif 0 <= r.y0 - group[-1].y1 < 3:       # the quote continues on the next line
                     group.append(r)
                 elif r.y0 > group[-1].y1:
                     break
             return (min(r.x0 for r in group), min(r.y0 for r in group), max(r.x1 for r in group), max(r.y1 for r in group))
+    return None
+
+
+FILLER = frozenset("""a an and are as at be by for from in into is it its of on or that the this these those to
+with which while both each two three their there than between figure fig show shows shown showing image picture
+view zoomed diagram chart plot graph panel left right top bottom part""".split())
+
+
+def label_words(text: str) -> list:
+    # The words that can name something printed in a figure: ligatures and hyphens undone,
+    # lower case, a plural "s" dropped, at least three characters with a letter (no axis
+    # ticks), no filler.
+    words = unicodedata.normalize("NFKC", text).lower().replace("-", " ").split()
+    words = [w.strip(".,:;!?()[]{}\"'`") for w in words]
+    words = [w[:-1] if len(w) > 3 and w.endswith("s") and not w.endswith("ss") else w for w in words]
+    return [w for w in words if len(w) >= 3 and any(ch.isalpha() for ch in w) and w not in FILLER]
+
+
+def label_box(page, text: str, frame: tuple):
+    # The box around the labels printed in a figure that an observation names, and the
+    # labels, or (None, []). A label is one printed line inside the figure; it is named
+    # when ALL its words occur in the observation -- "two auxiliary tasks: pCTR and
+    # pCTCVR" names "Auxiliary Tasks", "pCTR" and "pCTCVR", not "Main Task". A photo has
+    # no printed words and gets None.
+    import pymupdf
+    named, lines = set(label_words(text)), defaultdict(list)
+    for w in page.get_text("words", clip=pymupdf.Rect(frame)):
+        lines[(w[5], w[6])].append(w)                   # (block, line): one printed label
+    found = [ws for ws in lines.values()
+             if (need := label_words(" ".join(w[4] for w in ws))) and all(x in named for x in need)]
+    if not found:
+        return None, []
+    words = [w for ws in found for w in ws]
+    box = (min(w[0] for w in words), min(w[1] for w in words), max(w[2] for w in words), max(w[3] for w in words))
+    return box, list(dict.fromkeys(" ".join(w[4] for w in ws) for ws in found))
+
+
+def exact_box(page, ev, cite: dict, record: dict = None):
+    # Real pages: where a quote or an observation is printed, as (box, what), or None.
+    # A text quote: the sentence. A figure quote: a label inside the figure, else the
+    # caption (it sits outside the figure's box). A figure observation: the labels it names.
+    if "quote" in cite and ev.kind == "text":
+        box = quote_box(page, cite["quote"])
+        return (box, f"Section {ev.section} sentence") if box else None
+    if ev.kind != "figure":
+        return None
+    if "quote" in cite:
+        box = quote_box(page, cite["quote"], ev.bbox)
+        if box:
+            return box, f"{ev.label} label"
+        box = quote_box(page, cite["quote"], tuple(record["caption_bbox"])) if record and record.get("caption_bbox") else None
+        return (box, f"{ev.label} caption") if box else None
+    if "observation" in cite:
+        box, labels = label_box(page, cite["observation"], ev.bbox)
+        return (box, f"{ev.label} labels: " + ", ".join(labels)[:80]) if box else None
     return None
 
 
@@ -86,22 +144,31 @@ def n10b_bounding_boxes(state: AgentState) -> dict:
     # chart read from the PDF is a cell too. Figure claims: the box around the best
     # patches of N6c's similarity map. Text claims: the paragraph (notebook Section 13
     # narrows it to the quoted sentence). On the real backend (Day 6) a quote is found on
-    # the page -- the exact sentence, or the exact label inside a diagram -- and every box
-    # also records its page size and cite kind (the website draws them itself).
+    # the page -- the exact sentence, the exact label inside a diagram, or the caption --
+    # and an observation boxes the diagram labels it names; the map is the fallback (a
+    # photo has no printed words). Every box also records its page size and cite kind
+    # (the website draws them itself).
     evidence = {e.id: e for e in state["evidence"]}
-    doc = None
+    doc, records = None, {}
     if cfg.BACKEND == "real":
         import pymupdf
         from gea.corpus import get_corpus
-        doc = pymupdf.open(get_corpus(state["paper_id"])["pdf"])
+        corpus = get_corpus(state["paper_id"])
+        doc, records = pymupdf.open(corpus["pdf"]), {r["id"]: r for r in corpus["figures"]}
     boxes = []
     for i, claim in enumerate(state["claims"], 1):
         if claim.get("rejected"):
             continue
+        cited = [evidence[x["evidence"]] for x in claim["cites"]]
         for cite in claim["cites"]:
             ev = evidence[cite["evidence"]]
-            found = quote_box(doc[ev.page - 1], cite["quote"], ev.bbox if ev.kind == "figure" else None) \
-                if doc is not None and "quote" in cite and ev.kind in ("text", "figure") else None
+            if ev.tool == "RegionZoom" and any(e.source == ev.source and e.tool != "RegionZoom" for e in cited):
+                continue                    # a zoomed view points at the same region as its figure
+            # a zoomed view cited alone is boxed like its figure, with the figure's map
+            heat = ev.similarity if ev.tool != "RegionZoom" else next(
+                (e.similarity for e in evidence.values() if e.source == ev.source and e.tool != "RegionZoom"), None)
+            found = exact_box(doc[ev.page - 1], ev, cite, records.get(ev.source)) \
+                if doc is not None and "cell" not in cite else None
             if "cell" in cite:
                 cell = next((c for c in ev.cells if (c["row"], c["col"]) == tuple(cite["cell"])), None)
                 if cell is None:
@@ -109,14 +176,12 @@ def n10b_bounding_boxes(state: AgentState) -> dict:
                 part = "bar" if ev.kind == "figure" else "cell"
                 box, what = cell["bbox"], f"{ev.label} {part} {cite['cell'][0]} / {cite['cell'][1]}"
             elif found is not None:
-                box, what = found, (f"Section {ev.section} sentence" if ev.kind == "text" else f"{ev.label} label")
-            elif ev.kind == "figure" and ev.similarity is not None:
-                box = patches_to_bbox(ev.similarity, page_size=ev.page_size)
+                box, what = found
+            elif ev.kind == "figure" and heat is not None:
+                box = patches_to_bbox(heat, page_size=ev.page_size)
                 if ev.page_size:                # real map, kept to the figure: clip the patch edges to it
                     box = clip(box, ev.bbox)
                 what = f"{ev.label} (patch map)"
-            elif ev.tool == "RegionZoom":
-                continue                    # a zoomed view points at the same region as its figure
             elif ev.kind == "figure":
                 box, what = ev.bbox, f"{ev.label} (region)"     # no heat map (ColQwen2 did not run)
             elif ev.kind == "table":

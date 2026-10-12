@@ -146,3 +146,12 @@
     cleaning, empty clipped box. SPIQA gold for 1803.03467v4#1 says "decreases"; the PDF's bars increase.
   - Proofs in data/debug/day6/. Notebook Section 21 (146 cells). Tests: 112.
   - Lesson: backslashes in bash heredocs get mangled in this environment -- use the editor for code edits.
+- 2026-10-12, Day 6 follow-up (the user asked whether the per-claim heat-map limitation can be overcome):
+  - Counted first: only 3/50 boxes of the 10 dev answers used the question's map, and 1 verified claim had none.
+  - Exact sources added to N10b: caption quotes searched in the caption (outside the figure box); an observation
+    boxed on the diagram labels it names (a printed line counts when all its words occur in the observation);
+    a zoomed view cited alone boxed like its figure. Bug found by looking: justified text splits one line into
+    two search hits and the second was dropped (a caption box stopped at "comparing").
+  - Replay from the cache (100/100 cached, same 34 claims): map boxes 3 -> 1, unboxed claims 1 -> 0. The one left
+    is a photo (no printed words): the Day 7 runner gets a two-pass step (answer; stop the server; cache ColQwen2
+    vectors of figure claims; replay) for per-claim maps. Tests: 115.

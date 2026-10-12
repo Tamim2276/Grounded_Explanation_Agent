@@ -69,10 +69,10 @@
 - The ripple sets in RippleNet are used to interact with the item embedding iteratively for obtaining the responses of user u with respect to item v. [E1 quote "These ripple sets are used to interact with the item embedding (the yellow block) iterativ"]
 - The size of the ripple sets in RippleNet can be varied to investigate the robustness of the framework. [E3 quote "We vary the size of a user’s ripple set in each hop to further investigate the robustness "]
 
-  - box p.3 Section 3.1 sentence (53.5, 221.6, 294.0, 274.5)
-  - box p.3 Section 3.1 sentence (53.5, 221.6, 294.0, 274.5)
+  - box p.3 Section 3.1 sentence (53.5, 221.6, 295.0, 274.5)
+  - box p.3 Section 3.1 sentence (53.5, 221.6, 295.0, 274.5)
   - box p.8 Section 4.5 sentence (318.0, 676.0, 559.6, 695.8)
-  - box p.3 Section 3.1 sentence (53.5, 221.6, 294.0, 274.5)
+  - box p.3 Section 3.1 sentence (53.5, 221.6, 295.0, 274.5)
   - box p.8 Section 4.5 sentence (318.0, 676.0, 559.6, 695.8)
 
 ## 1812.06589v2#0: How do the different methods compare in terms of their ability to generate realistic faces?
@@ -85,7 +85,8 @@
 - The figure shows examples of generated faces by the method compared to the ground truth and other methods. [E1 quote "Figure 5: Generation examples of our method comparing with Ground Truth (G.T.) (a), and Zh"]
 - The zoomed view of Figure 5 highlights the differences in the details of the generated faces. [E2 observation "The zoomed view of Figure 5 shows more detail in the generated faces, indicating differenc"]
 
-  - box p.5 Figure 5 (patch map) (331.5, 127.7, 553.9, 229.9)
+  - box p.5 Figure 5 caption (315.0, 243.5, 558.0, 262.4)
+  - box p.5 Figure 5 caption (315.0, 243.5, 558.0, 272.4)
   - box p.5 Figure 5 (patch map) (331.5, 127.7, 553.9, 229.9)
 
 ## 1812.06589v2#1: What is the effect of adding DA to the baseline method?
@@ -159,7 +160,7 @@
 - The two auxiliary tasks used in the ESMM architecture for CVR modeling are CTR and CTCVR. [E3 quote "In ESMM, two auxiliary tasks of predicting the post-view click-through rate (CTR) and post"; E4 observation "The figure shows two auxiliary tasks: pCTR and pCTCVR."]
 
   - box p.2 Section 1 paragraph (53.8, 87.0, 295.6, 271.2)
-  - box p.2 Figure 2 (patch map) (331.5, 81.7, 535.5, 250.1)
+  - box p.2 Figure 2 labels: Auxiliary Tasks, pCTR, pCTCVR (484.3, 85.1, 524.9, 114.5)
 
 ## 1804.07931v2#1: What is the relationship between clicks and impressions?
 
