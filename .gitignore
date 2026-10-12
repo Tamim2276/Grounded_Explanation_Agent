@@ -28,3 +28,6 @@ data/
 
 # Personal planning notes
 PLAN.md
+
+# Secrets: the Gemini API key lives in .env, never in git
+.env

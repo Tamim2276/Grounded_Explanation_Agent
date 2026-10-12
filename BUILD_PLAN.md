@@ -1726,8 +1726,9 @@ for q in questions:
 >     reading).
 >   - Add `cfg.LLM_PROVIDER = "local" | "gemini"`. `call_llm` then sends the same request to
 >     Gemini's OpenAI-compatible endpoint.
->   - The API key is read from an environment variable (`setx GEMINI_API_KEY ...`), never
->     from a file in git. `LLM_MODEL` names the Gemini model, so its cache entries are kept
+>   - The API key is read from `GEMINI_API_KEY`: the environment variable if set, else the
+>     project's `.env` file. `.env` is in `.gitignore` (since 2026-10-12), so the key never
+>     goes into git. A placeholder value counts as "no key". `LLM_MODEL` names the Gemini model, so its cache entries are kept
 >     apart from the 7B's.
 >   - It needs internet. The runner's wait-and-retry loop covers outages, and the cache
 >     means no question is paid for twice. Check current prices and rate limits in Google AI
