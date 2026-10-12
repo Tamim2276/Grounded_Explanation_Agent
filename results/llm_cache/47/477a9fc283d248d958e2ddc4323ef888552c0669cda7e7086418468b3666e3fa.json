@@ -1,0 +1,41 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 186,
+  "prompt_tokens": 842,
+  "total_tokens": 1028
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The provided table gives measured discrimination values after discrimination removal using a decision tree as the classifier.\" -- cites: E1 (Table 2): quote \"Table 2: Measured discrimination after discrimination removal (decision tree as the classiﬁer).\"\n2. \"Table 2 presents the measured discrimination after discrimination removal using a decision tree as the classifier for both the two-phase framework (MSG) and DI.\" -- cites: E1 (Table 2): quote \"Table 2: Measured discrimination after discrimination removal (decision tree as the classiﬁer).\"\n3. \"For the two-phase framework (MSG), the values are 0.068 ± 4.6E−3 without classifier tweaking and 0.015 ± 1.0E−3, while for DI the values are 2E−4 ± 1.4E−3 and 0.001 ± 3.4E−4.\" -- cites: E1 (Table 2): row '0.004 ± 3.7E−6', column 'framework (MSG)' = 0.068 ± 4.6E−3; E1 (Table 2): row '0.004 ± 3.7E−6', column 'Two-phase' = 0.015 ± 1.0E−3; E1 (Table 2): row '0.004 ± 3.7E−6', column 'DI' = 2E−4 ± 1.4E−3; E1 (Table 2): row '0.001 ± 1.7E−7', column 'DI' = 0.001 ± 3.4E−4\n\nCited evidence:\n[E1] (table, Table 2, page 6): Table 2: Measured discrimination after discrimination removal (decision tree as the classiﬁer).\nValues (cite as cells):\n  row 'DED∗': 'Two-phase' = DEMh∗; 'framework (MSG)' = DEMh∗(w/o classiﬁer tweaking); '' = DEMh∗\n  row '0.004 ± 3.7E−6': 'Two-phase' = 0.015 ± 1.0E−3; 'framework (MSG)' = 0.068 ± 4.6E−3; 'DI' = 2E−4 ± 1.4E−3; '' = 0.092 ± 6.1E−3\n  row '0.001 ± 1.7E−7': 'Two-phase' = 0.016 ± 5.3E−4; 'framework (MSG)' = 0.067 ± 4.3E−3; 'DI' = 0.001 ± 3.4E−4; '' = 0.095 ± 1.6E−3\n  row '2E−4 ± 9.7E−9': 'Two-phase' = 0.013 ± 3.3E−4; 'framework (MSG)' = 0.061 ± 3.3E−3; 'DI' = 0.001 ± 6.8E−5; '' = 0.107 ± 5.4E−4"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited table caption directly matches the statement that it gives measured discrimination values after discrimination removal using a decision tree as the classifier."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The cited evidence caption only mentions Table 2 and the decision tree classifier, but does not state that it is for both the two-phase framework (MSG) and DI (that information must be taken from the table contents, not the caption quote)."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The cited rows and columns in Table 2 match all the provided numbers and descriptions."
+   }
+  ]
+ }
+}

@@ -177,3 +177,6 @@
     server from 7.5 to 12.7 GB and left 0.8 GB free -> --cache-ram 1024 (holds at 8.3 GB). G1 once
     generated 5,800 tokens (88 s) of repetition -> maxLength on G1's strings, max_tokens 2048.
     The proof drawing crashed on 4 claims citing one line (nested rings inverted) -> rings outwards.
+- 2026-10-13: no budget for a paid Gemini key -> the comparison uses gemini-3.5-flash-lite on the free tier
+  (3.8 Flash's free quota ran out after ~30 calls). Re-frozen with --again before any test question ran with
+  it; the one 3.8 Flash test answer is kept apart. Smoke test: 3 test questions, 24 calls, no quota error.

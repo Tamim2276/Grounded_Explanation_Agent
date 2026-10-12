@@ -75,9 +75,10 @@ LLM_MAX_TOKENS = 2048         # a cap on every reply: a 7B can repeat itself wit
 LLM_PROVIDER = "local"        # "local" (llama-server above) or "gemini": the stronger-model comparison
                               # (Day 7) -- the same requests to Gemini's OpenAI-compatible endpoint
 GEMINI_URL   = "https://generativelanguage.googleapis.com/v1beta/openai"
-GEMINI_MODEL = "gemini-3.8-flash"   # a fixed version, never a "-latest" name (2.5 Flash is closed to
-                              # new keys, 2026-10-12); the key is read from GEMINI_API_KEY
-                              # (environment, else .env -- which git ignores)
+GEMINI_MODEL = "gemini-3.5-flash-lite"   # a fixed version, never a "-latest" name. Free tier only (no
+                              # budget): 3.8 Flash's free daily quota ran out after ~30 calls on
+                              # 2026-10-12, so the comparison uses Flash-Lite; 2.5 Flash is closed to
+                              # new keys. The key is read from GEMINI_API_KEY (environment, else .env)
 
 
 def tools() -> tuple:

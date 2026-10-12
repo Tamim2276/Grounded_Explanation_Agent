@@ -567,9 +567,16 @@ Before this, it refused 18/20 (`text_only_dev_norepeat.jsonl`).
   - it often answers 503 "high demand", so the runner waits and redoes the question.
   - Price (2026-10-12): free tier, or $0.75 / $3.75 per 1M input / output tokens, about $4 for 150
     questions.
-  - The free tier's daily quota ran out after about 30 calls (HTTP 429). The full run needs about
-    1,350, so it needs a paid key. The runner stops after 5 refused redos instead of looping.
-  - The smoke test answered 1 test question end to end with Gemini.
+  - The free tier's daily quota for 3.8 Flash ran out after about 30 calls (HTTP 429). The full
+    run needs about 1,350, and there is no budget for a paid key.
+  - **So the comparison uses `gemini-3.5-flash-lite`** (re-frozen 2026-10-13, before any test
+    question was run with it). Thesis wording: "a current hosted model (Gemini 3.5 Flash-Lite,
+    free tier)", not "a frontier model".
+  - If the free daily quota stops it, the runner stops after 5 refused redos (no looping), and
+    the next `resume_eval.sh` continues. If it cannot finish all 150, report it on the questions
+    it covered, paired with the local full system on the same questions.
+  - Smoke test: 3 test questions end to end, 24 calls, no quota error. The one 3.8 Flash answer
+    is kept apart (`full_gemini-3.8-flash_test_smoke.jsonl`) and is not part of the comparison.
 
 ### The runner (Experimental Setup)
 

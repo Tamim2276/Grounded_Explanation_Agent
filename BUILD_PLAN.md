@@ -1849,8 +1849,10 @@ stops watching, not the run).
 >   - llama-server's RAM prompt cache grew it to 12.7 GB, so `--cache-ram 1024` is now in
 >     `start_llm.sh`;
 >   - a 5,800-token runaway G1 reply, so `maxLength` and `max_tokens` 2048 are now set.
-> - **Gemini:** the free tier's daily quota ran out after about 30 calls (HTTP 429). The full run
->   needs about 1,350 calls, about $4 on a paid key. Enabling billing is your decision.
+> - **Gemini:** there is no budget, so it stays on the free tier. 3.8 Flash's daily quota ran out
+>   after about 30 calls, so the comparison uses **`gemini-3.5-flash-lite`** (re-frozen
+>   2026-10-13; smoke test on 3 test questions passed). If the daily quota stops it, the next
+>   `resume_eval.sh` continues; if it cannot finish all 150, report the questions it covered.
 > - **Left for you:** 7.5 (BIOS, auto sign-in, Task Scheduler), then 7.8 (start).
 
 ### Check it works
