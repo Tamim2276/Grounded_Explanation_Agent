@@ -52,6 +52,13 @@ def wait_for_model() -> None:
     print(f"{time.strftime('%H:%M')} the model answers again", flush=True)
 
 
+def progress(done: int, total: int, seconds_left: float) -> str:
+    # "[ 12/150   8%  ~1h 25m left] " -- the time left from this session's pace
+    left = f"{int(seconds_left // 3600)}h {int(seconds_left % 3600 // 60):02d}m" if seconds_left >= 3600 \
+        else f"{int(seconds_left // 60)}m"
+    return f"[{done:3d}/{total}  {100 * done // total:3d}%  ~{left} left] "
+
+
 def show(q: dict, r: dict, test: bool) -> str:
     kept = sum(not c["rejected"] for c in r["claims"])
     line = (f"{q['qid']:18s} {r['seconds']:6.1f} s  {r['status'] or 'error':28s} claims {kept}/{len(r['claims'])}, "
@@ -112,10 +119,12 @@ def main() -> int:
 
         done = {r["qid"] for r in read_jsonl(out_file)}
         todo = [q for q in questions if q["qid"] not in done]
-        print(f"{name} on {args.split}: {len(done & {q['qid'] for q in questions})} done, {len(todo)} to go "
+        finished = len(done & {q['qid'] for q in questions})
+        print(f"{name} on {args.split}: {finished} done, {len(todo)} to go "
               f"-> {out_file.relative_to(cfg.PROJECT_ROOT).as_posix()}  (model {model_name()}, prompt "
               f"{llm.PROMPT_VERSION})", flush=True)
-        for q in todo:
+        started = time.time()
+        for n, q in enumerate(todo, 1):
             redos = 0
             while True:
                 try:
@@ -141,7 +150,8 @@ def main() -> int:
                 r = record(q, out, seconds, calls, args.system)
                 break
             append_jsonl(out_file, r)                       # on disk before the next question starts
-            print(show(q, r, test) if r["status"] != "error" else f"{q['qid']}: ERROR {r['error'][:120]}", flush=True)
+            print(progress(finished + n, len(questions), (time.time() - started) / n * (len(todo) - n))
+                  + (show(q, r, test) if r["status"] != "error" else f"{q['qid']}: ERROR {r['error'][:120]}"), flush=True)
 
     records = [r for r in read_jsonl(out_file) if r["qid"] in {q["qid"] for q in questions}]
     statuses = {s: sum(r["status"] == s for r in records) for s in sorted({r["status"] for r in records})}
