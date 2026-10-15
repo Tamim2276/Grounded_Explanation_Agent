@@ -1,0 +1,50 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 287,
+  "prompt_tokens": 2669,
+  "total_tokens": 2956,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seem to affect the influence vectors?\nSub-questions:\n1. [figure] How does increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seem to affect the influence vectors?\nEvidence:\nE1 [figure, Figure 1, page 12] (image attached): Figure 1: Parzen violates monotonicity; the point of interest ⃗x 0 is marked with a green circle. Its\nWords printed in the figure: 0 0.5 1 1.5 2 0 0.5 1 + + −−− 0 0.5 1 1.5 2 +++ + −−−\nE2 [figure, Figure 1, page 12]: Zoomed view (300 dpi) of: Figure 1: Parzen violates monotonicity; the point of interest ⃗x 0 is marked with a green circle. Its\nWords printed in the figure: 0 0.5 1 1.5 2 0 0.5 1 + + −−− 0 0.5 1 1.5 2 +++ + −−−\nE3 [text, Section 8.1, page 15]: Table 3 highlights the effects of parameter choice for both LIME and Parzen. For Parzen, we vary the σ parameter, whereas for LIME we vary ρ (for the Euclidean distance method compared to in the main paper) and µ (for the cosine similarity version). Intuitively, both parameters control the locality of their respective measures. Small values imply that points closer to the point of interest are considered with more weight or, to frame it in terms of window functions, the weight of points further away is suppressed. Larger parameter values diminish this effect. As can be seen in Table 3, small parameters make the measures place a lot of weight on the point of interest itself, and the resulting inﬂuence measure is a near-replica of it. As we increase\nE4 [text, Section 8, page 14]: In what follows, we apply MIM, Parzen and a version of LIME on a facial expression dataset. We ran our experiments using a workstation with a quad core Intel i7 CPU, and 16GB of RAM. We were able to compute each inﬂuence vector in 4 − 5 seconds. The dataset used for this experiment is a part of the Facial Expression Recognition 2013 dataset (Goodfellow, Erhan, Carrier, Courville, Mirza, et al., 2013). The data consists of 12 156 48 × 48 pixel grayscale images of faces, evenly divided between happy and sad facial expressions. Each pixel is a feature; its brightness level is its parametric value. A parametric Parzen inﬂuence measure with σ = 4 . 7 and a monotone inﬂuence measure with α ( d ) = 1 d 2 were run on some of the images. Further, we used a black-box data version of LIME. For the α parameter in Equation 14, we choose α ρ ( d ) =\nE5 [text, Section 8.1, page 15]: Tables 2 and 3 present additional experimental results on the dataset from (Goodfellow et al., 2013), with inﬂuence vectors computed similarly as in Section 8 of the main paper. In Table 2 depicted are ﬁve happy and ﬁve sad labeled images, their inﬂuence vector and the images shifted along the vector to ‘enhance’ their label as suggested by the inﬂuence vector; we use MIM, Parzen and LIME to compute inﬂuence. MIM and Parzen produce similar vectors, while the outputs of LIME are visibly more jagged, introducing much more noise to the shifted image. As one might expect, inﬂuence vectors for opposing labels tend to have similar but inverted direction. In Section 8, we test LIME and Parzen with certain parameter choices. LIME is parameterized by a variable ρ governing the behavior of a distance function α ρ (see the deﬁnition of LIME in Equation (14) of the main paper); increasing ρ makes LIME assign inﬂuence to points further away from the point of interest. We also consider LIME with (inverse) cosine similarity as our choice of α in Equation (14) of the main paper; this is again parameterized by a µ parameter controlling the amount of weight placed on points further away from the point of interest. Parzen is parameterized by the choice of σ in Equation (13) in the main paper.\nE6 [table, Table 3, page 22]: Table 3: The effect of different parameters and different distance measures.\n | LIME (Euclidean | distance) | LIME | (cosine | similarity) |  | Parzen | \nρ | Inﬂuence Shifted POI | Shifted POI | µ | Inﬂuence | Shifted POI | σ | Inﬂuence | Shifted POI\n2.0 |  |  | 0.010 |  |  | 2.0 |  | \n2.2 |  |  | 0.011 |  |  | 2.5 |  | \n2.4 |  |  | 0.012 |  |  | 3.0 |  | \n2.8 |  |  | 0.014 |  |  | 4.0 |  | \n3.0 |  |  | 0.015 |  |  | 4.5 |  | \n3.2 |  |  | 0.016 |  |  | 5.0 |  | \n3.4 |  |  | 0.017 |  |  | 5.5 |  | \n3.6 |  |  | 0.018 |  |  | 6.0 |  | \n3.8 |  |  | 0.019 |  |  | 6.5 |  |  [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seems to affect the influence vectors."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E3",
+    "fact": "Increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) diminishes the effect of considering points closer to the point of interest."
+   },
+   {
+    "sub_question": 3,
+    "evidence": "E6",
+    "fact": "Increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) increases the influence of points further away from the point of interest."
+   }
+  ],
+  "uncovered": [
+   4,
+   5
+  ],
+  "missing": "The evidence does not provide specific details on how the parameter values affect the influence vectors in terms of direction or magnitude of change. It only describes the general effect of increasing the parameters on the influence vectors. More specific numerical data or graphical representations,",
+  "sufficient": false
+ }
+}

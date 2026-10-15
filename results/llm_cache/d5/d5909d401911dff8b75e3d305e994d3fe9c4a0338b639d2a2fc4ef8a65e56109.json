@@ -1,0 +1,31 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 14,
+  "prompt_tokens": 112,
+  "total_tokens": 126,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seem to affect the influence vectors?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "parameters",
+   "settings"
+  ]
+ }
+}

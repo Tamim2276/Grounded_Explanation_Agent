@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 179,
+  "total_tokens": 239,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How can the shortcuts in the Visual7W dataset be remedied?\nSub-goals:\n1. [figure] How can the shortcuts in the Visual7W dataset be remedied?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide specific details on how the QoU and IoU procedures remediate the shortcuts in the dataset. It only describes the nature of the problem and the proposed solution but does not detail the steps or mechanisms involved in the remediation process."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for specific details on how the shortcuts in the Visual7W dataset are remedied, which is likely detailed in the text of the paper.",
+  "tool": "text",
+  "query": "remediation of shortcuts in Visual7W dataset"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 139,
+  "prompt_tokens": 631,
+  "total_tokens": 770,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The two auxiliary tasks used in the ESMM architecture for CVR modeling are CTR and CTCVR.\" -- cites: E3 (Section 1): quote \"In ESMM, two auxiliary tasks of predicting the post-view click-through rate (CTR) and post-view clickthrough&conversion rate (CTCVR) are introduced.\"\n2. \"The CTR task is estimated with a same independently trained CTR network.\" -- cites: E1 (Section 2.3): quote \"pCTR is estimated with a same independently trained CTR network (same structure and hyper parameters as BASE model).\"\n\nCited evidence:\n[E1] (text, Section 2.3, page 4): compare different CVR modeling methods over entire input space, which reflects the model performance corresponding to SSB problem. In CTCVR task, all models calculate pCTCVR by pCTR × pCVR , where: i) pCVR is estimated by each model respectively, ii) pCTR is estimated with a same independently trained CTR network (same structure and hyper parameters as BASE model). Both of the two tasks split the first 1/2 data in the time sequence to be training set while the rest to be test set. Area under the ROC curve (AUC) is adopted as performance metrics. All experiments are repeated 10 times and averaged results are reported.\n[E3] (text, Section 1, page 2): been well addressed in the scenario of CVR modeling, and none of above methods exploits the information of sequential actions. In this paper, by making good use of sequential pattern of user actions, we propose a novel approach named Entire Space Multitask Model (ESMM), which is able to eliminate the SSB and DS problems simultaneously. In ESMM, two auxiliary tasks of predicting the post-view click-through rate (CTR) and post-view clickthrough&conversion rate (CTCVR) are introduced. Instead of training CVR model directly with samples of clicked impressions, ESMM treats pCVR as an intermediate variable which multiplied by pCTR equals to pCTCVR . Both pCTCVR and pCTR are estimated over the entire space with samples of all impressions, thus the derived pCVR is also applicable over the entire space. It indicates that SSB problem is eliminated. Besides, parameters of feature representation of CVR network is shared with CTR network. The latter one is trained with much richer samples. This kind of parameter transfer learning [ 7 ] helps to alleviate the DS trouble remarkablely."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 1) explicitly states that in ESMM, two auxiliary tasks of predicting the post-view click-through rate (CTR) and post-view clickthrough&conversion rate (CTCVR) are introduced."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 2.3) states that pCTR is estimated with a same independently trained CTR network, which matches the claim."
+   }
+  ]
+ }
+}

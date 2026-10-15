@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 499,
+  "prompt_tokens": 2786,
+  "total_tokens": 3285,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the number of common k-hop neighbors change as the hop distance increases for items with and without common raters?\nEvidence:\n[E1] (figure, Figure 4, page 7) (image attached): Figure 4: The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing- News datasets. (d) The ratio of the two average numbers with different hops.\nWords printed in the figure: 1 2 3 4 Hop 0 20 40 60 # common k-hop neighbors with common rater(s) without common rater (a) MovieLens-1M 1 2 3 4 Hop 0 5 10 15 # common k-hop neighbors with common rater(s) without common rater (b) Book-Crossing 1 2 3 4 Hop 0 20 40 60 # common k-hop neighbors with common rater(s) without common rater (c) Bing-News 1 2 3 4 Hop 0 2 4 6 8 Ratio MovieLens-1M Book-Crossing Bing-News (d) Ratio of two average numbers\nValues (cite as cells):\n  row '(a) MovieLens-1M with common rater(s)': '1' = 4.3; '2' = 25.8; '3' = 42.6; '4' = 59.3\n  row '(a) MovieLens-1M without common rater': '1' = 1.1; '2' = 9.3; '3' = 27; '4' = 45.9\n  row '(b) Book-Crossing with common rater(s)': '1' = 2.7; '2' = 4.6; '3' = 6.8; '4' = 10.9\n  row '(b) Book-Crossing without common rater': '1' = 0.5; '2' = 1; '3' = 3.1; '4' = 6.3\n  row '(c) Bing-News with common rater(s)': '1' = 1.5; '2' = 10.8; '3' = 38.5; '4' = 55.8\n  row '(c) Bing-News without common rater': '1' = 0.6; '2' = 5; '3' = 32.8; '4' = 50.3\n[E2] (figure, Figure 4, page 7): a zoomed view of Figure 4 (image attached)\n[E3] (text, Section 4.4, page 7): We conduct an empirical study to investigate the correlation between the average number of common neighbors of an item pair in the KG and whether they have common rater(s) in RS. For each dataset, we first randomly sample one million item pairs, then count the average number of k -hop neighbors that the two items share in the KG under the following two circumstances: (1) the two items have at least one common rater in RS; (2) the two items have no common rater in RS. The results are presented in Figures 4a, 4b, 4c, respectively, which clearly show that if two items have common rater(s) in RS, they likely share more common k -hop neighbors in the KG for fixed k . The above findings empirically demonstrate that the similarity of proximity structures of two items in the KG could assist in measuring their relatedness in RS . In addition, we plot the ratio of the two average numbers with different hops (i.e., dividing the higher bar by its immediate lower bar for each hop number) in Figure 4d, from which we observe that the proximity structures of two items under the two circumstances become more similar with the increase of the hop number. This is because any two items are probable to share a large amount of k -hop neighbors in the KG for a large k , even if there is no direct similarity between them in reality. The result motivates us to find a moderate hop number in RippleNet to explore users’ potential interests as far as possible while avoiding introducing too much noise.\n[E4] (text, Section 3.2, page 3): Figure 3 shows the decreasing relatedness between the center and surrounding entities. One concern about ripple sets is their sizes may get too large with the increase of hop number k . To address the concern, note that: (1) A large number of entities in a real KG are sink entities , meaning they only have incoming links but no outgoing links, such as \"2004\" and \"PG-13\" in Figure 3. (2) In specific recommendation scenarios such as movie or book recommendations, relations can be limited to scenario-related categories to reduce the size of ripple sets and improve relevance among entities. For example, in Figure 3, all relations are movie-related and contain the word \"film\" in their names. (3) The number of maximal hop H is usually not too large in practice, since entities that are too distant from a user’s history may bring more noise than positive signals. We will discuss the choice of H in the experiments part. (4) In RippleNet, we can sample a fixed-size set of neighbors instead of using a full ripple set to further reduce the computation overhead. Designing such samplers is an important direction of future work, especially the non-uniform samplers for better capturing user’s hierarchical potential interests.\n[E5] (text, Section 3.2, page 3): where E 0 u = V u = { v | y uv = 1 } is the set of user’s clicked items in the past, which can be seen as the seed set of user u in KG. Relevant entities can be regarded as natural extensions of a user’s historical interests with respect to the KG. Given the definition of relevant entities, we then define the k -hop ripple set of user u as follows:\n[E6] (table, Table 5, page 9): Table 5: The results of AUC w.r.t. different hop numbers.\nValues (cite as cells):\n  row 'MovieLens-1M': '1' = 0.916; '2' = 0.919; '3' = 0.915; '4' = 0.918\n  row 'Book-Crossing': '1' = 0.727; '2' = 0.722; '3' = 0.730; '4' = 0.702\n  row 'Bing-News': '1' = 0.662; '2' = 0.676; '3' = 0.679; '4' = 0.674 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The number of common k-hop neighbors increases as the hop distance increases for items with common raters in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing-News datasets."
+     }
+    ]
+   },
+   {
+    "text": "The number of common k-hop neighbors increases as the hop distance increases for items without common raters in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing-News datasets."
+     }
+    ]
+   },
+   {
+    "text": "The ratio of the number of common k-hop neighbors with and without common raters decreases as the hop distance increases.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The ratio of the two average numbers with different hops."
+     }
+    ]
+   },
+   {
+    "text": "The number of common k-hop neighbors for items with common raters is consistently higher than for items without common raters across all hop distances in MovieLens-1M, Book-Crossing, and Bing-News datasets.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The average number of k -hop neighbors that two items share in the KG w.r.t. whether they have common raters in (a) MovieLens-1M, (b) Book-Crossing, and (c) Bing-News datasets."
+     }
+    ]
+   }
+  ]
+ }
+}

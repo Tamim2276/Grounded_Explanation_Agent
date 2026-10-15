@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 183,
+  "total_tokens": 244,
+  "prompt_tokens_details": {
+   "cached_tokens": 108
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method achieves the highest overall accuracy on the validation set?\nSub-goals:\n1. [table] Which method achieves the highest overall accuracy on the validation set?\nAlready tried: sub-goal 1 with table\nStill missing: The evidence does not provide the overall accuracy for each method on the validation set. It only shows the accuracy for the Size estimator, which is 100%. The other estimators' accuracies are not provided, so we cannot determine which method achieves the highest overall accuracy on the validation. "
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the method with the highest overall accuracy on the validation set, which is not directly provided in the table. We need to search the text for this information.",
+  "tool": "text",
+  "query": "highest overall accuracy on the validation set"
+ }
+}

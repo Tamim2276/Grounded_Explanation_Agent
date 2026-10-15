@@ -1,0 +1,42 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 168,
+  "prompt_tokens": 2350,
+  "total_tokens": 2518,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nSub-questions:\n1. [figure] Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nEvidence:\nE1 [figure, Figure 8, page 12] (image attached): Fig. 8. Average Relative Error of Edge Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0.00 0.01 0.02 0.03 0.04 0.05 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0.004 0.003 0.002 0.001 0.000 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0.00 0.01 0.02 0.03 0.04 Edge query ARE fsize=12 fsize=16 TCM(8*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow Fig. 8. Average Relative Error of Edge Queries\nE2 [figure, Figure 8, page 12]: Zoomed view (300 dpi) of: Fig. 8. Average Relative Error of Edge Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0.00 0.01 0.02 0.03 0.04 0.05 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0.004 0.003 0.002 0.001 0.000 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0.00 0.01 0.02 0.03 0.04 Edge query ARE fsize=12 fsize=16 TCM(8*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow Fig. 8. Average Relative Error of Edge Queries [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The TCM(8*memory) method shows the largest improvement in accuracy compared to the GSS(fsize=12) method in figure (a) email-EuAll."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "missing": "The graphs for cit-HepPh, web-NotreDame, lkml-reply, and Caida-networkflow need to be analyzed to determine which one shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method.",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 169,
+  "prompt_tokens": 602,
+  "total_tokens": 771,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?\nSub-questions:\n1. [table] Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset?\n2. [figure] How does its performance change as the corruption level increases?\nEvidence:\nE1 [table, Table 15, page 21]: Table 15: Test accuracies on the Large Movie Review dataset with different corruption probabilities.\n | 0% | 20% | 30% | 40% |  | \n | 79.43 | 78.66 | 77.1 | 73.98 |  | \n | 79.77 | 77.58 | 75.85 | 69.63 |  | \nB.3. |  |  |  |  |  | \n |  |  |  |  |  | \n |  |  |  |  |  | \n |  |  |  |  |  | \n |  |  |  |  |  | \n |  |  |  |  |  | \n |  |  |  |  |  | \nAbove ﬁgures Left two are RMSEs classiﬁcation manuscript. | varying MNIST dataset here with exceedingly | of 90% of Section 4.1. 15 and | mixture K train labels We 20 are | and the are observe that better than | expected randomly having the ones | measurement variance τ −1. shufﬂed and right two ﬁgures bigger K is beneﬁcial to the ones reported in the submitted\n |  |  |  |  |  | "
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "B.3. performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "Performance decreases as the corruption level increases."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide specific performance values for each method at different corruption levels, only the overall trend of performance decrease with increasing corruption. The exact method names and their performance at each corruption level are not provided in the given evidence.",
+  "sufficient": false
+ }
+}

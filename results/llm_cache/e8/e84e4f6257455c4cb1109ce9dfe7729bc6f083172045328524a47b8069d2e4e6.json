@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 249,
+  "prompt_tokens": 1369,
+  "total_tokens": 1618,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Doubly Robust (DR) estimator is most affected by the presence of noisy confounders, as indicated by the increase in its variance, as shown in Figure 6.\" -- cites: E1 (Figure 6): quote \"Increase in variances of OR and DR, AB retains performance characteristics.\"\n2. \"The figure shows that the DR estimator's variance increases more than the other estimators when noisy confounders are present.\" -- cites: E1 (Figure 6): observation \"The DR estimator's boxplot is wider than the others, indicating higher variance.\"\n\nCited evidence:\n[E1] (figure, Figure 6, page 13) (image attached): Figure 6: Performance of diﬀerent ATE estimators when noisy confounders are observed. Increase in variances of OR and DR, AB retains performance characteristics. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the Doubly Robust (DR) estimator is most affected by the presence of noisy confounders, as indicated by the increase in its variance. However, the evidence only mentions an increase in variances of OR and DR, and it does not specify that DR is more affected than the other estimators. The evidence does not provide a comparison of the extent of the increase in variance for DR versus other estimators."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that the figure shows the DR estimator's variance increases more than the other estimators when noisy confounders are present. The evidence mentions that the DR estimator's boxplot is wider than the others, indicating higher variance. However, the evidence does not provide a direct comparison of the variance increase for DR versus other estimators. It only states that the DR estimator's boxplot is wider, which implies higher variance, but it does not quantify the increase or compare it to other estimators."
+   }
+  ]
+ }
+}

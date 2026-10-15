@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 157,
+  "prompt_tokens": 1016,
+  "total_tokens": 1173,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the proposed metric of non-ME help detect adversarial examples?\nSub-questions:\n1. [figure] How does the proposed metric of non-ME help detect adversarial examples?\nEvidence:\nE1 [text, Section 0, page 4]: In practice, the restriction can be implemented by a detector with the metric of non-ME. In the case of Fig. 1a, any point that locates on the set S ˆ y (black dashed lines) has the highest value of non - ME = log 2 . Assuming that the learned representation transformation: X 7→ Z can map all the normal examples to the neighborhood of S ˆ y , where the neighborhood boundary consists of the isolines of non - ME = t (blue dot-dashed lines). This means that all the normal examples have values of non - ME > t . When there is no detector, the nearest adversarial example based on z 0 is z 1 , which locates on the nearest decision boundary w.r.t. z 0 . In contrast, when non-ME is used as the detection metric, z 1 will be easily ﬁltered out by the detector because non - ME( z 1 ) < t , and the nearest adversarial example becomes z 2 in this case, which locates on the junction manifold of the neighborhood boundary and the decision boundary. It is easy to generally conclude that ∥ z 0 − z 2 ∥ > ∥ z 0 − z 1 ∥ , almost everywhere. This means that due to the existence of the detector, adversaries have to impose larger minimal perturbations to successfully generate adversarial examples\nE2 [text, Section 3.1, page 3]: Due to the difﬁculty of correctly classifying adversarial examples [ 2 , 3 ] and the generality of their existence [ 7 , 9 ], we design a method to detect them instead, which could help in real world applications. For example, in semi-autonomous systems, the detection of adversarial examples would allow disabling autonomous operation and requesting human intervention [26]. A detection method relies on some metrics to decide whether an input x is adversarial or not for a given classiﬁer F ( X ) . A potential candidate is the conﬁdence F ( x ) ˆ y on the predicted label ˆ y , which inherently conveys the degree of certainty on a prediction and is widely used [ 11 ]. However, previous work shows that the conﬁdence score is unreliable in the adversarial setting [ 12 , 28 ]. Therefore, we construct another metric which is more pertinent and helpful to our goal. Namely, we deﬁne the metric of non-ME —the entropy of normalized non-maximal elements in F ( x ) , as:\nE3 [text, Section 4.2, page 7]: We further activate the thresholding test strategy with the K-density metric, and also test the performance of conﬁdence or non-ME being the metric for a more complete analysis. We construct simple binary classiﬁers to decide whether an example is adversarial or not by thresholding with the metrics, and then calculate the AUC-scores of ROC curves on these binary classiﬁers. Table 2 shows the AUC-scores calculated under different combinations of training procedures and thresholding metrics on both datasets. From Table 2, we can see that our method (RCE training + K-density detector) performs the best in almost all cases, and non-ME itself is also a pretty reliable metric, although not as good as K-density. The classiﬁers trained by RCE also return more reliable conﬁdence scores, which veriﬁes the conclusion in Theorem 1. Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The metric of non-ME helps detect adversarial examples by filtering out the nearest adversarial example based on z0 when non-ME is used as the detection metric."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide a direct comparison or explanation of how the metric of non-ME specifically helps detect adversarial examples in a quantitative or qualitative manner. It only describes the process and the effect of using non-ME as a metric for detection, but does not quantify the level",
+  "sufficient": false
+ }
+}

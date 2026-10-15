@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 45,
+  "prompt_tokens": 183,
+  "total_tokens": 228,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does Action Search use temporal context to reason about where to search next?\nSub-goals:\n1. [figure] How does Action Search use temporal context to reason about where to search next?\nAlready tried: sub-goal 1 with figure\nStill missing: No evidence for how Action Search uses temporal context to reason about where to search next in a quantitative or specific manner. The qualitative evidence provided in the figure and text does not give a specific method or mechanism for how temporal context is used to reason about the next search. A"
+  }
+ ],
+ "answer": {
+  "reason": "The text contains detailed explanations and methodologies that are not captured by the figure or table searches.",
+  "tool": "text",
+  "query": "Action Search temporal context reasoning next search method"
+ }
+}

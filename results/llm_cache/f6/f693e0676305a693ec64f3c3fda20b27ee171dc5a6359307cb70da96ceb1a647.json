@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 109,
+  "prompt_tokens": 230,
+  "total_tokens": 339,
+  "prompt_tokens_details": {
+   "cached_tokens": 152
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2), and how does its performance compare to other methods?\nSub-goals:\n1. [table] Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2)?\n2. [figure] How does its performance compare to other methods?\nAlready tried: sub-goal 1 with table, sub-goal 1 with figure\nStill missing: The evidence does not provide a direct comparison of the performance of SPDNet to other methods for the PaSC dataset in the handheld testing scenario (PaSC2). It only shows the accuracy of different methods for the PaSC-Con and PaSC-Han datasets and the convergence and accuracy curves of SPDNet and葛"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a direct comparison of the performance of SPDNet to other methods for the PaSC dataset in the handheld testing scenario (PaSC2). It only shows the accuracy of different methods for the PaSC-Con and PaSC-Han datasets and the convergence and accuracy curves of SPDNet and another method.",
+  "tool": "text",
+  "query": "performance comparison of SPDNet to other methods for PaSC dataset in handheld testing scenario (PaSC2)"
+ }
+}

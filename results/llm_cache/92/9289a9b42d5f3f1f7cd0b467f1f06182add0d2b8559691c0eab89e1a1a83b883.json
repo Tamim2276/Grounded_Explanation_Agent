@@ -1,0 +1,33 @@
+{
+ "name": "n1_sub_goals",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 51,
+  "prompt_tokens": 268,
+  "total_tokens": 319,
+  "prompt_tokens_details": {
+   "cached_tokens": 251
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You prepare questions about one scientific paper for a search agent. Split the question into sub-questions only when it clearly asks two or three different things; most questions stay ONE sub-question. For each, decide where in the paper its answer is most likely PRINTED:\n- table: numbers that compare methods, models, datasets or settings -- scores, accuracy, error, counts, statistics, or which one is best, worst, highest or lowest;\n- figure: anything SHOWN as a picture -- how something changes as another thing varies (curves, plots, bars), the architecture, framework or pipeline of a method and its parts, and visual examples or qualitative results;\n- text: definitions, reasons and explanations that are only written in prose.\nExamples:\n'What accuracy does the proposed model reach on ImageNet?' -> table\n'Which baseline performs worst on the test set?' -> table\n'How does the validation loss change during training?' -> figure\n'Which modules make up the proposed network?' -> figure\n'How do the generated samples look compared with the baselines?' -> figure\n'Why do the authors normalise the inputs?' -> text\nKeep the question's own words."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the compared methods is most likely to be the safest?"
+  }
+ ],
+ "answer": {
+  "sub_goals": [
+   {
+    "text": "Which of the compared methods is most likely to be the safest?",
+    "modality": "text"
+   }
+  ]
+ }
+}

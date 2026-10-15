@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 47,
+  "prompt_tokens": 189,
+  "total_tokens": 236,
+  "prompt_tokens_details": {
+   "cached_tokens": 120
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the purpose of the activation layer in a convolutional neural network?\nSub-goals:\n1. [figure] What is the purpose of the activation layer in a convolutional neural network?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The purpose of the activation layer in a convolutional neural network is not explicitly stated in the provided evidence. It is mentioned that activation layers use non-linear activation functions, but the specific purpose is not detailed further in the given evidence items. The figure and text onlyヒ"
+  }
+ ],
+ "answer": {
+  "reason": "The purpose of the activation layer in a convolutional neural network is not explicitly stated in the provided evidence.",
+  "tool": "table",
+  "query": "activation layer purpose convolutional neural network"
+ }
+}

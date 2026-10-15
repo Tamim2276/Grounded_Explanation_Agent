@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 142,
+  "total_tokens": 195,
+  "prompt_tokens_details": {
+   "cached_tokens": 72
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys, and why?\nSub-goals:\n1. [table] Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys, and why?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about a specific dataset and its challenge, which is best addressed by searching through the tables in the paper.",
+  "tool": "table",
+  "query": "biggest challenge dataset distinguish true triplets decoys"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 218,
+  "total_tokens": 276,
+  "prompt_tokens_details": {
+   "cached_tokens": 172
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best at predicting the delexicalised constituency tree of an example, and how much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nSub-goals:\n1. [table] Which model performs the best at predicting the delexicalised constituency tree of an example?\n2. [table] How much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nAlready tried: sub-goal 1 with table, sub-goal 2 with table\nStill missing: The baseline model's performance and the exact unlabelled F1 score difference between the best model and the baseline model are not provided in the evidence."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of model performance, which is typically found in the text of a scientific paper.",
+  "tool": "text",
+  "query": "best model performance delexicalised constituency tree unlabelled F1 score baseline model comparison"
+ }
+}

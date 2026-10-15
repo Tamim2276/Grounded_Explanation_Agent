@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 125,
+  "prompt_tokens": 911,
+  "total_tokens": 1036,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic is most likely to be associated with a pro-immigration stance?\nSub-questions:\n1. [figure] Which topic is most likely to be associated with a pro-immigration stance?\nEvidence:\nE1 [text, Section 4.3, page 8]: Tone as a label. We ﬁrst consider using the annotations as a label , and train a joint model to infer topics relevant to the tone of the article (pro- or anti-immigration). Figure 2 shows a set of topics learned in this way, along with the predicted probability of an article being pro-immigration conditioned on the given topic. All topics are coherent, and the predicted probabilities have strong face validity, e.g., “arrested charged charges agents operation” is least associated with pro-immigration. Tone as a covariate. Next we consider using tone as a covariate , and build a model using both tone and tone-topic interactions. Table 3 shows a set of topics learned from the immigration data, along with the most highly-weighted words in the corresponding tone-topic interaction terms. As can be seen, these interaction terms tend to capture different frames (e.g., “criminal” vs. “detainees”, and “illegals” vs. “newcomers”, etc). Combined model with temporal metadata. Finally, we incorporate both the tone annotations and the year of publication of each article, treating the former as a label and the latter as a covariate. In this model, we also include an embedding matrix, W c , to project the one-hot year vectors down to a\nE2 [text, Section 1, page 1]: Topic models comprise a family of methods for uncovering latent structure in text corpora, and are widely used tools in the digital humanities, political science, and other related ﬁelds ( Boyd-Graber et al. , 2017 ). Latent Dirichlet allocation (LDA; Blei et al. , 2003 ) is often used when there is no prior knowledge about a corpus. In the real world, however, most documents have non-textual attributes such as author ( Rosen-Zvi et al. , 2004 ), timestamp ( Blei and Lafferty , 2006 ), rating ( McAuliffe and Blei , 2008 ), or ideology ( Eisenstein et al. , 2011 ; Nguyen et al. , 2015b ), which we refer to as metadata . Many customizations of LDA have been developed to incorporate document metadata. Two models of note are supervised LDA (SLDA; McAuliffe\nE3 [text, Section abstract, page 1]: Most real-world document collections involve various types of metadata, such as author, source, and date, and yet the most commonly-used approaches to modeling text corpora ignore this information. While specialized models have been developed for particular applications, few are widely used in practice, as customization typically requires derivation of a custom inference algorithm. In this paper, we build on recent advances in variational inference methods and propose a general neural framework, based on topic models, to enable ﬂexible incorporation of metadata and allow for rapid exploration of alternative models. Our approach achieves strong performance, with a manageable tradeoff between perplexity, coherence, and sparsity. Finally, we demonstrate the potential of our framework through an exploration of a corpus of articles about US immigration."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "pro-immigration stance"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine which specific topic is most likely associated with a pro-immigration stance. The text discusses the use of topic models to infer topics related to the tone of articles and their association with pro- or anti-immigration stances, but it does not specify a",
+  "sufficient": false
+ }
+}

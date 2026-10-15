@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 220,
+  "total_tokens": 287,
+  "prompt_tokens_details": {
+   "cached_tokens": 140
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of VAGER+Voting compare to other VAGER variants in the 1-shot and 20-shot settings?\nSub-goals:\n1. [table] How does the performance of VAGER+Voting compare to other VAGER variants in the 1-shot and 20-shot settings?\nAlready tried: sub-goal 1 with table\nStill missing: No further evidence is provided to compare VAGER+Voting to other VAGER variants in the 20-shot setting or to provide a direct comparison of performance in the 20-shot setting. The table only shows performance in the 1-shot setting and does not provide a direct comparison of performance across the 20"
+  }
+ ],
+ "answer": {
+  "reason": "The table only shows performance in the 1-shot setting and does not provide a direct comparison of performance across the 20-shot setting.",
+  "tool": "text",
+  "query": "performance of VAGER+Voting compared to other VAGER variants in the 20-shot setting"
+ }
+}

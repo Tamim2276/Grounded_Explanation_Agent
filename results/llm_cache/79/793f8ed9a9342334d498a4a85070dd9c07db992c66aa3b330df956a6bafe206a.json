@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 165,
+  "prompt_tokens": 617,
+  "total_tokens": 782,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre in the SRL-NW network has the lowest failure rate and how does its inference time compare to other genres within the same network?\nSub-questions:\n1. [table] Which genre in the SRL-NW network has the lowest failure rate?\n2. [table] How does its inference time compare to other genres within the same network?\nEvidence:\nE1 [table, Table 11, page 11]: Table 11: Comparison of runtime for difference inference procedures in the noise-free constraint setting: Viterbi, A * (He et al. 2017) and GBI. For SRL-100 refer Table 1 and SRL-NW is a model trained on NW genre.\n |  |  |  |  | Failure | Inference | time | (approx. mins) | \n | Network | Genre(s) | Genre(s) No. of | of examples | rate (%) | Viterbi | GBI | A* | \n | SRL-100 | All | All | 25.6k | 9.82 | 109 | 288 | 377 | \n |  | BC | BC | 4.9k | 26.86 | 23 | 110 | 117 | \n |  | BN | BN | 3.9K | 18.51 | 18 | 64 | 100 | \n | SRL-NW | PT | PT | 2.8k | 10.01 | 8 | 19 | 15 | \n |  | TC | TC | 2.2k | 19.01 | 5 | 23 | 20 | \n |  | WB | WB | 2.3k | 20.32 | 12 | 49 | 69 | "
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "PT genre in SRL-NW network has the lowest failure rate."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "Inference time for PT genre is 8 minutes, which is lower than BC (23 minutes), BN (64 minutes), and WB (49 minutes)."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The inference time comparison for PT genre is not provided in the table. Additional information is needed to answer the second sub-question fully.",
+  "sufficient": false
+ }
+}

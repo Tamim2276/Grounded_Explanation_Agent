@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 310,
+  "prompt_tokens": 2408,
+  "total_tokens": 2718,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The support value of the node 'ana=NAM' is 2.\" -- cites: E5 (Figure 2): observation \"The node 'ana=NAM' has a value of (2,1) in the figure.\"\n2. \"The node 'ana=NAM' has a support value of 2 for the class 0.\" -- cites: E1 (Section A): quote \"X 1 = { ana-type=NAM, ant-type=NAM, headmatch=F } , C ( X 1 ) = 0 X 2 = { ana-type=NAM, ant-type=NAM, headmatch=T } , C ( X 2 ) = 1 X 3 = { ana-type=NAM, ant-type=NOM, headmatch=F } , C ( X 3 ) = 0 • A = { ana-type=NAM, ant-type=NAM, headmatch=F, head-match=T, ant-type=NOM } , • support ( a i , 0) a i ∈ A = { 2,1,2,0,1 } , e.g. “anatype=NAM” appeared two times in noncoreferring ( C ( X i ) = 0 ) samples, If we sort A based on a i ’s frequencies, i.e. support ( a i , 0) + support ( a i , 1) , the ordering of A ’s items will remain the same.\"\n3. \"The node 'ana=NAM' has a support value of 1 for the class 1.\" -- cites: E1 (Section A): quote \"X 1 = { ana-type=NAM, ant-type=NAM, headmatch=F } , C ( X 1 ) = 0 X 2 = { ana-type=NAM, ant-type=NAM, headmatch=T } , C ( X 2 ) = 1 X 3 = { ana-type=NAM, ant-type=NOM, headmatch=F } , C ( X 3 ) = 0 • A = { ana-type=NAM, ant-type=NAM, headmatch=F, head-match=T, ant-type=NOM } , • support ( a i , 0) a i ∈ A = { 2,1,2,0,1 } , e.g. “anatype=NAM” appeared two times in noncoreferring ( C ( X i ) = 0 ) samples, If we sort A based on a i ’s frequencies, i.e. support ( a i , 0) + support ( a i , 1) , the ordering of A ’s items will remain the same.\"\n4. \"The evidence does not provide the support value of the node 'ana=NAM' for the class 0.\" -- cites: E1 (Section A): quote \"X 1 = { ana-type=NAM, ant-type=NAM, headmatch=F } , C ( X 1 ) = 0 X 2 = { ana-type=NAM, ant-type=NAM, headmatch=T } , C ( X 2 ) = 1 X 3 = { ana-type=NAM, ant-type=NOM, headmatch=F } , C ( X 3 ) = 0 • A = { ana-type=NAM, ant-type=NAM, headmatch=F, head-match=T, ant-type=NOM } , • support ( a i , 0) a i ∈ A = { 2,1,2,0,1 } , e.g. “anatype=NAM” appeared two times in noncoreferring ( C ( X i ) = 0 ) samples, If we sort A based on a i ’s frequencies, i.e. support ( a i , 0) + support ( a i , 1) , the ordering of A ’s items will remain the same.\"\n\nCited evidence:\n[E1] (text, Section A, page 13): X 1 = { ana-type=NAM, ant-type=NAM, headmatch=F } , C ( X 1 ) = 0 X 2 = { ana-type=NAM, ant-type=NAM, headmatch=T } , C ( X 2 ) = 1 X 3 = { ana-type=NAM, ant-type=NOM, headmatch=F } , C ( X 3 ) = 0 • A = { ana-type=NAM, ant-type=NAM, headmatch=F, head-match=T, ant-type=NOM } , • support ( a i , 0) a i ∈ A = { 2,1,2,0,1 } , e.g. “anatype=NAM” appeared two times in noncoreferring ( C ( X i ) = 0 ) samples, If we sort A based on a i ’s frequencies, i.e. support ( a i , 0) + support ( a i , 1) , the ordering of A ’s items will remain the same. Now, we need to go through the samples again to build the tree. The FP-Tree construction steps after adding each of the above samples is demonstrated in Figure 1 . ana-type=NAM, anttype=NAM, head-match=F, head-match=T, and ant-type=NOM are abbreviated as ana=NAM, ant=NAM, head=F, head=T, and ant=NOM, respectively in Figures 1 and 2 . Figure 2 shows the resulted FP-Tree in which corresponding support values for both classes, i.e. zero and one, are also included in each node.\n[E5] (figure, Figure 2, page 14) (image attached): Figure 2 : FP-Tree with corresponding support values of the nodes.\nWords printed in the figure: ROOT ana=NAM (2,1) ant=NAM (1,1) head=F (1,0) head=T (0,1) head=F (1,0) ant=NOM (1,0) [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E5 (Figure 2) states that the node 'ana=NAM' has a value of (2,1), which means it has a support value of 2 for the class 0."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in E1 (Section A) does not provide the support value of the node 'ana=NAM' for the class 0. It only provides the support values for the class 1, which are 1, 2, 0, and 1."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E1 (Section A) does not provide the support value of the node 'ana=NAM' for the class 1. It only provides the support values for the class 0, which are 2, 1, 2, 0, and 1."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence in E1 (Section A) provides the support value of the node 'ana=NAM' for the class 0, which is 2. Therefore, the claim that the evidence does not provide this value is incorrect."
+   }
+  ]
+ }
+}

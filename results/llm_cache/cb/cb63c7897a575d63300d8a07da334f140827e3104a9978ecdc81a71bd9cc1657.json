@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 229,
+  "prompt_tokens": 1593,
+  "total_tokens": 1822,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The number of clicks is significantly smaller than the number of impressions.\" -- cites: E3 (Table 1): row 'Public Dataset', column '#impression' = 84M; E3 (Table 1): row 'Public Dataset', column '#click' = 3.4M\n2. \"The relationship is not one-to-one, as not all impressions lead to a click.\" -- cites: E1 (Figure 1): quote \"It is only part of the inference space which is composed of all impressions.\"\n3. \"The relationship between clicks and impressions is that not all impressions lead to a click.\" -- cites: E1 (Figure 1): quote \"Training space is composed of samples with clicked impressions. It is only part of the inference space which is composed of all impressions.\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 1) (image attached): Figure 1: Illustration of sample selection bias problem in conventional CVR modeling. Training space is composed of samples with clicked impressions. It is only part of the in- ference space which is composed of all impressions.\nWords printed in the figure: ���������� �� � � ��������� ��������� ��� � ������� � ��� �\n[E3] (table, Table 1, page 4): Table 1: Statistics of experimental datasets.\nValues (cite as cells):\n  row 'Public Dataset': '#user' = 0.4M; '#item' = 4.3M; '#impression' = 84M; '#click' = 3.4M; '#conversion' = 18k\n  row 'Product Dataset': '#user' = 48M; '#item' = 23.5M; '#impression' = 8950M; '#click' = 324M; '#conversion' = 1774k [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence from E3 (Table 1) shows that the number of impressions (84M) is significantly larger than the number of clicks (3.4M), supporting the claim that the number of clicks is significantly smaller than the number of impressions."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence from E1 (Figure 1) states that the training space is only part of the inference space, which is composed of all impressions. This implies that not all impressions lead to a click, supporting the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence from E1 (Figure 1) states that the training space is composed of samples with clicked impressions and is only part of the inference space which is composed of all impressions. This supports the claim that not all impressions lead to a click."
+   }
+  ]
+ }
+}

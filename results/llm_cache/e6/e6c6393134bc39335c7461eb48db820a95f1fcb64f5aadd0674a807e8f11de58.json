@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 15.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 56,
+  "prompt_tokens": 187,
+  "total_tokens": 243,
+  "prompt_tokens_details": {
+   "cached_tokens": 186
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the encoder understand the last user utterance?\nSub-goals:\n1. [figure] How does the encoder understand the last user utterance?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The encoder's specific mechanism for understanding the last user utterance in detail, such as the exact computation or transformation applied to the utterance to generate the query q r and the reduced representation q r using the memory M. The evidence does not provide the exact steps or formulas of"
+  }
+ ],
+ "answer": {
+  "reason": "To find the encoder's specific mechanism for understanding the last user utterance, a figure search is needed to visualize the process.",
+  "tool": "figure",
+  "query": "encoder understanding last user utterance"
+ }
+}

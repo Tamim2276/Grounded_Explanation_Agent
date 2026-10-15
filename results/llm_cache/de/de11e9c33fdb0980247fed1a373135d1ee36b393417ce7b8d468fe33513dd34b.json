@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 51,
+  "prompt_tokens": 231,
+  "total_tokens": 282,
+  "prompt_tokens_details": {
+   "cached_tokens": 164
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seem to affect the influence vectors?\nSub-goals:\n1. [figure] How does increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seem to affect the influence vectors?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The evidence does not provide specific details on how the parameter values affect the influence vectors in terms of direction or magnitude of change. It only shows a figure with arrows, but does not quantify or describe the effect of the parameters on the influence vectors in detail."
+  }
+ ],
+ "answer": {
+  "reason": "The figure provides a visual representation of the influence vectors but lacks detailed quantitative or qualitative descriptions of how the parameter values affect these vectors.",
+  "tool": "table",
+  "query": "parameter value effect on influence vectors"
+ }
+}

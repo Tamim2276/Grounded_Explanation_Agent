@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 52,
+  "prompt_tokens": 183,
+  "total_tokens": 235,
+  "prompt_tokens_details": {
+   "cached_tokens": 108
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the sequential and recurrent generation schemes?\nSub-goals:\n1. [figure] What is the difference between the sequential and recurrent generation schemes?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The difference in the preservation of identity and the handling of temporal dynamics between the sequential and recurrent generation schemes is not explicitly stated in the provided evidence. The evidence only describes the nature of the schemes but does not provide a direct comparison of their key,"
+  }
+ ],
+ "answer": {
+  "reason": "The figure may provide a visual comparison or explanation of the difference between the sequential and recurrent generation schemes.",
+  "tool": "figure",
+  "query": "Difference between sequential and recurrent generation schemes"
+ }
+}

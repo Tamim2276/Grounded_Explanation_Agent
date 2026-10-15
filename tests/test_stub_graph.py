@@ -26,7 +26,7 @@ from gea.viz import render_paper
 @pytest.fixture(autouse=True)
 def quiet():
     # No trace lines, and the stub backend, for every test.
-    with cfg.override(TRACE=False, BACKEND="stub"):
+    with cfg.override(TRACE=False, BACKEND="stub", FIRST_ROUND="planner"):   # the Day 1 design
         yield
 
 
@@ -170,7 +170,8 @@ def test_10g_only_n8_writes_the_buffer(agent):
 
 def test_10h_drawn_wiring_matches_the_thesis(agent):
     edges = {(e.source, e.target) for e in agent.get_graph().edges}
-    assert len(edges) == 32
+    assert len(edges) == 36                     # 32 + best effort + the broad first round (Day 7)
+    assert ("g1_sufficiency_check", "best_effort") in edges and ("best_effort", "n9_grounded_generator") in edges
     assert ("replan_prep", "n5_agentic_planner") in edges
     assert ("rewrite_prep", "n9_grounded_generator") in edges
     assert ("abstain", "n10c_dag_trace") in edges

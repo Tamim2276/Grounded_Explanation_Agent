@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 84,
+  "prompt_tokens": 193,
+  "total_tokens": 277,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of training on more diverse data on the accuracy of graph representation for VQA?\nSub-goals:\n1. [figure] What is the effect of training on more diverse data on the accuracy of graph representation for VQA?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide specific numerical or directional information about the effect of training on more diverse data on the accuracy of graph representation for VQA. It only shows examples of generated graphs for a free form question from the VQA dataset, but does not quantify or describe a"
+  }
+ ],
+ "answer": {
+  "reason": "The question seeks specific numerical or directional information about the effect of training on more diverse data on the accuracy of graph representation for VQA, which is not provided by the figure. Therefore, a 'table' search is needed to find this information.",
+  "tool": "table",
+  "query": "effect of training on more diverse data on the accuracy of graph representation for VQA"
+ }
+}

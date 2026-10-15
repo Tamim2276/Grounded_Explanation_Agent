@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 205,
+  "prompt_tokens": 2253,
+  "total_tokens": 2458,
+  "prompt_tokens_details": {
+   "cached_tokens": 457
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)? How does this compare to the performance of the model that only observes answers?\nSub-questions:\n1. [table] Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)?\n2. [figure] How does this compare to the performance of the model that only observes answers?\nEvidence:\nE1 [table, Table 8, page 15]: Table 8: Test accuracy (%) on COCOQA.\nMethod | IoU | QoU | IoU +QoU\nMLP-A | 70.3 | 31.7 | 26.6\nMLP-IA | 73.4 | 73.3 | 60.7\nMLP-QA | 91.5 | 52.5 | 51.4\nMLP-IQA | 93.1 | 78.3 | 75.9\nRandom | 25.0 | 25.0 | 14.3\nE2 [figure, Figure 1, page 1] (image attached): Figure 1: An illustration of how the shortcuts in the Vi- sual7W dataset ( Zhu et al. , 2016 ) should be remedied. In the original dataset, the correct answer “A train” is easily selected by a machine as it is far often used as the correct answer than the other decoy (negative) an- swers. (The numbers in the brackets are probability scores computed using eq. ( 2 )). Our two procedures — QoU and IoU (cf. Sect. 4 ) — create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the ques- tion alone . In these cases, machines make mistakes un- less they consider all information together . Thus, the alternative decoys suggested our procedures are better designed to gauge how well a learning algorithm can understand all information equally well.\nWords printed in the figure: Wei-Lun Chao∗, Hexiang Hu∗, Fei Sha University of Southern California Los Angeles, California, USA weilunchao760414@gmail.com, hexiang.frank.hu@gmail.com, feisha@usc.edu Abstract al question answering (Visual QA) has at- ed a lot of attention lately, seen essentially form of (visual) Turing test that artificial igence should strive to achieve. In this r, we study a crucial component of this how can we design good datasets for ask? We focus on the design of multiple- ce based datasets where the learner has to t the right answer from a set of candi- ones including the target (i.e. the correct and the decoys (i.e. the incorrect ones). Question: What v ...\nE3 [figure, Figure 1, page 1]: Zoomed view (300 dpi) of: Figure 1: An illustration of how the shortcuts in the Vi- sual7W dataset ( Zhu et al. , 2016 ) should be remedied. In the original dataset, the correct answer “A train” is easily selected by a machine as it is far often used as the correct answer than the other decoy (negative) an- swers. (The numbers in the brackets are probability scores computed using eq. ( 2 )). Our two procedures — QoU and IoU (cf. Sect. 4 ) — create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the ques- tion alone . In these cases, machines make mistakes un- less they consider all information together . Thus, the alternative decoys suggested our procedures are better designed to gauge how well a learning algorithm can understand all information equally well.\nWords printed in the figure: Wei-Lun Chao∗, Hexiang Hu∗, Fei Sha University of Southern California Los Angeles, California, USA weilunchao760414@gmail.com, hexiang.frank.hu@gmail.com, feisha@usc.edu Abstract al question answering (Visual QA) has at- ed a lot of attention lately, seen essentially form of (visual) Turing test that artificial igence should strive to achieve. In this r, we study a crucial component of this how can we design good datasets for ask? We focus on the design of multiple- ce based datasets where the learner has to t the right answer from a set of candi- ones including the target (i.e. the correct and the decoys (i.e. the incorre ... [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "MLP-IQA performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "The combined accuracy of MLP-IQA is 75.9%."
+   }
+  ],
+  "uncovered": [
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide information about the performance of the model that only observes answers or how this compares to the performance of MLP-IQA. The figure and table do not contain this information. The table only lists the combined accuracy for each model, but does not compare it to a 'd",
+  "sufficient": false
+ }
+}

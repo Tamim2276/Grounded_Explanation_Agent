@@ -1,0 +1,34 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 36,
+  "prompt_tokens": 115,
+  "total_tokens": 151,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys? Was there a significant difference in performance compared to the other methods?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "embedding method",
+   "model architectures",
+   "Visual7W dataset",
+   "IoU",
+   "QoU decoys"
+  ]
+ }
+}

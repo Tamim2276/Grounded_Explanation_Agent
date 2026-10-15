@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 115,
+  "prompt_tokens": 2021,
+  "total_tokens": 2136,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the ChoiceNet model perform on datasets with uniform corruptions?\nSub-questions:\n1. [figure] How does the ChoiceNet model perform on datasets with uniform corruptions?\nEvidence:\nE1 [figure, Figure 4, page 6] (image attached): Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions.\nWords printed in the figure: (a) (b) (c) (d)\nE2 [figure, Figure 4, page 6]: Zoomed view (300 dpi) of: Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions.\nWords printed in the figure: (a) (b) (c) (d)\nE3 [table, Table 9, page 16]: Table 9: Test accuracies on the MNIST datasets with corrupt labels.\n | Corruption p | Conﬁguration | Best | \n |  | ConvNet | 95.4 | \n | 50% | ConvNet+Mixup | 97.2 | \n |  | ConvNet+CN | 99.2 | \n |  | MDN | 97.7 | \n |  | ConvNet | 86.3 | \n | 80% | ConvNet+Mixup | 87.2 | \n |  | ConvNet+CN | 98.2 | \n |  | MDN | 85.2 | \n |  | ConvNet | 76.1 | \n | 90% | ConvNet+Mixup | 74.7 | \n |  | ConvNet+CN | 94.7 | \n |  | MDN | 61.4 | \n |  | ConvNet | 72.5 | \n |  | MDN | 31.2 | \nFor MNIST experiments, | we randomly shufﬂe a | percentage of the | with the | corruption probability p from 50% to 95% and\nmedian accuracies after We construct two networks: a with 256 output units (ConvNet) | ﬁve runs for each conﬁguration network with two residual and ChoiceNet with | following the blocks [49] with 3 × the same two residual | setting in × 64 blocks | convolutional layers followed by a fully-connected by the MCDN block (ConvNet+CN). We\neach network for 50 epochs We train each network for 300 and 225 epochs. We apply network as [49]. | with a ﬁxed learning rate epochs with a minibatch random horizontal ﬂip and | of 1e-5. size of 256. We random crop with | with a 4−pixel-padding | learning rate of 0.1, and it decays by 1/10 after and use a weight decay of 0.0001 for the\nThe classiﬁcation results are and the difference between Here, we also present additional | shown in Table 9 where the accuracies of ChoiceNet experimental results | ChoiceNet consistently and the others using the MNIST dataset | outperf ... [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "ChoiceNet model performs well on uniform corruptions."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The specific performance metrics or values for the ChoiceNet model on datasets with uniform corruptions are not provided in the evidence items. The figure shows fitting results and correlations but does not provide numerical performance metrics for uniform corruptions.",
+  "sufficient": false
+ }
+}

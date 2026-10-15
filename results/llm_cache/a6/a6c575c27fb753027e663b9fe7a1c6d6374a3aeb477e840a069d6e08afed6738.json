@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 200,
+  "total_tokens": 258,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the different methods compare in terms of their ability to generate realistic faces?\nSub-goals:\n1. [figure] How do the different methods compare in terms of their ability to generate realistic faces?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide a direct comparison of the methods in terms of their ability to generate realistic faces. It only provides quantitative results and visual examples, but not a direct comparison of the methods' performance in this aspect. The sub-questions 2, 3, 4, 5, 6, and 7 are not be"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of methods in generating realistic faces, which is best addressed by analyzing the figures that likely contain visual examples of the methods' outputs.",
+  "tool": "figure",
+  "query": "Comparison of methods in generating realistic faces"
+ }
+}

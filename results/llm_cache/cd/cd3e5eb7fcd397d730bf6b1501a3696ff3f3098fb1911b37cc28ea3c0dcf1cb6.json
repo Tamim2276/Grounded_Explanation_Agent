@@ -1,0 +1,32 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 28,
+  "prompt_tokens": 122,
+  "total_tokens": 150,
+  "prompt_tokens_details": {
+   "cached_tokens": 70
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers) and how does its performance compare to the model that only uses answers?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "VQAv2-2017",
+   "model",
+   "performance"
+  ]
+ }
+}

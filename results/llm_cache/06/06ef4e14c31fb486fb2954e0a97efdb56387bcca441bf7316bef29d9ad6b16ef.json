@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 130,
+  "total_tokens": 202,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which data structure is the fastest for updating on the email-EuAll dataset?\nSub-goals:\n1. [figure] Which data structure is the fastest for updating on the email-EuAll dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the fastest data structure for updating on the email-EuAll dataset, which is likely to be found in the figures or charts of the paper, as these often present performance comparisons.",
+  "tool": "figure",
+  "query": "fastest data structure for updating on the email-EuAll dataset"
+ }
+}

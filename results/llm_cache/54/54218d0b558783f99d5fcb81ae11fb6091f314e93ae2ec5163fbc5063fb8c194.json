@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 240,
+  "total_tokens": 312,
+  "prompt_tokens_details": {
+   "cached_tokens": 148
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average precision of TCM(256*memory) compare to the other two algorithms in the email-EuAll dataset?\nSub-goals:\n1. [figure] How does the average precision of TCM(256*memory) compare to the other two algorithms in the email-EuAll dataset?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with table\nStill missing: The average precision of TCM(256*memory) in the cit-HepPh, web-NotreDame, lkml-reply, and Caida-networkflow datasets is not provided in the given evidence. The table only provides update speed for different datasets and algorithms, not average precision for TCM(256*memory). Therefore, the answer to "
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of average precision, which is not covered by the figure or table. The text search is needed to find the relevant information.",
+  "tool": "text",
+  "query": "average precision TCM(256*memory) email-EuAll dataset"
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 215,
+  "prompt_tokens": 2390,
+  "total_tokens": 2605,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure.\" -- cites: E3 (Section 4.2): quote \"We can see that the performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure.\"\n2. \"The models are trained using Resnet-32.\" -- cites: E1 (Figure 4): observation \"The models is Resnet-32.\"\n3. \"The training procedure used is the CE.\" -- cites: E1 (Figure 4): quote \"The models is Resnet-32.\"\n\nCited evidence:\n[E1] (figure, Figure 4, page 17) (image attached): Figure 4: Classiﬁcation error rates on CIFAR-10. Two panels separately show the results when the networks are trained via the CE and RCE. The models is Resnet-32.\nWords printed in the figure: NOR RAND FGSM BIM ILCM JSMA C&W C&W-hc 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 Error rate (a) CE NOR RAND FGSM BIM ILCM JSMA C&W C&W-hc 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 Error rate (b) RCE\nValues (cite as cells):\n  row '(a) CE colour (0.298, 0.298, 0.861)': 'NOR' = 0.08\n  row '(a) CE colour (0.787, 0.392, 0.392)': 'RAND' = 0.12\n  row '(a) CE colour (0.637, 0.584, 0.953)': 'FGSM' = 0.9\n  row '(a) CE colour (0.298, 1.0, 1.0)': 'BIM' = 0.94\n  row '(a) CE colour (1.0, 0.891, 0.298)': 'ILCM' = 0.99\n  row '(a) CE colour (0.953, 0.656, 0.953)': 'JSMA' = 0.19\n  row '(a) CE colour (1.0, 0.684, 0.298)': 'C&W' = 1\n  row '(a) CE colour (1.0, 0.298, 0.298)': 'C&W-hc' = 1\n  row '(b) RCE colour (0.298, 0.298, 0.861)': 'NOR' = 0.07\n  row '(b) RCE colour (0.787, 0.392, 0.392)': 'RAND' = 0.14\n  row '(b) RCE colour (0.637, 0.584, 0.953)': 'FGSM' = 0.88\n  row '(b) RCE colour (0.298, 1.0, 1.0)': 'BIM' = 0.94\n  row '(b) RCE colour (1.0, 0.891, 0.298)': 'ILCM' = 0.7\n  row '(b) RCE colour (0.953, 0.656, 0.953)': 'JSMA' = 0.33\n  row '(b) RCE colour (1.0, 0.684, 0.298)': 'C&W' = 1\n  row '(b) RCE colour (1.0, 0.298, 0.298)': 'C&W-hc' = 1\n[E3] (text, Section 4.2, page 6): We ﬁrst evaluate in the normal setting, where we implement Resnet-32 and Resnet-56 [ 15 ] on both datasets. For each network, we use both the CE and RCE as the training objectives, trained by the same settings as He et al. [16] . The number of training steps for both objectives is set to be 20,000 on MNIST and 90,000 on CIFAR-10. Hereafter for notation simplicity, we will indicate the training procedure used after the model name of a trained network, e.g., Resnet-32 (CE). Similarly, we indicate the training procedure and omit the name of the target network after an attacking method, e.g., FGSM (CE). Table 1 shows the test error rates, where the thresholding test strategy is disabled and all the points receive their predicted labels. We can see that the performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure. Note that we apply the same training hyperparameters (e.g., learning rates and decay factors) for both the CE and RCE procedures, which suggests that RCE is easy to optimize and does not require much extra effort on tuning hyperparameters. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4.2) states: 'We can see that the performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure.' This directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 4) states: 'The models is Resnet-32.' This directly supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E1 (Figure 4) states: 'The models is Resnet-32.' This does not directly support the claim that 'The training procedure used is the CE.' The evidence does not specify the training procedure used, only the model architecture."
+   }
+  ]
+ }
+}

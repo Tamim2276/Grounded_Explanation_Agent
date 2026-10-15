@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 274,
+  "prompt_tokens": 667,
+  "total_tokens": 941,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The BOSSNET model achieved the highest combined score for informativeness and grammatical correctness on the CamRest dataset.\" -- cites: E1 (Table 5): row 'BOSSNET', column 'CamRest' = 2.44; E1 (Table 5): row 'BOSSNET', column 'SMD' = 2.28\n2. \"The Seq2Seq model had the second highest combined score for informativeness and grammatical correctness on the CamRest dataset.\" -- cites: E1 (Table 5): row 'Seq2Seq', column 'CamRest' = 2.28; E1 (Table 5): row 'Seq2Seq', column 'SMD' = 2.44\n3. \"The Mem2Seq model had the third highest combined score for informativeness and grammatical correctness on the CamRest dataset.\" -- cites: E1 (Table 5): row 'Mem2Seq', column 'CamRest' = 2.06; E1 (Table 5): row 'Mem2Seq', column 'SMD' = 1.9\n4. \"The Seq2Seq+Copy model had the lowest combined score for informativeness and grammatical correctness on the CamRest dataset.\" -- cites: E1 (Table 5): row 'Seq2Seq+Copy', column 'CamRest' = 1.22; E1 (Table 5): row 'Seq2Seq+Copy', column 'SMD' = 1.04\n\nCited evidence:\n[E1] (table, Table 5, page 7): Table 5: AMT Evaluations on CamRest and SMD (50% unseen) KA datasets\nValues (cite as cells):\n  row '': '' = Info; 'CamRest' = Grammar; '' = Info; 'SMD' = Grammar\n  row 'Seq2Seq': '' = 26; 'CamRest' = 2.28; '' = 22; 'SMD' = 2.44\n  row 'Seq2Seq+Copy': '' = 22; 'CamRest' = 1.22; '' = 16; 'SMD' = 1.04\n  row 'Mem2Seq': '' = 35; 'CamRest' = 2.06; '' = 26; 'SMD' = 1.9\n  row 'BOSSNET': '' = 80; 'CamRest' = 2.44; '' = 51; 'SMD' = 2.28"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The BOSSNET model has a combined score of 2.44 on the CamRest dataset, which is higher than the scores for the other models cited in the claim."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The Seq2Seq model has a combined score of 2.28 on the CamRest dataset, which is not the second highest score. The highest score is 2.44 for BOSSNET, and the second highest is 2.28 for Seq2Seq+Copy."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The Mem2Seq model has a combined score of 2.06 on the CamRest dataset, which is the third highest score after BOSSNET (2.44) and Seq2Seq+Copy (1.22)."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The Seq2Seq+Copy model has the lowest combined score of 1.22 on the CamRest dataset."
+   }
+  ]
+ }
+}

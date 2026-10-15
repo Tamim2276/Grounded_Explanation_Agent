@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 181,
+  "total_tokens": 243,
+  "prompt_tokens_details": {
+   "cached_tokens": 74
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the training size of the Action Search model affect its performance?\nSub-goals:\n1. [figure] How does the training size of the Action Search model affect its performance?\nAlready tried: nothing yet\nStill missing: No evidence item provides specific data on how the training size of the Action Search model affects its performance in terms of mAP or S score. The table only shows the effect of different training sizes on mAP and S score, but it does not specify the relationship between training size and these two"
+  }
+ ],
+ "answer": {
+  "reason": "The figure is likely to contain visual data or charts that can help understand the relationship between training size and performance metrics like mAP or S score.",
+  "tool": "figure",
+  "query": "Training size vs. mAP or S score for the Action Search model"
+ }
+}

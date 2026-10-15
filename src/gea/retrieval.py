@@ -436,12 +436,16 @@ def route_zoom(state: AgentState) -> str:
 # --- the single-pass baseline (BUILD_PLAN.md Day 7) ---------------------------------
 
 def n6_all_tools(state: AgentState) -> dict:
-    # Single pass: no planner and no loop. The text, table and figure tools each run ONCE
-    # with the question itself, a small figure is zoomed as in the full graph, and all
-    # of it goes to N8 together -- a standard RAG pipeline built from the same parts.
+    # Every tool ONCE with the question itself; a small figure is zoomed as in the full graph,
+    # and all of it goes to N8 together. The whole retrieval of the single-pass baseline (a
+    # standard RAG pipeline built from the same parts), and round 1 of the full graph when
+    # cfg.FIRST_ROUND is "all" (later rounds: N5's targeted searches). Only the tools the
+    # system has: text alone in the text-only baseline.
     found, events = [], []
     for tool, node in (("text", n6a_text_retriever), ("table", n6b_table_retriever),
                        ("figure", n6c_figure_retriever)):
+        if tool not in cfg.tools():
+            continue
         out = node({**state, "sub_goals": [], "action": {"tool": tool, "query": state["question"]}})
         new, events = out["new_evidence"], events + out["events"]
         if tool == "figure" and route_zoom(out) == "zoom":

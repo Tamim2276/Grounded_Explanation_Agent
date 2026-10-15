@@ -1,0 +1,44 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 140,
+  "prompt_tokens": 1955,
+  "total_tokens": 2095,
+  "prompt_tokens_details": {
+   "cached_tokens": 486
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually, and how does its performance compare to humans?\nSub-questions:\n1. [table] Which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually?\n2. [figure] How does its performance compare to humans?\nEvidence:\nE1 [table, Table 6, page 8]: Table 6: Using models trained on qaVG to improve Vi- sual7W and VQA (Accuracy in %).\nDatasets | Decoys | Best w/o | qaVG | model\n |  | using qaVG | initial | ﬁne-tuned\n | Orig | 65.7 | 60.5 | 69.1\nVisual7W | IoU +QoU | 52.0 | 58.1 | 58.7\n | All | 45.1 | 48.9 | 51.0\n | Orig | 64.6 | 42.2 | 65.6\nVQA | IoU +QoU | 63.7 | 47.9 | 64.1\n | All | 58.9 | 37.5 | 59.4\nE2 [figure, Figure 5, page 13] (image attached): Figure 5: Illustration of attention-based Visual QA models.\nWords printed in the figure: Question: Where is the ball? BoW Average Word2Vec Answer: In the air. CNN 200-layer ResNet BoW Average Word2Vec Concatenation L2 Normalize L2 Normalize MLP Score L2 Normalize BoW Average Word2Vec SMem ( Xu et. al. 2016 ) Question: Where is the ball? BoW Average Word2Vec Answer: In the air. CNN 200-layer ResNet BoW Average Word2Vec Concatenation L2 Normalize L2 Normalize MLP Score L2 Normalize LSTM Hierarchical LSTM Co-Attention ( Lu et. al. 2016 ) (a) Attention* (SMem + MLP) (b) HieCoAtt* (HieCoAtt + MLP)\nE3 [figure, Figure 5, page 13]: Zoomed view (300 dpi) of: Figure 5: Illustration of attention-based Visual QA models.\nWords printed in the figure: Question: Where is the ball? BoW Average Word2Vec Answer: In the air. CNN 200-layer ResNet BoW Average Word2Vec Concatenation L2 Normalize L2 Normalize MLP Score L2 Normalize BoW Average Word2Vec SMem ( Xu et. al. 2016 ) Question: Where is the ball? BoW Average Word2Vec Answer: In the air. CNN 200-layer ResNet BoW Average Word2Vec Concatenation L2 Normalize L2 Normalize MLP Score L2 Normalize LSTM Hierarchical LSTM Co-Attention ( Lu et. al. 2016 ) (a) Attention* (SMem + MLP) (b) HieCoAtt* (HieCoAtt + MLP) [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Fine-tuned model performs best on qaVG"
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E2",
+    "fact": "Performance comparison not provided"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide a comparison of the model's performance to humans. It only shows the performance of the models on qaVG and does not include any human performance data or comparison metrics.",
+  "sufficient": false
+ }
+}

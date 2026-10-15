@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 215,
+  "total_tokens": 286,
+  "prompt_tokens_details": {
+   "cached_tokens": 126
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What does the induced schema Win <A4, B3, C2> represent?\nSub-goals:\n1. [table] What does the induced schema Win <A4, B3, C2> represent?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: The evidence does not provide the specific representation of the schema Win <A4, B3, C2> in terms of its actors and relations. It only mentions that it is a relation schema and provides examples of other schemata but does not detail the specific schema Win <A4, B3, C2> in the required format (e.g., "
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a specific representation of the schema Win <A4, B3, C2>, which is not found in the text or table. The figure might contain the necessary information.",
+  "tool": "figure",
+  "query": "schema Win <A4, B3, C2> representation"
+ }
+}

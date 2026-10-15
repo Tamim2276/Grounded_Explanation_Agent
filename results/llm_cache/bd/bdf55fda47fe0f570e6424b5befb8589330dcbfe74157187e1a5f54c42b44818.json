@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 200,
+  "total_tokens": 266,
+  "prompt_tokens_details": {
+   "cached_tokens": 124
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method appears to be the safest for autonomous driving on straight lanes with different levels of outlier vehicles?\nSub-goals:\n1. [table] Which method appears to be the safest for autonomous driving on straight lanes with different levels of outlier vehicles?\nAlready tried: sub-goal 1 with text\nStill missing: table evidence for sub-goal 1 (rule floor); No further evidence is provided to determine which method is the safest for autonomous driving on straight lanes with different levels of outlier vehicles. The evidence provided is about the performance of the proposed method in comparison to other methods under different outlier rates, but it does'"
+  }
+ ],
+ "answer": {
+  "reason": "The table provides a structured comparison of methods under varying outlier conditions, which is necessary to determine the safest method for autonomous driving.",
+  "tool": "table",
+  "query": "safest method for autonomous driving on straight lanes with different levels of outlier vehicles"
+ }
+}

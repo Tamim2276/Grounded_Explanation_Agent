@@ -1,0 +1,50 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 212,
+  "prompt_tokens": 856,
+  "total_tokens": 1068,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\nSub-questions:\n1. [figure] Explain how the answering procedure works.\nEvidence:\nE1 [text, Section 1, page 4]: 3.3. Answering Procedure In this stage a recursive procedure seeks valid assignments (see Section 3.1 ) between the question graph and the\nE2 [text, Section 1, page 3]: returns the desired answer. The answering process consists of two stages (see Figure 2 for a scheme): 1. Question mapping into a graph representation - First, a representation of the question as a directed graph is generated, where nodes represent objects and edges represent relations between objects. Graph components include objects classes, properties and relations. The node representation includes all the object visual requirements needed to answer the question, which is a combination of the following (see examples in the supplement, section 1) : • Object class c ( e.g .’horse’). • Object property p ( e.g .’red’). • Queried object property f ( e.g .’color’). • Queried set property g ( e.g .’number’). • Quantiﬁers ( e.g .’all’, ’two’). • Quantity relative to another node ( e.g . same). • Node type: regular or SuperNode: OR of nodes (with optional additional requirements). 2. Answering procedure - In this stage, a recursive procedure ﬁnds valid assignments of the graph in the image. The number of required assignments for each node is determined by its quantiﬁers. The procedure follows the graph, invoking relevant sub-procedures and integrates the information to provide the answer. Importantly, it depends only on the abstract structure of the question graph, where the particular object classes, properties and relations are parameters, used to apply the corresponding visual estimators ( e.g . which property to extract). The invoked sub-procedures are selected from a pool of th ...\nE3 [text, Section 4.1, page 8]: also gives the method some capacity to explain its answers and suggest alternatives when question is not grounded in the image. Based on this approach, our answering system achieves near perfect results on a challenging dataset, without using any question-answer examples. We have demonstrated that question representation and answering capabilities can be extended outside the scope of the data used in training, preserving good results for the original domain. Substantial work is required to obtain a system that will be able to perform well on entirely general images and questions. The main immediate bottleneck is obtaining question-to-graph mapping with general representation capabilities for a broad range of questions. Question graph representation may also be enhanced to support questions with more complex logic, as well as extending the scope of the supported visual categories ( e.g . global scene types). Any general VQA requires vast estimation capabilities, as any visual category can be queried. In UnCoRd they are modularly incremented and automatically integrated with existing questions. Additional basic areas that current schemes, including ours, have only begun to address, are the use of external, non-visual knowledge in the answering process, and the composition of detailed, informative answers, integrating the language and visual aspects of VQA."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The answering process consists of two stages: question mapping into a graph representation and answering procedure."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The answering procedure seeks valid assignments between the question graph and the image."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The answering system achieves near perfect results on a challenging dataset."
+   }
+  ],
+  "uncovered": [
+   2,
+   3
+  ],
+  "missing": "The answering procedure and its specific steps are not detailed in the provided evidence. The evidence only describes the general framework and some aspects of the answering system's capabilities but does not provide a detailed explanation of the procedure itself or its specific steps.",
+  "sufficient": false
+ }
+}

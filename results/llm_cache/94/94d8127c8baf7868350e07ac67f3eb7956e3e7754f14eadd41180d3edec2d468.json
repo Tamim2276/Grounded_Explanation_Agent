@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 49,
+  "prompt_tokens": 173,
+  "total_tokens": 222,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of test error?\nSub-goals:\n1. [figure] Which model performs the best in terms of test error?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The evidence does not provide the test error for the other models or tasks to determine which model performs the best in terms of test error. The figure only shows the accuracy for different models and tasks, not the test error directly."
+  }
+ ],
+ "answer": {
+  "reason": "The figure does not provide the test error for the other models or tasks, so a table search is needed to find the test error values.",
+  "tool": "table",
+  "query": "test error"
+ }
+}

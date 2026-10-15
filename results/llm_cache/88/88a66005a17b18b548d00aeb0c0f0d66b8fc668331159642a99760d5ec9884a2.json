@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 203,
+  "prompt_tokens": 1414,
+  "total_tokens": 1617,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The induced schema Win <A4, B3, C2> represents a higher-order relation schema involving multiple arguments.\" -- cites: E5 (Figure 2): observation \"The figure shows the induction of higher-order schemata from the tri-partite graph, and the induced schema Win <A4, B3, C2> is highlighted.\"\n2. \"The induced schema Win <A4, B3, C2> is a 3-ary schema, as indicated by the figure.\" -- cites: E5 (Figure 2): observation \"The figure shows that the induced schema Win <A4, B3, C2> is a 3-ary schema.\"\n\nCited evidence:\n[E5] (figure, Figure 2, page 4) (image attached): Figure 2: Overview of Step 2 of TFBA . Induction of higher-order schemata from the tri-partite graph formed from the columns of matrices A , B , and C . Triangles in this graph (solid) represent a 3-ary schema, n-ary schemata for n > 3 can be induced from the 3-ary schemata. Please refer to Section 3.2.2 for details. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E5 (Figure 2) states that the figure shows the induction of higher-order schemata from the tri-partite graph, and the induced schema Win <A4, B3, C2> is highlighted. This directly supports the claim that the induced schema Win <A4, B3, C2> represents a higher-order relation schema involving multiple arguments."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E5 (Figure 2) states that the figure shows that the induced schema Win <A4, B3, C2> is a 3-ary schema. This directly supports the claim that the induced schema Win <A4, B3, C2> is a 3-ary schema."
+   }
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 130,
+  "prompt_tokens": 552,
+  "total_tokens": 682,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which framework has the lowest total communication cost for MNIST?\nSub-questions:\n1. [table] Which framework has the lowest total communication cost for MNIST?\nEvidence:\nE1 [table, Table 5, page 13]: Table 5: Performance Comparison on MNIST and CIFAR- 10.\n |  |  | Time (s) |  |  | Comm (MB) | \nCNN | Framework | setup | online | total | setup | online | total\n | MiniONN | 3.58 | 5.74 | 9.32 | 20.9 | 636.6 | 657.5\nMNIST | GAZELLE | 0.48 | 0.33 | 0.81 | 47.5 | 22.5 | 70.0\n | FALCON | 0.63 | 0.21 | 0.84 | 77.0 | 15.5 | 92.5\n | MiniONN | 472 | 72 | 544 | 3046 | 6226 | 9272\nCIFAR-10 | GAZELLE | 9.34 | 3.56 | 12.9 | 940 | 296 | 1236\n | FALCON | 7.20 | 2.88 | 10.1 | 1194 | 265 | 1459"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "GAZELLE has the lowest total communication cost for MNIST."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is needed to answer the sub-question as the table directly provides the answer for the lowest total communication cost for MNIST among the frameworks listed. The framework GAZELLE has the lowest total communication cost for MNIST according to the table provided in E1.",
+  "sufficient": true
+ }
+}

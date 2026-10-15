@@ -1,0 +1,41 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 165,
+  "prompt_tokens": 599,
+  "total_tokens": 764,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the representation task and the learning-to-learn task?\nSub-questions:\n1. [figure] What is the difference between the representation task and the learning-to-learn task?\nEvidence:\nE1 [text, Section 6, page 8]: We have collected a second dataset of photographs of spherical objects with complex appearance (glossy objects under natural light). In particular we use 3 different materials and 5 different illuminations each with 5 images from registered views (Fig. 11 ) for training and 70 for testing. Please see the supplemental video for the animation. Transfer of appearance captured from a real world image sequence to other complex geometry is shown in Fig. 12 . Tbl. 2 summarizes the outcome for the representation task previously explored for synthetic data only. An example result is seen in Fig. 1 , more are shown in the supplemental materials. Our method can estimate view-dependent appearance, unlike RM/RM++, from a small training set, but it\nE2 [text, Section 5.2, page 6]: Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views.\nE3 [text, Section abstract, page 1]: and-segmentation task, mapping from an image showing multiple materials to multiple deep appearance maps."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The representation task involves training and testing on a dataset of photographs of spherical objects with complex appearance, while the learning-to-learn task is not explicitly described in the provided evidence."
+   }
+  ],
+  "uncovered": [
+   1,
+   2,
+   3
+  ],
+  "missing": "The evidence does not provide a clear distinction between the representation task and the learning-to-learn task. The representation task is described, but the learning-to-learn task is not mentioned or defined in the provided evidence. Additional information is needed to answer the sub-question 1.1",
+  "sufficient": false
+ }
+}

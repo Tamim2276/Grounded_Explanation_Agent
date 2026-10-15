@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 168,
+  "total_tokens": 227,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?\nSub-goals:\n1. [figure] How do the reconstructions compare to the original samples?\nAlready tried: sub-goal 1 with figure\nStill missing: No further evidence is provided to compare the reconstructions to the original samples in terms of specific metrics or quantitative differences. The figure only provides qualitative observations about the reconstructions and the original samples, but does not provide a direct comparison or numerical"
+  }
+ ],
+ "answer": {
+  "reason": "To find a direct comparison or quantitative differences between reconstructions and original samples, a 'table' search is needed as it might contain numerical data or statistical analyses.",
+  "tool": "table",
+  "query": "reconstructions vs original samples quantitative comparison"
+ }
+}

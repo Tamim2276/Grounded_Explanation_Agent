@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 216,
+  "total_tokens": 271,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which objective function resulted in a higher ratio of f2(x∗) > 0 for the MNIST dataset?\nSub-goals:\n1. [figure] Which objective function resulted in a higher ratio of f2(x∗) > 0 for the MNIST dataset?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide the specific objective function that resulted in a higher ratio of f2(x∗) > 0 for the MNIST dataset. It only shows the types of adversarial examples generated on Resnet-32 (CE) and Resnet-32 (RCE). The figure does not specify the objective function used for these advers"
+  }
+ ],
+ "answer": {
+  "reason": "The figure does not provide the specific objective function used for the adversarial examples.",
+  "tool": "table",
+  "query": "objective function ratio f2(x∗) > 0 MNIST dataset"
+ }
+}

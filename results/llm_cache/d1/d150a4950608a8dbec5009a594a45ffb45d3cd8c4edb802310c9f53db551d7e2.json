@@ -1,0 +1,41 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 146,
+  "prompt_tokens": 1178,
+  "total_tokens": 1324,
+  "prompt_tokens_details": {
+   "cached_tokens": 460
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys, and why?\nSub-questions:\n1. [table] Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys, and why?\nEvidence:\nE1 [table, Table 6, page 8]: Table 6: Using models trained on qaVG to improve Vi- sual7W and VQA (Accuracy in %).\nDatasets | Decoys | Best w/o | qaVG | model\n |  | using qaVG | initial | ﬁne-tuned\n | Orig | 65.7 | 60.5 | 69.1\nVisual7W | IoU +QoU | 52.0 | 58.1 | 58.7\n | All | 45.1 | 48.9 | 51.0\n | Orig | 64.6 | 42.2 | 65.6\nVQA | IoU +QoU | 63.7 | 47.9 | 64.1\n | All | 58.9 | 37.5 | 59.4\nE2 [text, Section D.2, page 14]: For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset\nE3 [text, Section 4.1, page 5]: Main ideas Our procedures operate on a dataset that already contains image-question-target (IQT) triplets, i.e., we do not assume it has decoys already. For instance, we have used our procedures to create a multiple-choice dataset from the Visual Genome dataset which has no decoy. We assume that each image in the dataset is coupled with “multiple” QT pairs, which is the case in nearly all the existing datasets. Given an IQT triplet (I, Q, T), we create two sets of decoy answers. • QoU-decoys . We search among all other triplets that have similar questions to Q. The targets of those triplets are then collected as the decoys for T. As the targets to similar questions are likely\nE4 [text, Section 5.3, page 8]: it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 )."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The dataset with the biggest challenge is the one with the lowest accuracy in distinguishing true triplets from decoys."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide the specific dataset that presents the biggest challenge for distinguishing true triplets from decoys. It only compares the performance of different datasets and models but does not specify which dataset is the most challenging for the model to distinguish true triplets",
+  "sufficient": false
+ }
+}

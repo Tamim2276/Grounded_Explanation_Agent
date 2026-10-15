@@ -247,6 +247,8 @@ def n11_report_synthesis(state: AgentState) -> dict:
             boxes[b["claim"]].append(f"p.{b['page']} {list(b['bbox'])} {b['what']}")
         kept = [(i, c) for i, c in enumerate(state["claims"], 1) if not c.get("rejected")]
         lines += [f"ANSWER ({len(kept)} claim(s))", "-" * 72]
+        if state.get("best_effort"):
+            lines.append("  (best effort: the search budget ran out before the evidence was judged complete)")
         for i, c in kept:
             ids = ", ".join(dict.fromkeys(x["evidence"] for x in c["cites"]))
             lines.append(f"{i}. {c['text']}  [{ids}]")
@@ -271,5 +273,7 @@ def n12_final_output(state: AgentState) -> dict:
         kept = [c for c in state["claims"] if not c.get("rejected")]
         best = next((c for c in kept if c.get("conclusion")), kept[0] if kept else None)
         answer = best["text"] if best else "Every claim failed verification; nothing can be stated."
+        if best and state.get("best_effort"):
+            answer += " (The evidence found may be incomplete.)"
     return {"answer": answer,
             "events": step("N12", f"status={state.get('status', 'ok')}: {answer[:64]}...")}

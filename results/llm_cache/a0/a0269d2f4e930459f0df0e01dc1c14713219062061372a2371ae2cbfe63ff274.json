@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 143,
+  "prompt_tokens": 521,
+  "total_tokens": 664,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best for the \"Representation\" task when the view is \"Novel\"?\nSub-questions:\n1. [figure] Which method performs best for the 'Representation' task when the view is 'Novel'? -> table\nEvidence:\nE1 [table, Table 1, page 7]: Table 1. Quantitative results on synthetic data. Rows are different combination of tasks and methods (three applications, two view protocols, our two methods). Columns are different data. Error is measured as mean DSSIM across the data set (less is better).\nTask | View | Method | Error | \n |  |  | PNT | ENV\n |  | OUR | .105 | .123\nRepresentation | Same | RM++ | .143 | .160\n(Sec. 3.2) |  | OUR | .144 | .164\n | Novel | RM++ | .181 | .193\n |  | OUR | .106 | .131\nLearn-to-learn | Same | SGD | .105 | .123\n(Sec. 3.3) |  | OUR | .165 | .173\n | Novel | SGD | .144 | .164\n |  | OUR | .113 | .122\nSegmentation | Same | KMEANS | .132 | .136\n |  |  |  | "
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "RM++ performs best for the 'Representation' task when the view is 'Novel'."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine which method performs best for the 'Representation' task when the view is 'Novel'. The table only shows error values for different methods and views, but does not specify which method is best overall for the 'Representation' task under the 'Novel' view. A",
+  "sufficient": false
+ }
+}

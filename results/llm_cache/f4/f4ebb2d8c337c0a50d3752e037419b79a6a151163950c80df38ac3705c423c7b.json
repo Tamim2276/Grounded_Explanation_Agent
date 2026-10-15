@@ -1,0 +1,34 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 36,
+  "prompt_tokens": 111,
+  "total_tokens": 147,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why might the authors claim that although BOSSNET achieves a lower BLEU score than Mem2Seq on the SMD dataset, it still performs better in conveying necessary entity information?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "BOSSNET",
+   "Mem2Seq",
+   "SMD",
+   "BLEU score",
+   "entity information"
+  ]
+ }
+}

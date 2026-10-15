@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 56,
+  "prompt_tokens": 192,
+  "total_tokens": 248,
+  "prompt_tokens_details": {
+   "cached_tokens": 122
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which data structure is the fastest for updating on the email-EuAll dataset?\nSub-goals:\n1. [figure] Which data structure is the fastest for updating on the email-EuAll dataset?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The evidence does not provide information about the fastest data structure for updating on the email-EuAll dataset. It only shows the average relative error of edge queries for different data structures and datasets. The figure does not explicitly state which data structure is the fastest for the 'G"
+  }
+ ],
+ "answer": {
+  "reason": "The figure does not explicitly state which data structure is the fastest for updating on the email-EuAll dataset.",
+  "tool": "table",
+  "query": "email-EuAll dataset update speed"
+ }
+}

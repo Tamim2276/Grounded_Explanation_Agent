@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 137,
+  "prompt_tokens": 693,
+  "total_tokens": 830,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different steps involved in reconstructing implicit warrants for argument reasoning comprehension?\nSub-questions:\n1. [figure] What are the different steps involved in reconstructing implicit warrants for argument reasoning comprehension?\nEvidence:\nE1 [text, Section front, page 2]: The Argument Reasoning Comprehension Task: Identiﬁcation and Reconstruction of Implicit Warrants\nE2 [text, Section front, page 1]: The Argument Reasoning Comprehension Task: Identiﬁcation and Reconstruction of Implicit Warrants Ivan Habernal, Henning Wachsmuth, Iryna Gurevych, Benno Stein This is a pre-print non-ﬁnal version of the article accepted for publication at the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (NAACL 2018) . The ﬁnal ofﬁcial version along with the supplementary materials will be published on the ACL Anthology website in June 2018: http://aclweb.org/anthology/\nE3 [text, Section 1, page 3]: treme case, there may exist an alternative warrant in which the same reason is connected to the opposite claim. The intuition of alternative warrants is key to the systematic methodology that we develop in this paper for reconstructing a warrant for the original claim of an argument. In particular, we ﬁrst ‘twist’ the stance of a given argument, trying to plausibly explain its reasoning towards the opposite claim. Then, we twist the stance back and use a similar reasoning chain to come up with a warrant for the original argument. As we discuss further below, this works for real-world arguments with a missing piece of information that is taken for granted and considered as common knowledge, yet, would lead to the opposite stance if twisted. We demonstrate the applicability of our methodology in a large crowdsourcing study. The study results in 1,970 high-quality instances for a new task that we call argument reasoning comprehension : Given a reason and a claim, identify the correct warrant from two opposing options. An example is given in Figure 1 . A solution to this task will represent a substantial step towards automatic warrant reconstruction. However, we present experiments with several neural attention and language models which reveal that current approaches based on the words and phrases in arguments and warrants do not sufﬁce to solve the task."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The steps involve twisting the stance of an argument, trying to explain its reasoning towards the opposite claim, and then using a similar reasoning chain to come up with a warrant for the original argument."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The specific steps involved in reconstructing implicit warrants for argument reasoning comprehension are not detailed in the provided evidence. The text describes a methodology but does not list the exact steps involved in the process.",
+  "sufficient": false
+ }
+}

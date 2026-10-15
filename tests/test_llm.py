@@ -210,3 +210,21 @@ def test_a_busy_reply_is_retried_before_anything_is_counted(monkeypatch, tmp_pat
     with cfg.override(LLM_CACHE_DIR=tmp_path):
         assert llm.call_llm(ASK, SCHEMA, "plan") == {"tool": "table"}
     assert llm.stats["unreachable"] == before["unreachable"]
+
+
+@pytest.mark.parametrize("setting, partial, floor, route", [
+    ("answer", [{"sub_question": 1, "evidence": "E1", "fact": "Bing-News"}], [], "best_effort"),
+    ("answer", [], [], "exhausted"),                                     # the judge found nothing
+    ("answer", [{"sub_question": 1, "evidence": "E1", "fact": "x"}], [0], "exhausted"),   # table never retrieved
+    ("abstain", [{"sub_question": 1, "evidence": "E1", "fact": "Bing-News"}], [], "exhausted"),
+])
+def test_after_the_budget_g1s_partial_facts_decide(setting, partial, floor, route):
+    # Day 7: the strict G1 abstained on ~3 in 4 test questions although the right table was
+    # often in the buffer; after the last round, facts it did find lead to a flagged answer
+    from gea.sufficiency import sufficiency_gate
+    state = {"round": cfg.MAX_ROUNDS, "sufficiency": {"sufficient": False, "uncovered": [0], "missing": "m",
+                                                      "partial": partial, "floor": floor}}
+    with cfg.override(AFTER_BUDGET=setting, TRACE=False):
+        assert sufficiency_gate(state) == route
+    with cfg.override(AFTER_BUDGET=setting, TRACE=False):
+        assert sufficiency_gate({**state, "round": 1}) == "retrieve_again"     # earlier rounds: search on

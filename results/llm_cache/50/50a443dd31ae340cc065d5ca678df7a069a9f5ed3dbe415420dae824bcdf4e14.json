@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 182,
+  "total_tokens": 244,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the Similarity Ratio and AUC Increasing?\nSub-goals:\n1. [figure] What is the relationship between the Similarity Ratio and AUC Increasing?\nAlready tried: sub-goal 1 with figure\nStill missing: The relationship between the Similarity Ratio and AUC Increasing is positive, as indicated by the linear regression line in the figure. However, the exact slope or the specific direction of the relationship is not explicitly stated in the evidence provided. Further details on the slope or the exact方"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the relationship between the Similarity Ratio and AUC Increasing, which is best addressed by searching through the text of the paper for explicit statements or evidence.",
+  "tool": "text",
+  "query": "Similarity Ratio and AUC Increasing relationship text"
+ }
+}

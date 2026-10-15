@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 51,
+  "prompt_tokens": 193,
+  "total_tokens": 244,
+  "prompt_tokens_details": {
+   "cached_tokens": 122
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the representation task and the learning-to-learn task?\nSub-goals:\n1. [figure] What is the difference between the representation task and the learning-to-learn task?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The difference between the representation task and the learning-to-learn task is not explicitly stated in the provided evidence. The figure and text describe the tasks but do not provide a direct comparison of their differences in terms of the tasks themselves or the methods used to achieve them. A "
+  }
+ ],
+ "answer": {
+  "reason": "The table might contain a detailed comparison or explanation of the tasks, which could provide the necessary information to answer the question.",
+  "tool": "table",
+  "query": "representation task vs learning-to-learn task"
+ }
+}

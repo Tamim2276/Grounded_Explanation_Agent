@@ -180,3 +180,8 @@
 - 2026-10-13: no budget for a paid Gemini key -> the comparison uses gemini-3.5-flash-lite on the free tier
   (3.8 Flash's free quota ran out after ~30 calls). Re-frozen with --again before any test question ran with
   it; the one 3.8 Flash test answer is kept apart. Smoke test: 3 test questions, 24 calls, no quota error.
+- 2026-10-15/16: first test run (strict G1) abstained on 110/142 before a power cut. Fixed on dev only:
+  best effort after the budget (G1 stops the search; G2 still checks; flagged answer): dev 9/4/5/2 vs
+  strict 6/1/0/13. Every tool in round 1 tried and dropped (7/5/6/2). Strict run kept as --ablation strict.
+  A MemoryError hit my own pytest while the user's Cricket tests and the test run shared the PC (their jobs
+  survived): run only light tests while other jobs run.

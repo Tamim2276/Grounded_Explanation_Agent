@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 527,
+  "total_tokens": 604,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Action Search model is able to mimic the human search process when spotting actions in the AVA dataset.\" -- cites: E1 (Section 5.1): quote \"In this subsection, we demonstrate that our model is able to mimic the human search process when spotting actions in the AVA dataset [21].\"\n\nCited evidence:\n[E1] (text, Section 5.1, page 9): In this subsection, we demonstrate that our model is able to mimic the human search process when spotting actions in the AVA dataset [21]. We ﬁrst introduce our experimental protocol including a brief description of the dataset and metric used. Then, we compare Action Search against two spotting baseline models. Dataset. We conduct this experiment using the AVA v1.0 dataset [21], which is among the largest annotated action datasets and is composed of feature ﬁlms. We pick 15 action categories out of the original 80 set of actions. We train our model using the collected AVA searches from our Human Searches dataset. However, we prune oﬀthe search sequences with less than 8 steps. Refer to Section 3 for a description of the AVA searches and details about the action categories selection criteria. We evaluate our model on 35 testing videos. We use AVA 3-second annotations to deﬁne temporal boundaries for each action instance. Metric. We compare our model against other approaches according to the action spotting metric, which we deﬁne to be the expected number of unique observations made per video until spotting an action. An action is spotted if the model lands anywhere between its ground truth temporal bounds. Baseline Methods. To demonstrate the eﬀectiveness of our approach in learning to search eﬃciently, we consider two baseline models, Random Baseline and Direction Baseline (refer to the supplementary material for more baselines). Random Baseline : This model picks both the search direction and step size randomly. In particular, if the current search step is at time t of the video, it"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence directly states that the Action Search model is able to mimic the human search process when spotting actions in the AVA dataset [21]. This aligns with the claim as written."
+   }
+  ]
+ }
+}

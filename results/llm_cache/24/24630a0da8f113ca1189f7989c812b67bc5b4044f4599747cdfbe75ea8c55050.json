@@ -1,0 +1,33 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 27,
+  "prompt_tokens": 102,
+  "total_tokens": 129,
+  "prompt_tokens_details": {
+   "cached_tokens": 70
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the different models change as the corruption level increases? Which model appears to be the most robust to label corruption?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "models",
+   "performance",
+   "corruption level",
+   "robustness"
+  ]
+ }
+}

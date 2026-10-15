@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 78,
+  "prompt_tokens": 160,
+  "total_tokens": 238,
+  "prompt_tokens_details": {
+   "cached_tokens": 73
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2), and how does its performance compare to other methods?\nSub-goals:\n1. [table] Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2)?\n2. [figure] How does its performance compare to other methods?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The table tool is suitable for finding the best-performing method on the PaSC dataset for the handheld testing scenario (PaSC2) as it can search through tabular data to identify the method with the highest performance metrics.",
+  "tool": "table",
+  "query": "PaSC dataset handheld testing scenario (PaSC2) best method performance"
+ }
+}

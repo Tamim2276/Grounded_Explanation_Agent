@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 174,
+  "total_tokens": 251,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the performance of VAGER is worse than LR for the \"Bubble\" class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nSub-goals:\n1. [table] Can you explain why the performance of VAGER is worse than LR for the 'Bubble' class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question is about performance differences in a specific classification setting, which is typically found in the results or discussion sections of a scientific paper.",
+  "tool": "text",
+  "query": "performance of VAGER worse than LR for the 'Bubble' class in the 1-shot binary classification setting, while it performs better for the other nine classes"
+ }
+}

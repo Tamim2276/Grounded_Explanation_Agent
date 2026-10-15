@@ -56,6 +56,11 @@ for s in $SYSTEMS; do
     bash scripts/checkpoint.sh "evaluation: $s on $SPLIT" || true     # no internet: saved next time
 done
 
+# The "before" run for the thesis: the full system as first frozen (strict G1, N5 from round 1),
+# a documented ablation. 142 of 150 were done before the 2026-10-16 power cut.
+step "3/6 (extra): the strict 'before' run of the full system"
+python scripts/run_eval.py --system full --split "$SPLIT" --ablation strict
+
 step "4/6: the model server is no longer needed -- stopped, memory freed"
 taskkill //IM llama-server.exe //F > /dev/null 2>&1
 
@@ -74,9 +79,11 @@ fi
 step "6/6: boxes for claims about photos"
 files=""
 for s in $SYSTEMS; do files="$files results/runs/${s}_${SPLIT}.jsonl"; done
+files="$files results/runs/full_strict_${SPLIT}.jsonl"
 [ -f "results/runs/full_gemini_${SPLIT}.jsonl" ] && files="$files results/runs/full_gemini_${SPLIT}.jsonl"
 if python scripts/claim_vectors.py $files; then
     for s in $SYSTEMS; do python scripts/run_eval.py --system "$s" --split "$SPLIT" --rebox; done
+    python scripts/run_eval.py --system full --split "$SPLIT" --ablation strict --rebox
     [ -f "results/runs/full_gemini_${SPLIT}.jsonl" ] && python scripts/run_eval.py --system full --split "$SPLIT" --provider gemini --rebox
 fi
 bash scripts/checkpoint.sh "evaluation complete on $SPLIT" || true

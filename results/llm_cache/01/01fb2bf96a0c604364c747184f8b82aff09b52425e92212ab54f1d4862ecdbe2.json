@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 50,
+  "prompt_tokens": 197,
+  "total_tokens": 247,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic is most likely to be associated with a pro-immigration stance?\nSub-goals:\n1. [figure] Which topic is most likely to be associated with a pro-immigration stance?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); No further evidence is provided to determine which specific topic is most likely associated with a pro-immigration stance. The text discusses the use of topic models to infer topics related to the tone of articles and their association with pro- or anti-immigration stances, but it does not specify a"
+  }
+ ],
+ "answer": {
+  "reason": "To find evidence in the figure that supports the association of a specific topic with a pro-immigration stance.",
+  "tool": "figure",
+  "query": "pro-immigration stance"
+ }
+}

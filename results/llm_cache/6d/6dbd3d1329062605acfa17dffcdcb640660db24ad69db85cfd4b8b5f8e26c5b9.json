@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 52,
+  "prompt_tokens": 219,
+  "total_tokens": 271,
+  "prompt_tokens_details": {
+   "cached_tokens": 146
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model variant achieves the best performance on the CNSS dataset in terms of F1-score, and what are its key components?\nSub-goals:\n1. [table] Which model variant achieves the best performance on the CNSS dataset in terms of F1-score?\n2. [figure] What are its key components?\nAlready tried: sub-goal 1 with table, sub-goal 1 with figure\nStill missing: The key components of the model variant that achieves the best performance on the CNSS dataset in terms of F1-score are not explicitly listed in the evidence provided. The figure describes the general approach but does not specify the components of the model variant that achieves the best F1-score. "
+  }
+ ],
+ "answer": {
+  "reason": "The table provides the necessary data to identify the model variant with the best F1-score on the CNSS dataset.",
+  "tool": "table",
+  "query": "Best F1-score on CNSS dataset in table"
+ }
+}

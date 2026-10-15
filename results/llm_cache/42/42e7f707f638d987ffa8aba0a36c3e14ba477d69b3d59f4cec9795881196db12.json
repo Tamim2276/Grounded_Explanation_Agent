@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 188,
+  "prompt_tokens": 1348,
+  "total_tokens": 1536,
+  "prompt_tokens_details": {
+   "cached_tokens": 572
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the IMDB dataset for classifying documents with categorical labels, and how much better did it perform compared to the SLDA model?\nSub-questions:\n1. [table] Which model performed best on the IMDB dataset for classifying documents with categorical labels?\n2. [table] How much better did it perform compared to the SLDA model?\nEvidence:\nE1 [table, Table 1, page 7]: Table 1: Performance of our various models in an unsupervised setting (i.e., without labels or co- variates) on the IMDB dataset using a 5,000-word vocabulary and 50 topics. The supplementary ma- terials contain additional results for 20 newsgroups and Yahoo answers.\nModel | Ppl. ↓ | NPMI (int.) ↑ | NPMI (ext.) ↑ | Sparsity ↑\nLDA | 1508 | 0.13 | 0.14 | 0\nSAGE | 1767 | 0.12 | 0.12 | 0.79\nNVDM | 1748 | 0.06 | 0.04 | 0\nSCHOLAR −B.G. | 1889 | 0.09 | 0.13 | 0\nSCHOLAR | 1905 | 0.14 | 0.13 | 0\nSCHOLAR + W.V. | 1991 | 0.18 | 0.17 | 0\nSCHOLAR + REG. | 2185 | 0.10 | 0.12 | 0.58\nE2 [text, Section 4, page 6]: To evaluate and demonstrate the potential of this model, we present a series of experiments below. We ﬁrst test SCHOLAR without observed metadata, and explore the effects of using regularization and/or word vector initialization, compared to LDA, SAGE, and NVDM (§ 4.1 ). We then evaluate our model in terms of predictive performance, in comparison to SLDA and an l 2 -regularized logistic regression baseline (§ 4.2 ). Finally, we demonstrate the ability to incorporate covariates and/or labels in an exploratory data analysis (§ 4.3 ). The scores we report are generalization to heldout data, measured in terms of perplexity; coherence, measured in terms of non-negative point-wise mutual information (NPMI; Chang et al. , 2009 ; Newman et al. , 2010 ), and classiﬁcation accuracy on test data. For coherence we evaluate NPMI using the top 10 words of each topic, both internally (using test data), and externally, using a decade of articles from the English Gigaword dataset ( Graff and Cieri , 2003 ). Since our model employs variational methods, the reported perplexity is an upper bound based on the ELBO.\nE3 [text, Section 4.2, page 7]: We next consider the utility of our model in the context of categorical labels, and consider them alternately as observed covariates and as labels generated conditional on the latent representation. We use the same setup as above, but tune number of training epochs for our model using a random 20% of training data as a development set, and similarly tune regularization for logistic regression. Table 2 summarizes the accuracy of various models on three datasets, revealing that our model offers competitive performance, both as a joint model of words and labels (Eq. 9 ), and a model which conditions on covariates (Eq. 10 ). Although SCHOLAR is comparable to the logistic regression baseline, our purpose here is not to attain state-of-the-art performance on text classiﬁcation. Rather, the high accuracies we obtain demonstrate that we are learning low-dimensional representations of documents that are relevant to the label of interest, outperforming SLDA, and have the same attractive properties as topic models. Further, any neural network that is successful for text classiﬁcation could be incorporated into f y and trained end-to-end along with topic discovery.\nE4 [text, Section 4, page 6]: As datasets we use the familiar 20 newsgroups, the IMDB corpus of 50,000 movie reviews ( Maas et al. , 2011 ), and the UIUC Yahoo answers dataset with 150,000 documents in 15 categories ( Chang et al. , 2008 ). For further exploration, we also make use of a corpus of approximately 4,000 timestamped news articles about US immigration, each annotated with pro- or anti-immigration tone ( Card et al. , 2015 ). We use the original author-provided implementations of SAGE 11 and SLDA, 12 while for LDA we use Mallet. 13 . Our implementation of SCHOLAR is in TensorFlow, but we have also provided a preliminary PyTorch implementation of the core of our model. 14 For additional details about datasets and implementation, please refer to the supplementary material. It is challenging to fairly evaluate the relative computational efﬁciency of our approach compared to past work (due to the stochastic nature of our ap-"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "SCHOLAR + REG. performed best on the IMDB dataset for classifying documents with categorical labels."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E3",
+    "fact": "SCHOLAR + REG. performed better than SLDA."
+   }
+  ],
+  "uncovered": [
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide the specific performance metric or the exact difference in performance between SCHOLAR + REG. and SLDA. It only states that SCHOLAR + REG. outperforms SLDA, but does not give the exact improvement in performance or the metric used for comparison.",
+  "sufficient": false
+ }
+}

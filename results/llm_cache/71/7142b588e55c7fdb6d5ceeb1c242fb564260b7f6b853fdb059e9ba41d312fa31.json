@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 198,
+  "total_tokens": 262,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the LSTM-MDN network in the training phase?\nSub-goals:\n1. [figure] What is the role of the LSTM-MDN network in the training phase?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The role of the LSTM-MDN network in the training phase is not explicitly stated in the provided evidence. It is described in the context of the network's use for prediction, but not its role in the training phase itself. Further evidence is needed to determine its specific role in the training phase"
+  }
+ ],
+ "answer": {
+  "reason": "To find the role of the LSTM-MDN network in the training phase, a figure search is necessary as the text search did not provide the specific information.",
+  "tool": "figure",
+  "query": "LSTM-MDN network training phase role"
+ }
+}

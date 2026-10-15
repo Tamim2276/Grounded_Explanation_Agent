@@ -1,0 +1,53 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 232,
+  "prompt_tokens": 537,
+  "total_tokens": 769,
+  "prompt_tokens_details": {
+   "cached_tokens": 385
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset?\nEvidence:\n[E1] (table, Table 8, page 8): Table 8. Answering accuracy for 100 questions sampled from VQA v2 dataset (on terms with visual estimators in UnCoRd).\nValues (cite as cells):\n  row 'Pythia [85]': 'Yes/No' = 90.0; 'WH' = 68.3; 'Overall' = 77.0\n  row 'UnCoRd-VG-E': 'Yes/No' = 97.5; 'WH' = 88.3; 'Overall' = 92.0\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The 'UnCoRd-VG-E' method has the highest overall accuracy of 92.0 for answering questions about images on the 100 questions sampled from VQA v2 dataset.\": E1 Overall/UnCoRd-VG-E is None, the claim says 92.0\n- \"The 'Pythia [85]' method has an overall accuracy of 77.0 for answering questions about images on the 100 questions sampled from VQA v2 dataset.\": E1 Overall/Pythia [85] is None, the claim says 77.0"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The 'UnCoRd-VG-E' method has the highest overall accuracy of 92.0 for answering questions about images on the 100 questions sampled from VQA v2 dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Overall",
+      "col": "UnCoRd-VG-E",
+      "value": "92.0"
+     }
+    ]
+   },
+   {
+    "text": "The 'Pythia [85]' method has an overall accuracy of 77.0 for answering questions about images on the 100 questions sampled from VQA v2 dataset.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Overall",
+      "col": "Pythia [85]",
+      "value": "77.0"
+     }
+    ]
+   }
+  ]
+ }
+}

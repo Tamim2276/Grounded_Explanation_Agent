@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 192,
+  "total_tokens": 264,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The figure shows the convolution operation in the frequency domain, where the '*' symbol represents the multiplication of frequency components.\" -- cites: E2 (Figure 2): observation \"The figure shows the convolution operation in the frequency domain, where the '*' symbol represents the multiplication of frequency components.\"\n\nCited evidence:\n[E2] (figure, Figure 2, page 4): a zoomed view of Figure 2"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence directly states that the figure shows the convolution operation in the frequency domain, where the '*' symbol represents the multiplication of frequency components. This matches the claim exactly."
+   }
+  ]
+ }
+}

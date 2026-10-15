@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 182,
+  "total_tokens": 255,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the accuracy of the model change as the value of c increases?\nSub-goals:\n1. [figure] How does the accuracy of the model change as the value of c increases?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide specific information about how the accuracy of the model changes as the value of c increases. It only mentions the figure and the context of the oblivious attack, but does not provide the specific performance data or changes in accuracy with varying values of c."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the specific performance data of the model with varying values of c, which is not directly addressed by the figure. Therefore, a text search is needed to find the relevant information.",
+  "tool": "text",
+  "query": "How does the accuracy of the model change as the value of c increases?"
+ }
+}

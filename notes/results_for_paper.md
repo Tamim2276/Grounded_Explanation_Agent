@@ -554,6 +554,39 @@ Making text-only fair: with one tool, N5's rule "never repeat a (sub-goal, tool)
 2 and 3 the same search. In text-only, a repeat may now search again with the planner's new query.
 Before this, it refused 18/20 (`text_only_dev_norepeat.jsonl`).
 
+### The first test run, and the fix made on dev (2026-10-15/16) → Results; Discussion
+
+**What happened.** The first frozen test run, with strict G1 v7 alone, abstained on **110 of 142**
+questions (77%) before a power cut stopped it. Another 22 had claims withheld, and 10 were fully
+answered. The right table or figure *was* in the buffer for about 65% of them. The judge wanted the
+answer stated outright.
+
+**What was done (dev only; no test answer was read).** The plan's rule for a severe problem found
+during the test run: fix it on dev, re-freeze, re-run all systems on test, and say so.
+- **Best effort after the budget** (`cfg.AFTER_BUDGET = "answer"`): G1 decides when to *stop
+  searching*. After the last round, if it found answering facts (named and backed) and the rule
+  floor holds, the agent answers from them. G2 still checks every claim, and the answer says "the
+  evidence found may be incomplete". Otherwise it abstains.
+- Also tried and dropped: every tool in round 1, as single-pass does. It gave more evidence and
+  worse conclusions.
+
+| full system on dev (20) | right | partly | wrong | no answer |
+|---|---|---|---|---|
+| strict G1 alone (1st test run's design) | 6 | 1 | 0 | 13 |
+| **strict G1 + best effort (re-frozen)** | **9** | 4 | 5 | **2** |
+| – confident (G1 convinced) | 6 | 1 | 0 | 1 |
+| – best effort (flagged) | 3 | 3 | 5 | 1 |
+| + every tool in round 1 (dropped) | 7 | 5 | 6 | 2 |
+| single-pass (reference) | 12 | 3 | 5 | 0 |
+
+**For the thesis:**
+- Report both test runs: the strict run as an ablation (`full_strict_test.jsonl`) and the re-frozen
+  design as the main result.
+- The confident/flagged split is a selective-answering result: the system tells the reader which
+  answers to trust. On dev, every wrong answer carried the flag.
+- Single-pass still answers more questions correctly on dev (12 vs 9). Say this plainly. The
+  agent's value is the grounding and the warning, not raw accuracy with a 7B model.
+
 ### Problems found while running (Implementation; Discussion, *limitations*)
 
 - **llama-server's RAM prompt cache** (`--cache-ram`, 8 GB by default) grew the server from 7.5 to

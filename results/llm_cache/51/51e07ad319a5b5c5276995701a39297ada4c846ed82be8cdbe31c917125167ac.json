@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 197,
+  "total_tokens": 263,
+  "prompt_tokens_details": {
+   "cached_tokens": 130
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why is the number of demonstrations after the shift not available for the \"Push to Pose\" task?\nSub-goals:\n1. [figure] Why is the number of demonstrations after the shift not available for the 'Push to Pose' task?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The evidence does not provide information about why the number of demonstrations after the shift is not available for the 'Push to Pose' task. It only explains the reason for the task's difficulty in generating new synthetic training data by shifting the existing demonstration trajectories parallel."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide information about why the number of demonstrations after the shift is not available for the 'Push to Pose' task.",
+  "tool": "table",
+  "query": "Why is the number of demonstrations after the shift not available for the 'Push to Pose' task?"
+ }
+}

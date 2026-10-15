@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 192,
+  "total_tokens": 265,
+  "prompt_tokens_details": {
+   "cached_tokens": 138
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nSub-goals:\n1. [figure] Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: No evidence provided for sub-question 2 regarding the zoomed view of the figure or any other explanation method's emphasis on specific, localized features compared to smooth, gradual changes in pixel intensity."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the emphasis on specific, localized features in an explanation method, which is best addressed by examining the figure as it likely contains visual representations of these features.",
+  "tool": "figure",
+  "query": "Which explanation method in the figure emphasizes specific, localized features over smooth, gradual changes in pixel intensity?"
+ }
+}

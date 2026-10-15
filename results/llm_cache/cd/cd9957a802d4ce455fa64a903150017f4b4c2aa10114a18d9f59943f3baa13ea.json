@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 126,
+  "prompt_tokens": 2509,
+  "total_tokens": 2635,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nSub-questions:\n1. [figure] How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nEvidence:\nE1 [figure, Figure 1, page 1] (image attached): Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) .\nWords printed in the figure: Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\nE2 [figure, Figure 1, page 1]: Zoomed view (300 dpi) of: Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) .\nWords printed in the figure: Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\nE3 [table, Table 2, page 8]: Table 2. DSSIM (less is better) error on real data.\n | Same |  | Novel view | \n | OUR | OUR | RM++ | RM\nDSSIM Error | .069 | .079 | .090 | .127\nSource DAM |  |  |  | \nE4 [text, Section 1, page 1]: we move away from the pixel-based nature of implicit imagebased representations into a deep representation, but without any explicit reconstruction, as we do not target a direct mapping to any explicit reﬂectance model or illumination either. Still, we show that such a representation can be used to solve actual tasks, such as image synthesis, appearance acquisition and estimation-and-segmentation of appearance. This is enabled by four contributions: First, we will introduce a generalization of 2D reﬂectance maps [ 13 ] to 4D, which we call an Appearance Map (AM). AMs represent appearance for varying geometry under varying views. This allows freely changing the viewer and surface geometry, which is not possible for classic reﬂectance maps that ﬁx the relation between view and illumination (cf. Fig. 1 ). Second, while classic Reﬂectance Maps (RM) can be simply tabulated using a single 2D image, the full appearance is a 4D phenomenon that is more challenging to represent and process. Storing 4D appearance as a table, modestly resolving 10 degree features, would require storing (and somehow also capturing) 36 4 = 17 M ; impractical. Instead, we suggest using DAMs, neural networks that compactly represent AMs in only a couple of thousand parameters. This representation is efﬁcient, does not require any look-ups and\nE5 [text, Section 1, page 1]: The visual appearance of an object depends on the combination of four main factors: viewer, geometry, material and illumination. When capturing and processing appearance, one wishes to change one or more of those factors and predict what the new appearance is. This can be achieved using methods ranging from implicit image-based representations [ 6 , 13 ] to explicit Computer Graphics-like representations [ 27 ]. Implicit methods take a couple of photos as input and allow to predict high-quality imagery in a limited set of conditions, but modest ﬂexibility, e. g., interpolating an image between two photos but not extrapolating to new views. Explicit representations allow for more ﬂexibility when acquiring Phong parameters and HDR illumination maps [ 27 ], but incur substantial acquisition effort, e. g., taking a large number of calibrated (HDR) photos. DAMs propose a new direction to represent appearance:\nE6 [text, Section 1, page 2]: is differentiable. In addition, it can be learned effectively from images or video frames with a known viewer position and surface orientation. Applying this representation to new view positions and surface orientations can be done at speed competitive to classic rendering or RMs, i. e., within milliseconds for full images. Acquiring a DAM requires learning a deep model for every new appearance in practice. This would incur substantial computational effort, i. e., running an optimization compared to capturing a RM image in seconds. Addressing this, our third contribution suggests to use another deep (convolutional) neural network to map images showing an appearance to a DAM ([ 17 , 34 , 14 ], one-shot learning [ 8 ], “life-long”, or “continual” learning). This capture requires Fourth, the DAM representation can be used for joint material estimation-and-segmentation, a generalization of the previous objective. Here the input is an image with a known number of n materials, and output is n different DAMs, and a segmentation network that maps every pixel to a n weights. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The appearance of the sphere differs between the re-synthesis using DAMs and the reference image."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "No specific details about the differences in appearance between the re-synthesis using DAMs and the reference image are provided in the evidence items. The figure only shows the comparison but does not describe the differences in detail.",
+  "sufficient": false
+ }
+}

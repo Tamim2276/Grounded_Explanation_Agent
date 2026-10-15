@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 187,
+  "total_tokens": 261,
+  "prompt_tokens_details": {
+   "cached_tokens": 145
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre shows the **largest absolute improvement** in F1 score on the failure set after applying GBI for **both** syntactic parsing and SRL?\nSub-goals:\n1. [table] Which genre shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL?\nAlready tried: sub-goal 1 with table\nStill missing: No further evidence is provided to determine the largest absolute improvement for other genres or to confirm the absolute improvement size for Weblogs (WB)."
+  }
+ ],
+ "answer": {
+  "reason": "To find the largest absolute improvement in F1 score for a specific genre, a text search is needed to locate the relevant information within the paper's text.",
+  "tool": "text",
+  "query": "genre shows largest absolute improvement in F1 score on failure set after applying GBI for both syntactic parsing and SRL"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 153,
+  "total_tokens": 235,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the most 4-hop triples?\nSub-goals:\n1. [table] Which dataset has the most 4-hop triples?\nAlready tried: sub-goal 1 with table\nStill missing: No evidence for the number of 4-hop triples in the other datasets or any other sub-questions related to the number of 4-hop triples in the other datasets."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the dataset with the most 4-hop triples, which can be found in the table. Since the table search has already been used for this sub-goal, we need to use a different tool to find evidence for the number of 4-hop triples in other datasets.",
+  "tool": "figure",
+  "query": "4-hop triples across different datasets"
+ }
+}

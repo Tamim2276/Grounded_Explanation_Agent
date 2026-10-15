@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 145,
+  "prompt_tokens": 1048,
+  "total_tokens": 1193,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain why the \"Last contact\" feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\nSub-questions:\n1. [table] Explain why the 'Last contact' feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\nEvidence:\nE1 [text, Section 8.2, page 17]: The dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL (Chicago Police Department, 2017). The dataset contains 398 , 684 records; for each record the experiment focuses on 14 attributes and a score. The scores reﬂect an individual’s probability of being involved in a shooting incident either as a victim or an offender. Scores, ranging from 0 (low risk) to 500 (high risk), are calculated for individuals with criminal records using eight attributes (not including race or sex). These attributes are: age during the latest arrest (1), number of times being the victim of a shooting incident (2), number of times being the victim of aggravated battery or assault (3), number of prior arrests for violent offenses (4), presence of gang afﬁliation (5), number of prior narcotic arrests (6), trend in recent criminal activity (7) and number of prior unlawful use of weapon arrests (8). Additionally, in this experiment, we measure the inﬂuence of features not available to the algorithm (but which are part of the dataset): sex (9), race (10), occurrence of at least one weapon arrest in past 10 years (11), occurrence of at least one drug arrest in past 10 years (12), the subject being currently on parole (13), and the latest year of contact with the police (14).\nE2 [text, Section 8.2, page 17]: The dataset requires some adjustments to the original deﬁnitions of MIM and Parzen. First, we adjust MIM to a regression setting by replacing the indicator 1 ( c ( ⃗y ) = c ( ⃗x )) with c ( ⃗y ) − c ( ⃗x ) ; thus, a point’s contribution to the measure is weighted based on how much bigger, or smaller, its SSL score is; Parzen was similarly adjusted. Moreover, the race feature is categorical with no natural order to its states; thus, the value of race is set to 1 whenever it is the same as the point of interest, and 0 otherwise. While MIM and Parzen have similar outputs on the data: the average cosine similarity between the two measures is ≥ 0 . 94 (taken over ≥ 8000 randomly sampled points). Two example MIM inﬂuence measurements are depicted in Table 4. Asher and Arthur ((2017)) analyze the eight features used by the SSL Algorithm. Their results suggest that age has signiﬁcant negative inﬂuence on the SSL score, while other features contribute positively in varying degrees. The MIM outputs conﬁrm this statement, but suggest that the degree to which the features contribute to the SSL score vary greatly between cases. As exempliﬁed in Table 4, the inﬂuence of a single crime-related event tends to grow with the number of events of the same type. In the vast majority of cases, age has signiﬁcant negative inﬂuence on the SSL score. Interestingly, the latest date of contact with the police often has signiﬁcant positive inﬂuence on the score, despite not being used by the algorithm d ...\nE3 [text, Section 7.2, page 12]: We rewrite the core optimization problem in Ribeiro et al. ((2016b)), when a linear classiﬁer is used as an explanation:"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The latest date of contact with the police often has significant positive influence on the score, despite not being used by the algorithm."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide specific details on why the 'Last contact' feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm. It only states that the latest date of contact with the police often has significant, but",
+  "sufficient": false
+ }
+}

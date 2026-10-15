@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 182,
+  "total_tokens": 235,
+  "prompt_tokens_details": {
+   "cached_tokens": 120
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the buffer percentage and the width of the room?\nSub-goals:\n1. [figure] What is the relationship between the buffer percentage and the width of the room?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with table\nStill missing: No specific relationship between buffer percentage and room width is provided in the evidence. The figure shows buffer percentage for different widths but does not specify the relationship between buffer percentage and room width directly. Additional information or a clear statement about the buffer"
+  }
+ ],
+ "answer": {
+  "reason": "The figure provides a visual representation of buffer percentage across different room widths, but it does not explicitly state the relationship between buffer percentage and room width.",
+  "tool": "text",
+  "query": "relationship buffer percentage room width"
+ }
+}

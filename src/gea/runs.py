@@ -40,7 +40,8 @@ def record(q: dict, out: dict, seconds: float, calls: dict, system: str) -> dict
             "reference": q["ref_label"], "ref_kind": q["ref_kind"],
             "system": system, "provider": cfg.LLM_PROVIDER, "model": model_name(),
             "prompt_version": llm.PROMPT_VERSION,
-            "status": out.get("status"), "answer": out.get("answer"), "claims": claims,
+            "status": out.get("status"), "best_effort": bool(out.get("best_effort")),
+            "answer": out.get("answer"), "claims": claims,
             "boxes": plain(out.get("boxes", [])),
             "evidence": [{"id": e.id, "kind": e.kind, "label": e.label or e.source, "page": e.page,
                           "tool": e.tool, "bbox": plain(e.bbox), "page_size": plain(e.page_size)}
@@ -79,10 +80,11 @@ def freeze() -> dict:
             "uncommitted_changes": bool(git("status", "--porcelain")), "settings": frozen_settings()}
 
 
-def frozen_differences() -> list:
-    # What differs from eval/frozen_config.json, in words ([] = the settings match).
+def frozen_differences(ablated: tuple = ()) -> list:
+    # What differs from eval/frozen_config.json, in words ([] = the settings match). An
+    # ablation run may differ in exactly the settings it names, and in nothing else.
     if not FROZEN.exists():
         return ["eval/frozen_config.json does not exist yet (python scripts/freeze_config.py)"]
     frozen, now = json.loads(FROZEN.read_text(encoding="utf-8"))["settings"], frozen_settings()
     return [f"{k}: frozen {frozen.get(k)!r}, now {now.get(k)!r}"
-            for k in sorted(set(frozen) | set(now)) if frozen.get(k) != now.get(k)]
+            for k in sorted(set(frozen) | set(now)) if frozen.get(k) != now.get(k) and k not in ablated]

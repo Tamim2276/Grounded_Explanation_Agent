@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 183,
+  "total_tokens": 260,
+  "prompt_tokens_details": {
+   "cached_tokens": 134
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nSub-goals:\n1. [table] What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: No further evidence is provided to compare the available training data between ZDDA and UDA/MVL in terms of the number of domains or views of training data."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of the available training data between ZDDA and UDA/MVL, which is not directly addressed in the text or table. The figure might contain charts or graphs that visually represent this comparison.",
+  "tool": "figure",
+  "query": "Comparison of training data between ZDDA and UDA/MVL"
+ }
+}

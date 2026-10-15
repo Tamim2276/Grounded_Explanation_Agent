@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 13.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 160,
+  "prompt_tokens": 1799,
+  "total_tokens": 1959,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the shape of the tensor $x^1$ for the Shootings dataset?\nSub-questions:\n1. [figure] What is the shape of the tensor $x^1$ for the Shootings dataset?\nEvidence:\nE1 [figure, Figure 1, page 3] (image attached): Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\nE2 [figure, Figure 1, page 3]: Zoomed view (300 dpi) of: Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\nE3 [table, Table 2, page 7]: Table 2: Details of dimensions of tensors constructed for each dataset used in the experiments.\nDataset | X 1shape | X 2shape | X 3shape\nShootings | 3365 × 1295 × 50 | 2569 × 1295 × 50 | 2569 × 3365 × 50\nNYT Sports | 57, 820 × 20, 356 × 50 | 49, 659 × 20, 356 × 50 | 49, 659 × 57, 820 × 50\nMUC | 2825 × 962 × 50 | 2555 × 962 × 50 | 2555 × 2825 × 50 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "3365 × 1295 × 50"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The shape of the tensor $x^1$ for the Shootings dataset is 3365 × 1295 × 50. No further evidence is needed to answer this question as the shape is explicitly provided in the table. The figure and zoomed view do not provide the specific shape of the tensor $x^1$ for the Shootings dataset, only a high",
+  "sufficient": true
+ }
+}

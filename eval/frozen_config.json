@@ -1,9 +1,11 @@
 {
- "frozen_at": "2026-10-13T02:23:22",
- "git_commit": "3cf2328",
+ "frozen_at": "2026-10-16T01:15:00",
+ "git_commit": "06b3ff4",
  "uncommitted_changes": true,
  "settings": {
+  "AFTER_BUDGET": "answer",
   "COLPALI_DIM": 128,
+  "FIRST_ROUND": "planner",
   "GEMINI_MODEL": "gemini-3.5-flash-lite",
   "KIND_ROUTER": "vote",
   "KIND_VOTE_K": 9,

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 149,
+  "prompt_tokens": 2852,
+  "total_tokens": 3001,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why might CDAN+E be considered a more versatile method for unsupervised domain adaptation compared to UNIT, CyCADA, and GTA?\nSub-questions:\n1. [figure] Why might CDAN+E be considered a more versatile method for unsupervised domain adaptation compared to UNIT, CyCADA, and GTA?\nEvidence:\nE1 [figure, Figure 1, page 4] (image attached): Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1\nWords printed in the figure: loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\nE2 [figure, Figure 1, page 4]: Zoomed view (300 dpi) of: Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1\nWords printed in the figure: loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\nE3 [table, Table 3, page 8]: Table 3: Accuracy (%) on Ofﬁce-Home for unsupervised domain adaptation (AlexNet and ResNet)\nMethod | Ar Cl | Ar Pr | Ar Rw | Cl Ar | Cl Pr | Cl Rw | Pr Ar | Pr Cl | Pr Rw | Rw Ar | Rw Cl | Rw Pr | Avg\nAlexNet [27] | 26.4 | 32.6 | 41.3 | 22.1 | 41.7 | 42.1 | 20.5 | 20.3 | 51.1 | 31.0 | 27.9 | 54.9 | 34.3\nDAN [29] | 31.7 | 43.2 | 55.1 | 33.8 | 48.6 | 50.8 | 30.1 | 35.1 | 57.7 | 44.6 | 39.3 | 63.7 | 44.5\nDANN [13] | 36.4 | 45.2 | 54.7 | 35.2 | 51.8 | 55.1 | 31.6 | 39.7 | 59.3 | 45.7 | 46.4 | 65.9 | 47.3\nJAN [30] | 35.5 | 46.1 | 57.7 | 36.4 | 53.3 | 54.5 | 33.4 | 40.3 | 60.1 | 45.9 | 47.4 | 67.9 | 48.2\nCDAN | 36.2 | 47.3 | 58.6 | 37.3 | 54.4 | 58.3 | 33.2 | 43.9 | 62.1 | 48.2 | 48.1 | 70.7 | 49.9\nCDAN+E | 38.1 | 50.3 | 60.3 | 39.7 | 56.4 | 57.8 | 35.5 | 43.1 | 63.2 | 48.4 | 48.5 | 71.1 | 51.0\nResNet-50 [20] | 34.9 | 50.0 | 58.0 | 37.4 | 41.9 | 46.2 | 38.5 | 31.2 | 60.4 | 53.9 | 41.2 | 59.9 | 46.1\nDAN [29] | 43.6 | 57.0 | 67.9 | 45.8 | 56.5 | 60.4 | 44.0 | 43.6 | 67.7 | 63.1 | 51.5 | 74.3 | 56.3\nDANN [13] | 45.6 | 59.3 | 70.1 | 47.0 | 58.5 | 60.9 | 46.1 | 43.7 | 68.5 | 63.2 | 51.8 | 76.8 | 57.6\nJAN [30] | 45.9 | 61.2 | 68.9 | 50.4 | 59.7 | 61.0 | 45.8 | 43.4 | 70.3 | 63.9 | 52.4 | 76.8 | 58.3\nCDAN | 49.0 | 69.3 | 74.5 | 54.4 | 66.0 | 68.4 | 55.6 | 48.3 | 75.9 | 68.4 | 55.4 | 80.5 | 63.8\nCDAN+E | 50.7 | 70.6 | 76.0 | 57.6 | 70.0 | 70.0 | 57.4 | 50.9 | 77.3 | 70.9 | 56.7 | 81.6 | 65.8 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "CDAN+E has two conditioning methods: Multilinear and Randomized Multilinear Conditioning, which can be applied to both lower-dimensional and higher-dimensional scenarios."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide a comparison of CDAN+E's performance with UNIT, CyCADA, and GTA in terms of accuracy or other metrics. It only describes the architecture of CDAN+E and its two conditioning methods. Therefore, the question cannot be fully answered with the current evidence.",
+  "sufficient": false
+ }
+}

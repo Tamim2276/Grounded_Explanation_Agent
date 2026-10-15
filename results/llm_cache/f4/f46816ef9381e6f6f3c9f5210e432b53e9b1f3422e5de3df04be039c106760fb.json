@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 214,
+  "total_tokens": 284,
+  "prompt_tokens_details": {
+   "cached_tokens": 160
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually, and how does its performance compare to humans?\nSub-goals:\n1. [table] Which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually?\n2. [figure] How does its performance compare to humans?\nAlready tried: sub-goal 1 with table, sub-goal 1 with figure\nStill missing: The evidence does not provide a comparison of the model's performance to humans. It only shows the performance of the models on qaVG and does not include any human performance data or comparison metrics."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a comparison of the model's performance to humans. It only shows the performance of the models on qaVG and does not include any human performance data or comparison metrics.",
+  "tool": "text",
+  "query": "performance comparison to humans on qaVG"
+ }
+}

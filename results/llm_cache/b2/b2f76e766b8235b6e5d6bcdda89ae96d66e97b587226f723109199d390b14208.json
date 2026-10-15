@@ -1,0 +1,65 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 222,
+  "prompt_tokens": 331,
+  "total_tokens": 553,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator achieves the highest accuracy on the CLEVR validation set?\nEvidence:\n[E1] (table, Table 1, page 5): Table 1. CLEVR estimators results on CLEVR validation set\nValues (cite as cells):\n  row 'Ins. seg.': '' = 99.0; 'Acc.' = \n  row 'Material': '' = ; 'Acc.' = 99.97\n  row 'Size': '' = ; 'Acc.' = 100"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The 'Size' estimator achieves the highest accuracy on the CLEVR validation set with an accuracy of 100.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Size",
+      "col": "Acc.",
+      "value": "100"
+     }
+    ]
+   },
+   {
+    "text": "The 'Ins. seg.' estimator achieves an accuracy of 99.0 on the CLEVR validation set.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Ins. seg.",
+      "col": "Acc.",
+      "value": "99.0"
+     }
+    ]
+   },
+   {
+    "text": "The 'Material' estimator achieves an accuracy of 99.97 on the CLEVR validation set.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Material",
+      "col": "Acc.",
+      "value": "99.97"
+     }
+    ]
+   }
+  ]
+ }
+}

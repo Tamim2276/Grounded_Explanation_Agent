@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 191,
+  "total_tokens": 246,
+  "prompt_tokens_details": {
+   "cached_tokens": 118
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How can the shortcuts in the Visual7W dataset be remedied?\nSub-goals:\n1. [figure] How can the shortcuts in the Visual7W dataset be remedied?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The evidence does not provide specific details on how the shortcuts can be remedied in the Visual7W dataset, such as the exact procedures or the specific steps involved in creating the alternative decoys. It only mentions that alternative decoys are created to make the correct answer and decoys more"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for specific remediation steps for shortcuts in the Visual7W dataset, which is likely detailed in the text of the paper.",
+  "tool": "text",
+  "query": "remediation shortcuts Visual7W dataset"
+ }
+}

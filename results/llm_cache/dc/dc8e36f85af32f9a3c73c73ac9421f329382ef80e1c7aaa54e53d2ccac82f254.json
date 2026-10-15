@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 219,
+  "total_tokens": 281,
+  "prompt_tokens_details": {
+   "cached_tokens": 134
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the GDU and HFLU modules in the FAKEDETECTOR framework?\nSub-goals:\n1. [figure] What is the role of the GDU and HFLU modules in the FAKEDETECTOR framework?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The role of the HFLU module in the FAKEDETECTOR framework is not explicitly stated in the provided evidence. The figure and text focus on the GDU module, but there is no information about the HFLU module's role in the framework's architecture or its relationship with the GDU module. The text does,然,"
+  }
+ ],
+ "answer": {
+  "reason": "The role of the HFLU module in the FAKEDETECTOR framework is not explicitly stated in the provided evidence.",
+  "tool": "table",
+  "query": "HFLU module role in FAKEDETECTOR framework"
+ }
+}

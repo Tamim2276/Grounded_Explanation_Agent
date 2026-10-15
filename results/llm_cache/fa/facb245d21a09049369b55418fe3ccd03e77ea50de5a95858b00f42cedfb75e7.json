@@ -1,0 +1,41 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 167,
+  "prompt_tokens": 2575,
+  "total_tokens": 2742,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the four methods (ResNet, DANN, CDAN-f, CDAN-fg) is most effective at separating the two classes of data points?\nSub-questions:\n1. [figure] Which of the four methods (ResNet, DANN, CDAN-f, CDAN-fg) is most effective at separating the two classes of data points?\nEvidence:\nE1 [figure, Figure 2, page 9] (image attached): Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nBar values read from the PDF: (a) Multilinear DANN-f (representation) -> A->W: 82.2, A->D: 79.9; (a) Multilinear DANN-g (prediction) -> A->W: 79.7, A->D: 77; (a) Multilinear DANN-[f,g] (concatenation) -> A->W: 82.7, A->D: 80.5; (a) Multilinear CDAN (w/o entropy) -> A->W: 93.2, A->D: 89.4; (a) Multilinear CDAN-E (w/ entropy) -> A->W: 94.3, A->D: 93.1; (c) Discrepancy DANN-f (representation) -> A->W: 1.84, W->D: 1.29; (c) Discrepancy DANN-[f,g] (concatenation) -> A->W: 1.49, W->D: 1.16; (c) Discrepancy CDAN-E (w/ entropy) -> A->W: 1.19, W->D: 1.09\nE2 [figure, Figure 2, page 9]: Zoomed view (300 dpi) of: Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nBar values read from the PDF: (a) Multilinear DANN-f (representation) -> A->W: 82.2, A->D: 79.9; (a) Multilinear DANN-g (prediction) -> A->W: 79.7, A->D: 77; (a) Multilinear DANN-[f,g] (concatenation) -> A->W: 82.7, A->D: 80.5; (a) Multilinear CDAN (w/o entropy) -> A->W: 93.2, A->D: 89.4; (a) Multilinear CDAN-E (w/ entropy) -> A->W: 94.3, A->D: 93.1; (c) Discrepancy DANN-f (representation) -> A->W: 1.84, W->D: 1.29; (c) Discrepancy DANN-[f,g] (concatenation) -> A->W: 1.49, W->D: 1.16; (c) Discrepancy CDAN-E (w/ entropy) -> A->W: 1.19, W->D: 1.09 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "CDAN-E (w/ entropy) has the highest accuracy for both A->W and A->D tasks."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide information about the effectiveness of ResNet, DANN, and CDAN-f in separating the two classes of data points. The figure only shows the performance of CDAN-E (w/ entropy) and does not compare it with the other methods for the A->W and A->D tasks. The other sub-questions",
+  "sufficient": false
+ }
+}

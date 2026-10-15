@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 13.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 138,
+  "prompt_tokens": 2000,
+  "total_tokens": 2138,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the definition of a non-negative tensor?\nSub-questions:\n1. [figure] What is the definition of a non-negative tensor?\nEvidence:\nE1 [text, Section 3.2, page 4]: n 1 × n 2 × m . TFBA performs a coupled non-negative Tucker factorization of the input tensors X 1 , X 2 and X 3\nE2 [text, Section 3.2, page 5]: Each slice of the core tensor G 3 corresponds to one of the m relations. Each cell in a slice corresponds to an induced schema in terms of the latent factors from matrices A and B . In other words, G 3 i,j,k is an induced binary schema for relation k involving induced categories represented by columns A i and B j . Cells in G 1 and G 2 may be interpreted accordingly. We derive non-negative multiplicative updates for A , B and C following the NMF updating rules given in ( Lee and Seung , 2000 ). For the update of A , we consider the mode-1 matricization of ﬁrst and the second term in Equation 1 along with the regularizer.\nE3 [text, Section B, page 5]: Q represents elementwise division and I is the identity matrix. Initialization : For initializing the component matrices A , B , and C , we ﬁrst perform a nonnegative Tucker2 Decomposition of the individual input tensors X 1 , X 2 , and X 3 . Then compute the average of component matrices obtained from each individual decomposition for initialization. We initialize the core tensors G 1 , G 2 , and G 3 with the core tensors obtained from the individual decompositions. 3.2.2 Step 2: Binary to Higher-Order Schema Induction In this section, we describe how a higher-order schema is constructed from the factorization described in the previous sub-section. Each relation k has three representations given by the slices G 1 k from each core tensor. We need a principled way to produce a joint schema from these representations. For a relation, we select top- n indices ( i, j ) with highest values from each matrix. The indices i and j from G 3\nE4 [figure, Figure 1, page 3] (image attached): Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\nE5 [figure, Figure 1, page 3]: Zoomed view (300 dpi) of: Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "A non-negative tensor is a tensor where all elements are non-negative."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The definition of a non-negative tensor is not explicitly stated in the evidence provided. The evidence discusses the use of non-negative tensors in the context of TFBA, but does not define what a non-negative tensor is in general terms. The definition is implied but not explicitly stated in the sub",
+  "sufficient": false
+ }
+}

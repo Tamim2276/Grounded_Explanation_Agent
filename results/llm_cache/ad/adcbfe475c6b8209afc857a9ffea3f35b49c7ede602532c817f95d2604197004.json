@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 191,
+  "total_tokens": 250,
+  "prompt_tokens_details": {
+   "cached_tokens": 122
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the representation module and the learning-to-learn module?\nSub-goals:\n1. [figure] What is the difference between the representation module and the learning-to-learn module?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The difference in error between the representation module and the learning-to-learn module is not explicitly stated in the provided evidence. The figure and text do not provide a direct comparison of the error values for these two modules across different tasks or conditions. Therefore, the answer '"
+  }
+ ],
+ "answer": {
+  "reason": "The figure and text do not provide a direct comparison of the error values for the representation and learning-to-learn modules.",
+  "tool": "table",
+  "query": "representation module vs learning-to-learn module error comparison"
+ }
+}

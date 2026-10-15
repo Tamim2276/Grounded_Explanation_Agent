@@ -1,0 +1,43 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 153,
+  "prompt_tokens": 1411,
+  "total_tokens": 1564,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nSub-questions:\n1. [table] Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nEvidence:\nE1 [text, Section 5, page 4]: The rows “ranking” and “top-pairs” show the base results of deep-coref’s “ranking” and “toppairs” models, respectively. “+linguistic” rows represents the results for each of the mentionranking models in which the feature set of Section 4 is employed. The gender, number, animacy and mention type features, which have less than ﬁve values, are converted to binary features. Named entity and POS tags, and dependency relations are represented as learned embeddings. We observe that incorporating all the linguistic features bridges the gap between the performance of “top-pairs” and “ranking”. However, it does not improve signiﬁcantly over “ranking”. Henceforth, we use the “top-pairs” model of deep-coref as the baseline model to incorporate linguistic features. To assess the impact on generalization, we evaluate “top-pairs” and “+linguistic” 8 models that are trained on CoNLL, on WikiCoref (see Table 2 ). We observe that the impact on generalization is also not notable, i.e. the CoNLL score improves only by 0.5pp over “ranking”.\nE2 [text, Section A, page 13]: Filter models, on the other hand, are solely data dependent and therefore are independent of the learning algorithm. The use of a discriminative pattern mining approach for informative featurevalue selection, is equivalent to a ﬁlter model. Finally, embedded models are incorporated into the learning algorithm itself. For instance, we can incorporate all possible feature-values in deepcoref and use various regularization methods, e.g. dropouts, l 1 and l 2 regularizations, instead of preselecting informative feature-values. We examined the above regularization methods in “toppairs+linguistic” experiments. The use of each of the above regularizations on top of the feature layer in deep-coref results in signiﬁcantly lower performance than either of “top-pairs” and “top-\nE3 [text, Section 8.3, page 9]: training and development sets and testing on the excluded genre. Similar to Moosavi and Strube ( 2017a ), we use the pt and wb genres for the latter evaluation setup. The results of the ﬁrst evaluation setup are shown in Table 6 . The best performance on WikiCoref is achieved by Ghaddar and Langlais ( 2016a ) (“G&L” in Table 6 ) who introduced WikiCoref and design a domain-speciﬁc coreference resolver that makes use of the Wikipedia markups of a document as well as links to Freebase, which are annotated in WikiCoref. Incorporating EPM feature-values improves the performance by about three points. While “+EPM” does not use the WikiCoref data during training, and unlike “G&L”, it does not employ any domain-speciﬁc features, it achieves onpar performance with that of “G&L”. This indeed shows the effectiveness of informative featurevalues in improving generalization. The second set of generalization experiments is reported in Table 7 . “in-domain” columns show the results when the evaluation genres were included in training and development sets while the “out-of-domain” columns show the results when the evaluation genres were excluded. As we can see, “+EPM” generalizes best, and in out-ofdomain evaluations, it considerably outperforms the ensemble model of e2e-coref, which has the best performance on the CoNLL test set.\nE4 [table, Table 2, page 4]: Table 2 : Out-of-domain evaluation of deep-coref models on the WikiCoref dataset.\n | MUC | B3 | CEAFe | CoNLL | LEA\nranking | 63.10 | 48.43 | 47.18 | 52.90 | 44.40\ntop-pairs | 63.09 | 48.42 | 46.05 | 52.52 | 44.21\n+linguistic | 63.99 | 49.63 | 46.60 | 53.40 | 45.66\nE5 [figure, Figure 2, page 7] (image attached): Figure 2 : Comparison of mining times (seconds).\nWords printed in the figure: mines considerably fewer patterns. 7.3 How Does it Scale? cmc nursery sick kr-v-k german connect census poker 10−2 10−1 100 101 102 103 104 105 EPM(3) EPM(4) DDPMine MPP(3) MPP(4)\nE6 [figure, Figure 2, page 7]: Zoomed view (300 dpi) of: Figure 2 : Comparison of mining times (seconds).\nWords printed in the figure: mines considerably fewer patterns. 7.3 How Does it Scale? cmc nursery sick kr-v-k german connect census poker 10−2 10−1 100 101 102 103 104 105 EPM(3) EPM(4) DDPMine MPP(3) MPP(4)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "The +linguistic model performed best on the WikiCoref dataset."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "missing": "The evidence does not provide the specific model that performed best on the WikiCoref dataset. It only shows the performance of different models on the WikiCoref dataset, but does not specify which one was the best overall. The other sub-questions are not addressed by the evidence provided.",
+  "sufficient": false
+ }
+}

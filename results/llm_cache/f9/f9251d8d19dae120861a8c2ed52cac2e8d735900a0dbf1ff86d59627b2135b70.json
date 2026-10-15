@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 193,
+  "total_tokens": 265,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which type of adversarial example generation method results in images that are visually more similar to the original images?\nSub-goals:\n1. [figure] Which type of adversarial example generation method results in images that are visually more similar to the original images?\nAlready tried: sub-goal 1 with figure\nStill missing: No further evidence is provided to determine which method results in images that are visually more similar to the original images. The figure only shows examples of adversarial examples and their visual similarity to the original images, but it does not specify the method used for generation that is"
+  }
+ ],
+ "answer": {
+  "reason": "The figure provides visual examples but does not specify the method used for generation that results in images most similar to the original images.",
+  "tool": "table",
+  "query": "Which type of adversarial example generation method results in images that are visually more similar to the original images?"
+ }
+}

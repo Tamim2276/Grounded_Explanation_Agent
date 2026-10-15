@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 51,
+  "prompt_tokens": 160,
+  "total_tokens": 211,
+  "prompt_tokens_details": {
+   "cached_tokens": 73
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best overall on VQA-2014val, and how does its performance compare to human performance on the same dataset?\nSub-goals:\n1. [table] Which method performs best overall on VQA-2014val?\n2. [table] How does its performance compare to human performance on the same dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of performance, which is typically found in tables or sections that summarize results.",
+  "tool": "table",
+  "query": "performance comparison human VQA-2014val"
+ }
+}

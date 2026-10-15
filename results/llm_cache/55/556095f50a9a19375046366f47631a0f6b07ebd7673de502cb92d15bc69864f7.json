@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 172,
+  "prompt_tokens": 1487,
+  "total_tokens": 1659,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ZDDA3 outperforms the naive fusion under most conditions.\" -- cites: E1 (Figure 4): observation \"The figure shows that ZDDA3 has higher classification accuracy than naive fusion across most noise levels.\"\n2. \"The classification accuracy of ZDDA3 is consistently higher than that of naive fusion across different noise levels.\" -- cites: E1 (Figure 4): observation \"The figure displays the classification accuracy percentages for both methods under various noise levels, indicating that ZDDA3 consistently achieves higher accuracy.\"\n3. \"The figure does not provide a direct comparison of the methods' performance in terms of classification accuracy.\" -- cites: E1 (Figure 4): observation \"The figure compares the classification accuracy of naive fusion and ZDDA3 under different noise levels but does not explicitly state which method performs better.\"\n\nCited evidence:\n[E1] (figure, Figure 4, page 14) (image attached): Fig. 4. Performance comparison between the two sensor fusion methods with black images as the noisy images. We compare the classiﬁcation accuracy (%) of (a) naive fusion and (b) ZDDA 3 under diﬀerent noise levels in both RGB and depth testing data. (c) shows that ZDDA 3 outperforms the naive fusion under most conditions\nWords printed in the figure: 14 K.-C. Peng, Z. Wu, and J. Ernst (a) naive fusion (b) ZDDA3 (c) accuracy diff. ((b)-(a)) [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The figure shows that ZDDA3 has higher classification accuracy than naive fusion across most noise levels."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The figure displays the classification accuracy percentages for both methods under various noise levels, indicating that ZDDA3 consistently achieves higher accuracy."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The figure explicitly shows that ZDDA3 outperforms the naive fusion under most conditions, which contradicts the claim that the figure does not provide a direct comparison of the methods' performance in terms of classification accuracy."
+   }
+  ]
+ }
+}

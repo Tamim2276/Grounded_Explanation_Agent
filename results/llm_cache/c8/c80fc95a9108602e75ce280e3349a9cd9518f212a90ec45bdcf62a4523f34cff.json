@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 240,
+  "total_tokens": 307,
+  "prompt_tokens_details": {
+   "cached_tokens": 166
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the performance of VAGER is worse than LR for the \"Bubble\" class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nSub-goals:\n1. [table] Can you explain why the performance of VAGER is worse than LR for the 'Bubble' class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nAlready tried: sub-goal 1 with text, sub-goal 1 with table\nStill missing: The explanation for why VAGER performs worse for the 'Bubble' class compared to the other nine classes is not provided in the evidence items. The evidence only compares the performance of VAGER and LR for the 'Bubble' class and does not explain the difference in performance across the other classes."
+  }
+ ],
+ "answer": {
+  "reason": "The explanation for why VAGER performs worse for the 'Bubble' class compared to the other nine classes is not provided in the evidence items.",
+  "tool": "table",
+  "query": "performance of VAGER and LR for the 'Bubble' class in the 1-shot binary classification setting"
+ }
+}

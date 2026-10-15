@@ -44,6 +44,7 @@ class AgentState(TypedDict, total=False):
     rewrite_count: int               # regenerate loop counter, owned by rewrite_prep
     status:        str               # ok | insufficient_evidence | unsupported_claims_dropped
     sufficiency:   dict              # G1 -> {"sufficient", "uncovered", "missing"}
+    best_effort:   bool              # set when the budget ran out and G1's partial facts were used
 
     # N9 / G2
     claims:         list             # N9 -> [{"text", "cites": [...]}], replaced every draft

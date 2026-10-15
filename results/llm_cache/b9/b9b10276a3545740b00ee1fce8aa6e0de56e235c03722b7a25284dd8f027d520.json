@@ -1,0 +1,35 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 32,
+  "prompt_tokens": 158,
+  "total_tokens": 190,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following statements about the training procedure of ZDDA is true?\n\n(a) ZDDA simulates the target-domain representation using the source-domain data. (b) ZDDA builds a joint network with the supervision from the target domain. (c) ZDDA trains a sensor fusion network in step 1. (d) ZDDA trains a sensor fusion network in step 2."
+  }
+ ],
+ "answer": {
+  "names": [
+   "training procedure",
+   "ZDDA",
+   "training",
+   "procedure",
+   "ZDDA",
+   "training"
+  ]
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 171,
+  "total_tokens": 241,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\nSub-goals:\n1. [figure] Explain how the answering procedure works.\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The evidence does not provide information about the failure cases or the specific details of the answering procedure in the context of the failure cases. It only describes the general answering procedure and the failure cases are not detailed enough to understand the exact mechanism of failure in a "
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for an explanation of the answering procedure, which is likely detailed in the text of the paper. Since the previous attempts with text and figure have not provided the necessary information, a text search is the most appropriate next step.",
+  "tool": "text",
+  "query": "answering procedure"
+ }
+}

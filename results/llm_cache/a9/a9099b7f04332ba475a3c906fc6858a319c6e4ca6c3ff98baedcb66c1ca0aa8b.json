@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 136,
+  "prompt_tokens": 1615,
+  "total_tokens": 1751,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nSub-questions:\n1. [table] Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nEvidence:\nE1 [table, Table 5, page 16]: Table 5: The average time costs (s) on crafting each adversarial example via different attacks. The values are also the average values between MNIST and CIFAR-10. The models is Resnet-32.\nAttack | Objective | Time\nFGSM | CE RCE | ∼1.9 × 10−3 ∼2.4 × 10−3\nBIM | CE RCE | ∼3.3 × 10−3 ∼3.6 × 10−3\nILCM | CE RCE | ∼4.1 × 10−3 ∼4.3 × 10−3\nJSMA | CE RCE | ∼2.9 × 101 ∼2.0 × 101\nC&W | CE RCE | ∼4.5 × 101 ∼5.5 × 101\nC&W-hc | CE RCE | ∼6.5 × 101 ∼1.1 × 102\nC&W-wb | CE RCE | ∼7.0 × 102 ∼1.3 × 103\nE2 [text, Section 4.2, page 7]: We test the performance of the trained Resnet-32 networks on MNIST and CIFAR-10 under the oblivious attack, where we investigate the attacking methods as in Sec. 2.3. We ﬁrst disable the thresholding test strategy and make classiﬁers return all predictions to study the networks ability of correctly classifying adversarial examples. We use the iteration-based attacking methods: FGSM, BIM, ILCM and JSMA, and calculate the classiﬁcation accuracy of networks on crafted adversarial examples w.r.t. the perturbation ϵ . Fig. 2a shows the results. We can see that Resnet-32 (RCE) has higher accuracy scores than Resnet-32 (CE) under all the four attacks on both datasets. As for optimization-based methods like the C&W attack and its variants, we apply the same way as in [ 3 ] to report robustness. Speciﬁcally, we do a binary search for the parameter c , in order to ﬁnd the minimal distortions that can successfully attack the classiﬁer. The distortion is deﬁned in [ 33 ] as ∥ x − x ∗ ∥ 2 /\nE3 [text, Section 4.4, page 8]: We test our method under the white-box attack, which is the most difﬁcult threat model and no effective defense exits yet. We apply the white-box version of the C&W attack (abbr. to C&W-wb) introduced in [ 3 ], which is constructed specially to fool the K-density detectors. C&W-wb is also a white-box attack for our method, since it does not exploit information of the training objective. C&W-wb introduces a new loss term f 2 ( x ∗ ) = max( − log( KD ( x ∗ )) − η, 0) that penalizes the adversarial example x ∗ being detected by the K-density detectors, where η is set to be the median of − log( KD ( · )) on the training set. Table 3 shows the average minimal distortions and the ratios of f 2 ( x ∗ ) > 0 on the adversarial examples crafted by C&W-wb, where a higher ratio indicates that the detector is more robust and harder to be fooled. We ﬁnd that nearly all the adversarial examples generated on Resnet-32 (CE) have f 2 ( x ∗ ) ≤ 0 , which means that the values of K-density on them are greater than half of the values on the training data. This result is consistent with previous work [3].\nE4 [text, Section 4.5, page 8]: For complete analysis, we investigate the robustness under the black-box attack. The success of the black-box attack is based on the transferability of adversarial examples among different models [ 12 ]. We set the trained Resnet-56 networks as the target models. Adversaries intend to attack them but do not have access to their parameters. Thus we set the trained Resnet-32 networks to be the substitute models that adversaries actually attack on and then feed the crafted adversarial examples into the target models. Since adversaries know the existence of the K-density detectors, we apply the C&W-wb attack. We ﬁnd that the adversarial examples crafted by the C&W-wb attack have poor transferability, where less than 50% of them can make the target model misclassify on MNIST and less than 15% on CIFAR-10. Table 4 shows the AUC-scores in four different cases of the black-box attack on CIFAR-10, and the AUC-scores in the same cases on MNIST are all higher than 95%. Note that in our experiments the target models and the substitute models have very similar structures, and the C&W-wb attack becomes ineffective even under this quite ‘white’ black-box attack.\nE5 [figure, Figure 7, page 20] (image attached): Figure 7: The network is Resnet-32, the dataset is CIFAR-10.\nWords printed in the figure: -7 -6 -5 -4 -3 -2 -1 0 log10(c) 0 0.2 0.4 0.6 0.8 1 Accuracy C&W (CE) C&W (RCE) C&W-hc (CE) C&W-hc (RCE)\nE6 [figure, Figure 7, page 20]: Zoomed view (300 dpi) of: Figure 7: The network is Resnet-32, the dataset is CIFAR-10.\nWords printed in the figure: -7 -6 -5 -4 -3 -2 -1 0 log10(c) 0 0.2 0.4 0.6 0.8 1 Accuracy C&W (CE) C&W (RCE) C&W-hc (CE) C&W-hc (RCE)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "C&W-wb is the most effective attack method."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide information about the effectiveness of the attack methods in reducing the accuracy of the Resnet-32 model on the MNIST dataset. It only provides information about the time costs and the distortion of the adversarial examples for different attack methods on the CIFAR-10,",
+  "sufficient": false
+ }
+}

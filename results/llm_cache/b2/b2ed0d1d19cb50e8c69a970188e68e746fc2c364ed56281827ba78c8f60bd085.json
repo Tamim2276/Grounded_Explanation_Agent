@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 151,
+  "prompt_tokens": 2862,
+  "total_tokens": 3013,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following algorithms performs the best when trained via the CE?\nEvidence:\n[E1] (figure, Figure 4, page 17) (image attached): Figure 4: Classiﬁcation error rates on CIFAR-10. Two panels separately show the results when the networks are trained via the CE and RCE. The models is Resnet-32.\nWords printed in the figure: NOR RAND FGSM BIM ILCM JSMA C&W C&W-hc 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 Error rate (a) CE NOR RAND FGSM BIM ILCM JSMA C&W C&W-hc 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 Error rate (b) RCE\nValues (cite as cells):\n  row '(a) CE colour (0.298, 0.298, 0.861)': 'NOR' = 0.08\n  row '(a) CE colour (0.787, 0.392, 0.392)': 'RAND' = 0.12\n  row '(a) CE colour (0.637, 0.584, 0.953)': 'FGSM' = 0.9\n  row '(a) CE colour (0.298, 1.0, 1.0)': 'BIM' = 0.94\n  row '(a) CE colour (1.0, 0.891, 0.298)': 'ILCM' = 0.99\n  row '(a) CE colour (0.953, 0.656, 0.953)': 'JSMA' = 0.19\n  row '(a) CE colour (1.0, 0.684, 0.298)': 'C&W' = 1\n  row '(a) CE colour (1.0, 0.298, 0.298)': 'C&W-hc' = 1\n  row '(b) RCE colour (0.298, 0.298, 0.861)': 'NOR' = 0.07\n  row '(b) RCE colour (0.787, 0.392, 0.392)': 'RAND' = 0.14\n  row '(b) RCE colour (0.637, 0.584, 0.953)': 'FGSM' = 0.88\n  row '(b) RCE colour (0.298, 1.0, 1.0)': 'BIM' = 0.94\n  row '(b) RCE colour (1.0, 0.891, 0.298)': 'ILCM' = 0.7\n  row '(b) RCE colour (0.953, 0.656, 0.953)': 'JSMA' = 0.33\n  row '(b) RCE colour (1.0, 0.684, 0.298)': 'C&W' = 1\n  row '(b) RCE colour (1.0, 0.298, 0.298)': 'C&W-hc' = 1\n[E2] (figure, Figure 4, page 17): a zoomed view of Figure 4 (image attached)\n[E3] (text, Section 4.2, page 6): We ﬁrst evaluate in the normal setting, where we implement Resnet-32 and Resnet-56 [ 15 ] on both datasets. For each network, we use both the CE and RCE as the training objectives, trained by the same settings as He et al. [16] . The number of training steps for both objectives is set to be 20,000 on MNIST and 90,000 on CIFAR-10. Hereafter for notation simplicity, we will indicate the training procedure used after the model name of a trained network, e.g., Resnet-32 (CE). Similarly, we indicate the training procedure and omit the name of the target network after an attacking method, e.g., FGSM (CE). Table 1 shows the test error rates, where the thresholding test strategy is disabled and all the points receive their predicted labels. We can see that the performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure. Note that we apply the same training hyperparameters (e.g., learning rates and decay factors) for both the CE and RCE procedures, which suggests that RCE is easy to optimize and does not require much extra effort on tuning hyperparameters.\n[E4] (text, Section 3.2, page 5): Reverse training: Given the training set D := { ( x i , y i ) } i ∈ [ N ] , training the DNN F ( X, θ ) to be a reverse classiﬁer by minimizing the average RCE loss: θ ∗ Reverse logits: Negating the ﬁnal logits fed to the softmax layer as F R ( X, θ ∗ R ) that returns ordinary predictions on classes, and F R ( X, θ ∗ R ) is referred as the network trained via the RCE training procedure . Theorem 2. (Proof in Appendix A) Let ( x, y ) be a given training data. Under the L ∞ - norm , if there is a training error α ≪ 1\n[E5] (text, Section B.1, page 16): We apply the same hyperparameters when training Resnet networks via the CE and RCE. The optimizer is SGD with momentum, and the mini-batch size is 128. The weight decay is 0.0002, the leakiness of Relu is 0.1. On MNIST the training steps are 20,000, with piecewise learning rate as\n\nThese claims are already verified and kept:\n- The performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure.\n- The models are trained using Resnet-32.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The training procedure used is the CE.\": support check: The evidence in E1 (Figure 4) states: 'The models is Resnet-32.' This supports the claim that the models are Resnet-32, but it does not specify the training procedure used. The claim states 'The training procedure used is the CE,' which is not supported by the evidence. The evidence only mentions that the models are Resnet-32 and does not specify the training procedure.\n- \"The training hyperparameters are the same for both CE and RCE.\": the quote is not in E3 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The training procedure used is the CE.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The models is Resnet-32."
+     }
+    ]
+   },
+   {
+    "text": "The training hyperparameters are the same for both CE and RCE.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "We apply the same hyperparameters when training Resnet networks via the CE and RCE."
+     }
+    ]
+   }
+  ]
+ }
+}

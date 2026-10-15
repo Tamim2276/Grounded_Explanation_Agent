@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 180,
+  "total_tokens": 233,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different steps involved in reconstructing implicit warrants for argument reasoning comprehension?\nSub-goals:\n1. [figure] What are the different steps involved in reconstructing implicit warrants for argument reasoning comprehension?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The specific steps involved in reconstructing implicit warrants for argument reasoning comprehension are not detailed in the provided evidence. The text describes a methodology but does not list the exact steps involved in the process."
+  }
+ ],
+ "answer": {
+  "reason": "The figure might contain a flowchart or diagram that outlines the specific steps involved in reconstructing implicit warrants for argument reasoning comprehension.",
+  "tool": "figure",
+  "query": "reconstructing implicit warrants for argument reasoning comprehension"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 144,
+  "prompt_tokens": 749,
+  "total_tokens": 893,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which year is most associated with the terms \"sept\", \"hijackers\", and \"attacks\"?\nSub-questions:\n1. [table] Which year is most associated with the terms 'sept', 'hijackers', and 'attacks'? -> text\nEvidence:\nE1 [text, Section 4.3, page 8]: hijackers , and attacks increasing in probability as we move up in the space. If we wanted to look at each year individually, we could drop the embedding of years, and learn a sparse set of topic-year interactions, similar to tone in Table 3 .\nE2 [text, Section 4.3, page 8]: Tone as a label. We ﬁrst consider using the annotations as a label , and train a joint model to infer topics relevant to the tone of the article (pro- or anti-immigration). Figure 2 shows a set of topics learned in this way, along with the predicted probability of an article being pro-immigration conditioned on the given topic. All topics are coherent, and the predicted probabilities have strong face validity, e.g., “arrested charged charges agents operation” is least associated with pro-immigration. Tone as a covariate. Next we consider using tone as a covariate , and build a model using both tone and tone-topic interactions. Table 3 shows a set of topics learned from the immigration data, along with the most highly-weighted words in the corresponding tone-topic interaction terms. As can be seen, these interaction terms tend to capture different frames (e.g., “criminal” vs. “detainees”, and “illegals” vs. “newcomers”, etc). Combined model with temporal metadata. Finally, we incorporate both the tone annotations and the year of publication of each article, treating the former as a label and the latter as a covariate. In this model, we also include an embedding matrix, W c , to project the one-hot year vectors down to a\nE3 [text, Section 4.3, page 8]: two-dimensional continuous space, with a learned deviation for each dimension. We omit the topics in the interest of space, but Figure 3 shows the learned embedding for each year, along with the top terms of the corresponding deviations. As can be seen, the model learns that adjacent years tend to produce similar deviations, even though we have not explicitly encoded this information . The leftright dimension roughly tracks a temporal trend with positive deviations shifting from the years of Clinton and INS on the left, to Obama and ICE on the right. 16 Meanwhile, the events of 9/11 dominate the vertical direction, with the words sept ,"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The events of 9/11 dominate the vertical direction, with the words 'sept'"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The specific year associated with the terms 'sept', 'hijackers', and 'attacks'. The text mentions 'sept' in the context of 9/11, but does not specify the year directly. Further evidence is needed to determine the exact year associated with these terms.",
+  "sufficient": false
+ }
+}

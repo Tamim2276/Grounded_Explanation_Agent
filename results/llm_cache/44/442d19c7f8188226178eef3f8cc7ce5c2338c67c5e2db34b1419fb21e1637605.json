@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 107,
+  "prompt_tokens": 214,
+  "total_tokens": 321,
+  "prompt_tokens_details": {
+   "cached_tokens": 142
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the decline probability of an expert and whether or not they have a \"friend\" who has already declined?\nSub-goals:\n1. [figure] What is the relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with table\nStill missing: The relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined is not explicitly stated in the evidence provided. The figure shows the decline probability for experts with and without a 'friend' who has already declined, but it does not"
+  }
+ ],
+ "answer": {
+  "reason": "The relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined is not explicitly stated in the evidence provided. The figure shows the decline probability for experts with and without a 'friend' who has already declined, but it does not provide a direct comparison or explanation of the relationship.",
+  "tool": "text",
+  "query": "relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined"
+ }
+}

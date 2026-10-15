@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 190,
+  "total_tokens": 279,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best overall on both the CVR and CTCVR tasks?\nSub-goals:\n1. [table] Which model performs best overall on both the CVR and CTCVR tasks?\nAlready tried: sub-goal 1 with table\nStill missing: No evidence provided for sub-question 2, which asks for the specific model that performs best overall on both tasks and does not provide a direct comparison or specific AUC values for all models on both tasks in the given evidence items. The evidence focuses on ESMM's performance but does not list A"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the specific model that performs best overall on both CVR and CTCVR tasks, which requires a detailed comparison of model performance across both tasks. Since the table search has already been used, the next logical step is to search the text of the paper for a comprehensive comparison of model performance.",
+  "tool": "text",
+  "query": "best model overall CVR CTCVR"
+ }
+}

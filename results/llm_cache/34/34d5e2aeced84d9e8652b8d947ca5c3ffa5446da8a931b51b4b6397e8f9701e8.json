@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 49,
+  "prompt_tokens": 206,
+  "total_tokens": 255,
+  "prompt_tokens_details": {
+   "cached_tokens": 136
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the upper bound on the query complexity for finding an ε-perfect allocation with minimum cuts for 3 or more players?\nSub-goals:\n1. [figure] What is the upper bound on the query complexity for finding an ε-perfect allocation with minimum cuts for 3 or more players?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The upper bound for 3 or more players is not provided in the evidence. The evidence only covers the case for 2 players and provides an upper bound for that case, but not for 3 or more players."
+  }
+ ],
+ "answer": {
+  "reason": "The figure may contain graphical evidence or a table that provides the upper bound for 3 or more players.",
+  "tool": "figure",
+  "query": "upper bound query complexity 3 or more players"
+ }
+}

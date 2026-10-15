@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 132,
+  "prompt_tokens": 727,
+  "total_tokens": 859,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the model capture different perspectives on immigration when considering tone as a covariate?\nSub-questions:\n1. [figure] How does the model capture different perspectives on immigration when considering tone as a covariate?\nEvidence:\nE1 [text, Section 4.3, page 8]: Tone as a label. We ﬁrst consider using the annotations as a label , and train a joint model to infer topics relevant to the tone of the article (pro- or anti-immigration). Figure 2 shows a set of topics learned in this way, along with the predicted probability of an article being pro-immigration conditioned on the given topic. All topics are coherent, and the predicted probabilities have strong face validity, e.g., “arrested charged charges agents operation” is least associated with pro-immigration. Tone as a covariate. Next we consider using tone as a covariate , and build a model using both tone and tone-topic interactions. Table 3 shows a set of topics learned from the immigration data, along with the most highly-weighted words in the corresponding tone-topic interaction terms. As can be seen, these interaction terms tend to capture different frames (e.g., “criminal” vs. “detainees”, and “illegals” vs. “newcomers”, etc). Combined model with temporal metadata. Finally, we incorporate both the tone annotations and the year of publication of each article, treating the former as a label and the latter as a covariate. In this model, we also include an embedding matrix, W c , to project the one-hot year vectors down to a\nE2 [text, Section 4.3, page 7]: We demonstrate how our model might be used to explore an annotated corpus of articles about immigration, and adapt to different assumptions about the data. We only use a small number of topics in this part ( K = 8 ) for compact presentation.\nE3 [text, Section 6, page 9]: We have presented a neural framework for generalized topic models to enable ﬂexible incorporation of metadata with a variety of options. We take advantage of stochastic variational inference to develop a general algorithm for our framework such that variations do not require any model-speciﬁc algorithm derivations. Our model demonstrates the tradeoff between perplexity, coherence, and sparsity, and outperforms SLDA in predicting document labels. Furthermore, the ﬂexibility of our model enables intriguing exploration of a text corpus on US immigration. We believe that our model and code will facilitate rapid exploration of document collections with metadata."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The model captures different frames through tone-topic interaction terms."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide specific details on how the model captures different perspectives on immigration when considering tone as a covariate. It only mentions the use of tone as a covariate and the capture of different frames through tone-topic interaction terms, but does not specify the way,",
+  "sufficient": false
+ }
+}

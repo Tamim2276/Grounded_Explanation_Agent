@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 90,
+  "prompt_tokens": 243,
+  "total_tokens": 333,
+  "prompt_tokens_details": {
+   "cached_tokens": 152
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nSub-goals:\n1. [figure] Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The evidence does not provide the specific dataset or the exact improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method in the cit-HepPh, web-NotreDame, lkml-reply, and Caida-networkflow datasets. The evidence only shows the trend of the ARE for edge queries across "
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a specific graph showing the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method, which requires searching through the figures.",
+  "tool": "figure",
+  "query": "largest improvement in accuracy for TCM(8*memory) compared to GSS(fsize=12)"
+ }
+}

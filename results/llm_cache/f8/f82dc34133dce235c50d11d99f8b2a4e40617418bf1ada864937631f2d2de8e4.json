@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 120,
+  "total_tokens": 185,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the encoder understand the last user utterance?\nSub-goals:\n1. [figure] How does the encoder understand the last user utterance?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the encoder's understanding of the last user utterance, which is likely explained in the text of the paper. Therefore, a 'text' search is appropriate for this sub-goal.",
+  "tool": "text",
+  "query": "encoder last user utterance understanding"
+ }
+}

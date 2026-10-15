@@ -57,3 +57,39 @@ Plus a bug, not a category: a rewrite repeated the claims it was told were kept 
 - G1 v7 overshot: no wrong answers, but 13 abstentions. It refused the GRID table because it did not "explicitly state" the best method. One calibration step (v8) was tried: it allowed "a simple reading of the evidence" and required one evidence id. It brought back 3 wrong answers and still refused the same questions.
 - **v7 was kept**: it is the only version without a wrong answer. The thesis's priority is to say "I could not confirm" rather than be wrong. Tuning stopped there; v8's differences are noise on 20 questions.
 - The cost to report: v7 abstains often, including on 2 questions that v6 got right (the bar chart and GRID). Day 8 measures this on test, where single-pass gives the comparison.
+
+## After the first test run: answering after the budget (2026-10-16, dev only)
+
+The first test run of the frozen system (strict G1 v7) abstained on about 3 in 4 questions
+(`results/runs/full_test.jsonl`, the "strict" run). This was fixed on **dev only**, without reading
+test answers. The idea: G1 decides when to STOP SEARCHING; whether a claim may be published is
+G2's job. After the last round, if G1 found answering facts (named, backed) and the rule floor
+holds, the agent answers from them. G2 still checks every claim, and the answer is flagged "the
+evidence may be incomplete" (`cfg.AFTER_BUDGET = "answer"`). Otherwise it abstains.
+Run: `results/runs/full_dev_besteffort.jsonl`.
+
+| full system on dev | right | partly | wrong | no answer |
+|---|---|---|---|---|
+| G1 v7 strict (first test run) | 6 | 1 | 0 | 13 |
+| **G1 v7 + best effort** | 9 | 4 | 5 | 2 |
+| – of which confident (G1 convinced) | 6 | 1 | 0 | 1 |
+| – of which best effort (flagged) | 3 | 3 | 5 | 1 |
+| single-pass (for reference) | 12 | 3 | 5 | 0 |
+
+The flag carries information: confident answers had no wrong ones, and flagged answers had all 5
+wrong ones. Single-pass still gets more right (12 vs 9) with the same number wrong. It fetches
+text, a table and a figure in one round, whereas the agent fetches one kind per round, chosen by
+N1's vote.
+
+### Also tried: every tool in round 1 (dev, 2026-10-16) -- dropped
+
+Round 1 ran text, table and figure retrieval at once with the question, as single-pass does (`cfg.FIRST_ROUND = "all"`); N5 planned the later rounds. Run: `results/runs/full_dev_broad.jsonl`.
+
+| full system on dev | right | partly | wrong | no answer |
+|---|---|---|---|---|
+| best effort (kept) | 9 | 4 | 5 | 2 |
+| best effort + every tool in round 1 | 7 | 5 | 6 | 2 |
+
+More evidence made the writer's conclusions worse. For example, "which model performs best overall?" was answered with the BASE model's numbers. G1 was also convinced less often: 2 confident answers against 8. **Kept: best effort, round 1 by N5** (`FIRST_ROUND = "planner"`).
+
+**The design re-frozen for the second test run:** strict G1 v7 + best effort after the budget. The first test run (strict only, 142/150 before a power cut) is kept as the documented ablation `--ablation strict`, and its last 8 questions are completed with the same settings.

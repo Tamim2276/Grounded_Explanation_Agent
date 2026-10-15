@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 138,
+  "prompt_tokens": 1572,
+  "total_tokens": 1710,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of training on more diverse data on the accuracy of graph representation for VQA?\nSub-questions:\n1. [figure] What is the effect of training on more diverse data on the accuracy of graph representation for VQA?\nEvidence:\nE1 [figure, Figure 5, page 6] (image attached): Figure 5. Generated graphs for a free form question (from the VQA [ 8 ] dataset). Blue text: accurate concepts, red: inaccurate.\nWords printed in the figure: Q: What kind of ground is beneath the young baseball player? c: cylinder c: cube f: material ’same size’ c: baseball p: young c: what ’beneath’ c: baseball player p: young c: ground f: kind ’beneath’ None-Basic Min-Enhanced VG-Enhanced gure 5. Generated graphs for a free form question (from\nE2 [figure, Figure 5, page 6]: Zoomed view (300 dpi) of: Figure 5. Generated graphs for a free form question (from the VQA [ 8 ] dataset). Blue text: accurate concepts, red: inaccurate.\nWords printed in the figure: Q: What kind of ground is beneath the young baseball player? c: cylinder c: cube f: material ’same size’ c: baseball p: young c: what ’beneath’ c: baseball player p: young c: ground f: kind ’beneath’ None-Basic Min-Enhanced VG-Enhanced gure 5. Generated graphs for a free form question (from [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The figure shows the effect of training on more diverse data on the accuracy of graph representation for VQA."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide specific numerical or directional information about the effect of training on more diverse data on the accuracy of graph representation for VQA. It only shows examples of generated graphs for a free form question from the VQA dataset, but does not quantify or describe a",
+  "sufficient": false
+ }
+}

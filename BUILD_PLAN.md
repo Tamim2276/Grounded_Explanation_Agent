@@ -1853,6 +1853,12 @@ stops watching, not the run).
 >   after about 30 calls, so the comparison uses **`gemini-3.5-flash-lite`** (re-frozen
 >   2026-10-13; smoke test on 3 test questions passed). If the daily quota stops it, the next
 >   `resume_eval.sh` continues; if it cannot finish all 150, report the questions it covered.
+> - **The first test run** (strict G1 alone) abstained on 110 of 142 questions before a power cut
+>   stopped it. Fixed on dev only: **best effort after the budget**. G1 stops the search, G2 still
+>   checks every claim, and the answer is flagged. Dev: 9 / 4 / 5 / 2, against 6 / 1 / 0 / 13.
+>   **Re-frozen 2026-10-16 01:15.** The strict run is kept as `--ablation strict`, its last 8
+>   questions finished by `resume_eval.sh`. Every tool in round 1 was tried and dropped
+>   (`notes/error_analysis_dev.md`).
 > - **Left for you:** 7.5 (BIOS, auto sign-in, Task Scheduler), then 7.8 (start).
 
 ### Check it works

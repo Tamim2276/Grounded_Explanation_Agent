@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 39,
+  "prompt_tokens": 183,
+  "total_tokens": 222,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the definition of a non-negative tensor?\nSub-goals:\n1. [figure] What is the definition of a non-negative tensor?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The definition of a non-negative tensor is not explicitly stated in the evidence provided. The evidence discusses the use of non-negative tensors in the context of TFBA, but does not define what a non-negative tensor is in general terms. The definition is implied but not explicitly stated in the sub"
+  }
+ ],
+ "answer": {
+  "reason": "The definition of a non-negative tensor is not explicitly stated in the evidence provided.",
+  "tool": "table",
+  "query": "non-negative tensor definition"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 147,
+  "total_tokens": 207,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How did the accuracy of the model change as the iterations progressed?\nSub-goals:\n1. [figure] How did the accuracy of the model change as the iterations progressed?\nAlready tried: sub-goal 1 with figure\nStill missing: figure evidence for sub-goal 1 (rule floor); the judge named no item that backs sub-goal 1"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the change in model accuracy over iterations, which is typically visualized in a figure showing the model's performance over time.",
+  "tool": "figure",
+  "query": "change in model accuracy as iterations progressed"
+ }
+}

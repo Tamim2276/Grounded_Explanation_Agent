@@ -105,7 +105,12 @@ def llm_verdict(state: AgentState) -> dict:
     missing = "; ".join([f"{goals[i]['modality']} evidence for sub-goal {i + 1} (rule floor)" for i in floor]
                         + [f"the judge named no item that backs sub-goal {i + 1}" for i in unbacked]
                         + ([answer["missing"]] if not answer["sufficient"] and answer["missing"] else []))
-    return {"sufficient": False, "uncovered": uncovered, "missing": missing or "the model found a gap"}
+    # The facts the judge did find, each named item in the buffer and its numbers in that item:
+    # after the last round they decide between a best-effort answer and abstaining (Day 7).
+    partial = [{k: a[k] for k in ("sub_question", "evidence", "fact")} for a in answer["answers"]
+               if backed({"answers": [a]}, a["sub_question"], evidence)]
+    return {"sufficient": False, "uncovered": uncovered, "missing": missing or "the model found a gap",
+            "partial": partial, "floor": floor}
 
 
 def backed(answer: dict, n: int, evidence: list) -> bool:
@@ -140,12 +145,31 @@ def g1_sufficiency_check(state: AgentState) -> dict:
 def sufficiency_gate(state: AgentState) -> str:
     # G1's routing -- the red diamond. Returns a ROUTE NAME only; it must not return
     # a state update, since LangGraph ignores anything but the route.
-    if state["sufficiency"]["sufficient"]:
+    verdict = state["sufficiency"]
+    if verdict["sufficient"]:
         return "sufficient"
     if state["round"] >= cfg.MAX_ROUNDS:
+        # Budget spent. G1 decides when to STOP SEARCHING; whether a claim may be published
+        # is G2's job. So if the judge found answering facts and the rule floor holds (every
+        # table/figure sub-goal has that kind of item), answer from them -- G2 checks every
+        # claim -- and say the evidence may be incomplete. Otherwise abstain.
+        if cfg.AFTER_BUDGET == "answer" and verdict.get("partial") and not verdict.get("floor"):
+            trace("GATE", f"round {state['round']}/{cfg.MAX_ROUNDS} spent -> best effort "
+                          f"({len(verdict['partial'])} fact(s) found)")
+            return "best_effort"
         trace("GATE", f"round {state['round']}/{cfg.MAX_ROUNDS} spent -> exhausted")
         return "exhausted"
     return "retrieve_again"
+
+
+def best_effort(state: AgentState) -> dict:
+    # After the round budget, when G1 found answering facts but was not convinced the evidence
+    # is complete: go on to the writer, flagged -- G2 still checks every claim, and the report
+    # and the answer say that the evidence may be incomplete.
+    facts = "; ".join(f"{p['evidence']}: {p['fact']}" for p in state["sufficiency"]["partial"])
+    return {"best_effort": True,
+            "events": step("BEST", f"budget spent; answering from partial evidence: {facts[:150]}",
+                           short="best effort")}
 
 
 def replan_prep(state: AgentState) -> dict:

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 207,
+  "total_tokens": 268,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average number of answers per question differ between the training and development sets? What might be a possible explanation for this difference?\nSub-goals:\n1. [figure] How does the average number of answers per question differ between the training and development sets?\n2. [figure] What might be a possible explanation for this difference?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide specific numbers or a detailed explanation for the difference in the average number of answers per question between the training and development sets. It only describes the architecture of KEHNN and does not address the specific sub-questions asked."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of the average number of answers per question between two sets, which is likely to be found in the tables or figures of the paper.",
+  "tool": "table",
+  "query": "average number of answers per question training development sets"
+ }
+}

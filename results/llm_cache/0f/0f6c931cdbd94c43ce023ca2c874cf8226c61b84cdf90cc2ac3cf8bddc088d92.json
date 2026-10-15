@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 194,
+  "total_tokens": 267,
+  "prompt_tokens_details": {
+   "cached_tokens": 124
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best for response selection, and how can we tell?\nSub-goals:\n1. [table] Which model performs the best for response selection?\n2. [figure] How can we tell?\nAlready tried: sub-goal 1 with table, sub-goal 1 with figure\nStill missing: The evidence does not provide a direct comparison of the models' performance metrics or a clear explanation of how to determine the best model for response selection based on the provided evidence. The table and figure do not explicitly state which model performs the best or how to tell based on the"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a direct comparison of the models' performance metrics or a clear explanation of how to determine the best model for response selection based on the provided evidence.",
+  "tool": "text",
+  "query": "Which model performs the best for response selection, and how can we tell?"
+ }
+}

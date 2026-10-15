@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 175,
+  "total_tokens": 240,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the ChoiceNet model perform on datasets with uniform corruptions?\nSub-goals:\n1. [figure] How does the ChoiceNet model perform on datasets with uniform corruptions?\nAlready tried: sub-goal 1 with figure\nStill missing: No specific performance metrics or numerical data are provided for datasets with uniform corruptions in the figure. The figure only shows fitting results and correlations, but does not provide a quantitative measure of performance or a comparison to other models or datasets with different corruption"
+  }
+ ],
+ "answer": {
+  "reason": "To find specific performance metrics or numerical data related to the ChoiceNet model on datasets with uniform corruptions, a 'table' search is needed as it might contain detailed performance statistics.",
+  "tool": "table",
+  "query": "ChoiceNet model performance on datasets with uniform corruptions"
+ }
+}

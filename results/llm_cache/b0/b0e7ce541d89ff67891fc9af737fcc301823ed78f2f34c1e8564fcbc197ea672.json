@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 230,
+  "total_tokens": 290,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain why the \"Last contact\" feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\nSub-goals:\n1. [table] Explain why the 'Last contact' feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\nAlready tried: sub-goal 1 with text, sub-goal 1 with table\nStill missing: No evidence provided for sub-question 2, which asks for the specific influence of the 'Last contact' feature on the SSL score in both examples. The evidence only mentions the general influence of the latest contact date on the SSL score, not the specific examples or the direction of influence in the"
+  }
+ ],
+ "answer": {
+  "reason": "To find specific evidence about the influence of the 'Last contact' feature on the SSL score in both examples.",
+  "tool": "figure",
+  "query": "figure showing the influence of the 'Last contact' feature on the SSL score in both examples."
+ }
+}

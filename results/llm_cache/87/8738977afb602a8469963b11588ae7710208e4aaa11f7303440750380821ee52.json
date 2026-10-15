@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 204,
+  "prompt_tokens": 1286,
+  "total_tokens": 1490,
+  "prompt_tokens_details": {
+   "cached_tokens": 465
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys? Was there a significant difference in performance compared to the other methods?\nSub-questions:\n1. [table] Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys?\n2. [table] Was there a significant difference in performance compared to the other methods?\nEvidence:\nE1 [table, Table 10, page 15]: Table 10: Test accuracy (%) on VQA2 − -2017val, which contains 134,813 triplets.\nMethod | IoU | QoU | IoU +QoU\nMLP-A | 39.8 | 33.7 | 21.3\nMLP-IA | 40.3 | 53.0 | 31.0\nMLP-QA | 84.8 | 37.6 | 37.2\nMLP-IQA | 85.9 | 56.1 | 53.8\nRandom | 25.0 | 25.0 | 14.3\nE2 [text, Section 5.3, page 8]: it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 ).\nE3 [text, Section E, page 15]: In summary, 169 workers are involved in our studies. The total cost is $215 — the rate for every 20 triplets is $0.25. On our IoU-decoys and QoU-decoys, humans achieve 84.1%, 89.0%, and 82.5% on Visual7W, VQA, and VG, respectively. Compared to the human performance on the Orig decoys that involve human effort in creation (i.e., 88.4% on Visual7W, and 88.5% on VQA as reported in ( Antol et al. , 2015 )), these results suggest that the ways we create the decoys and the ﬁltering steps mentioned in Sect. 4.2 lead to high-quality datasets with limited ambiguity. F Analysis on different question and answer embeddings We consider G LO V E ( Pennington et al. , 2014 ) and the embedding learned from translation ( McCann et al. , 2017 ) on both question and answer embeddings. The results on Visual7W (IoU + QoU, compared to Table 3 of the main text that uses\nE4 [text, Section D.2, page 14]: For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "MLP-IQA performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E4",
+    "fact": "The performance of MLP-IQA is significantly better than other methods."
+   }
+  ],
+  "uncovered": [
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide information about the performance of GLOVE and the embedding learned from translation on the Visual7W dataset with IoU + QoU decoys, and there is no information about the performance of the models on the VQA2− dataset with IoU + QoU decoys compared to the other methods.",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 211,
+  "prompt_tokens": 2306,
+  "total_tokens": 2517,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nSub-questions:\n1. [figure] Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nEvidence:\nE1 [figure, Figure 4, page 8] (image attached): Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each conﬁguration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars).\nWords printed in the figure: 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\nE2 [figure, Figure 4, page 8]: Zoomed view (300 dpi) of: Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each conﬁguration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars).\nWords printed in the figure: 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\nE3 [table, Table 1, page 8]: Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code.\nNo training | Some training\n100% | 2\n90% Accuracy 1 80% | 19 7 29\nsoning comprehension and formal training tion. For each played together with the bar) and with | task with in reasoning, conﬁguration, the with the number of their standard\nE4 [text, Section 5.1, page 8]: To evaluate human upper bounds for the task, we sampled 100 random questions (such as those presented in Section 4.4 ) from the test set and distributed them among 173 participants of an AMT survey. Every participant had to answer 10 questions. We also asked the participants about their highest completed education (six categories) and the amount of formal training they have in reasoning, logic, or argumentation (no training, some, or extensive). In addition, they speciﬁed for each question how familiar they were with the topic (3- point scale). How Hard is the Task for Humans? It depends, as shown in Figure 4 . Whereas education had almost negligible inﬂuence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was. Overall, 30 of the 173 participants scored 100%. The mean score for those with extensive\nE5 [text, Section 6, page 10]: Based on the dataset, we evaluated human performance in argument reasoning comprehension. Our ﬁndings suggest that the task is harder for people without formal argumentation training, while being solvable without knowing the topic. We also found that neural attention models outperform language models on the task. In the short run, we plan to draw more attention to this topic by running a SemEval 2018 shared task. 12 A deep qualitative analysis of the warrants from the theoretical perspective of reasoning\nE6 [text, Section 5.1, page 8]: formal training was 90.9%. For all participants, the mean was 79.8%. However, we have to note that some of the questions are more difﬁcult than others, for which we could not control explicitly. Does Topic Familiarity Affect Human Performance? Not really, i.e., we found no signiﬁcant (Spearman) correlation between the mean score and familiarity of a participant in almost all education/training conﬁgurations. This suggests that ar- [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The figure shows the mean accuracy for different education levels and training levels."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The figure shows the mean accuracy for different education levels and training levels."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "The more extensive formal training in reasoning the participants had, the higher their score was."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide the specific effect size or significance of the training on argument reasoning comprehension accuracy for people with graduate degrees. It only shows the trend and does not provide a statistical significance level or a specific effect size measure for the graduate level",
+  "sufficient": false
+ }
+}

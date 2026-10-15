@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 145,
+  "prompt_tokens": 2115,
+  "total_tokens": 2260,
+  "prompt_tokens_details": {
+   "cached_tokens": 515
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best for the \"Representation\" task when the view is \"Novel\"?\nSub-questions:\n1. [figure] Which method performs best for the 'Representation' task when the view is 'Novel'? -> table\nEvidence:\nE1 [table, Table 1, page 7]: Table 1. Quantitative results on synthetic data. Rows are different combination of tasks and methods (three applications, two view protocols, our two methods). Columns are different data. Error is measured as mean DSSIM across the data set (less is better).\nTask | View | Method | Error | \n |  |  | PNT | ENV\n |  | OUR | .105 | .123\nRepresentation | Same | RM++ | .143 | .160\n(Sec. 3.2) |  | OUR | .144 | .164\n | Novel | RM++ | .181 | .193\n |  | OUR | .106 | .131\nLearn-to-learn | Same | SGD | .105 | .123\n(Sec. 3.3) |  | OUR | .165 | .173\n | Novel | SGD | .144 | .164\n |  | OUR | .113 | .122\nSegmentation | Same | KMEANS | .132 | .136\n |  |  |  | \nE2 [figure, Figure 7, page 7] (image attached): Figure 7. Results of our DAM representation trained using stochas- tic gradient descent (1st column) , our DAMs produced by our learning-to-learn network (2nd column) as well as a reference (3rd column) in a novel-view task.\nWords printed in the figure: measured as mean DSSIM across the data set (less is better). Task View Method Error PNT ENV Representation (Sec. 3.2) Same OUR .105 .123 RM++ .143 .160 Novel OUR .144 .164 RM++ .181 .193 Learn-to-learn (Sec. 3.3) Same OUR .106 .131 SGD .105 .123 Novel OUR .165 .173 SGD .144 .164 Segmentation (Sec. 3.4) Same OUR .113 .122 KMEANS .132 .136 Novel OUR .161 .154 KMEANS .172 .164\nE3 [figure, Figure 7, page 7]: Zoomed view (300 dpi) of: Figure 7. Results of our DAM representation trained using stochas- tic gradient descent (1st column) , our DAMs produced by our learning-to-learn network (2nd column) as well as a reference (3rd column) in a novel-view task.\nWords printed in the figure: measured as mean DSSIM across the data set (less is better). Task View Method Error PNT ENV Representation (Sec. 3.2) Same OUR .105 .123 RM++ .143 .160 Novel OUR .144 .164 RM++ .181 .193 Learn-to-learn (Sec. 3.3) Same OUR .106 .131 SGD .105 .123 Novel OUR .165 .173 SGD .144 .164 Segmentation (Sec. 3.4) Same OUR .113 .122 KMEANS .132 .136 Novel OUR .161 .154 KMEANS .172 .164 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "RM++ performs best for the 'Representation' task when the view is 'Novel'."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide the specific method that performs best for the 'Representation' task when the view is 'Novel'. It only shows the error values for different methods and views, but not which method is the best for the 'Representation' task under the 'Novel' view condition. The table and附",
+  "sufficient": false
+ }
+}

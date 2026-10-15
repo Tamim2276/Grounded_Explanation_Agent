@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 132,
+  "total_tokens": 196,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does explicitly modeling meaning-preserving invariances impact the generation of paraphrases?\nSub-goals:\n1. [figure] How does explicitly modeling meaning-preserving invariances impact the generation of paraphrases?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the impact of explicitly modeling meaning-preserving invariances on paraphrase generation, which is likely discussed in the text of the paper.",
+  "tool": "text",
+  "query": "explicitly modeling meaning-preserving invariances impact generation of paraphrases"
+ }
+}

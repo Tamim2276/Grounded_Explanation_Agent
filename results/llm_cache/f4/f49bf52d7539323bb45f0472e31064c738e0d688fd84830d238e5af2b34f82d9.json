@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 201,
+  "total_tokens": 260,
+  "prompt_tokens_details": {
+   "cached_tokens": 120
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best in the 10 classes 1-shot multi-class classification problem?\nSub-goals:\n1. [table] Which method performs best in the 10 classes 1-shot multi-class classification problem?\nAlready tried: sub-goal 1 with text\nStill missing: table evidence for sub-goal 1 (rule floor); No evidence for the performance of other methods in the 10 classes 1-shot multi-class classification problem. The evidence only covers the performance of VAGER+Voting and LR in binary and low-shot settings, not the 10 classes 1-shot setting specifically."
+  }
+ ],
+ "answer": {
+  "reason": "To find the best method for the 10 classes 1-shot multi-class classification problem, I need to search the table for comparative performance data.",
+  "tool": "table",
+  "query": "10 classes 1-shot multi-class classification performance"
+ }
+}

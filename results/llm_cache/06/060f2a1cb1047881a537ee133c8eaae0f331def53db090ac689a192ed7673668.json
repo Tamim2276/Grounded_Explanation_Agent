@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 139,
+  "prompt_tokens": 1684,
+  "total_tokens": 1823,
+  "prompt_tokens_details": {
+   "cached_tokens": 1353
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which pooling method is the most accurate for the AFEW database?\nSub-questions:\n1. [table] Which pooling method is the most accurate for the AFEW database?\nEvidence:\nE1 [text, Section U, page 7]: 4). Fig.2 (b)(c) show the GrNet can use much less epochs (than the SPDNet) to converge on AFEW, and the validation gets near 12% improvement after training. For larger datasets like HDM05, the improvement is even up to 40%.\nE2 [text, Section U, page 6]: Action Recognition : We use the HDM05 database (M¨uller et al. 2007) that is one of the largest-scale skeleton-based human action datasets. The dataset consists of 2,337 sequences of 130 action classes, and provides 3D locations of 31 joints of the subjects. Following the protocol designed in (Huang and Van Gool 2017), we conduct 10 random evaluations, each of which randomly selected half of sequences for training and the rest for testing. For data augmentation, the training sequences are divided into around 18,000 small subsequences in each random evaluation. As done in (Harandi, Salzmann, and Hartley 2014; Huang and Van Gool 2017), we represent each sequence by a covariance descriptor of size 93 × 93 , which is computed by the second order statistics of the 3D coordinates of the 31 joints in each frame. Then, we apply SVD on the covariance descriptors to get linear subspaces of order 10, which form the data on a Grassmannian Gr (10 , 93) . For our GrNet-1Block, the sizes of the connection weights are set to 93 × 60 , while those of GrNet-2Blocks are ﬁxed as 93 × 80 , 40 × 30 respectively.\nE3 [text, Section abstract, page 4]: where U k − 1 , 1: q is the ﬁrst q largest eigenvectors achieved by eigenvalue (EIG) decomposition on the input projection matrices X k = U k − 1 Σ k − 1 U T k − 1 , and n is the number of instances ˆ X i k − 1 for the pooling. The instances can be either n projection matrices or n entries within an square patch of size √ n × √ n located in one projection matrix. In other words, the ﬁrst type of pooling is performed across the projection matrices (A-ProjPooling), while the second one is executed by sliding the mean ﬁlter over each square patch within one projection matrix (W-ProjPooling). As a result, A-ProjPooling with OrthMap ﬁnally yields m n orthonormal matrices of size d k − 1 × q , while W-ProjPooling with OrthMap outputs m orthonormal matrices of size d k − 1 √ n × q .\nE4 [table, Table 1, page 7]: Table 1: Results for the AFEW, HDM05 and PaSC datasets. PaSC1/PaSC2 are the control/handheld testings.\nMethod | AFEW | HDM05 | PaSC1 | PaSC2\nSTM-ExpLet | 31.73% | – | – | –\nRSR-SPDML | 30.12% | 48.01%±3.38 | – | –\nDCC | 25.78% | 41.34%±1.05 | 75.83% | 67.04%\nGDA | 29.11% | 46.25%±2.71 | 71.38% | 67.49%\nGGDA | 29.45% | 46.87%±2.31 | 66.71% | 68.41%\nPML | 28.98% | 47.12%±1.59 | 73.45% | 68.32%\nVGGDeepFace | – | – | 78.82% | 68.24%\nDeepO2P | 28.54% | – | 68.76% | 60.14%\nSPDNet | 34.23% | 61.45%±1.12 | 80.12% | 72.83%\nGrNet-0Block | 25.34% | 51.12%±3.55 | 68.52% | 63.92%\nGrNet-1Block | 32.08% | 57.73%±2.24 | 80.15% | 72.51%\nGrNet-2Blocks | 34.23% | 59.23%±1.78 | 80.52% | 72.76%\nE5 [figure, Figure 2, page 7] (image attached): Figure 2: (a) Results of using single and multiple FRMap (S-FRMap, M-FRMap), ProjPoolings across or within pro- jections (A-ProjPooling, W-ProjPooling) for the three used databases. (b) (c) Convergence and accuracy curves of SPDNet and the proposed GrNet for the AFEW.\nWords printed in the figure: AFEW HDM05 PaSC-Con PaSC-Han 0 0.2 0.4 0.6 0.8 Accuracy S-FRMap M-FRMap A-ProjPooling W-ProjPooling (a) (b) (c)\nE6 [figure, Figure 2, page 7]: Zoomed view (300 dpi) of: Figure 2: (a) Results of using single and multiple FRMap (S-FRMap, M-FRMap), ProjPoolings across or within pro- jections (A-ProjPooling, W-ProjPooling) for the three used databases. (b) (c) Convergence and accuracy curves of SPDNet and the proposed GrNet for the AFEW.\nWords printed in the figure: AFEW HDM05 PaSC-Con PaSC-Han 0 0.2 0.4 0.6 0.8 Accuracy S-FRMap M-FRMap A-ProjPooling W-ProjPooling (a) (b) (c)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "GrNet-1Block has the highest accuracy of 32.08% for the AFEW database."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide information about the accuracy of different pooling methods for the AFEW database. It only compares the accuracy of different methods across multiple databases and does not specify which pooling method is the most accurate for the AFEW database alone.",
+  "sufficient": false
+ }
+}

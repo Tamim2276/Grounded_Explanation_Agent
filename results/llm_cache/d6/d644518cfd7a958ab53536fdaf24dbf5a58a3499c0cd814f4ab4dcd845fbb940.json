@@ -1,0 +1,31 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 26,
+  "prompt_tokens": 95,
+  "total_tokens": 121,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the purpose of the audio encoder in the proposed conditional recurrent adversarial video generation network structure?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "audio encoder",
+   "conditional recurrent adversarial video generation network structure"
+  ]
+ }
+}

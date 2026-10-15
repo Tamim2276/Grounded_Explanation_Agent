@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 157,
+  "prompt_tokens": 1580,
+  "total_tokens": 1737,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The figure shows a zoomed view of the graph stream, which includes the streaming graph $G$.\" -- cites: E2 (Figure 1): observation \"The figure shows a zoomed view of the graph stream, which includes the streaming graph $G$.\"\n2. \"Edges in the graph sketch $G_h$ are aggregated by summing the weights of the edges with the same source and destination nodes.\" -- cites: E1 (Figure 1): observation \"The figure shows a zoomed view of the graph stream, which includes the streaming graph $G$.\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 3) (image attached): Fig. 1. A sample graph stream\nWords printed in the figure: Graph stream S Streaming graph G (a, b; t1; 1) (a, c; t2; 1) (b, d; t3; 1) (a, c; t4; 1) (a, f; t5; 1) (c, f; t6; 1) (a, e; t7; 1) (a, c; t8; 3) (c, f; t9; 1) (d, a; t10; 1) ( d, f; t11; 1) (f, e; t12; 3) (a, g; t13; 1) (e, b; t14, 2) (d, a; t15; 1) g a c f d b e 1 1 1 1 1 2 2 3 1 5 2 Fig. 1. A sample graph stream\n[E2] (figure, Figure 1, page 3): a zoomed view of Figure 1 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E2 (Figure 1) states that the figure shows a zoomed view of the graph stream, which includes the streaming graph $G$. This directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in E1 (Figure 1) only shows a zoomed view of the graph stream, which includes the streaming graph $G$. It does not provide any information about the aggregation of edges in the graph sketch $G_h$. Therefore, the claim cannot be supported by the evidence."
+   }
+  ]
+ }
+}

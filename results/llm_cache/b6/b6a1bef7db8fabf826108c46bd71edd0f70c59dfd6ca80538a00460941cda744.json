@@ -1,0 +1,64 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 444,
+  "prompt_tokens": 2884,
+  "total_tokens": 3328,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How can the shortcuts in the Visual7W dataset be remedied?\nSub-questions:\n1. [figure] How can the shortcuts in the Visual7W dataset be remedied?\nEvidence:\nE1 [figure, Figure 1, page 1] (image attached): Figure 1: An illustration of how the shortcuts in the Vi- sual7W dataset ( Zhu et al. , 2016 ) should be remedied. In the original dataset, the correct answer “A train” is easily selected by a machine as it is far often used as the correct answer than the other decoy (negative) an- swers. (The numbers in the brackets are probability scores computed using eq. ( 2 )). Our two procedures — QoU and IoU (cf. Sect. 4 ) — create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the ques- tion alone . In these cases, machines make mistakes un- less they consider all information together . Thus, the alternative decoys suggested our procedures are better designed to gauge how well a learning algorithm can understand all information equally well.\nWords printed in the figure: Wei-Lun Chao∗, Hexiang Hu∗, Fei Sha University of Southern California Los Angeles, California, USA weilunchao760414@gmail.com, hexiang.frank.hu@gmail.com, feisha@usc.edu Abstract al question answering (Visual QA) has at- ed a lot of attention lately, seen essentially form of (visual) Turing test that artificial igence should strive to achieve. In this r, we study a crucial component of this how can we design good datasets for ask? We focus on the design of multiple- ce based datasets where the learner has to t the right answer from a set of candi- ones including the target (i.e. the correct and the decoys (i.e. the incorrect ones). Question: What v ...\nE2 [figure, Figure 1, page 1]: Zoomed view (300 dpi) of: Figure 1: An illustration of how the shortcuts in the Vi- sual7W dataset ( Zhu et al. , 2016 ) should be remedied. In the original dataset, the correct answer “A train” is easily selected by a machine as it is far often used as the correct answer than the other decoy (negative) an- swers. (The numbers in the brackets are probability scores computed using eq. ( 2 )). Our two procedures — QoU and IoU (cf. Sect. 4 ) — create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the ques- tion alone . In these cases, machines make mistakes un- less they consider all information together . Thus, the alternative decoys suggested our procedures are better designed to gauge how well a learning algorithm can understand all information equally well.\nWords printed in the figure: Wei-Lun Chao∗, Hexiang Hu∗, Fei Sha University of Southern California Los Angeles, California, USA weilunchao760414@gmail.com, hexiang.frank.hu@gmail.com, feisha@usc.edu Abstract al question answering (Visual QA) has at- ed a lot of attention lately, seen essentially form of (visual) Turing test that artificial igence should strive to achieve. In this r, we study a crucial component of this how can we design good datasets for ask? We focus on the design of multiple- ce based datasets where the learner has to t the right answer from a set of candi- ones including the target (i.e. the correct and the decoys (i.e. the incorre ...\nE3 [text, Section 3.2, page 4]: Machines ﬁnd shortcuts Table 1 summarizes the performance of the learning models, together with the human studies we performed on a subset of 1,000 triplets (c.f. Sect. 5 for details). There are a few interesting observations. First, in the row of “A” where only the candidate answers (and whether they are right or wrong) are used to train a learning model, the model performs signiﬁcantly better than random guessing and humans (52.9% vs. 25%) — humans will deem each of the answers equally likely without looking at both the image and the question! Note that in this case, the information i in eq. ( 1 ) contains nothing. The model learns the speciﬁc statistics of the candidate answers in the dataset and exploits those. Adding the information about the image (i.e., the row of “I+A”), the machine improves signiﬁcantly and gets close to the performance when all information is used (62.4% vs. 65.7%). There is a weaker correlation between the question and the answers as “Q+A” improves over “A” only modestly. This is expected. In the Visual7W dataset, the decoys are generated by human annotators as plausible answers to the questions without being shown the images — thus, many decoy answers do not have visual groundings. For instance, a question of “what animal is running?” elicits equally likely answers such as “dog”, “tiger”, “lion”, or “cat”, while an image of a dog running in the park will immediately rule out all 3 but the “dog”, see Fig. 1 for a similar example. Thus, the performa ...\nE4 [text, Section 5.1, page 6]: Visual7W Telling (Visual7W) ( Zhu et al. , 2016 ) The dataset uses 47,300 images from MSCOCO ( Lin et al. , 2014 ) and contains 139,868 IQA triplets. Each has 3 decoys generated by humans. Visual Genome (VG) ( Krishna et al. , 2017 ) The dataset uses 101,174 images from MSCOCO ( Lin et al. , 2014 ) and contains 1,445,322 IQT triplets. No decoys are provided. Human annotators are asked to write diverse pairs of questions and answers freely about an image or with respect to some regions of it. On average an image is coupled with 14 question-answer pairs. We divide the dataset into non-overlapping 50%/20%/30% for training/validation/testing. Additionally, we partition such that each portion is a “superset” of the corresponding one in Visual7W, respectively. VQA2 ( Goyal et al. , 2017 ) and COCOQA ( Ren et al. , 2015 ) We describe the datasets and experimental results in the Supplementary Material.\nE5 [text, Section 6, page 9]: cedures to remedy existing datasets and create new ones. We conduct extensive empirical studies to demonstrate the effectiveness of our methods in creating better Visual QA datasets. The remedied datasets and the newly created ones are released and available at http://www.teds. usc.edu/website_vqa/ .\nE6 [table, Table 1, page 4]: Table 1: Accuracy of selecting the right answers out of 4 choices (%) on the Visual QA task on Visual7W.\nInformation used | Machine | Human\nrandom | 25.0 | 25.0\nA | 52.9 | -\nI + A | 62.4 | 75.3\nQ + A | 58.2 | 36.4\nI + Q + A | 65.7 | 88.4 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The shortcuts in the Visual7W dataset can be remedied by creating alternative decoys that are highly likely by examining either the image or the question alone."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The shortcuts in the Visual7W dataset can be remedied by creating alternative decoys that are highly likely by examining either the image or the question alone."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The shortcuts in the Visual7W dataset can be remedied by creating alternative decoys that are highly likely by examining either the image or the question alone."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "The shortcuts in the Visual7W dataset can be remedied by creating alternative decoys that are highly likely by examining either the image or the question alone."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E5",
+    "fact": "The shortcuts in the Visual7W dataset can be remedied by creating alternative decoys that are highly likely by examining either the image or the question alone."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E6",
+    "fact": "The shortcuts in the Visual7W dataset can be remedied by creating alternative decoys that are highly likely by examining either the image or the question alone."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "No evidence provided for how the shortcuts in the Visual7W dataset can be remedied in a specific context or with a specific method that is not already covered by the alternative decoys created by the QoU and IoU procedures mentioned in the text and figures. The text and figures suggest that the deco",
+  "sufficient": false
+ }
+}

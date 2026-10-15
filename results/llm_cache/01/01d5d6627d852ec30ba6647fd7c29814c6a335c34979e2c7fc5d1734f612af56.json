@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 88,
+  "prompt_tokens": 222,
+  "total_tokens": 310,
+  "prompt_tokens_details": {
+   "cached_tokens": 146
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nSub-goals:\n1. [figure] Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nAlready tried: sub-goal 1 with figure\nStill missing: The graphs for cit-HepPh, web-NotreDame, lkml-reply, and Caida-networkflow need to be analyzed to determine which one shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method."
+  }
+ ],
+ "answer": {
+  "reason": "To find the graph showing the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method, I need to search through the figures.",
+  "tool": "figure",
+  "query": "largest improvement in accuracy for TCM(8*memory) compared to GSS(fsize=12)"
+ }
+}

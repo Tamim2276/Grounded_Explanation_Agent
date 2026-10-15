@@ -1,0 +1,41 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 163,
+  "prompt_tokens": 3662,
+  "total_tokens": 3825,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the four methods (ResNet, DANN, CDAN-f, CDAN-fg) is most effective at separating the two classes of data points?\nSub-questions:\n1. [figure] Which of the four methods (ResNet, DANN, CDAN-f, CDAN-fg) is most effective at separating the two classes of data points?\nEvidence:\nE1 [figure, Figure 2, page 9] (image attached): Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nBar values read from the PDF: (a) Multilinear DANN-f (representation) -> A->W: 82.2, A->D: 79.9; (a) Multilinear DANN-g (prediction) -> A->W: 79.7, A->D: 77; (a) Multilinear DANN-[f,g] (concatenation) -> A->W: 82.7, A->D: 80.5; (a) Multilinear CDAN (w/o entropy) -> A->W: 93.2, A->D: 89.4; (a) Multilinear CDAN-E (w/ entropy) -> A->W: 94.3, A->D: 93.1; (c) Discrepancy DANN-f (representation) -> A->W: 1.84, W->D: 1.29; (c) Discrepancy DANN-[f,g] (concatenation) -> A->W: 1.49, W->D: 1.16; (c) Discrepancy CDAN-E (w/ entropy) -> A->W: 1.19, W->D: 1.09\nE2 [figure, Figure 2, page 9]: Zoomed view (300 dpi) of: Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nBar values read from the PDF: (a) Multilinear DANN-f (representation) -> A->W: 82.2, A->D: 79.9; (a) Multilinear DANN-g (prediction) -> A->W: 79.7, A->D: 77; (a) Multilinear DANN-[f,g] (concatenation) -> A->W: 82.7, A->D: 80.5; (a) Multilinear CDAN (w/o entropy) -> A->W: 93.2, A->D: 89.4; (a) Multilinear CDAN-E (w/ entropy) -> A->W: 94.3, A->D: 93.1; (c) Discrepancy DANN-f (representation) -> A->W: 1.84, W->D: 1.29; (c) Discrepancy DANN-[f,g] (concatenation) -> A->W: 1.49, W->D: 1.16; (c) Discrepancy CDAN-E (w/ entropy) -> A->W: 1.19, W->D: 1.09\nE3 [table, Table 3, page 8]: Table 3: Accuracy (%) on Ofﬁce-Home for unsupervised domain adaptation (AlexNet and ResNet)\nMethod | Ar Cl | Ar Pr | Ar Rw | Cl Ar | Cl Pr | Cl Rw | Pr Ar | Pr Cl | Pr Rw | Rw Ar | Rw Cl | Rw Pr | Avg\nAlexNet [27] | 26.4 | 32.6 | 41.3 | 22.1 | 41.7 | 42.1 | 20.5 | 20.3 | 51.1 | 31.0 | 27.9 | 54.9 | 34.3\nDAN [29] | 31.7 | 43.2 | 55.1 | 33.8 | 48.6 | 50.8 | 30.1 | 35.1 | 57.7 | 44.6 | 39.3 | 63.7 | 44.5\nDANN [13] | 36.4 | 45.2 | 54.7 | 35.2 | 51.8 | 55.1 | 31.6 | 39.7 | 59.3 | 45.7 | 46.4 | 65.9 | 47.3\nJAN [30] | 35.5 | 46.1 | 57.7 | 36.4 | 53.3 | 54.5 | 33.4 | 40.3 | 60.1 | 45.9 | 47.4 | 67.9 | 48.2\nCDAN | 36.2 | 47.3 | 58.6 | 37.3 | 54.4 | 58.3 | 33.2 | 43.9 | 62.1 | 48.2 | 48.1 | 70.7 | 49.9\nCDAN+E | 38.1 | 50.3 | 60.3 | 39.7 | 56.4 | 57.8 | 35.5 | 43.1 | 63.2 | 48.4 | 48.5 | 71.1 | 51.0\nResNet-50 [20] | 34.9 | 50.0 | 58.0 | 37.4 | 41.9 | 46.2 | 38.5 | 31.2 | 60.4 | 53.9 | 41.2 | 59.9 | 46.1\nDAN [29] | 43.6 | 57.0 | 67.9 | 45.8 | 56.5 | 60.4 | 44.0 | 43.6 | 67.7 | 63.1 | 51.5 | 74.3 | 56.3\nDANN [13] | 45.6 | 59.3 | 70.1 | 47.0 | 58.5 | 60.9 | 46.1 | 43.7 | 68.5 | 63.2 | 51.8 | 76.8 | 57.6\nJAN [30] | 45.9 | 61.2 | 68.9 | 50.4 | 59.7 | 61.0 | 45.8 | 43.4 | 70.3 | 63.9 | 52.4 | 76.8 | 58.3\nCDAN | 49.0 | 69.3 | 74.5 | 54.4 | 66.0 | 68.4 | 55.6 | 48.3 | 75.9 | 68.4 | 55.4 | 80.5 | 63.8\nCDAN+E | 50.7 | 70.6 | 76.0 | 57.6 | 70.0 | 70.0 | 57.4 | 50.9 | 77.3 | 70.9 | 56.7 | 81.6 | 65.8 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "CDAN-E (w/ entropy) is most effective at separating the two classes of data points."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide specific accuracy values for ResNet, DANN, CDAN-f, and CDAN-fg to determine which is most effective at separating the two classes of data points. The evidence only compares CDAN-E (w/ entropy) to other methods in terms of accuracy and other metrics, but not in a direct,",
+  "sufficient": false
+ }
+}

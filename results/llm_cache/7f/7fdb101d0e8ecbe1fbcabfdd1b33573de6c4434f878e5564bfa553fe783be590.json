@@ -1,0 +1,30 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 15,
+  "prompt_tokens": 98,
+  "total_tokens": 113,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the initial value of V2 in the interval [0.35, 0.67]?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "variables"
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 155,
+  "prompt_tokens": 868,
+  "total_tokens": 1023,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the performance of VAGER is worse than LR for the \"Bubble\" class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nSub-questions:\n1. [table] Can you explain why the performance of VAGER is worse than LR for the 'Bubble' class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nEvidence:\nE1 [text, Section 4.2, page 6]: In this section, we evaluate how well the classiﬁers learned by our method and other baselines can perform in novel classes on binary classiﬁcation setting. The results are shown in Table 1 . In all low-shot settings, our method VAGER+Voting consistently performs the best in both AUC and F1 metrics. In contrast, LR performs the worst in 1-shot setting, which demonstrates the importance of generalization from base classes when the new class has very few samples. MRN does not work well in most settings, demonstrating that its basic hypothesis that the classiﬁcation parameters trained by large samples and small samples respectively are correlated does not necessarily hold in real data. By comparing VAGER+Voting with the other ﬁve variant versions of our method, we can safely draw the conclusion that the major ingredients in our method, including network embedding for low dimensional representations, mapping function for transforming embedding space to classiﬁcation parameter space, as well as the reﬁnement strategy are necessary and effective and the results support that the Voting strategy performs the best in our sce-\nE2 [text, Section 4.4, page 8]: test categories and learn to distinguish these 10 categories on the 1-shot setting. We repeat random selections ﬁve times and the result is shown on the ﬁrst 5 columns in Table 3 . Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are.\nE3 [text, Section 4.3, page 7]: Here the similarity of two classes is calculated by Equation 1 . Intuitively, if a new class is similar with the top- K base classes, while dissimilar with the remained base classes, its Similarity Ratio will be high, meaning that this new class can beneﬁt more from the base classes. For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10 . The dependent variable indicates the success degree of generalization. And we set K = 10 . We plot the similarity ratio and relative improvement of all novel classes in Figure 3 . We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% conﬁdence interval for the correlation coefﬁcient range between 0 . 124 and 0 . 169 and R 2 = 0 . 45 , showing that the SR ratio could explain 45% of the dependent variable."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The relative improvement in AUC of our method over non-transfer method LR in 1-shot setting is positively correlated with the similarity ratio of the new class."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide a specific explanation for why VAGER performs worse than LR for the 'Bubble' class in the 1-shot binary classification setting, while it performs better for the other nine classes. It only states that the relative improvement in AUC is positively correlated with the new",
+  "sufficient": false
+ }
+}

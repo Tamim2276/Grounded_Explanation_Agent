@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 245,
+  "prompt_tokens": 500,
+  "total_tokens": 745,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Product Dataset contains 324M click events and 1774k conversion events.\" -- cites: E4 (Table 1): row 'Product Dataset', column '#click' = 324M; E4 (Table 1): row 'Product Dataset', column '#conversion' = 1774k\n2. \"The Product Dataset has a significantly higher number of click events compared to conversion events.\" -- cites: E4 (Table 1): row 'Product Dataset', column '#click' = 324M; E4 (Table 1): row 'Product Dataset', column '#conversion' = 1774k\n3. \"The Product Dataset contains 8950M impressions, 48M users, and 23.5M items.\" -- cites: E4 (Table 1): row 'Product Dataset', column '#impression' = 8950M; E4 (Table 1): row 'Product Dataset', column '#user' = 48M; E4 (Table 1): row 'Product Dataset', column '#item' = 23.5M\n\nCited evidence:\n[E4] (table, Table 1, page 4): Table 1: Statistics of experimental datasets.\nValues (cite as cells):\n  row 'Public Dataset': '#user' = 0.4M; '#item' = 4.3M; '#impression' = 84M; '#click' = 3.4M; '#conversion' = 18k\n  row 'Product Dataset': '#user' = 48M; '#item' = 23.5M; '#impression' = 8950M; '#click' = 324M; '#conversion' = 1774k"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 (Table 1) confirms that the 'Product Dataset' contains 324M click events and 1774k conversion events."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E4 (Table 1) confirms that the 'Product Dataset' contains 324M click events and 1774k conversion events, which supports the claim that there are significantly more click events than conversion events."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E4 (Table 1) only provides the values for the 'Product Dataset' as 8950M impressions, 48M users, and 23.5M items. The claim includes additional values (0.4M impressions, 4.3M users, and 84M items) that are not supported by the evidence."
+   }
+  ]
+ }
+}

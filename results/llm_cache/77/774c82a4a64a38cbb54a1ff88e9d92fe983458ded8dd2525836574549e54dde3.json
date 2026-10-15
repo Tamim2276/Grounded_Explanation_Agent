@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 190,
+  "total_tokens": 244,
+  "prompt_tokens_details": {
+   "cached_tokens": 120
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the table and the graph sketch in the figure?\nSub-goals:\n1. [figure] What is the relationship between the table and the graph sketch in the figure?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The relationship between the table and the graph sketch in the figure is not explicitly stated in the provided evidence. The table and the graph sketch in the figure represent the same graph stream S, but the specific relationship is not detailed in the given evidence items. Further information is欠缺"
+  }
+ ],
+ "answer": {
+  "reason": "The relationship between the table and the graph sketch in the figure is not explicitly stated in the provided evidence.",
+  "tool": "table",
+  "query": "relationship between table and graph sketch in figure"
+ }
+}

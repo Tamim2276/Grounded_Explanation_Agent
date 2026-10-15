@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 49,
+  "prompt_tokens": 192,
+  "total_tokens": 241,
+  "prompt_tokens_details": {
+   "cached_tokens": 118
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the number of classes affect the setup and online time for the Softmax?\nSub-goals:\n1. [figure] How does the number of classes affect the setup and online time for the Softmax?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide any information about how the number of classes affects the setup and online time for the Softmax. The figure only shows an example of a convolutional neural network and does not include any data or analysis related to the Softmax layer or the effect of the number of 'c"
+  }
+ ],
+ "answer": {
+  "reason": "The figure does not provide the necessary information about the Softmax layer and its relation to the number of classes.",
+  "tool": "table",
+  "query": "number of classes setup online time Softmax"
+ }
+}

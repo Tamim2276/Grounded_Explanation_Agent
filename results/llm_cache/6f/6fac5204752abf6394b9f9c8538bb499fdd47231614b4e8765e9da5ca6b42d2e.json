@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 120,
+  "prompt_tokens": 811,
+  "total_tokens": 931,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre shows the **largest absolute improvement** in F1 score on the failure set after applying GBI for **both** syntactic parsing and SRL?\nSub-questions:\n1. [table] Which genre shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL?\nEvidence:\nE1 [table, Table 5, page 7]: Table 5: Evaluation of syntactic parser and SRL system on out-of-domain data. F1 scores are reported on the failure set . SRL model was trained on NW and the syntactic parser was trained on WSJ Section on OntoNote v5.0. Except PT, which is new and old Testament, all failure rate on out-domain data is higher than that of in-domain (11.9% for parsing and 18.1% for SRL) as suspected. The table shows that GBI can be successfully applied to resolve performance degradation on out-of-domain data.\n |  | Syntactic | Parsing |  |  |  | SRL | \nGenre | Failure | Conversion | F1 on | failure set | Failure | Conversion | F1 | on failure set\n | rate (%) | rate (%) | before | after | rate (%) | rate (%) | before | after\nBroadcast Conversation (BC) | 19.3 | 98.8 | 56.4 | 59.0 (+2.6) | 26.86 | 53.88 | 39.72 | 52.4 (+12.68)\nBroadcast News (BN) | 11.7 | 98.1 | 63.2 | 68.8 (+5.6) | 18.51 | 55.19 | 39.28 | 50.58 (+11.3)\nPivot Corpus (PT) | 9.8 | 97.8 | 71.4 | 75.8 (+4.4) | 10.01 | 62.34 | 47.19 | 63.69 (+16.5)\nTelephone Conversation (TC) | 10.1 | 86.2 | 56.9 | 57.6. (+0.7) | 19.09 | 54.62 | 47.7 | 58.04 (+10.34)\nWeblogs (WB) | 17.6 | 95.3 | 62.0 | 63.2 (+1.2) | 20.32 | 44.13 | 47.6 | 57.39 (+9.39)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Weblogs (WB) shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine the largest absolute improvement for other genres or to confirm the absolute improvement size for Weblogs (WB).",
+  "sufficient": false
+ }
+}

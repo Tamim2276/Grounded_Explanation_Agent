@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 49,
+  "prompt_tokens": 263,
+  "total_tokens": 312,
+  "prompt_tokens_details": {
+   "cached_tokens": 189
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)? How does this compare to the performance of the model that only observes answers?\nSub-goals:\n1. [table] Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)?\n2. [figure] How does this compare to the performance of the model that only observes answers?\nAlready tried: sub-goal 1 with table, sub-goal 2 with figure\nStill missing: The evidence does not provide information about the performance of the model that only observes answers or how this compares to the performance of MLP-IQA. The figure and table do not contain this information. The table only lists the combined accuracy for each model, but does not compare it to a 'd"
+  }
+ ],
+ "answer": {
+  "reason": "The text contains detailed descriptions and comparisons of model performances.",
+  "tool": "text",
+  "query": "performance of the model that only observes answers compared to MLP-IQA"
+ }
+}

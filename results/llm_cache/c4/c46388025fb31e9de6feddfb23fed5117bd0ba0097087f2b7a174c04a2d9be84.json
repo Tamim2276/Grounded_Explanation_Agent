@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 178,
+  "total_tokens": 233,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the intra-warrant attention mechanism work?\nSub-goals:\n1. [figure] How does the intra-warrant attention mechanism work?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: No further evidence is provided to explain how the intra-warrant attention mechanism works in detail or how it differs from the standard attention mechanism. The figure and text only describe the mechanism in a general sense and do not provide specific details or comparisons with the standard model."
+  }
+ ],
+ "answer": {
+  "reason": "The intra-warrant attention mechanism is described in the paper's text, so a 'text' search is appropriate to find detailed explanations and comparisons.",
+  "tool": "text",
+  "query": "intra-warrant attention mechanism works"
+ }
+}

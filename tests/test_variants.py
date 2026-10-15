@@ -91,3 +91,19 @@ def test_text_only_may_search_again_with_a_new_query():
         state["sufficiency"] = {"sufficient": False, "uncovered": [0], "missing": "a number"}
         action = n5_agentic_planner(state)["action"]
     assert action["tool"] == "text" and "overruled" not in action["planner"]
+
+
+def test_the_full_system_starts_with_every_tool_then_plans():
+    # Day 7: round 1 fetches text, a table and a figure with the question; N5 plans later rounds
+    with cfg.override(VARIANT="full", FIRST_ROUND="all"):
+        out = build_graph().invoke(new_state(UNANSWERABLE))
+    steps = path(out)
+    first = steps[:steps.index(next(s for s in steps if s.startswith("G1")))]
+    assert sorted(s for s in first if s.endswith("Retriever")) == ["FigureRetriever", "TableRetriever", "TextRetriever"]
+    assert any(e["node"] == "N5" for e in out["events"])                 # later rounds are planned
+
+
+def test_text_only_first_round_is_text_alone():
+    with cfg.override(VARIANT="text_only", FIRST_ROUND="all"):
+        out = build_graph().invoke(new_state(QUERY))
+    assert set(s for s in path(out) if s.endswith("Retriever")) == {"TextRetriever"}

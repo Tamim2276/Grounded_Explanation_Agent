@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 131,
+  "prompt_tokens": 1554,
+  "total_tokens": 1685,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?\nSub-questions:\n1. [figure] How do the reconstructions compare to the original samples?\nEvidence:\nE1 [figure, Figure 9, page 8] (image attached): Figure 9. Results of joint material segmentation and estimation for two samples (rows) . In every part we show a re-synthesis, as well as two estimated materials and the resulting mask. The insets in the last row show that, while not all reﬂection details are reproduced, ours is free of color shifts around the highlights and mostly a low- frequency approximation of the environment reﬂected.\nE2 [figure, Figure 9, page 8]: Zoomed view (300 dpi) of: Figure 9. Results of joint material segmentation and estimation for two samples (rows) . In every part we show a re-synthesis, as well as two estimated materials and the resulting mask. The insets in the last row show that, while not all reﬂection details are reproduced, ours is free of color shifts around the highlights and mostly a low- frequency approximation of the environment reﬂected. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The reconstructions are a low-frequency approximation of the environment reflected and free of color shifts around the highlights."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to compare the reconstructions to the original samples in terms of specific metrics or quantitative differences. The figure only provides qualitative observations about the reconstructions and the original samples, but does not provide a direct comparison or numerical",
+  "sufficient": false
+ }
+}

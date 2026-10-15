@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 120,
+  "prompt_tokens": 578,
+  "total_tokens": 698,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three different network architectures used in the comparison study?\nSub-questions:\n1. [figure] What are the three different network architectures used in the comparison study?\nEvidence:\nE1 [text, Section E, page 5]: Experimental study In the following we describe a series of experiments and observations justifying the three claims we made in the abstract of this paper. The beneﬁts of LSTM and MDN Our network architecture uses LSTM layers and an MDNbased error signal. These choices need to be validated, as many researchers reported success on similar tasks with a simpler network - without recurrent layers and using mean squared error (MSE) as an error signal. For instance, (Levine et al. 2016) use convolutional layers (for extracting poses\nE2 [text, Section E, page 5]: LSTM-MDN: Mixture density network containing 3 layers of LSTM with 50 memory states in each layer. The mixture contains 20 Gaussian kernels. The LSTM-MDN network is described in Figure 3, while the architectures of the other approaches are shown in Figure 5. Each network had been separately trained for the pick and place and the push to desired pose respectively, in effect creating 8 different controllers. The resulting controllers had been tested in the virtual environment by requiring the robot to perform randomly generated tasks 20 times. If it can not complete the task in a limited time (1 minute for the ﬁrst task and 2 minutes for the second one), we count the try as a failure and reset the position of the box. The numerical success rates are shown in the following table:\nE3 [text, Section abstract, page 3]: The neural network based robot controller The robot controller takes as input the pose of the objects involved and the pose and open/close status of the grip-"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "LSTM-MDN, LSTM, and MDN"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The specific network architectures used in the comparison study are not explicitly stated in the provided evidence. The text mentions LSTM-MDN, LSTM, and MDN, but it does not specify which three different network architectures were used in the comparison study.",
+  "sufficient": false
+ }
+}

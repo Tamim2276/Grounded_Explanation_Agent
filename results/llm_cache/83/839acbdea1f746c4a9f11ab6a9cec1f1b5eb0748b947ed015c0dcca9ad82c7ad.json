@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 46,
+  "prompt_tokens": 215,
+  "total_tokens": 261,
+  "prompt_tokens_details": {
+   "cached_tokens": 149
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the different models change as the corruption level increases? Which model appears to be the most robust to label corruption?\nSub-goals:\n1. [figure] How does the performance of the different models change as the corruption level increases?\n2. [table] Which model appears to be the most robust to label corruption?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with table\nStill missing: The evidence does not provide specific numerical values for the performance of the models at each corruption level or a direct comparison of the models' robustness to label corruption. It only shows trends and the best and last performance for each model at different corruption levels."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for specific performance data and robustness comparison, which are typically found in tables.",
+  "tool": "table",
+  "query": "performance of different models at various corruption levels"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 52,
+  "prompt_tokens": 183,
+  "total_tokens": 235,
+  "prompt_tokens_details": {
+   "cached_tokens": 118
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the frequency reduction process create multiple trajectories from a single demonstration?\nSub-goals:\n1. [figure] How does the frequency reduction process create multiple trajectories from a single demonstration?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The evidence does not provide the specific number of trajectories generated or the exact process of how the frequency reduction creates multiple trajectories from a single demonstration. It only shows an example of 8 generated trajectories and the process of frequency reduction, but does not specify"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide the specific number of trajectories generated or the exact process of how the frequency reduction creates multiple trajectories from a single demonstration.",
+  "tool": "table",
+  "query": "frequency reduction process multiple trajectories"
+ }
+}

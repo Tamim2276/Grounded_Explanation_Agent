@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 194,
+  "total_tokens": 262,
+  "prompt_tokens_details": {
+   "cached_tokens": 122
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nSub-goals:\n1. [table] Which deep-coref model performed best on the WikiCoref dataset, according to the table?\nAlready tried: sub-goal 1 with table\nStill missing: The evidence does not provide the specific model that performed best on the WikiCoref dataset. It only shows the performance of different models on the WikiCoref dataset, but does not specify which one was the best overall. The other sub-questions are not addressed by the evidence provided."
+  }
+ ],
+ "answer": {
+  "reason": "The table provides the performance of different models on the WikiCoref dataset, but it does not specify which model performed best overall.",
+  "tool": "table",
+  "query": "Which deep-coref model performed best on the WikiCoref dataset?"
+ }
+}

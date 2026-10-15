@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 365,
+  "prompt_tokens": 771,
+  "total_tokens": 1136,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Action Search uses temporal context to reason about where to search next.\" -- cites: E5 (Figure 5): observation \"We observe that Action Search uses temporal context to reason about where to search next.\"\n2. \"The model's search steps are influenced by the temporal context of the scenes and actions.\" -- cites: E1 (Section 5.3): quote \"Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly. For example, it uses information about scenes/concepts such as gala dinner and ﬁghts to spot actions such as clink glass and shoot , respectively (top two rows, left column).\"\n3. \"The model's search process is sequential and takes into account the previous search steps and the current visual observation.\" -- cites: E3 (Section 4.1): quote \"We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation.\"\n\nCited evidence:\n[E1] (text, Section 5.3, page 13): Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly. For example, it uses information about scenes/concepts such as gala dinner and ﬁghts to spot actions such as clink glass and shoot , respectively (top two rows, left column). Furthermore, when spotting the start times of actions, our model seems to understand the\n[E3] (text, Section 4.1, page 7): The input to Action Search is a sequence of visual observations ( X 1 , X 2 , . . . , X n ) and the output is a sequence of temporal locations ( f ( X 1 ) , f ( X 2 ) , . . . , f ( X n )), i.e. a search sequence, produced by the search process. For a given video and at the i th search step, a visual encoder represents the observation X i extracted from the model’s current temporal location in the video by a feature vector v i . We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation. Finally, a fully-connected layer transforms h i (the updated state) to produce f ( X i ), the next location to search in the video.\n[E5] (figure, Figure 5, page 14): a zoomed view of Figure 5"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E5 (Figure 5) states: 'We observe that Action Search uses temporal context to reason about where to search next.' This directly supports the claim that Action Search uses temporal context to reason about where to search next."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 5.3) states: 'Figure 5 depicts qualitative search sequences of our Action Search model, which exploits temporal context to spot the actions quickly. For example, it uses information about scenes/concepts such as gala dinner and ﬁghts to spot actions such as clink glass and shoot, respectively (top two rows, left column).' This supports the claim that the model's search steps are influenced by the temporal context of the scenes and actions."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4.1) states: 'We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs (h_i−1, f(X_i−1), v_i), where h_i−1 is the LSTM state from the previous step (an aggregation of information from previous steps), f(X_i−1) is the predicted temporal location from the previous step (the model’s current location), and v_i is the feature vector representing the current visual observation.' This supports the claim that the model's search process is sequential and takes into account the previous search steps and the current visual observation."
+   }
+  ]
+ }
+}

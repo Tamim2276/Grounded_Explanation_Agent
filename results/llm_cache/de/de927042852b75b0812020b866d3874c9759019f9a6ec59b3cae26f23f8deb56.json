@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 157,
+  "prompt_tokens": 2606,
+  "total_tokens": 2763,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different stages involved in constructing the Concept Interaction Graph (CIG) from a pair of documents?\nSub-questions:\n1. [figure] What are the different stages involved in constructing the Concept Interaction Graph (CIG) from a pair of documents?\nEvidence:\nE1 [figure, Figure 2, page 3] (image attached): Figure 2: An overview of our approach for constructing the Concept Interaction Graph (CIG) from a pair of documents and classifying it by Graph Convolutional Networks.\nWords printed in the figure: Construct KeyGraph by Word Co-occurrence w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w Document Pair KeyGraph Concepts Doc A Doc B Detect Concepts by Community Detection Assign Sentences by Similarities S1 S2 Concept 1 S1 S2 Concept 2 S1 S2 Concept 3 S1 S2 Concept 4 S1 S2 Concept 5 Concepts with sentences Get Edge Weights by Vertex Similarities 3 5 4 2 1 Concept Interaction Graph Siamese Encoder Context Layer Contex Layer Matching Layer Sentences 1 Sentences 2 Vertex Feature Term-based Feature Extractor Sentence 1, Sentence 2 Feature Extractor Vertex Feature CIG with vertex features vertex features Result (a) Representation (b) Encoding (c) Transformation (d) Aggregation Input GCN Layers Aggregation Layer transformed features Siamese matching Term-based matching Siamese matching … Term-based matching Global matching Concatenate Classify\nE2 [figure, Figure 2, page 3]: Zoomed view (300 dpi) of: Figure 2: An overview of our approach for constructing the Concept Interaction Graph (CIG) from a pair of documents and classifying it by Graph Convolutional Networks.\nWords printed in the figure: Construct KeyGraph by Word Co-occurrence w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w Document Pair KeyGraph Concepts Doc A Doc B Detect Concepts by Community Detection Assign Sentences by Similarities S1 S2 Concept 1 S1 S2 Concept 2 S1 S2 Concept 3 S1 S2 Concept 4 S1 S2 Concept 5 Concepts with sentences Get Edge Weights by Vertex Similarities 3 5 4 2 1 Concept Interaction Graph Siamese Encoder Context Layer Contex Layer Matching Layer Sentences 1 Sentences 2 Vertex Feature Term-based Feature Extractor Sentence 1, Sentence 2 Feature Extractor Vertex Feature CIG with vertex features vertex features Result (a) Representation (b) Encoding (c) Transformation (d) Aggregation Input GCN Layers Aggregation Layer transformed features Siamese matching Term-based matching Siamese matching … Term-based matching Global matching Concatenate Classify\nE3 [text, Section 2, page 2]: In this section, we present our Concept Interaction Graph (CIG) to represent a document as an undirected weighted graph , which decomposes a document into subsets of sentences, each subset focusing on a different concept . Given a document D , a CIG is a graph G D , where each vertex in G D is called a concept , which is a keyword or a set of highly correlated keywords in document D . Each sentence in D will be attached to the single concept vertex that it is the most related to, which most frequently is the concept the sentence mentions. Hence, vertices will have their own sentence sets, which are disjoint. The weight of the edge between a pair of concepts denotes how much the two concepts are related to each other and can be determined in various ways. As an example, Fig. 1 illustrates how we convert a document into a Concept Interaction Graph. We can extract keywords Rick , Morty , Summer , and Candy Planet from the document using standard keyword extraction algorithms, e.g., TextRank ( Mihalcea and Tarau , 2004 ). These keywords are further clustered into three concepts, where each concept is a subset of highly correlated keywords. After grouping keywords into concepts, we attach each sentence in the document to its most related concept vertex. For example, in Fig. 1 , sentences 1 and 2 are mainly talking about the relationship between Rick and Morty , and are thus attached to the concept ( Rick , Morty ). Other sentences are attached to vertices in a similar way. The att ...\nE4 [text, Section 1, page 1]: In this paper, we apply the divide-and-conquer philosophy to matching a pair of articles and bring deep text understanding from the currently dominating sequential modeling of language elements to a new level of graphical document representation, which is more suitable for longer articles. Speciﬁcally, we have made the following contributions: First , we propose the so-called Concept Interaction Graph (CIG) to represent a document as a weighted graph of concepts, where each concept vertex is either a keyword or a set of tightly connected keywords. The sentences in the article associated with each concept serve as the features for local comparison to the same concept appearing in another article. Furthermore, two concept vertices in an article are also connected by a weighted edge which indicates their interaction strength. The CIG does not only capture the essen-\nE5 [text, Section 2, page 3]: use each keyword directly as a concept. The beneﬁt brought by concept detection is that it reduces the number of vertices in a graph and speeds up matching, as will be shown in Sec. 4 . Sentence Attachment. After the concepts are discovered, the next step is to group sentences by concepts. We calculate the cosine similarity between each sentence and each concept, where sentences and concepts are represented by TF-IDF vectors. We assign each sentence to the concept which is the most similar to the sentence. Sentences that do not match any concepts in the document will be attached to a dummy vertex that does not contain any keywords. Edge Construction . To construct edges that reveal the correlations between different concepts, for each vertex, we represent its sentence set as a concatenation of the sentences attached to it, and calculate the edge weight between any two vertices as the TF-IDF similarity between their sentence sets. Although edge weights may be decided in other ways, our experience shows that constructing edges by TF-IDF similarity generates a CIG that is more densely connected. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The stages involved in constructing the Concept Interaction Graph (CIG) are: Construct KeyGraph by Word Co-occurrence, Detect Concepts by Community Detection, Assign Sentences by Similarities, Get Edge Weights by Vertex Similarities."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The stages involved in constructing the Concept Interaction Graph (CIG) from a pair of documents are not explicitly listed in the provided evidence. The figure and text describe the process but do not enumerate the stages in a numbered list or a similar format.",
+  "sufficient": false
+ }
+}

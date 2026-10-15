@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 195,
+  "prompt_tokens": 536,
+  "total_tokens": 731,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The 'top-pairs' model of deep-coref performed best on the WikiCoref dataset according to the table.\" -- cites: E4 (Table 2): row 'top-pairs', column 'CoNLL' = 52.52\n2. \"The 'ranking' model of deep-coref had a CoNLL score of 52.90 on the WikiCoref dataset.\" -- cites: E4 (Table 2): row 'ranking', column 'CoNLL' = 52.90\n3. \"The 'top-pairs' model of deep-coref had a CoNLL score of 52.52 on the WikiCoref dataset.\" -- cites: E4 (Table 2): row 'top-pairs', column 'CoNLL' = 52.52\n\nCited evidence:\n[E4] (table, Table 2, page 4): Table 2 : Out-of-domain evaluation of deep-coref models on the WikiCoref dataset.\nValues (cite as cells):\n  row 'ranking': 'MUC' = 63.10; 'B3' = 48.43; 'CEAFe' = 47.18; 'CoNLL' = 52.90; 'LEA' = 44.40\n  row 'top-pairs': 'MUC' = 63.09; 'B3' = 48.42; 'CEAFe' = 46.05; 'CoNLL' = 52.52; 'LEA' = 44.21\n  row '+linguistic': 'MUC' = 63.99; 'B3' = 49.63; 'CEAFe' = 46.60; 'CoNLL' = 53.40; 'LEA' = 45.66"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The 'top-pairs' model in the 'CoNLL' column of the 'top-pairs' row has a score of 52.52, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The 'ranking' model in the 'CoNLL' column of the 'ranking' row has a score of 52.90, which matches the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The 'top-pairs' model in the 'CoNLL' column of the 'top-pairs' row has a score of 52.52, which matches the claim."
+   }
+  ]
+ }
+}

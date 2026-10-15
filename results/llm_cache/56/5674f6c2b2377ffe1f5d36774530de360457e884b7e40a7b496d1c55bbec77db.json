@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 321,
+  "total_tokens": 380,
+  "prompt_tokens_details": {
+   "cached_tokens": 229
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following statements about the training procedure of ZDDA is true?\n\n(a) ZDDA simulates the target-domain representation using the source-domain data. (b) ZDDA builds a joint network with the supervision from the target domain. (c) ZDDA trains a sensor fusion network in step 1. (d) ZDDA trains a sensor fusion network in step 2.\nSub-goals:\n1. [table] Which of the following statements about the training procedure of ZDDA is true?\n2. [figure] (a) ZDDA simulates the target-domain representation using the source-domain data.\n3. [figure] (b) ZDDA builds a joint network with the supervision from the target domain.\nAlready tried: sub-goal 1 with text\nStill missing: table evidence for sub-goal 1 (rule floor); figure evidence for sub-goal 2 (rule floor); figure evidence for sub-goal 3 (rule floor); The evidence does not provide information about the training procedure of ZDDA in steps 2 and 3, and the statement about building a joint network with supervision from the target domain is not supported by the evidence provided."
+  }
+ ],
+ "answer": {
+  "reason": "To find the correct statement about the training procedure of ZDDA, I need to search the text of the paper for details about the steps involved in the training process.",
+  "tool": "text",
+  "query": "ZDDA training procedure steps"
+ }
+}

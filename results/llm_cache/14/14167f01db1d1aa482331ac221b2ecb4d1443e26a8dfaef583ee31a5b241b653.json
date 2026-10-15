@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 187,
+  "total_tokens": 248,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the virtual environment in the proposed approach?\nSub-goals:\n1. [figure] What is the role of the virtual environment in the proposed approach?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The role of the virtual environment in the proposed approach is not explicitly stated in the provided evidence. The evidence describes the use of the virtual environment for collecting demonstrations and modeling a table, but it does not explain the role of the virtual environment in the proposed or"
+  }
+ ],
+ "answer": {
+  "reason": "The role of the virtual environment in the proposed approach is not explicitly stated in the text, so a figure search is needed to find relevant evidence.",
+  "tool": "figure",
+  "query": "role of virtual environment in proposed approach"
+ }
+}

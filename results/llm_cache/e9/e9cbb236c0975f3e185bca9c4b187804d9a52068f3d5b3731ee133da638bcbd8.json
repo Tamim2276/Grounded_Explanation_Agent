@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 87,
+  "prompt_tokens": 183,
+  "total_tokens": 270,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys? Was there a significant difference in performance compared to the other methods?\nSub-goals:\n1. [table] Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys?\n2. [table] Was there a significant difference in performance compared to the other methods?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the best embedding method across all model architectures on the Visual7W dataset with IoU + QoU decoys, which is typically found in a table summarizing performance metrics.",
+  "tool": "table",
+  "query": "best embedding method across all model architectures on the Visual7W dataset with IoU + QoU decoys"
+ }
+}

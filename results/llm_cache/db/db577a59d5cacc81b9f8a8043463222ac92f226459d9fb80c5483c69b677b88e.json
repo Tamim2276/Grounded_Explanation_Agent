@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 52,
+  "prompt_tokens": 176,
+  "total_tokens": 228,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the compared methods is most likely to be the safest?\nSub-goals:\n1. [figure] Which of the compared methods is most likely to be the safest?\nAlready tried: sub-goal 1 with figure\nStill missing: No further evidence is provided to determine the safest method among the compared methods. The figure only shows the fitting results of different methods under various outlier rates, but it does not explicitly state which method is the safest. Additional information or a statement about the safety ("
+  }
+ ],
+ "answer": {
+  "reason": "To determine the safest method, we need to look for a statement or a table that explicitly ranks or compares the methods based on safety criteria.",
+  "tool": "table",
+  "query": "safety comparison of methods"
+ }
+}

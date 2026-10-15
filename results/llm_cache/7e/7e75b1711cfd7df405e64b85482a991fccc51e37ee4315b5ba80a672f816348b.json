@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 176,
+  "total_tokens": 240,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the sequential and recurrent generation schemes?\nSub-goals:\n1. [figure] What is the difference between the sequential and recurrent generation schemes?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The evidence does not provide specific details about the difference in effectiveness or performance metrics between the sequential and recurrent generation schemes. It only describes the nature of the schemes and their differences in terms of dependency modeling. Further evidence is needed to answer"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of the effectiveness or performance metrics between the two schemes, which is not covered by the text or figure searches. A table search might provide the necessary performance data.",
+  "tool": "table",
+  "query": "performance metrics sequential vs recurrent generation schemes"
+ }
+}

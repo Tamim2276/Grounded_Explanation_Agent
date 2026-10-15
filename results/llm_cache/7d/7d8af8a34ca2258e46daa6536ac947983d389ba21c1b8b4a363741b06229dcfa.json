@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 109,
+  "prompt_tokens": 1824,
+  "total_tokens": 1933,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?\nSub-questions:\n1. [figure] How do the reconstructions compare to the original samples?\nEvidence:\nE1 [figure, Figure 9, page 8] (image attached): Figure 9. Results of joint material segmentation and estimation for two samples (rows) . In every part we show a re-synthesis, as well as two estimated materials and the resulting mask. The insets in the last row show that, while not all reﬂection details are reproduced, ours is free of color shifts around the highlights and mostly a low- frequency approximation of the environment reﬂected.\nE2 [figure, Figure 9, page 8]: Zoomed view (300 dpi) of: Figure 9. Results of joint material segmentation and estimation for two samples (rows) . In every part we show a re-synthesis, as well as two estimated materials and the resulting mask. The insets in the last row show that, while not all reﬂection details are reproduced, ours is free of color shifts around the highlights and mostly a low- frequency approximation of the environment reﬂected.\nE3 [table, Table 1, page 7]: Table 1. Quantitative results on synthetic data. Rows are different combination of tasks and methods (three applications, two view protocols, our two methods). Columns are different data. Error is measured as mean DSSIM across the data set (less is better).\nTask | View | Method | Error | \n |  |  | PNT | ENV\n |  | OUR | .105 | .123\nRepresentation | Same | RM++ | .143 | .160\n(Sec. 3.2) |  | OUR | .144 | .164\n | Novel | RM++ | .181 | .193\n |  | OUR | .106 | .131\nLearn-to-learn | Same | SGD | .105 | .123\n(Sec. 3.3) |  | OUR | .165 | .173\n | Novel | SGD | .144 | .164\n |  | OUR | .113 | .122\nSegmentation | Same | KMEANS | .132 | .136\n |  |  |  |  [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The reconstructions are free of color shifts around the highlights and mostly a low-frequency approximation of the environment reflected."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to compare the reconstructions to the original samples in terms of quantitative measures or specific details of the comparison.",
+  "sufficient": false
+ }
+}

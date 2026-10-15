@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 171,
+  "total_tokens": 232,
+  "prompt_tokens_details": {
+   "cached_tokens": 136
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which year is most associated with the terms \"sept\", \"hijackers\", and \"attacks\"?\nSub-goals:\n1. [table] Which year is most associated with the terms 'sept', 'hijackers', and 'attacks'? -> text\nAlready tried: sub-goal 1 with text, sub-goal 1 with table\nStill missing: The year associated with the terms 'sept', 'hijackers', and 'attacks'."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a specific year associated with the terms 'sept', 'hijackers', and 'attacks', which is likely to be found in the text of the paper.",
+  "tool": "text",
+  "query": "sept hijackers attacks"
+ }
+}

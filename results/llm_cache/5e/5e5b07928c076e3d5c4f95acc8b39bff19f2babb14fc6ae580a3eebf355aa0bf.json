@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 132,
+  "total_tokens": 190,
+  "prompt_tokens_details": {
+   "cached_tokens": 72
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best for response selection, and how can we tell?\nSub-goals:\n1. [table] Which model performs the best for response selection?\n2. [figure] How can we tell?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the best model for response selection and how to determine it, which can be addressed by examining the tables and figures in the paper.",
+  "tool": "table",
+  "query": "Which model performs the best for response selection?"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 172,
+  "total_tokens": 238,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three goals that the proposed algorithm must achieve simultaneously?\nSub-goals:\n1. [figure] What are the three goals that the proposed algorithm must achieve simultaneously?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The specific three goals that the proposed algorithm must achieve simultaneously are not explicitly stated in the provided evidence. The text discusses the need to achieve these goals but does not list them directly."
+  }
+ ],
+ "answer": {
+  "reason": "The goal is to find the specific three goals that the proposed algorithm must achieve simultaneously, which is not explicitly stated in the text. The figure might contain a list or a chart that explicitly states these goals.",
+  "tool": "figure",
+  "query": "three goals algorithm must achieve simultaneously"
+ }
+}

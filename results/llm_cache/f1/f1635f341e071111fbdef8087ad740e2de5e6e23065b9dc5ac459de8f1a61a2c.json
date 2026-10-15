@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 56,
+  "prompt_tokens": 199,
+  "total_tokens": 255,
+  "prompt_tokens_details": {
+   "cached_tokens": 130
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the main differences between the educational philosophies of the Bonaparte and Voltaire schools?\nSub-goals:\n1. [figure] What are the main differences between the educational philosophies of the Bonaparte and Voltaire schools?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The evidence does not provide any information about the main differences between the educational philosophies of the Bonaparte and Voltaire schools. The evidence is related to a machine learning model for question-answering and does not address the educational philosophies of historical figures like"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for specific differences in educational philosophies, which are likely detailed in the text of the paper.",
+  "tool": "text",
+  "query": "Bonaparte Voltaire educational philosophies differences"
+ }
+}

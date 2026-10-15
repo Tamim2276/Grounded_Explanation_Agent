@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 47,
+  "prompt_tokens": 243,
+  "total_tokens": 290,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following statements about the training procedure of ZDDA is true?\n\n(a) ZDDA simulates the target-domain representation using the source-domain data. (b) ZDDA builds a joint network with the supervision from the target domain. (c) ZDDA trains a sensor fusion network in step 1. (d) ZDDA trains a sensor fusion network in step 2.\nSub-goals:\n1. [table] Which of the following statements about the training procedure of ZDDA is true?\n2. [figure] (a) ZDDA simulates the target-domain representation using the source-domain data.\n3. [figure] (b) ZDDA builds a joint network with the supervision from the target domain.\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the training procedure of ZDDA, which is likely detailed in the text of the paper.",
+  "tool": "text",
+  "query": "ZDDA training procedure"
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 215,
+  "prompt_tokens": 3312,
+  "total_tokens": 3527,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the probability of finding the pattern {head=F, ant=NAM} in the data?\nEvidence:\n[E1] (text, Section A, page 13): X 1 = { ana-type=NAM, ant-type=NAM, headmatch=F } , C ( X 1 ) = 0 X 2 = { ana-type=NAM, ant-type=NAM, headmatch=T } , C ( X 2 ) = 1 X 3 = { ana-type=NAM, ant-type=NOM, headmatch=F } , C ( X 3 ) = 0 • A = { ana-type=NAM, ant-type=NAM, headmatch=F, head-match=T, ant-type=NOM } , • support ( a i , 0) a i ∈ A = { 2,1,2,0,1 } , e.g. “anatype=NAM” appeared two times in noncoreferring ( C ( X i ) = 0 ) samples, If we sort A based on a i ’s frequencies, i.e. support ( a i , 0) + support ( a i , 1) , the ordering of A ’s items will remain the same. Now, we need to go through the samples again to build the tree. The FP-Tree construction steps after adding each of the above samples is demonstrated in Figure 1 . ana-type=NAM, anttype=NAM, head-match=F, head-match=T, and ant-type=NOM are abbreviated as ana=NAM, ant=NAM, head=F, head=T, and ant=NOM, respectively in Figures 1 and 2 . Figure 2 shows the resulted FP-Tree in which corresponding support values for both classes, i.e. zero and one, are also included in each node.\n[E2] (text, Section 6.3, page 5): We use a discriminative power and an information novelty measure for determining informativeness. We also use a frequency measure which determines the required minimum frequency of a pattern in training samples. It helps to avoid overﬁtting to the properties of the training data.\n[E3] (text, Section 7.3, page 7): Figure 2 compares EPM mining time (in seconds) with those of DDPMine and MPP. The parameter in the parentheses is the pattern size threshold, e.g. Θ l = 4 for EPM(4). The experiments that take more than two days are terminated and are not included. EPM is notably faster in comparison to the other two approaches. It is notable that the examined datasets are considerably smaller than the coreference data, which includes more than 33 million samples and 200 frequent feature-values.\n[E4] (table, Table 4, page 8): Table 4 : Comparisons on the CoNLL test set. The F 1 gains that are statistically signiﬁcant: (1) “+EPM” compared to “top- pairs”, “ranking” and “JIM”, (2) “+EPM” compared to “reinforce” based on MUC, B 3 and LEA, (3) “single” compared to “+EPM” based on MUC and B 3 , and (4) “ensemble” compared to other systems. Signiﬁcance is measured based on the approximate randomization test ( p < 0 . 05 ) ( Noreen , 1989 ).\nValues (cite as cells):\n  row '': '' = R; 'MUC' = P; '' = F1; '' = R; 'B3' = P; '' = F1; '' = R; 'CEAFe' = P; '' = F1; '' = R; 'LEA' = P; '' = F1; '' = ranking; '' = 70.43; 'MUC' = 79.57; '' = 74.72; '' = 58.08; 'B3' = 69.26; '' = 63.18; '' = 54.43; 'CEAFe' = 64.17; '' = 58.90; 'CoNLL' = 65.60; '' = 54.55; 'LEA' = 65.68; '' = 59.60; '' = reinforce; '' = 69.84; 'MUC' = 79.79; '' = 74.48; '' = 57.41; 'B3' = 70.96; '' = 63.47; '' = 55.63; 'CEAFe' = 63.83; '' = 59.45; 'CoNLL' = 65.80; '' = 53.78; 'LEA' = 67.23; '' = 59.76; '' = +EPM; '' = 71.16; 'MUC' = 79.35; '' = 75.03; '' = 59.28; 'B3' = 69.70; '' = 64.07; '' = 56.52; 'CEAFe' = 64.02; '' = 60.04; 'CoNLL' = 66.38; '' = 55.63; 'LEA' = 66.11; '' = 60.42; '' = +JIM; '' = 69.89; 'MUC' = 80.45; '' = 74.80; '' = 57.08; 'B3' = 71.58; '' = 63.51; '' = 55.36; 'CEAFe' = 64.20; '' = 59.45; 'CoNLL' = 65.93; '' = 53.46; 'LEA' = 67.97; '' = 59.85; '' = single; '' = 74.02; 'MUC' = 77.82; '' = 75.88; '' = 62.58; 'B3' = 67.45; '' = 64.92; '' = 59.16; 'CEAFe' = 62.96; '' = 61.00; 'CoNLL' = 67.27; '' = 58.90; 'LEA' = 63.79; '' = 61.25\n  row 'deep-coref': '' = top-pairs; '' = 69.41; 'MUC' = 79.90; '' = 74.29; '' = 57.01; 'B3' = 70.80; '' = 63.16; '' = 54.43; 'CEAFe' = 63.74; '' = 58.72; 'CoNLL' = 65.39; '' = 53.31; 'LEA' = 67.09; '' = 59.41\n  row 'e2e': '' = ensemble; '' = 73.73; 'MUC' = 80.95; '' = 77.17; '' = 61.83; 'B3' = 72.10; '' = 66.57; '' = 60.11; 'CEAFe' = 65.62; '' = 62.74; 'CoNLL' = 68.83; '' = 58.48; 'LEA' = 68.81; '' = 63.23\n[E5] (figure, Figure 4, page 14) (image attached): Figure 4 : Conditional FP-Tree for the p = { head=F , ant=NAM } pattern.\nWords printed in the figure: ROOT ana=NAM (1,0) ant=NAM (1,0) head=F (1,0) head=T (0,1) head=F (1,0) ant=NOM (1,0)\n[E6] (figure, Figure 4, page 14): a zoomed view of Figure 4 (image attached)\n\nThese claims are already verified and kept:\n- The pattern {head=F, ant=NAM} is found in the data.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The probability of finding the pattern {head=F, ant=NAM} in the data is not explicitly stated.\": support check: The evidence in E1 (Section A) does not explicitly state the probability of finding the pattern {head=F, ant=NAM} in the data. It only provides the count of occurrences for the pattern {head=F, ant=NAM} in the data, which is 0. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The pattern {head=F, ant=NAM} is found in the data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The pattern {head=F, ant=NAM} is present in the Conditional FP-Tree, as indicated by the node 'head=F (1,0)' under 'ant=NAM (1,0)' in the figure."
+     }
+    ]
+   },
+   {
+    "text": "The probability of finding the pattern {head=F, ant=NAM} in the data is not explicitly stated.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "X 1 = { ana-type=NAM, ant-type=NAM, headmatch=F } , C ( X 1 ) = 0"
+     }
+    ]
+   }
+  ]
+ }
+}

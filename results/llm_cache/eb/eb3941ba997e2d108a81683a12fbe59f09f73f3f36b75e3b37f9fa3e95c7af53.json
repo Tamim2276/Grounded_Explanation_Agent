@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 49,
+  "prompt_tokens": 194,
+  "total_tokens": 243,
+  "prompt_tokens_details": {
+   "cached_tokens": 122
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?\nSub-goals:\n1. [figure] What are the two auxiliary tasks that are used in the ESMM architecture for CVR modeling?\nAlready tried: sub-goal 1 with text\nStill missing: No evidence item contains the specific facts or numbers that answer the sub-question about the two auxiliary tasks used in the ESMM architecture for CVR modeling. The evidence items only describe the tasks and their roles but do not provide the specific names of the tasks as requested in the sub-ask"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for specific names of auxiliary tasks, which are likely detailed in the figures of the paper.",
+  "tool": "figure",
+  "query": "auxiliary tasks ESMM architecture CVR modeling"
+ }
+}

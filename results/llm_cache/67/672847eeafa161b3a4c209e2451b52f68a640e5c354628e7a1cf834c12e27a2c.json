@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 196,
+  "total_tokens": 268,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the proposed metric of non-ME help detect adversarial examples?\nSub-goals:\n1. [figure] How does the proposed metric of non-ME help detect adversarial examples?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The evidence does not provide a direct comparison or explanation of how the metric of non-ME specifically helps detect adversarial examples in a quantitative or qualitative manner. It only describes the process and the effect of using non-ME as a metric for detection, but does not quantify the level"
+  }
+ ],
+ "answer": {
+  "reason": "The figure evidence is needed to provide a direct comparison or explanation of how the metric of non-ME specifically helps detect adversarial examples in a quantitative or qualitative manner.",
+  "tool": "figure",
+  "query": "How does the proposed metric of non-ME help detect adversarial examples?"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 184,
+  "total_tokens": 237,
+  "prompt_tokens_details": {
+   "cached_tokens": 158
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting, and what trade-off does this model exhibit compared to other models?\nSub-goals:\n1. [table] Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting?\n2. [figure] What trade-off does this model exhibit compared to other models?\nAlready tried: sub-goal 1 with table\nStill missing: figure evidence for sub-goal 2 (rule floor)"
+  }
+ ],
+ "answer": {
+  "reason": "To find the model with the best NPMI scores, I need to search the tables for the specific scores.",
+  "tool": "table",
+  "query": "NPMI scores in unsupervised setting"
+ }
+}

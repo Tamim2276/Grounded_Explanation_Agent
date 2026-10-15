@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 189,
+  "prompt_tokens": 1206,
+  "total_tokens": 1395,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy, and how does its performance differ between the two test sets?\nSub-questions:\n1. [table] Which model performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy?\n2. [table] How does its performance differ between the two test sets?\nEvidence:\nE1 [table, Table 1, page 6]: Table 1: Per-response and per-dialog accuracies (in brackets) on bAbI dialog tasks of B O S S N ET and baselines\n |  | Retrieval | Models |  | Generative | Models |  | \nTask | QRN | MN | GMN | Mem2Seq* | Seq2Seq | Seq2Seq+Copy | Mem2Seq | BOSSNET\nT1 | 99.9 (-) | 99.6 (99.6) | 100 (100) | 100 (100) | 100 (100) | 100 (100) | 100 (100) | 100 (100)\nT2 | 99.5 (-) | 100 (100) | 100 (100) | 100 (100) | 100 (100) | 100 (100) | 100 (100) | 100 (100)\nT3 | 74.8 (-) | 74.9 (2.0) | 74.9 (0) | 94.7 (62.1) | 74.8 (0) | 85.1 (19.0) | 74.9 (0) | 95.2 (63.8)\nT4 | 57.2 (-) | 59.5 (3.0) | 57.2 (0) | 100 (100) | 57.2 (0) | 100 (100) | 100 (100) | 100 (100)\nT5 | 99.6 (-) | 96.1 (49.4) | 96.3 (52.5) | 97.9 (69.6) | 97.2 (64.4) | 96 (49.1) | 97.7(66.3) | 97.3 (65.6)\nT1-OOV | 83.1 (-) | 72.3 (0) | 82.4 (0) | 94.0 (62.2) | 81.7 (0) | 92.5 (54.7) | 94.0 (62.2) | 100 (100)\nT2-OOV | 78.9 (-) | 78.9 (0) | 78.9 (0) | 86.5 (12.4) | 78.9 (0) | 83.2 (0) | 86.5 (12.4) | 100 (100)\nT3-OOV | 75.2 (-) | 74.4 (0) | 75.3 (0) | 90.3 (38.7) | 75.3 (0) | 82.9 (0) | 75.2 (0) | 95.7 (66.6)\nT4-OOV | 56.9 (-) | 57.6 (0) | 57.0 (0) | 100 (100) | 57.0 (0) | 100 (100) | 100 (100) | 100 (100)\nT5-OOV | 67.8 (-) | 65.5 (0) | 66.7 (0) | 84.5 (2.3) | 67.4 (0) | 73.6 (0) | 75.6 (0) | 91.7 (18.5)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "BOSSNET performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "BOSSNET's performance is 95.2 (63.8) on T3 and 95.7 (66.6) on T3-OOV."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide a comparison of performance differences between the two test sets for the model that performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy.",
+  "sufficient": false
+ }
+}

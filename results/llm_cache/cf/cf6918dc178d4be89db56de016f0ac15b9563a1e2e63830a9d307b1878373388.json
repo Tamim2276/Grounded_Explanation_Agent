@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 174,
+  "total_tokens": 233,
+  "prompt_tokens_details": {
+   "cached_tokens": 126
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nSub-goals:\n1. [figure] How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nAlready tried: sub-goal 1 with figure\nStill missing: No further evidence is provided to compare the appearance of the sphere in more detail or to quantify the differences between the re-synthesis using DAMs and the reference image."
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a more detailed comparison of the sphere's appearance, which may be better addressed through a table or text search.",
+  "tool": "table",
+  "query": "Comparison of sphere appearance between re-synthesis using DAMs and reference image."
+ }
+}

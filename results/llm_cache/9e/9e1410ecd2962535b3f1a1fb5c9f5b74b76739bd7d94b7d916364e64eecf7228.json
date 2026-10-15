@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 126,
+  "prompt_tokens": 1391,
+  "total_tokens": 1517,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The node labeled η in the generative model represents the latent variable.\" -- cites: E1 (Figure 1): quote \"η\"\n2. \"The generative model is shown in Figure 1a.\" -- cites: E1 (Figure 1): observation \"Figure 1a presents the generative story of our model.\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 4) (image attached): Figure 1: Figure 1a presents the generative story of our model. Figure 1b illustrates the inference net- work using the reparametrization trick to perform variational inference on our model. Shaded nodes are observed; double circles indicate deterministic transformations of parent nodes.\nWords printed in the figure: w y η θ r α c B Ni D (a) Generative model r µ σ π c y w ϵ linear linear D (b) Inference model [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The node labeled η in the generative model is indeed present in Figure 1a, and the evidence states that η represents the latent variable."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence explicitly states that Figure 1a presents the generative story of the model, which supports the claim that the generative model is shown in Figure 1a."
+   }
+  ]
+ }
+}

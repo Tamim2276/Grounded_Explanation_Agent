@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 143,
+  "prompt_tokens": 1031,
+  "total_tokens": 1174,
+  "prompt_tokens_details": {
+   "cached_tokens": 375
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed better on the MNIST dataset, ResNet-32 (CE) or ResNet-56 (RCE)?\nSub-questions:\n1. [table] Which method performed better on the MNIST dataset, ResNet-32 (CE) or ResNet-56 (RCE)?\nEvidence:\nE1 [table, Table 4, page 8]: Table 4: AUC-scores ( 10 − 2 ) on CIFAR-10. Resnet-32 is the substitute model and Resnet-56 is the target model.\n | Res.-32 (CE) | Res.-32 (RCE)\nRes.-56 (CE) | 75.0 | 90.8\nRes.-56 (RCE) | 89.1 | 84.9\nE2 [text, Section 4.2, page 6]: We ﬁrst evaluate in the normal setting, where we implement Resnet-32 and Resnet-56 [ 15 ] on both datasets. For each network, we use both the CE and RCE as the training objectives, trained by the same settings as He et al. [16] . The number of training steps for both objectives is set to be 20,000 on MNIST and 90,000 on CIFAR-10. Hereafter for notation simplicity, we will indicate the training procedure used after the model name of a trained network, e.g., Resnet-32 (CE). Similarly, we indicate the training procedure and omit the name of the target network after an attacking method, e.g., FGSM (CE). Table 1 shows the test error rates, where the thresholding test strategy is disabled and all the points receive their predicted labels. We can see that the performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure. Note that we apply the same training hyperparameters (e.g., learning rates and decay factors) for both the CE and RCE procedures, which suggests that RCE is easy to optimize and does not require much extra effort on tuning hyperparameters.\nE3 [text, Section 4.2, page 7]: We test the performance of the trained Resnet-32 networks on MNIST and CIFAR-10 under the oblivious attack, where we investigate the attacking methods as in Sec. 2.3. We ﬁrst disable the thresholding test strategy and make classiﬁers return all predictions to study the networks ability of correctly classifying adversarial examples. We use the iteration-based attacking methods: FGSM, BIM, ILCM and JSMA, and calculate the classiﬁcation accuracy of networks on crafted adversarial examples w.r.t. the perturbation ϵ . Fig. 2a shows the results. We can see that Resnet-32 (RCE) has higher accuracy scores than Resnet-32 (CE) under all the four attacks on both datasets. As for optimization-based methods like the C&W attack and its variants, we apply the same way as in [ 3 ] to report robustness. Speciﬁcally, we do a binary search for the parameter c , in order to ﬁnd the minimal distortions that can successfully attack the classiﬁer. The distortion is deﬁned in [ 33 ] as ∥ x − x ∗ ∥ 2 /\nE4 [text, Section B.1, page 16]: We apply the same hyperparameters when training Resnet networks via the CE and RCE. The optimizer is SGD with momentum, and the mini-batch size is 128. The weight decay is 0.0002, the leakiness of Relu is 0.1. On MNIST the training steps are 20,000, with piecewise learning rate as"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "ResNet-56 (RCE) performed better on the MNIST dataset."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to compare ResNet-32 (CE) and ResNet-56 (RCE) on the MNIST dataset. The table only shows AUC-scores on CIFAR-10, not MNIST. Additional information is needed to answer the sub-question about MNIST performance comparison.",
+  "sufficient": false
+ }
+}

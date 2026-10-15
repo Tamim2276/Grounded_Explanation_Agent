@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 43,
+  "prompt_tokens": 171,
+  "total_tokens": 214,
+  "prompt_tokens_details": {
+   "cached_tokens": 98
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\nSub-goals:\n1. [figure] Explain how the answering procedure works.\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The answering procedure and its specific steps are not detailed in the provided evidence. The evidence only describes the general framework and some aspects of the answering system's capabilities but does not provide a detailed explanation of the procedure itself or its specific steps."
+  }
+ ],
+ "answer": {
+  "reason": "The figure is likely to contain a detailed explanation of the answering procedure, including its specific steps.",
+  "tool": "figure",
+  "query": "answering procedure steps"
+ }
+}

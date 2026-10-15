@@ -1,0 +1,63 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.5,
+ "images": 2,
+ "usage": {
+  "completion_tokens": 314,
+  "prompt_tokens": 5495,
+  "total_tokens": 5809,
+  "prompt_tokens_details": {
+   "cached_tokens": 3161
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the training size of the Action Search model affect its performance?\nEvidence:\n[E1] (text, Section 5.1, page 9): In this subsection, we demonstrate that our model is able to mimic the human search process when spotting actions in the AVA dataset [21]. We ﬁrst introduce our experimental protocol including a brief description of the dataset and metric used. Then, we compare Action Search against two spotting baseline models. Dataset. We conduct this experiment using the AVA v1.0 dataset [21], which is among the largest annotated action datasets and is composed of feature ﬁlms. We pick 15 action categories out of the original 80 set of actions. We train our model using the collected AVA searches from our Human Searches dataset. However, we prune oﬀthe search sequences with less than 8 steps. Refer to Section 3 for a description of the AVA searches and details about the action categories selection criteria. We evaluate our model on 35 testing videos. We use AVA 3-second annotations to deﬁne temporal boundaries for each action instance. Metric. We compare our model against other approaches according to the action spotting metric, which we deﬁne to be the expected number of unique observations made per video until spotting an action. An action is spotted if the model lands anywhere between its ground truth temporal bounds. Baseline Methods. To demonstrate the eﬀectiveness of our approach in learning to search eﬃciently, we consider two baseline models, Random Baseline and Direction Baseline (refer to the supplementary material for more baselines). Random Baseline : This model picks both the search direction and step size randomly. In particular, if the current search step is at time t of the video, it\n[E2] (text, Section 5.1, page 10): Results and Analysis. We run Action Search and the two baseline methods for 1000 independent search trials per test video to compute the action spotting metric. At each trial, we initialize each model at a random temporal location in the video, and we reinitialize the search model if it fails to spot an action after 500 steps. Figure 4 shows the cumulative performance of all three models over videos with diﬀerent action coverage ( i.e. the percentage of the video length that contains action instances). Unlike both the Direction Baseline and Random Baseline , Action Search is able to harness temporal context to expedite the search process and, as a result, takes on average 16 . 6 % and 22 . 3 % less observations, respectively, before successfully spotting actions. Notably, there is a great performance diﬀerence between our model and the two baselines in videos with very sparse actions ( i.e. action coverage ≤ 1%). We attribute this to the importance of temporal context when searching for sparse actions in video.\n[E3] (text, Section 4, page 7): In this section, we discuss the Action Search model architecture, the approach used to train it, and some speciﬁc implementation details. Figure 3 gives an overview of the main architecture of our approach.\n[E4] (table, Table 1, page 12): Table 1: Temporal localization results (mAP at tIoU) on the THUMOS14 testing set. We assign ‘–’ to unavailable mAP values. We report the average percentage of observed frames ( S ) for each approach. (a) Comparison against state-of-the- art methods: Our method ( Action Search + Priors + Res3D + S-CNN) achieves state-of-the-art results while observing only 17 . 3% of the video; (b) Video fea- tures eﬀect: We compare C3D for Action Search visual encoder + the C3D-based classiﬁer from [35] vs. ResNet for Action Search visual encoder + the Res3D- based classiﬁer from [41]; (c) The trade-oﬀbetween Action Search training size and performance: mAP and S score improve as we increase the training size.\nValues (cite as cells):\n  row 'Method': '' = 0.3; 'mAP' = 0.4; 'at' = 0.5; 'tIoU' = 0.6; '' = 0.7; '' = S; 'Backbone' = Arch.; '' = 0.3; 'mAP' = 0.4; 'at' = 0.5; 'tIoU' = 0.6; '' = 0.7; '' = S\n  row 'Frame Glimpses [44]': '' = 36.0; 'mAP' = 26.4; 'at' = 17.1; 'tIoU' = –; '' = –; '' = 40 ∗; 'Backbone' = C3D; '' = 43.7; 'mAP' = 35.2; 'at' = 23.9; 'tIoU' = 18.8; '' = 4.3; '' = 45.1\n  row 'Shou et al. [35]': '' = 36.3; 'mAP' = 28.7; 'at' = 19.0; 'tIoU' = –; '' = –; '' = 100; 'Backbone' = ResNet; '' = 51.8; 'mAP' = 42.4; 'at' = 30.8; 'tIoU' = 20.2; '' = 11.1; '' = 17.3\n  row 'Shou et al. [34]': '' = 40.1; 'mAP' = 29.4; 'at' = 23.3; 'tIoU' = 13.1; '' = 7.9; '' = 100; 'Backbone' = ; '' = ; 'mAP' = ; 'at' = ; 'tIoU' = ; '' = ; '' = \n  row 'Gao et al. [17]': '' = 44.1; 'mAP' = 34.9; 'at' = 25.6; 'tIoU' = –; '' = –; '' = 100; 'Backbone' = ; '' = (c); 'mAP' = (c); 'at' = ; 'tIoU' = ; '' = ; '' = \n  row 'Dai et al. [11]': '' = –; 'mAP' = 33.3; 'at' = 25.6; 'tIoU' = 15.9; '' = 9.0; '' = 100; 'Backbone' = Training; '' = ; 'mAP' = mAP; 'at' = at; 'tIoU' = tIoU; '' = ; '' = \n  row 'Xu et al. [43]': '' = 44.8; 'mAP' = 35.6; 'at' = 28.9; 'tIoU' = –; '' = –; '' = 100; 'Backbone' = Size; '' = 0.3; 'mAP' = 0.4; 'at' = 0.5; 'tIoU' = 0.6; '' = 0.7; '' = S\n  row 'Buch et al. [3]': '' = 45.7; 'mAP' = –; 'at' = 29.2; 'tIoU' = –; '' = 9.6; '' = 100; 'Backbone' = 0% [41]; '' = 40.6; 'mAP' = 32.6; 'at' = 22.5; 'tIoU' = 12.3; '' = 6.4; '' = 100\n  row 'Zhao et al. [46]': '' = 51.9; 'mAP' = 41.0; 'at' = 29.8; 'tIoU' = –; '' = –; '' = 100; 'Backbone' = 25%; '' = 41.1; 'mAP' = 32.9; 'at' = 22.4; 'tIoU' = 12.1; '' = 6.4; '' = 63.5\n  row 'Gao et al. [16]': '' = 50.1; 'mAP' = 41.3; 'at' = 31.0; 'tIoU' = 19.1; '' = 9.9; '' = 100; 'Backbone' = 50%; '' = 47.5; 'mAP' = 38.3; 'at' = 26.1; 'tIoU' = 16.6; '' = 8.1; '' = 34.4\n  row 'Res3D + S-CNN [41]': '' = 40.6; 'mAP' = 32.6; 'at' = 22.5; 'tIoU' = 12.3; '' = 6.4; '' = 100; 'Backbone' = 75%; '' = 50.2; 'mAP' = 41.0; 'at' = 29.5; 'tIoU' = 18.1; '' = 9.4; '' = 24.1\n  row 'Our method': '' = 51.8; 'mAP' = 42.4; 'at' = 30.8; 'tIoU' = 20.2; '' = 11.1; '' = 17.3; 'Backbone' = 100%; '' = 51.8; 'mAP' = 42.4; 'at' = 30.8; 'tIoU' = 20.2; '' = 11.1; '' = 17.3\n[E5] (figure, Figure 1, page 2) (image attached): Fig. 1: Left: A partial search sequence a human performed to ﬁnd the start of a Long Jump action (the shaded green area). Notably, humans are eﬃcient in spot- ting actions without observing a large portion of the video. Right: An eﬃciency comparison between humans, Action Search , and other detection/proposal meth- ods on THUMOS14 [24]. Our model is 5 . 8x more eﬃcient than other methods.\nWords printed in the figure: 2 H. Alwassel et al. Spotting Target Video Time t = 15 sec t = 67 sec t = 42 sec t = 63 sec t = 59 sec Human Search Step Task: Find the beginning of a Long Jump action 18 19 20 21 22 Average Precentage of Video Frames Observed to Localize Actions 5.0% 17.3% 100.0% Humans Action Search Detection/Proposal Methods\n[E6] (figure, Figure 1, page 2): a zoomed view of Figure 1 (image attached)\n[E7] (figure, Figure 3, page 7) (image attached): Fig. 3: Our model harnesses the temporal context from its current location and the history of what it has observed to predict the next search location in the video. At each step, (i) a visual encoder transforms the visual observation ex- tracted from the model’s current temporal location to a representative feature vector; (ii) an LSTM consumes this feature vector plus the state and temporal location produced in the previous step; (iii) the LSTM outputs its updated state and the next search location; (iv) the model moves to the new temporal location.\nWords printed in the figure: Action Search: Spotting Actions in Videos 7 𝐡𝑖 𝑓(𝐗𝑖) 𝐡𝑖+1 𝑓(𝐗𝑖+1) 𝐡𝑖−2 𝑓(𝐗𝑖−2) 𝐗𝑖 𝐗𝑖+1 𝐗𝑖−1 𝐗𝑖−2 𝐯𝑖 𝐯𝑖+1 𝐯𝑖−1 𝐯𝑖−2 𝐡𝑖−3 𝑓(𝐗𝑖−3) 𝑓(𝐗𝑖) 𝑓(𝐗𝑖−2) 𝑓(𝐗𝑖−3) LSTM Visual Encoder Spotting Target 𝐗𝒊: Visual Observation 𝐯𝒊: Feature Vector 𝐡𝒊: LSTM State 𝑓𝐗𝒊: Temporal Location Video Time . . . . . . . . . . . . 𝑓(𝐗𝑖+1) 𝑓(𝐗𝑖−1) Video Time 𝐡𝑖−1 𝑓(X𝑖−1)\n[E8] (figure, Figure 3, page 7): a zoomed view of Figure 3 (image attached)\n\nThese claims are already verified and kept:\n- The Action Search model is able to mimic the human search process when spotting actions in the AVA dataset.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The Action Search model is 5.8x more efficient than other methods in spotting actions.\": the number 5 is in no citation\n- \"The training size of the Action Search model affects its performance, as mAP and S score improve as we increase the training size.\": the quote is not in E4\n- \"The Action Search model is more efficient than humans in spotting actions, as it observes only 17.3% of the video compared to 5.0% for humans.\": the number 17.3, 5.0 is in no citation [image] [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Action Search model is able to mimic the human search process when spotting actions in the AVA dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "In this subsection, we demonstrate that our model is able to mimic the human search process when spotting actions in the AVA dataset [21]."
+     }
+    ]
+   },
+   {
+    "text": "The training size of the Action Search model affects its performance, as mAP and S score improve as we increase the training size.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "The trade-off between Action Search training size and performance: mAP and S score improve as we increase the training size."
+     }
+    ]
+   },
+   {
+    "text": "The Action Search model is more efficient than humans in spotting actions, as it observes only 17.3% of the video compared to 5.0% for humans.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "quote": "Our model is 5.8x more efficient than other methods."
+     },
+     {
+      "evidence": "E6",
+      "observation": "The bar chart shows that Action Search observes 17.3% of the video, while humans observe 5.0%."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 140,
+  "prompt_tokens": 1774,
+  "total_tokens": 1914,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nSub-questions:\n1. [figure] How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nEvidence:\nE1 [figure, Figure 1, page 1] (image attached): Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) .\nWords printed in the figure: Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\nE2 [figure, Figure 1, page 1]: Zoomed view (300 dpi) of: Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) .\nWords printed in the figure: Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\nE3 [table, Table 2, page 8]: Table 2. DSSIM (less is better) error on real data.\n | Same |  | Novel view | \n | OUR | OUR | RM++ | RM\nDSSIM Error | .069 | .079 | .090 | .127\nSource DAM |  |  |  |  [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The appearance of the sphere differs in the re-synthesis using DAMs and the reference image."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The specific differences in appearance between the re-synthesis using DAMs and the reference image are not detailed in the provided evidence. The figure shows multiple views, but the differences in appearance are not quantified or described in the text or figure captions provided. Therefore, the sub",
+  "sufficient": false
+ }
+}

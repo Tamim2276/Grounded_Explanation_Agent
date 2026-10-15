@@ -1,0 +1,55 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 299,
+  "prompt_tokens": 2243,
+  "total_tokens": 2542,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the representation module and the learning-to-learn module?\nSub-questions:\n1. [figure] What is the difference between the representation module and the learning-to-learn module?\nEvidence:\nE1 [text, Section abstract, page 1]: We propose a deep representation of appearance, i. e., the relation of color, surface orientation, viewer position, material and illumination. Previous approaches have used deep learning to extract classic appearance representations relating to reﬂectance model parameters (e. g., Phong) or illumination (e. g., HDR environment maps). We suggest to directly represent appearance itself as a network we call a Deep Appearance Map (DAM). This is a 4D generalization over 2D reﬂectance maps, which held the view direction ﬁxed. First, we show how a DAM can be learned from images or video frames and later be used to synthesize appearance, given new surface orientations and viewer positions. Second, we demonstrate how another network can be used to map from an image or video frames to a DAM network to reproduce this appearance, without using a lengthy optimization such as stochastic gradient descent (learning-to-learn). Finally, we show the example of an appearance estimation-\nE2 [text, Section 3.3, page 4]: Taking it a step further, we suggest to replace the learning procedure explained before by a network (learning-to-learn [ 34 ]). The main idea is to speed up the learning process, allowing acquisition of a deep appearance material on-the-ﬂy\nE3 [text, Section 5.2, page 6]: Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views.\nE4 [figure, Figure 6, page 6] (image attached): Figure 6. Pairs of error plots for each task. In each pair, the ﬁrst is the old and the second the new view. Each curve is produced by sorting the DSSIM (less is better) of all samples in the data set. Blue colors are for point light illumination, red colors for environment maps. Dark hues are the competitor and light hues ours.\nWords printed in the figure: Old view Ours Other Ours Other Error Error Error Rank Rank Rank Error Rank Error Rank Error Rank Envmap Pointlight New view Representation Learning-to-learn Segmentation and estimation Old view New view Old view New view 1000 .4 0 1000 .4 1000 .4 0 1000 .4 88 .4 0 1000 .4 0 0 0 0 0 0\nE5 [figure, Figure 6, page 6]: Zoomed view (300 dpi) of: Figure 6. Pairs of error plots for each task. In each pair, the ﬁrst is the old and the second the new view. Each curve is produced by sorting the DSSIM (less is better) of all samples in the data set. Blue colors are for point light illumination, red colors for environment maps. Dark hues are the competitor and light hues ours.\nWords printed in the figure: Old view Ours Other Ours Other Error Error Error Rank Rank Rank Error Rank Error Rank Error Rank Envmap Pointlight New view Representation Learning-to-learn Segmentation and estimation Old view New view Old view New view 1000 .4 0 1000 .4 1000 .4 0 1000 .4 88 .4 0 1000 .4 0 0 0 0 0 0\nE6 [table, Table 2, page 8]: Table 2. DSSIM (less is better) error on real data.\n | Same |  | Novel view | \n | OUR | OUR | RM++ | RM\nDSSIM Error | .069 | .079 | .090 | .127\nSource DAM |  |  |  |  [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The representation module directly represents appearance itself, while the learning-to-learn module maps from an image or video frames to a DAM network to reproduce this appearance."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "The representation module is a 4D generalization over 2D reflectance maps, which held the view direction fixed."
+   },
+   {
+    "sub_question": 3,
+    "evidence": "E1",
+    "fact": "The learning-to-learn module allows acquisition of a deep appearance material on-the-fly."
+   },
+   {
+    "sub_question": 4,
+    "evidence": "E6",
+    "fact": "The representation module has a lower DSSIM error than the learning-to-learn module for both same and novel view conditions."
+   }
+  ],
+  "uncovered": [
+   5,
+   6
+  ],
+  "missing": "The difference in error between the representation module and the learning-to-learn module for different illumination conditions (point light and environment maps) is not explicitly stated in the provided evidence. The figure and table only show the DSSIM error for the same and novel view conditions",
+  "sufficient": false
+ }
+}

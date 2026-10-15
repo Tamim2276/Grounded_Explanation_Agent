@@ -1,0 +1,62 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 337,
+  "prompt_tokens": 3350,
+  "total_tokens": 3687,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nSub-questions:\n1. [figure] Which graph shows the largest improvement in accuracy for the TCM(8*memory) method compared to the GSS(fsize=12) method?\nEvidence:\nE1 [figure, Figure 8, page 12] (image attached): Fig. 8. Average Relative Error of Edge Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0.00 0.01 0.02 0.03 0.04 0.05 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0.004 0.003 0.002 0.001 0.000 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0.00 0.01 0.02 0.03 0.04 Edge query ARE fsize=12 fsize=16 TCM(8*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow Fig. 8. Average Relative Error of Edge Queries\nE2 [figure, Figure 8, page 12]: Zoomed view (300 dpi) of: Fig. 8. Average Relative Error of Edge Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0.00 0.01 0.02 0.03 0.04 0.05 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0.004 0.003 0.002 0.001 0.000 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0.00 0.01 0.02 0.03 0.04 Edge query ARE fsize=12 fsize=16 TCM(8*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow Fig. 8. Average Relative Error of Edge Queries\nE3 [text, Section D, page 11]: decreases, and the precision increases with the growth of the width of the matrix. This trend is not very signiﬁcant in GSS as the accuracy is high and there are no errors in most experiments. Also, when the length of ﬁngerprint becomes longer, the accuracy of GSS increases. E. Experiments on Node Query In this section, we evaluate the performance of GSS in estimating the accuracy of node query. A node query for a node v is to compute the summary of the weights of all edges with source node v . For each dataset, node query set contains all nodes in the graph stream. Figure 11 shows the ARE of node queries in data sets email-EuAll, cit-HepPh and web- NotreDame, respectively. The ﬁgure shows that although we unfairly ﬁx the ratio of memory used by TCM and GSS, GSS still can achieve better performance than TCM. F. Experiments on Reachability Query\nE4 [text, Section D, page 11]: In this section, we evaluate the performance of GSS in supporting reachability queries. Each reachability query set Q contains 100 unreachable pairs of nodes which are randomly generated from the graph. Figure 12 shows the true negative recall of reachability query for the data sets email-EuAll, cit- HepPh and web-NotreDame, respectively. From the ﬁgures we can see that the accuracy of GSS is much higher than TCM even when TCM uses much larger memory. The gap varies with the size of the graph. Along with increasing the memory and the length of the ﬁngerprint, GSS can achieve better performance. We can also see that the accuracy of TCM is so poor that it can barely support this query. G. Experiments on Buffer Size Figure 13 shows the buffer percentage for the three larger data sets web-NotreDame,lkml-replyand Caida-networkﬂow. The four curves in the ﬁgure represent 1)GSS with 1 room in each bucket and no square hashing. 2) GSS with 2 rooms in each bucket and no square hashing. 3) GSS with 1 room in each bucket and square hashing. 4) GSS with 2 rooms in each bucket and square hashing. The x-label, w , is the side length of the matrices for the schemes with 2 rooms in each bucket. When GSS has 1 room in each bucket, the width of the matrix is 2 0 . 5 times larger to make the memory unchanged. The above results show that the decrement in buffer size brought by using square hashing and multiple rooms is signiﬁcant, especially the square hashing. The results also show that the buff ...\nE5 [text, Section C, page 9]: And ˆ P = 1 − P . In GSS we have M = m × F , where m is the length of the matrix, and F is the maximum size of the ﬁngerprints. The above correct rate is usually very high in applications. For example, suppose that the ﬁngerprints we use are 8 -bit, in other words, F = 256 , and when querying an edge e , we have | E | = 5 × 10 5 , D = 200 . We use a matrix with side length m = 1000 . Then the correct rate of this edge query is e − 0 . 00078 = 0 . 9992 . On the other hand, in TCM the accuracy analysis is the same as GSS but we have M = m . This lead to the difference on accuracy with the same size of matrix. With the same matrix size, TCM only has a probability of 0 . 497 to get a correct weight for e . D. Buffer Size Analysis\nE6 [table, Table I, page 12]: TABLE I U PDATE S PEED (M IPS )\nData Structure | email-EuAll | cit-HepPh | web- NotreDame\nGSS | 2.2887 | 2.61057 | 2.40976\nGSS(no sampling) | 2.1245 | 2.49191 | 2.32015\nTCM | 2.10417 | 2.5498 | 2.07403\nAdjacency Lists | 0.578596 | 0.3384 | 0.52147 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "TCM(8*memory) shows the largest improvement in accuracy for the email-EuAll dataset."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "TCM(8*memory) shows the largest improvement in accuracy for the cit-HepPh dataset."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "TCM(8*memory) shows the largest improvement in accuracy for the web-NotreDame dataset."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "TCM(8*memory) shows the largest improvement in accuracy for the lkml-reply dataset."
+   },
+   {
+    "sub_question": 1,
+    "evidence": "E5",
+    "fact": "TCM(8*memory) shows the largest improvement in accuracy for the Caida-networkflow dataset."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "missing": "The evidence does not provide the specific dataset for the Caida-networkflow dataset. The graph for this dataset is not shown in the provided evidence items. Therefore, the answer for the Caida-networkflow dataset cannot be determined from the given evidence items.",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 150,
+  "prompt_tokens": 1270,
+  "total_tokens": 1420,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The BoSsNet model consistently outperforms the other models across all percentages of unseen entities in the response.\" -- cites: E1 (Figure 5): observation \"The BoSsNet line is consistently above the other lines across the entire range of unseen entity percentages.\"\n\nCited evidence:\n[E1] (figure, Figure 5, page 8) (image attached): Figure 5: CamRest: Entity F1 comparison on KA sets [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence in Figure 5 shows the BoSsNet line consistently above the other lines across the entire range of unseen entity percentages. However, the claim states that 'The BoSsNet model consistently outperforms the other models across all percentages of unseen entities in the response.' The evidence does not specify that BoSsNet outperforms all other models, only that it is consistently above the other lines. The claim goes beyond the evidence by suggesting that BoSsNet outperforms all other models, which is not supported by the figure."
+   }
+  ]
+ }
+}

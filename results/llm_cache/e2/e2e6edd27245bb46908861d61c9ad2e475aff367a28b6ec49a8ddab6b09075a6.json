@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 188,
+  "total_tokens": 252,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following algorithms performs the best when trained via the CE?\nSub-goals:\n1. [figure] Which of the following algorithms performs the best when trained via the CE?\nAlready tried: sub-goal 1 with figure\nStill missing: No evidence provided for the RCE setting or other algorithms in the CE setting to determine which performs the best overall. The figure only shows the CE setting for ResNet-32, and there is no information about other algorithms or the RCE setting in the provided evidence. Therefore, the question is,"
+  }
+ ],
+ "answer": {
+  "reason": "The question requires information about the performance of different algorithms under the CE setting, which is not covered by the figure. Additional text search is needed.",
+  "tool": "text",
+  "query": "performance of different algorithms under the CE setting"
+ }
+}

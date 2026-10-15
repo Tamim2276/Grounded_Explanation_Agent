@@ -17,11 +17,18 @@ from gea.retrieval import (TOOL_NODES, n6_all_tools, n6a_text_retriever, n6b_tab
                            n6c_figure_retriever, n7_region_zoom, n8_evidence_buffer,
                            route_tool, route_zoom)
 from gea.state import AgentState
-from gea.sufficiency import abstain, g1_sufficiency_check, replan_prep, sufficiency_gate
+from gea.sufficiency import abstain, best_effort, g1_sufficiency_check, replan_prep, sufficiency_gate
 
 
-def add_retrieval(g: StateGraph) -> None:
-    # Shared by every builder from Step 2 on: N1 -> N2 -> N5 -> one tool -> N8.
+def route_first(state: AgentState) -> str:
+    # Conditional edge out of N2 (full graph): round 1 is every tool at once, or N5's choice.
+    return "all_tools" if cfg.FIRST_ROUND == "all" else "planner"
+
+
+def add_retrieval(g: StateGraph, broad_first: bool = False) -> None:
+    # Shared by every builder from Step 2 on: N1 -> N2 -> N5 -> one tool -> N8. With
+    # broad_first (the full graph, Day 7), round 1 can instead run every tool once with the
+    # question (cfg.FIRST_ROUND); the later rounds always go through N5.
     for name, fn in [("n1_query_intake", n1_query_intake),
                      ("n2_query_encoder", n2_query_encoder),
                      ("n5_agentic_planner", n5_agentic_planner),
@@ -33,7 +40,13 @@ def add_retrieval(g: StateGraph) -> None:
         g.add_node(name, fn)
     g.add_edge(START, "n1_query_intake")
     g.add_edge("n1_query_intake", "n2_query_encoder")
-    g.add_edge("n2_query_encoder", "n5_agentic_planner")
+    if broad_first:
+        g.add_node("n6_all_tools", n6_all_tools)
+        g.add_conditional_edges("n2_query_encoder", route_first,
+                                {"all_tools": "n6_all_tools", "planner": "n5_agentic_planner"})
+        g.add_edge("n6_all_tools", "n8_evidence_buffer")
+    else:
+        g.add_edge("n2_query_encoder", "n5_agentic_planner")
     g.add_conditional_edges("n5_agentic_planner", route_tool, TOOL_NODES)    # one edge, three tools
     g.add_conditional_edges("n6c_figure_retriever", route_zoom, {
         "zoom": "n7_region_zoom", "buffer": "n8_evidence_buffer"})
@@ -47,13 +60,16 @@ def add_g1_loop(g: StateGraph, on_sufficient: str) -> None:
     g.add_node("g1_sufficiency_check", g1_sufficiency_check)
     g.add_node("replan_prep", replan_prep)
     g.add_node("abstain", abstain)
+    g.add_node("best_effort", best_effort)
     g.add_edge("n8_evidence_buffer", "g1_sufficiency_check")
     g.add_conditional_edges("g1_sufficiency_check", sufficiency_gate, {   # the red diamond
         "sufficient":     on_sufficient,
         "retrieve_again": "replan_prep",
         "exhausted":      "abstain",
+        "best_effort":    "best_effort",      # budget spent, facts found: answer, flagged (Day 7)
     })
     g.add_edge("replan_prep", "n5_agentic_planner")                         # the red dashed loop
+    g.add_edge("best_effort", on_sufficient)
 
 
 def add_generation(g: StateGraph) -> None:
@@ -123,7 +139,7 @@ def build_grounded_agent_graph():
     # The complete query-time graph of thesis Chapter 4: every node, both gates,
     # both loops and both exits. (N3-N4 run offline, in corpus.build_ingest_graph.)
     g = StateGraph(AgentState)
-    add_retrieval(g)
+    add_retrieval(g, broad_first=True)
     add_g1_loop(g, on_sufficient="n9_grounded_generator")
     g.add_edge("abstain", "n10c_dag_trace")          # an abstention still gets its trace
     add_generation(g)

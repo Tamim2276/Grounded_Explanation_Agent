@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 211,
+  "total_tokens": 283,
+  "prompt_tokens_details": {
+   "cached_tokens": 124
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best for the \"Representation\" task when the view is \"Novel\"?\nSub-goals:\n1. [figure] Which method performs best for the 'Representation' task when the view is 'Novel'? -> table\nAlready tried: sub-goal 1 with table\nStill missing: figure evidence for sub-goal 1 (rule floor); No further evidence is provided to determine which method performs best for the 'Representation' task when the view is 'Novel'. The table only shows error values for different methods and views, but does not specify which method is best overall for the 'Representation' task under the 'Novel' view. A"
+  }
+ ],
+ "answer": {
+  "reason": "The table only provides error values and does not specify which method is best overall for the 'Representation' task under the 'Novel' view.",
+  "tool": "figure",
+  "query": "Which method performs best for the 'Representation' task when the view is 'Novel'?"
+ }
+}

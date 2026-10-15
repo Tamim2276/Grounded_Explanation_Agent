@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 159,
+  "prompt_tokens": 2196,
+  "total_tokens": 2355,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Action Search uses temporal context to reason about where to search next, as shown in the qualitative search sequences depicted in Figure 5.\" -- cites: E5 (Figure 5): observation \"The figure shows examples of successful and failure cases where the model uses temporal context to spot actions and oscillates around them\"\n2. \"The model's search process is sequential, taking into account the previous step's temporal location and visual observation, as described in Section 4.1.\" -- cites: E2 (Section 4.1): quote \"The input to Action Search is a sequence of visual observations ( X 1 , X 2 , . . . , X n ) and the output is a sequence of temporal locations ( f ( X 1 ) , f ( X 2 ) , . . . , f ( X n )), i.e. a search sequence, produced by the search process. For a given video and at the i th search step, a visual encoder represents the observation X i extracted from the model’s current temporal location in the video by a feature vector v i . We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation. Finally, a fully-connected layer transforms h i (the updated state) to produce f ( X i ), the next location to search in the video.\"\n\nCited evidence:\n[E2] (text, Section 4.1, page 7): The input to Action Search is a sequence of visual observations ( X 1 , X 2 , . . . , X n ) and the output is a sequence of temporal locations ( f ( X 1 ) , f ( X 2 ) , . . . , f ( X n )), i.e. a search sequence, produced by the search process. For a given video and at the i th search step, a visual encoder represents the observation X i extracted from the model’s current temporal location in the video by a feature vector v i . We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation. Finally, a fully-connected layer transforms h i (the updated state) to produce f ( X i ), the next location to search in the video.\n[E5] (figure, Figure 5, page 14) (image attached): Fig. 5: Qualitative search sequences produced by Action Search . The left column corresponds to AVA [21] testing videos, and the right column corresponds to THUMOS14 [24] testing videos. The top two rows depict examples when our model successfully spots the target action location (in green). The last row illus- trate failure cases, i.e. when the action location (in red) is not spotted exactly. We observe that Action Search uses temporal context to reason about where to search next. In failure cases, we notice that our model often oscillates around actions without spotting frames within the exact temporal location.\nWords printed in the figure: 14 H. Alwassel et al. t=674.6 sec t=659.9 sec t=694.7 sec t=689.9 sec t=698.2 sec Model Search Step Video Time t=34.3 sec t=85.6 sec t=122.7 sec t=141.8 sec t=133.1 sec Model Search Step Video Time t=345.0 sec t=453.6 sec t=567.4 sec t=611.7 sec t=616.7 sec Model Search Step Video Time t=122.5 sec t=191.9 sec t=440.6 sec t=538.3 sec t=669.6 sec Model Search Step Video Time t=603.6 sec t=718.2 sec t=513.3 sec t=595.1 sec t=468.3 sec Model Search Step Video Time t=128.9 sec t=136.0 sec t=137.1 sec t=150.5 sec t=178.1 sec Model Search Step Video Time [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in Figure 5 shows examples of successful and failure cases where the model uses temporal context to spot actions and oscillates around them. This supports the claim that Action Search uses temporal context to reason about where to search next."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in Section 4.1 describes the sequential decision-making process of the search mechanism, but it does not explicitly state that the search process is sequential and takes into account the previous step's temporal location and visual observation. The claim goes beyond the evidence provided."
+   }
+  ]
+ }
+}

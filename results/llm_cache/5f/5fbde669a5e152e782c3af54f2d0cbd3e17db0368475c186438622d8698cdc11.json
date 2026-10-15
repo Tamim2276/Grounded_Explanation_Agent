@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 266,
+  "prompt_tokens": 587,
+  "total_tokens": 853,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The BOSSNET model achieved the highest combined score for informativeness and grammatical correctness on the CamRest dataset.\" -- cites: E1 (Table 5): row 'BOSSNET', column 'CamRest' = 2.44; E1 (Table 5): row 'BOSSNET', column 'SMD' = 2.28\n2. \"The Mem2Seq model had the third highest combined score for informativeness and grammatical correctness on the CamRest dataset.\" -- cites: E1 (Table 5): row 'Mem2Seq', column 'CamRest' = 2.06; E1 (Table 5): row 'Mem2Seq', column 'SMD' = 1.9\n3. \"The Seq2Seq+Copy model had the lowest combined score for informativeness and grammatical correctness on the CamRest dataset.\" -- cites: E1 (Table 5): row 'Seq2Seq+Copy', column 'CamRest' = 1.22; E1 (Table 5): row 'Seq2Seq+Copy', column 'SMD' = 1.04\n\nCited evidence:\n[E1] (table, Table 5, page 7): Table 5: AMT Evaluations on CamRest and SMD (50% unseen) KA datasets\nValues (cite as cells):\n  row '': '' = Info; 'CamRest' = Grammar; '' = Info; 'SMD' = Grammar\n  row 'Seq2Seq': '' = 26; 'CamRest' = 2.28; '' = 22; 'SMD' = 2.44\n  row 'Seq2Seq+Copy': '' = 22; 'CamRest' = 1.22; '' = 16; 'SMD' = 1.04\n  row 'Mem2Seq': '' = 35; 'CamRest' = 2.06; '' = 26; 'SMD' = 1.9\n  row 'BOSSNET': '' = 80; 'CamRest' = 2.44; '' = 51; 'SMD' = 2.28"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The BOSSNET model has the highest combined score for informativeness and grammatical correctness on the CamRest dataset, as indicated by the value 2.44 in the 'CamRest' column for BOSSNET in Table 5."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The Mem2Seq model does not have the third highest combined score for informativeness and grammatical correctness on the CamRest dataset. The value 2.06 in the 'CamRest' column for Mem2Seq is lower than the scores for BOSSNET (2.44) and Seq2Seq+Copy (1.22), making it the second lowest, not the third highest."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The Seq2Seq+Copy model has the lowest combined score for informativeness and grammatical correctness on the CamRest dataset, as indicated by the value 1.22 in the 'CamRest' column for Seq2Seq+Copy in Table 5."
+   }
+  ]
+ }
+}

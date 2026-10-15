@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 51,
+  "prompt_tokens": 197,
+  "total_tokens": 248,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of OpenIE in Step 1 of TFBA?\nSub-goals:\n1. [figure] What is the role of OpenIE in Step 1 of TFBA?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The role of OpenIE in Step 1 of TFBA is not explicitly stated in the provided evidence. The text describes the process of TFBA but does not mention OpenIE or its role in Step 1 of the process. Further evidence is needed to answer this sub-question fully."
+  }
+ ],
+ "answer": {
+  "reason": "To find the role of OpenIE in Step 1 of TFBA, I need to search the figures for relevant information.",
+  "tool": "figure",
+  "query": "OpenIE Step 1 TFBA"
+ }
+}

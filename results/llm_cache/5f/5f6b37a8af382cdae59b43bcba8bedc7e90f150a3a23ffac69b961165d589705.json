@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 218,
+  "total_tokens": 294,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator performs best in the presence of noisy confounders and how does it compare to the Covariate Control (CC) estimator?\nSub-goals:\n1. [figure] Which estimator performs best in the presence of noisy confounders?\n2. [figure] How does it compare to the Covariate Control (CC) estimator?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence does not provide a direct comparison of the performance of EB and CC estimators to the Covariate Control (CC) estimator in the presence of noisy confounders. It only states that EB and CC outperform across all measures, but does not specify the performance of the CC estimator relativeto"
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a comparison of the EB estimator's performance to the CC estimator, which is not directly addressed in the figure. A text search is needed to find the specific comparison.",
+  "tool": "text",
+  "query": "performance of EB estimator compared to CC estimator in presence of noisy confounders"
+ }
+}

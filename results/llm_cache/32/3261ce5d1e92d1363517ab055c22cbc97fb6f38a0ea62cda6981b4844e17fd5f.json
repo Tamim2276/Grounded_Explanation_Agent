@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 171,
+  "prompt_tokens": 2950,
+  "total_tokens": 3121,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the different models change as the corruption level increases? Which model appears to be the most robust to label corruption?\nSub-questions:\n1. [figure] How does the performance of the different models change as the corruption level increases?\n2. [table] Which model appears to be the most robust to label corruption?\nEvidence:\nE1 [figure, Figure 11, page 18] (image attached): Figure 11: Learning curves of compared methods on random bias experiments using MNIST with different noise levels.\nWords printed in the figure: Corruption p Configuration Best Last 25% ConvNet 94.4 92.2 ConvNet+Mixup 97.6 97.6 ChoiceNet 99.2 99.2 40% ConvNet 77.9 71.8 ConvNet+Mixup 84.0 83.0 ChoiceNet 99.2 98.8 45% ConvNet 68.0 61.4 ConvNet+Mixup 68.9 55.8 ChoiceNet 98.0 97.1 47% ConvNet 58.2 53.9 ConvNet+Mixup 60.2 53.4 ChoiceNet 92.5 86.1 (a) (b) (c) (d)\nE2 [table, Table 11, page 17]: Table 11: Test accuracies on the MNIST dataset with corrupt label.\n | Corruption p 50% | Conﬁguration ConvNet ConvNet+Mixup ChoiceNet | Best 97.1 98.0 99.1 | Last 95.9 97.8 99.0 | \n | 80% | ConvNet+Mixup | 95.3 | 95.1 | \n |  | ChoiceNet | 98.3 | 98.3 | \n |  | ConvNet | 76.1 | 54.1 | \n | 90% | ConvNet+Mixup | 78.6 | 42.4 | \n |  | ChoiceNet | 95.9 | 95.2 | \n |  | ConvNet | 50.2 | 31.3 | \n | 95% | ConvNet+Mixup ChoiceNet | 53.2 84.5 | 26.6 66.0 | \ncontrary, the learning The experimental results neural networks trained with an extremely noisy ChoiceNet shows outstanding corruption rates are below | show stable curves of the random robust learning 95%), the test the noisy dataset 95% case, | behaviors which shufﬂe experiments behaviors when 80% accuracies of baseline in that the test over-ﬁtting is | are of the accuracies do occured | indicates the shown in the training methods do not in all | the robustness of the proposed method. Table 11 and Figure 12. The convolutional labels are uniformly shufﬂed. However, decrease as the number of epochs increases. drop even after 50 epochs for the cases where methods.\nTable 12 and Figure 13 selected training data using setting is more arduous than | results of the rule: (0, 1, 2, 3, shufﬂe case in that | permutation 4, 5, 6, 7, 8, 9) →(7, we are intentionally | experiments. 9, 0, 4, changing | 4, 2, 1, 3, the | Speciﬁcally, we change the labels of randomly 5, 6, 8) following [22]. We argue that this labels based on predeﬁned permutation rul ...\nE3 [text, Section 3.4, page 6]: Here, we provide synthetic examples in both regression and classiﬁcation to illustrate how the proposed method can be used to robustly learn the underlying target distribution given a noisy training dataset. Regression Task We ﬁrst focus on how the proposed method can distinguish between the target distribution and noise distributions in a regression task and show empirical evidence that our method can achieve this by estimating the target distribution and the correlation of noise distribution simultaneously. We train on two datasets with the same target function but with different types of corruptions by replacing 50% of the output values whose input values are within 0 to 2 : one uniformly sampled from − 1 to 3 and the other from a ﬂipped target function as shown in Figure 4(a) and 4(c) . Throughout this experiment, we set K = 2 for better visualization. As shown in Figure 4 , ChoiceNet successfully estimates the target function with partial corruption. To further understand how ChoiceNet works, we also plot the correlation of each mixture at each input with different colors. When using the ﬁrst dataset where we ﬂip the outputs whose inputs are between 0 and 2 , the correlations of the second mixture at the corrupt region becomes − 1 (see Figure 4(b) ). This is exactly what we wanted ChoiceNet to behave in that having − 1 correlation will simply ﬂip the output. In other words, the second mixture takes care of the noisy (ﬂipped) data by assigning − 1 correlation while the ﬁr ...\nE4 [text, Section 2, page 2]: The second group of estimating label corruption information is mainly presented for classiﬁcation tasks where training labels are assumed to be corrupt with a possibly unknown corruption matrix. An earlier study in [ 17 ] proposed an extra layer for the modeling of output noises. [ 4 ] extended the approach mentioned above by adding an additional noise adaptation layer with aggressive dropout regularization. A similar method was then proposed in [ 14 ] which initially estimated the label corruption matrix with a learned classiﬁer and used the corruption matrix to ﬁne-tune the classiﬁer. Other researchers [ 15 ] presented a robust training method that mimics the EM algorithm to train a neural network, with the label noise modeled as an additional softmax layer, similar to earlier work [ 4 ]. A self-error-correcting network was also presented [ 31 ]. It switches the training labels based on the learned model at the beginning stages by assuming that the deep model is more accurate during the earlier stage of training.\nE5 [text, Section 4.1, page 7]: The average absolute ﬁtting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ). Figure 6(d) - 6(f) show the ﬁtting results along with training data. While our proposed method is built on top of an MDN, it is worthwhile noting the severe performance degradation of an MDN with an extreme noise level ( 60% ). It is mainly because an MDN fails to allocate high mixture probability on the mixture corresponds to the target distribution as there are no dependencies among different mixtures. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The performance of the models decreases as the corruption level increases."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "ChoiceNet appears to be the most robust to label corruption."
+   }
+  ],
+  "uncovered": [
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide information about the performance of the models in a regression task or the specific robustness of ChoiceNet in a regression task with label corruption. The evidence focuses on classification tasks and the performance of models with different corruption levels, but does",
+  "sufficient": false
+ }
+}

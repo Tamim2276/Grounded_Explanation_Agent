@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 45,
+  "prompt_tokens": 159,
+  "total_tokens": 204,
+  "prompt_tokens_details": {
+   "cached_tokens": 108
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the filter in the convolution operation?\nSub-goals:\n1. [figure] What is the role of the filter in the convolution operation?\nAlready tried: sub-goal 1 with figure\nStill missing: The role of the filter in the convolution operation is not explicitly stated in the evidence provided. The figure shows a convolution operation but does not explain the role of the filter in detail."
+  }
+ ],
+ "answer": {
+  "reason": "The role of the filter in the convolution operation is not explicitly stated in the evidence provided.",
+  "tool": "text",
+  "query": "role of the filter in the convolution operation"
+ }
+}

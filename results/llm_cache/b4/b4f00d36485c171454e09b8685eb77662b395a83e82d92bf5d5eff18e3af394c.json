@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 95,
+  "prompt_tokens": 194,
+  "total_tokens": 289,
+  "prompt_tokens_details": {
+   "cached_tokens": 120
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic is most likely to be associated with a pro-immigration stance?\nSub-goals:\n1. [figure] Which topic is most likely to be associated with a pro-immigration stance?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: The evidence does not provide a specific topic associated with a pro-immigration stance. It only shows the probability of a pro-immigration tone for each topic, but does not name a specific topic as being most likely to be associated with a pro-immigration stance. The evidence is insufficient to ded"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a specific topic associated with a pro-immigration stance. It only shows the probability of a pro-immigration tone for each topic, but does not name a specific topic as being most likely to be associated with a pro-immigration stance. The evidence is insufficient to deduce a specific topic.",
+  "tool": "table",
+  "query": "pro-immigration tone probability"
+ }
+}

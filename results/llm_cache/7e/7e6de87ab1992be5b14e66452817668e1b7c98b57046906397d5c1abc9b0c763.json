@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 249,
+  "total_tokens": 308,
+  "prompt_tokens_details": {
+   "cached_tokens": 164
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting, and what trade-off does this model exhibit compared to other models?\nSub-goals:\n1. [table] Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting?\n2. [figure] What trade-off does this model exhibit compared to other models?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: figure evidence for sub-goal 2 (rule floor); The evidence does not provide specific trade-offs for the model that achieves the best NPMI scores compared to other models. It only mentions that adding regularization to encourage sparse topics has a similar effect as in SAGE, leading to worse perplexity and coherence, but it does create sparse. A"
+  }
+ ],
+ "answer": {
+  "reason": "The figure is likely to contain visual evidence of the trade-offs between models, which is not covered by text or table searches.",
+  "tool": "figure",
+  "query": "trade-off between models in unsupervised setting"
+ }
+}

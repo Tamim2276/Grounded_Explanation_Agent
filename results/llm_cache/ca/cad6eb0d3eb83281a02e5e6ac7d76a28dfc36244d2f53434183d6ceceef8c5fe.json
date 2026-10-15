@@ -1,0 +1,33 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 1144,
+  "total_tokens": 1219,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the main differences between the educational philosophies of the Bonaparte and Voltaire schools?\nSub-questions:\n1. [figure] What are the main differences between the educational philosophies of the Bonaparte and Voltaire schools?\nEvidence:\nE1 [text, Section abstract, page 5]: Speciﬁc Setting In this task, we regarded question categories tagged by askers as prior knowledge (both k x and k y ). There are 27 categories in the Qatar Living data. Knowledge vector k was initialized by averaging the embeddings of words in the category. For all baselines and our model, the word embedding and the topic model (in DeepMatch topic ) were trained on a Qatar living raw text provided by SemEval-2015 3 . We ﬁxed the word embedding during the training process, and set h in Equation (3), (8), (9) as ReLU. Results JAIST, the champion of the task in SemEval15, used 12 features and an SVM classiﬁer and achieved an accuracy of 0 . 725 . From Table 3, we can see that advanced neural networks, such as CNTN, MV-LSTM, LSTM a and KEHNN, outperform JAIST’s model, indicating that handcrafted features are less powerful than deep learning methods. Models that match text pairs by interaction representations like Arc2 and MatchPyramid are not better than models that perform matching with sentence embeddings like Arc1. This is because the training data is small and we ﬁxed the word embedding in learning. LSTM based models in general performs better than CNN based models, because they can capture sequential information in sentences. KEHNN leverages both the sequential information and the prior knowledge from categories in matching by a CNN with multiple channels. Therefore, it outperforms all other methods, and the improvement is statistically signiﬁcant (t-test with p-value ≤ 0 .  ...\nE2 [text, Section abstract, page 1]: to illustrate the challenge. The answer is very long 1 and contains a lot of information that well compare the two schools but semantically far from the question (e.g., “horse riding” and “lances swords”). The information makes the answer a high quality one, but hinders the existing models from establishing the semantic relations between the question and the answer in matching. Similarly, when questions become long, matching also becomes difﬁcult. In practice, such long text is not rare. For example, in a public QA data set, 54 . 8% question answer pairs are longer than 60 words (question length plus answer length). More seriously, the-state-of-theart model can only achieves 74 . 2% matching accuracy on pairs longer than 60 words compared to its performance 78 . 8% on pairs shorter than 30 words. These evidence indicates us that improving matching performance on pairs with long text is important but challenging, because the semantic gap is even bigger in such pairs.\nE3 [text, Section abstract, page 2]: the question in Table 1 in community QA, we can use the tag to enhance the matching between the question and the answer. “Family” reﬂects the global semantics of the question. It strengthens the effect of its semantically similar words like “kids”,“child” and “activity” in QA matching, and at the same time reduce the inﬂuence of “horse riding” and “lances swords” to matching. With the tag as a bridge, the semantic relation between the question and the answer can be identiﬁed, which is difﬁcult to achieve only by themselves. We propose a knowledge enhanced hybrid neural network (KEHNN) to leverage the prior knowledge in matching. Given a text pair, KEHNN exploits a knowledge gate to fuse the semantic information carried by the prior knowledge into the representation of words and generates a knowledge enhanced representation for each word. The knowledge gate is a non-linear unit and controls how much information from the word is kept in the new representation and how much information from the prior knowledge ﬂows to the representation. By this means, noise from the irrelevant words is ﬁltered out, and useful information from the relevant words is strengthened. The model then forms three channels to perform matching from multiple perspectives. Each channel models the interaction of two pieces of text in a pair by a similarity matrix. The ﬁrst channel matches text pairs on words. It calculates the similarity matrix by word embeddings. The second channel conducts matching on local ..."
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide information about the main differences between the educational philosophies of the Bonaparte and Voltaire schools. The evidence is related to a different topic and does not address the question at hand.",
+  "sufficient": false
+ }
+}

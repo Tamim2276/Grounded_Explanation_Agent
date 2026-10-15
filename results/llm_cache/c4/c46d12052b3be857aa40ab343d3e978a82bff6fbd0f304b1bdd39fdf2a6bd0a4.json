@@ -1,0 +1,44 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 190,
+  "prompt_tokens": 2376,
+  "total_tokens": 2566,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which coreference model performs best on the CoNLL test set according to the F$_1$ score? Is this performance statistically significant compared to all other models in the table?\nSub-questions:\n1. [table] Which coreference model performs best on the CoNLL test set according to the F$_1$ score?\n2. [table] Is this performance statistically significant compared to all other models in the table?\nEvidence:\nE1 [text, Section 8.2, page 8]: The performance of the “+EPM” model compared to recent state-of-the-art coreference models on the CoNLL test set is presented in Table 4 . The “single” and “ensemble” rows represent the results of the single and ensemble models of e2e-coref. We also compare EPM with the pattern mining approach used by Uryupina and Moschitti ( 2015 ), i.e. Jaccard Item Mining (JIM). For a fair comparison, while Uryupina and Moschitti ( 2015 ) used mined patterns for extracting feature templates, we use them for selecting feature-values. We run the JIM algorithm on the same data and with the same setup as that of EPM. 14 This results in nine pairwise features, 260 POS tags, 38 dependency relations, 32 mention types, and 18 named entity tags. The “+JIM” row shows the results of deep-coref top-pairs model in which these feature-values are incorporated. As we see, EPM feature-values result in signiﬁcantly better performance than those of JIM while the number of EPM feature-values is considerably less than JIM.\nE2 [text, Section 1, page 1]: scores on the CoNLL ofﬁcial test set. However, the superiority of a coreference resolver on the CoNLL evaluation sets does not necessarily indicate that it also performs better on new datasets. For instance, the ranking model of Clark and Manning ( 2016a ), the reinforcement learning model of Clark and Manning ( 2016b ) and the end-to-end model of Lee et al. ( 2017 ) are three recent coreference resolvers, among which the model of Lee et al. ( 2017 ) performs the best and that of Clark and Manning ( 2016b ) performs the second best on the CoNLL development and test sets. However, if we evaluate these systems on the WikiCoref dataset ( Ghaddar and Langlais , 2016a ), which is consistent with CoNLL with regard to coreference deﬁnition and annotation scheme, the performance ranking would be in a reverse order 1 . In Moosavi and Strube ( 2017a ), we investigate the generalization problem in coreference resolution and show that there is a large overlap between the coreferring mentions in the CoNLL training and evaluation sets. Therefore, higher scores on the CoNLL evaluation sets do not necessarily indicate a better coreference model. They may be due to better memorization of the training data. As a result, despite the remarkable improvements in coreference resolution, the use of coreference resolution in other applications is mainly limited to the use of simple rule-based systems, e.g. Lapata and Barzilay ( 2005 ), Yu and Ji ( 2016 ), and Elsner and Charniak ( 2008 ).\nE3 [text, Section 8.3, page 9]: training and development sets and testing on the excluded genre. Similar to Moosavi and Strube ( 2017a ), we use the pt and wb genres for the latter evaluation setup. The results of the ﬁrst evaluation setup are shown in Table 6 . The best performance on WikiCoref is achieved by Ghaddar and Langlais ( 2016a ) (“G&L” in Table 6 ) who introduced WikiCoref and design a domain-speciﬁc coreference resolver that makes use of the Wikipedia markups of a document as well as links to Freebase, which are annotated in WikiCoref. Incorporating EPM feature-values improves the performance by about three points. While “+EPM” does not use the WikiCoref data during training, and unlike “G&L”, it does not employ any domain-speciﬁc features, it achieves onpar performance with that of “G&L”. This indeed shows the effectiveness of informative featurevalues in improving generalization. The second set of generalization experiments is reported in Table 7 . “in-domain” columns show the results when the evaluation genres were included in training and development sets while the “out-of-domain” columns show the results when the evaluation genres were excluded. As we can see, “+EPM” generalizes best, and in out-ofdomain evaluations, it considerably outperforms the ensemble model of e2e-coref, which has the best performance on the CoNLL test set.\nE4 [table, Table 4, page 8]: Table 4 : Comparisons on the CoNLL test set. The F 1 gains that are statistically signiﬁcant: (1) “+EPM” compared to “top- pairs”, “ranking” and “JIM”, (2) “+EPM” compared to “reinforce” based on MUC, B 3 and LEA, (3) “single” compared to “+EPM” based on MUC and B 3 , and (4) “ensemble” compared to other systems. Signiﬁcance is measured based on the approximate randomization test ( p < 0 . 05 ) ( Noreen , 1989 ).\n |  |  | MUC |  |  | B3 |  |  | CEAFe |  | CoNLL |  | LEA | \n |  | R | P | F1 | R | P | F1 | R | P | F1 |  | R | P | F1\n | ranking | 70.43 | 79.57 | 74.72 | 58.08 | 69.26 | 63.18 | 54.43 | 64.17 | 58.90 | 65.60 | 54.55 | 65.68 | 59.60\n | reinforce | 69.84 | 79.79 | 74.48 | 57.41 | 70.96 | 63.47 | 55.63 | 63.83 | 59.45 | 65.80 | 53.78 | 67.23 | 59.76\ndeep-coref | top-pairs | 69.41 | 79.90 | 74.29 | 57.01 | 70.80 | 63.16 | 54.43 | 63.74 | 58.72 | 65.39 | 53.31 | 67.09 | 59.41\n | +EPM | 71.16 | 79.35 | 75.03 | 59.28 | 69.70 | 64.07 | 56.52 | 64.02 | 60.04 | 66.38 | 55.63 | 66.11 | 60.42\n | +JIM | 69.89 | 80.45 | 74.80 | 57.08 | 71.58 | 63.51 | 55.36 | 64.20 | 59.45 | 65.93 | 53.46 | 67.97 | 59.85\n | single | 74.02 | 77.82 | 75.88 | 62.58 | 67.45 | 64.92 | 59.16 | 62.96 | 61.00 | 67.27 | 58.90 | 63.79 | 61.25\ne2e | ensemble | 73.73 | 80.95 | 77.17 | 61.83 | 72.10 | 66.57 | 60.11 | 65.62 | 62.74 | 68.83 | 58.48 | 68.81 | 63.23\nE5 [figure, Figure 1, page 14] (image attached): Figure 1 : Left to right: (partial) constructed FP-Tree after adding each of the three given samples. The right-most tree is the ﬁnal FP-Tree that represents all input samples.\nWords printed in the figure: ROOT ana=NAM ant=NAM head=F ROOT ana=NAM ant=NAM head=F head=T ROOT ana=NAM ant=NAM head=F head=T head=F ant=NOM\nE6 [figure, Figure 1, page 14]: Zoomed view (300 dpi) of: Figure 1 : Left to right: (partial) constructed FP-Tree after adding each of the three given samples. The right-most tree is the ﬁnal FP-Tree that represents all input samples.\nWords printed in the figure: ROOT ana=NAM ant=NAM head=F ROOT ana=NAM ant=NAM head=F head=T ROOT ana=NAM ant=NAM head=F head=T head=F ant=NOM"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "The +EPM model performs best on the CoNLL test set according to the F1 score."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E4",
+    "fact": "The +EPM model's performance is statistically significant compared to all other models in the table."
+   }
+  ],
+  "uncovered": [
+   3
+  ],
+  "missing": "The evidence does not provide information about the statistical significance of the +EPM model's performance compared to all other models in the table. It only states that the +EPM model's performance is statistically significant compared to specific models in the table (top-pairs, ranking, JIM, etc",
+  "sufficient": false
+ }
+}

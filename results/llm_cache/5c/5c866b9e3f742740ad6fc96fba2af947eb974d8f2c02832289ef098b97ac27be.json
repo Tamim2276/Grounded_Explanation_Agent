@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 104,
+  "prompt_tokens": 203,
+  "total_tokens": 307,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The BoSsNet model performs the best in terms of Entity F1 score when the percentage of unseen entities in the response is low.\" -- cites: E2 (Figure 5): observation \"The BoSsNet model's line is consistently above the other models' lines at the lower percentages of unseen entities in the response.\"\n\nCited evidence:\n[E2] (figure, Figure 5, page 8): a zoomed view of Figure 5"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence states that the BoSsNet model's line is consistently above the other models' lines at the lower percentages of unseen entities in the response. This directly supports the claim that the BoSsNet model performs the best in terms of Entity F1 score when the percentage of unseen entities in the response is low."
+   }
+  ]
+ }
+}

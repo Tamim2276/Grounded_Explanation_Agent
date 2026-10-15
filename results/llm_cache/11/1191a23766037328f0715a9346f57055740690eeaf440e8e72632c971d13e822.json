@@ -1,0 +1,34 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 34,
+  "prompt_tokens": 94,
+  "total_tokens": 128,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the two approaches, density estimation or mixture of classifiers, is more robust to outliers?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "approaches",
+   "density estimation",
+   "mixture of classifiers",
+   "robustness",
+   "outliers"
+  ]
+ }
+}

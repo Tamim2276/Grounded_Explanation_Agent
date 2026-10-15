@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 149,
+  "prompt_tokens": 2834,
+  "total_tokens": 2983,
+  "prompt_tokens_details": {
+   "cached_tokens": 5
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of OpenIE in Step 1 of TFBA?\nSub-questions:\n1. [figure] What is the role of OpenIE in Step 1 of TFBA?\nEvidence:\nE1 [text, Section 5, page 8]: severely sparse higher-order tensor directly, TFBA performs back-off and jointly factorizes multiple lower-order tensors derived out of the higher-order tensor. In the second step, TFBA solves a constrained clique problem to induce schemata out of multiple binary schemata. We are hopeful that the backoff-based factorization idea exploited in TFBA will be useful in other sparse factorization settings.\nE2 [text, Section 4, page 6]: We perform a grid search for the rank parameters between 5 and 20, for the regularization weights we perform a grid search over 0 and 1. Table 3 provides the details of hyperparameters set for different datasets. Evaluation Protocol : For TFBA, we follow the protocol mentioned in Section 3.2.2 for constructing higher order schemata. For every relation, we consider top 5 binary schemata from the factorization of each tensor. We construct a tripartite graph, as explained in Section 3.2.2 , and mine constrained maximal cliques from the tripartite graphs for schemata. Table 4 provides some qualitative examples of higher-order schemata induced by TFBA. Accuracy of the schemata induced by the model is evaluated by human evaluators. In our experiments, we use human judgments from three evaluators. For every relation, the ﬁrst and second columns given in Table 4 are presented to the evaluators and they are asked to validate the schema. We present top 50 schemata based on the score of the constrained maximal clique induced by TFBA to the evaluators. This evaluation protocol was also used in ( Movshovitz-Attias and Cohen , 2015 ) for evaluating ontology induction. All evaluations were blind, i.e., the evaluators were not aware of the model they were evaluating.\nE3 [text, Section 4, page 6]: In this section, we evaluate the performance of TFBA for the task of HRSI. We also propose a baseline model for HRSI called HardClust. HardClust : We propose a baseline model called the Hard Clustering Baseline (HardClust) for the task of higher order relation schema induction. This model induces schemata by grouping perrelation NP arguments from OpenIE extractions. In other words, for each relation, all the Noun Phrases (NPs) in ﬁrst argument form a cluster that represents the subject of the relation, all the NPs in the second argument form a cluster that represents object and so on. Then from each cluster, the top most frequent NPs are chosen as the representative NPs for the argument type. We note that this method is only able to induce one schema per relation. Datasets: We run our experiments on three datasets. The ﬁrst dataset (Shootings) is a collection of 1,335 documents constructed from a publicly available database of mass shootings in the United States. The second is New York Times Sports (NYT Sports) dataset which is a collection of 20,940 sports documents from the period 2005 and 2007. And the third dataset (MUC) is a set of 1300 Latin American newswire documents about terrorism events. After performing the processing steps described in Section 3 , we obtained 357,914 unique OpenIE extractions from the NYT Sports dataset, 10,847 from Shootings dataset, and 8,318 from the MUC dataset. However, in order to properly analyze and evaluate the model, we consider only th ...\nE4 [figure, Figure 1, page 3] (image attached): Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\nE5 [figure, Figure 1, page 3]: Zoomed view (300 dpi) of: Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\nE6 [table, Table 4, page 8]: Table 4: Examples of schemata induced by TFBA. Please note that some of them are 3-ary while others are 4-ary. For details about schema induction, please refer to Section 3.2 .\nRelation Schema | NPs from the induced categories | Evaluator Judgment | (Human) Suggested Label\n | Shootings |  | \nleave⟨A6, B0, C7⟩ | A6: shooting, shooting incident, double shooting B0: one person, two people, three people C7: dead, injured, on edge | valid | < shooting > < people > <injured >\nidentify⟨A1, B1, C5, C6⟩ | A1: police, ofﬁcers, huntsville police B1: man, victims, four victims C5: sunday, shooting staurday, wednesday afternoon C6: apartment, bedroom, building in the neighborhood | valid | < police > < victim(s)> <day/time > <place >\nshoot⟨A7, B6, C1⟩ | A7: gunman, shooter, smith B6: freeman, slain woman, victims C1: friday, friday night, early monday morning | valid | < perpetrator > <victim > < time>\nshoot⟨A4, B2, C13⟩ | A4: <num>-year-old man, <num>-year-old george reavis, <num>-year-old brockton man B2: in the leg, in the head, in the neck C13: in macon, in chicago, in an alley | valid | < victim> < body part> < location >\nsay⟨A1, B1, C5⟩ | A1: police, ofﬁcers, huntsville police B1: man, victims, four victims C5: sunday, shooting staurday, wednesday afternoon | invalid | –\n | NYT sports |  | \nspend⟨A0, B16, C3⟩ | A0: yankees, mets, jets B14: $ <num> million, $ <num>, $ <num> billion C3: <num>, year, last season | valid | < team > < money > < year >\nwin⟨A2, B10, C3⟩ | C3: <num>, year,  ... [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "OpenIE is used to extract tuples from the unlabeled text corpus."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The role of OpenIE in Step 1 of TFBA is not explicitly stated in the provided evidence. The evidence describes the process of TFBA and the role of OpenIE in extracting tuples, but it does not specify the role of OpenIE in Step 1 of TFBA in detail. Further information is needed to answer this sub-ask",
+  "sufficient": false
+ }
+}

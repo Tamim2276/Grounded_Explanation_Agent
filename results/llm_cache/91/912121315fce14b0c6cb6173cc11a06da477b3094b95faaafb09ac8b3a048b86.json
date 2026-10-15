@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 88,
+  "prompt_tokens": 514,
+  "total_tokens": 602,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The three main components of the Action Search model architecture are the visual encoder, the LSTM, and the fully-connected layer.\" -- cites: E3 (Section 4.1): quote \"We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation.\"\n\nCited evidence:\n[E3] (text, Section 4.1, page 7): The input to Action Search is a sequence of visual observations ( X 1 , X 2 , . . . , X n ) and the output is a sequence of temporal locations ( f ( X 1 ) , f ( X 2 ) , . . . , f ( X n )), i.e. a search sequence, produced by the search process. For a given video and at the i th search step, a visual encoder represents the observation X i extracted from the model’s current temporal location in the video by a feature vector v i . We cast the search mechanism as a sequential decision making process modeled by an LSTM search network. This LSTM takes three inputs ( h i − 1 , f ( X i − 1 ) , v i ), where h i − 1 is the LSTM state from the previous step (an aggregation of information from previous steps), f ( X i − 1 ) is the predicted temporal location from the previous step (the model’s current location), and v i is the feature vector representing the current visual observation. Finally, a fully-connected layer transforms h i (the updated state) to produce f ( X i ), the next location to search in the video."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence does not mention the 'fully-connected layer' as a component of the Action Search model architecture. Instead, it describes the fully-connected layer as a transformation of the updated state h_i to produce the next location to search in the video."
+   }
+  ]
+ }
+}

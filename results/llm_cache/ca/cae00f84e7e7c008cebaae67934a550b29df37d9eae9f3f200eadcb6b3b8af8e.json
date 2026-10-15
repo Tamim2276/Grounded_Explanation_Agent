@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 188,
+  "prompt_tokens": 307,
+  "total_tokens": 495,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The 'Size' estimator achieves the highest accuracy on the CLEVR validation set with an accuracy of 100.\" -- cites: E1 (Table 1): row 'Size', column 'Acc.' = 100\n2. \"The 'Material' estimator achieves an accuracy of 99.97 on the CLEVR validation set.\" -- cites: E1 (Table 1): row 'Material', column 'Acc.' = 99.97\n\nCited evidence:\n[E1] (table, Table 1, page 5): Table 1. CLEVR estimators results on CLEVR validation set\nValues (cite as cells):\n  row 'Ins. seg.': '' = 99.0; 'Acc.' = \n  row 'Material': '' = ; 'Acc.' = 99.97\n  row 'Size': '' = ; 'Acc.' = 100"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the 'Size' estimator achieves an accuracy of 100 on the CLEVR validation set. The evidence provided in E1 (Table 1) shows that the 'Size' row has an 'Acc.' value of 100, which supports the claim as written."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the 'Material' estimator achieves an accuracy of 99.97 on the CLEVR validation set. The evidence provided in E1 (Table 1) shows that the 'Material' row has an 'Acc.' value of 99.97, which supports the claim as written."
+   }
+  ]
+ }
+}

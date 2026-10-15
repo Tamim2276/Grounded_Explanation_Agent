@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 138,
+  "total_tokens": 205,
+  "prompt_tokens_details": {
+   "cached_tokens": 75
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the function of the ReOrth Layer in the Projection Block of the Grassmann Network architecture?\nSub-goals:\n1. [figure] What is the function of the ReOrth Layer in the Projection Block of the Grassmann Network architecture?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The function of the ReOrth Layer in the Projection Block of the Grassmann Network architecture is likely described in the text of the paper, as it is not typically found in tables or figures.",
+  "tool": "text",
+  "query": "function ReOrth Layer Projection Block Grassmann Network architecture"
+ }
+}

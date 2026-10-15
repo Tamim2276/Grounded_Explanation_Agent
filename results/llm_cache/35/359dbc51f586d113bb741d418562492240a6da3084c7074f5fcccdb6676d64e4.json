@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 100,
+  "prompt_tokens": 184,
+  "total_tokens": 284,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of test error?\nSub-goals:\n1. [figure] Which model performs the best in terms of test error?\nAlready tried: sub-goal 1 with figure\nStill missing: No evidence provided for sub-question 2, which asks about the model's performance in terms of test error for other models or tasks not covered in the figure provided. The figure only shows the performance of CDAN-E (w/ entropy) in terms of test error, but does not provide a comparison with other CDN"
+  }
+ ],
+ "answer": {
+  "reason": "The figure only shows the performance of CDAN-E (w/ entropy) in terms of test error, but does not provide a comparison with other CDN models or tasks. To answer the question about which model performs the best in terms of test error, a text search is needed to find the relevant information.",
+  "tool": "text",
+  "query": "Which model performs the best in terms of test error?"
+ }
+}

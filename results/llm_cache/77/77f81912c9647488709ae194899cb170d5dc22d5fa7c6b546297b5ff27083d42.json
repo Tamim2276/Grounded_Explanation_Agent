@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 162,
+  "total_tokens": 227,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the highest value for the hyperparameter  λa?\nSub-goals:\n1. [table] Which dataset has the highest value for the hyperparameter λa?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: No evidence provided for sub-question 2, which asks about the effect of a hyperparameter on the dataset's performance or any other related information."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the dataset with the highest value for the hyperparameter λa, which is best addressed by searching the table as it typically contains numerical data and hyperparameter values.",
+  "tool": "table",
+  "query": "highest value for hyperparameter λa in the table"
+ }
+}

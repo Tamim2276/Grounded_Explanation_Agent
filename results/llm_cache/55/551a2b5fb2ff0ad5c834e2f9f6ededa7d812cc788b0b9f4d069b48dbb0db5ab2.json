@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 192,
+  "total_tokens": 255,
+  "prompt_tokens_details": {
+   "cached_tokens": 126
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best on the Ubuntu dataset for text lengths between 60 and 90 words?\nSub-goals:\n1. [table] Which model performs best on the Ubuntu dataset for text lengths between 60 and 90 words?\nAlready tried: sub-goal 1 with table\nStill missing: No further evidence is provided to determine which model performs best on the Ubuntu dataset for text lengths between 60 and 90 words. The table only provides accuracy for different text length ranges, not a direct comparison of the models within the specified range."
+  }
+ ],
+ "answer": {
+  "reason": "The table only provides accuracy for different text length ranges, not a direct comparison of the models within the specified range.",
+  "tool": "text",
+  "query": "Which model performs best on the Ubuntu dataset for text lengths between 60 and 90 words?"
+ }
+}

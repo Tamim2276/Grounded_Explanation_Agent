@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 230,
+  "total_tokens": 290,
+  "prompt_tokens_details": {
+   "cached_tokens": 163
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?\nSub-goals:\n1. [table] Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset?\n2. [figure] How does its performance change as the corruption level increases?\nAlready tried: sub-goal 1 with table, sub-goal 1 with figure\nStill missing: The evidence does not provide the specific performance values for each method at different corruption levels to determine the exact performance change for each method as the corruption level increases. It only shows the best and last performance for each method at each corruption level, but not the "
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a detailed analysis of performance changes across different corruption levels, which is best addressed by examining figures.",
+  "tool": "figure",
+  "query": "Performance of methods across varying corruption levels on the Large Movie Review dataset"
+ }
+}

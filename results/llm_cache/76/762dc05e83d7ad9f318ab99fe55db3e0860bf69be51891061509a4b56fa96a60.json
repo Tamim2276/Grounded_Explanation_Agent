@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 247,
+  "prompt_tokens": 777,
+  "total_tokens": 1024,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"In square hashing, edges with source node v are no longer mapped to one row, but r rows, sharing memory with other source nodes.\" -- cites: E4 (Section front): quote \"In square hashing edges with source node v are no longer mapped to one row, but r rows, sharing memory with other source nodes.\"\n2. \"Each edge is mapped to multiple buckets, and stored in the first empty one among them.\" -- cites: E4 (Section front): quote \"In this technique each edge is mapped to multiple buckets, and stored in the first empty one among them.\"\n3. \"The higher degree a node has, the more buckets its edges may take.\" -- cites: E4 (Section front): quote \"The higher degree a node has, the more buckets it may take.\"\n4. \"Square hashing reduces the number of left-over edges.\" -- cites: E5 (Section A): quote \"Obviously, square hashing will reduce the number of left-over edges.\"\n\nCited evidence:\n[E4] (text, Section front, page 2): In GSS, the memory cost and update speed are greatly inﬂuenced by the size of the buffer B . As the buffer takes additional memory, and update speed in an adjacency list is linear with its size. In order to restrict its size, we propose a technique called square hashing. In this technique each edge is mapped to multiple buckets, and stored in the ﬁrst empty one among them. This enlarges the chance that an edge ﬁnds an empty bucket. Besides, a few nodes in a sparse graph may still have very high degrees. If one node emits a lot of edges, these edges have high probability to evict each other when stored in one row. To solve this problem, In square hashing edges with source node v are no longer mapped to one row, but r rows, sharing memory with other source nodes. The higher degree a node has, the more buckets it may take. It is similar in the view of columns and destination nodes. This helps to ease the congestion brought by the skewness in node degrees. Experiments show that after this modiﬁcation the buffer only stores less than 0 . 01% of the edges in the graph stream.\n[E5] (text, Section A, page 7): 1-hop Precursor Query : to answer an 1-hop precursor query, we have the analogue operations with 1 -hop Successor Query if we switch the columns and the rows in the matrix X . The details are omitted due to space limit. After applying square hashing, the edges with source node H ( v ) in G h are on longer stored in a single row, but spread over r rows with addresses h i ( v )(1 ⩽ i ⩽ r ) . Similarly, edges with destination node H ( v ) are stored in the r different columns. These rows or columns are shared by the edges with different source nodes or destination nodes. The higher degree a node has, the more buckets its edges may take. This eases the congestion brought by skewness in node degrees. Moreover, as each bucket has multiple mapped buckets, it has higher probability to ﬁnd an empty one. Obviously, square hashing will reduce the number of left-over edges ."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 (Section front) states that in square hashing, edges with source node v are no longer mapped to one row, but r rows, sharing memory with other source nodes. This matches the claim exactly."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E4 (Section front) states that in this technique each edge is mapped to multiple buckets, and stored in the first empty one among them. This matches the claim exactly."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E4 (Section front) states that the higher degree a node has, the more buckets its edges may take. This matches the claim exactly."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence in E5 (Section A) states that square hashing will reduce the number of left-over edges. This matches the claim exactly."
+   }
+  ]
+ }
+}

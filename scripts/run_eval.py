@@ -32,6 +32,9 @@ from gea.state import new_state
 
 RUNS = cfg.PROJECT_ROOT / "results" / "runs"
 SYSTEMS = ("full", "single_pass", "text_only")
+# Ablations: a run that differs from the frozen settings in exactly these, named in its file and
+# its records. "strict": the first test run (2026-10-15) -- G1 alone decides, N5 from round 1.
+ABLATIONS = {"strict": {"AFTER_BUDGET": "abstain", "FIRST_ROUND": "planner"}}
 MAX_REDOS = 5            # then stop: the model answers "ready" but refuses every request (Gemini 429:
                          # a used-up daily quota) -- waiting longer would only loop
 
@@ -95,8 +98,10 @@ def main() -> int:
     ap.add_argument("--limit", type=int, help="only the first N questions (the smoke test)")
     ap.add_argument("--out", help="default results/runs/<system>[_gemini]_<split>.jsonl")
     ap.add_argument("--rebox", action="store_true", help="second pass: claim-map boxes, from the cache")
+    ap.add_argument("--ablation", choices=sorted(ABLATIONS), help="a documented variant of the frozen settings")
     args = ap.parse_args()
-    name = args.system + ("_gemini" if args.provider == "gemini" else "")
+    name = (args.system + ("_gemini" if args.provider == "gemini" else "")
+            + (f"_{args.ablation}" if args.ablation else ""))
     out_file = RUNS / (args.out or f"{name}_{args.split}.jsonl")
     questions = read_jsonl(cfg.PROJECT_ROOT / "eval" / "splits" / f"{args.split}.jsonl")[:args.limit]
     test = args.split == "test"
@@ -107,9 +112,9 @@ def main() -> int:
               f"  python scripts/cache_question_vectors.py --split {args.split}")
         return 1
     settings = dict(BACKEND="real", LLM_MODE="llm", PLANNER_MODE="llm", TRACE=False,
-                    VARIANT=args.system, LLM_PROVIDER=args.provider)
+                    VARIANT=args.system, LLM_PROVIDER=args.provider, **ABLATIONS.get(args.ablation, {}))
     with cfg.override(**settings):
-        if test and (problems := frozen_differences()):
+        if test and (problems := frozen_differences(tuple(ABLATIONS.get(args.ablation, {})))):
             print("The settings differ from eval/frozen_config.json -- the test run must use the frozen ones:")
             print("\n".join(f"  {p}" for p in problems))
             return 1
@@ -147,7 +152,7 @@ def main() -> int:
                     time.sleep(30)                          # a rate limit (429) needs a pause too
                     wait_for_model()
                     continue
-                r = record(q, out, seconds, calls, args.system)
+                r = record(q, out, seconds, calls, args.system) | ({"ablation": args.ablation} if args.ablation else {})
                 break
             append_jsonl(out_file, r)                       # on disk before the next question starts
             print(progress(finished + n, len(questions), (time.time() - started) / n * (len(todo) - n))

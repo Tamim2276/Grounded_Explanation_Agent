@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 97,
+  "prompt_tokens": 157,
+  "total_tokens": 254,
+  "prompt_tokens_details": {
+   "cached_tokens": 3
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator performs best in the presence of noisy confounders and how does it compare to the Covariate Control (CC) estimator?\nSub-goals:\n1. [figure] Which estimator performs best in the presence of noisy confounders?\n2. [figure] How does it compare to the Covariate Control (CC) estimator?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the performance of an estimator in the presence of noisy confounders and its comparison to the Covariate Control (CC) estimator. Since the goal is to retrieve information from figures, which typically contain visual comparisons and performance metrics, the 'figure' tool is the most appropriate.",
+  "tool": "figure",
+  "query": "performance of estimator in noisy confounders and comparison to CC estimator"
+ }
+}

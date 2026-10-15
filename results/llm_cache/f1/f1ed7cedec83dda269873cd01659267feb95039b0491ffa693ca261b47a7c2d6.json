@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 139,
+  "prompt_tokens": 1986,
+  "total_tokens": 2125,
+  "prompt_tokens_details": {
+   "cached_tokens": 892
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which policy learning method achieved the lowest regret in Ex. 2?\nSub-questions:\n1. [table] Which policy learning method achieved the lowest regret in Ex. 2?\nEvidence:\nE1 [table, Table 2, page 9]: Table 2: Policy learning results in Ex. 3\n | IPW | DR | IPW-SVM | DR-SVM | POEM | SNPOEM | Balanced | Balanced-DR\nGlass | 0.726 | 0.755 | 0.641 | 0.731 | 0.851 | 0.615 | 0.584 | 0.660\nEcoli | 0.488 | 0.501 | 0.332 | 0.509 | 0.431 | 0.331 | 0.298 | 0.371\nE2 [text, Section 3.1, page 8]: This approach requires solving a quadratic program for each objective gradient evaluation. While this can be made faster by using the previous solution as warm start, it is still computationally intensive, especially as the bilevel problem is nonconvex and both it and each quadratic program solved in “batch” mode. This is a limitation of the current optimization algorithm that we hope to improve on in the future using specialized methods for bilevel optimization [4, 32, 37]. Example 2. We return to Ex. 1 and consider policy learning. We use the ﬁxed draw shown in Fig. 1a and set σ to 0. We consider a variety of policy learners and plot the policies in Fig. 2 along with their population regret PAPE( π ) − PAPE( π ∗ ) . The policy learners we consider are: minimizing standard IPW and DR evaluations over Π logit with ˆ ϕ, ˆ µ as in Ex. 1 (versions with combinations of normalized, clipped, and/or true ϕ , not shown, all have regret 0.26–0.5), the direct method with Gaussian process regression gradient boosted trees (both sklearn defaults), weighted SVM classiﬁcation using IPW and DR weights (details in supplement), SNPOEM [ 43 ], PF [ 23 ], and our balanced policy learner (1) with parameters as in Ex. 1, Π = Π logit , λ = Λ = 0 (the DR version (2), not shown, has regret .08). Example 3. Next, we consider two UCI multi-class classiﬁcation datasets [ 30 ], Glass ( n = 214 , d = 9 , m = 6 ) and Ecoli ( n = 336 , d = 7 , m = 8 ), and use a supervised-to-contextual-bandit transformati ...\nE3 [text, Section front, page 1]: Balanced Policy Evaluation and Learning\nE4 [text, Section 3.2, page 8]: Next, we establish consistency results uniformly over policy classes. This allows us to bound the regret of the balanced policy learner. We deﬁne the sample and population regret, respectively, as\nE5 [figure, Figure 2, page 7] (image attached): Figure 2: Policy learning results in Ex. 2; numbers denote regret\nWords printed in the figure: 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 Balanced policy learner .06 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 IPW .50 Gauss Proc 0.29 IPW-SVM 0.34 SNPOEM 0.28 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 DR .26 Grad Boost 0.20 DR-SVM 0.18 PF 0.23\nE6 [figure, Figure 2, page 7]: Zoomed view (300 dpi) of: Figure 2: Policy learning results in Ex. 2; numbers denote regret\nWords printed in the figure: 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 Balanced policy learner .06 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 IPW .50 Gauss Proc 0.29 IPW-SVM 0.34 SNPOEM 0.28 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2 1 0 1 2 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 2.0 1.5 1.0 0.5 0.0 0.5 1.0 1.5 2.0 DR .26 Grad Boost 0.20 DR-SVM 0.18 PF 0.23"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E5",
+    "fact": "SNPOEM"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide the regret values for Ex. 2, only Ex. 3. The sub-question asks for the lowest regret in Ex. 2, but the evidence only shows results for Ex. 3. Therefore, the sub-question cannot be answered with the provided evidence. The evidence does not contain the specific regret for",
+  "sufficient": false
+ }
+}

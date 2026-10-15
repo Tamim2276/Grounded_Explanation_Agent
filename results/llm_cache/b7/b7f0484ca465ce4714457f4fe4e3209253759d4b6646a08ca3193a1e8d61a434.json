@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 180,
+  "total_tokens": 250,
+  "prompt_tokens_details": {
+   "cached_tokens": 72
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best at predicting the delexicalised constituency tree of an example, and how much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nSub-goals:\n1. [table] Which model performs the best at predicting the delexicalised constituency tree of an example?\n2. [table] How much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the best model's performance and its superiority over the baseline model in terms of unlabelled F1 score, which is typically found in a table summarizing experimental results.",
+  "tool": "table",
+  "query": "unlabelled F1 score comparison between best model and baseline model"
+ }
+}

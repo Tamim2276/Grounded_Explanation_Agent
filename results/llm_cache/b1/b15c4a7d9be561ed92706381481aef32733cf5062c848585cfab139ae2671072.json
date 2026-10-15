@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 183,
+  "prompt_tokens": 653,
+  "total_tokens": 836,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The BASE model performs the worst among all the models.\" -- cites: E4 (Table 2): row 'BASE', column 'AUC(mean ± std) on CVR task' = 66.00 ± 0.37; E4 (Table 2): row 'BASE', column 'AUC(mean ± std) on CTCVR task' = 62.07 ± 0.45\n\nCited evidence:\n[E4] (table, Table 2, page 4): Table 2: Comparison of different models on Public Dataset.\nValues (cite as cells):\n  row 'BASE': 'AUC(mean ± std) on CVR task' = 66.00 ± 0.37; 'AUC(mean ± std) on CTCVR task' = 62.07 ± 0.45\n  row 'AMAN': 'AUC(mean ± std) on CVR task' = 65.21 ± 0.59; 'AUC(mean ± std) on CTCVR task' = 63.53 ± 0.57\n  row 'OVERSAMPLING': 'AUC(mean ± std) on CVR task' = 67.18 ± 0.32; 'AUC(mean ± std) on CTCVR task' = 63.05 ± 0.48\n  row 'UNBIAS': 'AUC(mean ± std) on CVR task' = 66.65 ± 0.28; 'AUC(mean ± std) on CTCVR task' = 63.56 ± 0.70\n  row 'DIVISION': 'AUC(mean ± std) on CVR task' = 67.56 ± 0.48; 'AUC(mean ± std) on CTCVR task' = 63.62 ± 0.09\n  row 'ESMM-NS': 'AUC(mean ± std) on CVR task' = 68.25 ± 0.44; 'AUC(mean ± std) on CTCVR task' = 64.44 ± 0.62\n  row 'ESMM': 'AUC(mean ± std) on CVR task' = 68.56 ± 0.37; 'AUC(mean ± std) on CTCVR task' = 65.32 ± 0.49"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the BASE model performs the worst among all the models. However, the evidence shows that the BASE model has an AUC(mean ± std) of 66.00 ± 0.37 on the CVR task and 62.07 ± 0.45 on the CTCVR task, which is not the lowest among all the models. The UNBIAS model has an AUC(mean ± std) of 66.65 ± 0.28 on the CVR task and 63.56 ± 0.70 on the CTCVR task, which is lower than the BASE model's AUC on both tasks."
+   }
+  ]
+ }
+}

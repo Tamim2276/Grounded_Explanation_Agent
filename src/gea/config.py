@@ -19,6 +19,14 @@ MODALITIES = ("text", "table", "figure")
 # --- loop bounds and retrieval ------------------------------------------------
 MAX_ROUNDS   = 3              # bound on the retrieval loop   (G1 -> replan_prep -> N5)
 MAX_REWRITES = 2              # bound on the regenerate loop  (G2 -> rewrite_prep -> N9)
+FIRST_ROUND  = "planner"      # round 1: "planner" -- N5 picks one tool (the Day 1 design); "all" --
+                              # every tool once with the question, as single-pass does. "all" was
+                              # tried on dev (2026-10-16): 7 right / 5 partly / 6 wrong / 2 none,
+                              # against 9 / 4 / 5 / 2 without it -- more evidence, worse conclusions
+AFTER_BUDGET = "answer"       # when the rounds are spent and G1 is still not convinced: "answer" from
+                              # the facts G1 did find (if any, and the rule floor holds; G2 checks
+                              # every claim; flagged best effort) or "abstain" (Day 7: the strict G1
+                              # alone abstained on ~3 in 4 test questions)
 TOP_K        = 1              # items each retriever returns per call
 ZOOM_IF_AREA_BELOW = 0.30     # N7 runs when a figure covers less than 30% of its page
 

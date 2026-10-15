@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 56,
+  "prompt_tokens": 221,
+  "total_tokens": 277,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre in the SRL-NW network has the lowest failure rate and how does its inference time compare to other genres within the same network?\nSub-goals:\n1. [table] Which genre in the SRL-NW network has the lowest failure rate?\n2. [table] How does its inference time compare to other genres within the same network?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: The inference times for other genres and the comparison of inference times between genres are not provided in the evidence. The failure rates for other genres are also not explicitly stated in the evidence provided. Therefore, the inference time comparison and the failure rate for other genres are仍未"
+  }
+ ],
+ "answer": {
+  "reason": "The failure rate and inference times for other genres are not explicitly stated in the evidence provided.",
+  "tool": "table",
+  "query": "Compare inference times of all genres in the SRL-NW network."
+ }
+}

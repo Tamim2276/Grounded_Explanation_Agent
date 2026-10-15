@@ -1,0 +1,40 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 133,
+  "prompt_tokens": 462,
+  "total_tokens": 595,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)? How does this compare to the performance of the model that only observes answers?\nSub-questions:\n1. [table] Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)?\n2. [figure] How does this compare to the performance of the model that only observes answers?\nEvidence:\nE1 [table, Table 8, page 15]: Table 8: Test accuracy (%) on COCOQA.\nMethod | IoU | QoU | IoU +QoU\nMLP-A | 70.3 | 31.7 | 26.6\nMLP-IA | 73.4 | 73.3 | 60.7\nMLP-QA | 91.5 | 52.5 | 51.4\nMLP-IQA | 93.1 | 78.3 | 75.9\nRandom | 25.0 | 25.0 | 14.3"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "MLP-IQA performs the best with 75.9% combined accuracy."
+   }
+  ],
+  "uncovered": [
+   2,
+   3
+  ],
+  "missing": "The comparison of MLP-IQA's performance to the model that only observes answers is not provided in the evidence. The table only shows the combined accuracy for each model, but not the performance of a model that only observes answers for comparison.",
+  "sufficient": false
+ }
+}

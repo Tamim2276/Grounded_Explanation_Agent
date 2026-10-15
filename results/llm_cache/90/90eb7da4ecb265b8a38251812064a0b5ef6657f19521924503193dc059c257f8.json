@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 94,
+  "prompt_tokens": 233,
+  "total_tokens": 327,
+  "prompt_tokens_details": {
+   "cached_tokens": 144
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the Average Relative Error (ARE) of node queries change as the width increases for different configurations of GSS and TCM?\nSub-goals:\n1. [figure] How does the Average Relative Error (ARE) of node queries change as the width increases for different configurations of GSS and TCM?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with table\nStill missing: The evidence does not provide the specific details on how the ARE changes for different configurations of GSS and TCM as the width increases for each dataset (email-EuAll, cit-HepPh, web-NotreDame, lkml-reply, Caida-networkflow). The figure only shows the trend for one dataset (email-EuAll) and does"
+  }
+ ],
+ "answer": {
+  "reason": "The figure does not provide the specific details needed for all datasets.",
+  "tool": "text",
+  "query": "How does the Average Relative Error (ARE) of node queries change as the width increases for different configurations of GSS and TCM across all datasets (email-EuAll, cit-HepPh, web-NotreDame, lkml-reply, Caida-networkflow)?"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 197,
+  "total_tokens": 273,
+  "prompt_tokens_details": {
+   "cached_tokens": 126
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the novel class and the top-3 most similar base classes?\nSub-goals:\n1. [figure] What is the relationship between the novel class and the top-3 most similar base classes?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with table\nStill missing: The relationship between the novel class and the top-3 most similar base classes in terms of performance or similarity ratio is not provided in the evidence items. The evidence only lists the top-3 similar base classes but does not provide the performance metrics or similarity ratios for these base-"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the relationship in terms of performance or similarity ratio, which is not covered by the figure or table. Therefore, a text search is needed to find this information.",
+  "tool": "text",
+  "query": "relationship between the novel class and the top-3 most similar base classes in terms of performance or similarity ratio"
+ }
+}
