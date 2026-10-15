@@ -24,6 +24,8 @@ python scripts/cache_question_vectors.py --split "$SPLIT" || { echo "question ve
 
 # 2. The model server: started when there is room (start_llm.sh checks memory and GPU, and
 #    refuses while another job needs them -- then this tries again every minute).
+echo "$(date '+%T') starting the model server and waiting until it answers (about 1 minute;"
+echo "         longer while other programs hold the memory -- data/logs/llm.log says why). Keep this window open."
 until server_up; do
     server_running || bash scripts/start_llm.sh >> data/logs/llm.log 2>&1 &
     sleep 60
