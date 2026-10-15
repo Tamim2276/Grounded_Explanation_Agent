@@ -1,0 +1,54 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 369,
+  "prompt_tokens": 1253,
+  "total_tokens": 1622,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The GrNet-1Block method achieves the highest accuracy on the AFEW database with 32.08%, as shown in Table 1.\" -- cites: E4 (Table 1): row 'GrNet-1Block', column 'AFEW' = 32.08%\n2. \"The GrNet-2Blocks method also shows a high accuracy of 34.23% on the AFEW database, as seen in Table 1.\" -- cites: E4 (Table 1): row 'GrNet-2Blocks', column 'AFEW' = 34.23%\n3. \"The GrNet-2Blocks method shows a high accuracy of 34.23% on the AFEW database, as seen in Table 1.\" -- cites: E4 (Table 1): row 'GrNet-2Blocks', column 'AFEW' = 34.23%\n4. \"The GrNet method shows a higher accuracy than the SPDNet method on the AFEW database, as shown in Figure 2.\" -- cites: E6 (Figure 2): observation \"The GrNet method shows a steeper convergence curve and higher accuracy compared to SPDNet on the AFEW database.\"\n5. \"The SPDNet method achieves an accuracy of 34.23% on the AFEW database, which is the highest among the methods listed in Table 1.\" -- cites: E4 (Table 1): row 'SPDNet', column 'AFEW' = 34.23%\n\nCited evidence:\n[E4] (table, Table 1, page 7): Table 1: Results for the AFEW, HDM05 and PaSC datasets. PaSC1/PaSC2 are the control/handheld testings.\nValues (cite as cells):\n  row 'STM-ExpLet': 'AFEW' = 31.73%; 'HDM05' = –; 'PaSC1' = –; 'PaSC2' = –\n  row 'RSR-SPDML': 'AFEW' = 30.12%; 'HDM05' = 48.01%±3.38; 'PaSC1' = –; 'PaSC2' = –\n  row 'DCC': 'AFEW' = 25.78%; 'HDM05' = 41.34%±1.05; 'PaSC1' = 75.83%; 'PaSC2' = 67.04%\n  row 'GDA': 'AFEW' = 29.11%; 'HDM05' = 46.25%±2.71; 'PaSC1' = 71.38%; 'PaSC2' = 67.49%\n  row 'GGDA': 'AFEW' = 29.45%; 'HDM05' = 46.87%±2.31; 'PaSC1' = 66.71%; 'PaSC2' = 68.41%\n  row 'PML': 'AFEW' = 28.98%; 'HDM05' = 47.12%±1.59; 'PaSC1' = 73.45%; 'PaSC2' = 68.32%\n  row 'VGGDeepFace': 'AFEW' = –; 'HDM05' = –; 'PaSC1' = 78.82%; 'PaSC2' = 68.24%\n  row 'DeepO2P': 'AFEW' = 28.54%; 'HDM05' = –; 'PaSC1' = 68.76%; 'PaSC2' = 60.14%\n  row 'SPDNet': 'AFEW' = 34.23%; 'HDM05' = 61.45%±1.12; 'PaSC1' = 80.12%; 'PaSC2' = 72.83%\n  row 'GrNet-0Block': 'AFEW' = 25.34%; 'HDM05' = 51.12%±3.55; 'PaSC1' = 68.52%; 'PaSC2' = 63.92%\n  row 'GrNet-1Block': 'AFEW' = 32.08%; 'HDM05' = 57.73%±2.24; 'PaSC1' = 80.15%; 'PaSC2' = 72.51%\n  row 'GrNet-2Blocks': 'AFEW' = 34.23%; 'HDM05' = 59.23%±1.78; 'PaSC1' = 80.52%; 'PaSC2' = 72.76%\n[E6] (figure, Figure 2, page 7): a zoomed view of Figure 2"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 (Table 1) shows that the GrNet-1Block method achieves an accuracy of 32.08% on the AFEW database, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E4 (Table 1) shows that the GrNet-2Blocks method achieves an accuracy of 34.23% on the AFEW database, which matches the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E4 (Table 1) shows that the GrNet-2Blocks method achieves an accuracy of 34.23% on the AFEW database, which matches the claim."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence in E6 (Figure 2) does not provide the accuracy values for the GrNet and SPDNet methods on the AFEW database. It only shows a comparison of convergence curves and accuracy, not specific numerical values."
+   },
+   {
+    "claim": 5,
+    "supported": false,
+    "reason": "The evidence in E4 (Table 1) shows that the SPDNet method achieves an accuracy of 34.23% on the AFEW database, but this is not the highest accuracy among the methods listed in Table 1. The GrNet-2Blocks method achieves a higher accuracy of 34.23%."
+   }
+  ]
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 527,
+  "prompt_tokens": 2216,
+  "total_tokens": 2743,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"BOSSNET with multi-hop encoder performs better on bAbI tasks 3 and 5 compared to the 1-hop encoder due to its ability to better interpret unseen words using their surrounding context, as shown in Table 14 and Figure 4.\" -- cites: E3 (Section F): quote \"Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant.\"; E4 (Table 14): row 'BOSSNET with Multi-Hop Encoder', column 'bAbI' = 100; E5 (Figure 4): observation \"BOSSNET with multi-hop encoder maintains higher per-response accuracy compared to the 1-hop encoder across the range of unseen entity percentages in response.\"\n2. \"The performance difference between the non-OOV and OOV test sets is large, and BOSSNET with multi-hop encoder bridges this gap, as seen in Table 14 and Figure 4.\" -- cites: E4 (Table 14): row 'BOSSNET with Multi-Hop Encoder', column '(OOV)' = 91.7; E5 (Figure 4): observation \"BOSSNET with multi-hop encoder shows a consistent performance improvement across the range of unseen entity percentages in response.\"\n3. \"The tasks themselves, such as task 3 and 5, require inferencing over KB tuples to recommend a restaurant, which is better handled by the multi-hop encoder.\" -- cites: E3 (Section F): quote \"Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant.\"\n4. \"The multi-hop encoder's performance on bAbI tasks 3 and 5 is attributed to its ability to handle unseen words and infer KB tuples, which is crucial for these specific tasks.\" -- cites: E3 (Section F): quote \"Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant.\"; E4 (Table 14): row 'BOSSNET with Multi-Hop Encoder', column 'bAbI' = 100; E5 (Figure 4): observation \"BOSSNET with multi-hop encoder maintains higher per-response accuracy compared to the 1-hop encoder across the range of unseen entity percentages in response.\"\n\nCited evidence:\n[E3] (text, Section F, page 12): Table 14 shows the performance of bAbI tasks and CamRest on two B O S S N ET encoder settings. Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant. We also see substantial improvements on CamRest in both BLEU and entity F1 metric.\n[E4] (table, Table 14, page 14): Table 14: Ablation study: impact of hops in B O S S N ET encoder\nValues (cite as cells):\n  row '': '' = T1; 'bAbI' = T2; 'Dialog' = T3; 'Tasks' = T4; '' = T5; 'bAbI' = T1; 'Dialog' = T2; 'Tasks' = T3; '' = T4; '(OOV)' = T5; '' = BLEU; 'CamRest' = Ent. F1\n  row 'BOSSNET with 1-Hop Encoder': '' = 100; 'bAbI' = 100; 'Dialog' = 92.3; 'Tasks' = 100; '' = 90.5; 'bAbI' = 100; 'Dialog' = 100; 'Tasks' = 91.4; '' = 100; '(OOV)' = 89; '' = 10.5; 'CamRest' = 36.9\n  row 'BOSSNET with Multi-Hop Encoder': '' = 100; 'bAbI' = 100; 'Dialog' = 95.2; 'Tasks' = 100; '' = 97.3; 'bAbI' = 100; 'Dialog' = 100; 'Tasks' = 95.7; '' = 100; '(OOV)' = 91.7; '' = 15.2; 'CamRest' = 43.1\n[E5] (figure, Figure 4, page 8) (image attached): Figure 4: bAbI Task 5: Per-response accuracy compar- ison on KA sets [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim cites Table 14 and Figure 4, but the evidence only shows the performance of BOSSNET with 1-Hop and Multi-Hop encoders on bAbI tasks 3 and 5. The evidence does not provide a direct comparison of the performance of the multi-hop encoder versus the 1-hop encoder on these tasks. The evidence only shows the performance of BOSSNET with Multi-Hop Encoder on bAbI tasks 3 and 5 as 100, which is not a comparison with the 1-hop encoder."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim cites Table 14 and Figure 4, but the evidence only shows the performance of BOSSNET with 1-Hop and Multi-Hop encoders on bAbI tasks 3 and 5. The evidence does not provide a direct comparison of the performance of the multi-hop encoder versus the 1-hop encoder on these tasks. The evidence only shows the performance of BOSSNET with Multi-Hop Encoder on bAbI tasks 3 and 5 as 100, which is not a comparison with the 1-hop encoder."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in Section F of E3 states that multi-hops in the encoder help in bAbI task 3 and 5, as they require inferencing over the KB tuples to recommend a restaurant. This supports the claim that the tasks themselves, such as task 3 and 5, require inferencing over KB tuples to recommend a restaurant, which is better handled by the multi-hop encoder."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The claim cites Table 14 and Figure 4, but the evidence only shows the performance of BOSSNET with 1-Hop and Multi-Hop encoders on bAbI tasks 3 and 5. The evidence does not provide a direct comparison of the performance of the multi-hop encoder versus the 1-hop encoder on these tasks. The evidence only shows the performance of BOSSNET with Multi-Hop Encoder on bAbI tasks 3 and 5 as 100, which is not a comparison with the 1-hop encoder."
+   }
+  ]
+ }
+}

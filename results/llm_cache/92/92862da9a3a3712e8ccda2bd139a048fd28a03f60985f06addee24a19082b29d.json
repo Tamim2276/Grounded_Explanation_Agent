@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 280,
+  "prompt_tokens": 1115,
+  "total_tokens": 1395,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The 'Last contact' feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\" -- cites: E2 (Section 8.2): quote \"Interestingly, the latest date of contact with the police often has significant positive influence on the score, despite not being used by the algorithm directly.\"\n2. \"The dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL.\" -- cites: E1 (Section 8.2): quote \"The dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL (Chicago Police Department, 2017).\"\n\nCited evidence:\n[E1] (text, Section 8.2, page 17): The dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL (Chicago Police Department, 2017). The dataset contains 398 , 684 records; for each record the experiment focuses on 14 attributes and a score. The scores reﬂect an individual’s probability of being involved in a shooting incident either as a victim or an offender. Scores, ranging from 0 (low risk) to 500 (high risk), are calculated for individuals with criminal records using eight attributes (not including race or sex). These attributes are: age during the latest arrest (1), number of times being the victim of a shooting incident (2), number of times being the victim of aggravated battery or assault (3), number of prior arrests for violent offenses (4), presence of gang afﬁliation (5), number of prior narcotic arrests (6), trend in recent criminal activity (7) and number of prior unlawful use of weapon arrests (8). Additionally, in this experiment, we measure the inﬂuence of features not available to the algorithm (but which are part of the dataset): sex (9), race (10), occurrence of at least one weapon arrest in past 10 years (11), occurrence of at least one drug arrest in past 10 years (12), the subject being currently on parole (13), and the latest year of contact with the police (14).\n[E2] (text, Section 8.2, page 17): The dataset requires some adjustments to the original deﬁnitions of MIM and Parzen. First, we adjust MIM to a regression setting by replacing the indicator 1 ( c ( ⃗y ) = c ( ⃗x )) with c ( ⃗y ) − c ( ⃗x ) ; thus, a point’s contribution to the measure is weighted based on how much bigger, or smaller, its SSL score is; Parzen was similarly adjusted. Moreover, the race feature is categorical with no natural order to its states; thus, the value of race is set to 1 whenever it is the same as the point of interest, and 0 otherwise. While MIM and Parzen have similar outputs on the data: the average cosine similarity between the two measures is ≥ 0 . 94 (taken over ≥ 8000 randomly sampled points). Two example MIM inﬂuence measurements are depicted in Table 4. Asher and Arthur ((2017)) analyze the eight features used by the SSL Algorithm. Their results suggest that age has signiﬁcant negative inﬂuence on the SSL score, while other features contribute positively in varying degrees. The MIM outputs conﬁrm this statement, but suggest that the degree to which the features contribute to the SSL score vary greatly between cases. As exempliﬁed in Table 4, the inﬂuence of a single crime-related event tends to grow with the number of events of the same type. In the vast majority of cases, age has signiﬁcant negative inﬂuence on the SSL score. Interestingly, the latest date of contact with the police often has signiﬁcant positive inﬂuence on the score, despite not being used by the algorithm directly. In other cases, race has signiﬁcant inﬂuence as well. This last point highlights some of the issues of using a data-driven method: features that are not used by the classiﬁer can be assigned a signiﬁcant amount of inﬂuence; this is simply because race is correlated with other variables used by the SSL algorithm. Indeed, in order to ascertain that race is not an input to the algorithm, black-box access is required."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the 'Last contact' feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm. The cited evidence from E2 (Section 8.2) supports that the latest date of contact with the police often has significant positive influence on the score, despite not being used by the algorithm directly. However, the claim does not specify 'both examples' and the evidence does not provide information about the influence in both examples. Therefore, the claim is partially supported but not fully supported by the evidence."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL. The cited evidence from E1 (Section 8.2) directly supports this claim by stating that the dataset used for the experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL."
+   }
+  ]
+ }
+}

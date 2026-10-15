@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 231,
+  "prompt_tokens": 1116,
+  "total_tokens": 1347,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"TFBA achieves better results than HardClust for the Shootings and NYT Sports datasets.\" -- cites: E3 (Section 4): quote \"As can be observed from Table 5 , TFBA achieves better results than HardClust for the Shootings and NYT Sports datasets, however HardClust achieves better results for the MUC dataset.\"\n2. \"The Shootings dataset has 1,335 documents.\" -- cites: E2 (Section 4): quote \"The first dataset (Shootings) is a collection of 1,335 documents constructed from a publicly available database of mass shootings in the United States.\"\n3. \"The NYT Sports dataset has 20,940 documents.\" -- cites: E2 (Section 4): quote \"The second is New York Times Sports (NYT Sports) dataset which is a collection of 20,940 sports documents from the period 2005 and 2007.\"\n\nCited evidence:\n[E2] (text, Section 4, page 6): In this section, we evaluate the performance of TFBA for the task of HRSI. We also propose a baseline model for HRSI called HardClust. HardClust : We propose a baseline model called the Hard Clustering Baseline (HardClust) for the task of higher order relation schema induction. This model induces schemata by grouping perrelation NP arguments from OpenIE extractions. In other words, for each relation, all the Noun Phrases (NPs) in ﬁrst argument form a cluster that represents the subject of the relation, all the NPs in the second argument form a cluster that represents object and so on. Then from each cluster, the top most frequent NPs are chosen as the representative NPs for the argument type. We note that this method is only able to induce one schema per relation. Datasets: We run our experiments on three datasets. The ﬁrst dataset (Shootings) is a collection of 1,335 documents constructed from a publicly available database of mass shootings in the United States. The second is New York Times Sports (NYT Sports) dataset which is a collection of 20,940 sports documents from the period 2005 and 2007. And the third dataset (MUC) is a set of 1300 Latin American newswire documents about terrorism events. After performing the processing steps described in Section 3 , we obtained 357,914 unique OpenIE extractions from the NYT Sports dataset, 10,847 from Shootings dataset, and 8,318 from the MUC dataset. However, in order to properly analyze and evaluate the model, we consider only the 50 most frequent relations in the datasets and their corresponding OpenIE extractions. This is done to avoid noisy OpenIE extractions to yield better data quality and to aid subsequent manual evaluation of the data. We construct input tensors\n[E3] (text, Section 4, page 7): Experimental results comparing performance of various models for the task of HRSI are given in Table 5 . We present evaluation results from three evaluators represented as E1, E2 and E3. As can be observed from Table 5 , TFBA achieves better results than HardClust for the Shootings and NYT Sports datasets, however HardClust achieves better results for the MUC dataset. Percentage agreement of the evaluators for TFBA is 72%, 70% and 60% for Shootings, NYT Sports and MUC datasets respectively. HardClust Limitations : Even though Hard- Clust gives better induction for MUC corpus, this approach has some serious drawbacks. HardClust can only induce one schema per relation. This is a restrictive constraint as multiple senses can exist for a relation. For example, consider the schemata induced for the relation shoot as shown in Table 4 . TFBA induces two senses for the relation, but HardClust can induce only one schema. For a set of 4-tuples, HardClust can only induce ternary schemata; the dimensionality of the schemata cannot be varied. Since the latent factors induced by HardClust are entirely based on frequency, the latent categories induced by HardClust are dominated by only a ﬁxed set of noun phrases. For example, in NYT Sports dataset, subject category induced by HardClust for all the relations is ⟨ team, yankees, mets ⟩ . In addition to inducing only one schema per relation, most of the times HardClust only induces a ﬁxed set of categories. Whereas for TFBA, the number of categories depends on the rank of factorization, which is a user provided parameter, thus providing more ﬂexibility to choose the latent categories."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4) states that 'TFBA achieves better results than HardClust for the Shootings and NYT Sports datasets,' which directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 4) states that 'The first dataset (Shootings) is a collection of 1,335 documents constructed from a publicly available database of mass shootings in the United States,' which directly supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 4) states that 'The second is New York Times Sports (NYT Sports) dataset which is a collection of 20,940 sports documents from the period 2005 and 2007,' which directly supports the claim."
+   }
+  ]
+ }
+}

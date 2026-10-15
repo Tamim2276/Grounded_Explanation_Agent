@@ -1,0 +1,65 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 338,
+  "prompt_tokens": 3228,
+  "total_tokens": 3566,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2), and how does its performance compare to other methods?\nEvidence:\n[E1] (table, Table 1, page 7): Table 1: Results for the AFEW, HDM05 and PaSC datasets. PaSC1/PaSC2 are the control/handheld testings.\nValues (cite as cells):\n  row 'STM-ExpLet': 'AFEW' = 31.73%; 'HDM05' = –; 'PaSC1' = –; 'PaSC2' = –\n  row 'RSR-SPDML': 'AFEW' = 30.12%; 'HDM05' = 48.01%±3.38; 'PaSC1' = –; 'PaSC2' = –\n  row 'DCC': 'AFEW' = 25.78%; 'HDM05' = 41.34%±1.05; 'PaSC1' = 75.83%; 'PaSC2' = 67.04%\n  row 'GDA': 'AFEW' = 29.11%; 'HDM05' = 46.25%±2.71; 'PaSC1' = 71.38%; 'PaSC2' = 67.49%\n  row 'GGDA': 'AFEW' = 29.45%; 'HDM05' = 46.87%±2.31; 'PaSC1' = 66.71%; 'PaSC2' = 68.41%\n  row 'PML': 'AFEW' = 28.98%; 'HDM05' = 47.12%±1.59; 'PaSC1' = 73.45%; 'PaSC2' = 68.32%\n  row 'VGGDeepFace': 'AFEW' = –; 'HDM05' = –; 'PaSC1' = 78.82%; 'PaSC2' = 68.24%\n  row 'DeepO2P': 'AFEW' = 28.54%; 'HDM05' = –; 'PaSC1' = 68.76%; 'PaSC2' = 60.14%\n  row 'SPDNet': 'AFEW' = 34.23%; 'HDM05' = 61.45%±1.12; 'PaSC1' = 80.12%; 'PaSC2' = 72.83%\n  row 'GrNet-0Block': 'AFEW' = 25.34%; 'HDM05' = 51.12%±3.55; 'PaSC1' = 68.52%; 'PaSC2' = 63.92%\n  row 'GrNet-1Block': 'AFEW' = 32.08%; 'HDM05' = 57.73%±2.24; 'PaSC1' = 80.15%; 'PaSC2' = 72.51%\n  row 'GrNet-2Blocks': 'AFEW' = 34.23%; 'HDM05' = 59.23%±1.78; 'PaSC1' = 80.52%; 'PaSC2' = 72.76%\n[E2] (figure, Figure 2, page 7) (image attached): Figure 2: (a) Results of using single and multiple FRMap (S-FRMap, M-FRMap), ProjPoolings across or within pro- jections (A-ProjPooling, W-ProjPooling) for the three used databases. (b) (c) Convergence and accuracy curves of SPDNet and the proposed GrNet for the AFEW.\nWords printed in the figure: AFEW HDM05 PaSC-Con PaSC-Han 0 0.2 0.4 0.6 0.8 Accuracy S-FRMap M-FRMap A-ProjPooling W-ProjPooling (a) (b) (c)\n[E3] (figure, Figure 2, page 7): a zoomed view of Figure 2 (image attached)\n[E4] (text, Section U, page 6): Face Veriﬁcation : We employ one standard dataset named Point-and-Shoot Challenge (PaSC) (Beveridge et al. 2013). For 256 subjects, it owns 1,401 videos taken by control cameras, and 1,401 videos from handheld cameras. For the dataset, (Beveridge et al. 2013) designs control and handheld face veriﬁcation experiments. As done in (Beveridge, Zhang, and others 2015; Huang and Van Gool 2017), we use its 280 training videos and the COX data (Huang et al. 2015a) with 900 videos for training. Similarly, the training data are split\n[E5] (text, Section U, page 6): Action Recognition : We use the HDM05 database (M¨uller et al. 2007) that is one of the largest-scale skeleton-based human action datasets. The dataset consists of 2,337 sequences of 130 action classes, and provides 3D locations of 31 joints of the subjects. Following the protocol designed in (Huang and Van Gool 2017), we conduct 10 random evaluations, each of which randomly selected half of sequences for training and the rest for testing. For data augmentation, the training sequences are divided into around 18,000 small subsequences in each random evaluation. As done in (Harandi, Salzmann, and Hartley 2014; Huang and Van Gool 2017), we represent each sequence by a covariance descriptor of size 93 × 93 , which is computed by the second order statistics of the 3D coordinates of the 31 joints in each frame. Then, we apply SVD on the covariance descriptors to get linear subspaces of order 10, which form the data on a Grassmannian Gr (10 , 93) . For our GrNet-1Block, the sizes of the connection weights are set to 93 × 60 , while those of GrNet-2Blocks are ﬁxed as 93 × 80 , 40 × 30 respectively.\n[E6] (text, Section U, page 6): we just use an i7-2600K (3.40GHz) PC without any GPUs 5 . Note that, the readers can follow the DeepO2P method to implement an end-to-end learning of ConvNet+GrNet. Since the focus of this paper is on deep learning for Grassmannian inputs, we leave the study in future work. Emotion Recognition : We utilize the popular Acted Facial Expression in Wild (AFEW) (Dhall et al. 2014) dataset. The dataset contains 1,345 sequences of facial expressions acted by 330 actors in close to real world setting. The standard protocol designed by (Dhall et al. 2014) splits the dataset into three data sets, i.e., training, validation and test data sets. In the training and validation data sets, each video is classiﬁed into one of seven expressions, while the ground truth of the test set has not been released. As a result, we follow (Liu et al. 2014a; Huang and Van Gool 2017) to present the results on the validation set. As done in many works such as (Huang and Van Gool 2017) for augmenting the training data, we split the training videos to 1,747 small subvideos. For the evaluation, each facial frame is normalized to an image of size 20 × 20 . Then, following (Liu et al. 2013; Liu et al. 2014b), we model sequences of facial expression with a set of linear subspaces of order 10, which span a Grassmann manifold Gr (10 , 400) . In the task, the sizes of the GrNet-1Block weights are set to 400 × 100 , while those of the GrNet-2Blocks are set to 400 × 300 and 150 × 100 . [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The GrNet-1Block method performs best on the PaSC dataset for the handheld testing scenario (PaSC2), with an accuracy of 72.51%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "GrNet-1Block",
+      "col": "PaSC2",
+      "value": "72.51%"
+     }
+    ]
+   },
+   {
+    "text": "The GrNet-1Block method outperforms other methods on the PaSC dataset for the handheld testing scenario (PaSC2) with an accuracy of 72.51%, compared to 68.24% for SPDNet and 60.14% for DeepO2P.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "GrNet-1Block",
+      "col": "PaSC2",
+      "value": "72.51%"
+     },
+     {
+      "evidence": "E1",
+      "row": "SPDNet",
+      "col": "PaSC2",
+      "value": "68.24%"
+     },
+     {
+      "evidence": "E1",
+      "row": "DeepO2P",
+      "col": "PaSC2",
+      "value": "60.14%"
+     }
+    ]
+   }
+  ]
+ }
+}

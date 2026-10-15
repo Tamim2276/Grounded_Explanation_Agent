@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 379,
+  "prompt_tokens": 971,
+  "total_tokens": 1350,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The VQA2− dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys.\" -- cites: E2 (Section D.2): quote \"Comparing to Table 9, we see that the overall performance for each model decreases as the dataset\"\n2. \"The VQA2− dataset is more challenging because it removes triplets with Yes/No as the target, making it harder for models to distinguish true triplets from decoys.\" -- cites: E2 (Section D.2): quote \"Comparing to Table 9, we see that the overall performance for each model decreases as the dataset\"\n3. \"The Visual Genome dataset has no 'Orig' decoys, which makes it easier for models to distinguish true triplets from decoys.\" -- cites: E4 (Section 5.3): quote \"This dataset has no “Orig” decoys, and we have created a multiple-choice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge.\"\n4. \"The Visual7W dataset has the largest number of triplets, which might make it more challenging for models to distinguish true triplets from decoys.\" -- cites: E4 (Section 5.3): quote \"This dataset has no “Orig” decoys, and we have created a multiple-choice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge.\"\n\nCited evidence:\n[E2] (text, Section D.2, page 14): For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset\n[E4] (text, Section 5.3, page 8): it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 )."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim cites a table showing a decrease in performance for each model as the dataset changes, but it does not specify that this dataset is the VQA2− dataset. The evidence does not directly support the claim that the VQA2− dataset presents the biggest challenge."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim cites a table showing a decrease in performance for each model as the dataset changes, but it does not specify that this dataset is the VQA2− dataset. The evidence does not directly support the claim that the VQA2− dataset is more challenging because it removes triplets with Yes/No as the target."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim cites a section that discusses the Visual Genome dataset and mentions that it has no 'Orig' decoys. However, the evidence does not specify that this dataset is the Visual Genome dataset. The claim also states that it makes it easier for models to distinguish true triplets from decoys, which is not supported by the evidence."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The claim cites a section that discusses the Visual Genome dataset and mentions that it has over 1 million triplets, the largest dataset on this task to our knowledge. However, the evidence does not specify that this dataset is the Visual7W dataset. The claim also states that it has the largest number of triplets, which might make it more challenging for models to distinguish true triplets from decoys, which is not supported by the evidence."
+   }
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 293,
+  "prompt_tokens": 2182,
+  "total_tokens": 2475,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"CDAN-E (w/ entropy) achieves the highest accuracy in the 'A->W' and 'A->D' transfer tasks.\" -- cites: E1 (Figure 2): row '(a) Multilinear DANN-f (representation)', column 'A->W' = 82.2; E1 (Figure 2): row '(a) Multilinear DANN-f (representation)', column 'A->D' = 79.9; E1 (Figure 2): row '(a) Multilinear DANN-g (prediction)', column 'A->W' = 79.7; E1 (Figure 2): row '(a) Multilinear DANN-g (prediction)', column 'A->D' = 77\n2. \"CDAN-E (w/ entropy) has the smallest A-distance in the 'A->W' and 'A->D' transfer tasks.\" -- cites: E1 (Figure 2): row '(c) Discrepancy DANN-f (representation)', column 'A->W' = 1.84; E1 (Figure 2): row '(c) Discrepancy DANN-f (representation)', column 'W->D' = 1.29; E1 (Figure 2): row '(c) Discrepancy DANN-[f,g] (concatenation)', column 'A->W' = 1.49; E1 (Figure 2): row '(c) Discrepancy DANN-[f,g] (concatenation)', column 'W->D' = 1.16\n\nCited evidence:\n[E1] (figure, Figure 2, page 9) (image attached): Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nValues (cite as cells):\n  row '(a) Multilinear DANN-f (representation)': 'A->W' = 82.2; 'A->D' = 79.9\n  row '(a) Multilinear DANN-g (prediction)': 'A->W' = 79.7; 'A->D' = 77\n  row '(a) Multilinear DANN-[f,g] (concatenation)': 'A->W' = 82.7; 'A->D' = 80.5\n  row '(a) Multilinear CDAN (w/o entropy)': 'A->W' = 93.2; 'A->D' = 89.4\n  row '(a) Multilinear CDAN-E (w/ entropy)': 'A->W' = 94.3; 'A->D' = 93.1\n  row '(c) Discrepancy DANN-f (representation)': 'A->W' = 1.84; 'W->D' = 1.29\n  row '(c) Discrepancy DANN-[f,g] (concatenation)': 'A->W' = 1.49; 'W->D' = 1.16\n  row '(c) Discrepancy CDAN-E (w/ entropy)': 'A->W' = 1.19; 'W->D' = 1.09 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence provided does not compare the accuracy of CDAN-E (w/ entropy) directly with other methods in the 'A->W' and 'A->D' transfer tasks. Instead, it only shows the accuracy of CDAN-E (w/ entropy) in these tasks. The claim also mentions 'CDAN-E (w/ entropy)' in the 'A->W' and 'A->D' transfer tasks, but the evidence only shows the accuracy for 'A->W' and 'A->D' for CDAN-E (w/ entropy)."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence provided does not compare the A-distance of CDAN-E (w/ entropy) directly with other methods in the 'A->W' and 'A->D' transfer tasks. Instead, it only shows the A-distance for CDAN-E (w/ entropy) in these tasks. The claim also mentions 'CDAN-E (w/ entropy)' in the 'A->W' and 'A->D' transfer tasks, but the evidence only shows the A-distance for 'A->W' and 'A->D' for CDAN-E (w/ entropy)."
+   }
+  ]
+ }
+}

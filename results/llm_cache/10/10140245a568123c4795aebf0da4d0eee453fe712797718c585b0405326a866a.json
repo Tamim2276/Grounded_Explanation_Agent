@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 123,
+  "prompt_tokens": 493,
+  "total_tokens": 616,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The GSS data structure is the fastest for updating on the email-EuAll dataset, achieving a speed of 2.2887 MIPS.\" -- cites: E6 (Table I): row 'GSS', column 'email-EuAll' = 2.2887\n2. \"The TCM data structure is the slowest for updating on the email-EuAll dataset, achieving a speed of 2.10417 MIPS.\" -- cites: E6 (Table I): row 'TCM', column 'email-EuAll' = 2.10417\n\nCited evidence:\n[E6] (table, Table I, page 12): TABLE I U PDATE S PEED (M IPS )\nValues (cite as cells):\n  row 'GSS': 'email-EuAll' = 2.2887; 'cit-HepPh' = 2.61057; 'web- NotreDame' = 2.40976\n  row 'GSS(no sampling)': 'email-EuAll' = 2.1245; 'cit-HepPh' = 2.49191; 'web- NotreDame' = 2.32015\n  row 'TCM': 'email-EuAll' = 2.10417; 'cit-HepPh' = 2.5498; 'web- NotreDame' = 2.07403\n  row 'Adjacency Lists': 'email-EuAll' = 0.578596; 'cit-HepPh' = 0.3384; 'web- NotreDame' = 0.52147"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim cites the correct subject (GSS), row ('email-EuAll'), and column (2.2887) from the evidence."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim cites the correct subject (TCM), row ('email-EuAll'), and column (2.10417) from the evidence."
+   }
+  ]
+ }
+}

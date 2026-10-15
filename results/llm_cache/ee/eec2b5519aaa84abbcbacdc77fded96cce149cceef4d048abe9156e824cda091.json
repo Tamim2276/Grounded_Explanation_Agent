@@ -1,0 +1,71 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 320,
+  "prompt_tokens": 2327,
+  "total_tokens": 2647,
+  "prompt_tokens_details": {
+   "cached_tokens": 1134
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nEvidence:\n[E1] (table, Table 1, page 3): Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG)\nValues (cite as cells):\n  row 'given T-R target-domain training data?': 'UDA' = Y; 'MVL' = Y; 'DG' = N; 'ZDDA' = N\n  row 'given T-R training data in multiple (>1) domains/views?': 'UDA' = N; 'MVL' = Y; 'DG' = Y; 'ZDDA' = N\n  row 'example prior work': 'UDA' = [33]; 'MVL' = [42]; 'DG' = [28]; 'ZDDA' = N/A\n[E2] (text, Section 2, page 3): Other problems related to ZDDA include unsupervised domain adaptation (UDA), multi-view learning (MVL), and domain generalization (DG), and we compare their problem settings in Table 1, which shows that the ZDDA problem setting is diﬀerent from those of UDA, MVL, and DG. In UDA and MVL, T-R target-domain training data is given. In MVL and DG, T-R training data in multiple domains is given. However, in ZDDA, T-R target-domain training data\n[E3] (text, Section 5, page 11): Second, in Table 6, we compare ZDDA 2 with the existing DA methods because the DA task D M → D M -M is considered as one of the standard experiments in recent works [7, 14, 20, 33, 34]. Although this is not a fair comparison (because ZDDA 2 has no access to the T-R target-domain training data), we ﬁnd\n[E4] (text, Section 5, page 11): use, ZDDA 2 signiﬁcantly outperforms the baseline (source only). To see how the semantic similarity between the T-R dataset (denoted as D T − R ) and T-I dataset (denoted as D T − I ) aﬀects the performance, we are inspired by [12] and use the word2vec [29] to compute the mean similarity (denoted as S ) of any two labels from D T − R and D T − I (one from each). We report S ( D T − R , D T − I ) in the parenthesis of the middle four rows of Table 5, where higher S represents higher semantic similarity. Given Table 5 and the following reference S values: S (object, scene)=0.192, S (animal, fruit)=0.171, and S (cat, dog)=0.761, we ﬁnd that: (1) For all the listed DA tasks except D F → D F -M, higher S corresponds to better performance, which is consistent with our intuition that using more relevant data as the T-I data improves the performance more. (2) All the listed S s in Table 5 are close to or lower than S (animal, fruit)=0.171, which we believe shows that our T-I data is highly irrelevant to the T-R data.\n[E5] (figure, Figure 4, page 14) (image attached): Fig. 4. Performance comparison between the two sensor fusion methods with black images as the noisy images. We compare the classiﬁcation accuracy (%) of (a) naive fusion and (b) ZDDA 3 under diﬀerent noise levels in both RGB and depth testing data. (c) shows that ZDDA 3 outperforms the naive fusion under most conditions\nWords printed in the figure: 14 K.-C. Peng, Z. Wu, and J. Ernst (a) naive fusion (b) ZDDA3 (c) accuracy diff. ((b)-(a))\n[E6] (figure, Figure 4, page 14): a zoomed view of Figure 4 (image attached)\n\nThese claims are already verified and kept:\n- ZDDA does not require T-R target-domain training data, unlike UDA and MVL.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"ZDDA requires T-R training data in multiple domains, unlike UDA and MVL.\": support check: The evidence shows that ZDDA does not require T-R training data in multiple domains/views (ZDDA = N), while MVL does (MVL = Y). UDA is not mentioned in the row 'given T-R training data in multiple (>1) domains/views?' in the evidence provided. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ZDDA does not require T-R target-domain training data, unlike UDA and MVL.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "given T-R target-domain training data?",
+      "col": "ZDDA",
+      "value": "N"
+     },
+     {
+      "evidence": "E1",
+      "row": "given T-R target-domain training data?",
+      "col": "UDA",
+      "value": "Y"
+     },
+     {
+      "evidence": "E1",
+      "row": "given T-R target-domain training data?",
+      "col": "MVL",
+      "value": "Y"
+     }
+    ]
+   },
+   {
+    "text": "ZDDA does not require T-R training data in multiple domains/views, unlike MVL.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "given T-R training data in multiple (>1) domains/views?",
+      "col": "ZDDA",
+      "value": "N"
+     },
+     {
+      "evidence": "E1",
+      "row": "given T-R training data in multiple (>1) domains/views?",
+      "col": "MVL",
+      "value": "Y"
+     }
+    ]
+   }
+  ]
+ }
+}

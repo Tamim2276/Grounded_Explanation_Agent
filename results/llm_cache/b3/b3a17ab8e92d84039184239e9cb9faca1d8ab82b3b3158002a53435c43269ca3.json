@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 241,
+  "prompt_tokens": 2030,
+  "total_tokens": 2271,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The UnCoRd method achieves the highest overall accuracy on the validation set.\" -- cites: E2 (Section 4.1): quote \"As can be seen, our model achieves state-of-the-art results without training for the visual question answering task and not using any answers GT, as other methods.\"; E5 (Figure 8): observation \"UnCoRd correctly answers all questions in the figure, demonstrating its ability to handle questions outside the VQA v2 domain.\"\n2. \"The 'Size' category has the highest accuracy of 100% on the validation set.\" -- cites: E1 (Table 1): row 'Size', column 'Acc.' = 100\n3. \"The 'Material' category has an accuracy of 99.97% on the validation set.\" -- cites: E1 (Table 1): row 'Material', column 'Acc.' = 99.97\n\nCited evidence:\n[E1] (table, Table 1, page 5): Table 1. CLEVR estimators results on CLEVR validation set\nValues (cite as cells):\n  row 'Ins. seg.': '' = 99.0; 'Acc.' = \n  row 'Material': '' = ; 'Acc.' = 99.97\n  row 'Size': '' = ; 'Acc.' = 100\n[E2] (text, Section 4.1, page 5): As can be seen, our model achieves state-of-the-art results without training for the visual question answering task and not using any answers GT, as other methods. In addition UnCoRd can elaborate and explain answers and failures using intermediate results, and extend the handled domain with no need of images and related QA examples, as demonstrated in Section 4.2 and Figure 6 . On a sample of 10,000 validation set examples, all mistakes were due to wrong visual estimators’ predictions, mainly miss detection of a highly occluded object. Hence, accurate annotation of object coordinates (as performed in NS-VQA [ 81 ]) may even further reduce the small number of errors. Note that NS-VQA requires full scene analysis, which is not scalable for domain extension with a large number of objects and relations. It also uses images with question-answer pairs to train the programs, coupling the method to the speciﬁc\n[E5] (figure, Figure 8, page 7) (image attached): Figure 8. Examples of UnCoRd successes in answering questions outside the VQA v2 domain on COCO images.\nWords printed in the figure: Q: How many cell phones are left of the Q: What object is supporting the person red cell phone that is closest to the that is left of the person above the right cell phone? skateboard? UnCoRd A: 9, Pythia A: 4 UnCoRd A: bicycle, Pythia A: skateboard Q: How many cell phones are left of the Q: What thing is on an object that is left right cell phone? of the person above the skateboard? UnCoRd A: 11, Pythia A: 5 UnCoRd A: person, Pythia A: skateboard Q:Is the number of people that are to the Q: What color is the suitcase that is both right of the left ball the same as the below a blue suitcase and left of a number of balls? suitcase? UnCoRd A: no, Pythia A: no UnCoRd A: red, Pythia A: blue Q: Is the number of people that are to the Q: What color is the suitcase that is both right of the left ball greater than the below a blue suitcase and right of a number of balls? suitcase? UnCoRd A: yes, Pythia A: no UnCoRd A: orange, Pythia A: blue Figure 8. Examples of UnCoRd successes in answering question [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that 'The UnCoRd method achieves the highest overall accuracy on the validation set.' However, the evidence provided does not specify the overall accuracy of the UnCoRd method. Instead, it mentions that UnCoRd achieves state-of-the-art results and correctly answers all questions in the figure. The evidence does not provide a comparison of the accuracy of UnCoRd against other methods or a statement about the highest overall accuracy."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence from Table 1 shows that the 'Size' category has an accuracy of 100% on the validation set, as cited in the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence from Table 1 shows that the 'Material' category has an accuracy of 99.97% on the validation set, as cited in the claim."
+   }
+  ]
+ }
+}

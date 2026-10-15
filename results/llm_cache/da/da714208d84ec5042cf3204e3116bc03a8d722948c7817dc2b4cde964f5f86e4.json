@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 298,
+  "prompt_tokens": 1598,
+  "total_tokens": 1896,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"BOSSNET is highly robust across all percentage levels of unseen entities in the KB.\" -- cites: E2 (Section 1): quote \"We find that B O S S N ET is highly robust across all percentage levels.\"\n2. \"The performance of BOSSNET is consistently high across all unseen entity percentages in the KB.\" -- cites: E5 (Figure 1): observation \"BOSSNET maintains a high BLEU score across all percentages of unseen entities.\"\n3. \"BOSSNET outperforms other baselines in terms of disentanglement and robustness to unseen information in the KB.\" -- cites: E2 (Section 1): quote \"We find that B O S S N ET is competitive or significantly better on standard metrics in all datasets as compared to state-of-the-art baselines.\"\n\nCited evidence:\n[E2] (text, Section 1, page 2): We perform evaluations over three datasets – bAbI ( Bordes and Weston , 2017 ), CamRest ( Wen et al. , 2016 ), and Stanford Multi-Domain Dataset ( Eric et al. , 2017 ). Of these, the last two are realworld datasets. We ﬁnd that B O S S N ET is competitive or signiﬁcantly better on standard metrics in all datasets as compared to state-of-the-art baselines. We also introduce a knowledge adaptability (KA) evaluation, in which we systematically increase the percentage of previously unseen entities in the KB. We ﬁnd that B O S S N ET is highly robust across all percentage levels. Finally, we also report a humanbased evaluation and ﬁnd that B O S S N ET responses are frequently rated higher than other baselines. 1. We propose B O S S N ET , a novel architecture to disentangle the language model from knowledge incorporation in task-oriented dialogs.\n[E5] (figure, Figure 1, page 1) (image attached): Figure 1: Performance of various task-oriented dialog systems on the CamRest dataset as the percentage of unseen information in the KB changes. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 1) states: 'We find that B O S S N ET is highly robust across all percentage levels.' This directly supports the claim that BOSSNET is highly robust across all percentage levels of unseen entities in the KB."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E5 (Figure 1) shows that BOSSNET maintains a high BLEU score across all percentages of unseen entities, as indicated by the figure. This supports the claim that BOSSNET's performance is consistently high across all unseen entity percentages in the KB."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E2 (Section 1) states: 'We find that B O S S N ET is competitive or significantly better on standard metrics in all datasets as compared to state-of-the-art baselines.' This supports the claim that BOSSNET is competitive or significantly better than baselines, but it does not directly compare BOSSNET to other baselines in terms of disentanglement and robustness to unseen information. The evidence does not provide a direct comparison of disentanglement or robustness to unseen information."
+   }
+  ]
+ }
+}

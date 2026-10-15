@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 320,
+  "prompt_tokens": 2346,
+  "total_tokens": 2666,
+  "prompt_tokens_details": {
+   "cached_tokens": 1077
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nEvidence:\n[E1] (figure, Figure 4, page 8) (image attached): Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each conﬁguration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars).\nWords printed in the figure: 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\n[E2] (figure, Figure 4, page 8): a zoomed view of Figure 4 (image attached)\n[E3] (table, Table 1, page 8): Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code.\nValues (cite as cells):\n  row '100%': 'Some training' = 2\n  row '90% Accuracy 1 80%': 'Some training' = 19 7 29\n  row 'soning comprehension and formal training tion. For each played together with the bar) and with': 'Some training' = task with in reasoning, conﬁguration, the with the number of their standard\n[E4] (text, Section 5.1, page 8): To evaluate human upper bounds for the task, we sampled 100 random questions (such as those presented in Section 4.4 ) from the test set and distributed them among 173 participants of an AMT survey. Every participant had to answer 10 questions. We also asked the participants about their highest completed education (six categories) and the amount of formal training they have in reasoning, logic, or argumentation (no training, some, or extensive). In addition, they speciﬁed for each question how familiar they were with the topic (3- point scale). How Hard is the Task for Humans? It depends, as shown in Figure 4 . Whereas education had almost negligible inﬂuence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was. Overall, 30 of the 173 participants scored 100%. The mean score for those with extensive\n[E5] (text, Section 6, page 10): Based on the dataset, we evaluated human performance in argument reasoning comprehension. Our ﬁndings suggest that the task is harder for people without formal argumentation training, while being solvable without knowing the topic. We also found that neural attention models outperform language models on the task. In the short run, we plan to draw more attention to this topic by running a SemEval 2018 shared task. 12 A deep qualitative analysis of the warrants from the theoretical perspective of reasoning\n[E6] (text, Section 5.1, page 8): formal training was 90.9%. For all participants, the mean was 79.8%. However, we have to note that some of the questions are more difﬁcult than others, for which we could not control explicitly. Does Topic Familiarity Affect Human Performance? Not really, i.e., we found no signiﬁcant (Spearman) correlation between the mean score and familiarity of a participant in almost all education/training conﬁgurations. This suggests that ar-\n\nThese claims are already verified and kept:\n- The figure does not provide direct evidence for the effect of formal training on argument reasoning comprehension accuracy for people with graduate degrees.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The figure shows that for people with graduate degrees, those with extensive formal training in reasoning, logic, or argumentation have the highest accuracy in argument reasoning comprehension.\": support check: The evidence does not specify the accuracy of people with graduate degrees who have extensive formal training in reasoning, logic, or argumentation. The figure shows the accuracy for different levels of education and training, but it does not break down the accuracy for graduate degrees with extensive training.\n- \"The figure indicates that for people with graduate degrees, those with extensive formal training have the highest accuracy, reaching 100% in some configurations.\": the number 100 is in no citation [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The figure shows that for people with graduate degrees, those with extensive formal training in reasoning, logic, or argumentation have the highest accuracy in argument reasoning comprehension.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The figure shows that for people with graduate degrees, those with extensive formal training in reasoning, logic, or argumentation have the highest accuracy in argument reasoning comprehension."
+     }
+    ]
+   },
+   {
+    "text": "The figure indicates that for people with graduate degrees, those with extensive formal training have the highest accuracy, reaching 100% in some configurations.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The figure indicates that for people with graduate degrees, those with extensive formal training have the highest accuracy, reaching 100% in some configurations."
+     }
+    ]
+   },
+   {
+    "text": "The figure does not provide direct evidence for the effect of formal training on argument reasoning comprehension accuracy for people with graduate degrees.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The figure shows the accuracy for different levels of education and training, but it does not break down the accuracy for graduate degrees with extensive training."
+     }
+    ]
+   }
+  ]
+ }
+}

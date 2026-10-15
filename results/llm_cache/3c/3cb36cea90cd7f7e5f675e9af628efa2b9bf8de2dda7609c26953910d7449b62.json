@@ -1,0 +1,125 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 14.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 738,
+  "prompt_tokens": 1838,
+  "total_tokens": 2576,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5)?\nEvidence:\n[E1] (table, Table 4, page 5): Table 4: Evaluation of GBI on simpler, low-resource seq2seq networks. Here, we also evaluate whether GBI can be used in combination with different inference techniques: greedy and beam search of various widths.\nValues (cite as cells):\n  row 'Net': 'Infer' = method; 'Failure' = (/2415); 'Conv' = rate; 'F1' = before; '(Failure set)' = after\n  row '': 'Infer' = Greedy; 'Failure' = 317; 'Conv' = 79.81; 'F1' = 65.62; '(Failure set)' = 68.79 (+3.14); 'Infer' = Beam 2; 'Failure' = 206; 'Conv' = 87.38; 'F1' = 66.61; '(Failure set)' = 71.15 (+4.54); 'Infer' = Beam 9; 'Failure' = 153; 'Conv' = 91.50; 'F1' = 68.66; '(Failure set)' = 71.69 (+3.03); 'Infer' = Greedy; 'Failure' = 611; 'Conv' = 88.05; 'F1' = 62.17; '(Failure set)' = 64.49 (+2.32); 'Infer' = Beam 2; 'Failure' = 419; 'Conv' = 94.27; 'F1' = 65.40; '(Failure set)' = 66.65 (+1.25); 'Infer' = Beam 9; 'Failure' = 360; 'Conv' = 93.89; 'F1' = 67.83; '(Failure set)' = 70.64 (+2.81); 'Infer' = Greedy; 'Failure' = 886; 'Conv' = 69.86; 'F1' = 58.47; '(Failure set)' = 60.41 (+1.94); 'Infer' = Beam 2; 'Failure' = 602; 'Conv' = 82.89; 'F1' = 60.45; '(Failure set)' = 61.35 (+0.90); 'Infer' = Beam 9; 'Failure' = 552; 'Conv' = 80.62; 'F1' = 61.64; '(Failure set)' = 62.98 (+1.34)\n  row 'Net3': 'Infer' = Beam 5; 'Failure' = 160; 'Conv' = 87.50; 'F1' = 67.5; '(Failure set)' = 71.38 (+3.88)\n  row 'Net4': 'Infer' = Beam 5; 'Failure' = 368; 'Conv' = 92.66; 'F1' = 67.18; '(Failure set)' = 69.4 (+2.22)\n  row 'Net5': 'Infer' = Beam 5; 'Failure' = 546; 'Conv' = 81.50; 'F1' = 61.43; '(Failure set)' = 63.25 (+1.82)\n[E2] (text, Section 4, page 6): method in Table 3 for Net1-2, and in Table 4 for Net3-5. Across all the experimental conditions (Table 3, 4), the conversion rates are high, often above 80 and sometimes above 90 supporting Q2. Note that beam search alone can also increase constraint satisfaction with conversion rates reaching as high as 51.74% (164/317) in the case of Net3 with beam size 9. However, as the quality of the model increases, the conversion rate becomes minuscule; in the case of Net1,2 the conversion rate is less than 14% with beam 9; in Net1 converting 26 out of 187 and in Net2 converting just 1 out of 287 instances from failure set. In order to address question Q3—the ability of our approach to satisfy constraints without negatively affecting output quality—we measure the F1 scores on the failure-sets both before and after applying the constraint satisfaction algorithm. Since F1 is only deﬁned on valid trees, we employ heuristic post-processing to ensure all outputs are valid.\n[E3] (text, Section abstract, page 2): 1. Propose a novel Gradient-Based Inference framework. 2. Verify that GBI performs well on various applications, thus providing strong evidence for the generality of the method. 3. Examine GBI across wide range of reference model performances and report its consistency. 4. Show that GBI also perform well on out-of-domain data. For all the tasks, we ﬁnd that GBI satisﬁes a large percentage of the constraints (up to 98%) and that in almost every case (out-of-domain data, state-of-the art networks, and even for the lower-quality networks), enforcing the constraints improves the accuracy. On SRL, for example, the method successfully injects truth-conveying side-information via constraints, improving SOTA network 1 by 1.03 F1 (Peters et al. 2018). This improvement happens to surpass a A * algorithm for incorporating constraints while also being robust, in a way that A * is not, to cases for which the side constraints are inconsistent with the labeled ground-truth.\n[E4] (text, Section 4, page 5): F1. In each experiment, we learn a seq2seq network on a training set and then evaluate the network directly on the test set using a traditional inference algorithm to perform the decoding (either greedy decoding or beam-search). In order to study our algorithm on a wide range of accuracy regimes (section 4.4), we train many networks with different hyper-parameters producing models of various quality, from high to low, using the standard split of the WSJ portion of the PTB. In total, we train ﬁve networks Net1-5 for this study, that we describe below. We train our two best baseline models ( N et1,2) using a highly competitive seq2seq architecture for machine translation, GNMT (Wu et al. 2016) with F1 scores, 86.78 and 87.33, respectively. And, to study a wider range of accuracies, we train a simpler architecture with different hyper parameters and obtain nets (Net3-5). For all models, we employ Glorot initialization, and basic attention (Bahdanau, Cho, and Bengio 2014). See Table 2 for a summary of the networks, hyper-parameters, and their performance."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The inference method 'Beam 9' consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Net3",
+      "col": "Infer",
+      "value": "Beam 9"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net4",
+      "col": "Infer",
+      "value": "Beam 5"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net5",
+      "col": "Infer",
+      "value": "Beam 5"
+     }
+    ]
+   },
+   {
+    "text": "The F1 scores for the 'Beam 9' method are 68.66, 67.83, and 61.64 for Net3, Net4, and Net5, respectively, which are the highest among all methods across these networks.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Net3",
+      "col": "Infer",
+      "value": "Beam 9"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net4",
+      "col": "Infer",
+      "value": "Beam 9"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net5",
+      "col": "Infer",
+      "value": "Beam 9"
+     }
+    ]
+   },
+   {
+    "text": "The 'Greedy' method consistently leads to the lowest F1 score on the failure set across all three networks (Net3, Net4, and Net5).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Net3",
+      "col": "Infer",
+      "value": "Greedy"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net4",
+      "col": "Infer",
+      "value": "Greedy"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net5",
+      "col": "Infer",
+      "value": "Greedy"
+     }
+    ]
+   },
+   {
+    "text": "The 'Beam 2' method consistently leads to the second highest F1 score on the failure set across all three networks (Net3, Net4, and Net5).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Net3",
+      "col": "Infer",
+      "value": "Beam 2"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net4",
+      "col": "Infer",
+      "value": "Beam 2"
+     },
+     {
+      "evidence": "E1",
+      "row": "Net5",
+      "col": "Infer",
+      "value": "Beam 2"
+     }
+    ]
+   }
+  ]
+ }
+}

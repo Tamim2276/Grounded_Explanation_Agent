@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 393,
+  "prompt_tokens": 2017,
+  "total_tokens": 2410,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The reconstructions show a low-frequency approximation of the environment reflected, as observed in the insets of the last row of Figure 9.\" -- cites: E1 (Figure 9): observation \"The insets in the last row show that, while not all reflection details are reproduced, ours is free of color shifts around the highlights and mostly a low-frequency approximation of the environment reflected.\"\n2. \"The reconstructions are compared to the original samples in terms of their ability to reproduce reflection details and avoid color shifts around highlights.\" -- cites: E1 (Figure 9): observation \"The insets in the last row show that, while not all reflection details are reproduced, ours is free of color shifts around the highlights and mostly a low-frequency approximation of the environment reflected.\"\n3. \"The reconstructions are quantitatively evaluated using mean DSSIM across the data set, with lower values indicating better performance.\" -- cites: E3 (Table 1): quote \"Error is measured as mean DSSIM across the data set (less is better).\"\n4. \"The reconstructions are compared to the original samples in terms of their ability to capture the spatial arrangement of values, as shown in the zoomed view of Figure 9.\" -- cites: E2 (Figure 9): observation \"The zoomed view of Figure 9 shows the spatial arrangement of values.\"\n\nCited evidence:\n[E1] (figure, Figure 9, page 8) (image attached): Figure 9. Results of joint material segmentation and estimation for two samples (rows) . In every part we show a re-synthesis, as well as two estimated materials and the resulting mask. The insets in the last row show that, while not all reﬂection details are reproduced, ours is free of color shifts around the highlights and mostly a low- frequency approximation of the environment reﬂected.\n[E2] (figure, Figure 9, page 8): a zoomed view of Figure 9\n[E3] (table, Table 1, page 7): Table 1. Quantitative results on synthetic data. Rows are different combination of tasks and methods (three applications, two view protocols, our two methods). Columns are different data. Error is measured as mean DSSIM across the data set (less is better).\nValues (cite as cells):\n  row '': 'Error' = PNT; '' = ENV; 'Method' = OUR; 'Error' = .105; '' = .123; 'View' = Novel; 'Method' = RM++; 'Error' = .181; '' = .193; 'Method' = OUR; 'Error' = .106; '' = .131; 'View' = Novel; 'Method' = SGD; 'Error' = .144; '' = .164; 'Method' = OUR; 'Error' = .113; '' = .122\n  row 'Representation': 'View' = Same; 'Method' = RM++; 'Error' = .143; '' = .160\n  row '(Sec. 3.2)': 'View' = ; 'Method' = OUR; 'Error' = .144; '' = .164\n  row 'Learn-to-learn': 'View' = Same; 'Method' = SGD; 'Error' = .105; '' = .123\n  row '(Sec. 3.3)': 'View' = ; 'Method' = OUR; 'Error' = .165; '' = .173\n  row 'Segmentation': 'View' = Same; 'Method' = KMEANS; 'Error' = .132; '' = .136 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the reconstructions show a low-frequency approximation of the environment reflected, as observed in the insets of the last row of Figure 9. The evidence from E1 (Figure 9) supports this by stating that the insets in the last row show that the reconstructions are free of color shifts around the highlights and mostly a low-frequency approximation of the environment reflected."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that the reconstructions are compared to the original samples in terms of their ability to reproduce reflection details and avoid color shifts around highlights. The evidence from E1 (Figure 9) only mentions that the insets in the last row show that the reconstructions are free of color shifts around the highlights and mostly a low-frequency approximation of the environment reflected. It does not mention anything about reproducing reflection details."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The claim states that the reconstructions are quantitatively evaluated using mean DSSIM across the data set, with lower values indicating better performance. The evidence from E3 (Table 1) supports this by stating that error is measured as mean DSSIM across the data set (less is better)."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The claim states that the reconstructions are compared to the original samples in terms of their ability to capture the spatial arrangement of values, as shown in the zoomed view of Figure 9. The evidence from E2 (Figure 9) supports this by stating that the zoomed view of Figure 9 shows the spatial arrangement of values."
+   }
+  ]
+ }
+}

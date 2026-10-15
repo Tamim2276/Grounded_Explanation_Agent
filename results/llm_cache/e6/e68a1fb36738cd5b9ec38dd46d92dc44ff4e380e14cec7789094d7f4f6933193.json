@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 185,
+  "prompt_tokens": 421,
+  "total_tokens": 606,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The average number of answers per question in the training set is 6.36, while in the development set it is 5.48.\" -- cites: E3 (Table 2): row 'Training', column '#answers per question' = 6.36; E3 (Table 2): row 'Dev', column '#answers per question' = 5.48\n2. \"The difference in the average number of answers per question between the training and development sets might be due to the different sizes of the datasets, with the training set being significantly larger.\" -- cites: E3 (Table 2): row 'Training', column '#question' = 2600; E3 (Table 2): row 'Dev', column '#question' = 300\n\nCited evidence:\n[E3] (table, Table 2, page 5): Table 2: Statistics of the answer selection data set\nValues (cite as cells):\n  row 'Training': '#question' = 2600; '#answer' = 16541; '#answers per question' = 6.36\n  row 'Dev': '#question' = 300; '#answer' = 1645; '#answers per question' = 5.48\n  row 'Test': '#question' = 329; '#answer' = 1976; '#answers per question' = 6.00"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence from E3 (Table 2) shows that the average number of answers per question in the training set is 6.36 and in the development set is 5.48, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence from E3 (Table 2) shows that the number of questions in the training set is 2600 and in the development set is 300, but the claim incorrectly states that the number of answers per question is the reason for the difference in dataset sizes. The evidence does not provide information about the number of answers per question in relation to the dataset sizes."
+   }
+  ]
+ }
+}

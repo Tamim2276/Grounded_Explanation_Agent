@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 142,
+  "prompt_tokens": 463,
+  "total_tokens": 605,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The AMR-to-text model performs the best at predicting the delexicalised constituency tree of an example.\" -- cites: E3 (Section 4): quote \"AMR-to-text model with the same architecture as above to control for the extra regularisation in our model compared to previous work. Our results show that adding syntax into the model dramatically boosts performance, resulting in state-of-the-art single model performance on both datasets without using external training data.\"\n\nCited evidence:\n[E3] (text, Section 4, page 4): AMR-to-text model with the same architecture as above to control for the extra regularisation in our model compared to previous work. Our results show that adding syntax into the model dramatically boosts performance, resulting in state-ofthe-art single model performance on both datasets without using external training data. As an oracle experiment, we also generate from the realisation model conditioned on the ground truth parse. The outstanding result here – BLEU scores in the 50s – demonstrates that being able to predict the gold reference parse tree is a bottleneck in the performance of our model. However, given the inherent difﬁculty of predicting a single syntax realisation (cf. Section 4 ), we suspect that there is an intrinsic limit to how well generating from an AMR graph can replicate the reference realisation. We further note that we do not use models tailored to graph-structured data or characterlevel features as in Song et al. ( 2018 ); Beck et al. ( 2018 ), or additional unlabelled data to perform semi-supervised learning ( Konstas et al. , 2017 ). We believe that we can improve our results even further if we use these techniques."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the AMR-to-text model performs the best at predicting the delexicalised constituency tree of an example. However, the cited evidence does not mention the delexicalised constituency tree or any comparison to other models. Instead, it discusses the performance of the AMR-to-text model in predicting the gold reference parse tree and mentions that the model can generate from an AMR graph. The evidence does not provide a direct comparison to other models or state-of-the-art performance on the delexicalised constituency tree."
+   }
+  ]
+ }
+}

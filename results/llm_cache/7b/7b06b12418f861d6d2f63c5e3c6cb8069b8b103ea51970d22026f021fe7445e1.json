@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 190,
+  "prompt_tokens": 743,
+  "total_tokens": 933,
+  "prompt_tokens_details": {
+   "cached_tokens": 151
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The training hyperparameters for both the CE and RCE procedures were the same.\" -- cites: E4 (Section B.1): quote \"We apply the same hyperparameters when training Resnet networks via the CE and RCE.\"\n2. \"ResNet-56 (RCE) had a lower error rate than ResNet-32 (CE) under all the four attacks on both datasets.\" -- cites: E3 (Section 4.2): quote \"We test the performance of the trained Resnet-32 networks on MNIST and CIFAR-10 under the oblivious attack, where we investigate the attacking methods as in Sec. 2.3. We ﬁrst disable the thresholding test strategy and make classiﬁers return all predictions to study the networks ability of correctly classifying adversarial examples. We use the iteration-based attacking methods: FGSM, BIM, ILCM and JSMA, and calculate the classiﬁcation accuracy of networks on crafted adversarial examples w.r.t. the perturbation ϵ . Fig. 2a shows the results. We can see that Resnet-32 (RCE) has higher accuracy scores than Resnet-32 (CE) under all the four attacks on both datasets.\"\n\nCited evidence:\n[E3] (text, Section 4.2, page 7): We test the performance of the trained Resnet-32 networks on MNIST and CIFAR-10 under the oblivious attack, where we investigate the attacking methods as in Sec. 2.3. We ﬁrst disable the thresholding test strategy and make classiﬁers return all predictions to study the networks ability of correctly classifying adversarial examples. We use the iteration-based attacking methods: FGSM, BIM, ILCM and JSMA, and calculate the classiﬁcation accuracy of networks on crafted adversarial examples w.r.t. the perturbation ϵ . Fig. 2a shows the results. We can see that Resnet-32 (RCE) has higher accuracy scores than Resnet-32 (CE) under all the four attacks on both datasets. As for optimization-based methods like the C&W attack and its variants, we apply the same way as in [ 3 ] to report robustness. Speciﬁcally, we do a binary search for the parameter c , in order to ﬁnd the minimal distortions that can successfully attack the classiﬁer. The distortion is deﬁned in [ 33 ] as ∥ x − x ∗ ∥ 2 /\n[E4] (text, Section B.1, page 16): We apply the same hyperparameters when training Resnet networks via the CE and RCE. The optimizer is SGD with momentum, and the mini-batch size is 128. The weight decay is 0.0002, the leakiness of Relu is 0.1. On MNIST the training steps are 20,000, with piecewise learning rate as"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 states that the same hyperparameters were applied when training Resnet networks via the CE and RCE, which supports the claim that the training hyperparameters for both the CE and RCE procedures were the same."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in E3 indicates that ResNet-32 (RCE) had higher accuracy scores than ResNet-32 (CE) under all the four attacks on both datasets, which contradicts the claim that ResNet-56 (RCE) had a lower error rate than ResNet-32 (CE). The evidence refers to ResNet-32, not ResNet-56."
+   }
+  ]
+ }
+}

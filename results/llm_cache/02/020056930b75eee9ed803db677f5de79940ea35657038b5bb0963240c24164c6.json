@@ -1,0 +1,119 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 15.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 727,
+  "prompt_tokens": 4744,
+  "total_tokens": 5471,
+  "prompt_tokens_details": {
+   "cached_tokens": 3357
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the four methods (ResNet, DANN, CDAN-f, CDAN-fg) is most effective at separating the two classes of data points?\nEvidence:\n[E1] (figure, Figure 2, page 9) (image attached): Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nValues (cite as cells):\n  row '(a) Multilinear DANN-f (representation)': 'A->W' = 82.2; 'A->D' = 79.9\n  row '(a) Multilinear DANN-g (prediction)': 'A->W' = 79.7; 'A->D' = 77\n  row '(a) Multilinear DANN-[f,g] (concatenation)': 'A->W' = 82.7; 'A->D' = 80.5\n  row '(a) Multilinear CDAN (w/o entropy)': 'A->W' = 93.2; 'A->D' = 89.4\n  row '(a) Multilinear CDAN-E (w/ entropy)': 'A->W' = 94.3; 'A->D' = 93.1\n  row '(c) Discrepancy DANN-f (representation)': 'A->W' = 1.84; 'W->D' = 1.29\n  row '(c) Discrepancy DANN-[f,g] (concatenation)': 'A->W' = 1.49; 'W->D' = 1.16\n  row '(c) Discrepancy CDAN-E (w/ entropy)': 'A->W' = 1.19; 'W->D' = 1.09\n[E2] (figure, Figure 2, page 9): a zoomed view of Figure 2 (image attached)\n[E3] (table, Table 3, page 8): Table 3: Accuracy (%) on Ofﬁce-Home for unsupervised domain adaptation (AlexNet and ResNet)\nValues (cite as cells):\n  row 'AlexNet [27]': 'Ar Cl' = 26.4; 'Ar Pr' = 32.6; 'Ar Rw' = 41.3; 'Cl Ar' = 22.1; 'Cl Pr' = 41.7; 'Cl Rw' = 42.1; 'Pr Ar' = 20.5; 'Pr Cl' = 20.3; 'Pr Rw' = 51.1; 'Rw Ar' = 31.0; 'Rw Cl' = 27.9; 'Rw Pr' = 54.9; 'Avg' = 34.3\n  row 'DAN [29]': 'Ar Cl' = 31.7; 'Ar Pr' = 43.2; 'Ar Rw' = 55.1; 'Cl Ar' = 33.8; 'Cl Pr' = 48.6; 'Cl Rw' = 50.8; 'Pr Ar' = 30.1; 'Pr Cl' = 35.1; 'Pr Rw' = 57.7; 'Rw Ar' = 44.6; 'Rw Cl' = 39.3; 'Rw Pr' = 63.7; 'Avg' = 44.5; 'Ar Cl' = 43.6; 'Ar Pr' = 57.0; 'Ar Rw' = 67.9; 'Cl Ar' = 45.8; 'Cl Pr' = 56.5; 'Cl Rw' = 60.4; 'Pr Ar' = 44.0; 'Pr Cl' = 43.6; 'Pr Rw' = 67.7; 'Rw Ar' = 63.1; 'Rw Cl' = 51.5; 'Rw Pr' = 74.3; 'Avg' = 56.3\n  row 'DANN [13]': 'Ar Cl' = 36.4; 'Ar Pr' = 45.2; 'Ar Rw' = 54.7; 'Cl Ar' = 35.2; 'Cl Pr' = 51.8; 'Cl Rw' = 55.1; 'Pr Ar' = 31.6; 'Pr Cl' = 39.7; 'Pr Rw' = 59.3; 'Rw Ar' = 45.7; 'Rw Cl' = 46.4; 'Rw Pr' = 65.9; 'Avg' = 47.3; 'Ar Cl' = 45.6; 'Ar Pr' = 59.3; 'Ar Rw' = 70.1; 'Cl Ar' = 47.0; 'Cl Pr' = 58.5; 'Cl Rw' = 60.9; 'Pr Ar' = 46.1; 'Pr Cl' = 43.7; 'Pr Rw' = 68.5; 'Rw Ar' = 63.2; 'Rw Cl' = 51.8; 'Rw Pr' = 76.8; 'Avg' = 57.6\n  row 'JAN [30]': 'Ar Cl' = 35.5; 'Ar Pr' = 46.1; 'Ar Rw' = 57.7; 'Cl Ar' = 36.4; 'Cl Pr' = 53.3; 'Cl Rw' = 54.5; 'Pr Ar' = 33.4; 'Pr Cl' = 40.3; 'Pr Rw' = 60.1; 'Rw Ar' = 45.9; 'Rw Cl' = 47.4; 'Rw Pr' = 67.9; 'Avg' = 48.2; 'Ar Cl' = 45.9; 'Ar Pr' = 61.2; 'Ar Rw' = 68.9; 'Cl Ar' = 50.4; 'Cl Pr' = 59.7; 'Cl Rw' = 61.0; 'Pr Ar' = 45.8; 'Pr Cl' = 43.4; 'Pr Rw' = 70.3; 'Rw Ar' = 63.9; 'Rw Cl' = 52.4; 'Rw Pr' = 76.8; 'Avg' = 58.3\n  row 'CDAN': 'Ar Cl' = 36.2; 'Ar Pr' = 47.3; 'Ar Rw' = 58.6; 'Cl Ar' = 37.3; 'Cl Pr' = 54.4; 'Cl Rw' = 58.3; 'Pr Ar' = 33.2; 'Pr Cl' = 43.9; 'Pr Rw' = 62.1; 'Rw Ar' = 48.2; 'Rw Cl' = 48.1; 'Rw Pr' = 70.7; 'Avg' = 49.9; 'Ar Cl' = 49.0; 'Ar Pr' = 69.3; 'Ar Rw' = 74.5; 'Cl Ar' = 54.4; 'Cl Pr' = 66.0; 'Cl Rw' = 68.4; 'Pr Ar' = 55.6; 'Pr Cl' = 48.3; 'Pr Rw' = 75.9; 'Rw Ar' = 68.4; 'Rw Cl' = 55.4; 'Rw Pr' = 80.5; 'Avg' = 63.8\n  row 'CDAN+E': 'Ar Cl' = 38.1; 'Ar Pr' = 50.3; 'Ar Rw' = 60.3; 'Cl Ar' = 39.7; 'Cl Pr' = 56.4; 'Cl Rw' = 57.8; 'Pr Ar' = 35.5; 'Pr Cl' = 43.1; 'Pr Rw' = 63.2; 'Rw Ar' = 48.4; 'Rw Cl' = 48.5; 'Rw Pr' = 71.1; 'Avg' = 51.0; 'Ar Cl' = 50.7; 'Ar Pr' = 70.6; 'Ar Rw' = 76.0; 'Cl Ar' = 57.6; 'Cl Pr' = 70.0; 'Cl Rw' = 70.0; 'Pr Ar' = 57.4; 'Pr Cl' = 50.9; 'Pr Rw' = 77.3; 'Rw Ar' = 70.9; 'Rw Cl' = 56.7; 'Rw Pr' = 81.6; 'Avg' = 65.8\n  row 'ResNet-50 [20]': 'Ar Cl' = 34.9; 'Ar Pr' = 50.0; 'Ar Rw' = 58.0; 'Cl Ar' = 37.4; 'Cl Pr' = 41.9; 'Cl Rw' = 46.2; 'Pr Ar' = 38. ...\n[E4] (text, Section 4.3, page 9): Visualization We visualize by t-SNE [ 32 ] in Figures 3(a)–3(d) the representations of task A → W (31 classes) by ResNet, DANN, CDAN-f, and CDAN-fg. The source and target are not aligned well with ResNet, better aligned with DANN but categories are not discriminated well. They are aligned better and categories are discriminated better by CDAN-f, while CDAN-fg is evidently better than CDAN-f. This shows the beneﬁt of conditioning adversarial adaptation on discriminative predictions.\n[E5] (text, Section 4.3, page 9): Distribution Discrepancy The A -distance is a measure for distribution discrepancy [ 4 , 33 ], deﬁned as dist A = 2 (1 − 2 ϵ ) , where ϵ is the test error of a classiﬁer trained to discriminate the source from target. Figure 2(c) shows dist A on tasks A → W , W → D with features of ResNet, DANN, and CDAN. We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively. As domains W and D are similar, dist A of task W → D is smaller than that of A → W , implying higher accuracies. Convergence We testify the convergence of ResNet, DANN, and CDANs, with the test errors on task A → W shown in Figure 2(d). CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM). Note that CDAN (M) constitutes high-dimensional multilinear map, which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DANN.\n[E6] (text, Section 4.2, page 7): The results on Ofﬁce-31 based on AlexNet and ResNet are reported in Table 1, with results of baselines directly reported from the original papers if protocol is the same. The CDAN models signiﬁcantly outperform all comparison methods on most transfer tasks, where CDAN+E is a top-performing variant and CDAN performs slightly worse. It is desirable that CDAN promotes the classiﬁcation accuracies substantially on hard transfer tasks, e.g. A → W and A → D , where the source and target domains are substantially different [ 42 ]. Note that, CDAN+E even outperforms generative pixel-level domain adaptation method GTA, which has a very complex design in both architecture and objectives. The results on the ImageCLEF-DA dataset are reported in Table 2. The CDAN models outperform the comparison methods on most transfer tasks, but with smaller rooms of improvement. This is reasonable since the three domains in ImageCLEF-DA are of equal size and balanced in each category, and are visually more similar than Ofﬁce-31 , making the former dataset easier for domain adaptation.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"CDAN-E (w/ entropy) is the most effective method at separating the two classes of data points.\": the quote is not in E1\n- \"CDAN-E (w/ entropy) achieves the highest accuracy in the 'A->W' and 'A->D' transfer tasks.\": E1 (a) Multilinear DANN-f (representation)/A->W' = 82.2; 'A->D' = 79.9 is None, the claim says 82.2\n- \"CDAN-E (w/ entropy) has the smallest A-distance in the 'A->W' and 'A->D' transfer tasks.\": E1 (c) Discrepancy DANN-f (representation)/A->W' = 1.84; 'W->D' = 1.29 is None, the claim says 1.84\n- \"CDAN-E (w/ entropy) converges faster than DANN and ResNet.\": E1 (d) Convergence/CDAN (M)' = 0.05; 'CDAN (RM)' = 0.05; 'DANN' = 0.05; 'ResNet' = 0.05 is None, the claim says 0.05 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "CDAN-E (w/ entropy) achieves the highest accuracy in the 'A->W' and 'A->D' transfer tasks.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "(a) Multilinear DANN-f (representation)",
+      "col": "'A->W'",
+      "value": "82.2"
+     },
+     {
+      "evidence": "E1",
+      "row": "(a) Multilinear DANN-f (representation)",
+      "col": "'A->D'",
+      "value": "79.9"
+     },
+     {
+      "evidence": "E1",
+      "row": "(a) Multilinear DANN-g (prediction)",
+      "col": "'A->W'",
+      "value": "79.7"
+     },
+     {
+      "evidence": "E1",
+      "row": "(a) Multilinear DANN-g (prediction)",
+      "col": "'A->D'",
+      "value": "77"
+     }
+    ]
+   },
+   {
+    "text": "CDAN-E (w/ entropy) has the smallest A-distance in the 'A->W' and 'A->D' transfer tasks.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "(c) Discrepancy DANN-f (representation)",
+      "col": "'A->W'",
+      "value": "1.84"
+     },
+     {
+      "evidence": "E1",
+      "row": "(c) Discrepancy DANN-f (representation)",
+      "col": "'W->D'",
+      "value": "1.29"
+     },
+     {
+      "evidence": "E1",
+      "row": "(c) Discrepancy DANN-[f,g] (concatenation)",
+      "col": "'A->W'",
+      "value": "1.49"
+     },
+     {
+      "evidence": "E1",
+      "row": "(c) Discrepancy DANN-[f,g] (concatenation)",
+      "col": "'W->D'",
+      "value": "1.16"
+     }
+    ]
+   },
+   {
+    "text": "CDAN-E (w/ entropy) converges faster than DANN and ResNet.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "(d) Convergence",
+      "col": "'CDAN (M)'",
+      "value": "0.05"
+     },
+     {
+      "evidence": "E1",
+      "row": "(d) Convergence",
+      "col": "'CDAN (RM)'",
+      "value": "0.05"
+     },
+     {
+      "evidence": "E1",
+      "row": "(d) Convergence",
+      "col": "'DANN'",
+      "value": "0.05"
+     },
+     {
+      "evidence": "E1",
+      "row": "(d) Convergence",
+      "col": "'ResNet'",
+      "value": "0.05"
+     }
+    ]
+   }
+  ]
+ }
+}

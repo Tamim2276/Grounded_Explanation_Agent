@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 253,
+  "prompt_tokens": 746,
+  "total_tokens": 999,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The pick and place task in simulation and the real world differ in the number of demonstrations available, with pick and place having 650 raw demonstrations compared to 1614 for push to pose.\" -- cites: E6 (Table 1): row 'Raw demonstrations', column 'Pick and place' = 650; E6 (Table 1): row 'Raw demonstrations', column 'Push to pose' = 1614\n2. \"The pick and place task in simulation and the real world differ in the number of waypoints, with pick and place having 645,198 total waypoints compared to 369,477 for push to pose.\" -- cites: E6 (Table 1): row 'Total no. of waypoints', column 'Pick and place' = 645,198; E6 (Table 1): row 'Total no. of waypoints', column 'Push to pose' = 369,477\n3. \"The pick and place task in simulation and the real world differ in the number of low frequency demonstrations, with pick and place having 31,200 low frequency demonstrations compared to 12,912 for push to pose.\" -- cites: E6 (Table 1): row 'Low frequency demonstrations', column 'Pick and place' = 31,200; E6 (Table 1): row 'Low frequency demonstrations', column 'Push to pose' = 12,912\n4. \"The pick and place task in simulation and the real world differ in the average number of demonstration waypoints, with pick and place having an average of 20.68 waypoints per demonstration compared to 28.61 for push to pose.\" -- cites: E6 (Table 1): row 'Avg. demonstration waypoints', column 'Pick and place' = 20.68; E6 (Table 1): row 'Avg. demonstration waypoints', column 'Push to pose' = 28.61\n\nCited evidence:\n[E6] (table, Table 1, page 3): Table 1: The size of the datasets for the two studied tasks\nValues (cite as cells):\n  row 'Raw demonstrations': 'Pick and place' = 650; 'Push to pose' = 1614\n  row 'Demonstrations after shift': 'Pick and place' = 3900; 'Push to pose' = -\n  row 'Low frequency demonstrations': 'Pick and place' = 31,200; 'Push to pose' = 12,912\n  row 'Total no. of waypoints': 'Pick and place' = 645,198; 'Push to pose' = 369,477\n  row 'Avg. demonstration waypoints': 'Pick and place' = 20.68; 'Push to pose' = 28.61"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence confirms that 'Pick and place' has 650 raw demonstrations and 'Push to pose' has 1614 raw demonstrations."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence confirms that 'Pick and place' has 645,198 total waypoints and 'Push to pose' has 369,477 total waypoints."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence confirms that 'Pick and place' has 31,200 low frequency demonstrations and 'Push to pose' has 12,912 low frequency demonstrations."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence confirms that 'Pick and place' has an average of 20.68 waypoints per demonstration and 'Push to pose' has an average of 28.61 waypoints per demonstration."
+   }
+  ]
+ }
+}

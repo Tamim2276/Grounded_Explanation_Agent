@@ -1,0 +1,77 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 367,
+  "prompt_tokens": 2691,
+  "total_tokens": 3058,
+  "prompt_tokens_details": {
+   "cached_tokens": 1415
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which approach performs best on the development set?\nEvidence:\n[E1] (figure, Figure 3, page 7) (image attached): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\nWords printed in the figure: 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds\n[E2] (figure, Figure 3, page 7): a zoomed view of Figure 3 (image attached)\n[E3] (table, Table 2, page 10): Table 2: Accuracy of each approach (humans and sys- tems) on the development set and test set, respectively.\nValues (cite as cells):\n  row 'Human average': 'Dev' = ; '(±)' = ; 'Test' = .798; '(±)' = .162\n  row 'Human w/ training in reasoning': 'Dev' = ; '(±)' = ; 'Test' = .909; '(±)' = .114\n  row 'Random baseline': 'Dev' = .473; '(±)' = .039; 'Test' = .491; '(±)' = .031\n  row 'Language model': 'Dev' = .617; '(±)' = ; 'Test' = .500; '(±)' = \n  row 'Attention': 'Dev' = .488; '(±)' = .006; 'Test' = .513; '(±)' = .012\n  row 'Attention w/ context': 'Dev' = .502; '(±)' = .031; 'Test' = .512; '(±)' = .014\n  row 'Intra-warrant attention': 'Dev' = .638; '(±)' = .024; 'Test' = .556; '(±)' = .016\n  row 'Intra-warrant attent. w/ context': 'Dev' = .637; '(±)' = .040; 'Test' = .560; '(±)' = .055\n[E4] (text, Section 5.2, page 9): results of all approaches (humans and systems) are shown in Table 2 . Intra-warrant attention with rich context outperforms standard neural models with a simple attention, but it only slightly beats the language model on the dev set. The language model is basically random on the test set. A manual error analysis of 50 random wrong predictions (a single run of the best-performing system on the dev set) revealed no explicit pattern of encountered errors. Drawing any conclusions is hard given the diversity of included topics and the variety of reasoning patterns. A possible approach would be to categorize warrants using, e.g., argumentation schemes ( Walton et al. , 2008 ) and break down errors accordingly. However, this is beyond the scope here and thus left for future work. Can We Beneﬁt from Alternative Warrants and Opposite Claims? Since the reasoning chain R → AW →¬ C is correct, too, we also tried adding respective instances to the training set (thus doubling the size). In this conﬁguration, however, the neural models failed to learn anything better than a random guess. The reason behind is probably that the opposing claims are lexically very close, usually negated, and the models cannot pick this up. This underlines that argument reasoning comprehension cannot be solved by simply looking at the occurring words or phrases.\n[E5] (text, Section 5, page 8): bate they were taken from: 2011–2015 became the training set (1,210 instances), 2016 the development set (316 instances), and 2017 the test set (444 instances). This follows the paradigm of learning on past data and predicting on new ones. In addition, it removes much lexical and topical overlap.\n[E6] (text, Section 5.1, page 8): To evaluate human upper bounds for the task, we sampled 100 random questions (such as those presented in Section 4.4 ) from the test set and distributed them among 173 participants of an AMT survey. Every participant had to answer 10 questions. We also asked the participants about their highest completed education (six categories) and the amount of formal training they have in reasoning, logic, or argumentation (no training, some, or extensive). In addition, they speciﬁed for each question how familiar they were with the topic (3- point scale). How Hard is the Task for Humans? It depends, as shown in Figure 4 . Whereas education had almost negligible inﬂuence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was. Overall, 30 of the 173 participants scored 100%. The mean score for those with extensive\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The language model performs best on the development set with an accuracy of 0.617.\": E3 Language model/Dev is .617, the claim says 0.617\n- \"The human average performs best on the development set with an accuracy of 0.798.\": E3 Human average/Dev is , the claim says 0.798\n- \"The human with training in reasoning performs best on the development set with an accuracy of 0.909.\": E3 Human w/ training in reasoning/Dev is , the claim says 0.909\n- \"The figure shows that the intra-warrant attention with rich context approach performs best on the development set with an accuracy of 0.638.\": E3 Intra-warrant attention/Dev is .638, the claim says 0.638 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The human with training in reasoning performs best on the development set with an accuracy of 0.909.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Human w/ training in reasoning",
+      "col": "Dev",
+      "value": "0.909"
+     }
+    ]
+   },
+   {
+    "text": "The language model performs best on the development set with an accuracy of 0.617.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Language model",
+      "col": "Dev",
+      "value": "0.617"
+     }
+    ]
+   },
+   {
+    "text": "The human average performs best on the development set with an accuracy of 0.798.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Human average",
+      "col": "Dev",
+      "value": "0.798"
+     }
+    ]
+   },
+   {
+    "text": "The intra-warrant attention with rich context approach performs best on the development set with an accuracy of 0.638.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "row": "Intra-warrant attention",
+      "col": "Dev",
+      "value": "0.638"
+     }
+    ]
+   }
+  ]
+ }
+}

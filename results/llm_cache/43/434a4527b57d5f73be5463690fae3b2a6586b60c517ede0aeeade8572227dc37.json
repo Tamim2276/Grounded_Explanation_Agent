@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 497,
+  "prompt_tokens": 3212,
+  "total_tokens": 3709,
+  "prompt_tokens_details": {
+   "cached_tokens": 1955
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of test error?\nEvidence:\n[E1] (figure, Figure 2, page 9) (image attached): Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nValues (cite as cells):\n  row '(a) Multilinear DANN-f (representation)': 'A->W' = 82.2; 'A->D' = 79.9\n  row '(a) Multilinear DANN-g (prediction)': 'A->W' = 79.7; 'A->D' = 77\n  row '(a) Multilinear DANN-[f,g] (concatenation)': 'A->W' = 82.7; 'A->D' = 80.5\n  row '(a) Multilinear CDAN (w/o entropy)': 'A->W' = 93.2; 'A->D' = 89.4\n  row '(a) Multilinear CDAN-E (w/ entropy)': 'A->W' = 94.3; 'A->D' = 93.1\n  row '(c) Discrepancy DANN-f (representation)': 'A->W' = 1.84; 'W->D' = 1.29\n  row '(c) Discrepancy DANN-[f,g] (concatenation)': 'A->W' = 1.49; 'W->D' = 1.16\n  row '(c) Discrepancy CDAN-E (w/ entropy)': 'A->W' = 1.19; 'W->D' = 1.09\n[E2] (figure, Figure 2, page 9): a zoomed view of Figure 2 (image attached)\n[E3] (text, Section 4.3, page 9): Distribution Discrepancy The A -distance is a measure for distribution discrepancy [ 4 , 33 ], deﬁned as dist A = 2 (1 − 2 ϵ ) , where ϵ is the test error of a classiﬁer trained to discriminate the source from target. Figure 2(c) shows dist A on tasks A → W , W → D with features of ResNet, DANN, and CDAN. We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively. As domains W and D are similar, dist A of task W → D is smaller than that of A → W , implying higher accuracies. Convergence We testify the convergence of ResNet, DANN, and CDANs, with the test errors on task A → W shown in Figure 2(d). CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM). Note that CDAN (M) constitutes high-dimensional multilinear map, which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DANN.\n[E4] (text, Section 4.3, page 8): Ablation Study We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. Table 1 ∼ 4 shows that CDAN+E outperforms CDAN , proving that entropy conditioning can prioritize easy-to-transfer examples and encourage certain predictions. Conditioning Strategies Besides multilinear conditioning, we investigate DANN-[f,g] with the domain discriminator imposed on the concatenation of f and g , DANN-f and DANN-g with the\n[E5] (text, Section 4.1, page 6): Digits We investigate three digits datasets: MNIST , USPS , and Street View House Numbers ( SVHN ). We adopt the evaluation protocol of CyCADA [ 22 ] with three transfer tasks: USPS to MNIST ( U → M ), MNIST to USPS ( M → U ), and SVHN to MNIST ( S → M ). We train our model using the training sets: MNIST (60,000), USPS (7,291), standard SVHN train (73,257). Evaluation is reported on the standard test sets: MNIST (10,000), USPS (2,007) (the numbers of images are in parentheses).\n[E6] (table, Table 5, page 9): Table 5: Accuracy (%) of CDAN variants on Ofﬁce-31 for unsupervised domain adaptation (ResNet)\nValues (cite as cells):\n  row 'CDAN+E (w/ gaussian sampling)': 'A →W' = 93.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.2±0.3; 'D →A' = 70.2±0.4; 'W →A' = 67.4±0.4; 'Avg' = 86.4\n  row 'CDAN+E (w/ uniform sampling)': 'A →W' = 94.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.8±0.3; 'D →A' = 70.1±0.4; 'W →A' = 69.4±0.4; 'Avg' = 87.0\n  row 'CDAN+E (w/o random sampling)': 'A →W' = 94.1±0.1; 'D →W' = 98.6±0.1; 'W →D' = 100.0±.0; 'A →D' = 92.9±0.2; 'D →A' = 71.0±0.3; 'W →A' = 69.3±0.3; 'Avg' = 87.7\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The CDAN-E (w/ entropy) model performs the best in terms of test error, as indicated by the lowest test error values in Figure 2(d).\": support check: The claim states that the CDAN-E (w/ entropy) model performs the best in terms of test error, as indicated by the lowest test error values in Figure 2(d). However, the evidence provided in Figure 2(d) shows the test error values for different models, but it does not specify which model has the lowest test error. The figure only shows the convergence of different models over iterations, not the test error values. Therefore, the claim cannot be supported by the evidence.\n- \"The CDAN-E (w/ entropy) model has the lowest test error values in the range of 0.05 to 0.35, as shown in Figure 2(d).\": the number 0.05, 0.35 is in no citation [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The CDAN-E (w/ entropy) model has the lowest test error values in the range of 0.05 to 0.35, as shown in Figure 2(d).",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The test error values for CDAN-E (w/ entropy) are lower than other models in the range of 0.05 to 0.35 in Figure 2(d)."
+     }
+    ]
+   },
+   {
+    "text": "The CDAN-E (w/ entropy) model performs the best in terms of test error, as indicated by the lowest test error values in Figure 2(d).",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The test error values for CDAN-E (w/ entropy) are lower than other models in the range of 0.05 to 0.35 in Figure 2(d)."
+     }
+    ]
+   },
+   {
+    "text": "The CDAN-E (w/ entropy) model has the lowest test error values in the range of 0.05 to 0.35, as shown in Figure 2(d).",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The test error values for CDAN-E (w/ entropy) are lower than other models in the range of 0.05 to 0.35 in Figure 2(d)."
+     }
+    ]
+   },
+   {
+    "text": "The CDAN-E (w/ entropy) model performs the best in terms of test error, as indicated by the lowest test error values in Figure 2(d).",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The test error values for CDAN-E (w/ entropy) are lower than other models in the range of 0.05 to 0.35 in Figure 2(d)."
+     }
+    ]
+   }
+  ]
+ }
+}

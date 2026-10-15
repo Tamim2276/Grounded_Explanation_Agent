@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 283,
+  "prompt_tokens": 1833,
+  "total_tokens": 2116,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Parzen violates monotonicity; the point of interest ⃗x 0 is marked with a green circle.\" -- cites: E1 (Figure 1): quote \"Parzen violates monotonicity; the point of interest ⃗x 0 is marked with a green circle.\"\n2. \"The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly.\" -- cites: E3 (Section 8): quote \"The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly.\"\n3. \"LIME, while generally agreeing with the other two, results in a more 'shattered' image.\" -- cites: E3 (Section 8): quote \"LIME, while generally agreeing with the other two, results in a more 'shattered' image.\"\n4. \"The Parzen vector suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly, indicating a focus on specific, localized features.\" -- cites: E3 (Section 8): quote \"The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly.\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 12) (image attached): Figure 1: Parzen violates monotonicity; the point of interest ⃗x 0 is marked with a green circle. Its\nWords printed in the figure: 0 0.5 1 1.5 2 0 0.5 1 + + −−− 0 0.5 1 1.5 2 +++ + −−−\n[E3] (text, Section 8, page 15): the measures indicate that the brighter (darker) the pixel in the original image, the more ‘happy’ (‘sad’) the face. The third, ﬁfth and seventh column show the point of interest shifted according to the respective inﬂuence vector, i.e. the pixels with positive inﬂuence were brightened, and darkened if their inﬂuence was negative. According to the MIM inﬂuence vector, the factors that contribute to this face looking happy, are a bright mouth with darkened corners, bright eyebrows, bright tone of the face, and a darkened background. Shifting the picture along the inﬂuence vector seems to make the person in the picture smile wider, and open their mouth slightly. The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly. LIME, while generally agreeing with the other two, results in a more ’shattered’ image. Seemingly it’s better for a classiﬁer to focus it’s weights on a smaller set of features, while for MIM and Parzen you can see that neighbouring pixels actually have similar inﬂuence. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 1) states that 'Parzen violates monotonicity; the point of interest ⃗x 0 is marked with a green circle,' which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 8) states that 'The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly,' which matches the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 8) states that 'LIME, while generally agreeing with the other two, results in a more 'shattered' image,' which matches the claim."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 8) states that 'The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly,' which matches the claim."
+   }
+  ]
+ }
+}

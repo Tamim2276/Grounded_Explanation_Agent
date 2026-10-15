@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 199,
+  "total_tokens": 270,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nSub-goals:\n1. [figure] What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nAlready tried: sub-goal 1 with text\nStill missing: figure evidence for sub-goal 1 (rule floor); The effect of enforcing syntactic constraints on the semantic role labeling output is not explicitly stated for sub-question 2 and 3. The evidence provided does not address the specific effect on the semantic role labeling output in terms of the disagreement rate or the quality of the output (F1 and"
+  }
+ ],
+ "answer": {
+  "reason": "To find evidence of the effect of enforcing syntactic constraints on the semantic role labeling output, a figure search is necessary to look for charts or graphs that might illustrate this effect.",
+  "tool": "figure",
+  "query": "enforcing syntactic constraints effect on semantic role labeling output"
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 139,
+  "prompt_tokens": 834,
+  "total_tokens": 973,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Domain adaptation involves deriving solutions for both the source and target domains when the target-domain training data is unavailable, while sensor fusion aims to derive a solution when testing data from both domains is available, even if it can be noisy.\" -- cites: E4 (Section 3): quote \"Given a task of interest (TOI), a source domain D s , and a target domain D t , our proposed method, zero-shot deep domain adaptation (ZDDA), is designed to achieve the following two goals: 1) Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable. We assume that we have access to the T-R labeled training data in D s and the T-I dual-domain pairs in D s and D t . 2) Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available. The testing data in either D s or D t can be noisy. We assume that there is no prior knowledge available about the type of noise and which domain gives noisy data at testing time.\"; E3 (Section 1): quote \"Given no task-relevant target-domain training data , we show that ZDDA can perform sensor fusion and that ZDDA is more robust to noisy testing data in either source or target or both domains compared with a naive fusion approach in the scene classiﬁcation task from the SUN RGB-D [36] dataset.\"\n\nCited evidence:\n[E3] (text, Section 1, page 3): We make the following two contributions: (1) To the best of our knowledge, our proposed method, ZDDA, is the ﬁrst deep learning based method performing domain adaptation between one source image modality and another diﬀerent target image modality (not just diﬀerent datasets in the same modality such as the Oﬃce dataset [32]) without using the task-relevant target-domain training data . We show ZDDA’s eﬃcacy using the MNIST [27], Fashion-MNIST [46], NIST [18], EMNIST [9], and SUN RGB-D [36] datasets with cross validation. (2) Given no task-relevant target-domain training data , we show that ZDDA can perform sensor fusion and that ZDDA is more robust to noisy testing data in either source or target or both domains compared with a naive fusion approach in the scene classiﬁcation task from the SUN RGB-D [36] dataset.\n[E4] (text, Section 3, page 4): Given a task of interest (TOI), a source domain D s , and a target domain D t , our proposed method, zero-shot deep domain adaptation (ZDDA), is designed to achieve the following two goals: 1) Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable. We assume that we have access to the T-R labeled training data in D s and the T-I dual-domain pairs in D s and D t . 2) Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available. The testing data in either D s or D t can be noisy. We assume that there is no prior knowledge available about the type of noise and which domain gives noisy data at testing time."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence from E4 and E3 supports the claim that ZDDA aims to derive solutions for both the source and target domains when the target-domain training data is unavailable, and it also supports the part of the claim that sensor fusion aims to derive a solution when testing data from both domains is available, even if it can be noisy. The evidence explicitly mentions that ZDDA is designed to achieve these goals and that it is more robust to noisy testing data in either source or target or both domains."
+   }
+  ]
+ }
+}

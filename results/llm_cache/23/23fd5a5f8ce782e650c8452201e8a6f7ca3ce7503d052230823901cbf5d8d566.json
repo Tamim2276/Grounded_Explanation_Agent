@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 169,
+  "prompt_tokens": 576,
+  "total_tokens": 745,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Bonaparte school focuses on outdoor physical activities, manoeuvers, strategies, horse riding, and lances swords.\" -- cites: E6 (Table 1): quote \"Both are good schools but Bonaparte will teach your kids to become a good leader but they concentrate mainly on outdoor physical activities, manoeuvers, strategies. Horse riding and lances swords are their speciality....\"\n2. \"The Voltaire school emphasizes indoor activities and encourages independent thinking.\" -- cites: E6 (Table 1): quote \"On the other hand Voltaire will make your child more of a philosopher! They encourage independent thinking...and mainly concentrates on indoor activities! They inculcate good moral values in the child and he will surely grow up to be a thinking person!\"\n3. \"The Bonaparte school teaches leadership and outdoor skills, while the Voltaire school focuses on philosophy and moral values.\" -- cites: E6 (Table 1): quote \"Both are good schools but Bonaparte will teach your kids to become a good leader but they concentrate mainly on outdoor physical activities, manoeuvers, strategies. Horse riding and lances swords are their speciality.... On the other hand Voltaire will make your child more of a philosopher! They encourage independent thinking...and mainly concentrates on indoor activities! They inculcate good moral values in the child and he will surely grow up to be a thinking person!\"\n\nCited evidence:\n[E6] (table, Table 1, page 1): Table 1: A difﬁcult example from QA Question : Which school is better Voltaire or Bonaparte? Answer : Both are good schools but Bonaparte will teach your kids to become a good leader but they concentrate mainly on outdoor physical activities, manoeuvers, strategies. Horse riding and lances swords are their speciality.... On the other hand Voltaire will make your child more of a philosopher! They encourage independent thinking...and mainly concentrates on indoor activities! They inculcate good moral values in the child and he will surely grow up to be a thinking person!\nab of Software Development Environment, Beihang University, B ‡ Microsoft Research, Beijing, China {wuyu,lizj}@buaa.edu.cn {wuwei,mingzhou}@microsoft.com"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence mentions that Bonaparte school focuses on outdoor physical activities, manoeuvers, strategies, horse riding, and lances swords, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence states that Voltaire school mainly concentrates on indoor activities and encourages independent thinking, which aligns with the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence supports that Bonaparte school teaches leadership and outdoor skills, while Voltaire school focuses on philosophy and moral values, which matches the claim."
+   }
+  ]
+ }
+}

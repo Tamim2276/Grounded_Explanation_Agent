@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 347,
+  "prompt_tokens": 1925,
+  "total_tokens": 2272,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"BOSSNET is highly robust across all percentage levels of unseen entities in the KB.\" -- cites: E2 (Section 1): quote \"We find that B O S S N ET is highly robust across all percentage levels.\"\n2. \"The performance of BOSSNET is consistently high across all unseen entity percentages in the KB.\" -- cites: E5 (Figure 1): observation \"BOSSNET maintains a high BLEU score across all percentages of unseen entities.\"\n3. \"BOSSNET outperforms other baselines in terms of disentanglement and robustness to unseen information in the KB.\" -- cites: E2 (Section 1): quote \"We find that B O S S N ET is competitive or significantly better on standard metrics in all datasets as compared to state-of-the-art baselines.\"\n4. \"The evidence does not directly compare BOSSNET to other systems in terms of performance when the percentage of unseen information in the KB is high.\" -- cites: E1 (Section 1): quote \"In real-world applications, the KB information could change over time. For example, (1) a KB associated with a movie ticket booking system gets updated every week based on new ﬁlm releases, and (2) a restaurant reservation agent, trained with the knowledge of eateries in one city, may be deployed in other cities with an entirely different range of establishments. In such situations, the system should have the ability to conform to new-found knowledge unseen during its training.\"\n\nCited evidence:\n[E1] (text, Section 1, page 1): Task-oriented dialog agents converse with a user with the goal of accomplishing a speciﬁc task and often interact with a knowledge-base (KB). For example, a restaurant reservation agent ( Henderson et al. , 2014 ) will be grounded to a KB that contains the names of restaurants, and their details. In real-world applications, the KB information could change over time. For example, (1) a KB associated with a movie ticket booking system gets updated every week based on new ﬁlm releases, and (2) a restaurant reservation agent, trained with the knowledge of eateries in one city, may be deployed in other cities with an entirely different range of establishments. In such situations, the system should have the ability to conform to new-found knowledge unseen during its training. Ideally, the training algorithm must learn to disentangle the language\n[E2] (text, Section 1, page 2): We perform evaluations over three datasets – bAbI ( Bordes and Weston , 2017 ), CamRest ( Wen et al. , 2016 ), and Stanford Multi-Domain Dataset ( Eric et al. , 2017 ). Of these, the last two are realworld datasets. We ﬁnd that B O S S N ET is competitive or signiﬁcantly better on standard metrics in all datasets as compared to state-of-the-art baselines. We also introduce a knowledge adaptability (KA) evaluation, in which we systematically increase the percentage of previously unseen entities in the KB. We ﬁnd that B O S S N ET is highly robust across all percentage levels. Finally, we also report a humanbased evaluation and ﬁnd that B O S S N ET responses are frequently rated higher than other baselines. 1. We propose B O S S N ET , a novel architecture to disentangle the language model from knowledge incorporation in task-oriented dialogs.\n[E5] (figure, Figure 1, page 1) (image attached): Figure 1: Performance of various task-oriented dialog systems on the CamRest dataset as the percentage of unseen information in the KB changes. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 1) states, 'We find that B O S S N ET is highly robust across all percentage levels.' This directly supports the claim that BOSSNET is highly robust across all percentage levels of unseen entities in the KB."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E5 (Figure 1) shows that BOSSNET maintains a high BLEU score across all percentages of unseen entities, which supports the claim that BOSSNET's performance is consistently high across all unseen entity percentages in the KB."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E2 (Section 1) states, 'We find that B O S S N ET is competitive or significantly better on standard metrics in all datasets as compared to state-of-the-art baselines.' This does not directly compare BOSSNET to other baselines in terms of disentanglement and robustness to unseen information in the KB. The claim is not supported by the evidence."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence in E1 (Section 1) discusses the adaptability of systems to new information in real-world applications but does not directly compare BOSSNET to other systems in terms of performance when the percentage of unseen information in the KB is high. The claim is not supported by the evidence."
+   }
+  ]
+ }
+}

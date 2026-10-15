@@ -1,0 +1,67 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 506,
+  "prompt_tokens": 2470,
+  "total_tokens": 2976,
+  "prompt_tokens_details": {
+   "cached_tokens": 1002
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the proposed model compare to other models when trained on the LDC2017T10 dataset, and what does this suggest about the effectiveness of incorporating syntax into the model?\nEvidence:\n[E1] (table, Table 1, page 4): Table 1: Parsing scores on LDC2017T10 dev set.\nValues (cite as cells):\n  row 'Text-to-parse': 'Unlabelled F1' = 87.5; 'Labelled F1' = 85.8\n  row 'AMR-to-parse': 'Unlabelled F1' = 60.4; 'Labelled F1' = 54.8\n  row 'Unconditional': 'Unlabelled F1' = 38.5; 'Labelled F1' = 31.7\n[E2] (figure, Figure 1, page 2) (image attached): Figure 1: An example AMR graph, with variable names and verb senses, followed by the input to our system after preprocessing, and ﬁnally two sample re- alisations different in syntax.\nWords printed in the figure: (g / give-01 :ARG0 (i / I) :ARG1 (b / ball) :ARG2 (d / dog)) give :arg0 i :arg1 ball :arg2 dog I [gave]VP [the dog]NP [a ball]NP I [gave]VP [the ball]NP [to a dog]PP\n[E3] (figure, Figure 1, page 2): a zoomed view of Figure 1 (image attached)\n[E4] (text, Section 4, page 4): AMR-to-text model with the same architecture as above to control for the extra regularisation in our model compared to previous work. Our results show that adding syntax into the model dramatically boosts performance, resulting in state-ofthe-art single model performance on both datasets without using external training data. As an oracle experiment, we also generate from the realisation model conditioned on the ground truth parse. The outstanding result here – BLEU scores in the 50s – demonstrates that being able to predict the gold reference parse tree is a bottleneck in the performance of our model. However, given the inherent difﬁculty of predicting a single syntax realisation (cf. Section 4 ), we suspect that there is an intrinsic limit to how well generating from an AMR graph can replicate the reference realisation. We further note that we do not use models tailored to graph-structured data or characterlevel features as in Song et al. ( 2018 ); Beck et al. ( 2018 ), or additional unlabelled data to perform semi-supervised learning ( Konstas et al. , 2017 ). We believe that we can improve our results even further if we use these techniques.\n[E5] (text, Section 3.1, page 3): For the syntax model, we further constrain the decoder to only produce valid parse trees; as we build the parse tree left-to-right according to a depth-ﬁrst traversal, the permissible actions at any stage are to open a new constituent, produce a terminal (i.e. a POS tag), or close the currently open constituent. We implement this constraint by setting the logits of all impermissible actions to negative inﬁnity before taking the softmax. We ﬁnd that this improves both training speed and ﬁnal model performance, as we imbue the decoder with an intrinsic bias towards producing well-formed parse trees.\n[E6] (text, Section 3.3, page 3): Decoding from our model During test time, we would like to estimate\n\nThese claims are already verified and kept:\n- The incorporation of syntax into the model significantly boosts performance, as demonstrated by the state-of-the-art single model performance on both datasets.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The proposed model outperforms other models on the LDC2017T10 dataset, as evidenced by the 'Unlabelled F1' score of 87.5 for the 'Text-to-parse' model, which is higher than the 'Unlabelled F1' scores of 60.4 for the 'AMR-to-parse' model and 38.5 for the 'Unconditional' model.\": support check: The cited evidence only provides 'Unlabelled F1' scores for the 'Text-to-parse', 'AMR-to-parse', and 'Unconditional' models. The claim mentions 'Unlabelled F1' scores for the 'Text-to-parse' model, which is correct, but it also includes 'Unlabelled F1' scores for the 'AMR-to-parse' and 'Unconditional' models, which are not supported by the evidence. The 'Labelled F1' scores are not mentioned in the claim, and the evidence does not provide them.\n- \"The model's performance suggests that there is an intrinsic limit to how well generating from an AMR graph can replicate the reference realisation, as evidenced by the oracle experiment with BLEU scores in the 50s.\": support check: The cited evidence from E4 (Section 4) mentions BLEU scores in the 50s as an oracle experiment result, which demonstrates the difficulty of predicting the gold reference parse tree. However, the claim incorrectly attributes this to an 'oracle experiment with BLEU scores in the 50s' and suggests that this limits the model's ability to replicate the reference realisation. The evidence does not provide a direct comparison or statement about the model's performance in replicating the reference realisation. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The proposed model outperforms other models on the LDC2017T10 dataset, as evidenced by the 'Unlabelled F1' score of 87.5 for the 'Text-to-parse' model, which is higher than the 'Unlabelled F1' scores of 60.4 for the 'AMR-to-parse' model and 38.5 for the 'Unconditional' model.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "row 'Text-to-parse': 'Unlabelled F1' = 87.5; 'Labelled F1' = 85.8"
+     },
+     {
+      "evidence": "E1",
+      "quote": "row 'AMR-to-parse': 'Unlabelled F1' = 60.4; 'Labelled F1' = 54.8"
+     },
+     {
+      "evidence": "E1",
+      "quote": "row 'Unconditional': 'Unlabelled F1' = 38.5; 'Labelled F1' = 31.7"
+     }
+    ]
+   },
+   {
+    "text": "The model's performance suggests that there is an intrinsic limit to how well generating from an AMR graph can replicate the reference realisation, as evidenced by the oracle experiment with BLEU scores in the 50s.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "The outstanding result here – BLEU scores in the 50s – demonstrates that being able to predict the gold reference parse tree is a bottleneck in the performance of our model."
+     }
+    ]
+   },
+   {
+    "text": "The incorporation of syntax into the model significantly boosts performance, as demonstrated by the state-of-the-art single model performance on both datasets.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "Our results show that adding syntax into the model dramatically boosts performance, resulting in state-of-the-art single model performance on both datasets without using external training data."
+     }
+    ]
+   }
+  ]
+ }
+}

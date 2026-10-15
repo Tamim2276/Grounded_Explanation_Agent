@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 194,
+  "prompt_tokens": 952,
+  "total_tokens": 1146,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The performance of VAGER is worse than LR for the 'Bubble' class in the 1-shot binary classification setting, as shown in Table 2 where 'LR (No Transfer)' has an AUC of 0.7455 and 'VAGER (Transfer)' has an AUC of 0.7041.\" -- cites: E4 (Table 2): row 'Bubble', column 'LR (No Transfer)' = 0.7455; E4 (Table 2): row 'Bubble', column 'VAGER (Transfer)' = 0.7041\n2. \"The performance of VAGER is better than LR for the other nine classes in the 1-shot binary classification setting, as shown in Table 2 where 'VAGER (Transfer)' has higher AUC values than 'LR (No Transfer)' for all other classes except 'Bubble'.\" -- cites: E4 (Table 2): row 'Jeep', column 'LR (No Transfer)' = 0.8034; E4 (Table 2): row 'Jeep', column 'VAGER (Transfer)' = 0.9469; E4 (Table 2): row 'Zebra', column 'LR (No Transfer)' = 0.8472; E4 (Table 2): row 'Zebra', column 'VAGER (Transfer)' = 0.9393\n\nCited evidence:\n[E4] (table, Table 2, page 7): Table 2. Comparison of VAGER and LR over novel classes with 1-shot binary classiﬁcation setting\nValues (cite as cells):\n  row 'Jeep': 'LR (No Transfer)' = 0.8034; 'VAGER (Transfer)' = 0.9469\n  row 'Zebra': 'LR (No Transfer)' = 0.8472; 'VAGER (Transfer)' = 0.9393\n  row 'Hen': 'LR (No Transfer)' = 0.7763; 'VAGER (Transfer)' = 0.8398\n  row 'Lemon': 'LR (No Transfer)' = 0.6854; 'VAGER (Transfer)' = 0.9583\n  row 'Bubble': 'LR (No Transfer)' = 0.7455; 'VAGER (Transfer)' = 0.7041\n  row 'Pineapple': 'LR (No Transfer)' = 0.7364; 'VAGER (Transfer)' = 0.8623\n  row 'Lion': 'LR (No Transfer)' = 0.8305; 'VAGER (Transfer)' = 0.9372\n  row 'Screen': 'LR (No Transfer)' = 0.7801; 'VAGER (Transfer)' = 0.9056\n  row 'Drum': 'LR (No Transfer)' = 0.6510; 'VAGER (Transfer)' = 0.6995\n  row 'Restaurant': 'LR (No Transfer)' = 0.7806; 'VAGER (Transfer)' = 0.8787\n  row '0.2 Increasing 0.1 AUC': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row 'AUC 0.0': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '0.1': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '1.4 1.6': 'LR (No Transfer)' = 1.8 2.0 2.2 2.4 Similarity Ratio; 'VAGER (Transfer)' = 2.6 2.8 3.0"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 (Table 2) shows that for the 'Bubble' class, 'LR (No Transfer)' has an AUC of 0.7455 and 'VAGER (Transfer)' has an AUC of 0.7041, which supports the claim that VAGER is worse than LR for this class."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E4 (Table 2) shows that for the 'Jeep' and 'Zebra' classes, 'VAGER (Transfer)' has higher AUC values than 'LR (No Transfer)', which supports the claim that VAGER is better than LR for these classes except 'Bubble'."
+   }
+  ]
+ }
+}

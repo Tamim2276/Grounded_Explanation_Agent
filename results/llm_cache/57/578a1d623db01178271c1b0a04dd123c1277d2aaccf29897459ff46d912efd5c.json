@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 108,
+  "prompt_tokens": 567,
+  "total_tokens": 675,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Adversarial Balancing (AB) estimator has the smallest bias and best MSE performance in the case of fully observed confounders.\" -- cites: E6 (Table 2): row 'AB', column 'Bias' = 2.8 × 10−2; E6 (Table 2): row 'AB', column 'MSE' = 1.5 × 10−3\n\nCited evidence:\n[E6] (table, Table 2, page 11): Table 2: Performance of diﬀerent ATE estimators when true confounders are fully observed. Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Out- come Regression (OR). The naive estimator has the largest bias while AB esti- mator has the best MSE performance.\nValues (cite as cells):\n  row 'AB': 'Bias' = 2.8 × 10−2; 'MAE' = 2.9 × 10−2; 'MSE' = 1.5 × 10−3\n  row 'DR': 'Bias' = −2.3 × 10−3; 'MAE' = 6.1 × 10−2; 'MSE' = 8.0 × 10−3\n  row 'IPW': 'Bias' = 5.7 × 10−2; 'MAE' = 5.8 × 10−2; 'MSE' = 6.2 × 10−3\n  row 'Naive comparison': 'Bias' = 7.1 × 10−2; 'MAE' = 7.1 × 10−2; 'MSE' = 5.8 × 10−3\n  row 'OR': 'Bias' = 8.8 × 10−4; 'MAE' = 6.1 × 10−2; 'MSE' = 8.1 × 10−3"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E6 (Table 2) shows that the Adversarial Balancing (AB) estimator has a bias of 2.8 × 10−2 and an MSE of 1.5 × 10−3, which are the smallest values among the estimators listed. The claim is supported by the evidence."
+   }
+  ]
+ }
+}

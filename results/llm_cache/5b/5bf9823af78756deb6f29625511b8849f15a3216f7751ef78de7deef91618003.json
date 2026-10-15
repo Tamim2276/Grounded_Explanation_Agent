@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 192,
+  "prompt_tokens": 1348,
+  "total_tokens": 1540,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The relationship between gloss and representation error is shown in Figure 10.\" -- cites: E1 (Figure 10): quote \"Figure 10. Relation of gloss and representation error.\"\n2. \"The representation error decreases as the gloss level increases.\" -- cites: E1 (Figure 10): observation \"The graph in Figure 10 shows a downward trend as the gloss level increases.\"\n3. \"The representation error is lower for high gloss objects compared to low gloss objects.\" -- cites: E1 (Figure 10): observation \"The graph in Figure 10 shows a lower error for high gloss objects.\"\n\nCited evidence:\n[E1] (figure, Figure 10, page 7) (image attached): Figure 10. Relation of gloss and representation error.\nWords printed in the figure: .125 0 DSSIM Gloss High Low Test Total Train [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the relationship between gloss and representation error is shown in Figure 10, which is correctly cited and matches the evidence provided."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the representation error decreases as the gloss level increases. The evidence in Figure 10 shows a downward trend as the gloss level increases, which supports this claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The claim states that the representation error is lower for high gloss objects compared to low gloss objects. The evidence in Figure 10 shows a lower error for high gloss objects compared to low gloss objects, which supports this claim."
+   }
+  ]
+ }
+}

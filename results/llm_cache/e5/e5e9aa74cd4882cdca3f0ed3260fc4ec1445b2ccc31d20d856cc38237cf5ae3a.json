@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 185,
+  "prompt_tokens": 472,
+  "total_tokens": 657,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The proposed method outperforms or shows comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).\" -- cites: E1 (Section 4.1): quote \"The average absolute ﬁtting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).\"\n2. \"The proposed method is built on top of an MDN, which shows severe performance degradation with an extreme noise level ( 60% ).\" -- cites: E1 (Section 4.1): quote \"While our proposed method is built on top of an MDN, it is worthwhile noting the severe performance degradation of an MDN with an extreme noise level ( 60% ).\"\n\nCited evidence:\n[E1] (text, Section 4.1, page 7): The average absolute ﬁtting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ). Figure 6(d) - 6(f) show the ﬁtting results along with training data. While our proposed method is built on top of an MDN, it is worthwhile noting the severe performance degradation of an MDN with an extreme noise level ( 60% ). It is mainly because an MDN fails to allocate high mixture probability on the mixture corresponds to the target distribution as there are no dependencies among different mixtures."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 4.1) states that the proposed method outperforms or shows comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ). This directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 4.1) states that the proposed method is built on top of an MDN, and it notes the severe performance degradation of an MDN with an extreme noise level ( 60% ). This supports the claim that the proposed method is built on top of an MDN and shows severe performance degradation with an extreme noise level."
+   }
+  ]
+ }
+}

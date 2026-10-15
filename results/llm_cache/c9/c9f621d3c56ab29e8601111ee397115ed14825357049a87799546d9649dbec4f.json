@@ -1,0 +1,101 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 13.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 562,
+  "prompt_tokens": 3483,
+  "total_tokens": 4045,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the different models change as the corruption level increases? Which model appears to be the most robust to label corruption?\nEvidence:\n[E1] (figure, Figure 11, page 18) (image attached): Figure 11: Learning curves of compared methods on random bias experiments using MNIST with different noise levels.\nWords printed in the figure: Corruption p Configuration Best Last 25% ConvNet 94.4 92.2 ConvNet+Mixup 97.6 97.6 ChoiceNet 99.2 99.2 40% ConvNet 77.9 71.8 ConvNet+Mixup 84.0 83.0 ChoiceNet 99.2 98.8 45% ConvNet 68.0 61.4 ConvNet+Mixup 68.9 55.8 ChoiceNet 98.0 97.1 47% ConvNet 58.2 53.9 ConvNet+Mixup 60.2 53.4 ChoiceNet 92.5 86.1 (a) (b) (c) (d)\n[E2] (table, Table 11, page 17): Table 11: Test accuracies on the MNIST dataset with corrupt label.\nValues (cite as cells):\n  row '': 'Corruption p 50%' = 80%; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = ConvNet+Mixup; 'Best 97.1 98.0 99.1' = 95.3; 'Last 95.9 97.8 99.0' = 95.1; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = ChoiceNet; 'Best 97.1 98.0 99.1' = 98.3; 'Last 95.9 97.8 99.0' = 98.3; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = ConvNet; 'Best 97.1 98.0 99.1' = 76.1; 'Last 95.9 97.8 99.0' = 54.1; 'Corruption p 50%' = 90%; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = ConvNet+Mixup; 'Best 97.1 98.0 99.1' = 78.6; 'Last 95.9 97.8 99.0' = 42.4; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = ChoiceNet; 'Best 97.1 98.0 99.1' = 95.9; 'Last 95.9 97.8 99.0' = 95.2; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = ConvNet; 'Best 97.1 98.0 99.1' = 50.2; 'Last 95.9 97.8 99.0' = 31.3; 'Corruption p 50%' = 95%; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = ConvNet+Mixup ChoiceNet; 'Best 97.1 98.0 99.1' = 53.2 84.5; 'Last 95.9 97.8 99.0' = 26.6 66.0\n  row 'contrary, the learning The experimental results neural networks trained with an extremely noisy ChoiceNet shows outstanding corruption rates are below': 'Corruption p 50%' = show stable curves of the random robust learning 95%), the test the noisy dataset 95% case,; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = behaviors which shufﬂe experiments behaviors when 80% accuracies of baseline in that the test over-ﬁtting is; 'Best 97.1 98.0 99.1' = are of the accuracies do occured; 'Last 95.9 97.8 99.0' = indicates the shown in the training methods do not in all; '' = the robustness of the proposed method. Table 11 and Figure 12. The convolutional labels are uniformly shufﬂed. However, decrease as the number of epochs increases. drop even after 50 epochs for the cases where methods.\n  row 'Table 12 and Figure 13 selected training data using setting is more arduous than': 'Corruption p 50%' = results of the rule: (0, 1, 2, 3, shufﬂe case in that; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = permutation 4, 5, 6, 7, 8, 9) →(7, we are intentionally; 'Best 97.1 98.0 99.1' = experiments. 9, 0, 4, changing; 'Last 95.9 97.8 99.0' = 4, 2, 1, 3, the; '' = Speciﬁcally, we change the labels of randomly 5, 6, 8) following [22]. We argue that this labels based on predeﬁned permutation rules.\n  row 'When using the that the setting in [12] For the ﬁrst scenario': 'Corruption p 50%' = dataset, we followed both symmetric apply symmetric; 'Conﬁguration ConvNet ConvNet+Mixup ChoiceNet' = two different settings asymmetric noises. no ...\n[E3] (text, Section 3.4, page 6): Here, we provide synthetic examples in both regression and classiﬁcation to illustrate how the proposed method can be used to robustly learn the underlying target distribution given a noisy training dataset. Regression Task We ﬁrst focus on how the proposed method can distinguish between the target distribution and noise distributions in a regression task and show empirical evidence that our method can achieve this by estimating the target distribution and the correlation of noise distribution simultaneously. We train on two datasets with the same target function but with different types of corruptions by replacing 50% of the output values whose input values are within 0 to 2 : one uniformly sampled from − 1 to 3 and the other from a ﬂipped target function as shown in Figure 4(a) and 4(c) . Throughout this experiment, we set K = 2 for better visualization. As shown in Figure 4 , ChoiceNet successfully estimates the target function with partial corruption. To further understand how ChoiceNet works, we also plot the correlation of each mixture at each input with different colors. When using the ﬁrst dataset where we ﬂip the outputs whose inputs are between 0 and 2 , the correlations of the second mixture at the corrupt region becomes − 1 (see Figure 4(b) ). This is exactly what we wanted ChoiceNet to behave in that having − 1 correlation will simply ﬂip the output. In other words, the second mixture takes care of the noisy (ﬂipped) data by assigning − 1 correlation while the ﬁrst mixture component reserved for the target distribution is less affected by the noisy training data.\n[E4] (text, Section 2, page 2): The second group of estimating label corruption information is mainly presented for classiﬁcation tasks where training labels are assumed to be corrupt with a possibly unknown corruption matrix. An earlier study in [ 17 ] proposed an extra layer for the modeling of output noises. [ 4 ] extended the approach mentioned above by adding an additional noise adaptation layer with aggressive dropout regularization. A similar method was then proposed in [ 14 ] which initially estimated the label corruption matrix with a learned classiﬁer and used the corruption matrix to ﬁne-tune the classiﬁer. Other researchers [ 15 ] presented a robust training method that mimics the EM algorithm to train a neural network, with the label noise modeled as an additional softmax layer, similar to earlier work [ 4 ]. A self-error-correcting network was also presented [ 31 ]. It switches the training labels based on the learned model at the beginning stages by assuming that the deep model is more accurate during the earlier stage of training.\n[E5] (text, Section 4.1, page 7): The average absolute ﬁtting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ). Figure 6(d) - 6(f) show the ﬁtting results along with training data. While our proposed method is built on top of an MDN, it is worthwhile noting the severe performance degradation of an MDN with an extreme noise level ( 60% ). It is mainly because an MDN fails to allocate high mixture probability on the mixture corresponds to the target distribution as there are no dependencies among different mixtures. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ChoiceNet appears to be the most robust to label corruption as it maintains high accuracy even with high corruption levels.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "ChoiceNet 99.2 99.2"
+     },
+     {
+      "evidence": "E2",
+      "quote": "ChoiceNet 97.1 98.0 99.1"
+     },
+     {
+      "evidence": "E3",
+      "quote": "ChoiceNet successfully estimates the target function with partial corruption."
+     }
+    ]
+   },
+   {
+    "text": "The performance of ChoiceNet degrades more slowly than ConvNet and ConvNet+Mixup as the corruption level increases.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "ChoiceNet shows stable curves of the random label bias experiments."
+     },
+     {
+      "evidence": "E2",
+      "quote": "ChoiceNet 97.1 98.0 99.1"
+     },
+     {
+      "evidence": "E3",
+      "quote": "ChoiceNet successfully estimates the target function with partial corruption."
+     }
+    ]
+   },
+   {
+    "text": "The performance of ConvNet and ConvNet+Mixup drops significantly as the corruption level increases.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "ConvNet 94.4 92.2"
+     },
+     {
+      "evidence": "E2",
+      "quote": "ConvNet 77.9 71.8"
+     },
+     {
+      "evidence": "E3",
+      "quote": "ChoiceNet successfully estimates the target function with partial corruption."
+     }
+    ]
+   },
+   {
+    "text": "The performance of ChoiceNet is more consistent across different corruption levels compared to ConvNet and ConvNet+Mixup.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "ChoiceNet 99.2 99.2"
+     },
+     {
+      "evidence": "E2",
+      "quote": "ChoiceNet 97.1 98.0 99.1"
+     },
+     {
+      "evidence": "E3",
+      "quote": "ChoiceNet successfully estimates the target function with partial corruption."
+     }
+    ]
+   }
+  ]
+ }
+}

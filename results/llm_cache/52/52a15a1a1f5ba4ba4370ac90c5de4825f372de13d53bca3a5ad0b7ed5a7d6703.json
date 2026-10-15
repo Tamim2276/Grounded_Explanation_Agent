@@ -1,0 +1,37 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 116,
+  "prompt_tokens": 1773,
+  "total_tokens": 1889,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different types of features used by the Layout-induced Video Representation Network?\nSub-questions:\n1. [figure] What are the different types of features used by the Layout-induced Video Representation Network?\nEvidence:\nE1 [figure, Figure 4, page 3] (image attached): Figure 4. Layout-induced Video Representation Network: The dashed blue box indicates a shared 3D ConvNet to extract low- level features. We utilize the segmentation maps to decompose features into different places, and the solid blue boxes indicate that we train place-based models to extract place-based feature descriptions. When relevant to the activities of interest, we con- duct distance-based place discretization to model moving direc- tions; ﬁnally, we leverage the connectivity of places to aggregate the place-based feature descriptions at inference level.\nWords printed in the figure: NN-­‐ sidewalk NN-­‐ street NN-­‐ porch NN-­‐ shared frame differencing ….. Topological Feature Aggregation ….. <vehicle, move along, street> <person, stay, porch> Semantic Feature Decomposition porch walkway street sidewalk NN-­‐w1 NN-­‐w2 NN-­‐w3 Place based Feature Descriptions <person, move toward (home), walkway> Distance based Place Discretization\nE2 [figure, Figure 4, page 3]: Zoomed view (300 dpi) of: Figure 4. Layout-induced Video Representation Network: The dashed blue box indicates a shared 3D ConvNet to extract low- level features. We utilize the segmentation maps to decompose features into different places, and the solid blue boxes indicate that we train place-based models to extract place-based feature descriptions. When relevant to the activities of interest, we con- duct distance-based place discretization to model moving direc- tions; ﬁnally, we leverage the connectivity of places to aggregate the place-based feature descriptions at inference level.\nWords printed in the figure: NN-­‐ sidewalk NN-­‐ street NN-­‐ porch NN-­‐ shared frame differencing ….. Topological Feature Aggregation ….. <vehicle, move along, street> <person, stay, porch> Semantic Feature Decomposition porch walkway street sidewalk NN-­‐w1 NN-­‐w2 NN-­‐w3 Place based Feature Descriptions <person, move toward (home), walkway> Distance based Place Discretization [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The different types of features used are: sidewalk, street, porch, shared frame differencing, topological feature aggregation, semantic feature decomposition, place-based feature descriptions, and distance-based place discretization."
+   }
+  ],
+  "uncovered": [],
+  "missing": "No sub-questions are uncovered, as all information is present in the evidence provided.",
+  "sufficient": true
+ }
+}

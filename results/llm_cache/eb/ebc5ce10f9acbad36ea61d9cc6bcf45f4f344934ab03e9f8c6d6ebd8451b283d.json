@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 350,
+  "prompt_tokens": 617,
+  "total_tokens": 967,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The MLP-IQA model outperforms the MLP-A model by a significant margin, as the MLP-IQA model achieves a combined accuracy of 75.9%, while the MLP-A model only achieves 26.6%.\" -- cites: E1 (Table 8): row 'MLP-IQA', column 'IoU +QoU' = 75.9; E1 (Table 8): row 'MLP-A', column 'IoU +QoU' = 26.6\n2. \"The MLP-IQA model performs the best on the COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU).\" -- cites: E1 (Table 8): row 'MLP-IQA', column 'IoU +QoU' = 75.9\n3. \"The MLP-A model, which only observes answers, attains about the chance-level accuracy on the combined IU + QoU decoys.\" -- cites: E1 (Table 8): row 'MLP-A', column 'IoU +QoU' = 26.6\n\nCited evidence:\n[E1] (table, Table 8, page 15): Table 8: Test accuracy (%) on COCOQA.\nValues (cite as cells):\n  row 'MLP-A': 'IoU' = 70.3; 'QoU' = 31.7; 'IoU +QoU' = 26.6\n  row 'MLP-IA': 'IoU' = 73.4; 'QoU' = 73.3; 'IoU +QoU' = 60.7\n  row 'MLP-QA': 'IoU' = 91.5; 'QoU' = 52.5; 'IoU +QoU' = 51.4\n  row 'MLP-IQA': 'IoU' = 93.1; 'QoU' = 78.3; 'IoU +QoU' = 75.9\n  row 'Random': 'IoU' = 25.0; 'QoU' = 25.0; 'IoU +QoU' = 14.3"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the MLP-IQA model achieves 75.9% combined accuracy and the MLP-A model achieves 26.6%. However, the evidence shows that the MLP-IQA model achieves 75.9% in the 'IoU +QoU' column, and the MLP-A model achieves 26.6% in the same column. The claim is correct but misrepresents the subject of the comparison. The correct comparison should be between the 'IoU +QoU' columns of the two models."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that the MLP-IQA model performs the best on the COCOQA dataset. The evidence only shows the combined accuracy of the MLP-IQA model in the 'IoU +QoU' column, which is 75.9%. There is no evidence provided for the performance of the MLP-IQA model compared to other models or datasets. The claim is not supported by the evidence."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim states that the MLP-A model attains about the chance-level accuracy on the combined IU + QoU decoys. The evidence shows that the MLP-A model achieves 26.6% in the 'IoU +QoU' column, which is not close to chance-level accuracy (50%). The claim is not supported by the evidence."
+   }
+  ]
+ }
+}

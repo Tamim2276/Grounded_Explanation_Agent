@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 260,
+  "prompt_tokens": 1880,
+  "total_tokens": 2140,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The re-synthesis using DAMs shows a more consistent appearance across different views compared to the reflectance maps.\" -- cites: E1 (Figure 1): observation \"The sphere in the re-synthesis using DAMs appears more uniform across different views (Views 1 to 5) compared to the reflectance maps.\"\n2. \"The visual appearance of the sphere in the re-synthesis using DAMs is more detailed and realistic than in the reflectance maps.\" -- cites: E1 (Figure 1): observation \"The sphere in the re-synthesis using DAMs appears more detailed and realistic across different views compared to the reflectance maps.\"\n3. \"The appearance of the sphere in the re-synthesis using DAMs is more flexible and can be changed by varying the viewer position and surface geometry.\" -- cites: E4 (Section 1): quote \"This allows freely changing the viewer and surface geometry, which is not possible for classic reflectance maps that fix the relation between view and illumination (cf. Fig. 1).\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 1) (image attached): Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) .\nWords printed in the figure: Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\n[E4] (text, Section 1, page 1): we move away from the pixel-based nature of implicit imagebased representations into a deep representation, but without any explicit reconstruction, as we do not target a direct mapping to any explicit reﬂectance model or illumination either. Still, we show that such a representation can be used to solve actual tasks, such as image synthesis, appearance acquisition and estimation-and-segmentation of appearance. This is enabled by four contributions: First, we will introduce a generalization of 2D reﬂectance maps [ 13 ] to 4D, which we call an Appearance Map (AM). AMs represent appearance for varying geometry under varying views. This allows freely changing the viewer and surface geometry, which is not possible for classic reﬂectance maps that ﬁx the relation between view and illumination (cf. Fig. 1 ). Second, while classic Reﬂectance Maps (RM) can be simply tabulated using a single 2D image, the full appearance is a 4D phenomenon that is more challenging to represent and process. Storing 4D appearance as a table, modestly resolving 10 degree features, would require storing (and somehow also capturing) 36 4 = 17 M ; impractical. Instead, we suggest using DAMs, neural networks that compactly represent AMs in only a couple of thousand parameters. This representation is efﬁcient, does not require any look-ups and [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 1) states that the sphere in the re-synthesis using DAMs appears more uniform across different views (Views 1 to 5) compared to the reflectance maps, which aligns with the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 1) states that the sphere in the re-synthesis using DAMs appears more detailed and realistic across different views compared to the reflectance maps, which aligns with the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E4 (Section 1) discusses the flexibility of DAMs in changing the viewer and surface geometry, but it does not directly support the claim that the appearance of the sphere in the re-synthesis using DAMs is more flexible and can be changed by varying the viewer position and surface geometry. The evidence is more about the flexibility of DAMs in general, not specifically about the appearance of the sphere."
+   }
+  ]
+ }
+}

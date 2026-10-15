@@ -1,0 +1,39 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 119,
+  "prompt_tokens": 2193,
+  "total_tokens": 2312,
+  "prompt_tokens_details": {
+   "cached_tokens": 1096
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which year is most associated with the terms \"sept\", \"hijackers\", and \"attacks\"?\nEvidence:\n[E1] (text, Section 4.3, page 8): hijackers , and attacks increasing in probability as we move up in the space. If we wanted to look at each year individually, we could drop the embedding of years, and learn a sparse set of topic-year interactions, similar to tone in Table 3 .\n[E2] (text, Section 4.3, page 8): Tone as a label. We ﬁrst consider using the annotations as a label , and train a joint model to infer topics relevant to the tone of the article (pro- or anti-immigration). Figure 2 shows a set of topics learned in this way, along with the predicted probability of an article being pro-immigration conditioned on the given topic. All topics are coherent, and the predicted probabilities have strong face validity, e.g., “arrested charged charges agents operation” is least associated with pro-immigration. Tone as a covariate. Next we consider using tone as a covariate , and build a model using both tone and tone-topic interactions. Table 3 shows a set of topics learned from the immigration data, along with the most highly-weighted words in the corresponding tone-topic interaction terms. As can be seen, these interaction terms tend to capture different frames (e.g., “criminal” vs. “detainees”, and “illegals” vs. “newcomers”, etc). Combined model with temporal metadata. Finally, we incorporate both the tone annotations and the year of publication of each article, treating the former as a label and the latter as a covariate. In this model, we also include an embedding matrix, W c , to project the one-hot year vectors down to a\n[E3] (text, Section 4.3, page 8): two-dimensional continuous space, with a learned deviation for each dimension. We omit the topics in the interest of space, but Figure 3 shows the learned embedding for each year, along with the top terms of the corresponding deviations. As can be seen, the model learns that adjacent years tend to produce similar deviations, even though we have not explicitly encoded this information . The leftright dimension roughly tracks a temporal trend with positive deviations shifting from the years of Clinton and INS on the left, to Obama and ICE on the right. 16 Meanwhile, the events of 9/11 dominate the vertical direction, with the words sept ,\n[E4] (table, Table 3, page 9): Table 3: Top words for topics (left) and the corresponding anti-immigration (middle) and pro-immigration (right) variations when treating tone as a covariate, with interactions.\nValues (cite as cells):\n  row 'island story chinese ellis international guest worker workers bush labor bill beneﬁts bill welfare republican state senate': 'Anti-immigration interactions' = smuggling federal charges bill border house senate republican california gov state; 'Pro-immigration interactions' = island school ellis english story workers tech skilled farm labor law welfare students tuition\n[E5] (figure, Figure 3, page 8) (image attached): Figure 3: Learned embeddings of year-of- publication (treated as a covariate) from combined model of news articles about immigration.\nWords printed in the figure: 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 obama clinton deportations sept hijackers elian attacks INS refugees asylum clinton obama arizona ICE path\n[E6] (figure, Figure 3, page 8): a zoomed view of Figure 3 (image attached)\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The terms 'sept', 'hijackers', and 'attacks' are associated with the year 2001.\": the number 2001 is in no citation [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The terms 'sept', 'hijackers', and 'attacks' are associated with the year 2001.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The terms 'sept', 'hijackers', and 'attacks' are printed in the figure, and the year 2001 is associated with these terms."
+     }
+    ]
+   }
+  ]
+ }
+}

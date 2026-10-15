@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 391,
+  "prompt_tokens": 2021,
+  "total_tokens": 2412,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ChoiceNet appears to be the most robust to label corruption as it maintains high accuracy even with high corruption levels.\" -- cites: E1 (Figure 11): quote \"ChoiceNet 99.2 99.2\"; E1 (Figure 11): quote \"ChoiceNet 99.2 98.8\"; E1 (Figure 11): quote \"ChoiceNet 98.0 97.1\"; E1 (Figure 11): quote \"ChoiceNet 92.5 86.1\"\n2. \"The performance of ChoiceNet degrades more slowly than ConvNet and ConvNet+Mixup as the corruption level increases.\" -- cites: E1 (Figure 11): quote \"ChoiceNet 99.2 99.2\"; E1 (Figure 11): quote \"ChoiceNet 99.2 98.8\"; E1 (Figure 11): quote \"ChoiceNet 98.0 97.1\"; E1 (Figure 11): quote \"ChoiceNet 92.5 86.1\"\n3. \"The performance of ConvNet and ConvNet+Mixup drops significantly as the corruption level increases.\" -- cites: E1 (Figure 11): quote \"ConvNet 77.9 71.8\"; E1 (Figure 11): quote \"ConvNet 68.0 61.4\"; E1 (Figure 11): quote \"ConvNet 58.2 53.9\"; E1 (Figure 11): quote \"ConvNet+Mixup 84.0 83.0\"\n4. \"The performance of ChoiceNet is more consistent across different corruption levels compared to ConvNet and ConvNet+Mixup.\" -- cites: E1 (Figure 11): quote \"ChoiceNet 99.2 99.2\"; E1 (Figure 11): quote \"ChoiceNet 99.2 98.8\"; E1 (Figure 11): quote \"ChoiceNet 98.0 97.1\"; E1 (Figure 11): quote \"ChoiceNet 92.5 86.1\"\n\nCited evidence:\n[E1] (figure, Figure 11, page 18) (image attached): Figure 11: Learning curves of compared methods on random bias experiments using MNIST with different noise levels.\nWords printed in the figure: Corruption p Configuration Best Last 25% ConvNet 94.4 92.2 ConvNet+Mixup 97.6 97.6 ChoiceNet 99.2 99.2 40% ConvNet 77.9 71.8 ConvNet+Mixup 84.0 83.0 ChoiceNet 99.2 98.8 45% ConvNet 68.0 61.4 ConvNet+Mixup 68.9 55.8 ChoiceNet 98.0 97.1 47% ConvNet 58.2 53.9 ConvNet+Mixup 60.2 53.4 ChoiceNet 92.5 86.1 (a) (b) (c) (d) [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence shows the 'Best' accuracy for ChoiceNet at 99.2%, but the claim states 'ChoiceNet 99.2 98.8'. The 'Last' accuracy for ChoiceNet is 98.8%, which is the correct value, but the claim misrepresents the 'Best' accuracy."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The cited evidence shows the 'Best' accuracy for ChoiceNet at 99.2%, but the claim states 'ChoiceNet 99.2 98.8'. The 'Last' accuracy for ChoiceNet is 98.8%, which is the correct value, but the claim misrepresents the 'Best' accuracy."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The cited evidence shows the 'Best' accuracy for ConvNet at 94.4% and ConvNet+Mixup at 97.6%, but the claim states 'ConvNet 77.9 71.8' and 'ConvNet+Mixup 84.0 83.0'. These values are not supported by the evidence."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The cited evidence shows the 'Best' accuracy for ChoiceNet at 99.2%, but the claim states 'ChoiceNet 99.2 98.8'. The 'Last' accuracy for ChoiceNet is 98.8%, which is the correct value, but the claim misrepresents the 'Best' accuracy."
+   }
+  ]
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 284,
+  "prompt_tokens": 2683,
+  "total_tokens": 2967,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the highest value for the hyperparameter  λa?\nEvidence:\n[E1] (table, Table 3, page 7): Table 3: Details of hyper-parameters set for dif- ferent datasets.\nValues (cite as cells):\n  row 'Shootings': '(r1, r2, r3)' = (10, 20,15); '(λa, λb, λc)' = (0.3, 0.1, 0.7)\n  row 'NYT Sports': '(r1, r2, r3)' = (20, 15, 15); '(λa, λb, λc)' = (0.9, 0.5, 0.7)\n  row 'MUC': '(r1, r2, r3)' = (15, 12, 12); '(λa, λb, λc)' = (0.7, 0.7, 0.4)\n[E2] (text, Section 4, page 7): Experimental results comparing performance of various models for the task of HRSI are given in Table 5 . We present evaluation results from three evaluators represented as E1, E2 and E3. As can be observed from Table 5 , TFBA achieves better results than HardClust for the Shootings and NYT Sports datasets, however HardClust achieves better results for the MUC dataset. Percentage agreement of the evaluators for TFBA is 72%, 70% and 60% for Shootings, NYT Sports and MUC datasets respectively. HardClust Limitations : Even though Hard- Clust gives better induction for MUC corpus, this approach has some serious drawbacks. HardClust can only induce one schema per relation. This is a restrictive constraint as multiple senses can exist for a relation. For example, consider the schemata induced for the relation shoot as shown in Table 4 . TFBA induces two senses for the relation, but HardClust can induce only one schema. For a set of 4-tuples, HardClust can only induce ternary schemata; the dimensionality of the schemata cannot be varied. Since the latent factors induced by HardClust are entirely based on frequency, the latent categories induced by HardClust are dominated by only a ﬁxed set of noun phrases. For example, in NYT Sports dataset, subject category induced by HardClust for all the relations is ⟨ team, yankees, mets ⟩ . In addition to inducing only one schema per relation, most of the times HardClust only induces a ﬁxed set of categories. Whereas for TFBA, the number of categories depends on the rank of factorization, which is a user provided parameter, thus providing more ﬂexibility to choose the latent categories.\n[E3] (text, Section 4, page 6): In this section, we evaluate the performance of TFBA for the task of HRSI. We also propose a baseline model for HRSI called HardClust. HardClust : We propose a baseline model called the Hard Clustering Baseline (HardClust) for the task of higher order relation schema induction. This model induces schemata by grouping perrelation NP arguments from OpenIE extractions. In other words, for each relation, all the Noun Phrases (NPs) in ﬁrst argument form a cluster that represents the subject of the relation, all the NPs in the second argument form a cluster that represents object and so on. Then from each cluster, the top most frequent NPs are chosen as the representative NPs for the argument type. We note that this method is only able to induce one schema per relation. Datasets: We run our experiments on three datasets. The ﬁrst dataset (Shootings) is a collection of 1,335 documents constructed from a publicly available database of mass shootings in the United States. The second is New York Times Sports (NYT Sports) dataset which is a collection of 20,940 sports documents from the period 2005 and 2007. And the third dataset (MUC) is a set of 1300 Latin American newswire documents about terrorism events. After performing the processing steps described in Section 3 , we obtained 357,914 unique OpenIE extractions from the NYT Sports dataset, 10,847 from Shootings dataset, and 8,318 from the MUC dataset. However, in order to properly analyze and evaluate the model, we consider only the 50 most frequent relations in the datasets and their corresponding OpenIE extractions. This is done to avoid noisy OpenIE extractions to yield better data quality and to aid subsequent manual evaluation of the data. We construct input tensors\n[E4] (text, Section B, page 5): Q represents elementwise division and I is the identity matrix. Initialization : For initializing the component matrices A , B , and C , we ﬁrst perform a nonnegative Tucker2 Decomposition of the individual input tensors X 1 , X 2 , and X 3 . Then compute the average of component matrices obtained from each individual decomposition for initialization. We initialize the core tensors G 1 , G 2 , and G 3 with the core tensors obtained from the individual decompositions. 3.2.2 Step 2: Binary to Higher-Order Schema Induction In this section, we describe how a higher-order schema is constructed from the factorization described in the previous sub-section. Each relation k has three representations given by the slices G 1 k from each core tensor. We need a principled way to produce a joint schema from these representations. For a relation, we select top- n indices ( i, j ) with highest values from each matrix. The indices i and j from G 3\n[E5] (figure, Figure 1, page 3) (image attached): Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\n[E6] (figure, Figure 1, page 3): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The dataset with the highest value for the hyperparameter λa is the NYT Sports dataset, with a value of 0.9.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "NYT Sports",
+      "col": "(λa, λb, λc)",
+      "value": "0.9"
+     }
+    ]
+   },
+   {
+    "text": "The Shootings dataset has a hyperparameter λa value of 0.3.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Shootings",
+      "col": "(λa, λb, λc)",
+      "value": "0.3"
+     }
+    ]
+   },
+   {
+    "text": "The MUC dataset has a hyperparameter λa value of 0.7.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "MUC",
+      "col": "(λa, λb, λc)",
+      "value": "0.7"
+     }
+    ]
+   }
+  ]
+ }
+}

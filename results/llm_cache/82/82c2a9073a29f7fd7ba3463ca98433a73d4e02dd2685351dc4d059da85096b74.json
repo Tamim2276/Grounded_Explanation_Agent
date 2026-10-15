@@ -1,0 +1,97 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 14.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 719,
+  "prompt_tokens": 2582,
+  "total_tokens": 3301,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the performance of VAGER is worse than LR for the \"Bubble\" class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nEvidence:\n[E1] (text, Section 4.2, page 6): In this section, we evaluate how well the classiﬁers learned by our method and other baselines can perform in novel classes on binary classiﬁcation setting. The results are shown in Table 1 . In all low-shot settings, our method VAGER+Voting consistently performs the best in both AUC and F1 metrics. In contrast, LR performs the worst in 1-shot setting, which demonstrates the importance of generalization from base classes when the new class has very few samples. MRN does not work well in most settings, demonstrating that its basic hypothesis that the classiﬁcation parameters trained by large samples and small samples respectively are correlated does not necessarily hold in real data. By comparing VAGER+Voting with the other ﬁve variant versions of our method, we can safely draw the conclusion that the major ingredients in our method, including network embedding for low dimensional representations, mapping function for transforming embedding space to classiﬁcation parameter space, as well as the reﬁnement strategy are necessary and effective and the results support that the Voting strategy performs the best in our sce-\n[E2] (text, Section 4.4, page 8): test categories and learn to distinguish these 10 categories on the 1-shot setting. We repeat random selections ﬁve times and the result is shown on the ﬁrst 5 columns in Table 3 . Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are.\n[E3] (text, Section 4.3, page 7): Here the similarity of two classes is calculated by Equation 1 . Intuitively, if a new class is similar with the top- K base classes, while dissimilar with the remained base classes, its Similarity Ratio will be high, meaning that this new class can beneﬁt more from the base classes. For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10 . The dependent variable indicates the success degree of generalization. And we set K = 10 . We plot the similarity ratio and relative improvement of all novel classes in Figure 3 . We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% conﬁdence interval for the correlation coefﬁcient range between 0 . 124 and 0 . 169 and R 2 = 0 . 45 , showing that the SR ratio could explain 45% of the dependent variable.\n[E4] (table, Table 2, page 7): Table 2. Comparison of VAGER and LR over novel classes with 1-shot binary classiﬁcation setting\nValues (cite as cells):\n  row 'Jeep': 'LR (No Transfer)' = 0.8034; 'VAGER (Transfer)' = 0.9469\n  row 'Zebra': 'LR (No Transfer)' = 0.8472; 'VAGER (Transfer)' = 0.9393\n  row 'Hen': 'LR (No Transfer)' = 0.7763; 'VAGER (Transfer)' = 0.8398\n  row 'Lemon': 'LR (No Transfer)' = 0.6854; 'VAGER (Transfer)' = 0.9583\n  row 'Bubble': 'LR (No Transfer)' = 0.7455; 'VAGER (Transfer)' = 0.7041\n  row 'Pineapple': 'LR (No Transfer)' = 0.7364; 'VAGER (Transfer)' = 0.8623\n  row 'Lion': 'LR (No Transfer)' = 0.8305; 'VAGER (Transfer)' = 0.9372\n  row 'Screen': 'LR (No Transfer)' = 0.7801; 'VAGER (Transfer)' = 0.9056\n  row 'Drum': 'LR (No Transfer)' = 0.6510; 'VAGER (Transfer)' = 0.6995\n  row 'Restaurant': 'LR (No Transfer)' = 0.7806; 'VAGER (Transfer)' = 0.8787\n  row '0.2 Increasing 0.1 AUC': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row 'AUC 0.0': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '0.1': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '1.4 1.6': 'LR (No Transfer)' = 1.8 2.0 2.2 2.4 Similarity Ratio; 'VAGER (Transfer)' = 2.6 2.8 3.0\n[E5] (figure, Figure 5, page 8) (image attached): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem.\nWords printed in the figure: 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\n[E6] (figure, Figure 5, page 8): a zoomed view of Figure 5 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The performance of VAGER is worse than LR for the 'Bubble' class in the 1-shot binary classification setting, as shown in Table 2 where 'LR (No Transfer)' has an AUC of 0.7455 and 'VAGER (Transfer)' has an AUC of 0.7041.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "Bubble",
+      "col": "'LR (No Transfer)'",
+      "value": "0.7455"
+     },
+     {
+      "evidence": "E4",
+      "row": "Bubble",
+      "col": "'VAGER (Transfer)'",
+      "value": "0.7041"
+     }
+    ]
+   },
+   {
+    "text": "The performance of VAGER is better than LR for the other nine classes in the 1-shot binary classification setting, as shown in Table 2 where 'VAGER (Transfer)' has higher AUC values than 'LR (No Transfer)' for all other classes except 'Bubble'.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "Jeep",
+      "col": "'LR (No Transfer)'",
+      "value": "0.8034"
+     },
+     {
+      "evidence": "E4",
+      "row": "Jeep",
+      "col": "'VAGER (Transfer)'",
+      "value": "0.9469"
+     },
+     {
+      "evidence": "E4",
+      "row": "Zebra",
+      "col": "'LR (No Transfer)'",
+      "value": "0.8472"
+     },
+     {
+      "evidence": "E4",
+      "row": "Zebra",
+      "col": "'VAGER (Transfer)'",
+      "value": "0.9393"
+     }
+    ]
+   },
+   {
+    "text": "The performance of VAGER is worse than LR for the 'Bubble' class in the 1-shot binary classification setting, as shown in Figure 5 where the 'LR' line is above the 'VAGER+Voting' line for the 'Bubble' class at 1 shot.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E6",
+      "observation": "The 'LR' line is above the 'VAGER+Voting' line for the 'Bubble' class at 1 shot."
+     }
+    ]
+   },
+   {
+    "text": "The performance of VAGER is better than LR for the other nine classes in the 1-shot binary classification setting, as shown in Figure 5 where the 'VAGER+Voting' line is above the 'LR' line for all other classes except 'Bubble' at 1 shot.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E6",
+      "observation": "The 'VAGER+Voting' line is above the 'LR' line for all other classes except 'Bubble' at 1 shot."
+     }
+    ]
+   }
+  ]
+ }
+}

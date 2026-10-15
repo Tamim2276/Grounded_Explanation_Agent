@@ -1,0 +1,83 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 443,
+  "prompt_tokens": 3179,
+  "total_tokens": 3622,
+  "prompt_tokens_details": {
+   "cached_tokens": 2105
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best on the Ubuntu dataset for text lengths between 60 and 90 words?\nEvidence:\n[E1] (table, Table 5, page 6): Table 5: Accuracy on different length of text\nValues (cite as cells):\n  row '#Pair': '[0, 30)' = 203; '[30, 60)' = 689; '[60, 90)' = 579; '[90, ∞)' = 505; '[0, 30)' = 253578; '[30, 60)' = 207772; '[60, 90)' = 33618; '[90, ∞)' = 5032\n  row 'LSTM': '[0, 30)' = 0.768; '[30, 60)' = 0.705; '[60, 90)' = 0.728; '[90, ∞)' = 0.726; '[0, 30)' = 0.707; '[30, 60)' = 0.748; '[60, 90)' = 0.732; '[90, ∞)' = 0.718\n  row 'MV-LSTM': '[0, 30)' = 0.788; '[30, 60)' = 0.708; '[60, 90)' = 0.746; '[90, ∞)' = 0.739; '[0, 30)' = 0.726; '[30, 60)' = 0.752; '[60, 90)' = 0.725; '[90, ∞)' = 0.694\n  row 'KEHNN': '[0, 30)' = 0.792; '[30, 60)' = 0.721; '[60, 90)' = 0.765; '[90, ∞)' = 0.746; '[0, 30)' = 0.724; '[30, 60)' = 0.774; '[60, 90)' = 0.785; '[90, ∞)' = 0.791\n  row '': '[0, 30)' = (b); '[30, 60)' = Ubuntu dataset\n  row 'Length': '[0, 30)' = [0, 30); '[30, 60)' = [30, 60); '[60, 90)' = [60, 90); '[90, ∞)' = [90, ∞)\n[E2] (text, Section abstract, page 6): of the concatenation of the two pieces of text. # Pair represents the number of pairs that fall into the bucket. From the results, we can see that on relatively short text (i.e., length in [0 , 30) ), KEHNN performs comparably well with MV- LSTM, while on long text, KEHNN signiﬁcantly improves the matching accuracy. The results veriﬁed our claim that matching with multiple channels and prior knowledge can enhance accuracy on long text. Note that on the Ubuntu data, all models perform worse on short text than them on long text. This is because we ignored context for short messageresponse pairs, while long pairs are usually independent with context and have complete semantics. Furthermore, we also report the contributions of different channels of our model in Table 6. We can see that channel two is the most powerful one on the conversation data, while channel three is the best one on the QA data. This is because the prior knowledge in the conversation data is automatically generated rather than obtained from meta-data like that in the QA data. The automatically generated prior knowledge contains noise which hurts the performance of channel three. The full model outperforms all single channels consistently, demonstrating that matching with multiple channels could leverage the three types of features and sufﬁciently model the semantic relations in text pairs.\n[E3] (text, Section abstract, page 1): to illustrate the challenge. The answer is very long 1 and contains a lot of information that well compare the two schools but semantically far from the question (e.g., “horse riding” and “lances swords”). The information makes the answer a high quality one, but hinders the existing models from establishing the semantic relations between the question and the answer in matching. Similarly, when questions become long, matching also becomes difﬁcult. In practice, such long text is not rare. For example, in a public QA data set, 54 . 8% question answer pairs are longer than 60 words (question length plus answer length). More seriously, the-state-of-theart model can only achieves 74 . 2% matching accuracy on pairs longer than 60 words compared to its performance 78 . 8% on pairs shorter than 30 words. These evidence indicates us that improving matching performance on pairs with long text is important but challenging, because the semantic gap is even bigger in such pairs.\n[E4] (text, Section abstract, page 6): the last two utterances as we study text pair matching and ignore context information. We used the data pre-processed by Xu et al. (Xu et al. 2016) 4 , in which all urls and numbers were replaced by “ url ” and “ number ” respectively to alleviate the sparsity issue. The training set contains 1 million message-response pairs with a ratio 1 : 1 between positive and negative responses, and both the validation set and the test set have 0 . 5 million message-response pairs with a ratio 1 : 9 between positive and negative responses. We followed Lowe et al. (Lowe et al. 2015) and employed recall at position k in n candidates as evaluation metrics and denoted the metrics as R n @ k . R n @ k indicates if the correct response is in the top k results from n candidates. Speciﬁc Setting In this task, we trained a topic model to generate topics for both messages and responses as prior knowledge. We crawled 8 million questions (question and description) from the ”Computers & Internet” category in Yahoo! Answers, and utilized these data to train a Twitter LDA model (Zhao et al. 2011) with 100 topics. In order to construct k x,i and k y,i , we separately assigned a topic to a message and a response by the inference algorithm of Twitter LDA. Then we transformed the topic to a vector by averaging the embeddings of top 20 words under the topic. Word embedding tables were initialized using the public word vectors available at http://nlp.stanford. edu/projects/glove (trained on Twitter) and updated in learning. Tanh is used as h in Equation (3), (8), (9).\n[E5] (figure, Figure 1, page 4) (image attached): Figure 1: Architecture of KEHNN\nWords printed in the figure: BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e\n[E6] (figure, Figure 1, page 4): a zoomed view of Figure 1 (image attached)\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"KEHNN performs best on the Ubuntu dataset for text lengths between 60 and 90 words.\": E1 [60, 90)/KEHNN is None, the claim says 0.765\n- \"KEHNN outperforms other models on the Ubuntu dataset for text lengths between 60 and 90 words.\": E1 [60, 90)/KEHNN is None, the claim says 0.765\n- \"The performance of all models on the Ubuntu dataset is worse for text lengths between 60 and 90 words compared to text lengths between 30 and 60 words.\": E1 [30, 60)/KEHNN is None, the claim says 0.721 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "KEHNN performs best on the Ubuntu dataset for text lengths between 60 and 90 words.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "[60, 90)",
+      "col": "KEHNN",
+      "value": "0.765"
+     }
+    ]
+   },
+   {
+    "text": "KEHNN outperforms other models on the Ubuntu dataset for text lengths between 60 and 90 words.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "[60, 90)",
+      "col": "KEHNN",
+      "value": "0.765"
+     },
+     {
+      "evidence": "E1",
+      "row": "[60, 90)",
+      "col": "LSTM",
+      "value": "0.728"
+     },
+     {
+      "evidence": "E1",
+      "row": "[60, 90)",
+      "col": "MV-LSTM",
+      "value": "0.746"
+     }
+    ]
+   },
+   {
+    "text": "The performance of all models on the Ubuntu dataset is worse for text lengths between 60 and 90 words compared to text lengths between 30 and 60 words.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "[30, 60)",
+      "col": "KEHNN",
+      "value": "0.721"
+     },
+     {
+      "evidence": "E1",
+      "row": "[60, 90)",
+      "col": "KEHNN",
+      "value": "0.765"
+     }
+    ]
+   }
+  ]
+ }
+}

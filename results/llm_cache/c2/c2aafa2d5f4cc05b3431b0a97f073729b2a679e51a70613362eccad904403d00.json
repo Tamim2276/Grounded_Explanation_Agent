@@ -1,0 +1,89 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 12.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 557,
+  "prompt_tokens": 2920,
+  "total_tokens": 3477,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best in the 10 classes 1-shot multi-class classification problem?\nEvidence:\n[E1] (text, Section 4.4, page 8): test categories and learn to distinguish these 10 categories on the 1-shot setting. We repeat random selections ﬁve times and the result is shown on the ﬁrst 5 columns in Table 3 . Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are.\n[E2] (text, Section 4.2, page 6): In this section, we evaluate how well the classiﬁers learned by our method and other baselines can perform in novel classes on binary classiﬁcation setting. The results are shown in Table 1 . In all low-shot settings, our method VAGER+Voting consistently performs the best in both AUC and F1 metrics. In contrast, LR performs the worst in 1-shot setting, which demonstrates the importance of generalization from base classes when the new class has very few samples. MRN does not work well in most settings, demonstrating that its basic hypothesis that the classiﬁcation parameters trained by large samples and small samples respectively are correlated does not necessarily hold in real data. By comparing VAGER+Voting with the other ﬁve variant versions of our method, we can safely draw the conclusion that the major ingredients in our method, including network embedding for low dimensional representations, mapping function for transforming embedding space to classiﬁcation parameter space, as well as the reﬁnement strategy are necessary and effective and the results support that the Voting strategy performs the best in our sce-\n[E3] (text, Section 4.3, page 6): Although our method performs the best in different settings, the failure cases are easy to ﬁnd. We are interested in the following questions: (1) What are the typical failure cases? (2) What is the driving factor that controls the success of generalization? (3) Whether the generalization process is explainable? In order to answer the above questions, we further conduct an insightful analysis. We randomly select 10 novel classes, and list the performance of our method compared with LR in one-shot setting on these classes, as shown in Table 2 . It’s obvious that the effect of generalization is notable in 9 of them, but in the bubble class, the generalization plays a negative role. To discover the driving factor controlling success or failure of the generalization, we deﬁne and calculate the similarity ratio (SR) of a novel class with the base classes by: SR = Average Top - K Similarity with Base Classes\n[E4] (table, Table 3, page 8): Table 3. Top-1 Accuracy for m classes 1-shot problem\nValues (cite as cells):\n  row 'VAGER+Voting': '10 cls/G1' = 67.59%; '10 cls/G2' = 63.96%; '10 cls/G3' = 58.02%; '10 cls/G4' = 51.27%; '10 cls/G5' = 56.24%; '30 cls/G1' = 40.73%; '50 cls/G1' = 38.69%; '100 cls/G1' = 28.38%\n  row 'LR': '10 cls/G1' = 61.97%; '10 cls/G2' = 59.72%; '10 cls/G3' = 52.97%; '10 cls/G4' = 47.51%; '10 cls/G5' = 52.01%; '30 cls/G1' = 37.32%; '50 cls/G1' = 34.75%; '100 cls/G1' = 23.94%\n  row 'Weighted-LR': '10 cls/G1' = 63.13%; '10 cls/G2' = 60.09%; '10 cls/G3' = 50.32%; '10 cls/G4' = 46.13%; '10 cls/G5' = 49.81%; '30 cls/G1' = 36.77%; '50 cls/G1' = 34.64%; '100 cls/G1' = 23.60%\n  row 'MRN': '10 cls/G1' = 64.55%; '10 cls/G2' = 61.82%; '10 cls/G3' = 54.74%; '10 cls/G4' = 48.85%; '10 cls/G5' = 54.54%; '30 cls/G1' = 39.43%; '50 cls/G1' = 37.78%; '100 cls/G1' = 27.16%\n  row 'MatchingNet': '10 cls/G1' = 65.69%; '10 cls/G2' = 61.74%; '10 cls/G3' = 57.13%; '10 cls/G4' = 48.56%; '10 cls/G5' = 54.34%; '30 cls/G1' = 39.04%; '50 cls/G1' = 37.05%; '100 cls/G1' = 27.21%\n  row 'ProtoNet': '10 cls/G1' = 47.98%; '10 cls/G2' = 47.18%; '10 cls/G3' = 40.20%; '10 cls/G4' = 35.86%; '10 cls/G5' = 41.55%; '30 cls/G1' = 30.15%; '50 cls/G1' = 28.12%; '100 cls/G1' = 21.28%\n  row 'ActivationNet': '10 cls/G1' = 65.04%; '10 cls/G2' = 62.42%; '10 cls/G3' = 55.62%; '10 cls/G4' = 48.61%; '10 cls/G5' = 53.85%; '30 cls/G1' = 40.15%; '50 cls/G1' = 37.41%; '100 cls/G1' = 27.68%\n[E5] (figure, Figure 5, page 8) (image attached): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem.\nWords printed in the figure: 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\n[E6] (figure, Figure 5, page 8): a zoomed view of Figure 5 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "VAGER+Voting performs the best in all 5 groups, with an average top-1 accuracy promotion of around 2%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are."
+     }
+    ]
+   },
+   {
+    "text": "In the 10 classes 1-shot multi-class classification problem, VAGER+Voting consistently outperforms other methods in terms of top-1 accuracy.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "VAGER+Voting",
+      "col": "10 cls/G1",
+      "value": "67.59%"
+     },
+     {
+      "evidence": "E4",
+      "row": "LR",
+      "col": "10 cls/G1",
+      "value": "61.97%"
+     },
+     {
+      "evidence": "E4",
+      "row": "Weighted-LR",
+      "col": "10 cls/G1",
+      "value": "63.13%"
+     },
+     {
+      "evidence": "E4",
+      "row": "MRN",
+      "col": "10 cls/G1",
+      "value": "64.55%"
+     }
+    ]
+   },
+   {
+    "text": "The performance of VAGER+Voting is consistently higher than other methods across all shot numbers in the 10 classes 1-shot multi-class classification problem.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The blue line representing VAGER+Voting is consistently above the other lines across all shot numbers."
+     }
+    ]
+   },
+   {
+    "text": "The evidence does not directly compare the performance of VAGER+Voting against other methods in the 10 classes 1-shot multi-class classification problem.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "In all low-shot settings, our method VAGER+Voting consistently performs the best in both AUC and F1 metrics."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 139,
+  "prompt_tokens": 1321,
+  "total_tokens": 1460,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The metric of non-ME is more reliable than confidence scores in detecting adversarial examples, as indicated by the AUC-scores in Table 2.\" -- cites: E6 (Table 2): quote \"The model of target networks is Resnet-32. Values are calculated on the examples which are correctly classiﬁed as normal examples and then misclassiﬁed as adversarial counterparts. Bandwidths used when calculating K-density are σ 2\"\n\nCited evidence:\n[E6] (table, Table 2, page 7): Table 2: AUC-scores ( 10 − 2 ) of adversarial examples. The model of target networks is Resnet-32. Values are calculated on the examples which are correctly classiﬁed as normal examples and then misclassiﬁed as adversarial counterparts. Bandwidths used when calculating K-density are σ 2\nValues (cite as cells):\n  row '': 'Obj.' = CE; 'Conﬁdence' = 79.7; 'MNIST non-ME' = 66.8; 'K-density' = 98.8 (-); 'Conﬁdence' = 71.5; 'CIFAR-10 non-ME' = 66.9; 'K-density' = 99.7 (-); 'Obj.' = CE; 'Conﬁdence' = 88.9; 'MNIST non-ME' = 70.5; 'K-density' = 90.0 (-); 'Conﬁdence' = 0.0; 'CIFAR-10 non-ME' = 64.6; 'K-density' = 100.0 (-); 'Obj.' = CE; 'Conﬁdence' = 98.4; 'MNIST non-ME' = 50.4; 'K-density' = 96.2 (-); 'Conﬁdence' = 16.4; 'CIFAR-10 non-ME' = 37.1; 'K-density' = 84.2 (-); 'Obj.' = CE; 'Conﬁdence' = 98.6; 'MNIST non-ME' = 60.1; 'K-density' = 97.7 (-); 'Conﬁdence' = 99.2; 'CIFAR-10 non-ME' = 27.3; 'K-density' = 85.8 (-); 'Obj.' = CE; 'Conﬁdence' = 98.6; 'MNIST non-ME' = 64.1; 'K-density' = 99.4 (-); 'Conﬁdence' = 99.5; 'CIFAR-10 non-ME' = 50.2; 'K-density' = 95.3 (-); 'Obj.' = (a); 'Conﬁdence' = Classiﬁcation accuracy; 'MNIST non-ME' = under iteration-based; 'K-density' = attacks; 'Conﬁdence' = (b); 'CIFAR-10 non-ME' = Average minimal; 'K-density' = distortions\n  row 'BIM': 'Obj.' = RCE; 'Conﬁdence' = 91.7; 'MNIST non-ME' = 90.6; 'K-density' = 91.8 (*); 'Conﬁdence' = 0.7; 'CIFAR-10 non-ME' = 70.2; 'K-density' = 100.0 (*)\n  row 'ILCM': 'Obj.' = RCE; 'Conﬁdence' = 100.0; 'MNIST non-ME' = 97.0; 'K-density' = 98.6 (*); 'Conﬁdence' = 64.1; 'CIFAR-10 non-ME' = 77.8; 'K-density' = 93.9 (*)\n  row 'JSMA': 'Obj.' = RCE; 'Conﬁdence' = 100.0; 'MNIST non-ME' = 99.4; 'K-density' = 99.0 (*); 'Conﬁdence' = 99.5; 'CIFAR-10 non-ME' = 91.9; 'K-density' = 95.4 (*)\n  row 'C&W': 'Obj.' = RCE; 'Conﬁdence' = 100.0; 'MNIST non-ME' = 99.5; 'K-density' = 99.8 (*); 'Conﬁdence' = 99.6; 'CIFAR-10 non-ME' = 94.7; 'K-density' = 98.2 (*)\n  row 'Perturbation FGSM(CE)': 'Obj.' = FGSM(RCE); 'Conﬁdence' = Perturbation BIM(CE) BIM(RCE); 'MNIST non-ME' = Perturbation ILCM(CE); 'K-density' = Perturbation ILCM(RCE) JSMA(CE); 'Conﬁdence' = C&W JSMA(RCE); 'CIFAR-10 non-ME' = C&W-hc CE; 'K-density' = C&W C&W-hc RCE"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the metric of non-ME is more reliable than confidence scores in detecting adversarial examples, as indicated by the AUC-scores in Table 2. However, the evidence provided does not compare the reliability of non-ME and confidence scores. Instead, it provides AUC-scores for adversarial examples and the model used (ResNet-32) for calculating these scores. The evidence does not directly support the claim about the reliability of non-ME compared to confidence scores."
+   }
+  ]
+ }
+}

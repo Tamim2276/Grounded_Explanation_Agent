@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 279,
+  "prompt_tokens": 2164,
+  "total_tokens": 2443,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ChoiceNet is the safest method as it has a collision rate of 0% on straight lanes at 0% outlier rate.\" -- cites: E2 (Table 7): row '0%', column 'ChoiceNet' = 0%\n2. \"ChoiceNet is robust to handling different types of noisy labels.\" -- cites: E3 (Section 1): quote \"methods in terms of robustness with regard to handling different types of noisy labels.\"\n3. \"ChoiceNet is the safest method as it maintains the probability distributions over the weights and leverages mixture distributions to handle inconsistencies in a dataset.\" -- cites: E5 (Section 1): quote \"The cornerstone of the proposed method is a Cholesky Block in which we employ the Cholesky transform for sampling the weights of a neural network that enables us to model correlated outputs. Similar to Bayesian neural networks [ 5 ], we maintain the probability distributions over the weights, but we also leverage mixture distributions to handle the inconsistencies in a dataset.\"\n4. \"The safest method is not explicitly stated in the evidence.\" -- cites: E1 (Figure 7): observation \"ChoiceNet is the only method with a reference function that closely matches the training data across all outlier rates.\"\n\nCited evidence:\n[E1] (figure, Figure 7, page 14) (image attached): Figure 7: Reference function and ﬁtting results of compared methods on different outlier rates, 0% , 20% 40% , 80% , and 90% ).\n[E2] (table, Table 7, page 15): Table 7: Collision rates of compared methods on straight lanes.\nValues (cite as cells):\n  row '0%': 'MDN' = 50.83%; 'GPR' = 0.83%; 'LGPR' = 4.17%; 'RGPR' = 3.33%\n  row '10%': 'ChoiceNet' = 0%; 'MDN' = 38.33%; 'MLP' = 0%; 'GPR' = 2.5%; 'LGPR' = 1.67%; 'RGPR' = 4.17%\n  row '20%': 'ChoiceNet' = 0%; 'MDN' = 41.67%; 'MLP' = 0%; 'GPR' = 7.5%; 'LGPR' = 6.67%; 'RGPR' = 10%\n  row '30%': 'ChoiceNet' = 0%; 'MDN' = 66.67%; 'MLP' = 1.67%; 'GPR' = 4.17%; 'LGPR' = 1.67%; 'RGPR' = 7.5%\n  row '40%': 'ChoiceNet' = 0.83%; 'MDN' = 35%; 'MLP' = 3.33%; 'GPR' = 6.67%; 'LGPR' = 6.67%; 'RGPR' = 24.17%\n[E3] (text, Section 1, page 2): methods in terms of robustness with regard to handling different types of noisy labels.\n[E5] (text, Section 1, page 1): The cornerstone of the proposed method is a Cholesky Block in which we employ the Cholesky transform for sampling the weights of a neural network that enables us to model correlated outputs. Similar to Bayesian neural networks [ 5 ], we maintain the probability distributions over the weights, but we also leverage mixture distributions to handle the inconsistencies in a dataset. To the best of our knowledge, this is the ﬁrst approach simultaneously to infer the target distribution and the output correlations using a neural network in an end-to-end manner. We will refer to this framework as ChoiceNet . ChoiceNet is ﬁrst applied to synthetic regression tasks and a real-world regression task where we demonstrate its robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions. Subsequently, we move on to image classiﬁcation tasks using a number of benchmark datasets where we show that it shows comparable or superior performances compared to existing baseline [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence states that ChoiceNet has a collision rate of 0% on straight lanes at 0% outlier rate, but it does not specify the safety or robustness of ChoiceNet in terms of handling different types of noisy labels."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 1) states that methods are robust with regard to handling different types of noisy labels."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E5 (Section 1) discusses the Cholesky Block and the use of probability distributions and mixture distributions to handle inconsistencies in a dataset, but it does not explicitly state that ChoiceNet maintains the probability distributions over the weights and leverages mixture distributions to handle inconsistencies in a dataset."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence in E1 (Figure 7) shows that ChoiceNet is the only method with a reference function that closely matches the training data across all outlier rates, which implies that ChoiceNet is the safest method."
+   }
+  ]
+ }
+}

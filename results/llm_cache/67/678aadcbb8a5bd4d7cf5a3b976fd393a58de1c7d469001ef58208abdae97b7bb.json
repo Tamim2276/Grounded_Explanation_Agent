@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 464,
+  "prompt_tokens": 2792,
+  "total_tokens": 3256,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the LSTM-MDN network in the training phase?\nEvidence:\n[E1] (text, Section E, page 5): LSTM-MDN: Mixture density network containing 3 layers of LSTM with 50 memory states in each layer. The mixture contains 20 Gaussian kernels. The LSTM-MDN network is described in Figure 3, while the architectures of the other approaches are shown in Figure 5. Each network had been separately trained for the pick and place and the push to desired pose respectively, in effect creating 8 different controllers. The resulting controllers had been tested in the virtual environment by requiring the robot to perform randomly generated tasks 20 times. If it can not complete the task in a limited time (1 minute for the ﬁrst task and 2 minutes for the second one), we count the try as a failure and reset the position of the box. The numerical success rates are shown in the following table:\n[E2] (text, Section E, page 6): Feedfoward-MSE 0% 0% LSTM-MSE 85% 0% Feedforward-MDN 95% 15% LSTM-MDN 100% 95% The results allow us to derive several conclusions. Clearly, the Feedforward-MSE combination does not work for this particular set of problems and training data, failing to complete either task even once. Another conclusion is that the pick-and-place task is clearly the easier from the two, even when tested in the virtual environment where physical modeling errors don’t play a role. The presence of either LSTM or MSE in the network provided enough improvement in the controller to allow the ﬁnishing of the task in the majority of situations, while the presence of both lead to 100% success rate. On the other hand, the harder push to pose task requires both components to have a reasonable success rate of 95%. We conclude from these experiments that both adding LSTM layers, and using an MDN output provide signiﬁcant beneﬁts individually to the robot controller, and that these two techniques can be combined for more individual beneﬁts.\n[E3] (text, Section abstract, page 4): per at time t and outputs a prediction of the pose and the open/closed status of the gripper at time t + 1 . During training, this prediction is used to generate the error signal. During the deployment of the trained network, the prediction represents the desired pose of the end actuator which the robot needs to achieve through its inverse kinematics calculations. The controllers for the “pick and place” and the “push to desired pose” tasks have the same network architecture but were trained on the speciﬁc tasks. Our architecture uses an LSTM recurrent neural network and relies on mixture density networks (MDNs) to predict the probability density of the output. The error signal, in this case, is based on the negative logarithm likelihood of the next target waypoint given the probability density implied by the MDN. Let us now describe the intuitions that led to these choices. The solution to both manipulation tasks contain a series of individual movements which need to be executed in a speciﬁc sequence. Although both tasks can be solved in several different ways, the individual movements in them cannot be randomly exchanged. In order to successfully solve the task, the robot needs to choose and commit to a certain solution . While it is technically possible that this commitment will be encoded in the environment outside the robot, we conjecture that a robot controller which has a memory to store these commitments will perform better. The requirement of a controller with a memory leads us to the choice of recurrent neural networks, in particular, one of the most widely used models, the LSTM (Hochreiter and Schmidhuber 1997). We are using three LSTM layers with 50 nodes each as shown in Figure 3. The second intuition applies to the choice of the output layer and error signal. Both tasks allow multiple solutions. For instance, for the push to pose task, the robot might need to move the box in a diagonal direction. This can be achieved by either (a) ﬁrst pushing the shorter side of the box followed by a push on the longer side or (b) the other way around. However, by averaging these two solutions we reach a solution where the gripper would try to push the corner of the box, leading to an unpredictable result. This leads us to conjecture that a multi-modal error function would perform better than the unimodal MSE. The approach we chose is based on Mixture Density Networks (MDN) (Bishop 1994) which is to use the output of the network to predict the parameters of  ...\n[E4] (figure, Figure 3, page 5) (image attached): Figure 3: The training and evaluation phase. During the training the LSTM network is unrolled for 50 time-steps. The gripper pose and status (open/close) e t and the pose of relevant objects q t at time-step t is used as input and output of the network to calculate and backpropagate the error to update the weights. During the evaluation phase, the mixture density parameters are used to form a mixture of Gaussians and draw a sample from it. The sample is used to control the robot arm.\nWords printed in the figure: Training the LSTM-MDN network unrolled through time LSTM-MDN network performing the task in a closed loop et, qt Mixture density parameters LSTM LSTM LSTM Multivariate Mixture of Gaussians et+1 draw a sample Inverse kinematics Joint angles Negative log likelihood cost et, qt Mixture density parameters LSTM LSTM LSTM et+1 Negative log likelihood cost et+1, qt+1 Mixture density parameters LSTM LSTM LSTM et+2 … Negative log likelihood cost et+49, qt+49 Mixture density parameters LSTM LSTM LSTM et+50 Dataset M C H1 H2 H3 Softmax Exp � � Softmax Exp � � Softmax Exp � � � � �\n[E5] (figure, Figure 3, page 5): a zoomed view of Figure 3 (image attached)\n[E6] (table, Table 1, page 3): Table 1: The size of the datasets for the two studied tasks\nValues (cite as cells):\n  row 'Raw demonstrations': 'Pick and place' = 650; 'Push to pose' = 1614\n  row 'Demonstrations after shift': 'Pick and place' = 3900; 'Push to pose' = -\n  row 'Low frequency demonstrations': 'Pick and place' = 31,200; 'Push to pose' = 12,912\n  row 'Total no. of waypoints': 'Pick and place' = 645,198; 'Push to pose' = 369,477\n  row 'Avg. demonstration waypoints': 'Pick and place' = 20.68; 'Push to pose' = 28.61 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The LSTM-MDN network is trained by unrolling the LSTM network through time, using the gripper pose and status (e.g., e_t, q_t) as input and output to calculate and backpropagate the error to update the weights.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "observation": "The training and evaluation phase. During the training the LSTM network is unrolled for 50 time-steps."
+     }
+    ]
+   },
+   {
+    "text": "The LSTM-MDN network uses mixture density parameters to predict the probability density of the output, which is then used to form a mixture of Gaussians and draw a sample from it.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "observation": "The mixture density parameters are used to form a mixture of Gaussians and draw a sample from it."
+     }
+    ]
+   },
+   {
+    "text": "The LSTM-MDN network is used to predict the pose and the open/closed status of the gripper at time t + 1, which is used to generate the error signal during training.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "per at time t and outputs a prediction of the pose and the open/closed status of the gripper at time t + 1 . During training, this prediction is used to generate the error signal."
+     }
+    ]
+   },
+   {
+    "text": "The LSTM-MDN network is trained for the pick and place and the push to desired pose tasks separately, creating 8 different controllers.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Each network had been separately trained for the pick and place and the push to desired pose respectively, in effect creating 8 different controllers."
+     }
+    ]
+   }
+  ]
+ }
+}

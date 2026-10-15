@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 257,
+  "prompt_tokens": 1607,
+  "total_tokens": 1864,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The figure shows that as the number of workers per 'expert' increases, the Cohen's kappa agreement also increases.\" -- cites: E1 (Figure 3): observation \"The trend of the lines in Figure 3 shows an upward slope as the number of workers per 'expert' increases.\"\n2. \"The relationship is not linear, as the increase in Cohen's kappa agreement is not consistent across all thresholds.\" -- cites: E1 (Figure 3): observation \"The lines in Figure 3 have different slopes for different thresholds, indicating a non-linear relationship.\"\n3. \"The relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation is shown in Figure 3.\" -- cites: E1 (Figure 3): quote \"Figure 3: Cohen’s κ agreement for stance annotation on 98 comments.\"\n4. \"The relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation is not linear.\" -- cites: E1 (Figure 3): observation \"The figure shows that as the number of workers per 'expert' increases, the Cohen's kappa agreement also increases, but the increase is not consistent across all thresholds.\"\n\nCited evidence:\n[E1] (figure, Figure 3, page 7) (image attached): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\nWords printed in the figure: 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The figure shows an upward slope as the number of workers per 'expert' increases, which supports the claim that the Cohen's kappa agreement also increases."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The figure shows different slopes for different thresholds, indicating a non-linear relationship, which supports the claim that the increase in Cohen's kappa agreement is not consistent across all thresholds."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The figure is titled 'Figure 3: Cohen’s κ agreement for stance annotation on 98 comments,' which directly supports the claim that the relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation is shown in Figure 3."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The figure shows an upward slope as the number of workers per 'expert' increases, but the claim states that the relationship is not linear, which is contradictory to the evidence."
+   }
+  ]
+ }
+}

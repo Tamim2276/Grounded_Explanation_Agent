@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 184,
+  "prompt_tokens": 627,
+  "total_tokens": 811,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The MLP-IQA method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys, achieving an accuracy of 53.8%.\" -- cites: E1 (Table 10): row 'MLP-IQA', column 'IoU +QoU' = 53.8\n2. \"There was a significant difference in performance compared to the other methods, as indicated by the substantial gap in accuracy between MLP-IQA and the other methods.\" -- cites: E1 (Table 10): row 'MLP-IQA', column 'IoU +QoU' = 53.8; E1 (Table 10): row 'MLP-A', column 'IoU +QoU' = 21.3; E1 (Table 10): row 'MLP-IA', column 'IoU +QoU' = 31.0; E1 (Table 10): row 'MLP-QA', column 'IoU +QoU' = 37.2\n\nCited evidence:\n[E1] (table, Table 10, page 15): Table 10: Test accuracy (%) on VQA2 − -2017val, which contains 134,813 triplets.\nValues (cite as cells):\n  row 'MLP-A': 'IoU' = 39.8; 'QoU' = 33.7; 'IoU +QoU' = 21.3\n  row 'MLP-IA': 'IoU' = 40.3; 'QoU' = 53.0; 'IoU +QoU' = 31.0\n  row 'MLP-QA': 'IoU' = 84.8; 'QoU' = 37.6; 'IoU +QoU' = 37.2\n  row 'MLP-IQA': 'IoU' = 85.9; 'QoU' = 56.1; 'IoU +QoU' = 53.8\n  row 'Random': 'IoU' = 25.0; 'QoU' = 25.0; 'IoU +QoU' = 14.3"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim cites the correct row and column in Table 10, and the accuracy of 53.8% is correctly attributed to the 'MLP-IQA' method in the 'IoU +QoU' column."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim cites the correct rows and columns in Table 10, and the accuracy values for 'MLP-IQA' (53.8%) and the other methods (21.3%, 31.0%, 37.2%) are correctly attributed. The substantial gap in accuracy between MLP-IQA and the other methods is evident from these values."
+   }
+  ]
+ }
+}

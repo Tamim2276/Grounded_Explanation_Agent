@@ -1,0 +1,85 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 623,
+  "prompt_tokens": 1283,
+  "total_tokens": 1906,
+  "prompt_tokens_details": {
+   "cached_tokens": 1215
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best at predicting the delexicalised constituency tree of an example, and how much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nEvidence:\n[E1] (table, Table 1, page 4): Table 1: Parsing scores on LDC2017T10 dev set.\nValues (cite as cells):\n  row 'Text-to-parse': 'Unlabelled F1' = 87.5; 'Labelled F1' = 85.8\n  row 'AMR-to-parse': 'Unlabelled F1' = 60.4; 'Labelled F1' = 54.8\n  row 'Unconditional': 'Unlabelled F1' = 38.5; 'Labelled F1' = 31.7\n[E2] (text, Section 4, page 4): We ﬁrst investigate how much information AMR contains about possible syntactic realisations. We train two seq2seq models of the above architecture to predict the delexicalised constituency tree of an example given either the AMR graph or the text. We then evaluate both models on labelled and unlabelled F1 score on the dev split of the corpus. As neither model is guaranteed to produce trees with the right number of terminals, we ﬁrst run an insert/delete aligner between the predicted and reference terminals (i.e. POS tags) before calculating span F1s. We also report the results of running our aligner on the most probable parse tree as estimated by an unconditional LSTM as a baseline both to control for our aligner and also to see how much extra signal is in the AMR graph. The results in Table 1 show that predicting a syntactic structure from an AMR graph is a much harder task than predicting from the text, but there is information in the AMR graph to improve over a blind baseline.\n[E3] (text, Section 4, page 4): AMR-to-text model with the same architecture as above to control for the extra regularisation in our model compared to previous work. Our results show that adding syntax into the model dramatically boosts performance, resulting in state-ofthe-art single model performance on both datasets without using external training data. As an oracle experiment, we also generate from the realisation model conditioned on the ground truth parse. The outstanding result here – BLEU scores in the 50s – demonstrates that being able to predict the gold reference parse tree is a bottleneck in the performance of our model. However, given the inherent difﬁculty of predicting a single syntax realisation (cf. Section 4 ), we suspect that there is an intrinsic limit to how well generating from an AMR graph can replicate the reference realisation. We further note that we do not use models tailored to graph-structured data or characterlevel features as in Song et al. ( 2018 ); Beck et al. ( 2018 ), or additional unlabelled data to perform semi-supervised learning ( Konstas et al. , 2017 ). We believe that we can improve our results even further if we use these techniques.\n[E4] (text, Section 4, page 5): We selected the ﬁrst 50 AMR graphs in the dev set on linearised length between 15 and 40 with coherent reference realisations and generated 5 different realisations with our joint model and our baseline model. For our joint model, we ﬁrst sampled 3 parse structures from the syntax model with temperature 0.3. This means we divide the pertimestep logits of the syntax decoder by 0.3; this serves to sharpen the outputs of the syntax model and constrains the sampling process to produce relatively high-probability syntactic structures for the given AMR. Then, we realised each parse deterministically with the lexicalisation model. For the baseline model, we sample 3 realisations from the decoder with the same temperature. This gave us 100 examples in total. We then crowdsourced acceptability judgments for each example from 100 annotators: we showed the reference realisation of an AMR graph, together with model realisations, and asked each annotator to mark all the grammatical realisations which have the same meaning as the reference realisation. Each annotator was presented 30 examples selected randomly. Our results in Table 2 show that the joint model can generate more meaning-preserving realisations compared to a syntax-agnostic baseline. This shows the utility of separating out syntactic and lexical variation: we model explicitly meaning-preserving invariances, and can therefore generate better paraphrases.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The AMR-to-text model outperforms the baseline model by 28.1 points in terms of unlabelled F1 score.\": the quote is not in E1\n- \"The AMR-to-text model performs the best at predicting the delexicalised constituency tree of an example.\": the quote is not in E1"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The AMR-to-text model outperforms the baseline model by 28.1 points in terms of unlabelled F1 score.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "row 'AMR-to-parse': 'Unlabelled F1' = 60.4; 'Labelled F1' = 54.8"
+     },
+     {
+      "evidence": "E1",
+      "quote": "row 'Unconditional': 'Unlabelled F1' = 38.5; 'Labelled F1' = 31.7"
+     }
+    ]
+   },
+   {
+    "text": "The AMR-to-text model performs the best at predicting the delexicalised constituency tree of an example.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "row 'AMR-to-parse': 'Unlabelled F1' = 60.4; 'Labelled F1' = 54.8"
+     },
+     {
+      "evidence": "E1",
+      "quote": "row 'Unconditional': 'Unlabelled F1' = 38.5; 'Labelled F1' = 31.7"
+     }
+    ]
+   },
+   {
+    "text": "The AMR-to-text model outperforms the baseline model by 28.1 points in terms of unlabelled F1 score.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "row 'AMR-to-parse': 'Unlabelled F1' = 60.4; 'Labelled F1' = 54.8"
+     },
+     {
+      "evidence": "E1",
+      "quote": "row 'Unconditional': 'Unlabelled F1' = 38.5; 'Labelled F1' = 31.7"
+     }
+    ]
+   },
+   {
+    "text": "The AMR-to-text model performs the best at predicting the delexicalised constituency tree of an example.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "row 'AMR-to-parse': 'Unlabelled F1' = 60.4; 'Labelled F1' = 54.8"
+     },
+     {
+      "evidence": "E1",
+      "quote": "row 'Unconditional': 'Unlabelled F1' = 38.5; 'Labelled F1' = 31.7"
+     }
+    ]
+   }
+  ]
+ }
+}

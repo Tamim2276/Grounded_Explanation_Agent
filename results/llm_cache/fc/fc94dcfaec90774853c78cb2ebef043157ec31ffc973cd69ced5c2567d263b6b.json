@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 83,
+  "prompt_tokens": 198,
+  "total_tokens": 281,
+  "prompt_tokens_details": {
+   "cached_tokens": 138
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nSub-goals:\n1. [table] How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nAlready tried: sub-goal 1 with table\nStill missing: The sub-question asks how GBI compares to A* in terms of reducing disagreement rate, but the evidence only provides the disagreement rates without specifying the direction of change or the reduction in disagreement rate for GBI compared to A*."
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a comparison of GBI and A* in terms of reducing disagreement rates, which is not directly provided in the table. Therefore, a text search is needed to find the relevant information.",
+  "tool": "text",
+  "query": "GBI compared to A* in terms of reducing disagreement rate on the SRL-100 network's failure set"
+ }
+}

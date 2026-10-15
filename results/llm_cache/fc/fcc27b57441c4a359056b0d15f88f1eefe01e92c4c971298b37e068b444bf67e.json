@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 403,
+  "prompt_tokens": 3573,
+  "total_tokens": 3976,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the LIVR framework decompose semantic features into different places?\nEvidence:\n[E1] (figure, Figure 2, page 2) (image attached): Figure 2. Framework of LIVR. Given the segmentation map, we decompose the semantic features into different places and extract place-based feature descriptions individually, then dynamically aggregate them at inference time according to the topology of the scene. ⊙ denotes the masking operation for spatial decomposition. \"NN\" stands for neural network.\nWords printed in the figure: <person, move+toward+ (home), walkway> NN\" street NN\" sidewalk NN \"lawn NN\" walkway street sidewalk walkway lawn Topological+Feature+ Aggregation Semantic+Feature+Decomposition Place based Feature Descriptions Distance based Place Discretization … Figure 2. Framework of LIVR. Given the segmentation map, we\n[E2] (figure, Figure 2, page 2): a zoomed view of Figure 2 (image attached)\n[E3] (text, Section 3.2, page 3): Segmentation Maps Semantic Feature Decomposition utilizes a segmentation map of each place to decompose features and cause the network to extract place-based feature descriptions individually. The segmentation maps can be manually constructed using a mobile app we developed 2 to annotate each place by drawing points to construct polygons. This is reasonable since most smart home customers have only one or two cameras in their home. We employ human annotations because automatic semantic segmentation methods segment places based on appearance ( e.g., color, texture, etc. ), while our task requires differentiation between places with similar appearance based on function-\n[E4] (text, Section 1, page 2): The ﬁrst two components require semantic feature decomposition (Fig. 2 ). We utilize bitmaps encoded with the semantic labels of places to decompose video representations into different places and train models to learn placebased feature descriptions. This decomposition encourages the network to learn features of generic place-based motion patterns that are independent of scene layouts. As part of the semantic feature decomposition, we encode scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform w.r.t. another place. Fig. 2 (brown) shows the discretized bitmaps of walkway w.r.t. porch . As illustrated in Fig. 3(a) , features decomposed by those discretized bitmaps capture moving agents in spatial-temporal order, which reveals the moving direction, and can be generalized to different scene layouts. The actions occurring in one place may be projected\n[E5] (text, Section 3.1, page 3): which is composed of 3D Convolution (3D-conv) blocks. A key component of our framework is semantic feature decomposition, which decomposes feature maps according to region semantics obtained from given segmentation masks. This feature decomposition can be applied after any 3Dconv layer. Spatial Global Max Pooling (SGMP) is applied to extracted features within places, allowing the network to learn abstract features independent of shapes, sizes and absolute coordinates of both places and moving agents. For predicting each action label, we aggregate features from different places based on their connectivity in the segmentation map, referred to as Topological Feature Aggregation.\n[E6] (table, Table 1, page 6): Table 1. The Path from Traditional 3D ConvNets to our Methods. B/L1 and B/L2 are baseline models with raw pixels and and ConcateMap as input, respectively. For our proposed models: V1 uses segmentation maps to extract place-based feature descriptions only. V3 applies distance-based place discretization for some places. Both V1 and V3 use a FC layer to aggregate place features; V2 and V4 uses topological feature aggregation. H and FPS2 indicates using higher resolutions and FPS, and MF means using more ﬁlters per conv layer. Besides our baselines, we also compare LIVR with two state-of-the-art action recognition methods: [ 50 , 43 ].\nValues (cite as cells):\n  row '3D ConvNet?': 'B/L1' = ✓; 'B/L2' = ✓; 'B/L2 +MF' = ✓; 'LIVR- V1' = ✓; 'LIVR- V2' = ✓; 'LIVR- V3' = ✓; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'ConcateMap?': 'B/L1' = ; 'B/L2' = ✓; 'B/L2 +MF' = ✓; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ; 'LIVR- V4+MF' = ; 'LIVR- V4+FPS2' = ; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'place-based feature description?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ✓; 'LIVR- V2' = ✓; 'LIVR- V3' = ✓; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'distance-based place discretization?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ✓; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'topological feature aggregation?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ✓; 'LIVR- V3' = ; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'higher resolutions?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ; 'LIVR- V4+FPS2' = ; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'more ﬁlters?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ✓; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'higher FPS?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ; 'LIVR- V4+MF' = ; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'Observed scenes mAP': 'B/L1' = 51.09; 'B/L2' = 54.12; 'B/L2 +MF' = 53.02; 'LIVR- V1' = 55.69; 'LIVR- V2' = 57.12; 'LIVR- V3' = 58.02; 'LIVR- V4' = 59.71; 'LIVR- V4+H' = 59.64; 'LIVR- V4+MF' = 59.52; 'LIVR- V4+FPS2' = 59.01; 'TSN [43]' = 56.71; 'ReMotENet [50]' = 55.92\n  row 'Unseen scenes mAP': 'B/L1' = 19.21; 'B/L2' = 21.16; 'B/L2 +MF' = 20.45; 'LIVR- V1' = 41.57; 'LIVR- V2' = 43.78; 'LIVR- V3' = 47.76; 'LIVR- V4' = 50.65; 'LIVR- V4+H' = 49.03; 'LIVR- V4+MF' = 50.98; 'LIVR- V4+FPS2' = 49.56; 'TSN [43]' = 23.21; 'ReMotENet [50]' = 22.05 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The LIVR framework decomposes semantic features into different places by utilizing a segmentation map and extracting place-based feature descriptions individually.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Given the segmentation map, we decompose the semantic features into different places and extract place-based feature descriptions individually, then dynamically aggregate them at inference time according to the topology of the scene."
+     }
+    ]
+   },
+   {
+    "text": "The framework dynamically aggregates the decomposed features at inference time according to the topology of the scene.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Given the segmentation map, we decompose the semantic features into different places and extract place-based feature descriptions individually, then dynamically aggregate them at inference time according to the topology of the scene."
+     }
+    ]
+   },
+   {
+    "text": "The LIVR framework employs a segmentation map to decompose features and extract place-based feature descriptions individually.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Segmentation Maps Semantic Feature Decomposition utilizes a segmentation map of each place to decompose features and cause the network to extract place-based feature descriptions individually."
+     }
+    ]
+   },
+   {
+    "text": "The framework uses a segmentation map to decompose features and extract place-based feature descriptions individually, which is manually constructed using a mobile app.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Segmentation Maps Semantic Feature Decomposition utilizes a segmentation map of each place to decompose features and cause the network to extract place-based feature descriptions individually. The segmentation maps can be manually constructed using a mobile app we developed 2 to annotate each place by drawing points to construct polygons."
+     }
+    ]
+   }
+  ]
+ }
+}

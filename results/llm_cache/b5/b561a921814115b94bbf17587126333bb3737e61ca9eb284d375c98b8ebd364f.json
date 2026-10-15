@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 271,
+  "prompt_tokens": 590,
+  "total_tokens": 861,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The SCHOLAR model performed best on the IMDB dataset for classifying documents with categorical labels.\" -- cites: E3 (Section 4.2): quote \"our model offers competitive performance, both as a joint model of words and labels (Eq. 9 ), and a model which conditions on covariates (Eq. 10 ). Although SCHOLAR is comparable to the logistic regression baseline, our purpose here is not to attain state-of-the-art performance on text classification.\"\n2. \"The SCHOLAR model outperformed the SLDA model by a significant margin in terms of classification accuracy.\" -- cites: E3 (Section 4.2): quote \"Further, any neural network that is successful for text classification could be incorporated into f y and trained end-to-end along with topic discovery.\"\n3. \"The exact performance difference between SCHOLAR and SLDA is not provided in the given evidence.\" -- cites: E3 (Section 4.2): quote \"Although SCHOLAR is comparable to the logistic regression baseline, our purpose here is not to attain state-of-the-art performance on text classification.\"\n\nCited evidence:\n[E3] (text, Section 4.2, page 7): We next consider the utility of our model in the context of categorical labels, and consider them alternately as observed covariates and as labels generated conditional on the latent representation. We use the same setup as above, but tune number of training epochs for our model using a random 20% of training data as a development set, and similarly tune regularization for logistic regression. Table 2 summarizes the accuracy of various models on three datasets, revealing that our model offers competitive performance, both as a joint model of words and labels (Eq. 9 ), and a model which conditions on covariates (Eq. 10 ). Although SCHOLAR is comparable to the logistic regression baseline, our purpose here is not to attain state-of-the-art performance on text classiﬁcation. Rather, the high accuracies we obtain demonstrate that we are learning low-dimensional representations of documents that are relevant to the label of interest, outperforming SLDA, and have the same attractive properties as topic models. Further, any neural network that is successful for text classiﬁcation could be incorporated into f y and trained end-to-end along with topic discovery."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the SCHOLAR model performed best on the IMDB dataset for classifying documents with categorical labels. However, the evidence only mentions that the model offers competitive performance and outperforms SLDA, but it does not specify that it is the best model on the IMDB dataset. The evidence does not provide a direct comparison of performance to other models or datasets."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that the SCHOLAR model outperformed the SLDA model by a significant margin in terms of classification accuracy. The evidence does not provide a direct comparison of performance between SCHOLAR and SLDA. It only mentions that SCHOLAR outperforms SLDA and has the same attractive properties as topic models, but it does not specify the margin of improvement."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence states that the exact performance difference between SCHOLAR and SLDA is not provided. This directly supports the claim that the exact performance difference is not provided in the given evidence."
+   }
+  ]
+ }
+}

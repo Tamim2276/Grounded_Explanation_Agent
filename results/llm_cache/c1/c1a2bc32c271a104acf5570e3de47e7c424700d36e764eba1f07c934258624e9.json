@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 220,
+  "prompt_tokens": 699,
+  "total_tokens": 919,
+  "prompt_tokens_details": {
+   "cached_tokens": 194
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The representation module directly represents appearance itself as a network called a Deep Appearance Map (DAM), which generalizes over 2D reflectance maps by holding the view direction fixed.\" -- cites: E1 (Section abstract): quote \"We suggest to directly represent appearance itself as a network we call a Deep Appearance Map (DAM). This is a 4D generalization over 2D reflectance maps, which held the view direction fixed.\"\n2. \"The representation module is more effective in terms of having a lower DSSIM error for both same and novel view tasks, as shown in Table 2 and Figure 6.\" -- cites: E6 (Table 2): row 'DSSIM Error', column 'Same' = .069; E6 (Table 2): row 'DSSIM Error', column 'Novel view' = .090; E5 (Figure 6): observation \"The 'Ours' line is consistently lower than the 'Other' line in both 'Same' and 'Novel view' tasks in Figure 6.\"\n\nCited evidence:\n[E1] (text, Section abstract, page 1): We propose a deep representation of appearance, i. e., the relation of color, surface orientation, viewer position, material and illumination. Previous approaches have used deep learning to extract classic appearance representations relating to reﬂectance model parameters (e. g., Phong) or illumination (e. g., HDR environment maps). We suggest to directly represent appearance itself as a network we call a Deep Appearance Map (DAM). This is a 4D generalization over 2D reﬂectance maps, which held the view direction ﬁxed. First, we show how a DAM can be learned from images or video frames and later be used to synthesize appearance, given new surface orientations and viewer positions. Second, we demonstrate how another network can be used to map from an image or video frames to a DAM network to reproduce this appearance, without using a lengthy optimization such as stochastic gradient descent (learning-to-learn). Finally, we show the example of an appearance estimation-\n[E5] (figure, Figure 6, page 6): a zoomed view of Figure 6\n[E6] (table, Table 2, page 8): Table 2. DSSIM (less is better) error on real data.\nValues (cite as cells):\n  row '': 'Same' = OUR; '' = OUR; 'Novel view' = RM++; '' = RM\n  row 'DSSIM Error': 'Same' = .069; '' = .079; 'Novel view' = .090; '' = .127\n  row 'Source DAM': 'Same' = ; '' = ; 'Novel view' = ; '' = "
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section abstract) states that the representation module directly represents appearance itself as a network called a Deep Appearance Map (DAM), which generalizes over 2D reflectance maps by holding the view direction fixed. This matches the claim exactly."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E6 (Table 2) shows the DSSIM error for 'Same' as .069 and for 'Novel view' as .090. The evidence in E5 (Figure 6) shows that the 'Ours' line is consistently lower than the 'Other' line in both 'Same' and 'Novel view' tasks. This supports the claim that the representation module is more effective in terms of having a lower DSSIM error for both same and novel view tasks."
+   }
+  ]
+ }
+}

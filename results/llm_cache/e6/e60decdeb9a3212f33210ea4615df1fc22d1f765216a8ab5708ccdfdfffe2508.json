@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 212,
+  "prompt_tokens": 854,
+  "total_tokens": 1066,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The performance of CDAN+E variants that use random sampling is not directly compared to CDAN+E (w/o random sampling) in the provided evidence.\" -- cites: E1 (Table 5): row 'CDAN+E (w/ gaussian sampling)', column 'Avg' = 86.4; E1 (Table 5): row 'CDAN+E (w/ uniform sampling)', column 'Avg' = 87.0; E1 (Table 5): row 'CDAN+E (w/o random sampling)', column 'Avg' = 87.7\n2. \"CDAN+E (w/o random sampling) performs the best among all variants.\" -- cites: E1 (Table 5): row 'CDAN+E (w/o random sampling)', column 'Avg' = 87.7; E1 (Table 5): row 'CDAN+E (w/ uniform sampling)', column 'Avg' = 87.0; E1 (Table 5): row 'CDAN+E (w/ gaussian sampling)', column 'Avg' = 86.4\n3. \"CDAN+E (w/ uniform sampling) performs the second best among the randomized variants.\" -- cites: E1 (Table 5): row 'CDAN+E (w/ uniform sampling)', column 'Avg' = 87.0; E1 (Table 5): row 'CDAN+E (w/ gaussian sampling)', column 'Avg' = 86.4; E1 (Table 5): row 'CDAN+E (w/o random sampling)', column 'Avg' = 87.7\n\nCited evidence:\n[E1] (table, Table 5, page 9): Table 5: Accuracy (%) of CDAN variants on Ofﬁce-31 for unsupervised domain adaptation (ResNet)\nValues (cite as cells):\n  row 'CDAN+E (w/ gaussian sampling)': 'A →W' = 93.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.2±0.3; 'D →A' = 70.2±0.4; 'W →A' = 67.4±0.4; 'Avg' = 86.4\n  row 'CDAN+E (w/ uniform sampling)': 'A →W' = 94.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.8±0.3; 'D →A' = 70.1±0.4; 'W →A' = 69.4±0.4; 'Avg' = 87.0\n  row 'CDAN+E (w/o random sampling)': 'A →W' = 94.1±0.1; 'D →W' = 98.6±0.1; 'W →D' = 100.0±.0; 'A →D' = 92.9±0.2; 'D →A' = 71.0±0.3; 'W →A' = 69.3±0.3; 'Avg' = 87.7"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence does not provide a direct comparison of CDAN+E variants with and without random sampling. The evidence only shows the average accuracy for each variant, not a comparison between the two."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence shows that CDAN+E (w/o random sampling) has the highest average accuracy of 87.7%, which is higher than the other variants."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence shows that CDAN+E (w/ uniform sampling) has an average accuracy of 87.0%, which is higher than CDAN+E (w/ gaussian sampling) with an average accuracy of 86.4%. Therefore, it performs the second best among the randomized variants."
+   }
+  ]
+ }
+}

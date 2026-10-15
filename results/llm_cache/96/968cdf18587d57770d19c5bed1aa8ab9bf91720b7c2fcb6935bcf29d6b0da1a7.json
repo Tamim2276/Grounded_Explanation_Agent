@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 219,
+  "prompt_tokens": 2730,
+  "total_tokens": 2949,
+  "prompt_tokens_details": {
+   "cached_tokens": 220
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does explicitly modeling meaning-preserving invariances impact the generation of paraphrases?\nEvidence:\n[E1] (text, Section 7, page 5): We present an AMR generation model that factors the generation process through a syntactic decision, and show that this leads to improved AMR generation performance. In addition, we show that separating the syntactic decisions from the lexicalisation decisions allows the model to generate higher quality paraphrases of a given AMR graph. In future work, we would like to integrate a semantic parser into our model ( Yin et al. , 2018 ). Annotating data with AMR is expensive, and existing AMR treebanks are small. By integrating a component which parses into AMR into our model, we can do semi-supervised learning on plentiful unannotated natural language sentences, and improve our AMR generation performance even further. In addition, we would be able to generate text-to-text paraphrases by parsing into AMR ﬁrst and then carrying out the paraphrase genera-\n[E2] (text, Section 4, page 5): We selected the ﬁrst 50 AMR graphs in the dev set on linearised length between 15 and 40 with coherent reference realisations and generated 5 different realisations with our joint model and our baseline model. For our joint model, we ﬁrst sampled 3 parse structures from the syntax model with temperature 0.3. This means we divide the pertimestep logits of the syntax decoder by 0.3; this serves to sharpen the outputs of the syntax model and constrains the sampling process to produce relatively high-probability syntactic structures for the given AMR. Then, we realised each parse deterministically with the lexicalisation model. For the baseline model, we sample 3 realisations from the decoder with the same temperature. This gave us 100 examples in total. We then crowdsourced acceptability judgments for each example from 100 annotators: we showed the reference realisation of an AMR graph, together with model realisations, and asked each annotator to mark all the grammatical realisations which have the same meaning as the reference realisation. Each annotator was presented 30 examples selected randomly. Our results in Table 2 show that the joint model can generate more meaning-preserving realisations compared to a syntax-agnostic baseline. This shows the utility of separating out syntactic and lexical variation: we model explicitly meaning-preserving invariances, and can therefore generate better paraphrases.\n[E3] (text, Section 1, page 1): we disentangle the variance caused by the choice of syntax from that caused by the choice of words. We can therefore realise the same AMR graph with a variety of syntactic structures by sampling from the syntax model, and deterministically decoding using the lexicalisation model. We hypothesise that this generates better paraphrases of the reference realisation than sampling from a singlestep model. We linearise both the AMR graphs ( Konstas et al. , 2017 ) and constituency trees ( Vinyals et al. , 2015b ) to allow us to use sequence-to-sequence models ( Sutskever et al. , 2014 ; Bahdanau et al. , 2015 ) for the syntax and lexicalisation models. Further, as the AMR dataset is relatively small, we have issues with data sparsity causing poor parameter estimation for rarely seen words. We deal with this by anonymizing named entities, and including a copy mechanism ( Vinyals et al. , 2015a ; See et al. , 2017 ; Song et al. , 2018 ) into our decoder, which allows open-vocabulary token generation.\n[E4] (figure, Figure 1, page 2) (image attached): Figure 1: An example AMR graph, with variable names and verb senses, followed by the input to our system after preprocessing, and ﬁnally two sample re- alisations different in syntax.\nWords printed in the figure: (g / give-01 :ARG0 (i / I) :ARG1 (b / ball) :ARG2 (d / dog)) give :arg0 i :arg1 ball :arg2 dog I [gave]VP [the dog]NP [a ball]NP I [gave]VP [the ball]NP [to a dog]PP\n[E5] (figure, Figure 1, page 2): a zoomed view of Figure 1 (image attached)\n[E6] (table, Table 3, page 4): Table 3: BLEU results for generation.\nValues (cite as cells):\n  row 'Trained on LDC2017T10': 'Dev BLEU' = ; 'Test BLEU' = \n  row 'Our model': 'Dev BLEU' = 26.1; 'Test BLEU' = 26.8; 'Dev BLEU' = 23.6; 'Test BLEU' = 23.5\n  row 'Our model + oracle parse': 'Dev BLEU' = 57.5; 'Test BLEU' = -; 'Dev BLEU' = 53.1; 'Test BLEU' = -\n  row 'Baseline s2s + copy': 'Dev BLEU' = 23.7; 'Test BLEU' = 23.5\n  row 'Beck et al. (2018)': 'Dev BLEU' = -; 'Test BLEU' = 23.3\n  row 'Trained on LDC2015E86': 'Dev BLEU' = ; 'Test BLEU' = \n  row 'Konstas et al. (2017)': 'Dev BLEU' = 21.7; 'Test BLEU' = 22.0; 'Dev BLEU' = 33.1; 'Test BLEU' = 33.8\n  row 'Song et al. (2018)': 'Dev BLEU' = 22.8; 'Test BLEU' = 23.3; 'Dev BLEU' = -; 'Test BLEU' = 33.0\n  row 'Trained on LDC2015E86 or': 'Dev BLEU' = earlier + additional; 'Test BLEU' = unlabelled data\n  row 'Pourdamghani et al. (2016)': 'Dev BLEU' = 27.2; 'Test BLEU' = 26.9\n  row 'Song et al. (2017)': 'Dev BLEU' = 25.2; 'Test BLEU' = 25.6 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Explicitly modeling meaning-preserving invariances allows the model to generate higher quality paraphrases of a given AMR graph.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "This shows the utility of separating out syntactic and lexical variation: we model explicitly meaning-preserving invariances, and can therefore generate better paraphrases."
+     }
+    ]
+   },
+   {
+    "text": "The joint model can generate more meaning-preserving realisations compared to a syntax-agnostic baseline.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Our results in Table 2 show that the joint model can generate more meaning-preserving realisations compared to a syntax-agnostic baseline."
+     }
+    ]
+   }
+  ]
+ }
+}

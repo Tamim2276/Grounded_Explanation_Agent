@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 204,
+  "prompt_tokens": 574,
+  "total_tokens": 778,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The 'Size' category has the highest accuracy of 100% on the validation set.\" -- cites: E1 (Table 1): row 'Size', column 'Acc.' = 100\n2. \"The 'Material' category has an accuracy of 99.97% on the validation set.\" -- cites: E1 (Table 1): row 'Material', column 'Acc.' = 99.97\n3. \"The UnCoRd method achieves state-of-the-art results on the validation set.\" -- cites: E2 (Section 4.1): quote \"As can be seen, our model achieves state-of-the-art results without training for the visual question answering task and not using any answers GT, as other methods.\"\n\nCited evidence:\n[E1] (table, Table 1, page 5): Table 1. CLEVR estimators results on CLEVR validation set\nValues (cite as cells):\n  row 'Ins. seg.': '' = 99.0; 'Acc.' = \n  row 'Material': '' = ; 'Acc.' = 99.97\n  row 'Size': '' = ; 'Acc.' = 100\n[E2] (text, Section 4.1, page 5): As can be seen, our model achieves state-of-the-art results without training for the visual question answering task and not using any answers GT, as other methods. In addition UnCoRd can elaborate and explain answers and failures using intermediate results, and extend the handled domain with no need of images and related QA examples, as demonstrated in Section 4.2 and Figure 6 . On a sample of 10,000 validation set examples, all mistakes were due to wrong visual estimators’ predictions, mainly miss detection of a highly occluded object. Hence, accurate annotation of object coordinates (as performed in NS-VQA [ 81 ]) may even further reduce the small number of errors. Note that NS-VQA requires full scene analysis, which is not scalable for domain extension with a large number of objects and relations. It also uses images with question-answer pairs to train the programs, coupling the method to the speciﬁc"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Table 1) shows that the 'Size' category has an accuracy of 100% on the validation set."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Table 1) shows that the 'Material' category has an accuracy of 99.97% on the validation set."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E2 (Section 4.1) discusses the UnCoRd method achieving state-of-the-art results, but it does not provide specific accuracy values or compare the method to other methods in terms of accuracy. Therefore, the claim cannot be directly supported by the evidence."
+   }
+  ]
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 370,
+  "prompt_tokens": 2366,
+  "total_tokens": 2736,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the number of workers per \"expert\" and Cohen's kappa agreement for stance annotation?\nEvidence:\n[E1] (figure, Figure 3, page 7) (image attached): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\nWords printed in the figure: 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds\n[E2] (figure, Figure 3, page 7): a zoomed view of Figure 3 (image attached)\n[E3] (text, Section 4.3, page 7): Figure 3 shows the Cohen’s κ agreement for stance annotation with respect to the crowd size computed by our method. As MACE also includes a threshold for keeping only the most conﬁdent predictions in order to beneﬁt precision, we tuned this parameter, too. Deciding on the number of workers per task is a trade-off between the desired quality and the budget. For example, reason span annotation is a harder task; however, the results for six workers are comparable to those for the expert annotations of Habernal and Gurevych ( 2017 ). 9\n[E4] (text, Section 4.3, page 7): To strictly assess quality in the entire crowdsourcing process, we propose an evaluation method that enables ‘classic’ inter-annotator agreement measures for crowdsourcing, such as Fleiss’ κ or Krippendorff’s α . Applying κ and α directly to crowdsourced data has been disputed ( Passonneau and Carpenter , 2014 ). For estimating gold labels from the crowd, several models have been proposed; we rely on MACE ( Hovy et al. , 2013 ). Given a number of noisy workers, MACE outputs best estimates, outperforming simple majority votes. At least ﬁve workers are recommended for a crowdsourcing task, but how reliable is the output really? We hence collected 18 assignments per item and split them into two groups (9+9) based on their submission time. We then considered each group as an independent crowdsourcing experiment and estimated gold labels using MACE for each group, thus yielding two ‘experts from the crowd.’ Having two independent ‘experts’ from the crowd allowed us to compute standard agreement scores. We also varied the size of the sub-sample from each group from 1 to 9 by repeated random sampling of assignments. This revealed how the score varies with respect to the crowd size per ‘expert’.\n[E5] (text, Section 4.2, page 6): All 2,884 comments in our dataset classiﬁed as stance-taking by the crowdworkers were then also annotated as to whether being sarcastic or ironic; both pose challenges in analyzing argumentation not solved so far ( Habernal and Gurevych , 2017 ). 2. Reason Span Annotation For all comments taking a stance, the next step is to select those spans that give a reason for the claim (with a single EDU as the minimal unit). In our dataset, the workers found 5,119 reason spans, of which 2,026 lay within arguments. About 40 comments lacked any explicit reason. 3. Reason Gist Summarization This new task is, in our view, crucial for downstream annotations. Each reason from the previous step is rewritten, such that the reason’s gist in the argument remains the same but the clutter is removed (examples are given in the supplementary material which is available both in the ACL Anthology and the project GitHub site). Besides, wrongly annotated reasons are removed in this step. The result is pairs of reason R and claim C .\n[E6] (table, Table 1, page 8): Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code.\nValues (cite as cells):\n  row '100%': 'Some training' = 2\n  row '90% Accuracy 1 80%': 'Some training' = 19 7 29\n  row 'soning comprehension and formal training tion. For each played together with the bar) and with': 'Some training' = task with in reasoning, conﬁguration, the with the number of their standard [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation is shown in Figure 3.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 3: Cohen’s κ agreement for stance annotation on 98 comments."
+     }
+    ]
+   },
+   {
+    "text": "The figure shows that as the number of workers per 'expert' increases, the Cohen's kappa agreement also increases.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The trend of the lines in Figure 3 shows an upward slope as the number of workers per 'expert' increases."
+     }
+    ]
+   },
+   {
+    "text": "The relationship is not linear, as the increase in Cohen's kappa agreement is not consistent across all thresholds.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The lines in Figure 3 have different slopes for different thresholds, indicating a non-linear relationship."
+     }
+    ]
+   },
+   {
+    "text": "The highest Cohen's kappa agreement is achieved with 9 workers per 'expert' for the 0.95 threshold.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "The highest point on the line for the 0.95 threshold in Figure 3 is at 9 workers per 'expert'."
+     }
+    ]
+   }
+  ]
+ }
+}

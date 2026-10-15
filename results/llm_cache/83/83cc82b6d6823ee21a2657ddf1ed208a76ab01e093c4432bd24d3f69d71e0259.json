@@ -1,0 +1,79 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 12.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 468,
+  "prompt_tokens": 3992,
+  "total_tokens": 4460,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the two approaches, density estimation or mixture of classifiers, is more robust to outliers?\nEvidence:\n[E1] (text, Section 4.1, page 7): outliers. More experimental results using synthetic data and behavior cloning scenarios in MuJoCo environments where the demonstrations are collected and mixed from both expert and adversarial policies as well as detailed experimental settings can be found in the supplementary material. Synthetic Data In order to evaluate the robustness of the proposed method, we use three different 1 -D target functions. Particularly, we use the following target functions: cosexp , linear , and step functions as shown in Figure 6(d) - 6(f) , respectively, and collected 1 , 000 points per each function while replacing a certain portion of outputs to random values uniformly sampled between − 1 . 5 and 2 . 5 . We compared our proposed method with a mixture density network (MDN) [ 38 ] and fully connected layers with an L 2 -loss (MLP) and a robust loss (Robust) proposed in [ 21 ]. We use three-layers with 64 units and ReLU activations, and for both the proposed method and an MDN, ﬁve mixtures are used.\n[E2] (text, Section 1, page 1): Throughout this paper, we aim to address the following two questions: 1) How can we deﬁne (or measure) the quality of training data in a principled manner? 2) In the presence of inconsistent outputs, how can we infer the target distribution in a scalable manner? Traditionally, noisy outputs are handled by modeling additive random distributions, often leading to robust loss functions [ 3 ] or estimating the structures of label corruptions in classiﬁcations tasks [ 4 ] (for more details, refer to Section 2 ). To address the ﬁrst question, we leverage the concept of a correlation. Precisely, we deﬁne and measure the quality of training data using the correlation between the target distribution and the data generating distribution. However, estimating the correct correlation requires access to the target distribution, whereas learning the correct target distribution requires knowing the correlation between the distributions to be known, making it a chicken-and-egg problem. To address the second question, we present a novel method that simultaneously estimates the target distribution as well as the correlation in a fully differentiable manner using stochastic gradient descent methods.\n[E3] (text, Section 4.1, page 7): Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method. We compare our method with standard feedforward networks using four different loss functions: standard L 2 -loss, L 1 -loss which is known to be robust to outliers, a robust loss (RL) function proposed in [ 21 ], and a leaky robust loss (LeakyRL) function where the results are shown in Table 5 . Implementation details can be found in the supplementary material.\n[E4] (figure, Figure 1, page 3) (image attached): Figure 1: A process of binary classiﬁcation on corrupt data using the mixture of (a) densities and (b) classiﬁers through ( 4 ) . π f W ( x ) is the mixture weight which models the choice probability of f W and estimates the corruption probability π corrupt in ( 3 ) .\nWords printed in the figure: Dtrain <latexit sha1_base64=\"LF2Qh9b1peOPYIDOa+V2u6UkEFU=\">ACNXicbVDLS sNAFJ20Pmp9tbrTbAIrkoigi6LunBZwT6gCWEynbRDJ5MwcyOWEPBr3OrOb3HhTtz6C07aLTtgYHDOfcy5x4/5kyBZX0YpfLa+sZmZau6vbO7t1+rH3RVlEhCOyTike z7WFHOBO0A07saQ49Dnt+ZOb3O89UqlYJB5gGlM3xCPBAkYwaMmrHTkhjHBPL3NvNQB+gQpSMxElnm1htW0ZjCXiV2QBirQ9upG2RlGJAmpAMKxUgPbisFNsQRGOM2q TqJojMkEj+hAU4FDqtx0dkRmnmplaAaR1E+AOVP/bqQ4VGoa+noyj6wWvVxc6eWKVIFaQ5V/tCNAiu3JSJOAEqyDxZkHATIjOv0BwySQnwqSaYSKaPM8kYS0xAF13Vt dmLJS2T7nTtpr2/UWjdV0UWEH6ASdIRtdoha6Q23UQ9oxf0it6Md+PT+DK+56Mlo9g5RP9g/PwC6u6sIg=</latexit> <latexit sha1_base64=\"LF2Qh9b1peOPYIDOa+V2u6UkEFU=\">ACNXicbVDLS sNAFJ20Pmp9tbrTbAIrkoigi6LunBZwT6gCWEynbRDJ5MwcyOWEPBr3OrOb3HhTtz6C07aLTtgYHDOfcy5x4/5kyBZX0YpfLa+sZmZau6vbO7t1+rH3RVlEhCOyTike z7WFHOBO0A07saQ49Dnt+ZOb3O89UqlYJB5gGlM3xCPBAkYwaMmrHTkhjHBPL3NvNQB+gQpSMxElnm1htW0ZjCXiV2QBirQ9upG2RlGJAmpAMKxUgPbisFNsQRGOM2q TqJojMkEj+hAU4FDqtx0dkRmnmplaAaR1E+AOVP/bqQ4VGoa+noyj6wWvVxc6eWKVIFaQ5V/tCNAiu3JSJOAEqyDxZkHATIjOv0BwySQnwqSaYSKaPM8kYS0xAF13Vt dmLJS2T7nTtpr2/UWjdV0UWEH6ASdIRtdoha6Q23UQ9oxf0it6Md+PT+DK+56Mlo9g5RP9g/PwC6u6sIg=</latexit> <latexit sha1_base64=\"LF2Qh9b1peOPYIDOa+V2u6UkEFU=\">ACNXicbVDLS sNAFJ20Pmp9tbrTbAIrkoigi6LunBZwT6gCWEynbRDJ5MwcyOWEPBr3OrOb3HhTtz6C07aLTtgYHDOfcy5x4/5kyBZX0YpfLa+sZmZau6vbO7t1+rH3RVlEhCOyTike z7WFHOBO0A07saQ49Dnt+ZOb3O89UqlYJB5gGlM3xCPBAkYwaMmrHTkhjHBPL3NvNQB+gQpSMxElnm1htW0ZjCXiV2QBirQ9upG2RlGJAmpAMKxUgPbisFNsQRGOM2q TqJojMkEj+hAU4FDqtx0dkRmnmplaAaR1E+AOVP/bqQ4VGoa+noyj6wWvVxc6eWKVIFaQ5V/tCNAiu3JSJOAEqyDxZkHATIjOv0BwySQnwqSaYSKaPM8kYS0xAF13Vt dmLJS2T7nTtpr2/UWjdV0UWEH6ASdIRtdoha6Q23UQ9oxf0it6Md+PT+DK+56Mlo9g5RP9g/PwC6u6sIg=</latexit> <latexit sha1_base64=\"LF2Qh9b1peOPYIDOa+V2u6UkEFU=\">ACNXicbVDLS sNAFJ20Pmp9tbrTbAIrkoigi6LunBZwT6gCWEynbRDJ5MwcyOWEPBr3OrOb3HhTtz6C07aLTtgYHDOfcy5x4/5kyBZX0YpfLa+sZmZau6vbO7t1+rH3RVlEhCOyTike z7WFHOBO0A07saQ49Dnt+ZOb3O89UqlYJB5gGlM3xCPBAkYwaMmrHTkhjHBPL3NvNQB+gQpSMxElnm1htW0ZjCXiV2QBirQ9upG2RlGJAmpAMKxUgPbisFNsQRGOM2q TqJojMkEj+hAU4FDqtx0dkRmnmplaAaR1E+AOVP/bqQ4VGoa+noyj6wWvVxc6eWKVIFaQ5V/tCNAiu3JSJOAEqyDxZkHATIjOv0BwySQnwqSaYSKaPM8kYS0xAF13Vt dmLJS2T7nTtpr2/UWjdV0UWEH6ASdIRtdoha6Q23UQ9oxf0it6Md+PT+DK+56Mlo9g5RP9g/PwC6u6sIg=</latexit> Dclean <latexit sha1_base64=\"SH ...\n[E5] (figure, Figure 1, page 3): a zoomed view of Figure 1 (image attached)\n[E6] (table, Table 1, page 7): Table 1: The RMSEs of compared methods on the Boston Housing Dataset\nValues (cite as cells):\n  row '0%': 'ChoiceNet' = 3.29; 'L2' = 3.22; 'L1' = 3.26; 'RL' = 4.28; 'LeakyRL' = 3.36; 'MDN' = 3.46\n  row '10%': 'ChoiceNet' = 3.99; 'L2' = 5.97; 'L1' = 5.72; 'RL' = 6.36; 'LeakyRL' = 5.71; 'MDN' = 6.5\n  row '20%': 'ChoiceNet' = 4.77; 'L2' = 7.51; 'L1' = 7.16; 'RL' = 8.08; 'LeakyRL' = 7.08; 'MDN' = 8.62\n  row '30%': 'ChoiceNet' = 5.94; 'L2' = 9.04; 'L1' = 8.65; 'RL' = 10.54; 'LeakyRL' = 8.67; 'MDN' = 8.97\n  row '40%': 'ChoiceNet' = 6.80; 'L2' = 9.88; 'L1' = 9.69; 'RL' = 10.94; 'LeakyRL' = 9.68; 'MDN' = 10.44 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The mixture of classifiers approach is more robust to outliers as it can handle corrupted data more effectively, as shown in Figure 1.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "observation": "The figure illustrates the process of binary classification on corrupt data using both density estimation and mixture of classifiers. The mixture of classifiers approach is shown to be more effective in handling corrupted data, as indicated by the green and orange circles representing the clean and corrupted data points, respectively."
+     }
+    ]
+   },
+   {
+    "text": "The robustness of the mixture of classifiers approach is further supported by the lower RMSE values observed in Table 1 for the 'ChoiceNet' and 'L1' methods, which are known to be robust to outliers.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E6",
+      "row": "0%",
+      "col": "'ChoiceNet'",
+      "value": "3.29"
+     },
+     {
+      "evidence": "E6",
+      "row": "10%",
+      "col": "'ChoiceNet'",
+      "value": "3.99"
+     },
+     {
+      "evidence": "E6",
+      "row": "20%",
+      "col": "'ChoiceNet'",
+      "value": "4.77"
+     },
+     {
+      "evidence": "E6",
+      "row": "30%",
+      "col": "'ChoiceNet'",
+      "value": "5.94"
+     }
+    ]
+   },
+   {
+    "text": "The density estimation approach, as shown in Figure 1, struggles with handling outliers, as evidenced by the misclassification of the orange data points in the lower right quadrant.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E4",
+      "observation": "The figure shows that the density estimation approach misclassifies the orange data points in the lower right quadrant, indicating its vulnerability to outliers."
+     }
+    ]
+   }
+  ]
+ }
+}

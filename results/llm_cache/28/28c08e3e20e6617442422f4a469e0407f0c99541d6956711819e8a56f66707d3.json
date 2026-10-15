@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 202,
+  "prompt_tokens": 930,
+  "total_tokens": 1132,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The APA dataset focuses on actions defined with respect to scene layouts, including interaction with places and moving directions.\" -- cites: E2 (Section 2): quote \"In contrast to these datasets that were designed to evaluate motion and appearance modeling, or human-object interactions, our Agent-in-Place Action (APA) dataset is the first one that focuses on actions that are defined with respect to scene layouts, including interaction with places and moving directions.\"\n2. \"The APA dataset is the first dataset that addresses recognizing actions associated with scene layouts.\" -- cites: E1 (Section 1): quote \"APA dataset contains over 5,000 15s videos obtained from 26 different surveillance scenes with around 7,100 actions from 15 categories.\"\n3. \"The APA dataset is designed to improve generalization on unseen scenes by explicitly modeling scene layout.\" -- cites: E1 (Section 1): quote \"To evaluate the generalization of LIVR, we split the scenes into observed and unseen scenes. Extensive experiments show that LIVR significantly improves the generalizability of the model trained on only observed scenes and tested on unseen scenes (improving the mean average precision (mAP) from around 20% to more than 50%). Consistent improvements are observed on almost all action categories.\"\n\nCited evidence:\n[E1] (text, Section 1, page 2): onto adjacent places from the camera view(see Fig. 3(b) ). We propose topological feature aggregation to dynamically aggregate the decomposed features within the place associated with that action and adjacent places. The aggregation controls the \"on/off\" state of neuron connections from generic place-based feature descriptions to action nodes to model scene layout based on topological connectivity among places. We created the Agent-in-Place Action (APA) dataset, which to the best of our knowledge, is the ﬁrst dataset that addresses recognizing actions associated with scene layouts. APA dataset contains over 5,000 15s videos obtained from 26 different surveillance scenes with around 7,100 actions from 15 categories. To evaluate the generalization of LIVR, we split the scenes into observed and unseen scenes. Extensive experiments show that LIVR signiﬁcantly improves the generalizability of the model trained on only observed scenes and tested on unseen scenes (improving the mean average precision (mAP) from around 20% to more than 50%). Consistent improvements are observed on almost all action categories.\n[E2] (text, Section 2, page 3): nizing actions in video clips [ 40 , 29 , 45 , 8 , 35 , 44 , 7 , 28 , 26 , 38 , 18 , 41 ]; THUMOS [ 17 ], ActivityNet[ 4 ] and AVA [ 13 ] were introduced for temporal/spatial-temporal action localization [ 33 , 48 , 27 , 37 , 52 , 53 , 3 , 5 , 24 ]. Recently, signiﬁ- cant attention has been drawn to model human-human [ 13 ] and human-object interactions in daily actions [ 31 , 34 , 42 ]. In contrast to these datasets that were designed to evaluate motion and appearance modeling, or human-object interactions, our Agent-in-Place Action (APA) dataset is the ﬁrst one that focuses on actions that are deﬁned with respect to scene layouts, including interaction with places and moving directions. Recognizing these actions requires the network to not only detect and recognize agent categories and motion patterns, but also how they interact with the layout of the semantic classes in the scene. With the large variations of scene layouts, it is critical to explicitly model scene layout in the network to improve generalization on unseen scenes."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 2) explicitly states that the APA dataset focuses on actions defined with respect to scene layouts, including interaction with places and moving directions."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 1) states that the APA dataset is the first dataset that addresses recognizing actions associated with scene layouts."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E1 (Section 1) discusses the generalization of LIVR and its improvements on unseen scenes, but it does not directly state that the APA dataset is designed to improve generalization on unseen scenes by explicitly modeling scene layout. The claim goes beyond the evidence provided."
+   }
+  ]
+ }
+}

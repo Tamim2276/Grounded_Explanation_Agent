@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 88,
+  "prompt_tokens": 1539,
+  "total_tokens": 1627,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The buffer percentage decreases as the width of the room increases.\" -- cites: E1 (Figure 13): observation \"The buffer percentage decreases as the width of the room increases in all three datasets (web-NotreDame, lkml-reply, and Caida-networkflow).\"\n\nCited evidence:\n[E1] (figure, Figure 13, page 14) (image attached): Fig. 13. Buffer Percentage\nWords printed in the figure: 800 850 900 950 1000 1050 1100 1150 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (a) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.1 0.2 0.3 0.4 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (b) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.00 0.02 0.04 0.06 0.08 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (c) Caida-networkflow Fig. 13. Buffer Percentage [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the buffer percentage decreases as the width of the room increases. However, the evidence provided shows that the buffer percentage remains relatively constant across different widths for each dataset. The figure does not support a decrease in buffer percentage with increasing width."
+   }
+  ]
+ }
+}

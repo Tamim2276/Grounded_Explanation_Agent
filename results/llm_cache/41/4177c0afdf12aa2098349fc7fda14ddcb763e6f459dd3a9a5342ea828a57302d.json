@@ -1,0 +1,57 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 269,
+  "prompt_tokens": 2683,
+  "total_tokens": 2952,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting, and what trade-off does this model exhibit compared to other models?\nEvidence:\n[E1] (table, Table 5, page 12): Table 5: Performance of various models on the Yahoo answers dataset with 250 topics and a 5,000- word vocabulary. SAGE did not ﬁnish in 72 hours so we omit it from this table.\nValues (cite as cells):\n  row 'LDA': 'Ppl. ↓' = 1035; 'NPMI (int.) ↑' = 0.29; 'NPMI (ext.) ↑' = 0.15; 'Sparsity ↑' = 0\n  row 'NVDM': 'Ppl. ↓' = 4588; 'NPMI (int.) ↑' = 0.20; 'NPMI (ext.) ↑' = 0.09; 'Sparsity ↑' = 0\n  row 'SCHOLAR - B.G.': 'Ppl. ↓' = 1589; 'NPMI (int.) ↑' = 0.27; 'NPMI (ext.) ↑' = 0.16; 'Sparsity ↑' = 0\n  row 'SCHOLAR': 'Ppl. ↓' = 1596; 'NPMI (int.) ↑' = 0.33; 'NPMI (ext.) ↑' = 0.13; 'Sparsity ↑' = 0\n  row 'SCHOLAR + W.V.': 'Ppl. ↓' = 1780; 'NPMI (int.) ↑' = 0.37; 'NPMI (ext.) ↑' = 0.15; 'Sparsity ↑' = 0\n  row 'SCHOLAR + REG.': 'Ppl. ↓' = 1840; 'NPMI (int.) ↑' = 0.34; 'NPMI (ext.) ↑' = 0.13; 'Sparsity ↑' = 0.44\n[E2] (text, Section 4.1, page 7): Although the emphasis of this work is on incorporating observed labels and/or covariates, we brieﬂy report on experiments in the unsupervised setting. Recall that, without metadata, SCHOLAR equates to ProdLDA, but with an explicit background term. 15 We therefore use the same experimental setup as Srivastava and Sutton ( 2017 ) (learning rate, momentum, batch size, and number of epochs) and ﬁnd the same general patterns as they reported (see Table 1 and supplementary material): our model returns more coherent topics than LDA, but at the cost of worse perplexity. SAGE, by contrast, attains very high levels of sparsity, but at the cost of worse perplexity and coherence than LDA. As expected, the NVDM produces relatively low perplexity, but very poor coherence, due to its lack of constraints on θ . Further experimentation revealed that the VAE framework involves a tradeoff among the scores; running for more epochs tends to result in better perplexity on held-out data, but at the cost of worse coherence. Adding regularization to encourage sparse topics has a similar effect as in SAGE, leading to worse perplexity and coherence, but it does create sparse topics. Interestingly, initializing the encoder with pretrained word2vec embeddings, and not updating them returned a model with the best internal coherence of any model we considered for IMDB and Yahoo answers, and the second-best for 20 newsgroups.\n[E3] (text, Section E, page 12): For the external evaluation of NPMI, we use the co-occurrence statistics from all New York Times articles in the English Gigaword published from the start of 2000 to the end of 2009, processed in the same way as our data. For the text classiﬁcation experiments, we use the scikit-learn implementation of logistic regression. We give it access to the same input data as our model (using the same vocabulary), and tune the strength of l 2 regularization using crossvalidation. For our model, we only tune the number of epochs, evaluating on development data. Our models for this task did not use regularization or word vectors.\n[E4] (text, Section 4, page 6): To evaluate and demonstrate the potential of this model, we present a series of experiments below. We ﬁrst test SCHOLAR without observed metadata, and explore the effects of using regularization and/or word vector initialization, compared to LDA, SAGE, and NVDM (§ 4.1 ). We then evaluate our model in terms of predictive performance, in comparison to SLDA and an l 2 -regularized logistic regression baseline (§ 4.2 ). Finally, we demonstrate the ability to incorporate covariates and/or labels in an exploratory data analysis (§ 4.3 ). The scores we report are generalization to heldout data, measured in terms of perplexity; coherence, measured in terms of non-negative point-wise mutual information (NPMI; Chang et al. , 2009 ; Newman et al. , 2010 ), and classiﬁcation accuracy on test data. For coherence we evaluate NPMI using the top 10 words of each topic, both internally (using test data), and externally, using a decade of articles from the English Gigaword dataset ( Graff and Cieri , 2003 ). Since our model employs variational methods, the reported perplexity is an upper bound based on the ELBO.\n[E5] (figure, Figure 2, page 8) (image attached): Figure 2: Topics inferred by a joint model of words and tone, and the corresponding probability of pro- immigration tone for each topic. A topic is repre- sented by the top words sorted by word probability throughout the paper.\nWords printed in the figure: 0 1 p(pro-immigration | topic) arrested charged charges agents operation state gov benefits arizona law bill bills bush border president bill republicans labor jobs workers percent study wages asylum judge appeals deportation court visas visa applications students citizenship boat desert died men miles coast haitian english language city spanish community\n[E6] (figure, Figure 2, page 8): a zoomed view of Figure 2 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The SCHOLAR + REG. model achieves the best NPMI scores (both internal and external) in the unsupervised setting.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "SCHOLAR + REG.",
+      "col": "'NPMI (int.) ↑'",
+      "value": "0.34"
+     },
+     {
+      "evidence": "E1",
+      "row": "SCHOLAR + REG.",
+      "col": "'NPMI (ext.) ↑'",
+      "value": "0.13"
+     }
+    ]
+   },
+   {
+    "text": "The SCHOLAR + REG. model exhibits a trade-off between perplexity and coherence compared to other models.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Further experimentation revealed that the VAE framework involves a tradeoff among the scores; running for more epochs tends to result in better perplexity on held-out data, but at the cost of worse coherence."
+     }
+    ]
+   }
+  ]
+ }
+}

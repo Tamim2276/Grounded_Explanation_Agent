@@ -1,0 +1,71 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 372,
+  "prompt_tokens": 3439,
+  "total_tokens": 3811,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers) and how does its performance compare to the model that only uses answers?\nEvidence:\n[E1] (table, Table 4, page 8): Table 4: Accuracy (%) on the validation set in VQA.\nValues (cite as cells):\n  row 'MLP-A': 'Orig' = 31.2; 'IoU' = 39.9; 'QoU' = 45.7; 'IoU +QoU' = 31.2; 'All' = 27.4\n  row 'MLP-IA': 'Orig' = 42.0; 'IoU' = 39.8; 'QoU' = 55.1; 'IoU +QoU' = 34.1; 'All' = 28.7\n  row 'MLP-QA': 'Orig' = 58.0; 'IoU' = 84.7; 'QoU' = 55.1; 'IoU +QoU' = 54.4; 'All' = 50.0\n  row 'MLP-IQA': 'Orig' = 64.6; 'IoU' = 85.2; 'QoU' = 65.4; 'IoU +QoU' = 63.7; 'All' = 58.9\n  row 'HieCoAtt∗': 'Orig' = 63.0; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 63.7; 'All' = -\n  row 'Attntion∗': 'Orig' = 66.0; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 66.7; 'All' = -\n  row 'Human': 'Orig' = 88.5†; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 89.0; 'All' = -\n  row 'Random': 'Orig' = 5.6; 'IoU' = 25.0; 'QoU' = 25.0; 'IoU +QoU' = 14.3; 'All' = 4.2\n  row '∗: based †:': 'Orig' = on our taken; 'IoU' = implementation from; 'QoU' = (Antol et; 'IoU +QoU' = or modiﬁcation al., 2015); 'All' = \n[E2] (text, Section D.2, page 14): For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset\n[E3] (text, Section E, page 15): As mentioned in Sect. 5.2 of the main text, we provide details on user studies. Fig. 6 shows our user interface. We perform the studies using Amazon Mechanic Turk (AMT) on Visual7W ( Zhu et al. , 2016 ), VQA ( Antol et al. , 2015 ) and Visual Genome (VG) ( Krishna et al. , 2017 ). We mainly evaluate on our IoU-decoys and QoUdecoys (combined together). For each dataset, we randomly sample 1,000 image-question-target triplets together with the corresponding IoU-decoys and QoU-decoys to evaluate human performance. For each of these triplets, three workers are assigned to select the most correct candidate answer according to the image and the question. We compute the average accuracy of these workers and report them in Table 3, 4 and 5 of the main text and Table 7 . We also conduct human evaluation using the Orig decoys of Visual7W so as to investigate the difference between human-generated and automatically generated decoys. We also study how humans will perform given only partial information (i.e., images + candidate answers or questions + candidate answers), again using the Orig decoys of Visual7W. The corresponding interfaces are shown in Fig. 7 and 8 . For these studies, we use the same set of 1,000 triplets used to evaluate our created decoys for fair comparison. We make sure that no worker works on the same triplet across the four studies on Visual7W. Results are reported in Table 1 of the main text.\n[E4] (text, Section 2, page 3): In visual Madlibs, the questions are generated with a limited set of question templates and the detailed annotations (e.g., objects) of the images. Thus, similarly, a learning model can examine the image alone and deduce the correct answer. We propose automatic procedures to revise VQA and Visual7W (and to create new datasets based on COCOQA ( Ren et al. , 2015 ), VQA2 ( Goyal et al. , 2017 ), and Visual Genome) such that the decoy generation is carefully orchestrated to prevent learning algorithms from exploiting the shortcuts in the datasets by overﬁtting on incidental statistics. In particular, our design goal is that a learning machine needs to understand all the 3 components of an image-question-candidate answers triplet in order to make the right choice — ignoring either one or two components will result in drastic degradation in performance. Our work is inspired by the experiments in ( Jabri et al. , 2016 ) where they observe that machines without looking at images or questions can still perform well on the Visual QA task. Others have also reported similar issues ( Goyal et al. , 2017 ; Zhang et al. , 2016 ; Johnson et al. , 2017 ; Agrawal et al. , 2016 ; Kaﬂe and Kanan , 2017a ; Agrawal et al. , 2018 ), though not in the multiplechoice setting. Our work extends theirs by providing more detailed analysis as well as automatic procedures to remedy those design deﬁciencies.\n[E5] (figure, Figure 1, page 1) (image attached): Figure 1: An illustration of how the shortcuts in the Vi- sual7W dataset ( Zhu et al. , 2016 ) should be remedied. In the original dataset, the correct answer “A train” is easily selected by a machine as it is far often used as the correct answer than the other decoy (negative) an- swers. (The numbers in the brackets are probability scores computed using eq. ( 2 )). Our two procedures — QoU and IoU (cf. Sect. 4 ) — create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the ques- tion alone . In these cases, machines make mistakes un- less they consider all information together . Thus, the alternative decoys suggested our procedures are better designed to gauge how well a learning algorithm can understand all information equally well.\nWords printed in the figure: Wei-Lun Chao∗, Hexiang Hu∗, Fei Sha University of Southern California Los Angeles, California, USA weilunchao760414@gmail.com, hexiang.frank.hu@gmail.com, feisha@usc.edu Abstract al question answering (Visual QA) has at- ed a lot of attention lately, seen essentially form of (visual) Turing test that artificial igence should strive to achieve. In this r, we study a crucial component of this how can we design good datasets for ask? We focus on the design of multiple- ce based datasets where the learner has to t the right answer from a set of candi- ones including the target (i.e. the correct and the decoys (i.e. the incorrect ones). Question: What vehicle is pictured? Image only Unresolvable (IoU) a. Overcast. (0.5455) b. Daytime. (0.4941) c. A building. (0.4829) d. A train. (0.5363) Question only Unresolvable (QoU) a. A bicycle. (0.2813) b. A truck. (0.5364) c. A boat. (0.4631) d. A train. (0.5079) Original a. A car. (0.2083) b. A bus. (0.6151) c. A cab. (0.5000) d. A train. (0.7328) Candidate Answers:\n[E6] (figure, Figure 1, page 1): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The model that performs best on the VQAv2-2017 validation set when considering all three sources of information (images, questions, and answers) is MLP-IQA, with an accuracy of 63.7%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "MLP-IQA",
+      "col": "All",
+      "value": "63.7"
+     }
+    ]
+   },
+   {
+    "text": "The model that only uses answers (MLP-A) performs poorly, with an accuracy of 27.4% on the VQAv2-2017 validation set.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "MLP-A",
+      "col": "All",
+      "value": "27.4"
+     }
+    ]
+   },
+   {
+    "text": "The performance of MLP-IQA is significantly better than MLP-A, as it achieves an accuracy of 63.7% compared to MLP-A's 27.4%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "MLP-IQA",
+      "col": "All",
+      "value": "63.7"
+     },
+     {
+      "evidence": "E1",
+      "row": "MLP-A",
+      "col": "All",
+      "value": "27.4"
+     }
+    ]
+   }
+  ]
+ }
+}

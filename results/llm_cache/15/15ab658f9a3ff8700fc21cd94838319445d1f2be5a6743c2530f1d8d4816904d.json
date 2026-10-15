@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 193,
+  "prompt_tokens": 565,
+  "total_tokens": 758,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Seq2Seq+Copy model shows a considerable increase in performance, especially on the OOV test sets.\" -- cites: E2 (Section 4.1): quote \"Enabling it with the ability to copy from the context (Seq2Seq+Copy) shows a considerable increase in performance, especially on the OOV test sets (and non-OOV tests for tasks 3 and 4).\"\n2. \"The performance difference between the non-OOV and OOV test sets remains large, with the Seq2Seq+Copy model showing significant improvements on the OOV test sets.\" -- cites: E2 (Section 4.1): quote \"Despite gains from the Mem2Seq model, the performance difference between the non-OOV and OOV test sets remains large.\"\n\nCited evidence:\n[E2] (text, Section 4.1, page 5): tasks 3 and 4 is attributed to an error in the bAbI dataset construction, due to which, the non-OOV and OOV test conditions are the same for these tasks (see Appendix). A simple generative model (Seq2Seq) achieves accuracies comparable to the multi-hop retrieval models. Enabling it with the ability to copy from the context (Seq2Seq+Copy) shows a considerable increase in performance, especially on the OOV test sets (and non-OOV tests for tasks 3 and 4). The strong performance of simple sequence encoders when compared with multi-hop encoders (in retrieval models) raises a question about the value of multi-hop inference. Mem2Seq answers this question, by obtaining improvements in several tasks, speciﬁcally on their OOV test sets. This clearly shows that multi-hop inference and the copy mechanism are essentials for task-oriented dialogs. Despite gains from the Mem2Seq model, the performance difference between the non-OOV and OOV test sets remains large. B O S S N ET succeeds to bridge this gap with its ability to better interpret unseen words, using their surrounding context. It obtains signiﬁcant improvements on average of about 34% per-dialog accuracy and 10% per-response accuracy for the bAbI OOV test sets."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence in E2 (Section 4.1) states that the Seq2Seq+Copy model shows a considerable increase in performance, especially on the OOV test sets, which aligns with the claim."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The cited evidence in E2 (Section 4.1) mentions that despite gains from the Mem2Seq model, the performance difference between the non-OOV and OOV test sets remains large. This does not support the claim that the Seq2Seq+Copy model shows significant improvements on the OOV test sets. The evidence does not provide a comparison between the Seq2Seq+Copy model and the non-OOV test sets."
+   }
+  ]
+ }
+}

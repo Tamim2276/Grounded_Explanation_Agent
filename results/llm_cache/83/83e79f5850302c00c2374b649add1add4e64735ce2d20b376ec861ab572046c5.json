@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 12.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 536,
+  "prompt_tokens": 2632,
+  "total_tokens": 3168,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best for response selection, and how can we tell?\nEvidence:\n[E1] (table, Table 4, page 6): Table 4: Evaluation results on response selection\nValues (cite as cells):\n  row 'MLP': 'R2@1' = 0.651; 'R10@1' = 0.256; 'R10@2' = 0.380; 'R10@5' = 0.703\n  row 'DeepMatchtopic': 'R2@1' = 0.593; 'R10@1' = 0.345; 'R10@2' = 0.376; 'R10@5' = 0.693\n  row 'Arc1': 'R2@1' = 0.665; 'R10@1' = 0.221; 'R10@2' = 0.360; 'R10@5' = 0.684\n  row 'Arc2': 'R2@1' = 0.736; 'R10@1' = 0.380; 'R10@2' = 0.534; 'R10@5' = 0.777\n  row 'CNTN': 'R2@1' = 0.743; 'R10@1' = 0.349; 'R10@2' = 0.512; 'R10@5' = 0.797\n  row 'MatchPyramid': 'R2@1' = 0.743; 'R10@1' = 0.420; 'R10@2' = 0.554; 'R10@5' = 0.786\n  row 'LSTM': 'R2@1' = 0.725; 'R10@1' = 0.361; 'R10@2' = 0.494; 'R10@5' = 0.801\n  row 'LSTMa': 'R2@1' = 0.758; 'R10@1' = 0.381; 'R10@2' = 0.545; 'R10@5' = 0.801\n  row 'MV-LSTM': 'R2@1' = 0.767; 'R10@1' = 0.410; 'R10@2' = 0.565; 'R10@5' = 0.800\n  row 'KEHNN': 'R2@1' = 0.786; 'R10@1' = 0.460; 'R10@2' = 0.591; 'R10@5' = 0.819\n[E2] (figure, Figure 1, page 4) (image attached): Figure 1: Architecture of KEHNN\nWords printed in the figure: BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e\n[E3] (figure, Figure 1, page 4): a zoomed view of Figure 1 (image attached)\n[E4] (text, Section abstract, page 4): We tested our model on two matching tasks: answer selection for question answering and response selection for conversation.\n[E5] (text, Section abstract, page 6): Results Table 4 reports the evaluation results on response selection. Our method outperforms baseline models on all metrics, and the improvement is statistically signiﬁcant (ttest with p-value ≤ 0 . 01 ). In the data set, as the training data becomes large and we updated word embedding in learning, Arc2 and MatchPyraimd are much better than Arc1. LSTM based models perform better than CNN based models, which is consistent with the results in the QA task. Discussions We ﬁrst investigate the performance of KEHNN in terms of text length, as shown in Table 5. We compared our model with 2 typical matching models: LSTM and MV-LSTM. We binned the text pairs into 4 buckets, according to the length\n[E6] (text, Section abstract, page 6): of the concatenation of the two pieces of text. # Pair represents the number of pairs that fall into the bucket. From the results, we can see that on relatively short text (i.e., length in [0 , 30) ), KEHNN performs comparably well with MV- LSTM, while on long text, KEHNN signiﬁcantly improves the matching accuracy. The results veriﬁed our claim that matching with multiple channels and prior knowledge can enhance accuracy on long text. Note that on the Ubuntu data, all models perform worse on short text than them on long text. This is because we ignored context for short messageresponse pairs, while long pairs are usually independent with context and have complete semantics. Furthermore, we also report the contributions of different channels of our model in Table 6. We can see that channel two is the most powerful one on the conversation data, while channel three is the best one on the QA data. This is because the prior knowledge in the conversation data is automatically generated rather than obtained from meta-data like that in the QA data. The automatically generated prior knowledge contains noise which hurts the performance of channel three. The full model outperforms all single channels consistently, demonstrating that matching with multiple channels could leverage the three types of features and sufﬁciently model the semantic relations in text pairs. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The KEHNN model performs the best for response selection based on the evaluation results in Table 4.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "KEHNN: 'R2@1' = 0.786; 'R10@1' = 0.460; 'R10@2' = 0.591; 'R10@5' = 0.819"
+     }
+    ]
+   },
+   {
+    "text": "The KEHNN model outperforms baseline models on all metrics, as reported in Table 4.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "KEHNN: 'R2@1' = 0.786; 'R10@1' = 0.460; 'R10@2' = 0.591; 'R10@5' = 0.819"
+     }
+    ]
+   },
+   {
+    "text": "The KEHNN model's performance is influenced by the length of the text pairs, as shown in Table 5.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "quote": "KEHNN performs comparably well with MV-LSTM on relatively short text and significantly improves the matching accuracy on long text."
+     }
+    ]
+   },
+   {
+    "text": "The KEHNN model's architecture includes BiGRU units and knowledge gates, as depicted in Figure 1.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e"
+     }
+    ]
+   }
+  ]
+ }
+}

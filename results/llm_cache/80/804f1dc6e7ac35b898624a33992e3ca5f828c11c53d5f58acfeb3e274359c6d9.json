@@ -1,0 +1,71 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 362,
+  "prompt_tokens": 2760,
+  "total_tokens": 3122,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?\nEvidence:\n[E1] (table, Table 15, page 21): Table 15: Test accuracies on the Large Movie Review dataset with different corruption probabilities.\nValues (cite as cells):\n  row '': '0%' = 79.43; '20%' = 78.66; '30%' = 77.1; '40%' = 73.98; '0%' = 79.77; '20%' = 77.58; '30%' = 75.85; '40%' = 69.63\n  row 'B.3.': '0%' = ; '20%' = ; '30%' = ; '40%' = ; '' = ; '' = \n  row 'Above ﬁgures Left two are RMSEs classiﬁcation manuscript.': '0%' = varying MNIST dataset here with exceedingly; '20%' = of 90% of Section 4.1. 15 and; '30%' = mixture K train labels We 20 are; '40%' = and the are observe that better than; '' = expected randomly having the ones; '' = measurement variance τ −1. shufﬂed and right two ﬁgures bigger K is beneﬁcial to the ones reported in the submitted\n[E2] (figure, Figure 11, page 18) (image attached): Figure 11: Learning curves of compared methods on random bias experiments using MNIST with different noise levels.\nWords printed in the figure: Corruption p Configuration Best Last 25% ConvNet 94.4 92.2 ConvNet+Mixup 97.6 97.6 ChoiceNet 99.2 99.2 40% ConvNet 77.9 71.8 ConvNet+Mixup 84.0 83.0 ChoiceNet 99.2 98.8 45% ConvNet 68.0 61.4 ConvNet+Mixup 68.9 55.8 ChoiceNet 98.0 97.1 47% ConvNet 58.2 53.9 ConvNet+Mixup 60.2 53.4 ChoiceNet 92.5 86.1 (a) (b) (c) (d)\n[E3] (text, Section 4.2, page 8): Table 14 shows the test accuracy of compared methods under different noise settings. Our proposed method outperforms all compared methods on the symmetric noise settings with a large margin over 10%p. On asymmetric noise settings (Pair- 45% ), our method shows the second best performance, and this reveals the weakness of the proposed method. As Pair- 45% assigns 45% of each label to its next label, The Cholesky Block fails to infer the dominant label distributions correctly. However, we would like to note that Co-teaching [ 12 ] is complementary to our method where one can combine these two methods by using two ChoiceNets and update each network using Co-teaching. Generalization to Other Datasets We conduct additional experiments to investigate how our method works on other image datasets. We adopt the structure of WideResNet [ 45 ] and design a baseline network with a depth of 22 and a widen factor of 4 . We also construct ChoiceNet by replacing the last two layers (‘average pooling‘ and ‘linear‘) with the Cholesky Block . We train the networks on CIFAR-10, CIFAR-100, FMNIST, MNIST and SVHN datasets with noisy labels. We generate noisy datasets with symmetric noise setting and vary corruption ratios from 20% to 50% . We would like to emphasize that we use the same hyper-parameters, which\n[E4] (text, Section 2, page 2): The second group of estimating label corruption information is mainly presented for classiﬁcation tasks where training labels are assumed to be corrupt with a possibly unknown corruption matrix. An earlier study in [ 17 ] proposed an extra layer for the modeling of output noises. [ 4 ] extended the approach mentioned above by adding an additional noise adaptation layer with aggressive dropout regularization. A similar method was then proposed in [ 14 ] which initially estimated the label corruption matrix with a learned classiﬁer and used the corruption matrix to ﬁne-tune the classiﬁer. Other researchers [ 15 ] presented a robust training method that mimics the EM algorithm to train a neural network, with the label noise modeled as an additional softmax layer, similar to earlier work [ 4 ]. A self-error-correcting network was also presented [ 31 ]. It switches the training labels based on the learned model at the beginning stages by assuming that the deep model is more accurate during the earlier stage of training.\n[E5] (text, Section 1, page 1): Throughout this paper, we aim to address the following two questions: 1) How can we deﬁne (or measure) the quality of training data in a principled manner? 2) In the presence of inconsistent outputs, how can we infer the target distribution in a scalable manner? Traditionally, noisy outputs are handled by modeling additive random distributions, often leading to robust loss functions [ 3 ] or estimating the structures of label corruptions in classiﬁcations tasks [ 4 ] (for more details, refer to Section 2 ). To address the ﬁrst question, we leverage the concept of a correlation. Precisely, we deﬁne and measure the quality of training data using the correlation between the target distribution and the data generating distribution. However, estimating the correct correlation requires access to the target distribution, whereas learning the correct target distribution requires knowing the correlation between the distributions to be known, making it a chicken-and-egg problem. To address the second question, we present a novel method that simultaneously estimates the target distribution as well as the correlation in a fully differentiable manner using stochastic gradient descent methods. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The ChoiceNet method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset, with a test accuracy of 79.77%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "0%",
+      "col": "0%",
+      "value": "79.77"
+     }
+    ]
+   },
+   {
+    "text": "As the corruption level increases, the performance of the ChoiceNet method decreases, with accuracies of 99.2%, 98.8%, 97.1%, and 86.1% for 0%, 20%, 30%, and 40% corruption levels, respectively.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "0%",
+      "col": "0%",
+      "value": "79.77"
+     },
+     {
+      "evidence": "E1",
+      "row": "20%",
+      "col": "0%",
+      "value": "77.58"
+     },
+     {
+      "evidence": "E1",
+      "row": "30%",
+      "col": "0%",
+      "value": "75.85"
+     },
+     {
+      "evidence": "E1",
+      "row": "40%",
+      "col": "0%",
+      "value": "69.63"
+     }
+    ]
+   }
+  ]
+ }
+}

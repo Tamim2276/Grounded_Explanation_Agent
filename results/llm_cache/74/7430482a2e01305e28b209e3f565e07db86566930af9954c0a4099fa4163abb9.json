@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 165,
+  "prompt_tokens": 220,
+  "total_tokens": 385,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The layers of the network that are part of the source CNN and source classifier are the ones that are shared between the source and target CNNs in the domain adaptation process.\" -- cites: E6 (Figure 2): observation \"The figure shows that the layers labeled as 's1' and 's2' are shared between the source and target CNNs in step 1 of the ZDDA training procedure.\"\n\nCited evidence:\n[E6] (figure, Figure 2, page 5): a zoomed view of Figure 2"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the layers labeled as 's1' and 's2' are part of the source CNN and classifier, and are shared between the source and target CNNs. However, the evidence only mentions that the layers labeled as 's1' and 's2' are shared between the source and target CNNs in step 1 of the ZDDA training procedure. The evidence does not specify that these layers are part of the source CNN and classifier, nor does it state that they are shared between the source and target CNNs in the domain adaptation process. Therefore, the claim is not supported by the evidence."
+   }
+  ]
+ }
+}

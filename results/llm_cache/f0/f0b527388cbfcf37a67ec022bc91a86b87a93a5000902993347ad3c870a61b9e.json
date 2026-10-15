@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 216,
+  "prompt_tokens": 587,
+  "total_tokens": 803,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The proposed method outperforms or shows comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).\" -- cites: E5 (Section 4.1): quote \"The average absolute fitting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).\"\n2. \"The proposed method is built on top of an MDN, but it shows superior performances with a high outlier rate ( > 50% ).\" -- cites: E5 (Section 4.1): quote \"The average absolute fitting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).\"\n3. \"The proposed method is the best when there are a lot of outliers in the data.\" -- cites: E5 (Section 4.1): quote \"The average absolute fitting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).\"\n\nCited evidence:\n[E5] (text, Section 4.1, page 7): The average absolute ﬁtting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ). Figure 6(d) - 6(f) show the ﬁtting results along with training data. While our proposed method is built on top of an MDN, it is worthwhile noting the severe performance degradation of an MDN with an extreme noise level ( 60% ). It is mainly because an MDN fails to allocate high mixture probability on the mixture corresponds to the target distribution as there are no dependencies among different mixtures."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence directly states that the proposed method outperforms or shows comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% )."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence does not mention that the proposed method is built on top of an MDN. It only states that the proposed method is built on top of an MDN and that it shows superior performances with a high outlier rate ( > 50% )."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence does not state that the proposed method is the best when there are a lot of outliers in the data. It only mentions that the proposed method shows superior performances with a high outlier rate ( > 50% )."
+   }
+  ]
+ }
+}

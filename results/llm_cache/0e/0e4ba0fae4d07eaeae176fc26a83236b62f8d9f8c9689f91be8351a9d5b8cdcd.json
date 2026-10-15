@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 232,
+  "prompt_tokens": 2351,
+  "total_tokens": 2583,
+  "prompt_tokens_details": {
+   "cached_tokens": 221
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the upper bound on the query complexity for finding an ε-perfect allocation with minimum cuts for 3 or more players?\nEvidence:\n[E1] (text, Section 5, page 9): As mentioned in Corollary 1 , ϵ -perfect allocations with the minimum number of cuts can be computed with O ( n 3 /ϵ ) queries. For n = 2 players, the problem of computing ϵ -perfect allocations can be solved more eﬃciently by simulating Austin’s moving procedure in the RW model. The proofs for this section are in Appendix C . Theorem 5.1. An ϵ -perfect allocation for two players can be computed with O (log 1 Theorem 5.2. Computing an ϵ -perfect allocation with the minimum number of cuts for two players requires Ω We prove the lower bound by maintaining throughout the execution of any protocol two intervals in which the cuts of the perfect allocation must be situated, such that the distance to a perfect partition cannot decrease too much with any cut query. Lemma 5. Let ϵ > 0 . Consider a two player instance consistent with Figure 1 , where\n[E2] (text, Section C, page 31): . If the interval [ w, z ] is worth strictly less than ϵ to player 1, but an ϵ -perfect allocation has not been found, let a be such that V 1 ( a, w ) = 1 / 2. Any partition with cuts a and x ∈ [ w, z ] is ϵ -perfect for player 1. Then we can search for x ∈ [ w, z ] using the valuation of player 2, halving the interval [ w, z ] in each round. A solution is guaranteed to exist and the maximum number of queries addressed to player 2 is O Theorem 5.2 (restated) Computing an ϵ -perfect allocation with the minimum number of cuts for two players requires Ω\n[E3] (text, Section C, page 30): In this section we provide the lower and upper bounds for computing perfect allocations for two players. An upper bound of O (log ϵ − 1 ) for this problem can be obtained simulating Austin’s moving procedure in the RW model. Theorem 5.1 (restated) An ϵ -perfect allocation for two players can be computed with O (log 1 ϵ ) queries.\n[E4] (figure, Figure 7, page 31) (image attached): Figure 7: Approximate computation of ϵ -perfect partition. Maintain two points z and w , such that the rightmost cut must be situated in the interval [ z, w ]\n[E5] (figure, Figure 7, page 31): a zoomed view of Figure 7 (image attached)\n[E6] (table, Table 1, page 4): Table 1: Query complexity in cake cutting in the standard query model. Our results are marked with ( ∗ ). The lower bounds for ﬁnding ϵ -perfect and ϵ -equitable allocations for n ≥ 3 players hold for any number of cuts [ PW17 ]. The bounds for exact envy-free and proportional allocations hold for any number of cuts, except the upper bound for proportional works for connected pieces.\nValues (cite as cells):\n  row 'ϵ-envy-free (connected)': 'Players' = n = 2 n = 3 n ≥4; 'Upper bound' = 1 O(log ϵ−1) (∗) O(n/ϵ) (∗); 'Lower bound' = 1 Ω(log ϵ−1) (∗) Ω log ϵ−1 (∗)\n  row 'ϵ-perfect (min cuts)': 'Players' = n = 2 n ≥3; 'Upper bound' = O(log ϵ−1) (∗) O n3/ϵ [BM15]; 'Lower bound' = Ω(log ϵ−1) (∗) log ϵ−1 Ω [PW17] log log ϵ−1\n  row 'ϵ-equitable (connected)': 'Players' = n = 2 n ≥3; 'Upper bound' = O(log ϵ−1) [CP12] O n log n + log ϵ−1 [CP12]; 'Lower bound' = Ω(log ϵ−1) (∗) log ϵ−1 Ω [PW17] log log ϵ−1\n  row 'envy-free (exact)': 'Players' = n ≥2; 'Upper bound' = nnnnnn O [AM16]; 'Lower bound' = Ω(n2) [Pro09]\n  row 'proportional (exact)': 'Players' = n ≥2; 'Upper bound' = O (n log n) [EP84]; 'Lower bound' = Ω(n log n) [WS07, EP06] [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The upper bound on the query complexity for finding an ε-perfect allocation with minimum cuts for 3 or more players is O(n^3/ε).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "As mentioned in Corollary 1, ϵ -perfect allocations with the minimum number of cuts can be computed with O (n^3/ε) queries."
+     }
+    ]
+   },
+   {
+    "text": "The lower bound for finding an ε-perfect allocation with minimum cuts for 3 or more players is Ω log ϵ−1.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The proofs for this section are in Appendix C. Theorem 5.2. Computing an ϵ -perfect allocation with the minimum number of cuts for two players requires Ω"
+     }
+    ]
+   }
+  ]
+ }
+}

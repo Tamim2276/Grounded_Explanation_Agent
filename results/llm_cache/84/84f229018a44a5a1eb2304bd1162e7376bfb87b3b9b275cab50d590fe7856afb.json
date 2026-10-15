@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 216,
+  "prompt_tokens": 1580,
+  "total_tokens": 1796,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The reconstructions show a low-frequency approximation of the environment reflected, as observed in the insets of the last row of Figure 9.\" -- cites: E1 (Figure 9): observation \"The insets in the last row show that, while not all reflection details are reproduced, ours is free of color shifts around the highlights and mostly a low-frequency approximation of the environment reflected.\"\n2. \"The reconstructions are compared to the original samples in terms of their ability to reproduce reflection details and avoid color shifts around highlights.\" -- cites: E1 (Figure 9): observation \"The insets in the last row show that, while not all reflection details are reproduced, ours is free of color shifts around the highlights and mostly a low-frequency approximation of the environment reflected.\"\n3. \"The reconstructions are compared to the original samples in terms of their ability to capture the spatial arrangement of values, as shown in the zoomed view of Figure 9.\" -- cites: E2 (Figure 9): observation \"The zoomed view of Figure 9 shows the spatial arrangement of values, which is a key aspect of the reconstructions.\"\n\nCited evidence:\n[E1] (figure, Figure 9, page 8) (image attached): Figure 9. Results of joint material segmentation and estimation for two samples (rows) . In every part we show a re-synthesis, as well as two estimated materials and the resulting mask. The insets in the last row show that, while not all reﬂection details are reproduced, ours is free of color shifts around the highlights and mostly a low- frequency approximation of the environment reﬂected.\n[E2] (figure, Figure 9, page 8): a zoomed view of Figure 9 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that the insets in the last row show a low-frequency approximation of the environment reflected, which aligns with the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence mentions that the insets in the last row show that the reconstructions are free of color shifts around the highlights, which supports the claim about comparing the reconstructions to the original samples in terms of their ability to avoid color shifts."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence from E2 (Figure 9) only mentions the zoomed view of Figure 9 showing the spatial arrangement of values, but it does not compare the reconstructions to the original samples in terms of their ability to capture the spatial arrangement of values. The claim goes beyond the evidence provided."
+   }
+  ]
+ }
+}

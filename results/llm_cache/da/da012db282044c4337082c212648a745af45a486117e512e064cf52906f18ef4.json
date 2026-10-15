@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 137,
+  "prompt_tokens": 478,
+  "total_tokens": 615,
+  "prompt_tokens_details": {
+   "cached_tokens": 209
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ZDDA does not require T-R target-domain training data, unlike UDA and MVL.\" -- cites: E1 (Table 1): row 'given T-R target-domain training data?', column 'ZDDA' = N; E1 (Table 1): row 'given T-R target-domain training data?', column 'UDA' = Y; E1 (Table 1): row 'given T-R target-domain training data?', column 'MVL' = Y\n2. \"ZDDA does not require T-R training data in multiple domains/views, unlike MVL.\" -- cites: E1 (Table 1): row 'given T-R training data in multiple (>1) domains/views?', column 'ZDDA' = N; E1 (Table 1): row 'given T-R training data in multiple (>1) domains/views?', column 'MVL' = Y\n\nCited evidence:\n[E1] (table, Table 1, page 3): Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG)\nValues (cite as cells):\n  row 'given T-R target-domain training data?': 'UDA' = Y; 'MVL' = Y; 'DG' = N; 'ZDDA' = N\n  row 'given T-R training data in multiple (>1) domains/views?': 'UDA' = N; 'MVL' = Y; 'DG' = Y; 'ZDDA' = N\n  row 'example prior work': 'UDA' = [33]; 'MVL' = [42]; 'DG' = [28]; 'ZDDA' = N/A"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence shows that ZDDA does not require T-R target-domain training data (ZDDA = N), while UDA and MVL do (UDA = Y, MVL = Y)."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence shows that ZDDA does not require T-R training data in multiple domains/views (ZDDA = N), while MVL does (MVL = Y)."
+   }
+  ]
+ }
+}

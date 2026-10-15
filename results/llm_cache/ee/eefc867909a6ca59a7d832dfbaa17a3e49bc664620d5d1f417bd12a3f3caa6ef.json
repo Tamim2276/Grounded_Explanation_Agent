@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 223,
+  "total_tokens": 299,
+  "prompt_tokens_details": {
+   "cached_tokens": 144
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nSub-goals:\n1. [table] How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: The evidence does not provide the specific disagreement rate reduction for GBI compared to A* on the SRL-100 network's failure set. It only compares the overall disagreement rate reduction for GBI and A* across different networks and training data percentages. The specific comparison for the SRL-100"
+  }
+ ],
+ "answer": {
+  "reason": "The specific comparison for the SRL-100 network's failure set is not found in the text or table. The figure may contain the necessary data.",
+  "tool": "figure",
+  "query": "GBI vs A* disagreement rate reduction on SRL-100 network's failure set"
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 170,
+  "prompt_tokens": 1795,
+  "total_tokens": 1965,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Average Relative Error (ARE) of node queries decreases as the width increases for all configurations of GSS and TCM.\" -- cites: E1 (Figure 11): observation \"The ARE values for all configurations of GSS and TCM decrease as the width increases in the figure.\"\n2. \"The ARE of node queries for TCM is higher than GSS across all datasets and configurations.\" -- cites: E1 (Figure 11): observation \"The ARE values for TCM are consistently higher than GSS across all datasets and configurations.\"\n3. \"The ARE of node queries decreases as the width increases for all configurations of GSS and TCM.\" -- cites: E1 (Figure 11): observation \"The ARE decreases as the width increases for all configurations of GSS and TCM across all datasets.\"\n\nCited evidence:\n[E1] (figure, Figure 11, page 13) (image attached): Fig. 11. Average Relative Error of Node Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0 5 10 15 20 Node query ARE GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0 1 2 3 4 Node query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0 4 8 12 16 Node query ARE GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0 2 4 6 8 Node Query ARE fsize=12 fsize=16 TCM(256*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0 200 400 600 800 Node Query ARE fsize=12 fsize=16 TCM(16*memory) (e) Caida-networkflow Fig. 11. Average Relative Error of Node Queries [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that the ARE values for all configurations of GSS and TCM decrease as the width increases in the figure, which aligns with the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence indicates that the ARE values for TCM are consistently higher than GSS across all datasets and configurations, which supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence shows that the ARE decreases as the width increases for all configurations of GSS and TCM across all datasets, which supports the claim."
+   }
+  ]
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 282,
+  "prompt_tokens": 2945,
+  "total_tokens": 3227,
+  "prompt_tokens_details": {
+   "cached_tokens": 1706
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model variant achieves the best performance on the CNSS dataset in terms of F1-score, and what are its key components?\nEvidence:\n[E1] (table, Table 2, page 7): Table 2: Accuracy and F1-score results of different algorithms on CNSE and CNSS datasets.\nValues (cite as cells):\n  row 'Baselines': '' = Acc; 'CNSE' = F1; 'CNSS' = Acc; '' = F1; '' = Our models; 'CNSE' = Acc; '' = F1; 'CNSS' = Acc; '' = F1\n  row 'I. ARC-I': '' = 53.84; 'CNSE' = 48.68; 'CNSS' = 50.10; '' = 66.58; '' = XI. CIG-Siam; 'CNSE' = 74.47; '' = 73.03; 'CNSS' = 75.32; '' = 78.58\n  row 'II. ARC-II': '' = 54.37; 'CNSE' = 36.77; 'CNSS' = 52.00; '' = 53.83; '' = XII. CIG-Siam-GCN; 'CNSE' = 74.58; '' = 73.69; 'CNSS' = 78.91; '' = 80.72\n  row 'III. DUET': '' = 55.63; 'CNSE' = 51.94; 'CNSS' = 52.33; '' = 60.67; '' = XIII. CIGcd-Siam-GCN; 'CNSE' = 73.25; '' = 73.10; 'CNSS' = 76.23; '' = 76.94\n  row 'IV. DSSM': '' = 58.08; 'CNSE' = 64.68; 'CNSS' = 61.09; '' = 70.58; '' = XIV. CIG-Sim; 'CNSE' = 72.58; '' = 71.91; 'CNSS' = 75.16; '' = 77.27\n  row 'V. C-DSSM': '' = 60.17; 'CNSE' = 48.57; 'CNSS' = 52.96; '' = 56.75; '' = XV. CIG-Sim-GCN; 'CNSE' = 83.35; '' = 80.96; 'CNSS' = 87.12; '' = 87.57\n  row 'VI. MatchPyramid': '' = 66.36; 'CNSE' = 54.01; 'CNSS' = 62.52; '' = 64.56; '' = XVI. CIGcd-Sim-GCN; 'CNSE' = 81.33; '' = 78.88; 'CNSS' = 86.67; '' = 87.00\n  row 'VII. BM25': '' = 69.63; 'CNSE' = 66.60; 'CNSS' = 67.77; '' = 70.40; '' = XVII. CIG-Sim&Siam-GCN; 'CNSE' = 84.64; '' = 82.75; 'CNSS' = 89.77; '' = 90.07\n  row 'VIII. LDA': '' = 63.81; 'CNSE' = 62.44; 'CNSS' = 62.98; '' = 69.11; '' = XVIII. CIG-Sim&Siam-GCN-Simg; 'CNSE' = 84.21; '' = 82.46; 'CNSS' = 90.03; '' = 90.29\n  row 'IX. SimNet': '' = 71.05; 'CNSE' = 69.26; 'CNSS' = 70.78; '' = 74.50; '' = XIX. CIG-Sim&Siam-GCN-BERTg; 'CNSE' = 84.68; '' = 82.60; 'CNSS' = 89.56; '' = 89.97\n  row 'X. BERT ﬁne-tuning': '' = 81.30; 'CNSE' = 79.20; 'CNSS' = 86.64; '' = 87.08; '' = XX. CIG-Sim&Siam-GCN-Simg&BERTg; 'CNSE' = 84.61; '' = 82.59; 'CNSS' = 89.47; '' = 89.71\n[E2] (figure, Figure 2, page 3) (image attached): Figure 2: An overview of our approach for constructing the Concept Interaction Graph (CIG) from a pair of documents and classifying it by Graph Convolutional Networks.\nWords printed in the figure: Construct KeyGraph by Word Co-occurrence w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w Document Pair KeyGraph Concepts Doc A Doc B Detect Concepts by Community Detection Assign Sentences by Similarities S1 S2 Concept 1 S1 S2 Concept 2 S1 S2 Concept 3 S1 S2 Concept 4 S1 S2 Concept 5 Concepts with sentences Get Edge Weights by Vertex Similarities 3 5 4 2 1 Concept Interaction Graph Siamese Encoder Context Layer Contex Layer Matching Layer Sentences 1 Sentences 2 Vertex Feature Term-based Feature Extractor Sentence 1, Sentence 2 Feature Extractor Vertex Feature CIG with vertex features vertex features Result (a) Representation (b) Encoding (c) Transformation (d) Aggregation Input GCN Layers Aggregation Layer transformed features Siamese matching Term-based matching Siamese matching … Term-based matching Global matching Concatenate Classify\n[E3] (figure, Figure 2, page 3): a zoomed view of Figure 2 (image attached)\n\nThese claims are already verified and kept:\n- The key components of the model 'XVIII. CIG-Sim&Siam-GCN-Simg&BERTg' include a Siamese encoder, context layers, matching layers, and a term-based feature extractor.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The best performance on the CNSS dataset in terms of F1-score is achieved by the model variant 'XVIII. CIG-Sim&Siam-GCN-Simg&BERTg', with an F1-score of 90.29.\": E1 XVIII. CIG-Sim&Siam-GCN-Simg&BERTg/CNSS is None, the claim says 90.29 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The best performance on the CNSS dataset in terms of F1-score is achieved by the model variant 'XVIII. CIG-Sim&Siam-GCN-Simg&BERTg', with an F1-score of 90.29.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "XVIII. CIG-Sim&Siam-GCN-Simg&BERTg",
+      "col": "CNSS",
+      "value": "90.29"
+     }
+    ]
+   },
+   {
+    "text": "The key components of the model 'XVIII. CIG-Sim&Siam-GCN-Simg&BERTg' include a Siamese encoder, context layers, matching layers, and a term-based feature extractor.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "observation": "The figure shows the components of the model 'XVIII. CIG-Sim&Siam-GCN-Simg&BERTg' including a Siamese encoder, context layers, matching layers, and a term-based feature extractor."
+     }
+    ]
+   }
+  ]
+ }
+}

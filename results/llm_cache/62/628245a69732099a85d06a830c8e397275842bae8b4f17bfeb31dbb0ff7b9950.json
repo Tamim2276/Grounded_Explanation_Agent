@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 342,
+  "prompt_tokens": 2190,
+  "total_tokens": 2532,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"In the 1-shot setting, VAGER+Voting outperforms LR with an average top-1 accuracy of 0.9469 compared to LR's 0.8034.\" -- cites: E1 (Table 2): row 'Jeep', column 'VAGER (Transfer)' = 0.9469; E1 (Table 2): row 'Jeep', column 'LR (No Transfer)' = 0.8034\n2. \"In the 20-shot setting, VAGER+Voting also outperforms LR with an average top-1 accuracy of 0.9393 compared to LR's 0.8472.\" -- cites: E1 (Table 2): row 'Zebra', column 'VAGER (Transfer)' = 0.9393; E1 (Table 2): row 'Zebra', column 'LR (No Transfer)' = 0.8472\n3. \"The figure shows that VAGER+Voting maintains a higher top-1 accuracy than LR across all shot numbers, indicating its superior performance.\" -- cites: E5 (Figure 5): observation \"The blue line representing VAGER+Voting consistently stays above the red line representing LR across all shot numbers.\"\n4. \"The performance of VAGER+Voting consistently outperforms other VAGER variants in both 1-shot and 20-shot settings, as shown in the figure.\" -- cites: E5 (Figure 5): observation \"The figure shows that the blue line representing VAGER+Voting consistently stays above the other lines across all shot numbers, but it does not specify that this is in both the 1-shot and 20-shot settings.\"\n\nCited evidence:\n[E1] (table, Table 2, page 7): Table 2. Comparison of VAGER and LR over novel classes with 1-shot binary classiﬁcation setting\nValues (cite as cells):\n  row 'Jeep': 'LR (No Transfer)' = 0.8034; 'VAGER (Transfer)' = 0.9469\n  row 'Zebra': 'LR (No Transfer)' = 0.8472; 'VAGER (Transfer)' = 0.9393\n  row 'Hen': 'LR (No Transfer)' = 0.7763; 'VAGER (Transfer)' = 0.8398\n  row 'Lemon': 'LR (No Transfer)' = 0.6854; 'VAGER (Transfer)' = 0.9583\n  row 'Bubble': 'LR (No Transfer)' = 0.7455; 'VAGER (Transfer)' = 0.7041\n  row 'Pineapple': 'LR (No Transfer)' = 0.7364; 'VAGER (Transfer)' = 0.8623\n  row 'Lion': 'LR (No Transfer)' = 0.8305; 'VAGER (Transfer)' = 0.9372\n  row 'Screen': 'LR (No Transfer)' = 0.7801; 'VAGER (Transfer)' = 0.9056\n  row 'Drum': 'LR (No Transfer)' = 0.6510; 'VAGER (Transfer)' = 0.6995\n  row 'Restaurant': 'LR (No Transfer)' = 0.7806; 'VAGER (Transfer)' = 0.8787\n  row '0.2 Increasing 0.1 AUC': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row 'AUC 0.0': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '0.1': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '1.4 1.6': 'LR (No Transfer)' = 1.8 2.0 2.2 2.4 Similarity Ratio; 'VAGER (Transfer)' = 2.6 2.8 3.0\n[E5] (figure, Figure 5, page 8) (image attached): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem.\nWords printed in the figure: 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence from E1 (Table 2) shows that in the 'Jeep' row, 'VAGER (Transfer)' has an average top-1 accuracy of 0.9469 and 'LR (No Transfer)' has an average top-1 accuracy of 0.8034, which supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence from E1 (Table 2) shows that in the 'Zebra' row, 'VAGER (Transfer)' has an average top-1 accuracy of 0.9393 and 'LR (No Transfer)' has an average top-1 accuracy of 0.8472, which supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence from E5 (Figure 5) shows that the blue line representing VAGER+Voting consistently stays above the red line representing LR across all shot numbers, which supports the claim."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence from E5 (Figure 5) shows that the blue line representing VAGER+Voting consistently stays above the other lines across all shot numbers, but it does not specify that this is in both the 1-shot and 20-shot settings. The claim extends beyond the evidence provided."
+   }
+  ]
+ }
+}

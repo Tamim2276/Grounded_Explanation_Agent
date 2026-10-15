@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 220,
+  "prompt_tokens": 829,
+  "total_tokens": 1049,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) diminishes the influence of points closer to the point of interest, as larger parameter values suppress the weight of points further away.\" -- cites: E3 (Section 8.1): quote \"Intuitively, both parameters control the locality of their respective measures. Small values imply that points closer to the point of interest are considered with more weight or, to frame it in terms of window functions, the weight of points further away is suppressed. Larger parameter values diminish this effect.\"\n2. \"The Parzen influence measure with σ = 4.7 and a monotone influence measure with α (d) = 1/d^2 were run on some of the images, but the specific effect of σ on the influence vectors is not detailed in the provided evidence.\" -- cites: E4 (Section 8): quote \"The data consists of 12 156 48 × 48 pixel grayscale images of faces, evenly divided between happy and sad facial expressions. Each pixel is a feature; its brightness level is its parametric value. A parametric Parzen influence measure with σ = 4.7 and a monotone inﬂuence measure with α ( d ) = 1 d 2 were run on some of the images.\"\n\nCited evidence:\n[E3] (text, Section 8.1, page 15): Table 3 highlights the effects of parameter choice for both LIME and Parzen. For Parzen, we vary the σ parameter, whereas for LIME we vary ρ (for the Euclidean distance method compared to in the main paper) and µ (for the cosine similarity version). Intuitively, both parameters control the locality of their respective measures. Small values imply that points closer to the point of interest are considered with more weight or, to frame it in terms of window functions, the weight of points further away is suppressed. Larger parameter values diminish this effect. As can be seen in Table 3, small parameters make the measures place a lot of weight on the point of interest itself, and the resulting inﬂuence measure is a near-replica of it. As we increase\n[E4] (text, Section 8, page 14): In what follows, we apply MIM, Parzen and a version of LIME on a facial expression dataset. We ran our experiments using a workstation with a quad core Intel i7 CPU, and 16GB of RAM. We were able to compute each inﬂuence vector in 4 − 5 seconds. The dataset used for this experiment is a part of the Facial Expression Recognition 2013 dataset (Goodfellow, Erhan, Carrier, Courville, Mirza, et al., 2013). The data consists of 12 156 48 × 48 pixel grayscale images of faces, evenly divided between happy and sad facial expressions. Each pixel is a feature; its brightness level is its parametric value. A parametric Parzen inﬂuence measure with σ = 4 . 7 and a monotone inﬂuence measure with α ( d ) = 1 d 2 were run on some of the images. Further, we used a black-box data version of LIME. For the α parameter in Equation 14, we choose α ρ ( d ) ="
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence from E3 (Section 8.1) states that 'small values imply that points closer to the point of interest are considered with more weight or, to frame it in terms of window functions, the weight of points further away is suppressed. Larger parameter values diminish this effect.' This directly supports the claim that increasing the parameter value diminishes the influence of points closer to the point of interest."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The cited evidence from E4 (Section 8) does not provide any information about the specific effect of σ on the influence vectors. It only mentions that a Parzen influence measure with σ = 4.7 and a monotone influence measure with α(d) = 1/d^2 were run on some of the images. Therefore, the claim cannot be supported by the evidence."
+   }
+  ]
+ }
+}
