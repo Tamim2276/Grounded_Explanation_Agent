@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 353,
+  "prompt_tokens": 2840,
+  "total_tokens": 3193,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following statements about the training procedure of ZDDA is true?\n\n(a) ZDDA simulates the target-domain representation using the source-domain data. (b) ZDDA builds a joint network with the supervision from the target domain. (c) ZDDA trains a sensor fusion network in step 1. (d) ZDDA trains a sensor fusion network in step 2.\nEvidence:\n[E1] (text, Section 1, page 2): The state-of-the-art DA methods such as [1, 14–16, 25, 30, 35, 37, 39–41, 43, 44, 47, 50] are proposed to solve DA tasks under the assumption that the taskrelevant data , the data directly applicable and related to the TOI (regardless of whether it is labeled or not), in the target domain is available at training time, which is not always true in practice. For instance, in real business use cases, acquiring the task-relevant target-domain training data can be infeasible due to the combination of the following reasons: 1) Unsuitable tools at the ﬁeld. 2) Product development timeline. 3) Budget limitation. 4) Data import/export regulations. Such impractical assumption is also assumed true in the existing works of sensor fusion such as [31,48], where the goal is to obtain a dual-domain (source and target) TOI solution which is robust to noise in either domain. This unsolved issue motivates us to propose zero-shot deep domain adaptation (ZDDA), a DA and sensor fusion approach which learns from the task-irrelevant dual-domain training pairs without using the task-relevant target-domain training data, where we use the term task-irrelevant data to refer to the data which is not task-relevant. In the rest of the paper, we use T-R and T-I as the shorthand of task-relevant and task-irrelevant, respectively.\n[E2] (text, Section 5, page 12): that ZDDA 2 can reach the accuracy comparable to those of the state-of-theart methods (even outperform some of them), which supports that ZDDA 2 is a promising DA method when the T-R target-domain training data is unavailable. Third, we test the eﬃcacy of ZDDA on the DA tasks constructed from D S (adapting from depth to RGB images). We compare ZDDA with the baseline under diﬀerent scene classiﬁcation tasks by changing the number of scenes involved. The result is summarized in Table 7, where we list the training and testing modalities for each method. We also list the scene IDs (introduced in Sec. 4.1) involved in each task. Darker cells represent better accuracy in each column. We verify the irrelevance degree between T-R and T-I data by measuring the semantic similarity using the word2vec [29] (the same method we use in Table 5). For the 10-class experiment in Table 7, S ( D S (T-R), D S (T-I))=0.198 (close to the reference S (object, scene)=0.192), which we believe shows high irrelevance between our T-I and T-R data. For simplicity, we use E i to refer to the experiment speciﬁed by exp. ID i in this section. For the fully supervised methods in depth domain, ZDDA ( E 2 , E 3 ) outperforms the baseline ( E 1 ) due to the extra information brought by the T-I RGB-D pairs. We ﬁnd that for most listed tasks, ZDDA 3 ( E 3 ) outperforms ZDDA 2 ( E 2 ), which is consistent with our intuition because the source representation in ZDDA 2 is constrained by the L2 loss, while the counterpart in ZDDA 3 is learned without the L2 constraint given the simulated target representation. The fully supervised method in RGB domain ( E 6 ) outperforms the baseline of the domain adaptation ( E 4 ) and ZDDA 2 ( E 5 ) because E 6 has access to the T-R RGB training data which is unavailable for E 4 and E 5 . The performance improvement from E 4 to E 5 is caused by ZDDA 2 ’s training procedure as well as the extra T-I RGB-D training pairs. E 3 and E 7 perform similarly, which supports that the simulated target representation in ZDDA 3 is similar to the real one.\n[E3] (text, Section 4.3, page 10): To obtain the performance references of the fully supervised methods, we train a classiﬁer with the BNA in Table 4 in each domain using the T-R training data and labels in that domain. When the BNA is LeNet [5], we train the classiﬁer from scratch. For the other BNAs, we pre-train the classiﬁer in the same way as that described in Sec. 4.2. After training, for each DA task, we get two fully supervised classiﬁers C fs,s and C fs,t in the source and target domains respectively. For the baseline of the DA task, we directly feed the target-domain testing images to C fs,s to obtain the performance without applying any DA method. For the baseline of sensor fusion, we compare ZDDA 3 with a naive fusion method by predicting the label with the highest probability from C RGB and C D in Sec. 3.\n[E4] (table, Table 1, page 3): Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG)\nValues (cite as cells):\n  row 'given T-R target-domain training data?': 'UDA' = Y; 'MVL' = Y; 'DG' = N; 'ZDDA' = N\n  row 'given T-R training data in multiple (>1) domains/views?': 'UDA' = N; 'MVL' = Y; 'DG' = Y; 'ZDDA' = N\n  row 'example prior work': 'UDA' = [33]; 'MVL' = [42]; 'DG' = [28]; 'ZDDA' = N/A\n[E5] (figure, Figure 2, page 5) (image attached): Fig. 2. An overview of the ZDDA training procedure. We use the images from the SUN RGB-D [36] dataset for illustration. ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network. In step 1, we choose to train s 1 and ﬁx t , but we can also train t and ﬁx s 1 to simulate the target-domain representation. In step 2, t can also be trainable instead of being ﬁxed, but we choose to ﬁx it to make the number of trainable parameters manageable. The details are explained in Sec. 3\nWords printed in the figure: Zero-Shot Deep Domain Adaptation 5\n[E6] (figure, Figure 2, page 5): a zoomed view of Figure 2 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ZDDA simulates the target-domain representation using the source-domain data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows that ZDDA simulates the target-domain representation using the source-domain data."
+     }
+    ]
+   },
+   {
+    "text": "ZDDA builds a joint network with the supervision from the source domain.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows that ZDDA builds a joint network with the supervision from the source domain."
+     }
+    ]
+   },
+   {
+    "text": "ZDDA trains a sensor fusion network in step 1.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows that ZDDA simulates the target-domain representation using the source-domain data and builds a joint network with the supervision from the source domain in step 1."
+     }
+    ]
+   },
+   {
+    "text": "ZDDA trains a sensor fusion network in step 2.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows that ZDDA trains a sensor fusion network in step 2."
+     }
+    ]
+   }
+  ]
+ }
+}

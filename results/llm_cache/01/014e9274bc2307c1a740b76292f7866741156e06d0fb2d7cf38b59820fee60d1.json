@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 259,
+  "prompt_tokens": 2646,
+  "total_tokens": 2905,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the IMDB dataset for classifying documents with categorical labels, and how much better did it perform compared to the SLDA model?\nEvidence:\n[E1] (text, Section 4.2, page 7): We next consider the utility of our model in the context of categorical labels, and consider them alternately as observed covariates and as labels generated conditional on the latent representation. We use the same setup as above, but tune number of training epochs for our model using a random 20% of training data as a development set, and similarly tune regularization for logistic regression. Table 2 summarizes the accuracy of various models on three datasets, revealing that our model offers competitive performance, both as a joint model of words and labels (Eq. 9 ), and a model which conditions on covariates (Eq. 10 ). Although SCHOLAR is comparable to the logistic regression baseline, our purpose here is not to attain state-of-the-art performance on text classiﬁcation. Rather, the high accuracies we obtain demonstrate that we are learning low-dimensional representations of documents that are relevant to the label of interest, outperforming SLDA, and have the same attractive properties as topic models. Further, any neural network that is successful for text classiﬁcation could be incorporated into f y and trained end-to-end along with topic discovery.\n[E2] (text, Section 4, page 6): As datasets we use the familiar 20 newsgroups, the IMDB corpus of 50,000 movie reviews ( Maas et al. , 2011 ), and the UIUC Yahoo answers dataset with 150,000 documents in 15 categories ( Chang et al. , 2008 ). For further exploration, we also make use of a corpus of approximately 4,000 timestamped news articles about US immigration, each annotated with pro- or anti-immigration tone ( Card et al. , 2015 ). We use the original author-provided implementations of SAGE 11 and SLDA, 12 while for LDA we use Mallet. 13 . Our implementation of SCHOLAR is in TensorFlow, but we have also provided a preliminary PyTorch implementation of the core of our model. 14 For additional details about datasets and implementation, please refer to the supplementary material. It is challenging to fairly evaluate the relative computational efﬁciency of our approach compared to past work (due to the stochastic nature of our ap-\n[E3] (text, Section 4.1, page 7): Although the emphasis of this work is on incorporating observed labels and/or covariates, we brieﬂy report on experiments in the unsupervised setting. Recall that, without metadata, SCHOLAR equates to ProdLDA, but with an explicit background term. 15 We therefore use the same experimental setup as Srivastava and Sutton ( 2017 ) (learning rate, momentum, batch size, and number of epochs) and ﬁnd the same general patterns as they reported (see Table 1 and supplementary material): our model returns more coherent topics than LDA, but at the cost of worse perplexity. SAGE, by contrast, attains very high levels of sparsity, but at the cost of worse perplexity and coherence than LDA. As expected, the NVDM produces relatively low perplexity, but very poor coherence, due to its lack of constraints on θ . Further experimentation revealed that the VAE framework involves a tradeoff among the scores; running for more epochs tends to result in better perplexity on held-out data, but at the cost of worse coherence. Adding regularization to encourage sparse topics has a similar effect as in SAGE, leading to worse perplexity and coherence, but it does create sparse topics. Interestingly, initializing the encoder with pretrained word2vec embeddings, and not updating them returned a model with the best internal coherence of any model we considered for IMDB and Yahoo answers, and the second-best for 20 newsgroups.\n[E4] (table, Table 2, page 8): Table 2: Accuracy of various models on three datasets with categorical labels.\nValues (cite as cells):\n  row 'SLDA': '20news 2000 50' = 0.60; 'IMDB 5000 50' = 0.64; 'Yahoo 5000 250' = 0.65\n  row 'SCHOLAR (labels)': '20news 2000 50' = 0.67; 'IMDB 5000 50' = 0.86; 'Yahoo 5000 250' = 0.73\n  row 'SCHOLAR (covariates)': '20news 2000 50' = 0.71; 'IMDB 5000 50' = 0.87; 'Yahoo 5000 250' = 0.72\n  row 'Logistic regression': '20news 2000 50' = 0.70; 'IMDB 5000 50' = 0.87; 'Yahoo 5000 250' = 0.76\n[E5] (figure, Figure 3, page 8) (image attached): Figure 3: Learned embeddings of year-of- publication (treated as a covariate) from combined model of news articles about immigration.\nWords printed in the figure: 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 obama clinton deportations sept hijackers elian attacks INS refugees asylum clinton obama arizona ICE path\n[E6] (figure, Figure 3, page 8): a zoomed view of Figure 3 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The SCHOLAR model performed best on the IMDB dataset for classifying documents with categorical labels.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "SCHOLAR (labels)",
+      "col": "IMDB 5000 50",
+      "value": "0.86"
+     }
+    ]
+   },
+   {
+    "text": "The SCHOLAR model outperformed the SLDA model by 0.22 points on the IMDB dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "SLDA",
+      "col": "IMDB 5000 50",
+      "value": "0.64"
+     },
+     {
+      "evidence": "E4",
+      "row": "SCHOLAR (labels)",
+      "col": "IMDB 5000 50",
+      "value": "0.86"
+     }
+    ]
+   }
+  ]
+ }
+}

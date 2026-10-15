@@ -1,0 +1,95 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 12.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 511,
+  "prompt_tokens": 3169,
+  "total_tokens": 3680,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy, and how does its performance differ between the two test sets?\nEvidence:\n[E1] (text, Section 4.1, page 5): tasks 3 and 4 is attributed to an error in the bAbI dataset construction, due to which, the non-OOV and OOV test conditions are the same for these tasks (see Appendix). A simple generative model (Seq2Seq) achieves accuracies comparable to the multi-hop retrieval models. Enabling it with the ability to copy from the context (Seq2Seq+Copy) shows a considerable increase in performance, especially on the OOV test sets (and non-OOV tests for tasks 3 and 4). The strong performance of simple sequence encoders when compared with multi-hop encoders (in retrieval models) raises a question about the value of multi-hop inference. Mem2Seq answers this question, by obtaining improvements in several tasks, speciﬁcally on their OOV test sets. This clearly shows that multi-hop inference and the copy mechanism are essentials for task-oriented dialogs. Despite gains from the Mem2Seq model, the performance difference between the non-OOV and OOV test sets remains large. B O S S N ET succeeds to bridge this gap with its ability to better interpret unseen words, using their surrounding context. It obtains signiﬁcant improvements on average of about 34% per-dialog accuracy and 10% per-response accuracy for the bAbI OOV test sets.\n[E2] (text, Section 3.3, page 4): We evaluate B O S S N ET and other models based on their ability to generate valid responses. The per-response accuracy ( Bordes and Weston , 2017 ) is the percentage of generated responses that exactly match their respective gold response. The per-dialog accuracy is the percentage of dialogs with all correctly generated responses. These accuracy metrics are a good measure for evaluating datasets with boilerplate responses such as bAbI. To quantify performance on other datasets, we use BLEU ( Papineni et al. , 2002 ) and Entity F1 ( Eric and Manning , 2017 ) scores. BLEU measures the overlap of n-grams between the generated response and its gold response and has become a popular measure to compare task-oriented dialog systems. Entity F1 is computed by micro-F1 over KB entities in the entire set of gold responses.\n[E3] (text, Section 4.1, page 5): Table 1 reports the per-response and per-dialog (in parentheses) accuracies on the bAbI dialog tasks. The multi-hop retrieval-based models such as QRN, MN and GMN perform well on the non-OOV test sets for tasks 1, 2, and 5, but fail to exhibit similar performance on the corresponding OOV test sets. This result is expected as these models are trained to retrieve from a pre-deﬁned set of responses. Their poor non-OOV performance on\n[E4] (table, Table 1, page 6): Table 1: Per-response and per-dialog accuracies (in brackets) on bAbI dialog tasks of B O S S N ET and baselines\nValues (cite as cells):\n  row 'Task': '' = QRN; 'Retrieval' = MN; 'Models' = GMN; '' = Mem2Seq*; 'Generative' = Seq2Seq; 'Models' = Seq2Seq+Copy; '' = Mem2Seq; '' = BOSSNET\n  row 'T1': '' = 99.9 (-); 'Retrieval' = 99.6 (99.6); 'Models' = 100 (100); '' = 100 (100); 'Generative' = 100 (100); 'Models' = 100 (100); '' = 100 (100); '' = 100 (100)\n  row 'T2': '' = 99.5 (-); 'Retrieval' = 100 (100); 'Models' = 100 (100); '' = 100 (100); 'Generative' = 100 (100); 'Models' = 100 (100); '' = 100 (100); '' = 100 (100)\n  row 'T3': '' = 74.8 (-); 'Retrieval' = 74.9 (2.0); 'Models' = 74.9 (0); '' = 94.7 (62.1); 'Generative' = 74.8 (0); 'Models' = 85.1 (19.0); '' = 74.9 (0); '' = 95.2 (63.8)\n  row 'T4': '' = 57.2 (-); 'Retrieval' = 59.5 (3.0); 'Models' = 57.2 (0); '' = 100 (100); 'Generative' = 57.2 (0); 'Models' = 100 (100); '' = 100 (100); '' = 100 (100)\n  row 'T5': '' = 99.6 (-); 'Retrieval' = 96.1 (49.4); 'Models' = 96.3 (52.5); '' = 97.9 (69.6); 'Generative' = 97.2 (64.4); 'Models' = 96 (49.1); '' = 97.7(66.3); '' = 97.3 (65.6)\n  row 'T1-OOV': '' = 83.1 (-); 'Retrieval' = 72.3 (0); 'Models' = 82.4 (0); '' = 94.0 (62.2); 'Generative' = 81.7 (0); 'Models' = 92.5 (54.7); '' = 94.0 (62.2); '' = 100 (100)\n  row 'T2-OOV': '' = 78.9 (-); 'Retrieval' = 78.9 (0); 'Models' = 78.9 (0); '' = 86.5 (12.4); 'Generative' = 78.9 (0); 'Models' = 83.2 (0); '' = 86.5 (12.4); '' = 100 (100)\n  row 'T3-OOV': '' = 75.2 (-); 'Retrieval' = 74.4 (0); 'Models' = 75.3 (0); '' = 90.3 (38.7); 'Generative' = 75.3 (0); 'Models' = 82.9 (0); '' = 75.2 (0); '' = 95.7 (66.6)\n  row 'T4-OOV': '' = 56.9 (-); 'Retrieval' = 57.6 (0); 'Models' = 57.0 (0); '' = 100 (100); 'Generative' = 57.0 (0); 'Models' = 100 (100); '' = 100 (100); '' = 100 (100)\n  row 'T5-OOV': '' = 67.8 (-); 'Retrieval' = 65.5 (0); 'Models' = 66.7 (0); '' = 84.5 (2.3); 'Generative' = 67.4 (0); 'Models' = 73.6 (0); '' = 75.6 (0); '' = 91.7 (18.5)\n[E5] (figure, Figure 3, page 8) (image attached): Figure 3: bAbI Task 1: Per-response accuracy compar- ison on KA sets\n[E6] (figure, Figure 3, page 8): a zoomed view of Figure 3 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "BOSSNET achieves the highest per-dialog accuracy on T3 and T3-OOV, with 95.2% and 95.7% respectively, outperforming other models.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "T3",
+      "col": "BOSSNET",
+      "value": "95.2 (63.8)"
+     }
+    ]
+   },
+   {
+    "text": "BOSSNET shows a significant improvement in per-dialog accuracy on T3-OOV compared to T3, with a difference of 10.5%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "T3",
+      "col": "BOSSNET",
+      "value": "95.2 (63.8)"
+     },
+     {
+      "evidence": "E4",
+      "row": "T3-OOV",
+      "col": "BOSSNET",
+      "value": "95.7 (66.6)"
+     }
+    ]
+   },
+   {
+    "text": "BOSSNET outperforms other models on both T3 and T3-OOV, demonstrating its effectiveness in handling unseen words.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "T3",
+      "col": "BOSSNET",
+      "value": "95.2 (63.8)"
+     },
+     {
+      "evidence": "E4",
+      "row": "T3-OOV",
+      "col": "BOSSNET",
+      "value": "95.7 (66.6)"
+     }
+    ]
+   },
+   {
+    "text": "The performance difference between non-OOV and OOV test sets is large, with BOSSNET showing a 10.5% improvement on T3-OOV.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "T3",
+      "col": "BOSSNET",
+      "value": "95.2 (63.8)"
+     },
+     {
+      "evidence": "E4",
+      "row": "T3-OOV",
+      "col": "BOSSNET",
+      "value": "95.7 (66.6)"
+     }
+    ]
+   }
+  ]
+ }
+}

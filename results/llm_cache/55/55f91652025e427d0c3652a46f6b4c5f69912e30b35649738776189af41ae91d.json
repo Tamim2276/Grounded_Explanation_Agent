@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 372,
+  "prompt_tokens": 3170,
+  "total_tokens": 3542,
+  "prompt_tokens_details": {
+   "cached_tokens": 221
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the function of the ReOrth Layer in the Projection Block of the Grassmann Network architecture?\nEvidence:\n[E1] (text, Section abstract, page 4): Output Layers As shown in Fig.1, after applying the ProjMap layer, the outputs (i.e., the projection matrices) lie in Euclidean space, and thus can be converted into vector forms. Hence, on the top of the ProjMap layer, classical Euclidean network layers can be employed. For instance, the regular fully connected (FC) layer could be used after the ProjMap layer. The dimensionality of the ﬁlters in the FC layer is typically set to d k × d k − 1 , where d k and d k − 1 are the class number and the dimensionality of the input vector forms respectively. Finally, the common softmax layer can be used for visual classiﬁcation. Training Grassmann Network As most layers in the GrNet model are expressed with complex matrix factorization functions, they cannot be simply reduced to a constructed bottom-up from element-wise calculations. In other words, the matrix backpropgation (backprop) cannot be derived by using traditional matrix that treats element-wise operations in matrix form. As a result, simply using the traditional backprop will break down in the setting. To solve the problem, (Huang and Van Gool 2017; Ionescu, Vantzos, and Sminchisescu 2015) introduced manifold-valued connection weight update rule and matrix backprop respectively. Furthermore, the convergence of the stochastic gradient descent (SGD) algorithm on Riemannian manifolds has also been studied well in (Bottou 2010; Bonnabel 2013). Accordingly, we exploit the training procedure for the proposed GrNet upon these existing works.\n[E2] (text, Section U, page 7): This paper introduced the ﬁrst network architecture to perform deep learning over Grassmann manifolds. Essentially, it is a natural exploration of convolutional networks to perform fully connected convolution, normalization, pooling and Remannian computing on Grassmannian data. In three typical visual classiﬁcation evaluations, our Grassmann networks signiﬁcantly outperformed existing Grassmann learning methods, and performed comparably with state-of-theart methods. Directions for future work include extending the current GrNet to an end-to-end ConvNet+GrNet training system and applying it to other computer vision problems. Acknowledgement: This work is supported by EU Framework Seven project ReMeDi (grant 610902).\n[E3] (text, Section abstract, page 2): idea (Huang et al. 2015b), the FRMap layers are proposed to ﬁrstly perform transformations on input orthonormal matrices of subspaces to generate new matrices by adopting a full rank mapping scheme. Then, the ReOrth layers are developed to normalize the output matrices of the FRMap layers so that they can keep the basic orthogonality. In other words, the normalized data become orthonormal matrices that reside on Stiefel manifold 1 . As well-studied in (Edelman, Arias, and Smith 1998; Hamm and Lee. 2008), the projection metric performing on orthonormal matrices can represent linear subspaces and respect the geometry of Grassmann manifolds, which is actually a quotient manifold of the Stiefel manifold. Accordingly, we develop projection mapping (ProjMap) layers to maintain the Grassmannian property of the resulting data. Meanwhile, the ProjMap layers are able to transfer the resulting Grassmannian data into Euclidean data, which enables the regular Euclidean layers such as softmax layers for classiﬁcation. The ProjMap and softmax layers forms the Output block for GrNet. Additionally, since traditional pooling layers can reduce the network complexity, we also study projection pooling (ProjPooling) layers on the projection matrix form of the resulting orthonormal matrices. As it is non-trivial to perform pooling on non-Euclidean data directly, we develop a Pooling block to combine ProMap, ProjPooling and orthonormal mapping (OrthMap) layers, which respectively achieves Euclidean representation, performs pooling on resulting Euclidean data and transforms the results back to orthonormal data. The proposed GrNet structure is illustrated in Fig.1.\n[E4] (table, Table 1, page 7): Table 1: Results for the AFEW, HDM05 and PaSC datasets. PaSC1/PaSC2 are the control/handheld testings.\nValues (cite as cells):\n  row 'STM-ExpLet': 'AFEW' = 31.73%; 'HDM05' = –; 'PaSC1' = –; 'PaSC2' = –\n  row 'RSR-SPDML': 'AFEW' = 30.12%; 'HDM05' = 48.01%±3.38; 'PaSC1' = –; 'PaSC2' = –\n  row 'DCC': 'AFEW' = 25.78%; 'HDM05' = 41.34%±1.05; 'PaSC1' = 75.83%; 'PaSC2' = 67.04%\n  row 'GDA': 'AFEW' = 29.11%; 'HDM05' = 46.25%±2.71; 'PaSC1' = 71.38%; 'PaSC2' = 67.49%\n  row 'GGDA': 'AFEW' = 29.45%; 'HDM05' = 46.87%±2.31; 'PaSC1' = 66.71%; 'PaSC2' = 68.41%\n  row 'PML': 'AFEW' = 28.98%; 'HDM05' = 47.12%±1.59; 'PaSC1' = 73.45%; 'PaSC2' = 68.32%\n  row 'VGGDeepFace': 'AFEW' = –; 'HDM05' = –; 'PaSC1' = 78.82%; 'PaSC2' = 68.24%\n  row 'DeepO2P': 'AFEW' = 28.54%; 'HDM05' = –; 'PaSC1' = 68.76%; 'PaSC2' = 60.14%\n  row 'SPDNet': 'AFEW' = 34.23%; 'HDM05' = 61.45%±1.12; 'PaSC1' = 80.12%; 'PaSC2' = 72.83%\n  row 'GrNet-0Block': 'AFEW' = 25.34%; 'HDM05' = 51.12%±3.55; 'PaSC1' = 68.52%; 'PaSC2' = 63.92%\n  row 'GrNet-1Block': 'AFEW' = 32.08%; 'HDM05' = 57.73%±2.24; 'PaSC1' = 80.15%; 'PaSC2' = 72.51%\n  row 'GrNet-2Blocks': 'AFEW' = 34.23%; 'HDM05' = 59.23%±1.78; 'PaSC1' = 80.52%; 'PaSC2' = 72.76%\n[E5] (figure, Figure 1, page 3) (image attached): Figure 1: Conceptual illustration of the proposed Grassmann Network (GrNet) architecture. The rectangles in blue represent three basic blocks, i.e., Projection, Pooling and Output blocks, respectively.\nWords printed in the figure: … ���� ��� ����� ������������ ��������� � ProjMap Layer FC&Softmax Layers ���� �������� ���� ���, … � FRMap Layer �� Input Orth ��� ��� ReOrth Layer ��� ��� ����������� ������� ��� ��� ��� ��� ��� ��� ProjMap Layer ProjPooling Layer OrthMap Layer �������� ����� � ���������� �, … �� �����������,�:� ��������� � Projection Block Pooling Block Output Block\n[E6] (figure, Figure 1, page 3): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The ReOrth Layer normalizes the output matrices of the FRMap layers so that they can keep the basic orthogonality.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "the ReOrth layers are developed to normalize the output matrices of the FRMap layers so that they can keep the basic orthogonality."
+     }
+    ]
+   },
+   {
+    "text": "The ReOrth Layer is part of the Projection Block in the Grassmann Network architecture.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "ReOrth Layer"
+     }
+    ]
+   },
+   {
+    "text": "The ReOrth Layer is used to maintain the Grassmannian property of the resulting data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "the ReOrth layers are developed to normalize the output matrices of the FRMap layers so that they can keep the basic orthogonality."
+     }
+    ]
+   },
+   {
+    "text": "The ReOrth Layer is not directly related to the function of the ProjMap layer.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "the ProjMap layers are able to transfer the resulting Grassmannian data into Euclidean data, which enables the regular Euclidean layers such as softmax layers for classification."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 453,
+  "prompt_tokens": 3083,
+  "total_tokens": 3536,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the ChoiceNet model perform on datasets with uniform corruptions?\nEvidence:\n[E1] (text, Section 3.4, page 6): Here, we provide synthetic examples in both regression and classiﬁcation to illustrate how the proposed method can be used to robustly learn the underlying target distribution given a noisy training dataset. Regression Task We ﬁrst focus on how the proposed method can distinguish between the target distribution and noise distributions in a regression task and show empirical evidence that our method can achieve this by estimating the target distribution and the correlation of noise distribution simultaneously. We train on two datasets with the same target function but with different types of corruptions by replacing 50% of the output values whose input values are within 0 to 2 : one uniformly sampled from − 1 to 3 and the other from a ﬂipped target function as shown in Figure 4(a) and 4(c) . Throughout this experiment, we set K = 2 for better visualization. As shown in Figure 4 , ChoiceNet successfully estimates the target function with partial corruption. To further understand how ChoiceNet works, we also plot the correlation of each mixture at each input with different colors. When using the ﬁrst dataset where we ﬂip the outputs whose inputs are between 0 and 2 , the correlations of the second mixture at the corrupt region becomes − 1 (see Figure 4(b) ). This is exactly what we wanted ChoiceNet to behave in that having − 1 correlation will simply ﬂip the output. In other words, the second mixture takes care of the noisy (ﬂipped) data by assigning − 1 correlation while the ﬁrst mixture component reserved for the target distribution is less affected by the noisy training data.\n[E2] (text, Section 1, page 1): The cornerstone of the proposed method is a Cholesky Block in which we employ the Cholesky transform for sampling the weights of a neural network that enables us to model correlated outputs. Similar to Bayesian neural networks [ 5 ], we maintain the probability distributions over the weights, but we also leverage mixture distributions to handle the inconsistencies in a dataset. To the best of our knowledge, this is the ﬁrst approach simultaneously to infer the target distribution and the output correlations using a neural network in an end-to-end manner. We will refer to this framework as ChoiceNet . ChoiceNet is ﬁrst applied to synthetic regression tasks and a real-world regression task where we demonstrate its robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions. Subsequently, we move on to image classiﬁcation tasks using a number of benchmark datasets where we show that it shows comparable or superior performances compared to existing baseline\n[E3] (text, Section 4.2, page 8): Here, we conduct comprehensive classiﬁcation experiments to investigate how ChoiceNet performs on image classiﬁcation tasks with noisy labels. More experimental results on MNIST, CIFAR-10, and a natural language processing task and ablation studies of hyper-parameters can also be found in the supplementary material. CIFAR-10 Comparison We ﬁrst evaluate the performance of our method and compare it with MentorNet [ 10 ], Co-teaching [ 12 ] and F-correction [ 14 ] on noisy CIFAR- 10 datasets. We follow three different noise settings from [ 12 ]: PairFlip- 45% , Symmetry- 50% , and Symmetry- 20% . On ‘Symmetry‘ settings, noisy labels can be assigned to all classes, while, on ‘PairFlip‘ settings, all noisy labels from the same true label are assigned to a single noisy label. A model is trained on a noisy dataset and evaluated on the clean test set. For fair comparisons, we keep other conﬁgurations such as the network topology to be the same as [ 12 ].\n[E4] (table, Table 9, page 16): Table 9: Test accuracies on the MNIST datasets with corrupt labels.\nValues (cite as cells):\n  row '': 'Conﬁguration' = ConvNet; 'Best' = 95.4; 'Corruption p' = 50%; 'Conﬁguration' = ConvNet+Mixup; 'Best' = 97.2; 'Conﬁguration' = ConvNet+CN; 'Best' = 99.2; 'Conﬁguration' = MDN; 'Best' = 97.7; 'Conﬁguration' = ConvNet; 'Best' = 86.3; 'Corruption p' = 80%; 'Conﬁguration' = ConvNet+Mixup; 'Best' = 87.2; 'Conﬁguration' = ConvNet+CN; 'Best' = 98.2; 'Conﬁguration' = MDN; 'Best' = 85.2; 'Conﬁguration' = ConvNet; 'Best' = 76.1; 'Corruption p' = 90%; 'Conﬁguration' = ConvNet+Mixup; 'Best' = 74.7; 'Conﬁguration' = ConvNet+CN; 'Best' = 94.7; 'Conﬁguration' = MDN; 'Best' = 61.4; 'Conﬁguration' = ConvNet; 'Best' = 72.5; 'Conﬁguration' = MDN; 'Best' = 31.2\n  row 'For MNIST experiments,': 'Corruption p' = we randomly shufﬂe a; 'Conﬁguration' = percentage of the; 'Best' = with the; '' = corruption probability p from 50% to 95% and\n  row 'median accuracies after We construct two networks: a with 256 output units (ConvNet)': 'Corruption p' = ﬁve runs for each conﬁguration network with two residual and ChoiceNet with; 'Conﬁguration' = following the blocks [49] with 3 × the same two residual; 'Best' = setting in × 64 blocks; '' = convolutional layers followed by a fully-connected by the MCDN block (ConvNet+CN). We\n  row 'each network for 50 epochs We train each network for 300 and 225 epochs. We apply network as [49].': 'Corruption p' = with a ﬁxed learning rate epochs with a minibatch random horizontal ﬂip and; 'Conﬁguration' = of 1e-5. size of 256. We random crop with; 'Best' = with a 4−pixel-padding; '' = learning rate of 0.1, and it decays by 1/10 after and use a weight decay of 0.0001 for the\n  row 'The classiﬁcation results are and the difference between Here, we also present additional': 'Corruption p' = shown in Table 9 where the accuracies of ChoiceNet experimental results; 'Conﬁguration' = ChoiceNet consistently and the others using the MNIST dataset; 'Best' = outperforms becomes on following; '' = ConvNet and ConvNet+Mixup by a signiﬁcant clear as the corruption probability increases. three different scenarios:\n  row 'Biased label experiments where': 'Corruption p' = we randomly assign; 'Conﬁguration' = the percentage of the; 'Best' = training; '' = to label 0.\n  row 'Random shufﬂe experiments': 'Corruption p' = where we randomly replace; 'Conﬁguration' = the percentage of; 'Best' = training; '' = from the uniform multinomial distribution.\n[E5] (figure, Figure 4, page 6) (image attached): Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions.\nWords printed in the figure: (a) (b) (c) (d)\n[E6] (figure, Figure 4, page 6): a zoomed view of Figure 4 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ChoiceNet successfully estimates the target function with partial corruption.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "As shown in Figure 4, ChoiceNet successfully estimates the target function with partial corruption."
+     }
+    ]
+   },
+   {
+    "text": "The ChoiceNet model performs well on datasets with uniform corruptions.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "We train on two datasets with the same target function but with different types of corruptions by replacing 50% of the output values whose input values are within 0 to 2 : one uniformly sampled from − 1 to 3 and the other from a flipped target function as shown in Figure 4(a) and 4(c) ."
+     }
+    ]
+   },
+   {
+    "text": "ChoiceNet distinguishes between the target distribution and noise distributions in a regression task.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "We first focus on how the proposed method can distinguish between the target distribution and noise distributions in a regression task and show empirical evidence that our method can achieve this by estimating the target distribution and the correlation of noise distribution simultaneously."
+     }
+    ]
+   },
+   {
+    "text": "The performance of ChoiceNet on uniform corruptions is not explicitly stated in the provided evidence.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "We train on two datasets with the same target function but with different types of corruptions by replacing 50% of the output values whose input values are within 0 to 2 : one uniformly sampled from − 1 to 3 and the other from a flipped target function as shown in Figure 4(a) and 4(c) ."
+     }
+    ]
+   }
+  ]
+ }
+}

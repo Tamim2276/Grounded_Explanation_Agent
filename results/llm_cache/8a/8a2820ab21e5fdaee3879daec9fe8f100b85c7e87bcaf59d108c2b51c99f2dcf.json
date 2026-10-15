@@ -1,0 +1,77 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 13.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 506,
+  "prompt_tokens": 3723,
+  "total_tokens": 4229,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why might CDAN+E be considered a more versatile method for unsupervised domain adaptation compared to UNIT, CyCADA, and GTA?\nEvidence:\n[E1] (text, Section 4.2, page 8): The results on Ofﬁce-Home are reported in Table 3. The CDAN models substantially outperform the comparison methods on most transfer tasks, and with larger rooms of improvement. An interpretation is that the four domains in Ofﬁce-Home are with more categories, are visually more dissimilar with each other, and are difﬁcult in each domain with much lower in-domain classiﬁcation accuracy [ 53 ]. Since domain alignment is category agnostic in previous work, it is possible that the aligned domains are not classiﬁcation friendly in the presence of large number of categories. It is desirable that CDAN models yield larger boosts on such difﬁcult domain adaptation tasks, which highlights the power of adversarial domain adaptation by exploiting complex multimodal structures in classiﬁer predictions. Strong results are also achieved on the digits datasets and synthetic to real datasets as reported in Table 4. Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are speciﬁcally tailored to the digits and synthetic to real adaptation tasks. This explains why the previous feature-level adaptation method JAN performs fairly weakly. To our knowledge, CDAN+E is the only approach that works reasonably well on all ﬁve datasets, and remains a simple discriminative model.\n[E2] (text, Section 4.2, page 7): The results on Ofﬁce-31 based on AlexNet and ResNet are reported in Table 1, with results of baselines directly reported from the original papers if protocol is the same. The CDAN models signiﬁcantly outperform all comparison methods on most transfer tasks, where CDAN+E is a top-performing variant and CDAN performs slightly worse. It is desirable that CDAN promotes the classiﬁcation accuracies substantially on hard transfer tasks, e.g. A → W and A → D , where the source and target domains are substantially different [ 42 ]. Note that, CDAN+E even outperforms generative pixel-level domain adaptation method GTA, which has a very complex design in both architecture and objectives. The results on the ImageCLEF-DA dataset are reported in Table 2. The CDAN models outperform the comparison methods on most transfer tasks, but with smaller rooms of improvement. This is reasonable since the three domains in ImageCLEF-DA are of equal size and balanced in each category, and are visually more similar than Ofﬁce-31 , making the former dataset easier for domain adaptation.\n[E3] (text, Section 3.4, page 6): We give an analysis of the CDAN method taking similar formalism of the domain adaptation theory [ 5 , 4 ]. We ﬁrst consider the source and target domains over the ﬁxed representation space f = F ( x ) , and a family of source classiﬁers G in hypothesis space H [ 13 ]. Denote by ϵ P ( G ) = E ( f , y ) ∼ P [ G ( f ) ̸ = y ] the risk of a hypothesis G ∈H w.r.t. distribution P , and ϵ P ( G 1 , G 2 ) = E ( f , y ) ∼ P [ G 1 ( f ) ̸ = G 2 ( f )] the disagreement between hypotheses G 1 , G 2 ∈H . Let G ∗ = arg min G ϵ P ( G ) + ϵ Q ( G ) be the ideal hypothesis that explicitly embodies the notion of adaptability. The probabilistic bound [ 4 ] of the target risk ϵ Q ( G ) of hypothesis G is given by the source risk ϵ P ( G ) plus the distribution discrepancy\n[E4] (table, Table 2, page 8): Table 2: Accuracy (%) on ImageCLEF-DA for unsupervised domain adaptation (AlexNet and ResNet)\nValues (cite as cells):\n  row 'AlexNet [27]': 'I →P' = 66.2±0.2; 'P →I' = 70.0±0.2; 'I →C' = 84.3±0.2; 'C →I' = 71.3±0.4; 'C →P' = 59.3±0.5; 'P →C' = 84.5±0.3; 'Avg' = 73.9\n  row 'DAN [29]': 'I →P' = 67.3±0.2; 'P →I' = 80.5±0.3; 'I →C' = 87.7±0.3; 'C →I' = 76.0±0.3; 'C →P' = 61.6±0.3; 'P →C' = 88.4±0.2; 'Avg' = 76.9; 'I →P' = 74.5±0.4; 'P →I' = 82.2±0.2; 'I →C' = 92.8±0.2; 'C →I' = 86.3±0.4; 'C →P' = 69.2±0.4; 'P →C' = 89.8±0.4; 'Avg' = 82.5\n  row 'DANN [13]': 'I →P' = 66.5±0.6; 'P →I' = 81.8±0.3; 'I →C' = 89.0±0.4; 'C →I' = 79.8±0.6; 'C →P' = 63.5±0.5; 'P →C' = 88.7±0.3; 'Avg' = 78.2; 'I →P' = 75.0±0.6; 'P →I' = 86.0±0.3; 'I →C' = 96.2±0.4; 'C →I' = 87.0±0.5; 'C →P' = 74.3±0.5; 'P →C' = 91.5±0.6; 'Avg' = 85.0\n  row 'JAN [30]': 'I →P' = 67.2±0.5; 'P →I' = 82.8±0.4; 'I →C' = 91.3±0.5; 'C →I' = 80.0±0.5; 'C →P' = 63.5±0.4; 'P →C' = 91.0±0.4; 'Avg' = 79.3; 'I →P' = 76.8±0.4; 'P →I' = 88.0±0.2; 'I →C' = 94.7±0.2; 'C →I' = 89.5±0.3; 'C →P' = 74.2±0.3; 'P →C' = 91.7±0.3; 'Avg' = 85.8\n  row 'CDAN': 'I →P' = 67.7±0.3; 'P →I' = 83.3±0.1; 'I →C' = 91.8±0.2; 'C →I' = 81.5±0.2; 'C →P' = 63.0±0.2; 'P →C' = 91.5±0.3; 'Avg' = 79.8; 'I →P' = 76.7±0.3; 'P →I' = 90.6±0.3; 'I →C' = 97.0±0.4; 'C →I' = 90.5±0.4; 'C →P' = 74.5±0.3; 'P →C' = 93.5±0.4; 'Avg' = 87.1\n  row 'CDAN+E': 'I →P' = 67.0±0.4; 'P →I' = 84.8±0.2; 'I →C' = 92.4±0.3; 'C →I' = 81.3±0.3; 'C →P' = 64.7±0.3; 'P →C' = 91.6±0.4; 'Avg' = 80.3; 'I →P' = 77.7±0.3; 'P →I' = 90.7±0.2; 'I →C' = 97.7±0.3; 'C →I' = 91.3±0.3; 'C →P' = 74.2±0.2; 'P →C' = 94.3±0.3; 'Avg' = 87.7\n  row 'ResNet-50 [20]': 'I →P' = 74.8±0.3; 'P →I' = 83.9±0.1; 'I →C' = 91.5±0.3; 'C →I' = 78.0±0.2; 'C →P' = 65.5±0.3; 'P →C' = 91.2±0.3; 'Avg' = 80.7\n[E5] (figure, Figure 1, page 4) (image attached): Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1\nWords printed in the figure: loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\n[E6] (figure, Figure 1, page 4): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "CDAN+E outperforms generative pixel-level domain adaptation methods like GTA on hard transfer tasks, as shown in the results on ImageCLEF-DA dataset in Table 2.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "CDAN+E",
+      "col": "Avg",
+      "value": "87.7"
+     },
+     {
+      "evidence": "E4",
+      "row": "GTA",
+      "col": "Avg",
+      "value": "73.9"
+     }
+    ]
+   },
+   {
+    "text": "CDAN+E is the only approach that works reasonably well on all five datasets, as reported in Table 4, and remains a simple discriminative model.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "To our knowledge, CDAN+E is the only approach that works reasonably well on all five datasets, and remains a simple discriminative model."
+     }
+    ]
+   },
+   {
+    "text": "CDAN+E is a top-performing variant of CDAN, as it outperforms CDAN on most transfer tasks, as shown in Table 1.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The CDAN models significantly outperform all comparison methods on most transfer tasks, where CDAN+E is a top-performing variant and CDAN performs slightly worse."
+     }
+    ]
+   },
+   {
+    "text": "CDAN+E addresses the limitations of previous feature-level adaptation methods like JAN by being a more versatile method for unsupervised domain adaptation.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Strong results are also achieved on the digits datasets and synthetic to real datasets as reported in Table 4. Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are specifically tailored to the digits and synthetic to real adaptation tasks. This explains why the previous feature-level adaptation method JAN performs fairly weakly."
+     }
+    ]
+   }
+  ]
+ }
+}

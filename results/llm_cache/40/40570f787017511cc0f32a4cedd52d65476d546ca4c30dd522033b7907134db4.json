@@ -1,0 +1,65 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 313,
+  "prompt_tokens": 3133,
+  "total_tokens": 3446,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which sampling strategy for random matrices in CDAN+E leads to the highest average accuracy across all domain adaptation tasks on Office-31? How does this compare to the performance of CDAN+E variants that use random sampling?\nEvidence:\n[E1] (text, Section 4.3, page 8): Ablation Study We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. Table 1 ∼ 4 shows that CDAN+E outperforms CDAN , proving that entropy conditioning can prioritize easy-to-transfer examples and encourage certain predictions. Conditioning Strategies Besides multilinear conditioning, we investigate DANN-[f,g] with the domain discriminator imposed on the concatenation of f and g , DANN-f and DANN-g with the\n[E2] (text, Section 4.2, page 8): The results on Ofﬁce-Home are reported in Table 3. The CDAN models substantially outperform the comparison methods on most transfer tasks, and with larger rooms of improvement. An interpretation is that the four domains in Ofﬁce-Home are with more categories, are visually more dissimilar with each other, and are difﬁcult in each domain with much lower in-domain classiﬁcation accuracy [ 53 ]. Since domain alignment is category agnostic in previous work, it is possible that the aligned domains are not classiﬁcation friendly in the presence of large number of categories. It is desirable that CDAN models yield larger boosts on such difﬁcult domain adaptation tasks, which highlights the power of adversarial domain adaptation by exploiting complex multimodal structures in classiﬁer predictions. Strong results are also achieved on the digits datasets and synthetic to real datasets as reported in Table 4. Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are speciﬁcally tailored to the digits and synthetic to real adaptation tasks. This explains why the previous feature-level adaptation method JAN performs fairly weakly. To our knowledge, CDAN+E is the only approach that works reasonably well on all ﬁve datasets, and remains a simple discriminative model.\n[E3] (text, Section 4.2, page 7): The results on Ofﬁce-31 based on AlexNet and ResNet are reported in Table 1, with results of baselines directly reported from the original papers if protocol is the same. The CDAN models signiﬁcantly outperform all comparison methods on most transfer tasks, where CDAN+E is a top-performing variant and CDAN performs slightly worse. It is desirable that CDAN promotes the classiﬁcation accuracies substantially on hard transfer tasks, e.g. A → W and A → D , where the source and target domains are substantially different [ 42 ]. Note that, CDAN+E even outperforms generative pixel-level domain adaptation method GTA, which has a very complex design in both architecture and objectives. The results on the ImageCLEF-DA dataset are reported in Table 2. The CDAN models outperform the comparison methods on most transfer tasks, but with smaller rooms of improvement. This is reasonable since the three domains in ImageCLEF-DA are of equal size and balanced in each category, and are visually more similar than Ofﬁce-31 , making the former dataset easier for domain adaptation.\n[E4] (table, Table 5, page 9): Table 5: Accuracy (%) of CDAN variants on Ofﬁce-31 for unsupervised domain adaptation (ResNet)\nValues (cite as cells):\n  row 'CDAN+E (w/ gaussian sampling)': 'A →W' = 93.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.2±0.3; 'D →A' = 70.2±0.4; 'W →A' = 67.4±0.4; 'Avg' = 86.4\n  row 'CDAN+E (w/ uniform sampling)': 'A →W' = 94.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.8±0.3; 'D →A' = 70.1±0.4; 'W →A' = 69.4±0.4; 'Avg' = 87.0\n  row 'CDAN+E (w/o random sampling)': 'A →W' = 94.1±0.1; 'D →W' = 98.6±0.1; 'W →D' = 100.0±.0; 'A →D' = 92.9±0.2; 'D →A' = 71.0±0.3; 'W →A' = 69.3±0.3; 'Avg' = 87.7\n[E5] (figure, Figure 2, page 9) (image attached): Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence.\nWords printed in the figure: ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\nValues (cite as cells):\n  row '(a) Multilinear DANN-f (representation)': 'A->W' = 82.2; 'A->D' = 79.9\n  row '(a) Multilinear DANN-g (prediction)': 'A->W' = 79.7; 'A->D' = 77\n  row '(a) Multilinear DANN-[f,g] (concatenation)': 'A->W' = 82.7; 'A->D' = 80.5\n  row '(a) Multilinear CDAN (w/o entropy)': 'A->W' = 93.2; 'A->D' = 89.4\n  row '(a) Multilinear CDAN-E (w/ entropy)': 'A->W' = 94.3; 'A->D' = 93.1\n  row '(c) Discrepancy DANN-f (representation)': 'A->W' = 1.84; 'W->D' = 1.29\n  row '(c) Discrepancy DANN-[f,g] (concatenation)': 'A->W' = 1.49; 'W->D' = 1.16\n  row '(c) Discrepancy CDAN-E (w/ entropy)': 'A->W' = 1.19; 'W->D' = 1.09\n[E6] (figure, Figure 2, page 9): a zoomed view of Figure 2 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "CDAN+E (w/ uniform sampling) performs the best across the randomized variants, as shown in Table 5.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "CDAN+E (w/ uniform sampling)",
+      "col": "Avg",
+      "value": "87.0"
+     }
+    ]
+   },
+   {
+    "text": "CDAN+E (w/ gaussian sampling) performs the second best among the randomized variants, with an average accuracy of 86.4%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "CDAN+E (w/ gaussian sampling)",
+      "col": "Avg",
+      "value": "86.4"
+     }
+    ]
+   },
+   {
+    "text": "CDAN+E (w/o random sampling) performs the best among all CDAN variants, with an average accuracy of 87.7%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "CDAN+E (w/o random sampling)",
+      "col": "Avg",
+      "value": "87.7"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 362,
+  "prompt_tokens": 3338,
+  "total_tokens": 3700,
+  "prompt_tokens_details": {
+   "cached_tokens": 221
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of OpenIE in Step 1 of TFBA?\nEvidence:\n[E1] (text, Section 3.2, page 4): • X 1 ∈ R n 2 × n 3 × m + constructed out of the tuples in T by dropping the subject argument and aggregating resulting tuples i.e., X 1 The proposed framework TFBA for inducing higher order schemata involves the following two steps. • Step 1 : In this step, TFBA factorizes multiple lower-order overlapping tensors, X 1 , X 2 , and X 3 , derived from X to induce binary schemata. This step is illustrated in Figure 1 and we discuss details in Section 3.2.1 . • Step 2 : In this step, TFBA connects multiple binary schemata identiﬁed above to induce higher-order schemata. The method accomplishes this by solving a constrained clique problem. This step is illustrated in Figure 2 and we discuss the details in Section 3.2.2 . 3.2.1 Step 1: Back-off Tensor Factorization A schematic overview of this step is shown in Figure 1 . TFBA ﬁrst preprocesses the corpus and extracts OpenIE tuple set T out of it. The 4-mode tensor X is constructed out of T . Instead of performing factorization of the higher-order tensor X as in Section 3.1 , TFBA creates three tensors out of X : X 1\n[E2] (text, Section 3.1, page 3): Given a text corpus, we use OpenIEv5 ( Mausam , 2016 ) to extract tuples. Consider the following sentence “ Federer won against Nadal at Wimbledon. ”. Given this sentence, OpenIE extracts the 4-tuple (Federer, won, against Nadal, at Wimbledon) . We lemmatize the relations in the tuples and only consider the noun phrases as arguments. Let T represent the set of these 4-tuples. We can construct a 4-order tensor X ∈ R n 1 × n 2 × n 3 × m + from T . Here, n 1 is the number of subject noun phrases (NPs), n 2 is the number of object NPs, n 3 is the number of other NPs, and m is the number of relations in T . Values in the tensor correspond to the frequency of the tuples. In case of 5-tuples of the form (subject, relation, object, other-1, other-2) , we split the 5-tuples into two 4-tuples of the form (subject, relation, object, other-1) and (subject, relation, object, other-2) and frequency of these 4- tuples is considered to be same as the original 5- tuple. Factorizing the tensor X results in discovering latent categories of NPs, which help in in-\n[E3] (text, Section 4, page 6): In this section, we evaluate the performance of TFBA for the task of HRSI. We also propose a baseline model for HRSI called HardClust. HardClust : We propose a baseline model called the Hard Clustering Baseline (HardClust) for the task of higher order relation schema induction. This model induces schemata by grouping perrelation NP arguments from OpenIE extractions. In other words, for each relation, all the Noun Phrases (NPs) in ﬁrst argument form a cluster that represents the subject of the relation, all the NPs in the second argument form a cluster that represents object and so on. Then from each cluster, the top most frequent NPs are chosen as the representative NPs for the argument type. We note that this method is only able to induce one schema per relation. Datasets: We run our experiments on three datasets. The ﬁrst dataset (Shootings) is a collection of 1,335 documents constructed from a publicly available database of mass shootings in the United States. The second is New York Times Sports (NYT Sports) dataset which is a collection of 20,940 sports documents from the period 2005 and 2007. And the third dataset (MUC) is a set of 1300 Latin American newswire documents about terrorism events. After performing the processing steps described in Section 3 , we obtained 357,914 unique OpenIE extractions from the NYT Sports dataset, 10,847 from Shootings dataset, and 8,318 from the MUC dataset. However, in order to properly analyze and evaluate the model, we consider only the 50 most frequent relations in the datasets and their corresponding OpenIE extractions. This is done to avoid noisy OpenIE extractions to yield better data quality and to aid subsequent manual evaluation of the data. We construct input tensors\n[E4] (table, Table 4, page 8): Table 4: Examples of schemata induced by TFBA. Please note that some of them are 3-ary while others are 4-ary. For details about schema induction, please refer to Section 3.2 .\nValues (cite as cells):\n  row '': 'NPs from the induced categories' = Shootings; 'NPs from the induced categories' = NYT sports\n  row 'leave⟨A6, B0, C7⟩': 'NPs from the induced categories' = A6: shooting, shooting incident, double shooting B0: one person, two people, three people C7: dead, injured, on edge; 'Evaluator Judgment' = valid; '(Human) Suggested Label' = < shooting > < people > <injured >\n  row 'identify⟨A1, B1, C5, C6⟩': 'NPs from the induced categories' = A1: police, ofﬁcers, huntsville police B1: man, victims, four victims C5: sunday, shooting staurday, wednesday afternoon C6: apartment, bedroom, building in the neighborhood; 'Evaluator Judgment' = valid; '(Human) Suggested Label' = < police > < victim(s)> <day/time > <place >\n  row 'shoot⟨A7, B6, C1⟩': 'NPs from the induced categories' = A7: gunman, shooter, smith B6: freeman, slain woman, victims C1: friday, friday night, early monday morning; 'Evaluator Judgment' = valid; '(Human) Suggested Label' = < perpetrator > <victim > < time>\n  row 'shoot⟨A4, B2, C13⟩': 'NPs from the induced categories' = A4: <num>-year-old man, <num>-year-old george reavis, <num>-year-old brockton man B2: in the leg, in the head, in the neck C13: in macon, in chicago, in an alley; 'Evaluator Judgment' = valid; '(Human) Suggested Label' = < victim> < body part> < location >\n  row 'say⟨A1, B1, C5⟩': 'NPs from the induced categories' = A1: police, ofﬁcers, huntsville police B1: man, victims, four victims C5: sunday, shooting staurday, wednesday afternoon; 'Evaluator Judgment' = invalid; '(Human) Suggested Label' = –\n  row 'spend⟨A0, B16, C3⟩': 'NPs from the induced categories' = A0: yankees, mets, jets B14: $ <num> million, $ <num>, $ <num> billion C3: <num>, year, last season; 'Evaluator Judgment' = valid; '(Human) Suggested Label' = < team > < money > < year >\n  row 'win⟨A2, B10, C3⟩': 'NPs from the induced categories' = C3: <num>, year, last season A2: red sox, team, yankees B10: world series, title, world cup; 'Evaluator Judgment' = valid; '(Human) Suggested Label' = < year > < team > < championship >; 'NPs from the induced categories' = B10: world series, title, world cup C3: <num>, year, last season A4: umpire, mike cameron, andre agassi; 'Evaluator Judgment' = valid; '(Human) Suggested Label' = < championship > < year >\n  row 'get⟨A4, B4, C1⟩': 'NPs from the induced categories' = B4: ball, lives, grounder C1: back, forward, <num>-yard line MUC; 'Evaluator Judgment' = invalid; '(Human) Suggested Label' = –\n  row 'tell⟨A7, B2, C0⟩': 'NPs ...\n[E5] (figure, Figure 1, page 3) (image attached): Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\n[E6] (figure, Figure 1, page 3): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "In Step 1 of TFBA, OpenIE is used to extract tuples from the text corpus.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "TFBA first preprocesses the corpus and extracts OpenIE tuple set T out of it."
+     }
+    ]
+   },
+   {
+    "text": "The extracted tuples are then used to construct a 4-mode tensor X.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The 4-mode tensor X is constructed out of T."
+     }
+    ]
+   },
+   {
+    "text": "The tensor X is then factorized into three 3-mode tensors, X1, X2, and X3.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "TFBA creates three tensors out of X: X1."
+     },
+     {
+      "evidence": "E5",
+      "observation": "The figure shows the joint Tucker decomposition of X1, X2, and X3."
+     }
+    ]
+   },
+   {
+    "text": "The factorization of these tensors results in the induction of binary schemata.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "This joint factorization is performed using shared latent factors A, B, and C, resulting in binary schemata."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 321,
+  "prompt_tokens": 3513,
+  "total_tokens": 3834,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different types of features used by the Layout-induced Video Representation Network?\nEvidence:\n[E1] (text, Section front, page 1): Layout-induced Video Representation for\n[E2] (text, Section abstract, page 1): We address scene layout modeling for recognizing agentin-place actions, which are actions associated with agents who perform them and the places where they occur, in the context of outdoor home surveillance. We introduce a novel representation to model the geometry and topology of scene layouts so that a network can generalize from the layouts observed in the training scenes to unseen scenes in the test set. This Layout-Induced Video Representation (LIVR) abstracts away low-level appearance variance and encodes geometric and topological relationships of places to explicitly model scene layout. LIVR partitions the semantic features of a scene into different places to force the network to learn generic place-based feature descriptions which are independent of speciﬁc scene layouts; then, LIVR dynamically aggregates features based on connectivities of places in each speciﬁc scene to model its layout. We introduce a new Agent-in-Place Action (APA) dataset 1 to show that our method allows neural network models to generalize signiﬁ- cantly better to unseen scenes.\n[E3] (text, Section 3.1, page 3): The network architecture of layout-induced video representation is shown in Fig. 4 . For each video, we stack sampled frames of a video clip into a 4-D tensor. Our backbone network is similar to the architecture of ReMotENet [ 50 ],\n[E4] (table, Table 1, page 6): Table 1. The Path from Traditional 3D ConvNets to our Methods. B/L1 and B/L2 are baseline models with raw pixels and and ConcateMap as input, respectively. For our proposed models: V1 uses segmentation maps to extract place-based feature descriptions only. V3 applies distance-based place discretization for some places. Both V1 and V3 use a FC layer to aggregate place features; V2 and V4 uses topological feature aggregation. H and FPS2 indicates using higher resolutions and FPS, and MF means using more ﬁlters per conv layer. Besides our baselines, we also compare LIVR with two state-of-the-art action recognition methods: [ 50 , 43 ].\nValues (cite as cells):\n  row '3D ConvNet?': 'B/L1' = ✓; 'B/L2' = ✓; 'B/L2 +MF' = ✓; 'LIVR- V1' = ✓; 'LIVR- V2' = ✓; 'LIVR- V3' = ✓; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'ConcateMap?': 'B/L1' = ; 'B/L2' = ✓; 'B/L2 +MF' = ✓; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ; 'LIVR- V4+MF' = ; 'LIVR- V4+FPS2' = ; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'place-based feature description?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ✓; 'LIVR- V2' = ✓; 'LIVR- V3' = ✓; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'distance-based place discretization?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ✓; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'topological feature aggregation?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ✓; 'LIVR- V3' = ; 'LIVR- V4' = ✓; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'higher resolutions?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ✓; 'LIVR- V4+MF' = ; 'LIVR- V4+FPS2' = ; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'more ﬁlters?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ✓; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ; 'LIVR- V4+MF' = ✓; 'LIVR- V4+FPS2' = ; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'higher FPS?': 'B/L1' = ; 'B/L2' = ; 'B/L2 +MF' = ; 'LIVR- V1' = ; 'LIVR- V2' = ; 'LIVR- V3' = ; 'LIVR- V4' = ; 'LIVR- V4+H' = ; 'LIVR- V4+MF' = ; 'LIVR- V4+FPS2' = ✓; 'TSN [43]' = -; 'ReMotENet [50]' = -\n  row 'Observed scenes mAP': 'B/L1' = 51.09; 'B/L2' = 54.12; 'B/L2 +MF' = 53.02; 'LIVR- V1' = 55.69; 'LIVR- V2' = 57.12; 'LIVR- V3' = 58.02; 'LIVR- V4' = 59.71; 'LIVR- V4+H' = 59.64; 'LIVR- V4+MF' = 59.52; 'LIVR- V4+FPS2' = 59.01; 'TSN [43]' = 56.71; 'ReMotENet [50]' = 55.92\n  row 'Unseen scenes mAP': 'B/L1' = 19.21; 'B/L2' = 21.16; 'B/L2 +MF' = 20.45; 'LIVR- V1' = 41.57; 'LIVR- V2' = 43.78; 'LIVR- V3' = 47.76; 'LIVR- V4' = 50.65; 'LIVR- V4+H' = 49.03; 'LIVR- V4+MF' = 50.98; 'LIVR- V4+FPS2' = 49.56; 'TSN [43]' = 23.21; 'ReMotENet [50]' = 22.05\n[E5] (figure, Figure 4, page 3) (image attached): Figure 4. Layout-induced Video Representation Network: The dashed blue box indicates a shared 3D ConvNet to extract low- level features. We utilize the segmentation maps to decompose features into different places, and the solid blue boxes indicate that we train place-based models to extract place-based feature descriptions. When relevant to the activities of interest, we con- duct distance-based place discretization to model moving direc- tions; ﬁnally, we leverage the connectivity of places to aggregate the place-based feature descriptions at inference level.\nWords printed in the figure: NN-­‐ sidewalk NN-­‐ street NN-­‐ porch NN-­‐ shared frame differencing ….. Topological Feature Aggregation ….. <vehicle, move along, street> <person, stay, porch> Semantic Feature Decomposition porch walkway street sidewalk NN-­‐w1 NN-­‐w2 NN-­‐w3 Place based Feature Descriptions <person, move toward (home), walkway> Distance based Place Discretization\n[E6] (figure, Figure 4, page 3): a zoomed view of Figure 4 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Layout-induced Video Representation Network uses place-based feature descriptions, distance-based place discretization, and topological feature aggregation.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows the network architecture with these three components"
+     }
+    ]
+   },
+   {
+    "text": "The network extracts low-level features using a shared 3D ConvNet.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The dashed blue box indicates a shared 3D ConvNet"
+     }
+    ]
+   },
+   {
+    "text": "The network decomposes features into different places using segmentation maps.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The solid blue boxes indicate that we train place-based models to extract place-based feature descriptions"
+     }
+    ]
+   },
+   {
+    "text": "The network uses distance-based place discretization to model moving directions.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The text mentions 'distance-based place discretization to model moving directions'"
+     }
+    ]
+   }
+  ]
+ }
+}

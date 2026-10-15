@@ -1,0 +1,89 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 14.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 646,
+  "prompt_tokens": 2388,
+  "total_tokens": 3034,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the BOSSNET with multi-hop encoder performs better on bAbI tasks 3 and 5 compared to the 1-hop encoder, and how this relates to the tasks themselves?\nEvidence:\n[E1] (text, Section 4.1, page 5): tasks 3 and 4 is attributed to an error in the bAbI dataset construction, due to which, the non-OOV and OOV test conditions are the same for these tasks (see Appendix). A simple generative model (Seq2Seq) achieves accuracies comparable to the multi-hop retrieval models. Enabling it with the ability to copy from the context (Seq2Seq+Copy) shows a considerable increase in performance, especially on the OOV test sets (and non-OOV tests for tasks 3 and 4). The strong performance of simple sequence encoders when compared with multi-hop encoders (in retrieval models) raises a question about the value of multi-hop inference. Mem2Seq answers this question, by obtaining improvements in several tasks, speciﬁcally on their OOV test sets. This clearly shows that multi-hop inference and the copy mechanism are essentials for task-oriented dialogs. Despite gains from the Mem2Seq model, the performance difference between the non-OOV and OOV test sets remains large. B O S S N ET succeeds to bridge this gap with its ability to better interpret unseen words, using their surrounding context. It obtains signiﬁcant improvements on average of about 34% per-dialog accuracy and 10% per-response accuracy for the bAbI OOV test sets.\n[E2] (text, Section F, page 12): Table 14 shows the performance of bAbI tasks and CamRest on two B O S S N ET encoder settings. Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant. We also see substantial improvements on CamRest in both BLEU and entity F1 metric.\n[E3] (text, Section 4.2, page 6): and the other baselines to changes in the KB. We perform this experiment on 4 different tasks, namely bAbI tasks 1 and 5, CamRest, and SMD. Figures 3 and 4 show the per-response accuracies of the two bAbI dialog tasks plotted against the percentage of unseen entities in KA sets. From Figure 3 we observe that B O S S N ET remains immune to any variablity in the KB content, whereas the performance of Mem2Seq and Seq2Seq models drops drastically due to their inability to capture semantic representations of the injected KB entities. We see a similar trend in Figure 4 , but here all the models show a drop in performance, with B O S S N ET appearing the most steady. We explain this trend using the example dialog in Table 4 . In the current dialog context, the system is required to provide the address of the selected restaurant, but since more than one restaurant in the KB is unseen, it becomes ambiguous for the network to identify\n[E4] (table, Table 14, page 14): Table 14: Ablation study: impact of hops in B O S S N ET encoder\nValues (cite as cells):\n  row '': '' = T1; 'bAbI' = T2; 'Dialog' = T3; 'Tasks' = T4; '' = T5; 'bAbI' = T1; 'Dialog' = T2; 'Tasks' = T3; '' = T4; '(OOV)' = T5; '' = BLEU; 'CamRest' = Ent. F1\n  row 'BOSSNET with 1-Hop Encoder': '' = 100; 'bAbI' = 100; 'Dialog' = 92.3; 'Tasks' = 100; '' = 90.5; 'bAbI' = 100; 'Dialog' = 100; 'Tasks' = 91.4; '' = 100; '(OOV)' = 89; '' = 10.5; 'CamRest' = 36.9\n  row 'BOSSNET with Multi-Hop Encoder': '' = 100; 'bAbI' = 100; 'Dialog' = 95.2; 'Tasks' = 100; '' = 97.3; 'bAbI' = 100; 'Dialog' = 100; 'Tasks' = 95.7; '' = 100; '(OOV)' = 91.7; '' = 15.2; 'CamRest' = 43.1\n[E5] (figure, Figure 4, page 8) (image attached): Figure 4: bAbI Task 5: Per-response accuracy compar- ison on KA sets\n[E6] (figure, Figure 4, page 8): a zoomed view of Figure 4 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "BOSSNET with multi-hop encoder performs better on bAbI tasks 3 and 5 compared to the 1-hop encoder because it can better interpret unseen words using their surrounding context, as shown in Table 14 and Figure 4.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "BOSSNET with Multi-Hop Encoder",
+      "col": "(OOV)",
+      "value": "91.7"
+     },
+     {
+      "evidence": "E4",
+      "row": "BOSSNET with 1-Hop Encoder",
+      "col": "(OOV)",
+      "value": "89"
+     },
+     {
+      "evidence": "E5",
+      "observation": "BOSSNET with multi-hop encoder maintains high per-response accuracy even when the percentage of unseen entities in the response increases, as shown in Figure 4."
+     }
+    ]
+   },
+   {
+    "text": "The tasks 3 and 5 in the bAbI dataset require inferencing over KB tuples to recommend a restaurant, which is a characteristic of these tasks.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant."
+     }
+    ]
+   },
+   {
+    "text": "The performance of simple sequence encoders is comparable to multi-hop retrieval models on bAbI tasks 3 and 4, which are attributed to an error in the bAbI dataset construction.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "tasks 3 and 4 is attributed to an error in the bAbI dataset construction, due to which, the non-OOV and OOV test conditions are the same for these tasks (see Appendix)."
+     }
+    ]
+   },
+   {
+    "text": "The BOSSNET model with multi-hop encoder outperforms the 1-hop encoder on bAbI tasks 3 and 5, as shown in Table 14, which indicates that the multi-hop encoder is more effective in handling unseen words and context, especially in tasks that require inferencing over KB tuples.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "BOSSNET with Multi-Hop Encoder",
+      "col": "bAbI",
+      "value": "100"
+     },
+     {
+      "evidence": "E4",
+      "row": "BOSSNET with 1-Hop Encoder",
+      "col": "bAbI",
+      "value": "100"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 440,
+  "prompt_tokens": 2330,
+  "total_tokens": 2770,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs the best when there are a lot of outliers in the data?\nEvidence:\n[E1] (text, Section 1, page 1): The cornerstone of the proposed method is a Cholesky Block in which we employ the Cholesky transform for sampling the weights of a neural network that enables us to model correlated outputs. Similar to Bayesian neural networks [ 5 ], we maintain the probability distributions over the weights, but we also leverage mixture distributions to handle the inconsistencies in a dataset. To the best of our knowledge, this is the ﬁrst approach simultaneously to infer the target distribution and the output correlations using a neural network in an end-to-end manner. We will refer to this framework as ChoiceNet . ChoiceNet is ﬁrst applied to synthetic regression tasks and a real-world regression task where we demonstrate its robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions. Subsequently, we move on to image classiﬁcation tasks using a number of benchmark datasets where we show that it shows comparable or superior performances compared to existing baseline\n[E2] (text, Section 4.1, page 7): The average absolute ﬁtting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ). Figure 6(d) - 6(f) show the ﬁtting results along with training data. While our proposed method is built on top of an MDN, it is worthwhile noting the severe performance degradation of an MDN with an extreme noise level ( 60% ). It is mainly because an MDN fails to allocate high mixture probability on the mixture corresponds to the target distribution as there are no dependencies among different mixtures.\n[E3] (text, Section 4.1, page 7): Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method. We compare our method with standard feedforward networks using four different loss functions: standard L 2 -loss, L 1 -loss which is known to be robust to outliers, a robust loss (RL) function proposed in [ 21 ], and a leaky robust loss (LeakyRL) function where the results are shown in Table 5 . Implementation details can be found in the supplementary material.\n[E4] (table, Table 5, page 14): Table 5: The RMSEs of compared methods on the Boston Housing Dataset\nValues (cite as cells):\n  row '0%': 'ChoiceNet' = 3.29; 'L2' = 3.22; 'L1' = 3.26; 'RL' = 4.28; 'LeakyRL' = 3.36; 'MDN' = 3.46\n  row '10%': 'ChoiceNet' = 3.99; 'L2' = 5.97; 'L1' = 5.72; 'RL' = 6.36; 'LeakyRL' = 5.71; 'MDN' = 6.5\n  row '20%': 'ChoiceNet' = 4.77; 'L2' = 7.51; 'L1' = 7.16; 'RL' = 8.08; 'LeakyRL' = 7.08; 'MDN' = 8.62\n  row '30%': 'ChoiceNet' = 5.94; 'L2' = 9.04; 'L1' = 8.65; 'RL' = 10.54; 'LeakyRL' = 8.67; 'MDN' = 8.97\n  row '40%': 'ChoiceNet' = 6.80; 'L2' = 9.88; 'L1' = 9.69; 'RL' = 10.94; 'LeakyRL' = 9.68; 'MDN' = 10.44\n[E5] (figure, Figure 6, page 7) (image attached): Figure 6: (a-c) Average ﬁtting errors while varying the outlier rates and (e-f) ﬁtting results of the compared methods with 60% outliers using cosexp , linear , and step functions.\nWords printed in the figure: (a) (b) (c) (d) (e) (f)\n[E6] (figure, Figure 6, page 7): a zoomed view of Figure 6 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ChoiceNet outperforms or shows comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The average absolute fitting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% )."
+     }
+    ]
+   },
+   {
+    "text": "ChoiceNet demonstrates robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "ChoiceNet is first applied to synthetic regression tasks and a real-world regression task where we demonstrate its robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions."
+     }
+    ]
+   },
+   {
+    "text": "ChoiceNet shows comparable or superior performances compared to existing baseline methods.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Subsequently, we move on to image classification tasks using a number of benchmark datasets where we show that it shows comparable or superior performances compared to existing baseline"
+     }
+    ]
+   },
+   {
+    "text": "The proposed method outperforms or shows comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% ).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The average absolute fitting errors of three different functions are shown in Figure 6(a) - 6(c) , respectively where we can see that the proposed method outperforms or show comparable results with low outlier rates and shows superior performances with a high outlier rate ( > 50% )."
+     }
+    ]
+   }
+  ]
+ }
+}

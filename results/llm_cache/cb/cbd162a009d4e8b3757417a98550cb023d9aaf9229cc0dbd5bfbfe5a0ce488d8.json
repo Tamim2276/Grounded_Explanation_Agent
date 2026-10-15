@@ -1,0 +1,85 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 11.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 500,
+  "prompt_tokens": 2352,
+  "total_tokens": 2852,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?\nEvidence:\n[E1] (text, Section 3.3, page 4): The input to the network is a 256 × 256 RGB, normal and view direction images I showing the appearance of a single material Fig. 4 , c. Using an image instead of a plain list of samples allows the network to reason about spatial arrangement of values, e. g., detecting shapes and relations of highlights. The output is a 3360-dimensional vector Θ( I | φ ) that describes the internal parameters of a network producing the appearance of I . The network Θ has eight layers, reducing resolution until a fully-connected layer. Training now minimizes for\n[E2] (text, Section 5.4, page 7): Finally, we quantify the joint material-and-segmentation task from Sec. 3.4 . We perform the same split as in the previous section, however, now on the M ULTI M ATERIAL variant. For the re-synthesis to new views we use the ground truth segmentation in the new view (our method only produces the segmentation in all old views). We here compare to a competitor, where the image is ﬁrst segmented using k -means clustering on normals and RGB (same weight, as both have a similar range) and material is estimated for each segment in consecution. Tbl. 1 , bottom part shows the quantitative results and Fig. 9 the qualitative outcome. On average, we achieve an DSSIM error of .133 for P OINT L IGHT and .122 for E NVI - RONMENT M AP . The greedy method performs worse ( . 161 and . 154 ), as it segments highlights into individual parts. While the method can understand that highlights belong “to the rest” of a material, sometimes they end up in different clusters, as seen in Fig. 8 , middle and less in the bottom of Fig. 9 .\n[E3] (text, Section 4, page 5): the real world is to take many photos at many exposure settings of many geometric objects under varying illuminations. Regrettably, this does not scale well to a high number of samples due to the curse of dimensionality encountered with so many parameters (the product of geometry, material, illumination and view). Also it would be difﬁcult to manually decorate them with ground-truth material segmentation. Instead, we suggest to use photo-realistically rendered imagery. We acquired ﬁve production-quality 3D objects from a model repository. As most of our architectures consider images simply as a list of 4D samples, without spatial layout, this comparatively low number of models appears adequate. Each model was assigned multiple (three) or one physicallyplausible (layered GGX shading) materials organized on the objects surface in a complex and natural spatial arrangement. Before rendering, we randomize the hue of the diffuse component. For illumination, we used 20 different HDR environment maps. For each model, 32 different but equidistant view points on a circle around the object, with a random elevation, were used. Overall, this results in 5 × 20 × 32=3200 images. Note, the number of photos that would be required to exhaustively cover 4D; an order of magnitude higher. As the views and materials are randomized, no sharing between test and train sets exists. Geometry i. e., certain combinations of normals and view directions, might occur both in test and training data. We perform the same split into test and training for all tasks.\n[E4] (table, Table 2, page 8): Table 2. DSSIM (less is better) error on real data.\nValues (cite as cells):\n  row '': 'Same' = OUR; '' = OUR; 'Novel view' = RM++; '' = RM\n  row 'DSSIM Error': 'Same' = .069; '' = .079; 'Novel view' = .090; '' = .127\n  row 'Source DAM': 'Same' = ; '' = ; 'Novel view' = ; '' = \n[E5] (figure, Figure 9, page 8) (image attached): Figure 9. Results of joint material segmentation and estimation for two samples (rows) . In every part we show a re-synthesis, as well as two estimated materials and the resulting mask. The insets in the last row show that, while not all reﬂection details are reproduced, ours is free of color shifts around the highlights and mostly a low- frequency approximation of the environment reﬂected.\n[E6] (figure, Figure 9, page 8): a zoomed view of Figure 9 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The reconstructions are compared to the original samples in terms of DSSIM error, which is a measure of similarity between the original and the reconstructed images.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "Same",
+      "value": ".069"
+     },
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "Novel view",
+      "value": ".090"
+     }
+    ]
+   },
+   {
+    "text": "The reconstructions are visually compared to the original samples in Figure 9, where the re-synthesis and estimated materials are shown alongside the ground truth.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The reconstructions are visually compared to the original samples in Figure 9, where the re-synthesis and estimated materials are shown alongside the ground truth."
+     }
+    ]
+   },
+   {
+    "text": "The reconstructions are quantitatively compared to the original samples using DSSIM error, which is a measure of similarity between the original and the reconstructed images.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "Same",
+      "value": ".069"
+     },
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "Novel view",
+      "value": ".090"
+     }
+    ]
+   },
+   {
+    "text": "The reconstructions are qualitatively compared to the original samples in Figure 9, where the re-synthesis and estimated materials are shown alongside the ground truth.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The reconstructions are visually compared to the original samples in Figure 9, where the re-synthesis and estimated materials are shown alongside the ground truth."
+     }
+    ]
+   }
+  ]
+ }
+}

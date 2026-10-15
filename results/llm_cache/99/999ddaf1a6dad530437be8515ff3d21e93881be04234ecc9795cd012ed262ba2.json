@@ -1,0 +1,101 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 14.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 634,
+  "prompt_tokens": 2388,
+  "total_tokens": 3022,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nEvidence:\n[E1] (text, Section 1, page 1): we move away from the pixel-based nature of implicit imagebased representations into a deep representation, but without any explicit reconstruction, as we do not target a direct mapping to any explicit reﬂectance model or illumination either. Still, we show that such a representation can be used to solve actual tasks, such as image synthesis, appearance acquisition and estimation-and-segmentation of appearance. This is enabled by four contributions: First, we will introduce a generalization of 2D reﬂectance maps [ 13 ] to 4D, which we call an Appearance Map (AM). AMs represent appearance for varying geometry under varying views. This allows freely changing the viewer and surface geometry, which is not possible for classic reﬂectance maps that ﬁx the relation between view and illumination (cf. Fig. 1 ). Second, while classic Reﬂectance Maps (RM) can be simply tabulated using a single 2D image, the full appearance is a 4D phenomenon that is more challenging to represent and process. Storing 4D appearance as a table, modestly resolving 10 degree features, would require storing (and somehow also capturing) 36 4 = 17 M ; impractical. Instead, we suggest using DAMs, neural networks that compactly represent AMs in only a couple of thousand parameters. This representation is efﬁcient, does not require any look-ups and\n[E2] (text, Section 1, page 1): The visual appearance of an object depends on the combination of four main factors: viewer, geometry, material and illumination. When capturing and processing appearance, one wishes to change one or more of those factors and predict what the new appearance is. This can be achieved using methods ranging from implicit image-based representations [ 6 , 13 ] to explicit Computer Graphics-like representations [ 27 ]. Implicit methods take a couple of photos as input and allow to predict high-quality imagery in a limited set of conditions, but modest ﬂexibility, e. g., interpolating an image between two photos but not extrapolating to new views. Explicit representations allow for more ﬂexibility when acquiring Phong parameters and HDR illumination maps [ 27 ], but incur substantial acquisition effort, e. g., taking a large number of calibrated (HDR) photos. DAMs propose a new direction to represent appearance:\n[E3] (text, Section 1, page 2): is differentiable. In addition, it can be learned effectively from images or video frames with a known viewer position and surface orientation. Applying this representation to new view positions and surface orientations can be done at speed competitive to classic rendering or RMs, i. e., within milliseconds for full images. Acquiring a DAM requires learning a deep model for every new appearance in practice. This would incur substantial computational effort, i. e., running an optimization compared to capturing a RM image in seconds. Addressing this, our third contribution suggests to use another deep (convolutional) neural network to map images showing an appearance to a DAM ([ 17 , 34 , 14 ], one-shot learning [ 8 ], “life-long”, or “continual” learning). This capture requires Fourth, the DAM representation can be used for joint material estimation-and-segmentation, a generalization of the previous objective. Here the input is an image with a known number of n materials, and output is n different DAMs, and a segmentation network that maps every pixel to a n weights.\n[E4] (table, Table 2, page 8): Table 2. DSSIM (less is better) error on real data.\nValues (cite as cells):\n  row '': 'Same' = OUR; '' = OUR; 'Novel view' = RM++; '' = RM\n  row 'DSSIM Error': 'Same' = .069; '' = .079; 'Novel view' = .090; '' = .127\n  row 'Source DAM': 'Same' = ; '' = ; 'Novel view' = ; '' = \n[E5] (figure, Figure 1, page 1) (image attached): Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) .\nWords printed in the figure: Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\n[E6] (figure, Figure 1, page 1): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The appearance of the sphere in the re-synthesis using DAMs is more consistent across different views compared to the reference image and the re-synthesis using reflectance maps.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The sphere appears more uniform and less distorted in the DAM re-synthesis across different views."
+     },
+     {
+      "evidence": "E6",
+      "observation": "The DAM re-synthesis maintains the sphere's appearance more consistently across different views, as seen in the zoomed view of Figure 1."
+     }
+    ]
+   },
+   {
+    "text": "The DAM re-synthesis shows less variation in appearance across different views compared to the reference image and the reflectance maps.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The sphere appears more uniform and less distorted in the DAM re-synthesis across different views."
+     },
+     {
+      "evidence": "E6",
+      "observation": "The DAM re-synthesis maintains the sphere's appearance more consistently across different views, as seen in the zoomed view of Figure 1."
+     }
+    ]
+   },
+   {
+    "text": "The DAM re-synthesis appears to have a smoother transition between different views compared to the reference image and the reflectance maps.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The sphere appears more uniform and less distorted in the DAM re-synthesis across different views."
+     },
+     {
+      "evidence": "E6",
+      "observation": "The DAM re-synthesis maintains the sphere's appearance more consistently across different views, as seen in the zoomed view of Figure 1."
+     }
+    ]
+   },
+   {
+    "text": "The DAM re-synthesis shows less DSSIM error compared to the reference image and the reflectance maps in novel view conditions.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "'Novel view'",
+      "value": ".090"
+     },
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "'Same'",
+      "value": ".069"
+     },
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "'Novel view'",
+      "value": ".127"
+     },
+     {
+      "evidence": "E4",
+      "row": "DSSIM Error",
+      "col": "'Same'",
+      "value": ".079"
+     }
+    ]
+   }
+  ]
+ }
+}

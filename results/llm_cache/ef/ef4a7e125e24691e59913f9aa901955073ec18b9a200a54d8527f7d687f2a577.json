@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 352,
+  "prompt_tokens": 3533,
+  "total_tokens": 3885,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the decline probability of an expert and whether or not they have a \"friend\" who has already declined?\nEvidence:\n[E1] (text, Section 1, page 2): The ranking score S qi was deﬁned by only considering the expertise matching degree between q and the expert e i (Cf. the ﬁrst term in Eq. (1)). One method is to use language models [Zhai and Lafferty, 2001], which estimates the generative probability of a query given each document (expert-related document here) using a smoothed word distribution. Afterwards, topic models have been used to model latent topics in order to improve the matching accuracy [Mimno and McCallum, 2007; Riahi et al. , 2012; Tang et al. , 2008]. However, all these models do not consider the probability that expert e i accepts to answer the query q . Algorithmically, the difﬁculty is how to deﬁne the second term in Eq. (1). Another challenge, in practical scenarios, is the lack of sufﬁcient labeled data. One potential solution to this end is weakly supervised learning [Crandall and Huttenlocher, 2006], which essentially leverages some kind of correlation between training instances to propagate the labeled information to unlabeled instances. Widely used correlations include similarity and links (e.g., friend or coauthor relationships). Figure 1 shows the decline probability of an expert, conditioned on whether or not the expert has a “friend” who has already declined. We see correlation indeed exists in all the datasets used in our experiments (Cf. § 4 for details of the datasets).\n[E2] (text, Section 1, page 2): or expertise. Methods using probabilistic model [Mimno and McCallum, 2007], network analysis [Zhang et al. , 2007], and embedding [Han et al. , 2016] have been developed. However, they did not consider the experts’ acceptance probability. A few systems have been developed to make reviewer recommendations, e.g., AMiner [Tang et al. , 2008]. Toutiao organized a data challenge to predict the probability that an expert would accept the invitation to answer speciﬁc questions. 3 Methodologies Given a query (e.g., question/paper) q , our goal is to ﬁnd experts with sufﬁcient knowledge who are willing to answer the question or review the paper, with limited amount of labeled data. Let us consider a set of N candidate experts E = { e 1 , · · · , e N } . The general problem can be then formalized as seeking a ranking function to quantify each expert e i ’s expertise degree and acceptance probability simultaneously.\n[E3] (text, Section 1, page 3): ory [Turner and Oakes, 1986; Tajfel and Turner, 2004], which suggests that people with the same social identity (e.g., position, afﬁliation, age, etc.) tend to share the same social behavior. For example, in an online community, users with the same job tend to accept/decline the same question invitation; in the paper-reviewer recommendation setting, researchers from the same organization are more likely to decline an invitation at the same time. We formalize the social identify-based correlations into a weakly supervised factor graph (WeakFG) model, to simultaneously learn the expertise matching degree and the acceptance probability with limited labeled data. 3.1 WeakFG: Weakly Supervised Factor Graph We now explain how WeakFG works. In WeakFG, we ﬁrst use the embedding technologies [Mikolov et al. , 2013] to capture semantics of expertise matching and then use a semisupervised graph model to predict whether expert e i will accept or decline an invitation, by considering both local similarity and correlation between experts.\n[E4] (table, Table 1, page 6): Table 1: Performance comparison of different methods.\nValues (cite as cells):\n  row 'Method': '' = ; '' = P@1; '' = P@3; 'QA-Expert' = P@5; '' = MAP; '' = Rprec; '' = P@3; '' = P@5; 'Paper-Reviewer' = P@10; '' = MAP; '' = Rprec\n  row '': '' = max; '' = 36.8; '' = 34.9; 'QA-Expert' = 33.2; '' = 57.4; '' = 55.7; '' = 66.5; '' = 61.6; 'Paper-Reviewer' = 54.7; '' = 76.7; '' = 67.2; '' = max; '' = 33.6; '' = 33.6; 'QA-Expert' = 33.3; '' = 55.1; '' = 53.5; '' = 67.1; '' = 61.8; 'Paper-Reviewer' = 54.8; '' = 77.0; '' = 67.1; '' = max; '' = 37.5; '' = 35.3; 'QA-Expert' = 33.2; '' = 56.7; '' = 53.9; '' = 63.0; '' = 59.3; 'Paper-Reviewer' = 54.1; '' = 72.8; '' = 65.6; '' = max; '' = 40.8; '' = 36.4; 'QA-Expert' = 34.0; '' = 59.5; '' = 56.2; '' = 67.3; '' = 61.5; 'Paper-Reviewer' = 54.6; '' = 76.3; '' = 67.2; '' = max; '' = 36.2; '' = 34.4; 'QA-Expert' = 33.2; '' = 57.3; '' = 55.6; '' = 69.6; '' = 62.5; 'Paper-Reviewer' = 55.1; '' = 77.7; '' = 68.3\n  row 'LM': '' = avg; '' = 37.5; '' = 36.8; 'QA-Expert' = 33.2; '' = 57.9; '' = 55.6; '' = 69.9; '' = 63.3; 'Paper-Reviewer' = 54.9; '' = 78.2; '' = 68.3\n  row 'BM25': '' = avg; '' = 41.4; '' = 34.6; 'QA-Expert' = 33.3; '' = 59.1; '' = 56.5; '' = 70.2; '' = 63.9; 'Paper-Reviewer' = 55.1; '' = 78.1; '' = 68.4\n  row 'LDA': '' = avg; '' = 32.9; '' = 33.8; 'QA-Expert' = 32.9; '' = 53.6; '' = 51.4; '' = 66.3; '' = 62.6; 'Paper-Reviewer' = 55.2; '' = 75.8; '' = 67.9\n  row 'WMD': '' = avg; '' = 38.2; '' = 38.2; 'QA-Expert' = 34.1; '' = 58.8; '' = 55.6; '' = 64.2; '' = 59.3; 'Paper-Reviewer' = 53.0; '' = 73.7; '' = 63.5\n  row 'D2V': '' = avg; '' = 29.6; '' = 32.7; 'QA-Expert' = 33.3; '' = 53.9; '' = 53.0; '' = 72.3; '' = 65.4; 'Paper-Reviewer' = 56.2; '' = 80.5; '' = 71.3\n  row 'RankSVM': '' = ; '' = 49.8; '' = 38.5; 'QA-Expert' = 33.7; '' = 65.5; '' = 63.1; '' = 70.6; '' = 64.8; 'Paper-Reviewer' = 56.0; '' = 81.0; '' = 72.7\n  row 'WeakFG': '' = ; '' = 52.8; '' = 39.6; 'QA-Expert' = 34.1; '' = 67.4; '' = 64.5; '' = 71.9; '' = 65.5; 'Paper-Reviewer' = 56.3; '' = 82.0; '' = 73.8\n[E5] (figure, Figure 1, page 2) (image attached): Figure 1: Decline probability of an expert conditioned on whether or not the expert has a correlated “friend” who has already declined on two datasets: QA-Expert and Paper-Reviewer, and our online evalu- ation of journal reviewer recommendation.\nWords printed in the figure: QA-Expert Paper-Reviewer Online Evaluation 0.4 0.5 0.6 0.7 Decline Probability without with\n[E6] (figure, Figure 1, page 2): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The decline probability of an expert is higher when they have a 'friend' who has already declined, as shown in Figure 1.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows the decline probability of an expert conditioned on whether or not the expert has a 'friend' who has already declined."
+     }
+    ]
+   },
+   {
+    "text": "The decline probability of an expert is higher in the QA-Expert dataset compared to the Paper-Reviewer dataset, as shown in Figure 1.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows the decline probability of an expert conditioned on whether or not the expert has a 'friend' who has already declined, with different datasets labeled as QA-Expert and Paper-Reviewer."
+     }
+    ]
+   },
+   {
+    "text": "The decline probability of an expert is higher in the Online Evaluation dataset compared to the Paper-Reviewer dataset, as shown in Figure 1.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The figure shows the decline probability of an expert conditioned on whether or not the expert has a 'friend' who has already declined, with different datasets labeled as QA-Expert, Paper-Reviewer, and Online Evaluation."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 198,
+  "prompt_tokens": 2153,
+  "total_tokens": 2351,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which step in the methodology resulted in the largest decrease in the size of the dataset?\nEvidence:\n[E1] (text, Section 4.3, page 7): Figure 3 shows the Cohen’s κ agreement for stance annotation with respect to the crowd size computed by our method. As MACE also includes a threshold for keeping only the most conﬁdent predictions in order to beneﬁt precision, we tuned this parameter, too. Deciding on the number of workers per task is a trade-off between the desired quality and the budget. For example, reason span annotation is a harder task; however, the results for six workers are comparable to those for the expert annotations of Habernal and Gurevych ( 2017 ). 9\n[E2] (text, Section 5.2, page 9): To evaluate all systems, each instance in our dataset is represented as a tuple ( R , C , W 0 , W 1 ) with a label (0 or 1). If the label is 0, W 0 is the correct warrant, otherwise W 1 . Recall that we have two warrants W and AW whose correctness depends on the claim: W is correct for R and the original claim C , whereas AW would be correct for R and the opposite claim ¬ C . We thus doubled the training data by adding a permuted instance ( R , C , W 1 , W 0 ) with the respective correct label; this led to increased performance. The overall\n[E3] (text, Section 4.2, page 5): The methodology we propose consists of eight consecutive steps that are illustrated in Figure 2 and detailed below. Each step can be operationalized with crowdsourcing. For our dataset, we performed crowdsourcing on 5,000 randomly sampled comments using Amazon Mechanical Turk (AMT) from December 2016 to April 2017. Before, each comment was split into elementary discourse units (EDUs) using SistaNLP ( Surdeanu et al. , 2015 ). 1. Stance Annotation For each comment, we ﬁrst classify what stance it is taking (recall that we always have two explicit claims with opposing stance). Alternatively, it may be neutral (consider-\n[E4] (table, Table 1, page 8): Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code.\nValues (cite as cells):\n  row '100%': 'Some training' = 2\n  row '90% Accuracy 1 80%': 'Some training' = 19 7 29\n  row 'soning comprehension and formal training tion. For each played together with the bar) and with': 'Some training' = task with in reasoning, conﬁguration, the with the number of their standard\n[E5] (figure, Figure 3, page 7) (image attached): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\nWords printed in the figure: 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds\n[E6] (figure, Figure 3, page 7): a zoomed view of Figure 3 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The methodology resulted in the largest decrease in the size of the dataset in Step 6, where the weakest 30% of instances were discarded.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "Input instances were filtered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded."
+     }
+    ]
+   },
+   {
+    "text": "The methodology involved eight consecutive steps, each operationalized with crowdsourcing.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "The methodology we propose consists of eight consecutive steps that are illustrated in Figure 2 and detailed below."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,95 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 13.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 605,
+  "prompt_tokens": 2419,
+  "total_tokens": 3024,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the compared methods is most likely to be the safest?\nEvidence:\n[E1] (text, Section 1, page 2): methods in terms of robustness with regard to handling different types of noisy labels.\n[E2] (text, Section 2, page 2): tions for classiﬁcation were studied [ 32 ], with the results showing that the mean absolute value of error is inherently robust to label noise. In other work [ 21 ], a robust loss function for deep regression tasks was proposed using Tukey’s biweight function with the median absolute deviation of the residuals. The last group focusses on using implicit or explicit regularization methods while training. Adding small label noises while training is known to be beneﬁcial to training, as it can be regarded as an effective regularization method [ 23 , 24 ]. Similar methods have been proposed to tackle noisy outputs. A bootstrapping method [ 22 ] which trains a neural network with a convex combination of the output of the current network and the noisy target was proposed. [ 25 ] proposed DisturbLabel, a simple method that randomly replaces a percentage of the labels with incorrect values for each iteration. Mixing both input and output data was also proposed [ 26 , 27 ]. One study [ 27 ] considered the image recognition problem under label noise and the other [ 26 ] focused on a sound recognition problem. The temporal ensemble was proposed in [ 30 ] where an unsupervised loss term of ﬁtting the output of an augmented input to the augmented target updated with an exponential moving average. [ 29 ] extends the temporal ensemble in [ 30 ] by introducing a consistency cost function that minimizes the distance between the weights of the student model and the teacher model. [ 28 ] presented a new regularization method based on virtual adversarial loss which measures the smoothness of conditional label distribution given input. Minimizing the virtual adversarial loss has a regularizing effect in that it makes the model smooth at each data point.\n[E3] (text, Section 1, page 1): The cornerstone of the proposed method is a Cholesky Block in which we employ the Cholesky transform for sampling the weights of a neural network that enables us to model correlated outputs. Similar to Bayesian neural networks [ 5 ], we maintain the probability distributions over the weights, but we also leverage mixture distributions to handle the inconsistencies in a dataset. To the best of our knowledge, this is the ﬁrst approach simultaneously to infer the target distribution and the output correlations using a neural network in an end-to-end manner. We will refer to this framework as ChoiceNet . ChoiceNet is ﬁrst applied to synthetic regression tasks and a real-world regression task where we demonstrate its robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions. Subsequently, we move on to image classiﬁcation tasks using a number of benchmark datasets where we show that it shows comparable or superior performances compared to existing baseline\n[E4] (table, Table 7, page 15): Table 7: Collision rates of compared methods on straight lanes.\nValues (cite as cells):\n  row '0%': 'MDN' = 50.83%; 'GPR' = 0.83%; 'LGPR' = 4.17%; 'RGPR' = 3.33%\n  row '10%': 'ChoiceNet' = 0%; 'MDN' = 38.33%; 'MLP' = 0%; 'GPR' = 2.5%; 'LGPR' = 1.67%; 'RGPR' = 4.17%\n  row '20%': 'ChoiceNet' = 0%; 'MDN' = 41.67%; 'MLP' = 0%; 'GPR' = 7.5%; 'LGPR' = 6.67%; 'RGPR' = 10%\n  row '30%': 'ChoiceNet' = 0%; 'MDN' = 66.67%; 'MLP' = 1.67%; 'GPR' = 4.17%; 'LGPR' = 1.67%; 'RGPR' = 7.5%\n  row '40%': 'ChoiceNet' = 0.83%; 'MDN' = 35%; 'MLP' = 3.33%; 'GPR' = 6.67%; 'LGPR' = 6.67%; 'RGPR' = 24.17%\n[E5] (figure, Figure 7, page 14) (image attached): Figure 7: Reference function and ﬁtting results of compared methods on different outlier rates, 0% , 20% 40% , 80% , and 90% ). [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ChoiceNet is the method that shows the best performance in terms of robustness to label noise, as it achieves a collision rate of 0% in all tested outlier rates (0%, 10%, 20%, 30%, 40%) according to Table 7.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "0%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     },
+     {
+      "evidence": "E4",
+      "row": "10%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     },
+     {
+      "evidence": "E4",
+      "row": "20%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     },
+     {
+      "evidence": "E4",
+      "row": "30%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     }
+    ]
+   },
+   {
+    "text": "ChoiceNet is the method that shows the best performance in terms of robustness to label noise, as it achieves a collision rate of 0% in all tested outlier rates (0%, 10%, 20%, 30%, 40%) according to Table 7.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "40%",
+      "col": "ChoiceNet",
+      "value": "0.83%"
+     }
+    ]
+   },
+   {
+    "text": "ChoiceNet is the method that shows the best performance in terms of robustness to label noise, as it achieves a collision rate of 0% in all tested outlier rates (0%, 10%, 20%, 30%, 40%) according to Table 7.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "30%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     }
+    ]
+   },
+   {
+    "text": "ChoiceNet is the method that shows the best performance in terms of robustness to label noise, as it achieves a collision rate of 0% in all tested outlier rates (0%, 10%, 20%, 30%, 40%) according to Table 7.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "20%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     }
+    ]
+   }
+  ]
+ }
+}

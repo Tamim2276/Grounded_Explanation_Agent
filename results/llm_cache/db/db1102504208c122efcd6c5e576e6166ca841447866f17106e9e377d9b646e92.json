@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 283,
+  "prompt_tokens": 2681,
+  "total_tokens": 2964,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of Entity F1 score when the percentage of unseen entities in the response is low?\nEvidence:\n[E1] (text, Section 4.2, page 6): the correct restaurant and infer its address. In the end, the system is forced to pick a random address – the probability of which being correct decreases The performance on the CamRest KA test sets is illustrated in Figures 1 and 5 . B O S S N ET has the best performance with even a slight increase in both BLEU and Entity F1 metrics as more OOV content is injected in the dialog, probably because it is clear that it needs to copy when processing unseen entities. Seq2Seq+Copy is unable to perform well in CamRest as the length of the input (dialog history + KB tuples) is long and the size of the training set is also small. We believe that Seq2Seq+Copy works best in an environment with an abundance of short dialog training data (e.g., bAbI task 1 in Figure 3 ). SMD consists of dialogs with a large KB and a highly varying response pattern. This makes it very difﬁcult to learn the language model – reﬂected in the low BLEU scores for all the systems. B O S S - N ET still provides the best F1 entity score due to\n[E2] (text, Section 4.1, page 5): In Table 2 , we report results on the real-world datasets. B O S S N ET greatly outperforms other models in both Entity F1 metric and BLEU scores on CamRest. On SMD, B O S S N ET achieves the best only in Entity F1. On further analysis of the generated responses we observe that B O S S - N ET responses often convey the necessary entity information from the KB. However, they consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores. We investigate this further in our human evaluation. Human Evaluation: We summarize the human evaluation results for real-world datasets in Table 3 . B O S S N ET shows the best performance on Camrest, and is judged useful 77 times out of 100. Also, it has the highest average grammatical correctness score of 2.28 (very close to Seq2Seq and Mem2Seq). B O S S N ET performs on par with Mem2Seq and Seq2Seq in its ability to relay appropriate information to solve SMD dialog tasks, and has a slightly higher grammaticality score.\n[E3] (text, Section 4.4, page 7): We qualitatively compare the performance of B O S S N ET with other baselines using examples. Table 7 , demonstrates the ability of B O S S N ET to copy entities (restaurant name and address) in its response. The other baselines either generate unwanted or irrelevant entities in their response, or fail to copy altogether. B O S S N ET also best captures the language model effectively with a slight paraphrasing of the gold response. Table 8 contains only unseen entities. This example highlights the shortcomings of the Seq2Seq model as it ends up predicting a restaurant encountered during training. Mem2Seq copies a restaurant name without learning to sort the restaurants based on rating. B O S S N ET , with its efﬁcient memory addressing, is seen to be able to solve both issues.\n[E4] (table, Table 6, page 8): Table 6: Ablation study: impact of each model element on B O S S N ET\nValues (cite as cells):\n  row '': '' = T1; 'bAbI' = T2; 'Dialog' = T3; 'Tasks' = T4; '' = T5; 'bAbI' = T1; 'Dialog' = T2; 'Tasks' = T3; '' = T4; '(OOV)' = T5; '' = BLEU; 'CamRest' = Ent. F1\n  row 'BOSSNET w/o BOSS Memory': '' = 100; 'bAbI' = 100; 'Dialog' = 74.9; 'Tasks' = 57.2; '' = 95.6; 'bAbI' = 93.5; 'Dialog' = 78.9; 'Tasks' = 74.9; '' = 57; '(OOV)' = 81.4; '' = 10.13; 'CamRest' = 29\n  row 'BOSSNET w/o Ld': '' = 100; 'bAbI' = 100; 'Dialog' = 91.7; 'Tasks' = 100; '' = 94.3; 'bAbI' = 83.2; 'Dialog' = 78.9; 'Tasks' = 92.7; '' = 100; '(OOV)' = 66.7; '' = 15.5; 'CamRest' = 40.1\n  row 'BOSSNET w/o DLD': '' = 100; 'bAbI' = 100; 'Dialog' = 93.4; 'Tasks' = 100; '' = 95.3; 'bAbI' = 79.2; 'Dialog' = 84.6; 'Tasks' = 90.7; '' = 100; '(OOV)' = 78.1; '' = 12.4; 'CamRest' = 40.45\n  row 'BOSSNET': '' = 100; 'bAbI' = 100; 'Dialog' = 95.2; 'Tasks' = 100; '' = 97.3; 'bAbI' = 100; 'Dialog' = 100; 'Tasks' = 95.7; '' = 100; '(OOV)' = 91.7; '' = 15.2; 'CamRest' = 43.1\n[E5] (figure, Figure 5, page 8) (image attached): Figure 5: CamRest: Entity F1 comparison on KA sets\n[E6] (figure, Figure 5, page 8): a zoomed view of Figure 5 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "BOSSNET consistently outperforms other models in terms of Entity F1 score across different unseen entity percentages in the response.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "BOSSNET maintains the highest Entity F1 score across all unseen entity percentages in the response."
+     }
+    ]
+   },
+   {
+    "text": "BOSSNET shows the best performance in terms of Entity F1 score when the percentage of unseen entities in the response is low.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "BOSSNET maintains the highest Entity F1 score across all unseen entity percentages in the response."
+     }
+    ]
+   },
+   {
+    "text": "Seq2Seq+Copy and Seq2Seq struggle to perform well when the percentage of unseen entities in the response is low.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "Seq2Seq+Copy and Seq2Seq show a decline in Entity F1 score as the percentage of unseen entities increases."
+     }
+    ]
+   }
+  ]
+ }
+}

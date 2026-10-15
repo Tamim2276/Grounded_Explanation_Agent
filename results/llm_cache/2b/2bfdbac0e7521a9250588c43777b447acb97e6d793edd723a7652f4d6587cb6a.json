@@ -1,0 +1,65 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 310,
+  "prompt_tokens": 2494,
+  "total_tokens": 2804,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys? Was there a significant difference in performance compared to the other methods?\nEvidence:\n[E1] (text, Section 5.3, page 8): it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 ).\n[E2] (text, Section E, page 15): In summary, 169 workers are involved in our studies. The total cost is $215 — the rate for every 20 triplets is $0.25. On our IoU-decoys and QoU-decoys, humans achieve 84.1%, 89.0%, and 82.5% on Visual7W, VQA, and VG, respectively. Compared to the human performance on the Orig decoys that involve human effort in creation (i.e., 88.4% on Visual7W, and 88.5% on VQA as reported in ( Antol et al. , 2015 )), these results suggest that the ways we create the decoys and the ﬁltering steps mentioned in Sect. 4.2 lead to high-quality datasets with limited ambiguity. F Analysis on different question and answer embeddings We consider G LO V E ( Pennington et al. , 2014 ) and the embedding learned from translation ( McCann et al. , 2017 ) on both question and answer embeddings. The results on Visual7W (IoU + QoU, compared to Table 3 of the main text that uses\n[E3] (text, Section D.2, page 14): For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset\n[E4] (table, Table 12, page 17): Table 12: Test accuracy (%) on Visual7W, compar- ing different random decoy strategies to our methods: (A) Orig + uniformly random decoys from unique cor- rect answers, (B) Orig + weighted random decoys w.r.t. their frequencies, and All (Orig+IoU +QoU).\nValues (cite as cells):\n  row 'MLP-A': '(A)' = 39.6; '(B)' = 11.6; 'All' = 15.6\n  row 'MLP-IA': '(A)' = 53.4; '(B)' = 40.3; 'All' = 22.2\n  row 'MLP-QA': '(A)' = 52.3; '(B)' = 50.3; 'All' = 31.9\n  row 'MLP-IQA': '(A)' = 61.5; '(B)' = 60.2; 'All' = 45.1\n  row 'Random': '(A)' = 10.0; '(B)' = 10.0; 'All' = 10.0\n[E5] (figure, Figure 6, page 16) (image attached): Figure 6: User interface for human evaluation on Visual7W (IoU-decoys+QoU-decoys).\n[E6] (figure, Figure 6, page 16): a zoomed view of Figure 6 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The MLP-IQA embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys, achieving an accuracy of 61.5%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "MLP-IQA",
+      "col": "(A)",
+      "value": "61.5"
+     }
+    ]
+   },
+   {
+    "text": "The MLP-IQA embedding method showed a significant difference in performance compared to other methods, as it outperformed MLP-A by 21.9 percentage points and MLP-IA by 8.1 percentage points.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "MLP-IQA",
+      "col": "(A)",
+      "value": "61.5"
+     },
+     {
+      "evidence": "E4",
+      "row": "MLP-A",
+      "col": "(A)",
+      "value": "39.6"
+     },
+     {
+      "evidence": "E4",
+      "row": "MLP-IA",
+      "col": "(A)",
+      "value": "53.4"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 242,
+  "prompt_tokens": 2369,
+  "total_tokens": 2611,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset?\nEvidence:\n[E1] (text, Section 4.1, page 8): also gives the method some capacity to explain its answers and suggest alternatives when question is not grounded in the image. Based on this approach, our answering system achieves near perfect results on a challenging dataset, without using any question-answer examples. We have demonstrated that question representation and answering capabilities can be extended outside the scope of the data used in training, preserving good results for the original domain. Substantial work is required to obtain a system that will be able to perform well on entirely general images and questions. The main immediate bottleneck is obtaining question-to-graph mapping with general representation capabilities for a broad range of questions. Question graph representation may also be enhanced to support questions with more complex logic, as well as extending the scope of the supported visual categories ( e.g . global scene types). Any general VQA requires vast estimation capabilities, as any visual category can be queried. In UnCoRd they are modularly incremented and automatically integrated with existing questions. Additional basic areas that current schemes, including ours, have only begun to address, are the use of external, non-visual knowledge in the answering process, and the composition of detailed, informative answers, integrating the language and visual aspects of VQA.\n[E2] (text, Section 4.1, page 5): Results demonstrate that models perform well on data with lower variability than their training data. The high performance of the ’Extended’ models on their corresponding data illustrates that substantial extensions are possible in question-to-graph mapping without requiring any new training images. VG models’ lower accuracy is expected due to the unsuitable elements in its data (see Section 3.2.2 ). Additional tests are required to check possible advantages of VG models for different domains. We report such a test next. 4.2.2 VQA Representation In this experiment, representation capabilities are tested for a different dataset. Since normally, annotations corresponding to our graph representation are not provided, we sampled 100 questions of the VQA [ 8 ] validation set and manually examined the results for the eight question-to-graph models (see Section 4.2.1 ). The results in Table 4 express the large gaps in the abilities of models to represent new domains. Models trained\n[E3] (text, Section 4.1, page 6): speciﬁcally on CLEVR do not generalize at all to the untrained domain. As the models are trained on more diverse data, results improve substantially, peaking clearly for VG- Enhanced model by a large margin from other models. This is also evident in the example given in Figure 5 where adequacy of the graph increases in a similar manner. This result is interesting as using this model provides high accuracy for CLEVR as well (see Table 5 ). The fact that substantial performance gain is achieved for a data domain that was not used in training (the VQA dataset domain), while preserving good results on the original data (CLEVR), demonstrates the potential of the approach to provide a general answering system for visual questions. Further investigation is required for means to enrich question description examples and produce further signiﬁcant improvements.\n[E4] (table, Table 8, page 8): Table 8. Answering accuracy for 100 questions sampled from VQA v2 dataset (on terms with visual estimators in UnCoRd).\nValues (cite as cells):\n  row 'Pythia [85]': 'Yes/No' = 90.0; 'WH' = 68.3; 'Overall' = 77.0\n  row 'UnCoRd-VG-E': 'Yes/No' = 97.5; 'WH' = 88.3; 'Overall' = 92.0\n[E5] (figure, Figure 9, page 8) (image attached): Figure 9. Examples of UnCoRd failures in answering questions outside the VQA v2 domain on COCO images.\nWords printed in the figure: Q: What color is the kite closest to the Q: There is a bottle that is left of a bottle; yellow kite that is left of the orange kite? how many wine glasses are right of it? UnCoRd A: no valid orange kite, Pythia A: blue UnCoRd A: no bottle, Pythia A: 5 Q: What color is the kite closest to the Q: There is a bottle that is right of a bottle; yellow kite that is right of the how many wine glasses are left of it? orange kite? UnCoRd A: no bottle, Pythia A: 5 UnCoRd A: no valid orange kite, Pythia A: blue Failure source: wrong color estimation [70] Failure source: failed object detection (below: failed object in the red box above) (below: mask R-CNN results [24]) Object pixels Predicted pixels’ colors (yellow instead of orange)\n[E6] (figure, Figure 9, page 8): a zoomed view of Figure 9 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The UnCoRd-VG-E method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset, achieving an accuracy of 92.0%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "UnCoRd-VG-E",
+      "col": "Overall",
+      "value": "92.0"
+     }
+    ]
+   },
+   {
+    "text": "The Pythia method has an overall accuracy of 77.0% for answering questions about images on the 100 questions sampled from VQA v2 dataset.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "Pythia [85]",
+      "col": "Overall",
+      "value": "77.0"
+     }
+    ]
+   }
+  ]
+ }
+}

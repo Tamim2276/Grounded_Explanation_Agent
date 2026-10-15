@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 215,
+  "prompt_tokens": 2373,
+  "total_tokens": 2588,
+  "prompt_tokens_details": {
+   "cached_tokens": 225
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the representation task and the learning-to-learn task?\nEvidence:\n[E1] (text, Section 6, page 8): We have collected a second dataset of photographs of spherical objects with complex appearance (glossy objects under natural light). In particular we use 3 different materials and 5 different illuminations each with 5 images from registered views (Fig. 11 ) for training and 70 for testing. Please see the supplemental video for the animation. Transfer of appearance captured from a real world image sequence to other complex geometry is shown in Fig. 12 . Tbl. 2 summarizes the outcome for the representation task previously explored for synthetic data only. An example result is seen in Fig. 1 , more are shown in the supplemental materials. Our method can estimate view-dependent appearance, unlike RM/RM++, from a small training set, but it\n[E2] (text, Section abstract, page 1): We propose a deep representation of appearance, i. e., the relation of color, surface orientation, viewer position, material and illumination. Previous approaches have used deep learning to extract classic appearance representations relating to reﬂectance model parameters (e. g., Phong) or illumination (e. g., HDR environment maps). We suggest to directly represent appearance itself as a network we call a Deep Appearance Map (DAM). This is a 4D generalization over 2D reﬂectance maps, which held the view direction ﬁxed. First, we show how a DAM can be learned from images or video frames and later be used to synthesize appearance, given new surface orientations and viewer positions. Second, we demonstrate how another network can be used to map from an image or video frames to a DAM network to reproduce this appearance, without using a lengthy optimization such as stochastic gradient descent (learning-to-learn). Finally, we show the example of an appearance estimation-\n[E3] (text, Section 5.2, page 6): Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views.\n[E4] (table, Table 1, page 7): Table 1. Quantitative results on synthetic data. Rows are different combination of tasks and methods (three applications, two view protocols, our two methods). Columns are different data. Error is measured as mean DSSIM across the data set (less is better).\nValues (cite as cells):\n  row '': 'Error' = PNT; '' = ENV; 'Method' = OUR; 'Error' = .105; '' = .123; 'View' = Novel; 'Method' = RM++; 'Error' = .181; '' = .193; 'Method' = OUR; 'Error' = .106; '' = .131; 'View' = Novel; 'Method' = SGD; 'Error' = .144; '' = .164; 'Method' = OUR; 'Error' = .113; '' = .122\n  row 'Representation': 'View' = Same; 'Method' = RM++; 'Error' = .143; '' = .160\n  row '(Sec. 3.2)': 'View' = ; 'Method' = OUR; 'Error' = .144; '' = .164\n  row 'Learn-to-learn': 'View' = Same; 'Method' = SGD; 'Error' = .105; '' = .123\n  row '(Sec. 3.3)': 'View' = ; 'Method' = OUR; 'Error' = .165; '' = .173\n  row 'Segmentation': 'View' = Same; 'Method' = KMEANS; 'Error' = .132; '' = .136\n[E5] (figure, Figure 3, page 4) (image attached): Figure 3. Different appearance processing tasks that we address using our deep appearance maps. a) The ﬁrst task simply reproduces a given appearance, i. e., it maps from normal and view directions to RGB values using a NN. b) In a learning-to-learn task a network maps an image to a DAM representation. c) Finally, in the segmentation-and-estimation task, a network maps an image to multiple DAMs and multiple segmentation networks.\n[E6] (figure, Figure 3, page 4): a zoomed view of Figure 3 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The representation task involves mapping from normal and view directions to RGB values using a neural network, as shown in Figure 3a.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The representation task is the first task that simply reproduces a given appearance, mapping from normal and view directions to RGB values using a neural network."
+     }
+    ]
+   },
+   {
+    "text": "The learning-to-learn task involves mapping an image to a DAM representation, as shown in Figure 3b.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "observation": "The second task is a learning-to-learn task, which maps an image to a DAM representation."
+     }
+    ]
+   }
+  ]
+ }
+}

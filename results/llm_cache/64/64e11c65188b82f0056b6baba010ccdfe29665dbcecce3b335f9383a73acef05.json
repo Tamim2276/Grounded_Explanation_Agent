@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 316,
+  "prompt_tokens": 1367,
+  "total_tokens": 1683,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How did the accuracy of the model change as the iterations progressed?\nEvidence:\n[E1] (text, Section 4, page 6): GBI with a constraint loss g , a length-normalized quadratic (3 x a − y a ) 2 / ( m + n ) that is zero when the number of a ’s in the output ( y a ) is exactly three times the number in the input ( x a ) with m , n denoting input, output, respectively. GBI achieves a conversion rate of 65.2% after 100 iterations, while also improving the accuracy on the failure-set from 75.2% to 82.4%. This synthetic experiment provides additional evidence in support of Q2 and Q3, on a simpler small-capacity network. 4.4 GBI on wide range of reference models The foregoing experimental results provide evidence that GBI is a viable method for enforcing constraints. However, we hitherto study GBI on high quality reference networks such as SRL-100. To further bolster our conclusions, we now direct our investigation towards lower quality networks to understand GBI’s viability under a broader quality spectrum. We ask, how sensitive is GBI to the reference network’s performance (Q4)? To this end, we train poorer quality networks by restricting the amount of available training data or employing simpler architectures.\n[E2] (text, Section B, page 11): Table 11 reports the runtime for different inference procedures with varying dataset sizes. In general, we observe that GBI tends to be faster than A * , especially when the dataset is large enough. One exception is the BC domain where GBI is just slightly faster than A*. We hypothesize it might be due to the difﬁculty of the constraint violations as its failure rate is higher than usual. GBI will spend more time searching for the correct output (more iterations) if it is harder to ﬁnd the solution. Also note that we explicitly set the max epoch M for GBI after which it will stop iterating to avoid pathological cases. In our SRL experiments, we have set the max epochs to be 10 (GBI-10). To study its scalability, we ran GBI with max epoch set to 30 (GBI-30). The runtime increase to 556 mins for GBI-30 as opposed to 288 mins of GBI-10. However, GBI-30 improves signiﬁcantly in all accuracy metrics compared to GBI-10: overall F1 (+0.34), F1 on failure set (+3.4), exact match (+4.35%), and conversion rate (+11.24%). As can be seen from the demonstration, there is a clear tradeoff between runtime and accuracy as controlled by the maximum number of epochs M . The user can control M by the runtime constraint the system has: lower M when the serving time is most important and larger M when accuracy is more important than the serving time.\n[E3] (text, Section 4, page 4): work performance, and (Q5) does GBI also work on out-ofdomain data. Q3 is particularly important because we adjust the weights of the network at test-time and this may lead to unexpected behavior. Q5 deals with our original motivation of using structured prediction to enhance performanceon the out-of-domain data. To address these various questions, we ﬁrst deﬁne some terminology to measure how well the model is doing in terms of constraints. To address (Q1) we measure the failure-rate (i.e., the ratio of test sentences for which the network infers an output that fails to fully satisfy the constraints). To address (Q2) we evaluate our method on the failure-set (i.e., the set of output sentences for which the original network produces constraint-violating outputs) and measure our method’s conversion rate ; that is, the percentage of failures for which our method is able to completely satisfy the constraints (or “convert”). Finally, to address (Q3), we evaluate the quality (e.g., accuracy or F1) of the output predictions on the network’s failure-set both before and after applying our method.\n[E4] (table, Table 7, page 9): Table 7: A semantic role labeling example for which the method successfully enforces syntactic constraints. The initial output has an inconsistent span for token ”really like this”. Enforcing the constraint not only corrects the number of agreeing spans, but also changes the semantic role ”B-ARG2” to ”B-ARGM-ADV” and ”I-ARG2” to ”B-ARG2”..\nValues (cite as cells):\n  row '0': 'output' = B-ARG1 B-V B-ARG2 I-ARG2 I-ARG2 O O O O O O O O; 'loss' = 0.012; '' = ; '' = \n  row '6': 'output' = B-ARG1 B-V B-ARG2 I-ARG2 I-ARG2 O O O O O O O O; 'loss' = 0.049; '' = ; '' = \n  row '7': 'output' = B-ARG1 B-V B-ARGM-ADV B-ARG2 I-ARG2 O O O O O O O O; 'loss' = 0.00; '' = ; '' = "
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The accuracy of the model improved as the iterations progressed, as evidenced by the conversion rate increasing from 75.2% to 82.4% after 100 iterations.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "GBI achieves a conversion rate of 65.2% after 100 iterations, while also improving the accuracy on the failure-set from 75.2% to 82.4%."
+     }
+    ]
+   },
+   {
+    "text": "The model's accuracy metrics improved significantly with more iterations, as seen in the runtime increase from 288 mins to 556 mins for GBI-10 to GBI-30, respectively, while the conversion rate increased by 11.24%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "However, GBI-30 improves significantly in all accuracy metrics compared to GBI-10: overall F1 (+0.34), F1 on failure set (+3.4), exact match (+4.35%), and conversion rate (+11.24%)."
+     }
+    ]
+   }
+  ]
+ }
+}

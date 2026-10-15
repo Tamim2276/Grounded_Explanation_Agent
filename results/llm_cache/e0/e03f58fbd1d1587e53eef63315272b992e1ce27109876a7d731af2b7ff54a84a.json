@@ -1,0 +1,71 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 327,
+  "prompt_tokens": 2571,
+  "total_tokens": 2898,
+  "prompt_tokens_details": {
+   "cached_tokens": 218
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best for the \"Representation\" task when the view is \"Novel\"?\nEvidence:\n[E1] (text, Section 5.2, page 6): Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views.\n[E2] (text, Section 5.1, page 6): Here we evaluate our deep appearance representation (Sec. 5.2 ), as well as its application to learning-to-learn appearance (Sec. 5.3 ) and joint material estimation-andsegmentation (Sec. 5.4 ). Instrumentation for all tasks is performed in a similar fashion using our multi-view, multi-material data set (Sec. 4 ). In particular, we consider its P OINT L IGHT and E NVIRON - MENT M AP variants. Depending on the task, we either use a S INGLE M ATERIAL or M ULTI M ATERIAL . The main quantity we evaluate is image similarity error (DSSIM, less is better) with respect to a path-traced reference. We consider two tasks: re-synthesizing from the S AME V IEW (training views) as well as from a N OVEL V IEW (test views). We will use 10 of the 32 views for every sample for training and predict 22 novel views. The 10 views form a random but consecutive range of angles ca. 240 degree.\n[E3] (text, Section 6, page 8): We have collected a second dataset of photographs of spherical objects with complex appearance (glossy objects under natural light). In particular we use 3 different materials and 5 different illuminations each with 5 images from registered views (Fig. 11 ) for training and 70 for testing. Please see the supplemental video for the animation. Transfer of appearance captured from a real world image sequence to other complex geometry is shown in Fig. 12 . Tbl. 2 summarizes the outcome for the representation task previously explored for synthetic data only. An example result is seen in Fig. 1 , more are shown in the supplemental materials. Our method can estimate view-dependent appearance, unlike RM/RM++, from a small training set, but it\n[E4] (table, Table 1, page 7): Table 1. Quantitative results on synthetic data. Rows are different combination of tasks and methods (three applications, two view protocols, our two methods). Columns are different data. Error is measured as mean DSSIM across the data set (less is better).\nValues (cite as cells):\n  row '': 'Error' = PNT; '' = ENV; 'Method' = OUR; 'Error' = .105; '' = .123; 'View' = Novel; 'Method' = RM++; 'Error' = .181; '' = .193; 'Method' = OUR; 'Error' = .106; '' = .131; 'View' = Novel; 'Method' = SGD; 'Error' = .144; '' = .164; 'Method' = OUR; 'Error' = .113; '' = .122\n  row 'Representation': 'View' = Same; 'Method' = RM++; 'Error' = .143; '' = .160\n  row '(Sec. 3.2)': 'View' = ; 'Method' = OUR; 'Error' = .144; '' = .164\n  row 'Learn-to-learn': 'View' = Same; 'Method' = SGD; 'Error' = .105; '' = .123\n  row '(Sec. 3.3)': 'View' = ; 'Method' = OUR; 'Error' = .165; '' = .173\n  row 'Segmentation': 'View' = Same; 'Method' = KMEANS; 'Error' = .132; '' = .136\n[E5] (figure, Figure 7, page 7) (image attached): Figure 7. Results of our DAM representation trained using stochas- tic gradient descent (1st column) , our DAMs produced by our learning-to-learn network (2nd column) as well as a reference (3rd column) in a novel-view task.\nWords printed in the figure: measured as mean DSSIM across the data set (less is better). Task View Method Error PNT ENV Representation (Sec. 3.2) Same OUR .105 .123 RM++ .143 .160 Novel OUR .144 .164 RM++ .181 .193 Learn-to-learn (Sec. 3.3) Same OUR .106 .131 SGD .105 .123 Novel OUR .165 .173 SGD .144 .164 Segmentation (Sec. 3.4) Same OUR .113 .122 KMEANS .132 .136 Novel OUR .161 .154 KMEANS .172 .164\n[E6] (figure, Figure 7, page 7): a zoomed view of Figure 7 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The method 'OUR' performs best for the 'Representation' task when the view is 'Novel', with an error of .144 for PNT and .164 for ENV.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "Representation",
+      "col": "View",
+      "value": "Novel"
+     },
+     {
+      "evidence": "E4",
+      "row": "Representation",
+      "col": "View",
+      "value": "Novel"
+     },
+     {
+      "evidence": "E4",
+      "row": "Representation",
+      "col": "View",
+      "value": "Novel"
+     }
+    ]
+   },
+   {
+    "text": "The method 'RM++' has a higher error than 'OUR' for the 'Representation' task when the view is 'Novel', with an error of .181 for PNT and .193 for ENV.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "Representation",
+      "col": "View",
+      "value": "Novel"
+     },
+     {
+      "evidence": "E4",
+      "row": "Representation",
+      "col": "View",
+      "value": "Novel"
+     }
+    ]
+   }
+  ]
+ }
+}

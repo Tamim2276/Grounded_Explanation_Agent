@@ -1,0 +1,47 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 152,
+  "prompt_tokens": 2510,
+  "total_tokens": 2662,
+  "prompt_tokens_details": {
+   "cached_tokens": 219
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator has the smallest bias and best MSE performance in the case of fully observed confounders?\nEvidence:\n[E1] (text, Section 5.1, page 12): the fact that it suﬀers from higher variance. IPW has a large bias comparable to the naive estimator. The DR estimator’s performance falls in between OR and IPW. In scenario 2, we relax our assumption on the ability to observe the true confounders. Instead, we assume that we can only observe transformations of the true confounders as given in Eq. (15)-(16). This corresponds to a case where the researcher cannot directly observe X , but can still access a set of variables that are related to the confounders themselves (and thus will likely misspecify the model). Results and boxplots are given in Table 3 and Figure 6, respectively. Our ﬁrst observation is the dramatic drop in the performance of OR. The estimator performs the worst in both bias and MSE. DR achieves the best performance in this case with respect to bias, however it once again suﬀers from large variance. The AB estimator seems to provide a balance between bias and variance.\n[E2] (text, Section 5.1, page 13): estimator 7 (AB) [20], and an entropy balancing 8 based method (EB) [9]. The main diﬀerence between ATE and ATETR estimation is the latter utilizes data among respondents only. Results and boxplots are given in Table 4 and Figure 7, respectively. In our tests, the OR estimator has the largest bias. The estimator is trained using controlassigned survey respondents, and counterfactuals for the treatment assigned respondents are generated using the trained model. In our setting, the OR estimator consistently underestimates counterfactuals for the treatment-assigned respondents, resulting in a bias that is comparable with the naive estimator. CC, EB and IPW have small biases; EB and CC estimators have the best MSE performance across all estimators. In scenario 2, we relax our assumption on our ability to observe the true confounders, and we assume that we can only observe transformations of the true confounders as given in Eq. (15)-(16). Results and boxplots are given in Table 5 and Figure 8, respectively.\n[E3] (text, Section 5.1, page 10): We implemented four diﬀerent estimators and compared their performance under two diﬀerent scenarios. In scenario 1, we assume that we can observe the actual values of the confounding factors, i.e. , X 1 , X 2 . This allows us to correctly specify a model to adjust for all of the confounding variables, and Assumption 1 holds. Our ﬁrst estimator is a naive mean comparison among respondents. By deﬁnition this is an inconsistent estimator and does not take into account observed confounders. The remaining estimators are based on Lemma 1, and use the observed covariates to correct for the underlying bias. We implemented outcome regression (OR) [3], inverse propensity weighing (IPW) [13], a doubly robust (DR) estimator based on OR and IPW [3], and an adversarial balancing based estimator (AB) using Logistic Regression as the classiﬁer [20]. We measured the performance of each estimator via bias, median absolute error (MAE), and mean squared error (MSE) 6 as discussed in [13]. Results are given in Table 2. See Figure 5 for the distribution of estimates.\n[E4] (table, Table 2, page 11): Table 2: Performance of diﬀerent ATE estimators when true confounders are fully observed. Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Out- come Regression (OR). The naive estimator has the largest bias while AB esti- mator has the best MSE performance.\nValues (cite as cells):\n  row 'AB': 'Bias' = 2.8 × 10−2; 'MAE' = 2.9 × 10−2; 'MSE' = 1.5 × 10−3\n  row 'DR': 'Bias' = −2.3 × 10−3; 'MAE' = 6.1 × 10−2; 'MSE' = 8.0 × 10−3\n  row 'IPW': 'Bias' = 5.7 × 10−2; 'MAE' = 5.8 × 10−2; 'MSE' = 6.2 × 10−3\n  row 'Naive comparison': 'Bias' = 7.1 × 10−2; 'MAE' = 7.1 × 10−2; 'MSE' = 5.8 × 10−3\n  row 'OR': 'Bias' = 8.8 × 10−4; 'MAE' = 6.1 × 10−2; 'MSE' = 8.1 × 10−3\n[E5] (figure, Figure 7, page 14) (image attached): Figure 7: Performance of diﬀerent ATETR estimators when true confounders are fully observed. CC and EB outperforms AB in contrast to ATE.\n[E6] (figure, Figure 7, page 14): a zoomed view of Figure 7 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The AB estimator has the smallest bias and best MSE performance in the case of fully observed confounders.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "row": "AB",
+      "col": "Bias",
+      "value": "2.8 × 10−2"
+     },
+     {
+      "evidence": "E4",
+      "row": "AB",
+      "col": "MSE",
+      "value": "1.5 × 10−3"
+     }
+    ]
+   }
+  ]
+ }
+}
