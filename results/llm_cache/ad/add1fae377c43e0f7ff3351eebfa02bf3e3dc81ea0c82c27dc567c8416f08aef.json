@@ -1,0 +1,62 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 324,
+  "prompt_tokens": 737,
+  "total_tokens": 1061
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre in the SRL-NW network has the lowest failure rate and how does its inference time compare to other genres within the same network?\nEvidence:\n[E1] (table, Table 11, page 11): Table 11: Comparison of runtime for difference inference procedures in the noise-free constraint setting: Viterbi, A * (He et al. 2017) and GBI. For SRL-100 refer Table 1 and SRL-NW is a model trained on NW genre.\nValues (cite as cells):\n  row '': '' = Network; '' = Genre(s); '' = Genre(s) No. of; '' = of examples; 'Failure' = rate (%); 'Inference' = Viterbi; 'time' = GBI; '(approx. mins)' = A*; '' = SRL-100; '' = All; '' = All; '' = 25.6k; 'Failure' = 9.82; 'Inference' = 109; 'time' = 288; '(approx. mins)' = 377; '' = BC; '' = BC; '' = 4.9k; 'Failure' = 26.86; 'Inference' = 23; 'time' = 110; '(approx. mins)' = 117; '' = BN; '' = BN; '' = 3.9K; 'Failure' = 18.51; 'Inference' = 18; 'time' = 64; '(approx. mins)' = 100; '' = SRL-NW; '' = PT; '' = PT; '' = 2.8k; 'Failure' = 10.01; 'Inference' = 8; 'time' = 19; '(approx. mins)' = 15; '' = TC; '' = TC; '' = 2.2k; 'Failure' = 19.01; 'Inference' = 5; 'time' = 23; '(approx. mins)' = 20; '' = WB; '' = WB; '' = 2.3k; 'Failure' = 20.32; 'Inference' = 12; 'time' = 49; '(approx. mins)' = 69"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "In the SRL-NW network, the PT genre has the lowest failure rate compared to the other genres in the same network.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "SRL-NW",
+      "col": "Failure rate (%)",
+      "value": "10.01"
+     }
+    ]
+   },
+   {
+    "text": "For the PT genre in the SRL-NW network, the inference time is 8 for Viterbi, 19 for GBI, and 15 for A*.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "SRL-NW",
+      "col": "Inference Viterbi",
+      "value": "8"
+     },
+     {
+      "evidence": "E1",
+      "row": "SRL-NW",
+      "col": "Inference time GBI",
+      "value": "19"
+     },
+     {
+      "evidence": "E1",
+      "row": "SRL-NW",
+      "col": "Inference time (approx. mins) A*",
+      "value": "15"
+     }
+    ]
+   }
+  ]
+ }
+}

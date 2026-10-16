@@ -1,0 +1,60 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 12.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 332,
+  "prompt_tokens": 1060,
+  "total_tokens": 1392
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5)?\nEvidence:\n[E1] (table, Table 4, page 5): Table 4: Evaluation of GBI on simpler, low-resource seq2seq networks. Here, we also evaluate whether GBI can be used in combination with different inference techniques: greedy and beam search of various widths.\nValues (cite as cells):\n  row 'Net': 'Infer' = method; 'Failure' = (/2415); 'Conv' = rate; 'F1' = before; '(Failure set)' = after\n  row '': 'Infer' = Greedy; 'Failure' = 317; 'Conv' = 79.81; 'F1' = 65.62; '(Failure set)' = 68.79 (+3.14); 'Infer' = Beam 2; 'Failure' = 206; 'Conv' = 87.38; 'F1' = 66.61; '(Failure set)' = 71.15 (+4.54); 'Infer' = Beam 9; 'Failure' = 153; 'Conv' = 91.50; 'F1' = 68.66; '(Failure set)' = 71.69 (+3.03); 'Infer' = Greedy; 'Failure' = 611; 'Conv' = 88.05; 'F1' = 62.17; '(Failure set)' = 64.49 (+2.32); 'Infer' = Beam 2; 'Failure' = 419; 'Conv' = 94.27; 'F1' = 65.40; '(Failure set)' = 66.65 (+1.25); 'Infer' = Beam 9; 'Failure' = 360; 'Conv' = 93.89; 'F1' = 67.83; '(Failure set)' = 70.64 (+2.81); 'Infer' = Greedy; 'Failure' = 886; 'Conv' = 69.86; 'F1' = 58.47; '(Failure set)' = 60.41 (+1.94); 'Infer' = Beam 2; 'Failure' = 602; 'Conv' = 82.89; 'F1' = 60.45; '(Failure set)' = 61.35 (+0.90); 'Infer' = Beam 9; 'Failure' = 552; 'Conv' = 80.62; 'F1' = 61.64; '(Failure set)' = 62.98 (+1.34)\n  row 'Net3': 'Infer' = Beam 5; 'Failure' = 160; 'Conv' = 87.50; 'F1' = 67.5; '(Failure set)' = 71.38 (+3.88)\n  row 'Net4': 'Infer' = Beam 5; 'Failure' = 368; 'Conv' = 92.66; 'F1' = 67.18; '(Failure set)' = 69.4 (+2.22)\n  row 'Net5': 'Infer' = Beam 5; 'Failure' = 546; 'Conv' = 81.50; 'F1' = 61.43; '(Failure set)' = 63.25 (+1.82)"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The provided table evaluates GBI combined with different inference techniques on simpler, low-resource seq2seq networks.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Table 4: Evaluation of GBI on simpler, low-resource seq2seq networks. Here, we also evaluate whether GBI can be used in combination with different inference techniques: greedy and beam search of various widths."
+     }
+    ]
+   },
+   {
+    "text": "Across all three networks, Beam 9 consistently leads to the highest F1 score on the failure set compared to Greedy, Beam 2, and Beam 5.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "",
+      "col": "(Failure set)",
+      "value": "71.69 (+3.03)"
+     },
+     {
+      "evidence": "E1",
+      "row": "",
+      "col": "(Failure set)",
+      "value": "70.64 (+2.81)"
+     },
+     {
+      "evidence": "E1",
+      "row": "",
+      "col": "(Failure set)",
+      "value": "62.98 (+1.34)"
+     }
+    ]
+   }
+  ]
+ }
+}

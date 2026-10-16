@@ -1,0 +1,30 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 37,
+  "prompt_tokens": 94,
+  "total_tokens": 131
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre shows the **largest absolute improvement** in F1 score on the failure set after applying GBI for **both** syntactic parsing and SRL?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "GBI",
+   "syntactic parsing",
+   "SRL",
+   "F1"
+  ]
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 164,
+  "total_tokens": 217
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the accuracy of the model change as the value of c increases?\nSub-goals:\n1. [figure] How does the accuracy of the model change as the value of c increases?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The specific figure showing classification accuracy under C&W attacks as c increases (such as Fig. 7 mentioned in E5) is not provided in the evidence."
+  }
+ ],
+ "answer": {
+  "reason": "Since text and figure searches have been exhausted, we need to inspect the tabular data to find how accuracy varies with the parameter c.",
+  "tool": "table",
+  "query": "accuracy c parameter"
+ }
+}

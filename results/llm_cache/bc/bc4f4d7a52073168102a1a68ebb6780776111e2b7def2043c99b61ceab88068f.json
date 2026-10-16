@@ -1,0 +1,36 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 15.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 123,
+  "prompt_tokens": 2292,
+  "total_tokens": 2415
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nEvidence:\n[E1] (text, Section 6, page 10): Based on the dataset, we evaluated human performance in argument reasoning comprehension. Our ﬁndings suggest that the task is harder for people without formal argumentation training, while being solvable without knowing the topic. We also found that neural attention models outperform language models on the task. In the short run, we plan to draw more attention to this topic by running a SemEval 2018 shared task. 12 A deep qualitative analysis of the warrants from the theoretical perspective of reasoning\n[E2] (text, Section 5.1, page 8): To evaluate human upper bounds for the task, we sampled 100 random questions (such as those presented in Section 4.4 ) from the test set and distributed them among 173 participants of an AMT survey. Every participant had to answer 10 questions. We also asked the participants about their highest completed education (six categories) and the amount of formal training they have in reasoning, logic, or argumentation (no training, some, or extensive). In addition, they speciﬁed for each question how familiar they were with the topic (3- point scale). How Hard is the Task for Humans? It depends, as shown in Figure 4 . Whereas education had almost negligible inﬂuence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was. Overall, 30 of the 173 participants scored 100%. The mean score for those with extensive\n[E3] (text, Section 3, page 5): Constructing an alternative warrant is not possible for all reason/claim pairs; in some reasons the arguer’s position is deeply embedded. As a result, trying to give a plausible reasoning for the opposite claim ¬ C either leads to nonsense or to a proposition that resembles a rebuttal rather than a warrant ( Toulmin , 1958 ). However, if both W and AW are available, they usually capture the core of a reason’s relevance and reveal the implicit presuppositions (examples follow further below). Based on our key hypothesis, we deﬁne the argument reasoning comprehension task as: Given a reason R and a claim C along with the title and a short description of the debate they occur in, identify the correct warrant W from two candidates: the correct warrant W and an incorrect alternative warrant AW. An instance of the task is thus basically given by a tuple ( R , C , W , AW ) . The debate title and description serve as the context of R and C . As it is binary, we propose to evaluate the task using accuracy.\n[E4] (figure, Figure 4, page 8) (image attached): Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each conﬁguration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars).\nWords printed in the figure: 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\n[E5] (figure, Figure 4, page 8): a zoomed view of Figure 4 (image attached)\n[E6] (table, Table 1, page 8): Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code.\nValues (cite as cells):\n  row '100%': 'Some training' = 2\n  row '90% Accuracy 1 80%': 'Some training' = 19 7 29\n  row 'soning comprehension and formal training tion. For each played together with the bar) and with': 'Some training' = task with in reasoning, conﬁguration, the with the number of their standard [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The paper notes that whereas education had almost negligible influence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Whereas education had almost negligible inﬂuence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was."
+     }
+    ]
+   }
+  ]
+ }
+}

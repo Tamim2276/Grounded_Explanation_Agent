@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 80.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 395,
+  "total_tokens": 455
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which step in the methodology resulted in the largest decrease in the size of the dataset?\nSub-questions:\n1. [table] Which step in the methodology resulted in the largest decrease in the size of the dataset?\nEvidence:\nE1 [table, Table 1, page 8]: Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code.\nNo training | Some training\n100% | 2\n90% Accuracy 1 80% | 19 7 29\nsoning comprehension and formal training tion. For each played together with the bar) and with | task with in reasoning, conﬁguration, the with the number of their standard"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The dataset sizes or number of instances remaining after each of the eight steps are not provided in the evidence to determine which step resulted in the largest decrease.",
+  "sufficient": false
+ }
+}

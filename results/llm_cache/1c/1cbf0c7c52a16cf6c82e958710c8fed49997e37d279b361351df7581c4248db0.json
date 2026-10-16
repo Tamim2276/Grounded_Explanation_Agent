@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 106,
+  "prompt_tokens": 1134,
+  "total_tokens": 1240
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nSub-questions:\n1. [table] How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nEvidence:\nE1 [table, Table 1, page 5]: Table 1: Comparison of the GBI vs. A * inference procedure for SRL. We report the avg. disagreement rate, F1-scores and exact match for the failure set (columns 5-10) and F1-score for the whole test set (last 2 columns). Also, we report performances on a wide range of reference models SRL-X, where X denotes % of dataset used for training. We employ Viterbi decoding as a base inference strategy (before) and apply GBI (after) in combination with Viterbi.\n |  |  |  |  |  |  | Failure set |  |  |  | Test set\nNetwork | Failure | Inference | Conv | Average | (%) |  | F1 | Exact (%) | Match |  | F1\n | rate(%) |  | rate(%) | before | after | before | after | before | after | before | after\nSRL-100 | 9.82 | GBI A* | 42.25 40.40 | 44.85 | 24.92 33.91 | 48.00 | 59.70 (+11.7) 48.83 (+0.83) | 0.0 | 19.90 13.79 | 84.40 | 85.63 (+1.23) 84.51 (+0.11)\nSRL-70 | 10.54 | GBI A* | 46.22 44.42 | 45.54 | 23.02 32.32 | 47.81 | 59.37 (+11.56) 50.49 (+2.68) | 0.0 | 19.57 16.12 | 83.55 | 84.83 (+1.28) 83.90 (+0.35)\nSRL-40 | 11.06 | GBI A* | 47.89 44.74 | 45.71 | 22.42 32.17 | 46.53 | 58.83 (+12.3) 46.53 (+2.88) | 0.0 | 19.45 15.15 | 82.57 | 84.03 (+1.46) 82.98 (+0.41)\nSRL-10 | 14.15 | GBI A* | 44.28 43.66 | 47.14 | 24.88 32.80 | 44.19 | 54.78 (+10.59) 45.93 (+1.74) | 0.0 | 15.28 12.28 | 78.56 | 80.18 (+1.62) 78.87 (+0.31)\nSRL-1 | 21.90 | GBI A* | 52.85 48.96 | 50.38 | 21.45 30.28 | 37.90 | 49.00 (+11.10) 41.59 (+3.69) | 0.0 | 12.83 11.25 | 67.28 | 69.97 (+2.69) 67.97 (+0.69)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "On the SRL-100 failure set, GBI reduces the disagreement rate (average rate after) to 24.92%, whereas A* reduces it to 33.91%."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

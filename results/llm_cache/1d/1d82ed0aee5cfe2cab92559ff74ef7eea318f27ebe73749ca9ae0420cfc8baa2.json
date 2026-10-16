@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 165,
+  "total_tokens": 225
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed better on the MNIST dataset, ResNet-32 (CE) or ResNet-56 (RCE)?\nSub-goals:\n1. [table] Which method performed better on the MNIST dataset, ResNet-32 (CE) or ResNet-56 (RCE)?\nAlready tried: sub-goal 1 with table\nStill missing: No evidence for the MNIST dataset; the provided evidence only covers CIFAR-10."
+  }
+ ],
+ "answer": {
+  "reason": "I need to check the text sections to find performance comparisons on the MNIST dataset since the table search for CIFAR-10 did not yield MNIST results.",
+  "tool": "text",
+  "query": "MNIST ResNet-32 CE ResNet-56 RCE"
+ }
+}

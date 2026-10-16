@@ -1,0 +1,27 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 8,
+  "prompt_tokens": 77,
+  "total_tokens": 85
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the LIVR framework decompose semantic features into different places?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "LIVR"
+  ]
+ }
+}

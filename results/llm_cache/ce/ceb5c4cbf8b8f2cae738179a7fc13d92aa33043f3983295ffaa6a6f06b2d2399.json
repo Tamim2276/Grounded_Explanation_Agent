@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 148,
+  "total_tokens": 206
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nSub-goals:\n1. [figure] What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nAlready tried: sub-goal 1 with figure\nStill missing: figure evidence for sub-goal 1 (rule floor); No evidence items have been provided to answer the sub-question."
+  }
+ ],
+ "answer": {
+  "reason": "Since figure search did not yield results, we should search the main text paragraphs to find the described effect of enforcing syntactic constraints.",
+  "tool": "text",
+  "query": "effect of enforcing syntactic constraints on semantic role labeling"
+ }
+}

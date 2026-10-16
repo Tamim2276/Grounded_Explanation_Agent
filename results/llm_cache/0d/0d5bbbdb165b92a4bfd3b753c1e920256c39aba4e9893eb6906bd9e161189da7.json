@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 10.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 81,
+  "prompt_tokens": 1288,
+  "total_tokens": 1369
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which combination of training procedure and thresholding metric consistently performs the best across both MNIST and CIFAR-10 datasets for all attack types?\nSub-questions:\n1. [table] Which combination of training procedure and thresholding metric consistently performs the best across both MNIST and CIFAR-10 datasets for all attack types?\nEvidence:\nE1 [table, Table 5, page 16]: Table 5: The average time costs (s) on crafting each adversarial example via different attacks. The values are also the average values between MNIST and CIFAR-10. The models is Resnet-32.\nAttack | Objective | Time\nFGSM | CE RCE | ∼1.9 × 10−3 ∼2.4 × 10−3\nBIM | CE RCE | ∼3.3 × 10−3 ∼3.6 × 10−3\nILCM | CE RCE | ∼4.1 × 10−3 ∼4.3 × 10−3\nJSMA | CE RCE | ∼2.9 × 101 ∼2.0 × 101\nC&W | CE RCE | ∼4.5 × 101 ∼5.5 × 101\nC&W-hc | CE RCE | ∼6.5 × 101 ∼1.1 × 102\nC&W-wb | CE RCE | ∼7.0 × 102 ∼1.3 × 103\nE2 [text, Section 4.2, page 6]: We ﬁrst evaluate in the normal setting, where we implement Resnet-32 and Resnet-56 [ 15 ] on both datasets. For each network, we use both the CE and RCE as the training objectives, trained by the same settings as He et al. [16] . The number of training steps for both objectives is set to be 20,000 on MNIST and 90,000 on CIFAR-10. Hereafter for notation simplicity, we will indicate the training procedure used after the model name of a trained network, e.g., Resnet-32 (CE). Similarly, we indicate the training procedure and omit the name of the target network after an attacking method, e.g., FGSM (CE). Table 1 shows the test error rates, where the thresholding test strategy is disabled and all the points receive their predicted labels. We can see that the performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure. Note that we apply the same training hyperparameters (e.g., learning rates and decay factors) for both the CE and RCE procedures, which suggests that RCE is easy to optimize and does not require much extra effort on tuning hyperparameters.\nE3 [text, Section 4.2, page 7]: We further activate the thresholding test strategy with the K-density metric, and also test the performance of conﬁdence or non-ME being the metric for a more complete analysis. We construct simple binary classiﬁers to decide whether an example is adversarial or not by thresholding with the metrics, and then calculate the AUC-scores of ROC curves on these binary classiﬁers. Table 2 shows the AUC-scores calculated under different combinations of training procedures and thresholding metrics on both datasets. From Table 2, we can see that our method (RCE training + K-density detector) performs the best in almost all cases, and non-ME itself is also a pretty reliable metric, although not as good as K-density. The classiﬁers trained by RCE also return more reliable conﬁdence scores, which veriﬁes the conclusion in Theorem 1. Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3.\nE4 [text, Section 4.2, page 7]: We test the performance of the trained Resnet-32 networks on MNIST and CIFAR-10 under the oblivious attack, where we investigate the attacking methods as in Sec. 2.3. We ﬁrst disable the thresholding test strategy and make classiﬁers return all predictions to study the networks ability of correctly classifying adversarial examples. We use the iteration-based attacking methods: FGSM, BIM, ILCM and JSMA, and calculate the classiﬁcation accuracy of networks on crafted adversarial examples w.r.t. the perturbation ϵ . Fig. 2a shows the results. We can see that Resnet-32 (RCE) has higher accuracy scores than Resnet-32 (CE) under all the four attacks on both datasets. As for optimization-based methods like the C&W attack and its variants, we apply the same way as in [ 3 ] to report robustness. Speciﬁcally, we do a binary search for the parameter c , in order to ﬁnd the minimal distortions that can successfully attack the classiﬁer. The distortion is deﬁned in [ 33 ] as ∥ x − x ∗ ∥ 2 /"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "RCE training + K-density detector performs the best in almost all cases across both datasets."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

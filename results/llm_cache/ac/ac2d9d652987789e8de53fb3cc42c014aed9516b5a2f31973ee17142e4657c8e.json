@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 16.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 92,
+  "prompt_tokens": 1827,
+  "total_tokens": 1919
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The provided evidence does not explicitly define a generic action category or compare it to an agent-in-place action, but mentions that agent-in-place actions are actions associated with the agents performing them and the places where they occur.\" -- cites: E1 (Figure 1): quote \"An agent-in-place action is represented as <agent, action, place>\"; E5 (Section abstract): quote \"recognizing agentin-place actions, which are actions associated with agents who perform them and the places where they occur\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 1) (image attached): Figure 1. Example agent-in-place actions and segmentation maps. Different colors represent different places. We zoom in to the agents performing the actions for clarity. An agent-in-place action is represented as <agent, action, place> . Same colors indicate same place types ( e.g., green for lawn, blue for walkway, etc. ).\nWords printed in the figure: Ruichi Yu1 Hongcheng Wang2 Ang Li3∗Jingxiao Zheng1 Vlad I. Morariu4∗ Larry S. Davis1 1University of Maryland, College Park 2Comcast Applied AI Research 3DeepMind 4Adobe Research {yrcbsg, jxzheng, lsd}@umiacs.umd.edu, hongcheng_wang@comcast.com anglili@google.com, morariu@adobe.com Abstract We address scene layout modeling for recognizing agent- n-place actions, which are actions associated with agents who perform them and the places where they occur, in the context of outdoor home surveillance. We introduce a novel epresentation to model the geometry and topology of scene ayouts so that a network can generalize from the layouts observed in the training scenes to unseen scenes in the test <pet, move along, sidewalk> <person, move along, sidewalk> <vehicle, move away (home), driveway> <person, move away (home), driveway>\n[E5] (text, Section abstract, page 1): We address scene layout modeling for recognizing agentin-place actions, which are actions associated with agents who perform them and the places where they occur, in the context of outdoor home surveillance. We introduce a novel representation to model the geometry and topology of scene layouts so that a network can generalize from the layouts observed in the training scenes to unseen scenes in the test set. This Layout-Induced Video Representation (LIVR) abstracts away low-level appearance variance and encodes geometric and topological relationships of places to explicitly model scene layout. LIVR partitions the semantic features of a scene into different places to force the network to learn generic place-based feature descriptions which are independent of speciﬁc scene layouts; then, LIVR dynamically aggregates features based on connectivities of places in each speciﬁc scene to model its layout. We introduce a new Agent-in-Place Action (APA) dataset 1 to show that our method allows neural network models to generalize signiﬁ- cantly better to unseen scenes. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence (E1 and E5) defines agent-in-place actions as actions associated with agents who perform them and the places where they occur, and E1 represents them as <agent, action, place>, matching the claim's assertions."
+   }
+  ]
+ }
+}

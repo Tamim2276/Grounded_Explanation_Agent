@@ -1,0 +1,48 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 222,
+  "prompt_tokens": 1424,
+  "total_tokens": 1646
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nEvidence:\n[E1] (table, Table 1, page 5): Table 1: Comparison of the GBI vs. A * inference procedure for SRL. We report the avg. disagreement rate, F1-scores and exact match for the failure set (columns 5-10) and F1-score for the whole test set (last 2 columns). Also, we report performances on a wide range of reference models SRL-X, where X denotes % of dataset used for training. We employ Viterbi decoding as a base inference strategy (before) and apply GBI (after) in combination with Viterbi.\nValues (cite as cells):\n  row 'Network': '' = Failure; '' = Inference; '' = Conv; '' = Average; '' = (%); '' = ; 'Failure set' = F1; '' = Exact (%); '' = Match; '' = ; 'Test set' = F1\n  row '': '' = rate(%); '' = rate(%); '' = before; '' = after; '' = before; 'Failure set' = after; '' = before; '' = after; '' = before; 'Test set' = after\n  row 'SRL-100': '' = 9.82; '' = GBI A*; '' = 42.25 40.40; '' = 44.85; '' = 24.92 33.91; '' = 48.00; 'Failure set' = 59.70 (+11.7) 48.83 (+0.83); '' = 0.0; '' = 19.90 13.79; '' = 84.40; 'Test set' = 85.63 (+1.23) 84.51 (+0.11)\n  row 'SRL-70': '' = 10.54; '' = GBI A*; '' = 46.22 44.42; '' = 45.54; '' = 23.02 32.32; '' = 47.81; 'Failure set' = 59.37 (+11.56) 50.49 (+2.68); '' = 0.0; '' = 19.57 16.12; '' = 83.55; 'Test set' = 84.83 (+1.28) 83.90 (+0.35)\n  row 'SRL-40': '' = 11.06; '' = GBI A*; '' = 47.89 44.74; '' = 45.71; '' = 22.42 32.17; '' = 46.53; 'Failure set' = 58.83 (+12.3) 46.53 (+2.88); '' = 0.0; '' = 19.45 15.15; '' = 82.57; 'Test set' = 84.03 (+1.46) 82.98 (+0.41)\n  row 'SRL-10': '' = 14.15; '' = GBI A*; '' = 44.28 43.66; '' = 47.14; '' = 24.88 32.80; '' = 44.19; 'Failure set' = 54.78 (+10.59) 45.93 (+1.74); '' = 0.0; '' = 15.28 12.28; '' = 78.56; 'Test set' = 80.18 (+1.62) 78.87 (+0.31)\n  row 'SRL-1': '' = 21.90; '' = GBI A*; '' = 52.85 48.96; '' = 50.38; '' = 21.45 30.28; '' = 37.90; 'Failure set' = 49.00 (+11.10) 41.59 (+3.69); '' = 0.0; '' = 12.83 11.25; '' = 67.28; 'Test set' = 69.97 (+2.69) 67.97 (+0.69)\n\nThese claims are already verified and kept:\n- Table 1 compares the GBI and A* inference procedures for SRL.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"For the SRL-100 network's failure set, GBI achieves an average disagreement rate of 42.25 percent, while A* achieves an average disagreement rate of 40.40 percent.\": E1 SRL-100/ is SRL-100, the claim says 42.25 40.40"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Table 1 compares the GBI and A* inference procedures for SRL.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Table 1: Comparison of the GBI vs. A * inference procedure for SRL."
+     }
+    ]
+   },
+   {
+    "text": "For the SRL-100 network's failure set, GBI achieves an average disagreement rate of 42.25 percent, while A* achieves an average disagreement rate of 40.40 percent.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "SRL-100",
+      "col": "",
+      "value": "42.25 40.40"
+     }
+    ]
+   }
+  ]
+ }
+}

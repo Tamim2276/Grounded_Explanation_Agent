@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 28.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 94,
+  "prompt_tokens": 1354,
+  "total_tokens": 1448
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nSub-questions:\n1. [figure] What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nEvidence:\nE1 [text, Section 4, page 4]: 4.1 Semantic Role Labeling We employ the AllenNLP (Gardner et al. 2017) SRL network with ELMo embeddings, which is a multi-layer highway bi-LSTM that produces BIO output predictions for each input token (Peters et al. 2018). For data we use OntoNotes v5.0, which has ground-truth for both SRL and syntactic parsing (Pradhan et al. 2013). We evaluate GBI on the testset (25.6k examples), out of which consistent parse information is available for 81.25% examples (we only include side-information in terms of constraints for this subset). We repeat the same experimental procedure over multiple networks, SRL-X, while varying the portion (X%) of the training dataset. In Table 1, we see that GBI is able to convert 42.25 % of failure set, and this boosts the overall F1 measure by 1.23 point over the SOTA network (SRL-100) which does not incorporate the constraints (they report 84.6 F1, we obtain a similar 84.4 F1 with their network, and achieve 85.63 after enforcing constraints with our inference). Further, to address (Q1) we measure the sentence-level failure rate as well as span-level disagreement rate (i.e., the ratio of predicted spans in a sentence that disagree with the spans implied by the true syntactic parse of the sentence). To address (Q2) we evaluate our method on the failure set (i.e., the set of sentences for which disagreement rate is nonzero) and measure our method’s avgerage disagreement rate. Finally, to address (Q3), we evaluate the quality (F1 and exact match) of the ...\nE2 [text, Section abstract, page 1]: In this paper, we present gradient-based inference (GBI), an inference method for neural networks that strongly favors respecting output constraints by adjusting the network’s weights at test-time, for each input. Given an appropriate function that measures the extent of a constraint violation, we can express the hard constraints as an optimization problem over the continuous weights and apply backpropagation to tune them. That is, by iteratively adjusting the weights so that the neural network becomes increasingly likely to produce an output conﬁguration that obeys the desired constraints. Much like scoped-learning, the algorithm customizes the weights for each example at test-time (Blei, Bagnell, and McCallum 2002), but does so in a way to satisfy the constraints. We study GBI on three tasks: semantic role labeling (SRL), syntactic constituency parsing and a synthetic sequence transduction problem and ﬁnd that the algorithm performs favorably on all three tasks. In summary, our contributions are that we:\nE3 [text, Section 2, page 3]: 3 Applications There are multiple applications that involve hard-constraints and we provide two illustrative examples that we later employ as case-studies in our experiments: SRL and syntactic parsing. The former exempliﬁes a case in which external knowledge encoded as hard constraints conveys beneﬁcial side information to the original task of interest while the latter studies a case in which hard constraints are inherent to the task of interest. Finally, we brieﬂy mention sequence transduction as framework in which constraints may arise. Of course, constraints may in general arise for a variety of different reasons, depending on the situation. We provide example-based case studies for each application in Appendix A, B. 3.1 Semantic Role Labeling As a ﬁrst illustrative example, consider SRL. SRL focuses on identifying shallow semantic information about phrases. For example, in the sentence “it is really like this, just look at the bus sign” the goal is to tag the arguments given “is” as the verb predicate: “it” as its ﬁrst argument and the prepositional phrase “like this” as its second argument. Traditionally SRL is addressed as a sequence labeling problem, in which the input is the sequence of tokens and the output are BIO-encoded class labels representing both the regimentation of tokens into contiguous segments and their semantic roles.\nE4 [table, Table 7, page 9]: Table 7: A semantic role labeling example for which the method successfully enforces syntactic constraints. The initial output has an inconsistent span for token ”really like this”. Enforcing the constraint not only corrects the number of agreeing spans, but also changes the semantic role ”B-ARG2” to ”B-ARGM-ADV” and ”I-ARG2” to ”B-ARG2”..\niteration | output | loss |  | \n0 | B-ARG1 B-V B-ARG2 I-ARG2 I-ARG2 O O O O O O O O | 0.012 |  | \n6 | B-ARG1 B-V B-ARG2 I-ARG2 I-ARG2 O O O O O O O O | 0.049 |  | \n7 | B-ARG1 B-V B-ARGM-ADV B-ARG2 I-ARG2 O O O O O O O O | 0.00 |  | "
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "Enforcing syntactic constraints on the semantic role labeling output corrects inconsistent spans and changes semantic role labels such as B-ARG2 to B-ARGM-ADV."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

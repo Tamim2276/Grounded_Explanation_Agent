@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 10.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 504,
+  "total_tokens": 571
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The text states that RCE training combined with the K-density detector performs the best in almost all cases across both MNIST and CIFAR-10 datasets.\" -- cites: E3 (Section 4.2): quote \"We further activate the thresholding test strategy with the K-density metric, and also test the performance of conﬁdence or non-ME being the metric for a more complete analysis. We construct simple binary classiﬁers to decide whether an example is adversarial or not by thresholding with the metrics, and then calculate the AUC-scores of ROC curves on these binary classiﬁers. Table 2 shows the AUC-scores calculated under different combinations of training procedures and thresholding metrics on both datasets. From Table 2, we can see that our method (RCE training + K-density detector) performs the best in almost all cases\"\n\nCited evidence:\n[E3] (text, Section 4.2, page 7): We further activate the thresholding test strategy with the K-density metric, and also test the performance of conﬁdence or non-ME being the metric for a more complete analysis. We construct simple binary classiﬁers to decide whether an example is adversarial or not by thresholding with the metrics, and then calculate the AUC-scores of ROC curves on these binary classiﬁers. Table 2 shows the AUC-scores calculated under different combinations of training procedures and thresholding metrics on both datasets. From Table 2, we can see that our method (RCE training + K-density detector) performs the best in almost all cases, and non-ME itself is also a pretty reliable metric, although not as good as K-density. The classiﬁers trained by RCE also return more reliable conﬁdence scores, which veriﬁes the conclusion in Theorem 1. Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text explicitly states that RCE training combined with the K-density detector performs the best in almost all cases on both datasets."
+   }
+  ]
+ }
+}

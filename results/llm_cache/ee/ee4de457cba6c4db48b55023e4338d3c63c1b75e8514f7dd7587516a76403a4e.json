@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 58.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 139,
+  "total_tokens": 209
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nSub-goals:\n1. [table] Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "To find the attack method that most effectively reduces the accuracy of the Resnet-32 model on the MNIST dataset, I will search the tables for performance and accuracy metrics under different attacks.",
+  "tool": "table",
+  "query": "Resnet-32 MNIST attack accuracy"
+ }
+}

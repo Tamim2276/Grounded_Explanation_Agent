@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 1209,
+  "total_tokens": 1270
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which step in the methodology resulted in the largest decrease in the size of the dataset?\nSub-questions:\n1. [table] Which step in the methodology resulted in the largest decrease in the size of the dataset?\nEvidence:\nE1 [table, Table 1, page 8]: Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code.\nNo training | Some training\n100% | 2\n90% Accuracy 1 80% | 19 7 29\nsoning comprehension and formal training tion. For each played together with the bar) and with | task with in reasoning, conﬁguration, the with the number of their standard\nE2 [text, Section 4.2, page 7]: above), in order to ﬁlter out nonsense alternative warrants. All resulting 2,447 warrants were written by the workers again under CC0 license. 8. Warrant Validation To ensure that each tuple ( R , C , W , AW ) allows only one logical explanation (i.e., either R → W → C or R → AW → C is correct, not both), all instances are validated again. Disputed cases in the dataset (according to our workers) were ﬁxed by an expert to ensure quality. We ended up with 1,970 instances to be used for the argument reasoning comprehension task.\nE3 [text, Section 4.2, page 6]: similarly plausible (in the given data, respective reasons turned out to be rather irrelevant though). We used only those 1,955 instances where R indeed implied C according to the workers, as this suggests at least some implicit presupposition in R . 5. Alternative Warrant This step is the trickiest, since it requires both creativity and ‘brain twisting’. As exempliﬁed in Section 3 , a plausible explanation needs to be given why R supports ¬ C (i.e., the alternative warrant AW ). Alternatively, this may be classiﬁed as being impossible. Exact instructions for our workers can be found in the provided sources. All 5,342 alternative warrants in our dataset are written under CC-0 license. 6. Alternative Warrant Validation As the previous step produces largely uncontrolled writings, we validate each fabricated alternative warrant AW as to whether it actually relates to the reason R . To this end, we show AW and ¬ C together with two alternatives: R itself and a distracting reason. Only instances with correctly validated R are kept.\nE4 [text, Section 5, page 7]: Given the dataset, we performed ﬁrst experiments to assess the complexity of argument reasoning comprehension. To this end, we split the 1,970 instances into three sets based on the year of the de-\nE5 [figure, Figure 3, page 7] (image attached): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\nWords printed in the figure: 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds\nE6 [figure, Figure 3, page 7]: Zoomed view (300 dpi) of: Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\nWords printed in the figure: 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence items do not provide the complete dataset sizes for all eight steps in Table 1, so the step resulting in the largest decrease cannot be identified.",
+  "sufficient": false
+ }
+}

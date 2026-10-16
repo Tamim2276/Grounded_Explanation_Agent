@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 14.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 2051,
+  "total_tokens": 2126
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"When trained via the CE, NOR performs the best with an error rate of 0.08.\" -- cites: E1 (Figure 4): row '(a) CE colour (0.298, 0.298, 0.861)', column 'NOR' = 0.08\n\nCited evidence:\n[E1] (figure, Figure 4, page 17) (image attached): Figure 4: Classiﬁcation error rates on CIFAR-10. Two panels separately show the results when the networks are trained via the CE and RCE. The models is Resnet-32.\nWords printed in the figure: NOR RAND FGSM BIM ILCM JSMA C&W C&W-hc 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 Error rate (a) CE NOR RAND FGSM BIM ILCM JSMA C&W C&W-hc 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 Error rate (b) RCE\nValues (cite as cells):\n  row '(a) CE colour (0.298, 0.298, 0.861)': 'NOR' = 0.08\n  row '(a) CE colour (0.787, 0.392, 0.392)': 'RAND' = 0.12\n  row '(a) CE colour (0.637, 0.584, 0.953)': 'FGSM' = 0.9\n  row '(a) CE colour (0.298, 1.0, 1.0)': 'BIM' = 0.94\n  row '(a) CE colour (1.0, 0.891, 0.298)': 'ILCM' = 0.99\n  row '(a) CE colour (0.953, 0.656, 0.953)': 'JSMA' = 0.19\n  row '(a) CE colour (1.0, 0.684, 0.298)': 'C&W' = 1\n  row '(a) CE colour (1.0, 0.298, 0.298)': 'C&W-hc' = 1\n  row '(b) RCE colour (0.298, 0.298, 0.861)': 'NOR' = 0.07\n  row '(b) RCE colour (0.787, 0.392, 0.392)': 'RAND' = 0.14\n  row '(b) RCE colour (0.637, 0.584, 0.953)': 'FGSM' = 0.88\n  row '(b) RCE colour (0.298, 1.0, 1.0)': 'BIM' = 0.94\n  row '(b) RCE colour (1.0, 0.891, 0.298)': 'ILCM' = 0.7\n  row '(b) RCE colour (0.953, 0.656, 0.953)': 'JSMA' = 0.33\n  row '(b) RCE colour (1.0, 0.684, 0.298)': 'C&W' = 1\n  row '(b) RCE colour (1.0, 0.298, 0.298)': 'C&W-hc' = 1 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence shows that when trained via CE, NOR has an error rate of 0.08, which is the lowest among all listed methods in panel (a)."
+   }
+  ]
+ }
+}

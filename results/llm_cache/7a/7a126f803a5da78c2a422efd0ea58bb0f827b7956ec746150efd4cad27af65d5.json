@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 11.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 123,
+  "total_tokens": 185
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which approach performs best on the development set?\nSub-goals:\n1. [figure] Which approach performs best on the development set?\nAlready tried: sub-goal 1 with figure\nStill missing: No evidence shows which approach performs best on the development set."
+  }
+ ],
+ "answer": {
+  "reason": "Since the figure search did not yield the results for development set performance, I will search the text to find the description of the best performing approach on the development set.",
+  "tool": "text",
+  "query": "best approach development set performance"
+ }
+}

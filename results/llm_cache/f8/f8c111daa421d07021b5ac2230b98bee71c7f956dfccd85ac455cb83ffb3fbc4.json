@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 157,
+  "total_tokens": 220
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which step in the methodology resulted in the largest decrease in the size of the dataset?\nSub-goals:\n1. [table] Which step in the methodology resulted in the largest decrease in the size of the dataset?\nAlready tried: sub-goal 1 with table\nStill missing: The dataset sizes or number of instances remaining after each of the eight steps are not provided in the evidence to determine which step resulted in the largest decrease."
+  }
+ ],
+ "answer": {
+  "reason": "Since the table search did not provide the dataset sizes after each step, I will search the text paragraphs for information regarding the dataset size reduction across the methodology steps.",
+  "tool": "text",
+  "query": "dataset size reduction methodology steps remaining instances"
+ }
+}

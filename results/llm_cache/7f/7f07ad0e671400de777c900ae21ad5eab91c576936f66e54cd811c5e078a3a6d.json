@@ -1,0 +1,44 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 13.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 165,
+  "prompt_tokens": 963,
+  "total_tokens": 1128
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre shows the **largest absolute improvement** in F1 score on the failure set after applying GBI for **both** syntactic parsing and SRL?\nEvidence:\n[E1] (table, Table 5, page 7): Table 5: Evaluation of syntactic parser and SRL system on out-of-domain data. F1 scores are reported on the failure set . SRL model was trained on NW and the syntactic parser was trained on WSJ Section on OntoNote v5.0. Except PT, which is new and old Testament, all failure rate on out-domain data is higher than that of in-domain (11.9% for parsing and 18.1% for SRL) as suspected. The table shows that GBI can be successfully applied to resolve performance degradation on out-of-domain data.\nValues (cite as cells):\n  row 'Genre': '' = Failure; 'Syntactic' = Conversion; 'Parsing' = F1 on; '' = failure set; '' = Failure; '' = Conversion; 'SRL' = F1; '' = on failure set\n  row '': '' = rate (%); 'Syntactic' = rate (%); 'Parsing' = before; '' = after; '' = rate (%); '' = rate (%); 'SRL' = before; '' = after\n  row 'Broadcast Conversation (BC)': '' = 19.3; 'Syntactic' = 98.8; 'Parsing' = 56.4; '' = 59.0 (+2.6); '' = 26.86; '' = 53.88; 'SRL' = 39.72; '' = 52.4 (+12.68)\n  row 'Broadcast News (BN)': '' = 11.7; 'Syntactic' = 98.1; 'Parsing' = 63.2; '' = 68.8 (+5.6); '' = 18.51; '' = 55.19; 'SRL' = 39.28; '' = 50.58 (+11.3)\n  row 'Pivot Corpus (PT)': '' = 9.8; 'Syntactic' = 97.8; 'Parsing' = 71.4; '' = 75.8 (+4.4); '' = 10.01; '' = 62.34; 'SRL' = 47.19; '' = 63.69 (+16.5)\n  row 'Telephone Conversation (TC)': '' = 10.1; 'Syntactic' = 86.2; 'Parsing' = 56.9; '' = 57.6. (+0.7); '' = 19.09; '' = 54.62; 'SRL' = 47.7; '' = 58.04 (+10.34)\n  row 'Weblogs (WB)': '' = 17.6; 'Syntactic' = 95.3; 'Parsing' = 62.0; '' = 63.2 (+1.2); '' = 20.32; '' = 44.13; 'SRL' = 47.6; '' = 57.39 (+9.39)"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "For Pivot Corpus (PT), the F1 on failure set for syntactic parsing improves by +4.4, and the F1 on failure set for SRL improves by +16.5.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Pivot Corpus (PT)",
+      "col": "",
+      "value": "+4.4"
+     },
+     {
+      "evidence": "E1",
+      "row": "Pivot Corpus (PT)",
+      "col": "",
+      "value": "+16.5"
+     }
+    ]
+   }
+  ]
+ }
+}

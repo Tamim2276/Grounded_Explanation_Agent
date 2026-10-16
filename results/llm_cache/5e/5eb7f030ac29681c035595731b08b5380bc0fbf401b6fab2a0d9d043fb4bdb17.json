@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 156,
+  "prompt_tokens": 594,
+  "total_tokens": 750
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Table 2 shows the accuracy of each approach on the development set and test set.\" -- cites: E6 (Table 2): quote \"Table 2: Accuracy of each approach (humans and sys- tems) on the development set and test set, respectively.\"\n2. \"Among the automated systems, intra-warrant attention performs best on the development set with an accuracy of .638.\" -- cites: E6 (Table 2): row 'Intra-warrant attention', column 'Dev' = .638\n\nCited evidence:\n[E6] (table, Table 2, page 10): Table 2: Accuracy of each approach (humans and sys- tems) on the development set and test set, respectively.\nValues (cite as cells):\n  row 'Human average': 'Dev' = ; '(±)' = ; 'Test' = .798; '(±)' = .162\n  row 'Human w/ training in reasoning': 'Dev' = ; '(±)' = ; 'Test' = .909; '(±)' = .114\n  row 'Random baseline': 'Dev' = .473; '(±)' = .039; 'Test' = .491; '(±)' = .031\n  row 'Language model': 'Dev' = .617; '(±)' = ; 'Test' = .500; '(±)' = \n  row 'Attention': 'Dev' = .488; '(±)' = .006; 'Test' = .513; '(±)' = .012\n  row 'Attention w/ context': 'Dev' = .502; '(±)' = .031; 'Test' = .512; '(±)' = .014\n  row 'Intra-warrant attention': 'Dev' = .638; '(±)' = .024; 'Test' = .556; '(±)' = .016\n  row 'Intra-warrant attent. w/ context': 'Dev' = .637; '(±)' = .040; 'Test' = .560; '(±)' = .055"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited table caption explicitly states that Table 2 shows the accuracy of each approach on the development set and test set."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited table shows that Intra-warrant attention has a Dev accuracy of .638, and comparing this to the other automated systems in the table (.473, .617, .488, .502, .637), it performs the best on the development set."
+   }
+  ]
+ }
+}

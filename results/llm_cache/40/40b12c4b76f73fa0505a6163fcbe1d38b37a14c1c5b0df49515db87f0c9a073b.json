@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 145,
+  "total_tokens": 220
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed better on the MNIST dataset, ResNet-32 (CE) or ResNet-56 (RCE)?\nSub-goals:\n1. [table] Which method performed better on the MNIST dataset, ResNet-32 (CE) or ResNet-56 (RCE)?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I need to search the tables to find the performance comparison between ResNet-32 (CE) and ResNet-56 (RCE) on the MNIST dataset.",
+  "tool": "table",
+  "query": "MNIST dataset ResNet-32 CE ResNet-56 RCE performance"
+ }
+}

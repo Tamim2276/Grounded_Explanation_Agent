@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 115,
+  "prompt_tokens": 501,
+  "total_tokens": 616
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"To preserve temporal ordering, 3D-conv blocks with spatial-only max pooling are applied to extract features from each discretized place before concatenating them channel-wise.\" -- cites: E5 (Section 3.2): quote \"To preserve temporal ordering, we apply 3D-conv blocks with spatial-only max pooling to extract features from each discretized place, and concatenate them channel-wise.\"\n2. \"Subsequently, 3D-conv blocks with temporal-only max pooling are applied to abstract temporal information.\" -- cites: E5 (Section 3.2): quote \"Then, we apply 3D-conv blocks with temporal-only max pooling to abstract temporal information.\"\n\nCited evidence:\n[E5] (text, Section 3.2, page 4): Discretizing a place into parts at different distances to the anchor place and explicitly separating their spatial-temporal features allows the representation to capture moving agents in spatial-temporal order and extract direction-related abstract features. However, not all places need to be segmented since some places (such as sidewalk , street ) are not associated with any direction-related action ( e.g., moving toward or away from the house). For these places, we still extract the whole-place feature descriptors f L,p . We discuss the effect of different choices of place discretization and the number of parts k , and show the robustness of our framework to these parameters in Sec. 5 . To preserve temporal ordering, we apply 3D-conv blocks with spatial-only max pooling to extract features from each discretized place, and concatenate them channel-wise. Then, we apply 3D-conv blocks with temporal-only max pooling to abstract temporal information. Finally, we obtain a 1-D place-based feature description after applying GMP (see Fig. 5 ). The ﬁnal description obtained after distance-based place discretization has the same dimensionality as non-discretized place descriptions."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text in E5 directly matches the claim: 'To preserve temporal ordering, we apply 3D-conv blocks with spatial-only max pooling to extract features from each discretized place, and concatenate them channel-wise.'"
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited text in E5 directly matches the claim: 'Then, we apply 3D-conv blocks with temporal-only max pooling to abstract temporal information.'"
+   }
+  ]
+ }
+}

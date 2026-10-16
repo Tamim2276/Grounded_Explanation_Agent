@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 177,
+  "total_tokens": 241
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the 3D ConvNet in the distance-based place discretization process?\nSub-goals:\n1. [figure] What is the role of the 3D ConvNet in the distance-based place discretization process?\nAlready tried: sub-goal 1 with figure\nStill missing: The figure only shows that 3D ConvNet processes features and concatenates them to form Place-based Feature Descriptions, but does not explicitly explain its exact functional role or purpose in the distance-based place discretization process."
+  }
+ ],
+ "answer": {
+  "reason": "I need to search the main text to find a detailed explanation of the role and function of the 3D ConvNet in distance-based place discretization.",
+  "tool": "text",
+  "query": "3D ConvNet distance-based place discretization"
+ }
+}

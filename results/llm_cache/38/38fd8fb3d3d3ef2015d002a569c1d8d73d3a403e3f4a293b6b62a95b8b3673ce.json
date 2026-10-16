@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 15.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 167,
+  "total_tokens": 232
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nSub-goals:\n1. [figure] Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nAlready tried: sub-goal 1 with text, sub-goal 1 with figure\nStill missing: the judge named no item that backs sub-goal 1"
+  }
+ ],
+ "answer": {
+  "reason": "Since text and figure searches did not yield the results, I will search the tables for data on how formal training affects argument reasoning comprehension accuracy among individuals with graduate degrees.",
+  "tool": "table",
+  "query": "formal training reasoning logic argumentation graduate degrees accuracy"
+ }
+}

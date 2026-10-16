@@ -1,0 +1,46 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 215,
+  "prompt_tokens": 1551,
+  "total_tokens": 1766
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the number of workers per \"expert\" and Cohen's kappa agreement for stance annotation?\nEvidence:\n[E1] (figure, Figure 3, page 7) (image attached): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\nWords printed in the figure: 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds\n[E2] (figure, Figure 3, page 7): a zoomed view of Figure 3 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Figure 3 shows Cohen's kappa agreement for stance annotation as a function of workers per expert.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 3: Cohen’s κ agreement for stance annotation on 98 comments."
+     }
+    ]
+   },
+   {
+    "text": "As the number of workers per expert increases, Cohen's kappa agreement for stance annotation generally increases across all MACE thresholds.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "observation": "In the line chart, as the x-axis representing Workers per expert increases from 1 to 9, the y-values for Cohen's kappa generally rise for all MACE threshold lines."
+     }
+    ]
+   }
+  ]
+ }
+}

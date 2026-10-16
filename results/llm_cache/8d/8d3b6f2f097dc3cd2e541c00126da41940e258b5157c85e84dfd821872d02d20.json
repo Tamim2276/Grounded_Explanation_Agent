@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 48,
+  "prompt_tokens": 121,
+  "total_tokens": 169
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the accuracy of the model change as the value of c increases?\nSub-goals:\n1. [figure] How does the accuracy of the model change as the value of c increases?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will search the figures to find the plot showing model accuracy as a function of the parameter c.",
+  "tool": "figure",
+  "query": "accuracy versus c"
+ }
+}
