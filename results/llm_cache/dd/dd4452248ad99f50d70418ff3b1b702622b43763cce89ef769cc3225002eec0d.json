@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 112,
+  "prompt_tokens": 387,
+  "total_tokens": 499,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The GBI method is proposed and verified to perform well on various applications.\" -- cites: E4 (Section abstract): quote \"Propose a novel Gradient-Based Inference framework.\"\n\nCited evidence:\n[E4] (text, Section abstract, page 2): 1. Propose a novel Gradient-Based Inference framework. 2. Verify that GBI performs well on various applications, thus providing strong evidence for the generality of the method. 3. Examine GBI across wide range of reference model performances and report its consistency. 4. Show that GBI also perform well on out-of-domain data. For all the tasks, we ﬁnd that GBI satisﬁes a large percentage of the constraints (up to 98%) and that in almost every case (out-of-domain data, state-of-the art networks, and even for the lower-quality networks), enforcing the constraints improves the accuracy. On SRL, for example, the method successfully injects truth-conveying side-information via constraints, improving SOTA network 1 by 1.03 F1 (Peters et al. 2018). This improvement happens to surpass a A * algorithm for incorporating constraints while also being robust, in a way that A * is not, to cases for which the side constraints are inconsistent with the labeled ground-truth."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the GBI method is proposed and verified to perform well on various applications. The evidence only mentions proposing a novel Gradient-Based Inference framework and verifying its performance on various applications. The claim includes the word 'verified', which is not explicitly stated in the evidence. The evidence does not explicitly state that the method is verified to perform well on various applications."
+   }
+  ]
+ }
+}

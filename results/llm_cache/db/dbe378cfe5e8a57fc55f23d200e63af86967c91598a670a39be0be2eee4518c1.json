@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 200,
+  "prompt_tokens": 311,
+  "total_tokens": 511,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The paper discusses the methodology of reconstructing implicit warrants for argument reasoning comprehension.\" -- cites: E1 (Section Figure 2): quote \"Figure 2: Overview of the methodology of reconstructing implicit warrants for argument reasoning comprehension.\"\n2. \"The process involves identifying and reconstructing implicit warrants.\" -- cites: E2 (Section front): quote \"The Argument Reasoning Comprehension Task: Identification and Reconstruction of Implicit Warrants\"\n3. \"The methodology is described in detail in the paper.\" -- cites: E1 (Section Figure 2): quote \"Figure 2: Overview of the methodology of reconstructing implicit warrants for argument reasoning comprehension.\"\n\nCited evidence:\n[E1] (text, Section Figure 2, page 6): Figure 2: Overview of the methodology of reconstructing implicit warrants for argument reasoning comprehension. \n[E2] (text, Section front, page 2): The Argument Reasoning Comprehension Task: Identiﬁcation and Reconstruction of Implicit Warrants"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section Figure 2) directly states that the paper discusses the methodology of reconstructing implicit warrants for argument reasoning comprehension."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in E2 (Section front) mentions the identification and reconstruction of implicit warrants but does not specify the process involved. The claim goes beyond the evidence by stating that the process involves identifying and reconstructing implicit warrants."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E1 (Section Figure 2) only provides an overview of the methodology and does not describe it in detail. The claim goes beyond the evidence by stating that the methodology is described in detail in the paper."
+   }
+  ]
+ }
+}

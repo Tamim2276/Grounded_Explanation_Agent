@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 142,
+  "total_tokens": 197,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which ATE estimator is most affected by the presence of noisy confounders?\nSub-goals:\n1. [text] Which ATE estimator is most affected by the presence of noisy confounders?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: No evidence for other ATE estimators' performance under noisy confounders."
+  }
+ ],
+ "answer": {
+  "reason": "To find evidence on the performance of different ATE estimators under noisy confounders, a text search is needed.",
+  "tool": "text",
+  "query": "ATE estimator noisy confounders"
+ }
+}

@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 318,
+  "prompt_tokens": 782,
+  "total_tokens": 1100,
+  "prompt_tokens_details": {
+   "cached_tokens": 667
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs the best when the number of shots is 50?\nEvidence:\n[E1] (text, Section Figure 2, page 6): Figure 2. The change of performance as the number of shots in- creases in binary classiﬁcation. 1 2 3 4 5 10 20 50 Shots 0.75 0.80 0.85 0.90 0.95 1.00 AUC VAGER+Voting VAGER LR Weighted LR MRN\n[E2] (text, Section Figure 5, page 8): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\n[E3] (text, Section 4.2, page 6): Furthermore, we compare the performances of these methods in different low-shot settings, and the results are shown in Figure 2 . Our method consistently performs the best in all settings, and the advantage of our method is more obvious when the novel classes have less training samples. Especially, by comparing our method and LR, we can see that LR needs about 20 shots to reach AUC 0.9, while we only need 2 shots, indicating that we can save 90% training data. An interesting phenomenon is that the performance of Weighted-LR does not change as the shot number increases. The main reason is that the heuristic rule is not ﬂexible enough to incorporate new information, which demonstrates the importance of learning to learn, rather than rulebased learning.\n\nThese claims are already verified and kept:\n- The evidence does not provide a direct comparison of the methods' performance at exactly 50 shots.\n- The AUC of our method reaches 0.9 with only 2 shots, while LR needs 20 shots to reach the same AUC.\n- The performance of Weighted-LR does not change as the shot number increases, indicating that the heuristic rule is not flexible enough to incorporate new information.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The performance of our method consistently outperforms other methods in all settings, as shown in Figure 2.\": the number 2 is in no citation"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The performance of our method consistently outperforms other methods in all settings, as shown in Figure 2.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Our method consistently performs the best in all settings, and the advantage of our method is more obvious when the novel classes have less training samples."
+     }
+    ]
+   },
+   {
+    "text": "The AUC of our method reaches 0.9 with only 2 shots, while LR needs 20 shots to reach the same AUC.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "LR needs about 20 shots to reach AUC 0.9, while we only need 2 shots, indicating that we can save 90% training data."
+     }
+    ]
+   },
+   {
+    "text": "The performance of Weighted-LR does not change as the shot number increases, indicating that the heuristic rule is not flexible enough to incorporate new information.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "The performance of Weighted-LR does not change as the shot number increases. The main reason is that the heuristic rule is not flexible enough to incorporate new information, which demonstrates the importance of learning to learn, rather than rulebased learning."
+     }
+    ]
+   }
+  ]
+ }
+}

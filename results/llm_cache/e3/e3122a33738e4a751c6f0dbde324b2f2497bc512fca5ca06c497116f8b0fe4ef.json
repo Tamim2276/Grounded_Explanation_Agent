@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 147,
+  "prompt_tokens": 804,
+  "total_tokens": 951,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which approach performs best on the development set?\nSub-questions:\n1. [text] Which approach performs best on the development set?\nEvidence:\nE1 [text, Section Table 2, page 10]: Table 2: Accuracy of each approach (humans and sys- tems) on the development set and test set, respectively. Approach Dev (±) Test (±) Human average .798 .162 Human w/ training in reasoning .909 .114 Random baseline .473 .039 .491 .031 Language model .617 .500 Attention .488 .006 .513 .012 Attention w/ context .502 .031 .512 .014 Intra-warrant attention .638 .024 .556 .016 Intra-warrant attent. w/ context .637 .040 .560 .055\nE2 [text, Section 5, page 8]: bate they were taken from: 2011–2015 became the training set (1,210 instances), 2016 the development set (316 instances), and 2017 the test set (444 instances). This follows the paradigm of learning on past data and predicting on new ones. In addition, it removes much lexical and topical overlap.\nE3 [text, Section 5.2, page 9]: results of all approaches (humans and systems) are shown in Table 2 . Intra-warrant attention with rich context outperforms standard neural models with a simple attention, but it only slightly beats the language model on the dev set. The language model is basically random on the test set. A manual error analysis of 50 random wrong predictions (a single run of the best-performing system on the dev set) revealed no explicit pattern of encountered errors. Drawing any conclusions is hard given the diversity of included topics and the variety of reasoning patterns. A possible approach would be to categorize warrants using, e.g., argumentation schemes ( Walton et al. , 2008 ) and break down errors accordingly. However, this is beyond the scope here and thus left for future work. Can We Beneﬁt from Alternative Warrants and Opposite Claims? Since the reasoning chain R → AW →¬ C is correct, too, we also tried adding respective instances to the training set (thus doubling the size). In this conﬁguration, however, the neural models failed to learn anything better than a random guess. The reason behind is probably that the opposing claims are lexically very close, usually negated, and the models cannot pick this up. This underlines that argument reasoning comprehension cannot be solved by simply looking at the occurring words or phrases."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Intra-warrant attention with rich context outperforms standard neural models with a simple attention, but it only slightly beats the language model on the dev set."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The specific approach that performs best on the development set is not explicitly stated in the provided evidence. The text only mentions that Intra-warrant attention with rich context outperforms standard neural models with a simple attention, but it only slightly beats the language model on thedev",
+  "sufficient": false
+ }
+}

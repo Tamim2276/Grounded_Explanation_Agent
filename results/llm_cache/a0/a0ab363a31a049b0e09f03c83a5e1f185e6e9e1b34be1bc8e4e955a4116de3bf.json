@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 144,
+  "prompt_tokens": 429,
+  "total_tokens": 573,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The VQA2− dataset is challenging because it lacks the 'Orig' decoys, which makes it more difficult for models to distinguish between true triplets and decoys.\" -- cites: E1 (Section D.2): quote \"Comparing to Table 9, we see that the overall performance for each model decreases as the dataset\"\n\nCited evidence:\n[E1] (text, Section D.2, page 14): For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the VQA2− dataset is challenging because it lacks the 'Orig' decoys, which makes it more difficult for models to distinguish between true triplets and decoys. However, the cited evidence does not mention 'Orig' decoys or discuss the difficulty in distinguishing between true triplets and decoys. Instead, it discusses the performance of models with different levels of information visibility and the impact of removing triplets with Yes/No as the target. The evidence does not directly support the claim as written."
+   }
+  ]
+ }
+}

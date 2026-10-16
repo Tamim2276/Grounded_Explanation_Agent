@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 177,
+  "prompt_tokens": 866,
+  "total_tokens": 1043,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average number of answers per question differ between the training and development sets? What might be a possible explanation for this difference?\nSub-questions:\n1. [text] How does the average number of answers per question differ between the training and development sets?\n2. [text] What might be a possible explanation for this difference?\nEvidence:\nE1 [text, Section Table 2, page 5]: Table 2: Statistics of the answer selection data set Table 2: Statistics of the answer selection data set Data #question #answer #answers per question Training 2600 16541 6.36 Dev 300 1645 5.48 Test 329 1976 6.00\nE2 [text, Section abstract, page 5]: Speciﬁc Setting In this task, we regarded question categories tagged by askers as prior knowledge (both k x and k y ). There are 27 categories in the Qatar Living data. Knowledge vector k was initialized by averaging the embeddings of words in the category. For all baselines and our model, the word embedding and the topic model (in DeepMatch topic ) were trained on a Qatar living raw text provided by SemEval-2015 3 . We ﬁxed the word embedding during the training process, and set h in Equation (3), (8), (9) as ReLU. Results JAIST, the champion of the task in SemEval15, used 12 features and an SVM classiﬁer and achieved an accuracy of 0 . 725 . From Table 3, we can see that advanced neural networks, such as CNTN, MV-LSTM, LSTM a and KEHNN, outperform JAIST’s model, indicating that handcrafted features are less powerful than deep learning methods. Models that match text pairs by interaction representations like Arc2 and MatchPyramid are not better than models that perform matching with sentence embeddings like Arc1. This is because the training data is small and we ﬁxed the word embedding in learning. LSTM based models in general performs better than CNN based models, because they can capture sequential information in sentences. KEHNN leverages both the sequential information and the prior knowledge from categories in matching by a CNN with multiple channels. Therefore, it outperforms all other methods, and the improvement is statistically signiﬁcant (t-test with p-value ≤ 0 .  ...\nE3 [text, Section abstract, page 5]: The goal of answer selection is to recognize high quality answers in answer candidates of a question. We used a public data set of answer selection in SemEval 2015 (AlessandroMoschitti, Glass, and Randeree 2015), which collects question-answer pairs from Qatar Living Forum 2 and requires to classify the answers into 3 categories (i.e. C = 3 in our model) including good, potential and bad. The ratio of the three categories is 51 : 10 : 39 . The statistics of the data set is summarized in Table 2. We used classiﬁcation accuracy as an evaluation metric."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The average number of answers per question in the training set is 6.36, and in the development set is 5.48."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "The average number of answers per question in the training set is 6.36, and in the development set is 5.48."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The explanation for the difference in the average number of answers per question between the training and development sets is not provided in the evidence items.",
+  "sufficient": false
+ }
+}

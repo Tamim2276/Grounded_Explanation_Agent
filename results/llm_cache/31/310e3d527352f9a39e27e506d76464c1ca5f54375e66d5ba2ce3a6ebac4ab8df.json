@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 198,
+  "total_tokens": 264,
+  "prompt_tokens_details": {
+   "cached_tokens": 131
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the different models change as the corruption level increases? Which model appears to be the most robust to label corruption?\nSub-goals:\n1. [text] How does the performance of the different models change as the corruption level increases?\n2. [text] Which model appears to be the most robust to label corruption?\nAlready tried: sub-goal 1 with text\nStill missing: No evidence provided for how the performance of the models changes as the corruption level increases or which model appears to be the most robust to label corruption. The evidence provided only discusses the performance of the models at different corruption levels and the robustness of ChoiceNet in "
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the performance of models at varying corruption levels and which model is most robust. The previous text search did not provide this specific information.",
+  "tool": "text",
+  "query": "performance of the different models change as the corruption level increases"
+ }
+}

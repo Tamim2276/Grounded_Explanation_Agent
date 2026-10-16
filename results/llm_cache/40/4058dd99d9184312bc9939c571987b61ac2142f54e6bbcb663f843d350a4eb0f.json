@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 114,
+  "total_tokens": 174,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the Similarity Ratio and AUC Increasing?\nSub-goals:\n1. [text] What is the relationship between the Similarity Ratio and AUC Increasing?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The goal is to find the relationship between the Similarity Ratio and AUC Increasing, which can be directly addressed by a text search.",
+  "tool": "text",
+  "query": "What is the relationship between the Similarity Ratio and AUC Increasing?"
+ }
+}

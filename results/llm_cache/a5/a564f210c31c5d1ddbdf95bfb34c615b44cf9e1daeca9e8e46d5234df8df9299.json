@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 204,
+  "total_tokens": 266,
+  "prompt_tokens_details": {
+   "cached_tokens": 134
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of VAGER+Voting compare to other VAGER variants in the 1-shot and 20-shot settings?\nSub-goals:\n1. [text] How does the performance of VAGER+Voting compare to other VAGER variants in the 1-shot and 20-shot settings?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: No further evidence is provided to compare VAGER+Voting to other VAGER variants in the 20-shot setting or to provide a direct comparison of performance metrics between VAGER+Voting and other variants in the 1-shot and 20-shot settings."
+  }
+ ],
+ "answer": {
+  "reason": "The text search tool is suitable for finding specific comparisons within the paper.",
+  "tool": "text",
+  "query": "performance of VAGER+Voting compared to other VAGER variants in 1-shot and 20-shot settings"
+ }
+}

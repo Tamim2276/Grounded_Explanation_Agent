@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 173,
+  "total_tokens": 230,
+  "prompt_tokens_details": {
+   "cached_tokens": 98
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the definition of a non-negative tensor?\nSub-goals:\n1. [text] What is the definition of a non-negative tensor?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide a definition of a non-negative tensor. It only mentions the use of non-negative Tucker factorization in the context of TFBA and the core tensors G1, G2, and G3, but does not explicitly define what a non-negative tensor is in general terms."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a definition of a non-negative tensor, so a direct text search is needed to find a general definition.",
+  "tool": "text",
+  "query": "definition of a non-negative tensor"
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 101,
+  "prompt_tokens": 399,
+  "total_tokens": 500,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The human performance on the 'All' category of Visual7W was 84.1%.\" -- cites: E3 (Section Table 3): quote \"Human 88.4 - - 84.1 -\"\n\nCited evidence:\n[E3] (text, Section Table 3, page 7): Table 3: Test accuracy (%) on Visual7W. Method Orig IoU QoU IoU +QoU All MLP-A 52.9 27.0 34.1 17.7 15.6 MLP-IA 62.4 27.3 55.0 23.6 22.2 MLP-QA 58.2 84.1 40.7 37.8 31.9 MLP-IQA 65.7 84.1 57.6 52.0 45.1 HieCoAtt∗ 63.9 - - 51.5 - Attntion∗ 65.9 - - 52.8 - Human 88.4 - - 84.1 - Random 25.0 25.0 25.0 14.3 10.0 ∗: based on our implementation or modification"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states 'The human performance on the 'All' category of Visual7W was 84.1%.' However, the evidence shows that the human performance on the 'All' category is 88.4%, not 84.1%. The claim is not supported by the evidence."
+   }
+  ]
+ }
+}

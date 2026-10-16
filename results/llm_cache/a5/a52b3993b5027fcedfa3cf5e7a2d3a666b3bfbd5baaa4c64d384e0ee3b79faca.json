@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 95,
+  "prompt_tokens": 932,
+  "total_tokens": 1027,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the highest value for the hyperparameter  λa?\nSub-questions:\n1. [text] Which dataset has the highest value for the hyperparameter λa?\nEvidence:\nE1 [text, Section Table 3, page 7]: Table 3: Details of hyper-parameters set for dif- ferent datasets. Dataset (r1, r2, r3) (λa, λb, λc) Shootings (10, 20,15) (0.3, 0.1, 0.7) NYT Sports (20, 15, 15) (0.9, 0.5, 0.7) MUC (15, 12, 12) (0.7, 0.7, 0.4)\nE2 [text, Section Table 2, page 7]: Table 2: Details of dimensions of tensors constructed for each dataset used in the experiments. Dataset X 1shape X 2shape X 3shape Shootings 3365 × 1295 × 50 2569 × 1295 × 50 2569 × 3365 × 50 NYT Sports 57, 820 × 20, 356 × 50 49, 659 × 20, 356 × 50 49, 659 × 57, 820 × 50 MUC 2825 × 962 × 50 2555 × 962 × 50 2555 × 2825 × 50\nE3 [text, Section 4, page 7]: Experimental results comparing performance of various models for the task of HRSI are given in Table 5 . We present evaluation results from three evaluators represented as E1, E2 and E3. As can be observed from Table 5 , TFBA achieves better results than HardClust for the Shootings and NYT Sports datasets, however HardClust achieves better results for the MUC dataset. Percentage agreement of the evaluators for TFBA is 72%, 70% and 60% for Shootings, NYT Sports and MUC datasets respectively. HardClust Limitations : Even though Hard- Clust gives better induction for MUC corpus, this approach has some serious drawbacks. HardClust can only induce one schema per relation. This is a restrictive constraint as multiple senses can exist for a relation. For example, consider the schemata induced for the relation shoot as shown in Table 4 . TFBA induces two senses for the relation, but HardClust can induce only one schema. For a set of 4-tuples, HardClust can only induce ternary schemata; the dimensionality of the schemata cannot be varied. Since the latent factors induced by HardClust are entirely based on frequency, the latent categories induced by HardClust are dominated by only a ﬁxed set of noun phrases. For example, in NYT Sports dataset, subject category induced by HardClust for all the relations is ⟨ team, yankees, mets ⟩ . In addition to inducing only one schema per relation, most of the times HardClust only induces a ﬁxed set of categories. Whereas for TFBA, the number of cate ..."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "NYT Sports dataset has the highest value for λa"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine the highest value for λa in the Shootings or MUC datasets.",
+  "sufficient": true
+ }
+}

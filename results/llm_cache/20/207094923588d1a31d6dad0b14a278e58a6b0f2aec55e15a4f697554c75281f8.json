@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 178,
+  "total_tokens": 253,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs the best when there are a lot of outliers in the data?\nSub-goals:\n1. [text] Which method performs the best when there are a lot of outliers in the data?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide a specific method that performs best with a lot of outliers. It only mentions ChoiceNet's robustness to outliers and its ability to distinguish target distributions and noise distributions. Further evidence is needed to determine which method performs best with a lot of"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence suggests that ChoiceNet is robust to outliers and can distinguish between target and noise distributions, but it does not explicitly state which method performs best with a lot of outliers.",
+  "tool": "text",
+  "query": "Which method performs the best when there are a lot of outliers in the data?"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 116,
+  "prompt_tokens": 642,
+  "total_tokens": 758,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs the best when the number of shots is 50?\nSub-questions:\n1. [text] Which method performs the best when the number of shots is 50?\nEvidence:\nE1 [text, Section Figure 2, page 6]: Figure 2. The change of performance as the number of shots in- creases in binary classiﬁcation. 1 2 3 4 5 10 20 50 Shots 0.75 0.80 0.85 0.90 0.95 1.00 AUC VAGER+Voting VAGER LR Weighted LR MRN\nE2 [text, Section Figure 5, page 8]: Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\nE3 [text, Section 4.2, page 6]: Furthermore, we compare the performances of these methods in different low-shot settings, and the results are shown in Figure 2 . Our method consistently performs the best in all settings, and the advantage of our method is more obvious when the novel classes have less training samples. Especially, by comparing our method and LR, we can see that LR needs about 20 shots to reach AUC 0.9, while we only need 2 shots, indicating that we can save 90% training data. An interesting phenomenon is that the performance of Weighted-LR does not change as the shot number increases. The main reason is that the heuristic rule is not ﬂexible enough to incorporate new information, which demonstrates the importance of learning to learn, rather than rulebased learning."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Our method consistently performs the best in all settings"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide a specific method or its performance for a shot number of 50. It only compares methods across different settings and does not specify the best method for 50 shots explicitly.",
+  "sufficient": false
+ }
+}

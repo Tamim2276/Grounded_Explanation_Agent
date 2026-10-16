@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 473,
+  "prompt_tokens": 976,
+  "total_tokens": 1449,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the buffer percentage and the width of the room?\nEvidence:\n[E1] (text, Section Figure 13, page 14): Fig. 13. Buffer Percentage 800 850 900 950 1000 1050 1100 1150 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (a) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.1 0.2 0.3 0.4 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (b) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.00 0.02 0.04 0.06 0.08 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (c) Caida-networkflow Fig. 13. Buffer Percentage\n[E2] (text, Section D, page 11): decreases, and the precision increases with the growth of the width of the matrix. This trend is not very signiﬁcant in GSS as the accuracy is high and there are no errors in most experiments. Also, when the length of ﬁngerprint becomes longer, the accuracy of GSS increases. E. Experiments on Node Query In this section, we evaluate the performance of GSS in estimating the accuracy of node query. A node query for a node v is to compute the summary of the weights of all edges with source node v . For each dataset, node query set contains all nodes in the graph stream. Figure 11 shows the ARE of node queries in data sets email-EuAll, cit-HepPh and web- NotreDame, respectively. The ﬁgure shows that although we unfairly ﬁx the ratio of memory used by TCM and GSS, GSS still can achieve better performance than TCM. F. Experiments on Reachability Query\n[E3] (text, Section B, page 11): Average precision of a query set is the average value of the precision of all queries in it. A more accuracy data structure will have higher Average Precision True Negative Recall: It measures the accuracy of the reachability query. Because connectives of all edges are kept, there is no false negatives in TCM and GSS, which means if we can travel to d from s in the streaming graph, the query result of these data structures will be deﬁnitely yes. Therefore in experiments we use reachability query sets Q = { q 1 , q 2 , ..., q k } where ∀ q i ∈ Q , source node s and destination node d in q i are unreachable. True negative recall is deﬁned as the number of queries reported as unreachable divided by the number of all queries in Q . Buffer Percentage: It measures buffer size of GSS. Buffer percentage is deﬁned as the number of edges that the buffer contains divided by the total number of edges in the graph stream."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The buffer percentage is defined as the number of edges that the buffer contains divided by the total number of edges in the graph stream.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Buffer Percentage: It measures buffer size of GSS. Buffer percentage is defined as the number of edges that the buffer contains divided by the total number of edges in the graph stream."
+     }
+    ]
+   },
+   {
+    "text": "The relationship between the buffer percentage and the width of the room is not directly stated in the provided evidence.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Fig. 13. Buffer Percentage 800 850 900 950 1000 1050 1100 1150 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (a) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.1 0.2 0.3 0.4 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (b) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.00 0.02 0.04 0.06 0.08 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (c) Caida-networkflow Fig. 13. Buffer Percentage"
+     }
+    ]
+   }
+  ]
+ }
+}

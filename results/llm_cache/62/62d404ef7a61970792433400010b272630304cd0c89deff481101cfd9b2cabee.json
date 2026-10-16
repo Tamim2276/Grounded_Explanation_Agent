@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 144,
+  "total_tokens": 221,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average precision of TCM(256*memory) compare to the other two algorithms in the email-EuAll dataset?\nSub-goals:\n1. [text] How does the average precision of TCM(256*memory) compare to the other two algorithms in the email-EuAll dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of average precision between TCM(256*memory) and other algorithms in the email-EuAll dataset, which can be directly addressed by a text search.",
+  "tool": "text",
+  "query": "average precision TCM(256*memory) email-EuAll dataset other algorithms"
+ }
+}

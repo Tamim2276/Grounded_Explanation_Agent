@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 208,
+  "prompt_tokens": 525,
+  "total_tokens": 733,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The embedding method that performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys was MLP-IQA, achieving 61.5% accuracy.\" -- cites: E3 (Section Table 12): quote \"MLP-IQA 61.5 60.2 45.1\"\n2. \"The performance of MLP-IQA was significantly better than the other methods, as it achieved the highest accuracy of 61.5% on the Visual7W dataset with IoU + QoU decoys.\" -- cites: E3 (Section Table 12): quote \"MLP-IQA 61.5 60.2 45.1\"\n3. \"The evidence does not provide a direct comparison of MLP-IQA's performance to other embedding methods across all model architectures on the Visual7W dataset with IoU + QoU decoys.\" -- cites: E3 (Section Table 12): quote \"MLP-IQA 61.5 60.2 45.1\"\n\nCited evidence:\n[E3] (text, Section Table 12, page 17): Table 12: Test accuracy (%) on Visual7W, compar- ing different random decoy strategies to our methods: (A) Orig + uniformly random decoys from unique cor- rect answers, (B) Orig + weighted random decoys w.r.t. their frequencies, and All (Orig+IoU +QoU). Method (A) (B) All MLP-A 39.6 11.6 15.6 MLP-IA 53.4 40.3 22.2 MLP-QA 52.3 50.3 31.9 MLP-IQA 61.5 60.2 45.1 Random 10.0 10.0 10.0"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that MLP-IQA achieved 61.5% accuracy, which matches the value in the cited evidence for the 'All' row under the 'All' column."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that MLP-IQA achieved the highest accuracy of 61.5%, which is supported by the evidence showing that MLP-IQA has the highest value in the 'All' column."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence does not provide a direct comparison of MLP-IQA's performance to other embedding methods across all model architectures. The evidence only shows the performance of MLP-IQA and other methods under the 'All' strategy, not across all model architectures."
+   }
+  ]
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 230,
+  "prompt_tokens": 574,
+  "total_tokens": 804,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Domain adaptation involves deriving solutions for both the source and target domains when the task-relevant target-domain training data is unavailable.\" -- cites: E2 (Section 3): quote \"Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable.\"\n2. \"Sensor fusion involves deriving the solution of the task of interest when the testing data in both the source and target domains is available, even if the data is noisy.\" -- cites: E2 (Section 3): quote \"Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available. The testing data in either D s or D t can be noisy.\"\n3. \"The key difference is that domain adaptation requires the absence of task-relevant target-domain training data, while sensor fusion requires the availability of testing data in both domains.\" -- cites: E2 (Section 3): quote \"Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable.\"; E2 (Section 3): quote \"Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available.\"\n\nCited evidence:\n[E2] (text, Section 3, page 4): Given a task of interest (TOI), a source domain D s , and a target domain D t , our proposed method, zero-shot deep domain adaptation (ZDDA), is designed to achieve the following two goals: 1) Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable. We assume that we have access to the T-R labeled training data in D s and the T-I dual-domain pairs in D s and D t . 2) Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available. The testing data in either D s or D t can be noisy. We assume that there is no prior knowledge available about the type of noise and which domain gives noisy data at testing time."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that domain adaptation involves deriving solutions for both the source and target domains (D_s and D_t) when the task-relevant training data in the target domain (D_t) is unavailable. This aligns with the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence states that sensor fusion involves deriving the solution of the task of interest (TOI) when the testing data in both the source and target domains (D_s and D_t) is available, even if the data is noisy. This aligns with the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence clearly distinguishes between domain adaptation and sensor fusion. Domain adaptation requires the absence of task-relevant target-domain training data, while sensor fusion requires the availability of testing data in both domains. This aligns with the claim."
+   }
+  ]
+ }
+}

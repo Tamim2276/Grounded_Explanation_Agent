@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 140,
+  "total_tokens": 216,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nSub-goals:\n1. [text] How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison between GBI and A* in terms of reducing disagreement rates on a specific network's failure set. The text search tool is suitable for finding such a comparison within the paper.",
+  "tool": "text",
+  "query": "GBI A* SRL-100 network failure set disagreement rate comparison"
+ }
+}

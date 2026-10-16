@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 490,
+  "prompt_tokens": 1491,
+  "total_tokens": 1981,
+  "prompt_tokens_details": {
+   "cached_tokens": 1213
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually, and how does its performance compare to humans?\nEvidence:\n[E1] (text, Section 3.2, page 4): chine and human on “I+A” are likely due to their difference in understanding visual information. Note that human improves signiﬁcantly from “I+A” to “I+Q+A” with “Q” added, while the machine does so only marginally. The difference can be attributed to the difference in understanding the question and correlating with the answers between the two. Since each image corresponds to multiple questions or have multiple objects, solely relying on the image itself will not work well in principle. Such difference clearly indicates that in the Visual QA model, the language component is weak as the model cannot fully exploit the information in “Q”, making a smaller relative improvement 5.3% (from 62.4% to 65.7%) where humans improved relatively 17.4%. Shortcuts are due to design deﬁciencies We probe deeper on how the decoy answers have impacted the performance of learning models. As explained above, the decoys are drawn from all plausible answers to a question, irrespective of whether they are visually grounded or not. We have also discovered that the targets (i.e., correct answers) are infrequently used as decoys.\n[E2] (text, Section 5.3, page 8): it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 ).\n[E3] (text, Section E, page 15): As mentioned in Sect. 5.2 of the main text, we provide details on user studies. Fig. 6 shows our user interface. We perform the studies using Amazon Mechanic Turk (AMT) on Visual7W ( Zhu et al. , 2016 ), VQA ( Antol et al. , 2015 ) and Visual Genome (VG) ( Krishna et al. , 2017 ). We mainly evaluate on our IoU-decoys and QoUdecoys (combined together). For each dataset, we randomly sample 1,000 image-question-target triplets together with the corresponding IoU-decoys and QoU-decoys to evaluate human performance. For each of these triplets, three workers are assigned to select the most correct candidate answer according to the image and the question. We compute the average accuracy of these workers and report them in Table 3, 4 and 5 of the main text and Table 7 . We also conduct human evaluation using the Orig decoys of Visual7W so as to investigate the difference between human-generated and automatically generated decoys. We also study how humans will perform given only partial information (i.e., images + candidate answers or questions + candidate answers), again using the Orig decoys of Visual7W. The corresponding interfaces are shown in Fig. 7 and 8 . For these studies, we use the same set of 1,000 triplets used to evaluate our created decoys for fair comparison. We make sure that no worker works on the same triplet across the four studies on Visual7W. Results are reported in Table 1 of the main text.\n\nThese claims are already verified and kept:\n- The MLP-IQA model trained on qaVG with both IoU and QoU decoys is used to initialize the models for the Visual7W and VQA datasets.\n- The human performance on qaVG is significantly better than the machine performance, with humans improving 17.4% from “I+A” to “I+Q+A” while the machine only improves marginally.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The question does not provide enough information to determine which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually.\": support check: The evidence in E1 (Section 3.2) states: 'The difference can be attributed to the difference in understanding the question and correlating with the answers between the two. Since each image corresponds to multiple questions or have multiple objects, solely relying on the image itself will not work well in principle. Such difference clearly indicates that in the Visual QA model, the language component is weak as the model cannot fully exploit the information in “Q”, making a smaller relative improvement 5.3% (from 62.4% to 65.7%) where humans improved relatively 17.4%.' This evidence does not provide information about which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually. The evidence discusses the difference in performance between humans and machines but does not compare the models directly."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The MLP-IQA model trained on qaVG with both IoU and QoU decoys is used to initialize the models for the Visual7W and VQA datasets.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets."
+     }
+    ]
+   },
+   {
+    "text": "The human performance on qaVG is significantly better than the machine performance, with humans improving 17.4% from “I+A” to “I+Q+A” while the machine only improves marginally.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The difference can be attributed to the difference in understanding the question and correlating with the answers between the two. Since each image corresponds to multiple questions or have multiple objects, solely relying on the image itself will not work well in principle. Such difference clearly indicates that in the Visual QA model, the language component is weak as the model cannot fully exploit the information in “Q”, making a smaller relative improvement 5.3% (from 62.4% to 65.7%) where humans improved relatively 17.4%."
+     }
+    ]
+   },
+   {
+    "text": "The question does not provide enough information to determine which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The difference can be attributed to the difference in understanding the question and correlating with the answers between the two. Since each image corresponds to multiple questions or have multiple objects, solely relying on the image itself will not work well in principle. Such difference clearly indicates that in the Visual QA model, the language component is weak as the model cannot fully exploit the information in “Q”, making a smaller relative improvement 5.3% (from 62.4% to 65.7%) where humans improved relatively 17.4%."
+     }
+    ]
+   }
+  ]
+ }
+}

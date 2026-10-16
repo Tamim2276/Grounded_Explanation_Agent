@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 150,
+  "prompt_tokens": 1181,
+  "total_tokens": 1331,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What does the induced schema Win <A4, B3, C2> represent?\nSub-questions:\n1. [text] What does the induced schema Win <A4, B3, C2> represent?\nEvidence:\nE1 [text, Section Table 4, page 8]: Table 4: Examples of schemata induced by TFBA. Please note that some of them are 3-ary while others are 4-ary. For details about schema induction, please refer to Section 3.2 . Relation Schema NPs from the induced categories Evaluator Judgment (Human) Suggested Label Shootings leave⟨A6, B0, C7⟩ A6: shooting, shooting incident, double shooting valid < shooting > B0: one person, two people, three people < people > C7: dead, injured, on edge <injured > identify⟨A1, B1, C5, C6⟩ A1: police, officers, huntsville police valid < police > B1: man, victims, four victims < victim(s)> C5: sunday, shooting staurday, wednesday afternoon <day/time > C6: apartment, bedroom, building in the neighborhood <place > shoot⟨A7, B6, C1⟩ A7: gunman, shooter, smith valid < perpetrator > B6: freeman, slain woman, victims <victim > C1: friday, friday night, early monday morning < time> shoot⟨A4, B2, C13⟩ A4: <num>-year-old man, <num>-year-old george reavis, <num>-year-old brockton man valid < victim> B2: in the leg, in the head, in the neck < body part> C13: in macon, in chicago, in an alley < location > say⟨A1, B1, C5⟩ A1: police, officers, huntsville police invalid – B1: man, victims, four victims C5: sunday, shooting staurday, wednesday afternoon NYT sports spend⟨A0, B16, C3⟩ A0: yankees, mets, jets valid < team > B14: $ <num> million, $ <num>, $ <num> billion < money > C3: <num>, year, last season < year > win⟨A2, B10, C3⟩ A2: red sox, team, yankees valid < team > B10: world series, title, world cup ...\nE2 [text, Section Figure 2, page 4]: Figure 2: Overview of Step 2 of TFBA . Induction of higher-order schemata from the tri-partite graph formed from the columns of matrices A , B , and C . Triangles in this graph (solid) represent a 3-ary schema, n-ary schemata for n > 3 can be induced from the 3-ary schemata. Please refer to Section 3.2.2 for details. \nE3 [text, Section Table 5, page 8]: Table 5: Higher-order RSI accuracies of various methods on the three datasets. Induced schemata for each dataset and method are evaluated by three human evaluators, E1, E2, and E3. TFBA performs better than HardClust for Shootings and NYT Sports datasets. Even though HardClust achieves better accuracy on MUC dataset, it has several limitations, see Section 4 for more details. Chambers-13 solves a slightly different problem called event schema induction, for more details about the comparison with Chambers-13 see Section 4.1 . Shootings NYT Sports MUC E1 E2 E3 Avg E1 E2 E3 Avg E1 E2 E3 Avg HardClust 0.64 0.70 0.64 0.66 0.42 0.28 0.52 0.46 0.64 0.58 0.52 0.58 Chambers-13 0.32 0.42 0.28 0.34 0.08 0.02 0.04 0.07 0.28 0.34 0.30 0.30 TFBA 0.82 0.78 0.68 0.76 0.86 0.6 0.64 0.70 0.58 0.38 0.48 0.48"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The induced schema Win <A4, B2, C13> represents a schema for victims with specific body parts and locations."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide the specific representation of the schema Win <A4, B3, C2> as it is not listed in the provided evidence items. The schema Win <A4, B2, C13> is the closest match, but it does not match the sub-question exactly.",
+  "sufficient": false
+ }
+}

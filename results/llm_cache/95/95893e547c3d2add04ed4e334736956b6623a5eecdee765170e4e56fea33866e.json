@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 156,
+  "total_tokens": 217,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different types of features used by the Layout-induced Video Representation Network?\nSub-goals:\n1. [text] What are the different types of features used by the Layout-induced Video Representation Network?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide specific types of features used by the Layout-induced Video Representation Network. It describes the process of feature extraction and aggregation but does not list the types of features explicitly."
+  }
+ ],
+ "answer": {
+  "reason": "The text search has already been used to find information about the types of features used by the Layout-induced Video Representation Network.",
+  "tool": "text",
+  "query": "different types of features used by the Layout-induced Video Representation Network"
+ }
+}

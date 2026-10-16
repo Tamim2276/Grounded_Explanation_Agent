@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 290,
+  "prompt_tokens": 964,
+  "total_tokens": 1254,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the highest value for the hyperparameter  λa?\nEvidence:\n[E1] (text, Section Table 3, page 7): Table 3: Details of hyper-parameters set for dif- ferent datasets. Dataset (r1, r2, r3) (λa, λb, λc) Shootings (10, 20,15) (0.3, 0.1, 0.7) NYT Sports (20, 15, 15) (0.9, 0.5, 0.7) MUC (15, 12, 12) (0.7, 0.7, 0.4)\n[E2] (text, Section Table 2, page 7): Table 2: Details of dimensions of tensors constructed for each dataset used in the experiments. Dataset X 1shape X 2shape X 3shape Shootings 3365 × 1295 × 50 2569 × 1295 × 50 2569 × 3365 × 50 NYT Sports 57, 820 × 20, 356 × 50 49, 659 × 20, 356 × 50 49, 659 × 57, 820 × 50 MUC 2825 × 962 × 50 2555 × 962 × 50 2555 × 2825 × 50\n[E3] (text, Section 4, page 7): Experimental results comparing performance of various models for the task of HRSI are given in Table 5 . We present evaluation results from three evaluators represented as E1, E2 and E3. As can be observed from Table 5 , TFBA achieves better results than HardClust for the Shootings and NYT Sports datasets, however HardClust achieves better results for the MUC dataset. Percentage agreement of the evaluators for TFBA is 72%, 70% and 60% for Shootings, NYT Sports and MUC datasets respectively. HardClust Limitations : Even though Hard- Clust gives better induction for MUC corpus, this approach has some serious drawbacks. HardClust can only induce one schema per relation. This is a restrictive constraint as multiple senses can exist for a relation. For example, consider the schemata induced for the relation shoot as shown in Table 4 . TFBA induces two senses for the relation, but HardClust can induce only one schema. For a set of 4-tuples, HardClust can only induce ternary schemata; the dimensionality of the schemata cannot be varied. Since the latent factors induced by HardClust are entirely based on frequency, the latent categories induced by HardClust are dominated by only a ﬁxed set of noun phrases. For example, in NYT Sports dataset, subject category induced by HardClust for all the relations is ⟨ team, yankees, mets ⟩ . In addition to inducing only one schema per relation, most of the times HardClust only induces a ﬁxed set of categories. Whereas for TFBA, the number of categories depends on the rank of factorization, which is a user provided parameter, thus providing more ﬂexibility to choose the latent categories."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The dataset with the highest value for the hyperparameter λa is NYT Sports, with a value of 0.9.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "NYT Sports (20, 15, 15) (0.9, 0.5, 0.7)"
+     }
+    ]
+   },
+   {
+    "text": "The Shootings dataset has a hyperparameter λa value of 0.3.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Shootings (10, 20,15) (0.3, 0.1, 0.7)"
+     }
+    ]
+   },
+   {
+    "text": "The MUC dataset has a hyperparameter λa value of 0.7.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "MUC (15, 12, 12) (0.7, 0.7, 0.4)"
+     }
+    ]
+   }
+  ]
+ }
+}

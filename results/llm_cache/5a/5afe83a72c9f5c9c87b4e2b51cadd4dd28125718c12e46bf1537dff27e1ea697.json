@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 116,
+  "total_tokens": 180,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the table and the graph sketch in the figure?\nSub-goals:\n1. [text] What is the relationship between the table and the graph sketch in the figure?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the relationship between a table and a graph sketch in a figure, which can be directly addressed by searching the text of the paper for this specific relationship.",
+  "tool": "text",
+  "query": "relationship between the table and the graph sketch in the figure"
+ }
+}

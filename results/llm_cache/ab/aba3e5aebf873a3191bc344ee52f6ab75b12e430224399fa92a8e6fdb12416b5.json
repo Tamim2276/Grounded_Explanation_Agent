@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 129,
+  "prompt_tokens": 420,
+  "total_tokens": 549,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The experiments on node query show that GSS can achieve better performance than TCM.\" -- cites: E1 (Section D): quote \"Figure 11 shows the ARE of node queries in data sets email-EuAll, cit-HepPh and web-NotreDame, respectively. The figure shows that although we unfairly fix the ratio of memory used by TCM and GSS, GSS still can achieve better performance than TCM.\"\n\nCited evidence:\n[E1] (text, Section D, page 11): decreases, and the precision increases with the growth of the width of the matrix. This trend is not very signiﬁcant in GSS as the accuracy is high and there are no errors in most experiments. Also, when the length of ﬁngerprint becomes longer, the accuracy of GSS increases. E. Experiments on Node Query In this section, we evaluate the performance of GSS in estimating the accuracy of node query. A node query for a node v is to compute the summary of the weights of all edges with source node v . For each dataset, node query set contains all nodes in the graph stream. Figure 11 shows the ARE of node queries in data sets email-EuAll, cit-HepPh and web- NotreDame, respectively. The ﬁgure shows that although we unfairly ﬁx the ratio of memory used by TCM and GSS, GSS still can achieve better performance than TCM. F. Experiments on Reachability Query"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence discusses the performance of GSS and TCM in the context of node queries, but it does not specify that GSS achieves better performance than TCM in all datasets or under all conditions. The evidence only states that GSS can achieve better performance than TCM when the ratio of memory used by TCM and GSS is unfairly fixed. This does not necessarily mean that GSS consistently outperforms TCM across all datasets and conditions."
+   }
+  ]
+ }
+}

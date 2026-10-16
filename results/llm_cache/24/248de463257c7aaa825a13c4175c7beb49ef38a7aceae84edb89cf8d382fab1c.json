@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 475,
+  "prompt_tokens": 1448,
+  "total_tokens": 1923,
+  "prompt_tokens_details": {
+   "cached_tokens": 1264
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the proposed metric of non-ME help detect adversarial examples?\nEvidence:\n[E1] (text, Section 0, page 4): In practice, the restriction can be implemented by a detector with the metric of non-ME. In the case of Fig. 1a, any point that locates on the set S ˆ y (black dashed lines) has the highest value of non - ME = log 2 . Assuming that the learned representation transformation: X 7→ Z can map all the normal examples to the neighborhood of S ˆ y , where the neighborhood boundary consists of the isolines of non - ME = t (blue dot-dashed lines). This means that all the normal examples have values of non - ME > t . When there is no detector, the nearest adversarial example based on z 0 is z 1 , which locates on the nearest decision boundary w.r.t. z 0 . In contrast, when non-ME is used as the detection metric, z 1 will be easily ﬁltered out by the detector because non - ME( z 1 ) < t , and the nearest adversarial example becomes z 2 in this case, which locates on the junction manifold of the neighborhood boundary and the decision boundary. It is easy to generally conclude that ∥ z 0 − z 2 ∥ > ∥ z 0 − z 1 ∥ , almost everywhere. This means that due to the existence of the detector, adversaries have to impose larger minimal perturbations to successfully generate adversarial examples\n[E2] (text, Section 3.1, page 3): Due to the difﬁculty of correctly classifying adversarial examples [ 2 , 3 ] and the generality of their existence [ 7 , 9 ], we design a method to detect them instead, which could help in real world applications. For example, in semi-autonomous systems, the detection of adversarial examples would allow disabling autonomous operation and requesting human intervention [26]. A detection method relies on some metrics to decide whether an input x is adversarial or not for a given classiﬁer F ( X ) . A potential candidate is the conﬁdence F ( x ) ˆ y on the predicted label ˆ y , which inherently conveys the degree of certainty on a prediction and is widely used [ 11 ]. However, previous work shows that the conﬁdence score is unreliable in the adversarial setting [ 12 , 28 ]. Therefore, we construct another metric which is more pertinent and helpful to our goal. Namely, we deﬁne the metric of non-ME —the entropy of normalized non-maximal elements in F ( x ) , as:\n[E3] (text, Section 4.2, page 7): We further activate the thresholding test strategy with the K-density metric, and also test the performance of conﬁdence or non-ME being the metric for a more complete analysis. We construct simple binary classiﬁers to decide whether an example is adversarial or not by thresholding with the metrics, and then calculate the AUC-scores of ROC curves on these binary classiﬁers. Table 2 shows the AUC-scores calculated under different combinations of training procedures and thresholding metrics on both datasets. From Table 2, we can see that our method (RCE training + K-density detector) performs the best in almost all cases, and non-ME itself is also a pretty reliable metric, although not as good as K-density. The classiﬁers trained by RCE also return more reliable conﬁdence scores, which veriﬁes the conclusion in Theorem 1. Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3.\n[E4] (text, Section 3.3, page 6): the predicted label if the value of metric is larger than a threshold T , or classiﬁes the one as adversarial and returns NOT SURE otherwise. In our method, we adopt the kernel density (K-density) metric introduced in [ 8 ], because applying the K-density metric with CE training has already shown better robustness and versatility than other defenses [ 3 ]. K-density can be regarded as some combination of the conﬁdence and non-ME metrics, since it can simultaneously convey the information about them. Kernel density: The K-density is calculated in the ﬁnal-layer hidden space. Given the predicted label ˆ y , K-density is deﬁned as KD ( x ) = 1 | X ˆ y | x i ∈ X ˆ y k ( z i , z ) , where X ˆ y represents the set of training points with label ˆ y , z i and z are the corresponding ﬁnal-layer hidden vectors, k ( z i , z ) = exp( −∥ z i − z ∥ 2 /σ 2 ) is the Gaussian kernel with the bandwidth σ treated as a hyperparameter.\n\nThese claims are already verified and kept:\n- The proposed metric of non-ME is a reliable metric for detecting adversarial examples, although not as good as the K-density metric.\n- The proposed metric of non-ME helps detect adversarial examples by distinguishing between noisy examples and adversarial examples.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The proposed metric of non-ME helps detect adversarial examples by filtering out the nearest adversarial example based on z0, which is z1, and instead identifying z2, which locates on the junction manifold of the neighborhood boundary and the decision boundary.\": the quote is not in E1\n- \"The metric of non-ME is defined as the entropy of normalized non-maximal elements in F(x), which is more pertinent and helpful for detecting adversarial examples.\": the quote is not in E2"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The proposed metric of non-ME helps detect adversarial examples by filtering out the nearest adversarial example based on z0, which is z1, and instead identifying z2, which locates on the junction manifold of the neighborhood boundary and the decision boundary.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "In contrast, when non-ME is used as the detection metric, z1 will be easily filtered out by the detector because non - ME( z1 ) < t , and the nearest adversarial example becomes z2 in this case, which locates on the junction manifold of the neighborhood boundary and the decision boundary."
+     }
+    ]
+   },
+   {
+    "text": "The metric of non-ME is defined as the entropy of normalized non-maximal elements in F(x), which is more pertinent and helpful for detecting adversarial examples.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Therefore, we construct another metric which is more pertinent and helpful to our goal. Namely, we define the metric of non-ME —the entropy of normalized non-maximal elements in F ( x ) , as:"
+     }
+    ]
+   },
+   {
+    "text": "The proposed metric of non-ME is a reliable metric for detecting adversarial examples, although not as good as the K-density metric.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "non-ME itself is also a pretty reliable metric, although not as good as K-density."
+     }
+    ]
+   },
+   {
+    "text": "The proposed metric of non-ME helps detect adversarial examples by distinguishing between noisy examples and adversarial examples.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3."
+     }
+    ]
+   }
+  ]
+ }
+}

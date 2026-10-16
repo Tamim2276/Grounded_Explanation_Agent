@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 453,
+  "prompt_tokens": 766,
+  "total_tokens": 1219,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"BOSSNET achieves a lower BLEU score than Mem2Seq on the SMD dataset, but still performs better in conveying necessary entity information because its responses often consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores.\" -- cites: E1 (Section 4.1): quote \"However, they consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores.\"\n2. \"BOSSNET outperforms Mem2Seq in Entity F1 metric on the SMD dataset, indicating its ability to convey necessary entity information.\" -- cites: E1 (Section 4.1): quote \"B O S S N ET greatly outperforms other models in both Entity F1 metric and BLEU scores on CamRest. On SMD, B O S S N ET achieves the best only in Entity F1.\"\n3. \"BOSSNET's responses are judged useful 77 times out of 100 in human evaluation, suggesting its effectiveness in conveying necessary entity information.\" -- cites: E1 (Section 4.1): quote \"B O S S N ET shows the best performance on Camrest, and is judged useful 77 times out of 100.\"\n4. \"BOSSNET's performance on the SMD dataset is better than Mem2Seq in terms of conveying necessary entity information, despite having a lower BLEU score, due to its ability to efficiently process unseen entities and its focus on conveying information rather than copying.\" -- cites: E1 (Section 4.1): quote \"However, they consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores.\"; E1 (Section 4.1): quote \"B O S S N ET greatly outperforms other models in both Entity F1 metric and BLEU scores on CamRest. On SMD, B O S S N ET achieves the best only in Entity F1.\"\n\nCited evidence:\n[E1] (text, Section 4.1, page 5): In Table 2 , we report results on the real-world datasets. B O S S N ET greatly outperforms other models in both Entity F1 metric and BLEU scores on CamRest. On SMD, B O S S N ET achieves the best only in Entity F1. On further analysis of the generated responses we observe that B O S S - N ET responses often convey the necessary entity information from the KB. However, they consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores. We investigate this further in our human evaluation. Human Evaluation: We summarize the human evaluation results for real-world datasets in Table 3 . B O S S N ET shows the best performance on Camrest, and is judged useful 77 times out of 100. Also, it has the highest average grammatical correctness score of 2.28 (very close to Seq2Seq and Mem2Seq). B O S S N ET performs on par with Mem2Seq and Seq2Seq in its ability to relay appropriate information to solve SMD dialog tasks, and has a slightly higher grammaticality score."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that BOSSNET achieves a lower BLEU score than Mem2Seq, which is not supported by the evidence. The evidence only mentions that BOSSNET responses consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores. It does not compare BOSSNET's BLEU score to Mem2Seq's."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that BOSSNET outperforms Mem2Seq in the Entity F1 metric, which is not supported by the evidence. The evidence states that BOSSNET greatly outperforms other models in both Entity F1 metric and BLEU scores on CamRest, but only achieves the best in Entity F1 on SMD. It does not compare BOSSNET's performance to Mem2Seq's in Entity F1 metric."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim states that BOSSNET's responses are judged useful 77 times out of 100 in human evaluation, which is not supported by the evidence. The evidence states that BOSSNET shows the best performance on CamRest and is judged useful 77 times out of 100, but this is for CamRest, not SMD."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The claim states that BOSSNET's performance on the SMD dataset is better than Mem2Seq in terms of conveying necessary entity information, despite having a lower BLEU score. This is partially supported by the evidence, which mentions that BOSSNET responses consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores. However, the evidence does not directly compare BOSSNET's performance to Mem2Seq's in terms of conveying necessary entity information or mention BOSSNET's ability to efficiently process unseen entities or focus on conveying information rather than copying."
+   }
+  ]
+ }
+}

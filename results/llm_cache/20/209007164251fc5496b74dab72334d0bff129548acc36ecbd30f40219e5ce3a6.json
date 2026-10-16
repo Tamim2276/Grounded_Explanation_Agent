@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 85,
+  "prompt_tokens": 224,
+  "total_tokens": 309,
+  "prompt_tokens_details": {
+   "cached_tokens": 145
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?\nSub-goals:\n1. [text] Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset?\n2. [text] How does its performance change as the corruption level increases?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide information about how ChoiceNet's performance changes as the corruption level increases. It only shows the performance at p = 0% and at different corruption levels (10%, 20%, 30%, 40%). The performance change as the corruption level increases is not explicitly stated in"
+  }
+ ],
+ "answer": {
+  "reason": "The question requires information about the performance change of a specific method as the corruption level increases, which is not directly provided in the text.",
+  "tool": "text",
+  "query": "Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?"
+ }
+}

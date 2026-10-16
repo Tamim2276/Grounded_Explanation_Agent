@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 85,
+  "prompt_tokens": 752,
+  "total_tokens": 837,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The key components of the CIG-Sim&Siam-GCN-Simg&BERTg model include the use of Siamese and term-based similarity encoders, GCN layers, and BERT global features.\" -- cites: E3 (Section 4): quote \"vertex, “Siam” indicates the use of Siamese encoder, while “Sim” indicates the use of term-based similarity encoder, as shown in Fig. 2 . “GCN” means that we convolve the local matching vectors on vertices through GCN layers. Finally, “BERT g ” or “Sim g ” indicates the use of additional global features given by BERT or the five term-based similarity metrics mentioned in Sec. 3 , appended to the graphically merged matching vector m AB , for final classification.\"\n\nCited evidence:\n[E3] (text, Section 4, page 7): vertex, “Siam” indicates the use of Siamese encoder, while “Sim” indicates the use of term-based similarity encoder, as shown in Fig. 2 . “GCN” means that we convolve the local matching vectors on vertices through GCN layers. Finally, “BERT g ” or “Sim g ” indicates the use of additional global features given by BERT or the ﬁve termbased similarity metrics mentioned in Sec. 3 , appended to the graphically merged matching vector m AB , for ﬁnal classiﬁcation. Implementation Details . We use Stanford CoreNLP ( Manning et al. , 2014 ) for word segmentation (on Chinese text) and named entity recognition. For Concept Interaction Graph construction with community detection, we set the minimum community size (number of keywords contained in a concept vertex) to be 2, and the maximum size to be 6. Our neural network model consists of word embedding layer, Siamese encoding layer, Graph transformation layers, and classiﬁcation layer. For embedding, we load the pre-trained word vectors and ﬁx it during training. The embeddings of out of vocabulary words are set to be zero vectors. For the Siamese encoding network, we use 1-D convolution with number of ﬁlters 32 , followed by an ReLU layer and Max Pooling layer. For graph transformation, we utilize 2 layers of GCN ( Kipf and Welling , 2016 ) for experiments on the CNSS dataset, and 3 layers of GCN for experiments on the CNSE dataset. When the vertex encoder is the ﬁve-dimensional features, we set the output size of GCN layers to be 16. When the vertex encoder is the Siamese network encoder, we set the output size of GCN layers to be 128 except the last layer. For the last GCN layer, the output size is always set to be 16 . For the classiﬁcation module, it consists of a linear layer with output size 16 , an ReLU layer, a second linear layer, and ﬁnally a Sigmoid layer. Note that this classiﬁcation module is also"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence from E3 (Section 4, page 7) explicitly mentions the use of Siamese and term-based similarity encoders, GCN layers, and BERT global features, which aligns with the claim."
+   }
+  ]
+ }
+}

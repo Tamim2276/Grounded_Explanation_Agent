@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 343,
+  "prompt_tokens": 766,
+  "total_tokens": 1109,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of OpenIE in Step 1 of TFBA?\nEvidence:\n[E1] (text, Section Figure 1, page 3): Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details. \n[E2] (text, Section Figure 2, page 4): Figure 2: Overview of Step 2 of TFBA . Induction of higher-order schemata from the tri-partite graph formed from the columns of matrices A , B , and C . Triangles in this graph (solid) represent a 3-ary schema, n-ary schemata for n > 3 can be induced from the 3-ary schemata. Please refer to Section 3.2.2 for details. \n[E3] (text, Section 3.2, page 4): • X 1 ∈ R n 2 × n 3 × m + constructed out of the tuples in T by dropping the subject argument and aggregating resulting tuples i.e., X 1 The proposed framework TFBA for inducing higher order schemata involves the following two steps. • Step 1 : In this step, TFBA factorizes multiple lower-order overlapping tensors, X 1 , X 2 , and X 3 , derived from X to induce binary schemata. This step is illustrated in Figure 1 and we discuss details in Section 3.2.1 . • Step 2 : In this step, TFBA connects multiple binary schemata identiﬁed above to induce higher-order schemata. The method accomplishes this by solving a constrained clique problem. This step is illustrated in Figure 2 and we discuss the details in Section 3.2.2 . 3.2.1 Step 1: Back-off Tensor Factorization A schematic overview of this step is shown in Figure 1 . TFBA ﬁrst preprocesses the corpus and extracts OpenIE tuple set T out of it. The 4-mode tensor X is constructed out of T . Instead of performing factorization of the higher-order tensor X as in Section 3.1 , TFBA creates three tensors out of X : X 1"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "In Step 1 of TFBA, OpenIE is used to preprocess the corpus and extract a tuple set T.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "TFBA first preprocesses the corpus and extracts OpenIE tuple set T out of it."
+     }
+    ]
+   },
+   {
+    "text": "The higher-order tensor X is constructed out of the tuples in T.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "The 4-mode tensor X is constructed out of T."
+     }
+    ]
+   },
+   {
+    "text": "TFBA then creates three tensors out of X: X1, X2, and X3.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Instead of performing factorization of the higher-order tensor X as in Section 3.1, TFBA creates three tensors out of X: X1."
+     }
+    ]
+   },
+   {
+    "text": "The role of OpenIE in Step 1 is to extract a tuple set T from the corpus.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "TFBA first preprocesses the corpus and extracts OpenIE tuple set T out of it."
+     }
+    ]
+   }
+  ]
+ }
+}

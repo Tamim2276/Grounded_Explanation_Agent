@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 287,
+  "prompt_tokens": 666,
+  "total_tokens": 953,
+  "prompt_tokens_details": {
+   "cached_tokens": 177
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The proposed WeakFG method clearly outperforms all the comparison methods by 1.5-10.7% in terms of MAP.\" -- cites: E2 (Section 4.1): quote \"Overall, the proposed WeakFG clearly outperforms all the comparison methods by 1.5-10.7% in terms of MAP.\"\n2. \"The WeakFG method outperforms the D2V method by 1.5-10.7% in terms of MAP.\" -- cites: E2 (Section 4.1): quote \"Overall, the proposed WeakFG clearly outperforms all the comparison methods by 1.5-10.7% in terms of MAP.\"\n3. \"The question does not specify the P@1 metric, only MAP, so the comparison cannot be made.\" -- cites: E2 (Section 4.1): quote \"Overall, the proposed WeakFG clearly outperforms all the comparison methods by 1.5-10.7% in terms of MAP.\"\n\nCited evidence:\n[E2] (text, Section 4.1, page 5): RankSVM [Joachims, 2002]: We consider a learning to rank approach with the same feature set as WeakFG. For SVM, we use SVM-Rank implemented in SVM-Light (https://svmlight.joachims.org). RankSVM also uses the accept/reject feedback to learn the prediction model. WeakFG : The proposed method, which trains a WeakFG model to rank the experts. For example, in QA-Expert, as the co-reply relationship is very sparse, we deﬁne correlation as “the number of both-interested topics ≥ 6 ” (each user has about 10 interested topics). Evaluation Measures. We consider the problem as a ranking problem and evaluate different methods by Precision of the top- N results (P@ N ), Mean Average Precision (MAP), and R-prec [Buckley and Voorhees, 2004]. 4.2 Experimental Results Table 1 lists the performance of all methods on the datasets. Overall, the proposed WeakFG clearly outperforms all the comparison methods by 1.5-10.7% in terms of MAP. How embeddings help? Taking a closer look, we observed that the embedding-based methods (WMD and D2V) perform better than the other methods (LM and BM25) using only keywords. LDA can be also considered as an embedding-like algorithm by using topics. However its performance is not as good as expected. Both RankSVM and WeakFG leverage the embedding results and improve the prediction performance."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the WeakFG method outperforms all comparison methods by 1.5-10.7% in terms of MAP. The evidence in E2 (Section 4.1) states the same: 'Overall, the proposed WeakFG clearly outperforms all the comparison methods by 1.5-10.7% in terms of MAP.'"
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim compares the WeakFG method to the D2V method, but the evidence only mentions the performance of WeakFG against all comparison methods. There is no specific mention of D2V in the cited evidence."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim suggests that the comparison cannot be made because the question does not specify the P@1 metric, only MAP. However, the evidence does not provide any information about P@1 or suggest that the comparison cannot be made due to the lack of P@1 metric. The evidence only states that WeakFG outperforms all comparison methods by 1.5-10.7% in terms of MAP."
+   }
+  ]
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 162,
+  "total_tokens": 219,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method appears to be most robust to the presence of outliers in the training data?\nSub-goals:\n1. [text] Which method appears to be most robust to the presence of outliers in the training data?\nAlready tried: sub-goal 1 with text\nStill missing: No further evidence is provided to determine which method is most robust to outliers in the training data. The text discusses various methods but does not explicitly state which one is the most robust based on the given evidence."
+  }
+ ],
+ "answer": {
+  "reason": "To find explicit evidence in the text about which method is most robust to outliers.",
+  "tool": "text",
+  "query": "Which method appears to be most robust to the presence of outliers in the training data?"
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 146,
+  "prompt_tokens": 1421,
+  "total_tokens": 1567,
+  "prompt_tokens_details": {
+   "cached_tokens": 989
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?\nSub-questions:\n1. [text] How do the reconstructions compare to the original samples?\nEvidence:\nE1 [text, Section Figure 5, page 5]: Figure 5. Two samples from four variants of our data set. \nE2 [text, Section 3.3, page 4]: The input to the network is a 256 × 256 RGB, normal and view direction images I showing the appearance of a single material Fig. 4 , c. Using an image instead of a plain list of samples allows the network to reason about spatial arrangement of values, e. g., detecting shapes and relations of highlights. The output is a 3360-dimensional vector Θ( I | φ ) that describes the internal parameters of a network producing the appearance of I . The network Θ has eight layers, reducing resolution until a fully-connected layer. Training now minimizes for\nE3 [text, Section 4, page 5]: the real world is to take many photos at many exposure settings of many geometric objects under varying illuminations. Regrettably, this does not scale well to a high number of samples due to the curse of dimensionality encountered with so many parameters (the product of geometry, material, illumination and view). Also it would be difﬁcult to manually decorate them with ground-truth material segmentation. Instead, we suggest to use photo-realistically rendered imagery. We acquired ﬁve production-quality 3D objects from a model repository. As most of our architectures consider images simply as a list of 4D samples, without spatial layout, this comparatively low number of models appears adequate. Each model was assigned multiple (three) or one physicallyplausible (layered GGX shading) materials organized on the objects surface in a complex and natural spatial arrangement. Before rendering, we randomize the hue of the diffuse component. For illumination, we used 20 different HDR environment maps. For each model, 32 different but equidistant view points on a circle around the object, with a random elevation, were used. Overall, this results in 5 × 20 × 32=3200 images. Note, the number of photos that would be required to exhaustively cover 4D; an order of magnitude higher. As the views and materials are randomized, no sharing between test and train sets exists. Geometry i. e., certain combinations of normals and view directions, might occur both in test and training data. We perfo ...\nE4 [text, Section 5.2, page 6]: Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views.\nE5 [text, Section 3.2, page 3]: according to the α -weighted sum of a data cost c d that depends on the DAM model parameters and an adversarial cost c a that further includes the cost of the parameters of an adversarial model δ , that is biasing the solution to be plausible. W is a weight vector that is set to 1 for now, but will be required later for segmentation. We use α = . 001 . The data cost is deﬁned as\nE6 [text, Section 1, page 2]: is differentiable. In addition, it can be learned effectively from images or video frames with a known viewer position and surface orientation. Applying this representation to new view positions and surface orientations can be done at speed competitive to classic rendering or RMs, i. e., within milliseconds for full images. Acquiring a DAM requires learning a deep model for every new appearance in practice. This would incur substantial computational effort, i. e., running an optimization compared to capturing a RM image in seconds. Addressing this, our third contribution suggests to use another deep (convolutional) neural network to map images showing an appearance to a DAM ([ 17 , 34 , 14 ], one-shot learning [ 8 ], “life-long”, or “continual” learning). This capture requires Fourth, the DAM representation can be used for joint material estimation-and-segmentation, a generalization of the previous objective. Here the input is an image with a known number of n materials, and output is n different DAMs, and a segmentation network that maps every pixel to a n weights.\nE7 [text, Section Figure 6, page 6]: Figure 6. Pairs of error plots for each task. In each pair, the ﬁrst is the old and the second the new view. Each curve is produced by sorting the DSSIM (less is better) of all samples in the data set. Blue colors are for point light illumination, red colors for environment maps. Dark hues are the competitor and light hues ours. Old view Ours Other Ours Other Error Error Error Rank Rank Rank Error Rank Error Rank Error Rank Envmap Pointlight New view Representation Learning-to-learn Segmentation and estimation Old view New view Old view New view 1000 .4 0 1000 .4 1000 .4 0 1000 .4 88 .4 0 1000 .4 0 0 0 0 0 0"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E7",
+    "fact": "The reconstructions are compared to the original samples using DSSIM error plots."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "missing": "The evidence does not provide specific comparisons or error values for the reconstructions to the original samples. It only shows error plots and does not quantify the differences or provide a direct comparison of the reconstructions to the original samples in terms of error or similarity measures. ",
+  "sufficient": false
+ }
+}

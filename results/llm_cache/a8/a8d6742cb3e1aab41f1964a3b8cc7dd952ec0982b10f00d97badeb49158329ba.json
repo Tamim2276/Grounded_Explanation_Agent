@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 136,
+  "prompt_tokens": 713,
+  "total_tokens": 849,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which objective function resulted in a higher ratio of f2(x∗) > 0 for the MNIST dataset?\nSub-questions:\n1. [text] Which objective function resulted in a higher ratio of f2(x∗) > 0 for the MNIST dataset?\nEvidence:\nE1 [text, Section 3.2, page 5]: Note that 1 y = P 0 and R y = P ∞ . When λ > 0 , let θ ∗ CE , then the prediction F ( x, θ ∗ λ ) will tend to equal to P λ , rather than the ground-truth 1 y . This makes the output predictions be biased. In order to have unbiased predictions that make the output vector F ( x ) tend to 1 y , and simultaneously encourage uniformity among probabilities on untrue classes, we deﬁne another objective function based on what we call reverse cross-entropy (RCE) as CE , i.e., θ ∗ R ) , which means that given an input x , the reverse classiﬁer F ( X, θ ∗ R ) will not only tend to assign the lowest probability to the true class but also tend to output a uniform distribution on other classes. This simple insight leads to our entire RCE training procedure which consists of two parts, as outlined below:\nE2 [text, Section Table 3, page 8]: Table 3: The ratios of f 2 ( x ∗ ) > 0 and minimal distortions of the adversarial examples crafted by C&W-wb. Model is Resnet-32. separately termed as CE / RCE. Adversarial examples are generated b Obj. MNIST CIFAR-10 Ratio Distortion Ratio Distortion CE 0.01 17.12 0.00 1.26 RCE 0.77 31.59 0.12 3.89\nE3 [text, Section Table 6, page 17]: Table 6: The ratios (%) of f 2 ( x ∗ ) > 0 of the adversarial examples crafted by the high-conﬁdence version of C&W-wb on MNIST and CIFAR-10. The model is Resnet-32 and the metric is K-density. Objective MNIST CIFAR-10 CE 100 100 RCE 100 100"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "RCE resulted in a higher ratio of f2(x∗) > 0 for the MNIST dataset"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to compare the ratios of f2(x∗) > 0 for the MNIST dataset between the two objective functions. The table only shows the ratios for adversarial examples crafted by C&W-wb, not the original MNIST dataset.",
+  "sufficient": true
+ }
+}

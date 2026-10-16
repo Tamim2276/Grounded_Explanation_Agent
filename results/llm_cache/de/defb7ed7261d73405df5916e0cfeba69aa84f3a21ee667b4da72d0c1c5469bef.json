@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 80,
+  "prompt_tokens": 198,
+  "total_tokens": 278,
+  "prompt_tokens_details": {
+   "cached_tokens": 126
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the Average Relative Error (ARE) of node queries change as the width increases for different configurations of GSS and TCM?\nSub-goals:\n1. [text] How does the Average Relative Error (ARE) of node queries change as the width increases for different configurations of GSS and TCM?\nAlready tried: sub-goal 1 with text\nStill missing: No evidence is provided to answer how the Average Relative Error (ARE) of node queries changes as the width increases for different configurations of GSS and TCM. The evidence only shows the ARE for different configurations and widths but does not provide a trend or change in ARE as the width varies"
+  }
+ ],
+ "answer": {
+  "reason": "To find evidence of how the Average Relative Error (ARE) of node queries changes with increasing width for different configurations of GSS and TCM.",
+  "tool": "text",
+  "query": "How does the Average Relative Error (ARE) of node queries change as the width increases for different configurations of GSS and TCM?"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 125,
+  "prompt_tokens": 873,
+  "total_tokens": 998,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which framework has the lowest total communication cost for MNIST?\nSub-questions:\n1. [text] Which framework has the lowest total communication cost for MNIST?\nEvidence:\nE1 [text, Section Table 5, page 13]: Table 5: Performance Comparison on MNIST and CIFAR- 10. 10. CNN Framework Time (s) Comm (MB) setup online total setup online total MNIST MiniONN GAZELLE FALCON 3.58 0.48 0.63 5.74 0.33 0.21 9.32 0.81 0.84 20.9 47.5 77.0 636.6 22.5 15.5 657.5 70.0 92.5 CIFAR-10 MiniONN GAZELLE FALCON 472 9.34 7.20 72 3.56 2.88 544 12.9 10.1 3046 940 1194 6226 296 265 9272 1236 1459\nE2 [text, Section 6.2, page 13]: As shown in Table 5, when evaluating the online overhead on MNIST model, FALCON is running over 27 × faster than MiniONN while reducing communication overhead by over 97%. For the online overhead in CIFAR-10, FALCON is about 25 × faster than MiniONN and reduce communication\nE3 [text, Section 6.2, page 13]: We evaluated the performance of FALCON on two realworld models, MNIST and CIFAR-10. We show the time cost and the communication overhead in both setup and online phases. The time cost includes the computation cost of client C and server S and the transmission latency between them. To be noted, for the fairness of comparison, the softmax layer is excluded in both models. MNIST is a dataset for handwritten digits and is widely used for image classiﬁcation and recognition tasks. We use the CNN model for MNIST from [23]. This CNN model takes a gray scale image with size 28 × 28 as input, and outputs the classiﬁcation result, which is either 0 to 9. It has 2 convolutional, 2 fully-connected, 3 ReLU and 2 max pooling layers. CIFAR-10 is a small RGB image dataset in 10 classes and is widely used for image classiﬁcation tasks. We use the CNN model for CIFAR-10 from [23]. The input to this CIFAR-10 model is a three channel image of size 32 × 32 × 3, and the output is the class it belongs to. This model contains 7 convolutional, 1 fully-connected, 7 ReLU and 2 mean pooling layers."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "FALCON"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "No further evidence is provided to determine the total communication cost for MNIST in FALCON or any other framework. The table only provides the total communication cost for each framework, not the breakdown for MNIST specifically. Additional information is needed to answer the sub-question about F",
+  "sufficient": false
+ }
+}

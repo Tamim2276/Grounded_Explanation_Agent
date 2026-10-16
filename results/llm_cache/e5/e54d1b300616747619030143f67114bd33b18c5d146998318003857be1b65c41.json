@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 180,
+  "total_tokens": 244,
+  "prompt_tokens_details": {
+   "cached_tokens": 110
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nSub-goals:\n1. [text] What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The effect of enforcing syntactic constraints on the semantic role labeling output is not explicitly stated for sub-question 2 and 3. The evidence provided does not directly address the effect on the semantic role labeling output in terms of specific metrics or changes in performance for sub-queries"
+  }
+ ],
+ "answer": {
+  "reason": "To find specific metrics or performance changes related to the effect of enforcing syntactic constraints on semantic role labeling output.",
+  "tool": "text",
+  "query": "enforcing syntactic constraints on the semantic role labeling output and its effect on performance metrics"
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 246,
+  "prompt_tokens": 657,
+  "total_tokens": 903,
+  "prompt_tokens_details": {
+   "cached_tokens": 380
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"FALCON outperforms GAZELLE in both setup and online phases.\" -- cites: E1 (Section 6.1): quote \"As one can see from Table 2, FALCON outperforms GAZELLE in both setup and online phases.\"\n2. \"FALCON is running over 27 × faster than MiniONN for the online overhead on MNIST model.\" -- cites: E2 (Section 6.2): quote \"FALCON is running over 27 × faster than MiniONN while reducing communication overhead by over 97%.\"\n3. \"The table shows that FALCON has lower online times compared to GAZELLE for both convolutional and fully-connected layers.\" -- cites: E1 (Section 6.1): quote \"As shown in Table 2, for convolutional layers, we show the online running time with input ( w × h × c ) and ﬁlter ( f w × f h × c , k ) using different frameworks. For fully-connected layers, we report the running time with the input vector of length l i and the output vector of length l o . Note that, the setup phases involve performing FFT on ﬁlters and encrypting random values for masking, and the online phases take only the server’s computation into account.\"\n\nCited evidence:\n[E1] (text, Section 6.1, page 12): the different input size. As shown in Table 2, for convolutional layers, we show the online running time with input ( w × h × c ) and ﬁlter ( f w × f h × c , k ) using different frameworks. For fully-connected layers, we report the running time with the input vector of length l i and the output vector of length l o . Note that, the setup phases involve performing FFT on ﬁlters and encrypting random values for masking, and the online phases take only the server’s computation into account. As one can see from Table 2, FALCON outperforms GAZELLE in both setup and online phases. Especially for online phases, our efﬁcient Conv and FC implementations offer us over 10 × less runtime.\n[E2] (text, Section 6.2, page 13): As shown in Table 5, when evaluating the online overhead on MNIST model, FALCON is running over 27 × faster than MiniONN while reducing communication overhead by over 97%. For the online overhead in CIFAR-10, FALCON is about 25 × faster than MiniONN and reduce communication"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section 6.1) states that 'FALCON outperforms GAZELLE in both setup and online phases,' which directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 6.2) states that 'FALCON is running over 27 × faster than MiniONN while reducing communication overhead by over 97%,' which directly supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E1 (Section 6.1) discusses the online running times for convolutional and fully-connected layers but does not compare FALCON to GAZELLE specifically. It only mentions that FALCON outperforms GAZELLE in both setup and online phases, and it does not provide a direct comparison of online times for both convolutional and fully-connected layers."
+   }
+  ]
+ }
+}

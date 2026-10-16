@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 201,
+  "prompt_tokens": 762,
+  "total_tokens": 963,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best for response selection, and how can we tell?\nSub-questions:\n1. [text] Which model performs the best for response selection?\n2. [text] How can we tell?\nEvidence:\nE1 [text, Section abstract, page 4]: We tested our model on two matching tasks: answer selection for question answering and response selection for conversation.\nE2 [text, Section abstract, page 6]: Results Table 4 reports the evaluation results on response selection. Our method outperforms baseline models on all metrics, and the improvement is statistically signiﬁcant (ttest with p-value ≤ 0 . 01 ). In the data set, as the training data becomes large and we updated word embedding in learning, Arc2 and MatchPyraimd are much better than Arc1. LSTM based models perform better than CNN based models, which is consistent with the results in the QA task. Discussions We ﬁrst investigate the performance of KEHNN in terms of text length, as shown in Table 5. We compared our model with 2 typical matching models: LSTM and MV-LSTM. We binned the text pairs into 4 buckets, according to the length\nE3 [text, Section Table 4, page 6]: Table 4: Evaluation results on response selection Table 4: Evaluation results on response selection R2@1 R10@1 R10@2 R10@5 MLP 0.651 0.256 0.380 0.703 DeepMatchtopic 0.593 0.345 0.376 0.693 Arc1 0.665 0.221 0.360 0.684 Arc2 0.736 0.380 0.534 0.777 CNTN 0.743 0.349 0.512 0.797 MatchPyramid 0.743 0.420 0.554 0.786 LSTM 0.725 0.361 0.494 0.801 LSTMa 0.758 0.381 0.545 0.801 MV-LSTM 0.767 0.410 0.565 0.800 KEHNN 0.786 0.460 0.591 0.819"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "Arc2 and MatchPyramid are much better than Arc1."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E3",
+    "fact": "KEHNN has the highest R2@1, R10@1, R10@2, and R10@5 scores."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide a direct comparison of Arc2 and MatchPyramid against KEHNN or other models in terms of performance metrics. It only states that Arc2 and MatchPyramid are better than Arc1. The question asks for the best model and how to tell, which requires a comparison of KEHNN against",
+  "sufficient": false
+ }
+}

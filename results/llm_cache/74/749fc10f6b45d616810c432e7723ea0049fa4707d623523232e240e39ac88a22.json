@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 140,
+  "prompt_tokens": 1776,
+  "total_tokens": 1916,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nSub-questions:\n1. [text] Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nEvidence:\nE1 [text, Section 4.2, page 7]: We test the performance of the trained Resnet-32 networks on MNIST and CIFAR-10 under the oblivious attack, where we investigate the attacking methods as in Sec. 2.3. We ﬁrst disable the thresholding test strategy and make classiﬁers return all predictions to study the networks ability of correctly classifying adversarial examples. We use the iteration-based attacking methods: FGSM, BIM, ILCM and JSMA, and calculate the classiﬁcation accuracy of networks on crafted adversarial examples w.r.t. the perturbation ϵ . Fig. 2a shows the results. We can see that Resnet-32 (RCE) has higher accuracy scores than Resnet-32 (CE) under all the four attacks on both datasets. As for optimization-based methods like the C&W attack and its variants, we apply the same way as in [ 3 ] to report robustness. Speciﬁcally, we do a binary search for the parameter c , in order to ﬁnd the minimal distortions that can successfully attack the classiﬁer. The distortion is deﬁned in [ 33 ] as ∥ x − x ∗ ∥ 2 /\nE2 [text, Section Table 2, page 7]: Table 2: AUC-scores ( 10 − 2 ) of adversarial examples. The model of target networks is Resnet-32. Values are calculated on the examples which are correctly classiﬁed as normal examples and then misclassiﬁed as adversarial counterparts. Bandwidths used when calculating K-density are σ 2 Attack Obj. MNIST CIFAR-10 Confidence non-ME K-density Confidence non-ME K-density FGSM CE 79.7 66.8 98.8 (-) 71.5 66.9 99.7 (-) RCE 98.8 98.6 99.4 (*) 92.6 91.4 98.0 (*) BIM CE 88.9 70.5 90.0 (-) 0.0 64.6 100.0 (-) RCE 91.7 90.6 91.8 (*) 0.7 70.2 100.0 (*) ILCM CE 98.4 50.4 96.2 (-) 16.4 37.1 84.2 (-) RCE 100.0 97.0 98.6 (*) 64.1 77.8 93.9 (*) JSMA CE 98.6 60.1 97.7 (-) 99.2 27.3 85.8 (-) RCE 100.0 99.4 99.0 (*) 99.5 91.9 95.4 (*) C&W CE 98.6 64.1 99.4 (-) 99.5 50.2 95.3 (-) RCE 100.0 99.5 99.8 (*) 99.6 94.7 98.2 (*) C&W-hc CE 0.0 40.0 91.1 (-) 0.0 28.8 75.4 (-) RCE 0.1 93.4 99.6 (*) 0.2 53.6 91.8 (*) 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy MNIST 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy CIFAR-10 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy FGSM(RCE) FGSM(CE) BIM(RCE) BIM(CE) ILCM(RC ...\nE3 [text, Section 4.2, page 6]: We ﬁrst evaluate in the normal setting, where we implement Resnet-32 and Resnet-56 [ 15 ] on both datasets. For each network, we use both the CE and RCE as the training objectives, trained by the same settings as He et al. [16] . The number of training steps for both objectives is set to be 20,000 on MNIST and 90,000 on CIFAR-10. Hereafter for notation simplicity, we will indicate the training procedure used after the model name of a trained network, e.g., Resnet-32 (CE). Similarly, we indicate the training procedure and omit the name of the target network after an attacking method, e.g., FGSM (CE). Table 1 shows the test error rates, where the thresholding test strategy is disabled and all the points receive their predicted labels. We can see that the performance of the networks trained by RCE is as good as and sometimes even better than those trained by the traditional CE procedure. Note that we apply the same training hyperparameters (e.g., learning rates and decay factors) for both the CE and RCE procedures, which suggests that RCE is easy to optimize and does not require much extra effort on tuning hyperparameters."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "FGSM, BIM, ILCM, and JSMA"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide a specific attack method as the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset. It only lists the methods used in the study and their performance on the datasets. The evidence does not specify which method is the most effective among",
+  "sufficient": false
+ }
+}

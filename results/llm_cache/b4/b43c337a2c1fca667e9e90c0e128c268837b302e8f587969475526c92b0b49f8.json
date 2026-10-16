@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 104,
+  "prompt_tokens": 209,
+  "total_tokens": 313,
+  "prompt_tokens_details": {
+   "cached_tokens": 132
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the \"All\" category of Visual7W, and how did its performance compare to human performance?\nSub-goals:\n1. [text] Which model performed best on the 'All' category of Visual7W?\n2. [text] How did its performance compare to human performance?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide a direct comparison of Attention's performance to human performance on the 'All' category of Visual7W. It only compares the improvement in performance for Attention and MLP-IQA and mentions a general improvement for humans on the 'I+Q+A' category, which is not directly "
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a direct comparison of Attention's performance to human performance on the 'All' category of Visual7W. It only compares the improvement in performance for Attention and MLP-IQA and mentions a general improvement for humans on the 'I+Q+A' category, which is not directly relevant.",
+  "tool": "text",
+  "query": "Attention's performance on the 'All' category of Visual7W compared to human performance"
+ }
+}

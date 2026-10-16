@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 84,
+  "prompt_tokens": 169,
+  "total_tokens": 253,
+  "prompt_tokens_details": {
+   "cached_tokens": 102
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of OpenIE in Step 1 of TFBA?\nSub-goals:\n1. [text] What is the role of OpenIE in Step 1 of TFBA?\nAlready tried: sub-goal 1 with text\nStill missing: The role of OpenIE in Step 2 of TFBA is not covered by the evidence provided. The evidence only describes Step 1 and Step 2 of TFBA, but does not specify the role of OpenIE in Step 2 of TFBA."
+  }
+ ],
+ "answer": {
+  "reason": "The question specifically asks about the role of OpenIE in Step 1 of TFBA, which has already been addressed. The next step is to find information about the role of OpenIE in Step 2 of TFBA.",
+  "tool": "text",
+  "query": "What is the role of OpenIE in Step 2 of TFBA?"
+ }
+}

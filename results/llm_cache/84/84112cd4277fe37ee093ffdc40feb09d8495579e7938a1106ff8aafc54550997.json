@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 112,
+  "total_tokens": 175,
+  "prompt_tokens_details": {
+   "cached_tokens": 62
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which framework is faster for setting up and running the FC layer?\nSub-goals:\n1. [text] Which framework is faster for setting up and running the FC layer?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the speed of frameworks for setting up and running the FC layer, which can be directly addressed by searching through the text of the paper.",
+  "tool": "text",
+  "query": "Which framework is faster for setting up and running the FC layer?"
+ }
+}

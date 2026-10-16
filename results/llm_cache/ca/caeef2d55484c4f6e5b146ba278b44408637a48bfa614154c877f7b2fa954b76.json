@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 592,
+  "prompt_tokens": 1219,
+  "total_tokens": 1811,
+  "prompt_tokens_details": {
+   "cached_tokens": 946
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the proposed model compare to other models when trained on the LDC2017T10 dataset, and what does this suggest about the effectiveness of incorporating syntax into the model?\nEvidence:\n[E1] (text, Section Table 1, page 4): Table 1: Parsing scores on LDC2017T10 dev set. Model Unlabelled F1 Labelled F1 Text-to-parse 87.5 85.8 AMR-to-parse 60.4 54.8 Unconditional 38.5 31.7\n[E2] (text, Section 4, page 4): AMR-to-text model with the same architecture as above to control for the extra regularisation in our model compared to previous work. Our results show that adding syntax into the model dramatically boosts performance, resulting in state-ofthe-art single model performance on both datasets without using external training data. As an oracle experiment, we also generate from the realisation model conditioned on the ground truth parse. The outstanding result here – BLEU scores in the 50s – demonstrates that being able to predict the gold reference parse tree is a bottleneck in the performance of our model. However, given the inherent difﬁculty of predicting a single syntax realisation (cf. Section 4 ), we suspect that there is an intrinsic limit to how well generating from an AMR graph can replicate the reference realisation. We further note that we do not use models tailored to graph-structured data or characterlevel features as in Song et al. ( 2018 ); Beck et al. ( 2018 ), or additional unlabelled data to perform semi-supervised learning ( Konstas et al. , 2017 ). We believe that we can improve our results even further if we use these techniques.\n[E3] (text, Section Table 3, page 4): Table 3: BLEU results for generation. Model Dev BLEU Test BLEU Trained on LDC2017T10 Our model 26.1 26.8 Our model + oracle parse 57.5 - Baseline s2s + copy 23.7 23.5 Beck et al. (2018) - 23.3 Trained on LDC2015E86 Our model 23.6 23.5 Our model + oracle parse 53.1 - Konstas et al. (2017) 21.7 22.0 Song et al. (2018) 22.8 23.3 Trained on LDC2015E86 or earlier + additional unlabelled data Song et al. (2018) - 33.0 Konstas et al. (2017) 33.1 33.8 Pourdamghani et al. (2016) 27.2 26.9 Song et al. (2017) 25.2 25.6\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The proposed model outperforms other models when trained on the LDC2017T10 dataset, as evidenced by its state-of-the-art single model performance on both datasets.\": support check: The claim states that the proposed model outperforms other models on the LDC2017T10 dataset, but the evidence only mentions state-of-the-art performance on both datasets without using external training data. The claim also mentions both datasets, while the evidence only refers to one dataset.\n- \"The performance of the proposed model is significantly enhanced by incorporating syntax, as shown by the dramatic boost in BLEU scores when using an oracle parse.\": support check: The claim attributes the performance enhancement to incorporating syntax, but the evidence states that the dramatic boost in BLEU scores is due to being able to predict the gold reference parse tree, not the incorporation of syntax.\n- \"The proposed model's performance on the LDC2017T10 dataset is comparable to other models trained on earlier datasets, but it does not match the performance of models trained on more recent datasets or those using additional unlabelled data.\": support check: The claim suggests that the proposed model's performance is comparable to other models trained on earlier datasets and does not match more recent datasets or those using additional unlabelled data. The evidence only compares the model's performance on the LDC2017T10 dataset to other models trained on the same dataset and does not provide a comparison to more recent datasets or those using additional unlabelled data."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The proposed model outperforms other models when trained on the LDC2017T10 dataset, as evidenced by its state-of-the-art single model performance on both datasets.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Our results show that adding syntax into the model dramatically boosts performance, resulting in state-of-the-art single model performance on both datasets without using external training data."
+     }
+    ]
+   },
+   {
+    "text": "The performance of the proposed model is significantly enhanced by incorporating syntax, as shown by the dramatic boost in BLEU scores when using an oracle parse.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The outstanding result here – BLEU scores in the 50s – demonstrates that being able to predict the gold reference parse tree is a bottleneck in the performance of our model."
+     }
+    ]
+   },
+   {
+    "text": "The proposed model's performance on the LDC2017T10 dataset is comparable to other models trained on earlier datasets, but it does not match the performance of models trained on more recent datasets or those using additional unlabelled data.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Table 3: BLEU results for generation. Model Dev BLEU Test BLEU Trained on LDC2017T10 Our model 26.1 26.8 Our model + oracle parse 57.5 - Baseline s2s + copy 23.7 23.5 Beck et al. (2018) - 23.3 Trained on LDC2015E86 Our model 23.6 23.5 Our model + oracle parse 53.1 - Konstas et al. (2017) 21.7 22.0 Song et al. (2018) 22.8 23.3 Trained on LDC2015E86 or earlier + additional unlabelled data Song et al. (2018) - 33.0 Konstas et al. (2017) 33.1 33.8 Pourdamghani et al. (2016) 27.2 26.9 Song et al. (2017) 25.2 25.6"
+     }
+    ]
+   }
+  ]
+ }
+}

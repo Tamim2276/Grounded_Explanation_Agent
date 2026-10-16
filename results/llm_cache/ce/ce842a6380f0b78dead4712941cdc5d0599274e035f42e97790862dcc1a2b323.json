@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 181,
+  "total_tokens": 247,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the pick and place task in simulation and the real world?\nSub-goals:\n1. [text] What is the difference between the pick and place task in simulation and the real world?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The specific differences in the pick and place task between simulation and the real world are not explicitly detailed in the provided evidence. The evidence focuses more on the push-to-pose task and the general differences between simulation and the real world, but does not provide a detailed answer"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence provided does not explicitly detail the differences between the pick and place task in simulation and the real world, so a more focused search is needed.",
+  "tool": "text",
+  "query": "difference between pick and place task in simulation and real world"
+ }
+}

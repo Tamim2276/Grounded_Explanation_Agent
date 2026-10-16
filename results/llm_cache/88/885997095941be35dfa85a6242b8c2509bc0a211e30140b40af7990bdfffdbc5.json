@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 74,
+  "prompt_tokens": 110,
+  "total_tokens": 184,
+  "prompt_tokens_details": {
+   "cached_tokens": 63
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the filter in the convolution operation?\nSub-goals:\n1. [text] What is the role of the filter in the convolution operation?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question is about the role of the filter in a convolution operation, which is a common topic in scientific papers related to machine learning or signal processing. A text search is suitable for finding this information within the paper.",
+  "tool": "text",
+  "query": "What is the role of the filter in the convolution operation?"
+ }
+}

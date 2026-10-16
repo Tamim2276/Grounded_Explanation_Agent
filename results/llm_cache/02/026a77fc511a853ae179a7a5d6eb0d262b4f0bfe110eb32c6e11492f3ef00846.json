@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 199,
+  "prompt_tokens": 580,
+  "total_tokens": 779,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The lower bound for finding an ε-perfect allocation with minimum cuts for 3 or more players is Ω � log ϵ−1 log log ϵ−1 �.\" -- cites: E1 (Section Table 1): quote \"The lower bounds for ﬁnding ϵ -perfect and ϵ -equitable allocations for n ≥ 3 players hold for any number of cuts [ PW17 ].\"\n\nCited evidence:\n[E1] (text, Section Table 1, page 4): Table 1: Query complexity in cake cutting in the standard query model. Our results are marked with ( ∗ ). The lower bounds for ﬁnding ϵ -perfect and ϵ -equitable allocations for n ≥ 3 players hold for any number of cuts [ PW17 ]. The bounds for exact envy-free and proportional allocations hold for any number of cuts, except the upper bound for proportional works for connected pieces. Fairness notion Players Upper bound Lower bound ϵ-envy-free (connected) n = 2 1 1 n = 3 O(log ϵ−1) (∗) Ω(log ϵ−1) (∗) n ≥4 O(n/ϵ) (∗) Ω � log ϵ−1� (∗) ϵ-perfect (min cuts) n = 2 O(log ϵ−1) (∗) Ω(log ϵ−1) (∗) n ≥3 O � n3/ϵ � [BM15] Ω � log ϵ−1 log log ϵ−1 � [PW17] ϵ-equitable (connected) n = 2 O(log ϵ−1) [CP12] Ω(log ϵ−1) (∗) n ≥3 O � n � log n + log ϵ−1�� [CP12] Ω � log ϵ−1 log log ϵ−1 � [PW17] envy-free (exact) n ≥2 O � nnnnnn � [AM16] Ω(n2) [Pro09] proportional (exact) n ≥2 O (n log n) [EP84] Ω(n log n) [WS07, EP06]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim cites a specific formula for the lower bound of finding an ε-perfect allocation with minimum cuts for 3 or more players as Ω � log ϵ−1 log log ϵ−1 �. However, the cited evidence only states that the lower bounds for finding ϵ-perfect and ϵ-equitable allocations for n ≥ 3 players hold for any number of cuts [PW17]. The evidence does not provide a specific formula for the lower bound of finding an ε-perfect allocation with minimum cuts. The evidence only mentions that the bounds for exact envy-free and proportional allocations hold for any number of cuts, except the upper bound for proportional works for connected pieces. The evidence does not provide the specific formula for the lower bound of finding an ε-perfect allocation with minimum cuts."
+   }
+  ]
+ }
+}

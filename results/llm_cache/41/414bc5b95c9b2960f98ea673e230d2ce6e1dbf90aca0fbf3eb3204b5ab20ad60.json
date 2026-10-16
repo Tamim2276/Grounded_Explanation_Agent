@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 259,
+  "prompt_tokens": 1195,
+  "total_tokens": 1454,
+  "prompt_tokens_details": {
+   "cached_tokens": 987
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of test error?\nEvidence:\n[E1] (text, Section Figure 2, page 9): Figure 2: Analysis of conditioning strategies, distribution discrepancy, and convergence. ncertain). This reveals the power of the entropy conditioning to guarantee example transferabili A->W A->D Transfer Task 75 80 85 90 95 100 105 Accuracy DANN-f (representation) DANN-g (prediction) DANN-[f,g] (concatenation) CDAN (w/o entropy) CDAN-E (w/ entropy) (a) Multilinear 12 24 36 48 60 72 Example ID 0 0.5 1 1.5 Entropy Weight Correct Prediction? Entropy e-H(g) (b) Entropy A->W W->D Transfer Task 1 1.2 1.4 1.6 1.8 2 A-Distance ResNet DANN CDAN (c) Discrepancy 0.05 1 2 3 4 5 6 Number of Iterations ( 104) 0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 Test Error CDAN (M) CDAN (RM) DANN ResNet (d) Convergence\n[E2] (text, Section 4.3, page 9): Distribution Discrepancy The A -distance is a measure for distribution discrepancy [ 4 , 33 ], deﬁned as dist A = 2 (1 − 2 ϵ ) , where ϵ is the test error of a classiﬁer trained to discriminate the source from target. Figure 2(c) shows dist A on tasks A → W , W → D with features of ResNet, DANN, and CDAN. We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively. As domains W and D are similar, dist A of task W → D is smaller than that of A → W , implying higher accuracies. Convergence We testify the convergence of ResNet, DANN, and CDANs, with the test errors on task A → W shown in Figure 2(d). CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM). Note that CDAN (M) constitutes high-dimensional multilinear map, which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DANN.\n[E3] (text, Section 4.3, page 8): Ablation Study We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. Table 1 ∼ 4 shows that CDAN+E outperforms CDAN , proving that entropy conditioning can prioritize easy-to-transfer examples and encourage certain predictions. Conditioning Strategies Besides multilinear conditioning, we investigate DANN-[f,g] with the domain discriminator imposed on the concatenation of f and g , DANN-f and DANN-g with the\n\nThese claims are already verified and kept:\n- The CDAN model has the fastest convergence.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The CDAN model performs the best in terms of test error.\": support check: The evidence states that CDAN enjoys faster convergence than DANN and that CDAN (M) converges faster than CDAN (RM). However, it does not explicitly state that CDAN performs the best in terms of test error. The evidence does not provide a direct comparison of test error across all models.\n- \"The CDAN model has the smallest distribution discrepancy.\": support check: The evidence states that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively. However, it does not directly state that the CDAN model has the smallest distribution discrepancy. The evidence only compares the distribution discrepancy of CDAN features to ResNet and DANN features."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The CDAN model has the fastest convergence.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM)."
+     }
+    ]
+   },
+   {
+    "text": "The CDAN model performs the best in terms of test error.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM)."
+     }
+    ]
+   },
+   {
+    "text": "The CDAN model has the smallest distribution discrepancy.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively."
+     }
+    ]
+   }
+  ]
+ }
+}

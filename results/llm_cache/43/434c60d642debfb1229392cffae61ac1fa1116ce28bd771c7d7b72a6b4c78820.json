@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 224,
+  "prompt_tokens": 745,
+  "total_tokens": 969,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ChoiceNet has the lowest outlier rates across all outlier percentages in Table 7.\" -- cites: E1 (Section Table 7): quote \"Outliers ChoiceNet MDN MLP GPR LGPR RGPR 0% 0% 50.83% 0% 0.83% 4.17% 3.33%\"\n2. \"ChoiceNet shows the lowest root mean square lane deviation distances in Table 8, indicating better performance.\" -- cites: E2 (Section Table 8): quote \"Outliers ChoiceNet MDN MLP GPR LGPR RGPR 0% 0.314 0.723 0.300 0.356 0.349 0.424\"\n\nCited evidence:\n[E1] (text, Section Table 7, page 15): Table 7: Collision rates of compared methods on straight lanes. Outliers ChoiceNet MDN MLP GPR LGPR RGPR 0% 0% 50.83% 0% 0.83% 4.17% 3.33% 10% 0% 38.33% 0% 2.5% 1.67% 4.17% 20% 0% 41.67% 0% 7.5% 6.67% 10% 30% 0% 66.67% 1.67% 4.17% 1.67% 7.5% 40% 0.83% 35% 3.33% 6.67% 6.67% 24.17%\n[E2] (text, Section Table 8, page 15): Table 8: Root mean square lane deviation distances (m) of compared methods on straight lanes. Outliers ChoiceNet MDN MLP GPR LGPR RGPR 0% 0.314 0.723 0.300 0.356 0.349 0.424 10% 0.352 0.387 0.438 0.401 0.446 0.673 20% 0.349 0.410 0.513 0.418 0.419 0.725 30% 0.368 0.368 0.499 0.455 0.476 0.740 40% 0.370 0.574 0.453 0.453 0.453 0.636"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that ChoiceNet has the lowest outlier rates across all outlier percentages in Table 7. However, the evidence provided in E1 (Section Table 7) only shows the outlier rates for a single outlier percentage (0%). The evidence does not provide data for all outlier percentages, so it cannot be concluded that ChoiceNet has the lowest outlier rates across all outlier percentages."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that ChoiceNet shows the lowest root mean square lane deviation distances in Table 8, indicating better performance. However, the evidence provided in E2 (Section Table 8) only shows the root mean square lane deviation distances for a single outlier percentage (0%). The evidence does not provide data for all outlier percentages, so it cannot be concluded that ChoiceNet shows the lowest root mean square lane deviation distances across all outlier percentages."
+   }
+  ]
+ }
+}

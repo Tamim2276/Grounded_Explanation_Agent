@@ -1,0 +1,63 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 452,
+  "prompt_tokens": 821,
+  "total_tokens": 1273,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the number of shifts and the accuracy of the output?\nEvidence:\n[E1] (text, Section Table 8, page 9): Table 8: A shift-reduce example for which the method successfully enforces constraints. The initial output has only nine shifts, but there are ten tokens in the input. Enforcing the constraint not only corrects the number of shifts to ten, but changes the implied tree structure to the correct tree. iteration output loss accuracy 0 ssr!sr!ssssrrr!rr!ssrrrrrr! 0.0857 33.3% 11 ssr!sr!ssssrrr!rr!ssrrrrrr! 0.0855 33.3% 12 sssr!ssssrr!srrr!rr!ssrrrrrr! 0.0000 100.0%\n[E2] (text, Section 2, page 3): Note that for output sequences to form a valid tree over the input, the sequence must satisfy a number of constraints. First, the number of shifts must equal the number of input\n[E3] (text, Section B, page 11): Table 11 reports the runtime for different inference procedures with varying dataset sizes. In general, we observe that GBI tends to be faster than A * , especially when the dataset is large enough. One exception is the BC domain where GBI is just slightly faster than A*. We hypothesize it might be due to the difﬁculty of the constraint violations as its failure rate is higher than usual. GBI will spend more time searching for the correct output (more iterations) if it is harder to ﬁnd the solution. Also note that we explicitly set the max epoch M for GBI after which it will stop iterating to avoid pathological cases. In our SRL experiments, we have set the max epochs to be 10 (GBI-10). To study its scalability, we ran GBI with max epoch set to 30 (GBI-30). The runtime increase to 556 mins for GBI-30 as opposed to 288 mins of GBI-10. However, GBI-30 improves signiﬁcantly in all accuracy metrics compared to GBI-10: overall F1 (+0.34), F1 on failure set (+3.4), exact match (+4.35%), and conversion rate (+11.24%). As can be seen from the demonstration, there is a clear tradeoff between runtime and accuracy as controlled by the maximum number of epochs M . The user can control M by the runtime constraint the system has: lower M when the serving time is most important and larger M when accuracy is more important than the serving time."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The number of shifts must equal the number of input tokens for the output to form a valid tree.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Note that for output sequences to form a valid tree over the input, the sequence must satisfy a number of constraints. First, the number of shifts must equal the number of input tokens."
+     }
+    ]
+   },
+   {
+    "text": "The accuracy of the output increases as the number of shifts increases.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The initial output has only nine shifts, but there are ten tokens in the input. Enforcing the constraint not only corrects the number of shifts to ten, but changes the implied tree structure to the correct tree."
+     },
+     {
+      "evidence": "E1",
+      "quote": "iteration output loss accuracy 0 ssr!sr!ssssrrr!rr!ssrrrrrr! 0.0857 33.3% 11 ssr!sr!ssssrrr!rr!ssrrrrrr! 0.0855 33.3% 12 sssr!ssssrr!srrr!rr!ssrrrrrr! 0.0000 100.0%"
+     }
+    ]
+   },
+   {
+    "text": "The relationship between the number of shifts and the accuracy of the output is not explicitly stated in the provided evidence.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The initial output has only nine shifts, but there are ten tokens in the input. Enforcing the constraint not only corrects the number of shifts to ten, but changes the implied tree structure to the correct tree."
+     }
+    ]
+   }
+  ]
+ }
+}

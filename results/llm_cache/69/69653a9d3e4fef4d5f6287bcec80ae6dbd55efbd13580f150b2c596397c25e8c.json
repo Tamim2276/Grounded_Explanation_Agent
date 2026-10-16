@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 100,
+  "prompt_tokens": 153,
+  "total_tokens": 253,
+  "prompt_tokens_details": {
+   "cached_tokens": 94
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?\nSub-goals:\n1. [text] How do the reconstructions compare to the original samples?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide a comparison between reconstructions and original samples. It only shows a figure with samples from the data set. Further evidence is needed to compare reconstructions to the original samples to answer the question fully."
+  }
+ ],
+ "answer": {
+  "reason": "The text search has already been used to find the comparison between reconstructions and original samples, but the evidence found was insufficient. Therefore, a different tool is needed to gather more information.",
+  "tool": "text",
+  "query": "The evidence does not provide a comparison between reconstructions and original samples. It only shows a figure with samples from the data set. Further evidence is needed to compare reconstructions to the original samples to answer the question fully."
+ }
+}

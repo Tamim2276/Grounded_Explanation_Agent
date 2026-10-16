@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 87,
+  "prompt_tokens": 149,
+  "total_tokens": 236,
+  "prompt_tokens_details": {
+   "cached_tokens": 61
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre in the SRL-NW network has the lowest failure rate and how does its inference time compare to other genres within the same network?\nSub-goals:\n1. [text] Which genre in the SRL-NW network has the lowest failure rate?\n2. [text] How does its inference time compare to other genres within the same network?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the genre with the lowest failure rate and its inference time comparison within the SRL-NW network. The first sub-goal is to find the genre with the lowest failure rate, which can be addressed using a text search.",
+  "tool": "text",
+  "query": "Which genre in the SRL-NW network has the lowest failure rate?"
+ }
+}

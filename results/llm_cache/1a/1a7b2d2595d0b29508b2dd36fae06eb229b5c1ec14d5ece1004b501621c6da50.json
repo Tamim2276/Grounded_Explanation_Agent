@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 114,
+  "total_tokens": 180,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following algorithms performs the best when trained via the CE?\nSub-goals:\n1. [text] Which of the following algorithms performs the best when trained via the CE?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the performance of algorithms trained via the Cross-Entropy (CE) method, so a text search is appropriate to find relevant information within the paper.",
+  "tool": "text",
+  "query": "Which of the following algorithms performs the best when trained via the CE?"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 52,
+  "prompt_tokens": 132,
+  "total_tokens": 184,
+  "prompt_tokens_details": {
+   "cached_tokens": 94
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the encoder understand the last user utterance?\nSub-goals:\n1. [text] How does the encoder understand the last user utterance?\nAlready tried: sub-goal 1 with text\nStill missing: No further evidence is provided to answer how the encoder uses the memory cell representations to understand the last user utterance."
+  }
+ ],
+ "answer": {
+  "reason": "To find information about how the encoder uses memory cell representations to understand the last user utterance.",
+  "tool": "text",
+  "query": "encoder memory cell representations last user utterance"
+ }
+}

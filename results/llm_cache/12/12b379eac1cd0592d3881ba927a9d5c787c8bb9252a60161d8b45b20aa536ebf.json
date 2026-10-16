@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 49,
+  "prompt_tokens": 171,
+  "total_tokens": 220,
+  "prompt_tokens_details": {
+   "cached_tokens": 108
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the presence of noise in the input image affect the quality of the generated images?\nSub-goals:\n1. [text] How does the presence of noise in the input image affect the quality of the generated images?\nAlready tried: sub-goal 1 with text\nStill missing: The specific effect of noise on the quality of generated images is not detailed in the provided evidence. The evidence indicates the algorithm's ability to handle noise but does not quantify the effect or provide a direct comparison of image quality with and without noise."
+  }
+ ],
+ "answer": {
+  "reason": "To find specific details about the effect of noise on image quality, a more detailed search is needed.",
+  "tool": "text",
+  "query": "specific effect of noise on the quality of generated images"
+ }
+}

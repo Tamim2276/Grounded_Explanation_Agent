@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 188,
+  "prompt_tokens": 554,
+  "total_tokens": 742,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ZDDA requires T-R target-domain training data, while UDA and MVL do not.\" -- cites: E1 (Section Table 1): quote \"given T-R target-domain training data? Y Y N N\"; E2 (Section 2): quote \"In UDA and MVL, T-R target-domain training data is given. In MVL and DG, T-R training data in multiple domains is given. However, in ZDDA, T-R target-domain training data\"\n2. \"ZDDA and UDA/MVL differ in the availability of T-R target-domain training data.\" -- cites: E1 (Section Table 1): quote \"given T-R target-domain training data? Y Y N N\"; E2 (Section 2): quote \"In UDA and MVL, T-R target-domain training data is given. In MVL and DG, T-R training data in multiple domains is given. However, in ZDDA, T-R target-domain training data\"\n\nCited evidence:\n[E1] (text, Section Table 1, page 3): Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG) problem conditions UDA MVL DG ZDDA given T-R target-domain training data? Y Y N N given T-R training data in multiple (>1) domains/views? N Y Y N example prior work [33] [42] [28] N/A\n[E2] (text, Section 2, page 3): Other problems related to ZDDA include unsupervised domain adaptation (UDA), multi-view learning (MVL), and domain generalization (DG), and we compare their problem settings in Table 1, which shows that the ZDDA problem setting is diﬀerent from those of UDA, MVL, and DG. In UDA and MVL, T-R target-domain training data is given. In MVL and DG, T-R training data in multiple domains is given. However, in ZDDA, T-R target-domain training data"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section Table 1) states that ZDDA does not have T-R target-domain training data (N), while UDA and MVL do (Y). This directly supports the claim that ZDDA requires T-R target-domain training data, while UDA and MVL do not."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Section Table 1) states that ZDDA does not have T-R target-domain training data (N), while UDA and MVL do (Y). This directly supports the claim that ZDDA and UDA/MVL differ in the availability of T-R target-domain training data."
+   }
+  ]
+ }
+}

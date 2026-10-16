@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 179,
+  "total_tokens": 261,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the number of workers per \"expert\" and Cohen's kappa agreement for stance annotation?\nSub-goals:\n1. [text] What is the relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation?\nAlready tried: sub-goal 1 with text\nStill missing: The specific relationship between the number of workers per 'expert' and the Cohen's kappa agreement for stance annotation is not explicitly stated in the evidence. The figure shows the relationship but does not provide a numerical or textual description of the relationship itself."
+  }
+ ],
+ "answer": {
+  "reason": "To find the specific relationship described in the figure, a visual analysis tool is needed.",
+  "tool": "text",
+  "query": "The relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation is not explicitly stated in the evidence. The figure shows the relationship but does not provide a numerical or textual description of the relationship itself."
+ }
+}

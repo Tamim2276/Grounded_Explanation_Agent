@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 51,
+  "prompt_tokens": 110,
+  "total_tokens": 161,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which framework has the lowest total communication cost for MNIST?\nSub-goals:\n1. [text] Which framework has the lowest total communication cost for MNIST?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the lowest total communication cost for MNIST, which can be directly searched in the text of the paper.",
+  "tool": "text",
+  "query": "lowest total communication cost for MNIST"
+ }
+}

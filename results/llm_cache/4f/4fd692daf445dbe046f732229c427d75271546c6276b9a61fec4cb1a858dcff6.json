@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 227,
+  "total_tokens": 316,
+  "prompt_tokens_details": {
+   "cached_tokens": 160
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best at predicting the delexicalised constituency tree of an example, and how much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nSub-goals:\n1. [text] Which model performs the best at predicting the delexicalised constituency tree of an example?\n2. [text] How much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide the unlabelled F1 score for the AMR-to-text model or the baseline model, nor does it compare the performance of the AMR-to-text model to the baseline model in terms of unlabelled F1 score."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide the unlabelled F1 score for the AMR-to-text model or the baseline model, nor does it compare the performance of the AMR-to-text model to the baseline model in terms of unlabelled F1 score.",
+  "tool": "text",
+  "query": "AMR-to-text model unlabelled F1 score baseline model"
+ }
+}

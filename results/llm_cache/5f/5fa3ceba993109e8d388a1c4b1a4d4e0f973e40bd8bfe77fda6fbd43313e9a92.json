@@ -1,0 +1,39 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 97,
+  "prompt_tokens": 634,
+  "total_tokens": 731,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between gloss and representation error?\nEvidence:\n[E1] (text, Section Figure 10, page 7): Figure 10. Relation of gloss and representation error. .125 0 DSSIM Gloss High Low Test Total Train\n[E2] (text, Section Figure 6, page 6): Figure 6. Pairs of error plots for each task. In each pair, the ﬁrst is the old and the second the new view. Each curve is produced by sorting the DSSIM (less is better) of all samples in the data set. Blue colors are for point light illumination, red colors for environment maps. Dark hues are the competitor and light hues ours. Old view Ours Other Ours Other Error Error Error Rank Rank Rank Error Rank Error Rank Error Rank Envmap Pointlight New view Representation Learning-to-learn Segmentation and estimation Old view New view Old view New view 1000 .4 0 1000 .4 1000 .4 0 1000 .4 88 .4 0 1000 .4 0 0 0 0 0 0\n[E3] (text, Section 5.2, page 6): Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The relationship between gloss and representation error is illustrated in Figure 10.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 10. Relation of gloss and representation error."
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 555,
+  "prompt_tokens": 1720,
+  "total_tokens": 2275,
+  "prompt_tokens_details": {
+   "cached_tokens": 1443
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre shows the **largest absolute improvement** in F1 score on the failure set after applying GBI for **both** syntactic parsing and SRL?\nEvidence:\n[E1] (text, Section Table 5, page 7): Table 5: Evaluation of syntactic parser and SRL system on out-of-domain data. F1 scores are reported on the failure set . SRL model was trained on NW and the syntactic parser was trained on WSJ Section on OntoNote v5.0. Except PT, which is new and old Testament, all failure rate on out-domain data is higher than that of in-domain (11.9% for parsing and 18.1% for SRL) as suspected. The table shows that GBI can be successfully applied to resolve performance degradation on out-of-domain data. Syntactic Parsing SRL Genre Failure Conversion F1 on failure set Failure Conversion F1 on failure set rate (%) rate (%) before after rate (%) rate (%) before after Broadcast Conversation (BC) 19.3 98.8 56.4 59.0 (+2.6) 26.86 53.88 39.72 52.4 (+12.68) Broadcast News (BN) 11.7 98.1 63.2 68.8 (+5.6) 18.51 55.19 39.28 50.58 (+11.3) Pivot Corpus (PT) 9.8 97.8 71.4 75.8 (+4.4) 10.01 62.34 47.19 63.69 (+16.5) Telephone Conversation (TC) 10.1 86.2 56.9 57.6. (+0.7) 19.09 54.62 47.7 58.04 (+10.34) Weblogs (WB) 17.6 95.3 62.0 63.2 (+1.2) 20.32 44.13 47.6 57.39 (+9.39)\n[E2] (text, Section 4, page 6): For SRL , we simulate low-resource models by limiting the training data portion to 1%, 10%, 40%, and 70% resulting in F1 score range of 67.28-83.55. Similarly, for syntactic parsing , we train additional low-quality models N et3-5 with a simpler uni-directional encoders/decoders, and on different training data portions of 25%, 75%, and 100% (Table 2). We evaluate GBI on each of them in Table 1, 4 and ﬁnd further evidence in support of favorable answers to Q2 (satisfying constraints) and Q3 (improving F1 accuracy) by favorably answering Q4. Moreover, while not reported fully due to page limits, we examined both tasks with over 20 experiments and different baseline networks in combination with different inference strategies, and we found GBI favorable in all but one case (but by just 0.04 comparing without GBI). We also study whether GBI is compatible with better underlying discrete search algorithms, in particular beam search for seq2seq. As we seen in column 2 of Table 4, that although beam-search improves the F1 score and reduces the percentage of violating constraints, GBI further improves over beam-search when using the latter in the inner-loop as the decoding procedure. In conclusion, improving the underlying inference procedure has the effect of decreasing the number of violating outputs, but GBI is still very much effective on this increasingly small set, despite it intuitively representing more difﬁcult cases that even eludes constraint satisfaction via beam search inference.\n[E3] (text, Section 4, page 7): out-of-genre data with the highest being 26.86% for BC (vs. 18.10% NW). Further, by enforcing constraints, we see signiﬁcant gains on the failure set in terms of F1 score across all genres (ranging from 9.39-16.5 F1), thus, providing additional evidences for answering Q5. As we did for SRL, we train a GMNT seq2seq model on the WSJ NW section in OntoNotes v5.0 Treebank 4 which shares the same genre classiﬁcation with PropBank. The F1 on the within-genre data (test set of WSJ) is 85.03, but the F1 on these genres is much lower, ranging from the midforties on BC (46.2–78.5 depending on the subcategory) to the low-eighties on BN (68.3–81.3. depending on the subcategory). Indeed, we ﬁnd that overall the F1 is lower and in some cases, like WB, the failure rate is much higher (17.6% for WB vs. 11.9% for WSJ). Following the same experimental protocol as on the PTB data, we report the results in Table 5 (aggregating over all subcategories in each genre). We see that across all genres, the algorithm has high conversion rates (sometimes close to 100%), and that in each case, enforcing the constraints improves the F1. Again, we ﬁnd support for Q2, Q3 and Q5.\n\nThese claims are already verified and kept:\n- The Weblogs (WB) genre shows a significant improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.\n- The Broadcast Conversation (BC) genre shows a significant improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.\n- The Broadcast News (BN) genre shows a significant improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The Pivot Corpus (PT) genre shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.\": support check: The claim states that the Pivot Corpus (PT) genre shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL. However, the evidence shows that the Pivot Corpus (PT) genre has an improvement of 4.4 in F1 score for syntactic parsing and 16.5 in F1 score for SRL. This is the largest improvement among the genres cited, but the claim incorrectly states that it is for both syntactic parsing and SRL, which is not supported by the evidence."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Pivot Corpus (PT) genre shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Pivot Corpus (PT) 9.8 97.8 71.4 75.8 (+4.4) 10.01 62.34 47.19 63.69 (+16.5)"
+     }
+    ]
+   },
+   {
+    "text": "The Weblogs (WB) genre shows a significant improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Weblogs (WB) 17.6 95.3 62.0 63.2 (+1.2) 20.32 44.13 47.6 57.39 (+9.39)"
+     }
+    ]
+   },
+   {
+    "text": "The Broadcast Conversation (BC) genre shows a significant improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Broadcast Conversation (BC) 19.3 98.8 56.4 59.0 (+2.6) 26.86 53.88 39.72 52.4 (+12.68)"
+     }
+    ]
+   },
+   {
+    "text": "The Broadcast News (BN) genre shows a significant improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Broadcast News (BN) 11.7 98.1 63.2 68.8 (+5.6) 18.51 55.19 39.28 50.58 (+11.3)"
+     }
+    ]
+   }
+  ]
+ }
+}

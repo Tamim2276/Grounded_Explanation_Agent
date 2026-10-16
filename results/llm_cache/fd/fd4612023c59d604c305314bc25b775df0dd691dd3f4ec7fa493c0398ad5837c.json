@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 490,
+  "prompt_tokens": 1389,
+  "total_tokens": 1879,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain why the \"Last contact\" feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\nEvidence:\n[E1] (text, Section 8.2, page 17): The dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL (Chicago Police Department, 2017). The dataset contains 398 , 684 records; for each record the experiment focuses on 14 attributes and a score. The scores reﬂect an individual’s probability of being involved in a shooting incident either as a victim or an offender. Scores, ranging from 0 (low risk) to 500 (high risk), are calculated for individuals with criminal records using eight attributes (not including race or sex). These attributes are: age during the latest arrest (1), number of times being the victim of a shooting incident (2), number of times being the victim of aggravated battery or assault (3), number of prior arrests for violent offenses (4), presence of gang afﬁliation (5), number of prior narcotic arrests (6), trend in recent criminal activity (7) and number of prior unlawful use of weapon arrests (8). Additionally, in this experiment, we measure the inﬂuence of features not available to the algorithm (but which are part of the dataset): sex (9), race (10), occurrence of at least one weapon arrest in past 10 years (11), occurrence of at least one drug arrest in past 10 years (12), the subject being currently on parole (13), and the latest year of contact with the police (14).\n[E2] (text, Section 8.2, page 17): The dataset requires some adjustments to the original deﬁnitions of MIM and Parzen. First, we adjust MIM to a regression setting by replacing the indicator 1 ( c ( ⃗y ) = c ( ⃗x )) with c ( ⃗y ) − c ( ⃗x ) ; thus, a point’s contribution to the measure is weighted based on how much bigger, or smaller, its SSL score is; Parzen was similarly adjusted. Moreover, the race feature is categorical with no natural order to its states; thus, the value of race is set to 1 whenever it is the same as the point of interest, and 0 otherwise. While MIM and Parzen have similar outputs on the data: the average cosine similarity between the two measures is ≥ 0 . 94 (taken over ≥ 8000 randomly sampled points). Two example MIM inﬂuence measurements are depicted in Table 4. Asher and Arthur ((2017)) analyze the eight features used by the SSL Algorithm. Their results suggest that age has signiﬁcant negative inﬂuence on the SSL score, while other features contribute positively in varying degrees. The MIM outputs conﬁrm this statement, but suggest that the degree to which the features contribute to the SSL score vary greatly between cases. As exempliﬁed in Table 4, the inﬂuence of a single crime-related event tends to grow with the number of events of the same type. In the vast majority of cases, age has signiﬁcant negative inﬂuence on the SSL score. Interestingly, the latest date of contact with the police often has signiﬁcant positive inﬂuence on the score, despite not being used by the algorithm directly. In other cases, race has signiﬁcant inﬂuence as well. This last point highlights some of the issues of using a data-driven method: features that are not used by the classiﬁer can be assigned a signiﬁcant amount of inﬂuence; this is simply because race is correlated with other variables used by the SSL algorithm. Indeed, in order to ascertain that race is not an input to the algorithm, black-box access is required.\n[E3] (text, Section 1, page 1): Recent years have seen the widespread implementation of data-driven decision making algorithms in increasingly high-stakes domains, such as ﬁnance, healthcare, transportation and public safety. Using novel ML techniques, these algorithms are able to process massive amounts of data and make highly accurate predictions; however, their inherent complexity makes it increasingly difﬁcult for humans to understand why certain decisions were made. Indeed, these algorithms are black-box decision makers : their inner workings are either hidden from human scrutiny by proprietary law, or (as is often the case) are so complicated that even their own designers are hard-pressed to explain their behavior. By obfuscating their reasoning, data-driven classiﬁers expose human stakeholders to risks. These may include incorrect decisions (e.g. a loan application that was wrongly rejected due to system error), information leaks (e.g. an algorithm inadvertently uses information it should not have used), or discrimination (e.g. biased decisions against certain ethnic or gender groups). Government bodies and regulatory authorities have recently begun calling for algorithmic transparency : providing human-interpretable explanations of the underlying reasoning behind large-scale decision making algorithms. Several recent works propose making algorithms more transparent by using numerical inﬂuence measures: methods for measuring the importance of every feature in a dataset. However, these works, by and large, do not justify why their particular methodology is sound. Our work takes an axiomatic approach to inﬂuence measurement in data-driven domains. Starting from a"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL (Chicago Police Department, 2017).",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The dataset used for this experiment is the anonymized listing of arrest data used by the Chicago Police Department’s Strategic Subject Algorithm to create a risk assessment score, known as the Strategic Subject List or SSL (Chicago Police Department, 2017)."
+     }
+    ]
+   },
+   {
+    "text": "The latest date of contact with the police often has significant positive influence on the score, despite not being used by the algorithm directly.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The latest date of contact with the police often has significant positive influence on the score, despite not being used by the algorithm directly."
+     }
+    ]
+   },
+   {
+    "text": "The dataset requires some adjustments to the original definitions of MIM and Parzen. First, we adjust MIM to a regression setting by replacing the indicator 1 ( c ( ⃗y ) = c ( ⃗x )) with c ( ⃗y ) − c ( ⃗x ) ; thus, a point’s contribution to the measure is weighted based on how much bigger, or smaller, its SSL score is; Parzen was similarly adjusted.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The dataset requires some adjustments to the original definitions of MIM and Parzen. First, we adjust MIM to a regression setting by replacing the indicator 1 ( c ( ⃗y ) = c ( ⃗x )) with c ( ⃗y ) − c ( ⃗x ) ; thus, a point’s contribution to the measure is weighted based on how much bigger, or smaller, its SSL score is; Parzen was similarly adjusted."
+     }
+    ]
+   }
+  ]
+ }
+}

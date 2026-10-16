@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 240,
+  "prompt_tokens": 779,
+  "total_tokens": 1019,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Adversarial Balancing (AB) estimator has the smallest bias and best MSE performance in the case of fully observed confounders.\" -- cites: E1 (Section Table 2): quote \"The naive estimator has the largest bias while AB estimator has the best MSE performance.\"\n2. \"The Entropy Balancing (EB) estimator has the best performance followed by the simple Covariate Control (CC) estimator.\" -- cites: E3 (Section Table 4): quote \"EB has the best performance followed by simple CC estimator.\"\n\nCited evidence:\n[E1] (text, Section Table 2, page 11): Table 2: Performance of diﬀerent ATE estimators when true confounders are fully observed. Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Out- come Regression (OR). The naive estimator has the largest bias while AB esti- mator has the best MSE performance. Estimator Bias MAE MSE AB 2.8 × 10−2 2.9 × 10−2 1.5 × 10−3 DR −2.3 × 10−3 6.1 × 10−2 8.0 × 10−3 IPW 5.7 × 10−2 5.8 × 10−2 6.2 × 10−3 Naive comparison 7.1 × 10−2 7.1 × 10−2 5.8 × 10−3 OR 8.8 × 10−4 6.1 × 10−2 8.1 × 10−3\n[E3] (text, Section Table 4, page 14): Table 4: Performance of diﬀerent ATETR estimators when true confounders are fully observed. Estimators are Adversarial Balancing (AB), Covariate Control (CC), Entrophy Balancing (EB), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Regression (OR). EB has the best performance followed by simple CC estimator. Estimator Bias MAE MSE AB 3.2 × 10−2 3.3 × 10−2 1.7 × 10−3 CC 7.7 × 10−3 1.9 × 10−2 7.8 × 10−4 EB 4.3 × 10−3 1.8 × 10−2 7.1 × 10−4 IPW 7.7 × 10−3 1.9 × 10−2 1.0 × 10−3 Naive comparison 7.1 × 10−2 7.1 × 10−2 5.8 × 10−3 OR 7.8 × 10−2 7.8 × 10−2 6.8 × 10−3"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the Adversarial Balancing (AB) estimator has the smallest bias and best MSE performance in the case of fully observed confounders. However, the evidence from E1 (Section Table 2) only compares the naive estimator to the AB estimator and does not provide a direct comparison of the AB estimator to other estimators. The evidence shows that the naive estimator has the largest bias, while the AB estimator has the best MSE performance, but it does not state that the AB estimator has the smallest bias or that it is the best in terms of MSE compared to other estimators."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the Entropy Balancing (EB) estimator has the best performance followed by the simple Covariate Control (CC) estimator. The evidence from E3 (Section Table 4) directly supports this claim by stating that EB has the best performance followed by the simple CC estimator."
+   }
+  ]
+ }
+}

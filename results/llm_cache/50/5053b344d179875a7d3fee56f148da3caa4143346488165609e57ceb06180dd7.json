@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 166,
+  "total_tokens": 227,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three different network architectures used in the comparison study?\nSub-goals:\n1. [text] What are the three different network architectures used in the comparison study?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: No further information is provided about the three different network architectures used in the comparison study. The evidence only lists the three architectures but does not provide any additional details or context about their use in the study or their comparison with each other."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence lists the three architectures but does not provide additional details or context about their use in the study or their comparison with each other.",
+  "tool": "text",
+  "query": "three different network architectures used in the comparison study"
+ }
+}

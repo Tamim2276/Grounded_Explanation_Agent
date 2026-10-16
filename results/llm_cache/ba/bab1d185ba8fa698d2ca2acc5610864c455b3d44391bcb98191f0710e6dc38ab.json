@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 268,
+  "prompt_tokens": 666,
+  "total_tokens": 934,
+  "prompt_tokens_details": {
+   "cached_tokens": 315
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The embedding method that performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys was MLP-IQA, achieving 61.5% accuracy.\" -- cites: E3 (Section Table 12): quote \"MLP-IQA 61.5 60.2 45.1\"\n2. \"The performance of MLP-IQA was significantly better than the other methods, as it achieved the highest accuracy of 61.5% on the Visual7W dataset with IoU + QoU decoys.\" -- cites: E3 (Section Table 12): quote \"MLP-IQA 61.5 60.2 45.1\"\n3. \"The evidence does not provide a direct comparison of MLP-IQA's performance to other embedding methods across all model architectures on the Visual7W dataset with IoU + QoU decoys.\" -- cites: E3 (Section Table 12): quote \"Table 12: Test accuracy (%) on Visual7W, comparing different random decoy strategies to our methods: (A) Orig + uniformly random decoys from unique correct answers, (B) Orig + weighted random decoys w.r.t. their frequencies, and All (Orig+IoU +QoU). Method (A) (B) All MLP-A 39.6 11.6 15.6 MLP-IA 53.4 40.3 22.2 MLP-QA 52.3 50.3 31.9 MLP-IQA 61.5 60.2 45.1 Random 10.0 10.0 10.0\"\n\nCited evidence:\n[E3] (text, Section Table 12, page 17): Table 12: Test accuracy (%) on Visual7W, compar- ing different random decoy strategies to our methods: (A) Orig + uniformly random decoys from unique cor- rect answers, (B) Orig + weighted random decoys w.r.t. their frequencies, and All (Orig+IoU +QoU). Method (A) (B) All MLP-A 39.6 11.6 15.6 MLP-IA 53.4 40.3 22.2 MLP-QA 52.3 50.3 31.9 MLP-IQA 61.5 60.2 45.1 Random 10.0 10.0 10.0"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that MLP-IQA achieved 61.5% accuracy, but the evidence only provides the accuracy for the 'All' strategy, which is 45.1% for MLP-IQA. The claim also mentions 'IoU + QoU decoys', but the evidence does not specify this decoy strategy."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that MLP-IQA achieved 61.5% accuracy, but the evidence only provides the accuracy for the 'All' strategy, which is 45.1% for MLP-IQA. The claim also mentions 'IoU + QoU decoys', but the evidence does not specify this decoy strategy."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence does not provide a direct comparison of MLP-IQA's performance to other embedding methods across all model architectures on the Visual7W dataset with IoU + QoU decoys. It only provides the accuracy for the 'All' strategy."
+   }
+  ]
+ }
+}

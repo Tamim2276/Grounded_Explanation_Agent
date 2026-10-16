@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 118,
+  "prompt_tokens": 609,
+  "total_tokens": 727,
+  "prompt_tokens_details": {
+   "cached_tokens": 230
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Outcome Regression (OR) estimator is most affected by the presence of noisy confounders, as its performance drops significantly compared to other estimators.\" -- cites: E2 (Section Table 3): quote \"Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Re- gression (OR). In contrast to Table 2, the performance of OR drops signifi- cantly while AB continues to provide a balance between variance and bias.\"\n2. \"The Outcome Regression (OR) estimator is not the most affected by the presence of noisy confounders.\" -- cites: E2 (Section Table 3): quote \"Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Re- gression (OR). In contrast to Table 2, the performance of OR drops signifi- cantly while AB continues to provide a balance between variance and bias.\"\n\nCited evidence:\n[E2] (text, Section Table 3, page 12): Table 3: Performance of diﬀerent ATE estimators when noisy confounders are observed. Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Re- gression (OR). In contrast to Table 2, the performance of OR drops signiﬁcantly while AB continues to provide a balance between variance and bias. Estimator Bias MAE MSE AB 3.4 × 10−2 3.4 × 10−2 1.8 × 10−3 DR 6.2 × 10−3 9.6 × 10−2 2.0 × 10−2 IPW 5.9 × 10−2 6.0 × 10−2 6.6 × 10−3 Naive comparison 7.1 × 10−2 7.1 × 10−2 5.8 × 10−3 OR 3.0 × 10−2 1.0 × 10−1 2.4 × 10−2"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that the performance of Outcome Regression (OR) drops significantly compared to other estimators when noisy confounders are observed, which supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence contradicts the claim by stating that the performance of OR drops significantly, which is the opposite of what the claim suggests."
+   }
+  ]
+ }
+}

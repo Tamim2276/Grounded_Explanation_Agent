@@ -1,0 +1,42 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 193,
+  "prompt_tokens": 1550,
+  "total_tokens": 1743,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nSub-questions:\n1. [text] How does GBI compare to A* in terms of reducing disagreement rate on the SRL-100 network's failure set?\nEvidence:\nE1 [text, Section Table 1, page 5]: Table 1: Comparison of the GBI vs. A * inference procedure for SRL. We report the avg. disagreement rate, F1-scores and exact match for the failure set (columns 5-10) and F1-score for the whole test set (last 2 columns). Also, we report performances on a wide range of reference models SRL-X, where X denotes % of dataset used for training. We employ Viterbi decoding as a base inference strategy (before) and apply GBI (after) in combination with Viterbi. Network Failure Inference Conv Failure set Test set Average (%) F1 Exact Match F1 rate(%) rate(%) Disagreement (%) before after before after before after before after SRL-100 9.82 GBI 42.25 44.85 24.92 48.00 59.70 (+11.7) 0.0 19.90 84.40 85.63 (+1.23) A* 40.40 33.91 48.83 (+0.83) 13.79 84.51 (+0.11) SRL-70 10.54 GBI 46.22 45.54 23.02 47.81 59.37 (+11.56) 0.0 19.57 83.55 84.83 (+1.28) A* 44.42 32.32 50.49 (+2.68) 16.12 83.90 (+0.35) SRL-40 11.06 GBI 47.89 45.71 22.42 46.53 58.83 (+12.3) 0.0 19.45 82.57 84.03 (+1.46) A* 44.74 32.17 46.53 (+2.88) 15.15 82.98 (+0.41) SRL-10 14.15 GBI 44.28 47.14 24.88 44.19 54.78 (+10.59) 0.0 15.28 78.56 80.18 (+1.62) A* 43.66 32.80 45.93 (+1.74) 12.28 78.87 (+0.31) SRL-1 21.90 GBI 52.85 50.38 21.45 37.90 49.00 (+11.10) 0.0 12.83 67.28 69.97 (+2.69) A* 48.96 30.28 41.59 (+3.69) 11.25 67.97 (+0.69)\nE2 [text, Section 4, page 6]: GBI with a constraint loss g , a length-normalized quadratic (3 x a − y a ) 2 / ( m + n ) that is zero when the number of a ’s in the output ( y a ) is exactly three times the number in the input ( x a ) with m , n denoting input, output, respectively. GBI achieves a conversion rate of 65.2% after 100 iterations, while also improving the accuracy on the failure-set from 75.2% to 82.4%. This synthetic experiment provides additional evidence in support of Q2 and Q3, on a simpler small-capacity network. 4.4 GBI on wide range of reference models The foregoing experimental results provide evidence that GBI is a viable method for enforcing constraints. However, we hitherto study GBI on high quality reference networks such as SRL-100. To further bolster our conclusions, we now direct our investigation towards lower quality networks to understand GBI’s viability under a broader quality spectrum. We ask, how sensitive is GBI to the reference network’s performance (Q4)? To this end, we train poorer quality networks by restricting the amount of available training data or employing simpler architectures.\nE3 [text, Section 4, page 4]: work performance, and (Q5) does GBI also work on out-ofdomain data. Q3 is particularly important because we adjust the weights of the network at test-time and this may lead to unexpected behavior. Q5 deals with our original motivation of using structured prediction to enhance performanceon the out-of-domain data. To address these various questions, we ﬁrst deﬁne some terminology to measure how well the model is doing in terms of constraints. To address (Q1) we measure the failure-rate (i.e., the ratio of test sentences for which the network infers an output that fails to fully satisfy the constraints). To address (Q2) we evaluate our method on the failure-set (i.e., the set of output sentences for which the original network produces constraint-violating outputs) and measure our method’s conversion rate ; that is, the percentage of failures for which our method is able to completely satisfy the constraints (or “convert”). Finally, to address (Q3), we evaluate the quality (e.g., accuracy or F1) of the output predictions on the network’s failure-set both before and after applying our method."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The disagreement rate for GBI on the SRL-100 network's failure set is 19.90%, and for A* it is 13.79%. GBI reduces the disagreement rate by 6.11%."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "missing": "The evidence does not provide information about how GBI compares to A* in terms of reducing disagreement rate on the SRL-100 network's failure set. It only provides the disagreement rates for both methods, but not the comparison or the reduction in disagreement rate for GBI relative to A* on the SRL",
+  "sufficient": false
+ }
+}

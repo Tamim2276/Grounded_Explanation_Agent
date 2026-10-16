@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 112,
+  "total_tokens": 169,
+  "prompt_tokens_details": {
+   "cached_tokens": 61
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How are edges aggregated in the graph sketch $G_h$?\nSub-goals:\n1. [text] How are edges aggregated in the graph sketch $G_h$?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the aggregation of edges in a specific graph sketch, which is a detailed topic that can be found within the text of the paper.",
+  "tool": "text",
+  "query": "edges aggregated graph sketch $G_h$"
+ }
+}

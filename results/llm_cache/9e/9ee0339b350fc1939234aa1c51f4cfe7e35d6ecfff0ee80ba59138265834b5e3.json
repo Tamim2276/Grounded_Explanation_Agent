@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 144,
+  "total_tokens": 204,
+  "prompt_tokens_details": {
+   "cached_tokens": 100
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which policy learning method achieved the lowest regret in Ex. 2?\nSub-goals:\n1. [text] Which policy learning method achieved the lowest regret in Ex. 2?\nAlready tried: sub-goal 1 with text\nStill missing: No evidence for Ex. 3 or other examples in the document to determine the lowest regret in Ex. 2 for other methods or policies."
+  }
+ ],
+ "answer": {
+  "reason": "To find the specific policy learning method that achieved the lowest regret in Ex. 2, a text search is necessary to locate the relevant section of the paper.",
+  "tool": "text",
+  "query": "policy learning method lowest regret Ex. 2"
+ }
+}

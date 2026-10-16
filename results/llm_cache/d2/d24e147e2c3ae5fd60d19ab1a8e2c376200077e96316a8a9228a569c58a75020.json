@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 208,
+  "prompt_tokens": 471,
+  "total_tokens": 679,
+  "prompt_tokens_details": {
+   "cached_tokens": 246
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ZDDA simulates the target-domain representation using the source-domain data.\" -- cites: E4 (Section Figure 2): quote \"ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network.\"\n2. \"ZDDA builds a joint network with the supervision from the source domain.\" -- cites: E4 (Section Figure 2): quote \"ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network.\"\n3. \"ZDDA trains a sensor fusion network in step 2.\" -- cites: E4 (Section Figure 2): quote \"In step 2, t can also be trainable instead of being fixed, but we choose to fix it to make the number of trainable parameters manageable.\"\n\nCited evidence:\n[E4] (text, Section Figure 2, page 5): Fig. 2. An overview of the ZDDA training procedure. We use the images from the SUN RGB-D [36] dataset for illustration. ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network. In step 1, we choose to train s 1 and ﬁx t , but we can also train t and ﬁx s 1 to simulate the target-domain representation. In step 2, t can also be trainable instead of being ﬁxed, but we choose to ﬁx it to make the number of trainable parameters manageable. The details are explained in Sec. 3 Zero-Shot Deep Domain Adaptation 5"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network. This directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence explicitly mentions that ZDDA builds a joint network with the supervision from the source domain, which directly supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence states that in step 2, t can also be trainable instead of being fixed, but the claim incorrectly states that ZDDA trains a sensor fusion network in step 2. The evidence does not mention ZDDA training a sensor fusion network in step 2."
+   }
+  ]
+ }
+}

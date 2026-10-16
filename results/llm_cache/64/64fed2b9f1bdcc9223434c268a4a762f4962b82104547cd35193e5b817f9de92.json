@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 146,
+  "prompt_tokens": 1131,
+  "total_tokens": 1277,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed best according to the P@1 metric for the QA-Expert task, and how much better did it perform compared to the average P@1 score of the D2V method? \nSub-questions:\n1. [text] Which method performed best according to the P@1 metric for the QA-Expert task?\n2. [text] How much better did it perform compared to the average P@1 score of the D2V method?\nEvidence:\nE1 [text, Section 4.1, page 5]: Datasets. We conducted experiments on two datasets. QA-Expert: this dataset is from an online international QA challenge 2 . It consists of 87,988 users and 47,656 questions with 43,913 invitations and 9,561 responses. To reduce noise, we select those questions with at least 5 invited users and 1 response in our experiment. This results in 182 questions and 599 users. In this dataset, we aim to evaluate how can our method improve the performance of predicting users’ responses to answer invitations in the online QA system. Paper-Reviewer: this dataset comes from the reviewer bidding of a major CS conference in 2016. It contains 935 submissions and 440 Program Committee members. PC members placed bids for the papers they are interested to review. For each paper, we consider PC’s bids as a positive response to the invitation, and randomly sample the same number of PCs who do not bid for this paper as negative.\nE2 [text, Section 4.1, page 5]: RankSVM [Joachims, 2002]: We consider a learning to rank approach with the same feature set as WeakFG. For SVM, we use SVM-Rank implemented in SVM-Light (https://svmlight.joachims.org). RankSVM also uses the accept/reject feedback to learn the prediction model. WeakFG : The proposed method, which trains a WeakFG model to rank the experts. For example, in QA-Expert, as the co-reply relationship is very sparse, we deﬁne correlation as “the number of both-interested topics ≥ 6 ” (each user has about 10 interested topics). Evaluation Measures. We consider the problem as a ranking problem and evaluate different methods by Precision of the top- N results (P@ N ), Mean Average Precision (MAP), and R-prec [Buckley and Voorhees, 2004]. 4.2 Experimental Results Table 1 lists the performance of all methods on the datasets. Overall, the proposed WeakFG clearly outperforms all the comparison methods by 1.5-10.7% in terms of MAP. How embeddings help? Taking a closer look, we observed that the embedding-based methods (WMD and D2V) perform better than the other methods (LM and BM25) using only keywords. LDA can be also considered as an embedding-like algorithm by using topics. However its performance is not as good as expected. Both RankSVM and WeakFG leverage the embedding results and improve the prediction performance.\nE3 [text, Section 1, page 1]: not consider the second half of the problem — the probability of whether the invited experts would accept to answer the question. Indeed, the subproblem is even more serious—e.g. more than half of the questions on Quora only have one or do not have any answer 1 . These QA websites such as Quora are now striving to match questions with the right experts and seek the best respondent to provide an answer. The problem can be formalized as follows: Given a query (i.e., question/document) q , one of the goals is to ﬁnd experts with sufﬁcient knowledge. We consider a set of N candidate experts E = { e 1 , · · · , e N } . We use function R ( q, e i ) to measure the extent to which expert e i has the knowledge on query q . The other goal here is to estimate how likely expert e i would accept to answer the query q . We use function R ′ ( q, e i ) to quantify the probability of acceptance. Finally, the above problem can be deﬁned as: given a query q and a set of experts E = { e 1 , · · · , e N } , the goal is to maximize the utility function:"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "WeakFG"
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E2",
+    "fact": "1.5-10.7%"
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide the specific method that performed best according to the P@1 metric for the QA-Expert task, and it does not provide the average P@1 score of the D2V method for comparison.",
+  "sufficient": false
+ }
+}

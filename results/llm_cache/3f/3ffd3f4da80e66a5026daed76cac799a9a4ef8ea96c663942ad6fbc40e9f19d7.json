@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 358,
+  "prompt_tokens": 1329,
+  "total_tokens": 1687,
+  "prompt_tokens_details": {
+   "cached_tokens": 1272
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the decline probability of an expert and whether or not they have a \"friend\" who has already declined?\nEvidence:\n[E1] (text, Section Figure 1, page 2): Figure 1: Decline probability of an expert conditioned on whether or not the expert has a correlated “friend” who has already declined on two datasets: QA-Expert and Paper-Reviewer, and our online evalu- ation of journal reviewer recommendation. QA-Expert Paper-Reviewer Online Evaluation 0.4 0.5 0.6 0.7 Decline Probability without with\n[E2] (text, Section 1, page 2): The ranking score S qi was deﬁned by only considering the expertise matching degree between q and the expert e i (Cf. the ﬁrst term in Eq. (1)). One method is to use language models [Zhai and Lafferty, 2001], which estimates the generative probability of a query given each document (expert-related document here) using a smoothed word distribution. Afterwards, topic models have been used to model latent topics in order to improve the matching accuracy [Mimno and McCallum, 2007; Riahi et al. , 2012; Tang et al. , 2008]. However, all these models do not consider the probability that expert e i accepts to answer the query q . Algorithmically, the difﬁculty is how to deﬁne the second term in Eq. (1). Another challenge, in practical scenarios, is the lack of sufﬁcient labeled data. One potential solution to this end is weakly supervised learning [Crandall and Huttenlocher, 2006], which essentially leverages some kind of correlation between training instances to propagate the labeled information to unlabeled instances. Widely used correlations include similarity and links (e.g., friend or coauthor relationships). Figure 1 shows the decline probability of an expert, conditioned on whether or not the expert has a “friend” who has already declined. We see correlation indeed exists in all the datasets used in our experiments (Cf. § 4 for details of the datasets).\n[E3] (text, Section 1, page 2): or expertise. Methods using probabilistic model [Mimno and McCallum, 2007], network analysis [Zhang et al. , 2007], and embedding [Han et al. , 2016] have been developed. However, they did not consider the experts’ acceptance probability. A few systems have been developed to make reviewer recommendations, e.g., AMiner [Tang et al. , 2008]. Toutiao organized a data challenge to predict the probability that an expert would accept the invitation to answer speciﬁc questions. 3 Methodologies Given a query (e.g., question/paper) q , our goal is to ﬁnd experts with sufﬁcient knowledge who are willing to answer the question or review the paper, with limited amount of labeled data. Let us consider a set of N candidate experts E = { e 1 , · · · , e N } . The general problem can be then formalized as seeking a ranking function to quantify each expert e i ’s expertise degree and acceptance probability simultaneously.\n[E4] (text, Section 1, page 4): Correlation factor function: The correlation between experts can be used to help infer experts’ acceptance probability. It is modeled as correlation factor functions among latent variables { y i } . Formally, it can be also deﬁned as: where φ ( . ) is a set of indicator functions to model whether speciﬁc correlation exists between experts e i and e j ; β indicates the weights of different factors. In different applications, there are different types of correlations between experts. For example, in QA expert ﬁnding, we can deﬁne correlation as co-reply, corresponding to the situation when two users have replied to the same question. In paper-reviewer recommendation, we can consider co-author relationship. However, as shown in Figure 1, such kinds of correlations might be still insufﬁcient. We further deﬁne some other social identity [Tajfel and Turner, 2004] based correlations. Social identity theory introduced a way to explain intergroup behavior, in particular to predict certain intergroup\n\nThese claims are already verified and kept:\n- The decline probability of an expert is higher when they have a 'friend' who has already declined, as shown in Figure 1.\n- The ranking score S qi is defined by only considering the expertise matching degree between q and the expert e i.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The decline probability of an expert is influenced by the correlation factor function, which models the correlation between experts.\": support check: The claim states that the decline probability of an expert is influenced by the correlation factor function, which models the correlation between experts. However, the evidence in Section 1 only states that the correlation between experts can be used to help infer experts' acceptance probability, and it is modeled as correlation factor functions among latent variables {y_i}. The evidence does not directly support the claim that the decline probability is influenced by the correlation factor function."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The decline probability of an expert is influenced by the correlation factor function, which models the correlation between experts.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "The correlation between experts can be used to help infer experts’ acceptance probability. It is modeled as correlation factor functions among latent variables { y i } ."
+     }
+    ]
+   },
+   {
+    "text": "The decline probability of an expert is higher when they have a 'friend' who has already declined, as shown in Figure 1.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 1: Decline probability of an expert conditioned on whether or not the expert has a correlated “friend” who has already declined on two datasets: QA-Expert and Paper-Reviewer, and our online evaluation of journal reviewer recommendation. QA-Expert Paper-Reviewer Online Evaluation 0.4 0.5 0.6 0.7 Decline Probability without with"
+     }
+    ]
+   },
+   {
+    "text": "The ranking score S qi is defined by only considering the expertise matching degree between q and the expert e i.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The ranking score S qi was defined by only considering the expertise matching degree between q and the expert e i (Cf. the first term in Eq. (1))."
+     }
+    ]
+   }
+  ]
+ }
+}

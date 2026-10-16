@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 246,
+  "prompt_tokens": 1468,
+  "total_tokens": 1714,
+  "prompt_tokens_details": {
+   "cached_tokens": 1287
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the ChoiceNet model perform on datasets with uniform corruptions?\nEvidence:\n[E1] (text, Section Figure 4, page 6): Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions. (a) (b) (c) (d)\n[E2] (text, Section 3.4, page 6): Here, we provide synthetic examples in both regression and classiﬁcation to illustrate how the proposed method can be used to robustly learn the underlying target distribution given a noisy training dataset. Regression Task We ﬁrst focus on how the proposed method can distinguish between the target distribution and noise distributions in a regression task and show empirical evidence that our method can achieve this by estimating the target distribution and the correlation of noise distribution simultaneously. We train on two datasets with the same target function but with different types of corruptions by replacing 50% of the output values whose input values are within 0 to 2 : one uniformly sampled from − 1 to 3 and the other from a ﬂipped target function as shown in Figure 4(a) and 4(c) . Throughout this experiment, we set K = 2 for better visualization. As shown in Figure 4 , ChoiceNet successfully estimates the target function with partial corruption. To further understand how ChoiceNet works, we also plot the correlation of each mixture at each input with different colors. When using the ﬁrst dataset where we ﬂip the outputs whose inputs are between 0 and 2 , the correlations of the second mixture at the corrupt region becomes − 1 (see Figure 4(b) ). This is exactly what we wanted ChoiceNet to behave in that having − 1 correlation will simply ﬂip the output. In other words, the second mixture takes care of the noisy (ﬂipped) data by assigning − 1 correlation while the ﬁrst mixture component reserved for the target distribution is less affected by the noisy training data.\n[E3] (text, Section Table 9, page 16): Table 9: Test accuracies on the MNIST datasets with corrupt labels. Corruption p Configuration Best Last 50% ConvNet 95.4 89.5 ConvNet+Mixup 97.2 96.8 ConvNet+CN 99.2 99.2 MDN 97.7 97.7 80% ConvNet 86.3 76.9 ConvNet+Mixup 87.2 87.2 ConvNet+CN 98.2 97.6 MDN 85.2 78.7 90% ConvNet 76.1 69.8 ConvNet+Mixup 74.7 74.7 ConvNet+CN 94.7 89.0 MDN 61.4 50.2 95% ConvNet 72.5 64.4 ConvNet+Mixup 69.2 68.2 ConvNet+CN 88.5 80.0 MDN 31.2 25.9 MNIST For MNIST experiments, we randomly shuffle a percentage of the labels with the corruption probability p from 50% to 95% and compare median accuracies after five runs for each configuration following the setting in [27]. We construct two networks: a network with two residual blocks [49] with 3 × 3 × 64 convolutional layers followed by a fully-connected layer with 256 output units (ConvNet) and ChoiceNet with the same two residual blocks followed by the MCDN block (ConvNet+CN). We train each network for 50 epochs with a fixed learning rate of 1e-5. We train each network for 300 epochs with a minibatch size of 256. We begin with a learning rate of 0.1, and it decays by 1/10 after 150 and 225 epochs. We apply random horizontal flip and random crop with 4−pixel-padding and use a weight decay of 0.0001 for the baseline network as [49]. The classification results are shown in Table 9 where ChoiceNet consistently outperforms ConvNet and ConvNet+Mixup by a significant margin, and the difference between the accuracies of ChoiceNet and the others becomes more clear as the corruption probability increases. Here, we also present additional experimental results using the MNIST dataset on following three different scenarios: 1. Biased label experiments where we randomly assign the percentage of the training labels to label 0. 2. Random shuffle experiments where we randomly replace the percentage of the training labels from the uniform multinomial distribution. 16\n\nThese claims are already verified and kept:\n- ChoiceNet successfully estimates the target function with partial corruption.\n- The ChoiceNet model successfully estimates the target function with partial corruption.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The performance of ChoiceNet on uniform corruptions is not explicitly compared to other models.\": support check: The evidence in E3 (Section Table 9) compares the performance of ChoiceNet to ConvNet and ConvNet+Mixup, but it does not explicitly compare ChoiceNet's performance to other models on uniform corruptions. The claim goes beyond the evidence provided.\n- \"The ChoiceNet model performs well on datasets with uniform corruptions.\": support check: The evidence in E3 (Section Table 9) compares the performance of ChoiceNet to ConvNet and ConvNet+Mixup, but it does not explicitly state that ChoiceNet performs well on datasets with uniform corruptions. The claim goes beyond the evidence provided."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The performance of ChoiceNet on uniform corruptions is not explicitly compared to other models.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Here, we also present additional experimental results using the MNIST dataset on following three different scenarios: 1. Biased label experiments where we randomly assign the percentage of the training labels to label 0. 2. Random shuffle experiments where we randomly replace the percentage of the training labels from the uniform multinomial distribution."
+     }
+    ]
+   },
+   {
+    "text": "The ChoiceNet model performs well on datasets with uniform corruptions.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "The classification results are shown in Table 9 where ChoiceNet consistently outperforms ConvNet and ConvNet+Mixup by a significant margin, and the difference between the accuracies of ChoiceNet and the others becomes more clear as the corruption probability increases."
+     }
+    ]
+   }
+  ]
+ }
+}

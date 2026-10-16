@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 258,
+  "prompt_tokens": 1028,
+  "total_tokens": 1286,
+  "prompt_tokens_details": {
+   "cached_tokens": 395
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The email-EuAll dataset is used to compare the average precision of TCM(256*memory) with other algorithms.\" -- cites: E1 (Section Figure 10): quote \"Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll\"\n2. \"The average precision of TCM(256*memory) is shown in the email-EuAll dataset in Figure 10(a).\" -- cites: E1 (Section Figure 10): quote \"Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll\"\n3. \"The average precision of TCM(256*memory) is higher than GSS(fsize=12) and GSS(fsize=16) in the email-EuAll dataset.\" -- cites: E1 (Section Figure 10): quote \"Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll\"\n\nCited evidence:\n[E1] (text, Section Figure 10, page 13): Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll 700 800 900 1000 1100 1200 Width 0.7 0.8 0.9 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (b) cit-HepPh 700 800 900 1000 1100 1200 Width 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(256*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(16*memory) (e) Caida-networkflow Fig. 10. Average Precision of 1-hop Successor Queries"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim mentions 'email-EuAll dataset', but the evidence only refers to 'email-EuAll' without specifying a dataset. The evidence does not provide information about comparing the average precision of TCM(256*memory) with other algorithms."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence directly states that the average precision of TCM(256*memory) is shown in the email-EuAll dataset in Figure 10(a)."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence does not provide a comparison of the average precision of TCM(256*memory) with GSS(fsize=12) and GSS(fsize=16) in the email-EuAll dataset. It only shows the average precision for TCM(256*memory) and GSS(fsize=12) and GSS(fsize=16) in the email-EuAll dataset."
+   }
+  ]
+ }
+}

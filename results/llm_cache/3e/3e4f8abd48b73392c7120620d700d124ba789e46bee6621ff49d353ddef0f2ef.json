@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 209,
+  "total_tokens": 276,
+  "prompt_tokens_details": {
+   "cached_tokens": 163
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys? Was there a significant difference in performance compared to the other methods?\nSub-goals:\n1. [text] Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys?\n2. [text] Was there a significant difference in performance compared to the other methods?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide specific performance metrics or comparisons for other embedding methods to determine if there was a significant difference in performance compared to the other methods."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide specific performance metrics or comparisons for other embedding methods to determine if there was a significant difference in performance compared to the other methods.",
+  "tool": "text",
+  "query": "Was there a significant difference in performance compared to the other methods?"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 116,
+  "total_tokens": 170,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the LIVR framework decompose semantic features into different places?\nSub-goals:\n1. [text] How does the LIVR framework decompose semantic features into different places?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about a specific process within the LIVR framework, which is likely detailed in the paper's text.",
+  "tool": "text",
+  "query": "LIVR framework decomposes semantic features into different places"
+ }
+}

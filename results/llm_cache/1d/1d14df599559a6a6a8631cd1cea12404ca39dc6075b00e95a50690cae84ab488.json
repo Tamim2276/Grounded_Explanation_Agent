@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 193,
+  "prompt_tokens": 568,
+  "total_tokens": 761,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"As the corruption level increases, ChoiceNet's performance decreases but remains the best among the methods tested.\" -- cites: E1 (Section Table 15): quote \"ChoiceNet 79.43 79.50 78.66 77.1 73.98\"\n2. \"The performance of ChoiceNet degrades more slowly than other methods as the corruption level increases.\" -- cites: E1 (Section Table 15): quote \"ChoiceNet 79.43 79.50 78.66 77.1 73.98\"\n\nCited evidence:\n[E1] (text, Section Table 15, page 21): Table 15: Test accuracies on the Large Movie Review dataset with different corruption probabilities. Corruption p 0% 10% 20% 30% 40% ChoiceNet 79.43 79.50 78.66 77.1 73.98 Mixup 79.77 78.73 77.58 75.85 69.63 MLP 79.04 77.88 75.70 69.05 62.83 VAT 76.40 72.50 69.20 65.20 58.30 B.3. Ablation Study on MNIST Above figures show the results of ablation study when varying the number of mixture K and the expected measurement variance τ −1. Left two figures indicate test accuracies using the MNIST dataset where 90% of train labels are randomly shuffled and right two figures are RMSEs using a synthetic one-dimensional regression problem in Section 4.1. We observe that having bigger K is beneficial to the classification accuracies. In fact, the results achieved here with K equals 15 and 20 are better than the ones reported in the submitted manuscript. τ −1 does not affect much unless it is exceedingly large. 21"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that ChoiceNet's performance decreases but remains the best among the methods tested. However, the evidence only shows the test accuracies for ChoiceNet under different corruption levels. It does not provide information about the performance of other methods or whether ChoiceNet remains the best. Therefore, the claim cannot be supported by the evidence."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that the performance of ChoiceNet degrades more slowly than other methods as the corruption level increases. The evidence shows the test accuracies for ChoiceNet under different corruption levels, but it does not provide a comparison with other methods or a statement about the rate of degradation. Therefore, the claim cannot be supported by the evidence."
+   }
+  ]
+ }
+}

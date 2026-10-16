@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 478,
+  "prompt_tokens": 698,
+  "total_tokens": 1176,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the main difference between the Multilinear Conditioning architecture and the Randomized Multilinear Conditioning architecture?\nEvidence:\n[E1] (text, Section Figure 1, page 4): Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1 loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\n[E2] (text, Section 2, page 5): where 4096 is the largest number of units in typical deep networks (e.g. AlexNet), and if dimension of the multilinear map T ⊗ is larger than 4096 , then we will choose randomized multilinear map T ⊙ .\n[E3] (text, Section 4.3, page 8): Ablation Study We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. Table 1 ∼ 4 shows that CDAN+E outperforms CDAN , proving that entropy conditioning can prioritize easy-to-transfer examples and encourage certain predictions. Conditioning Strategies Besides multilinear conditioning, we investigate DANN-[f,g] with the domain discriminator imposed on the concatenation of f and g , DANN-f and DANN-g with the"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Multilinear Conditioning architecture is applicable to lower-dimensional scenarios, while the Randomized Multilinear Conditioning architecture is fit to higher-dimensional scenarios.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "(a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classifier prediction g via multi-linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, fit to higher-dimensional scenario, where D is conditioned on classifier prediction g via randomized multilinear map √ 1 loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R"
+     }
+    ]
+   },
+   {
+    "text": "The Randomized Multilinear Conditioning architecture uses a randomized multilinear map when the dimension of the multilinear map T ⊗ exceeds 4096 units, which is the largest number of units in typical deep networks.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "where 4096 is the largest number of units in typical deep networks (e.g. AlexNet), and if dimension of the multilinear map T ⊗ is larger than 4096, then we will choose randomized multilinear map T ⊙ ."
+     }
+    ]
+   },
+   {
+    "text": "The Randomized Multilinear Conditioning architecture involves sampling random matrices from Gaussian and Uniform distributions, as seen in the ablation study of Equation (6).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Ablation Study We examine the sampling strategies of the random matrices in Equation (6). We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively."
+     }
+    ]
+   }
+  ]
+ }
+}

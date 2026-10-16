@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 225,
+  "prompt_tokens": 451,
+  "total_tokens": 676,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The AMR-to-parse model performs better than the Text-to-parse model in terms of unlabelled F1 score, with a score of 60.4 compared to 87.5 for the Text-to-parse model.\" -- cites: E5 (Section Table 1): quote \"AMR-to-parse 60.4 54.8\"; E5 (Section Table 1): quote \"Text-to-parse 87.5 85.8\"\n2. \"The AMR-to-parse model performs worse than the Text-to-parse model in terms of labelled F1 score, with a score of 54.8 compared to 85.8 for the Text-to-parse model.\" -- cites: E5 (Section Table 1): quote \"AMR-to-parse 60.4 54.8\"; E5 (Section Table 1): quote \"Text-to-parse 87.5 85.8\"\n3. \"The baseline model, which is the unconditional LSTM, performs with an unlabelled F1 score of 38.5.\" -- cites: E5 (Section Table 1): quote \"Unconditional 38.5 31.7\"\n\nCited evidence:\n[E5] (text, Section Table 1, page 4): Table 1: Parsing scores on LDC2017T10 dev set. Model Unlabelled F1 Labelled F1 Text-to-parse 87.5 85.8 AMR-to-parse 60.4 54.8 Unconditional 38.5 31.7"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the AMR-to-parse model has a score of 60.4 in terms of unlabelled F1 score, which is incorrect. The evidence shows that the AMR-to-parse model has a score of 60.4 in terms of labelled F1 score, not unlabelled F1 score."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence shows that the AMR-to-parse model has a score of 54.8 in terms of labelled F1 score, which is lower than the score of 85.8 for the Text-to-parse model."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence shows that the baseline model, which is the unconditional LSTM, has an unlabelled F1 score of 38.5."
+   }
+  ]
+ }
+}

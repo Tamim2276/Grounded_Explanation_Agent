@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 130,
+  "prompt_tokens": 878,
+  "total_tokens": 1008,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method achieves the highest overall accuracy on the validation set?\nSub-questions:\n1. [text] Which method achieves the highest overall accuracy on the validation set?\nEvidence:\nE1 [text, Section Table 2, page 5]: Table 2. CLEVR QA accuracy for state-of-the-art methods Method Exist Count Comp. Query Comp. Overall Overall Num. Att. Att. test set val. set IEP-strong [31] 97.1 92.7 98.7 98.1 98.9 96.9 FiLM [56] 99.3 94.3 93.4 99.3 99.3 97.6 DDRprog [63] 98.8 96.5 98.4 99.1 99.0 98.3 MAC [27] 99.5 97.1 99.1 99.5 99.5 98.9 TbD [52] 99.2 97.6 99.4 99.5 99.6 99.1 HAN [50] 99.6 97.2 96.9 99.6 99.6 98.8 NS-VQA [81]a 99.9 99.7 99.9 99.8 99.8 - 99.8 UnCoRdNone-B 99.89 99.54 99.91 99.74 99.80 99.74 99.8 Table 2. CLEVR QA accuracy for state-of-the-art methods\nE2 [text, Section Table 1, page 5]: Table 1. CLEVR estimators results on CLEVR validation set EstimatorAPIoU=.50 Acc. Ins. seg. 99.0 Color 99.98 Material 99.97 Size 100\nE3 [text, Section 4.1, page 5]: As can be seen, our model achieves state-of-the-art results without training for the visual question answering task and not using any answers GT, as other methods. In addition UnCoRd can elaborate and explain answers and failures using intermediate results, and extend the handled domain with no need of images and related QA examples, as demonstrated in Section 4.2 and Figure 6 . On a sample of 10,000 validation set examples, all mistakes were due to wrong visual estimators’ predictions, mainly miss detection of a highly occluded object. Hence, accurate annotation of object coordinates (as performed in NS-VQA [ 81 ]) may even further reduce the small number of errors. Note that NS-VQA requires full scene analysis, which is not scalable for domain extension with a large number of objects and relations. It also uses images with question-answer pairs to train the programs, coupling the method to the speciﬁc"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "UnCoRdNone-B achieves the highest overall accuracy on the validation set."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine the highest overall accuracy for the methods listed in E1. The table only provides accuracy for the validation set, not the overall accuracy across all methods. Additional information is needed to compare the overall accuracy of all methods listed in the ",
+  "sufficient": false
+ }
+}

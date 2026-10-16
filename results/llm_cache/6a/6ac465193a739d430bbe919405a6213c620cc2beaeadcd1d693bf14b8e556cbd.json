@@ -1,0 +1,41 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 146,
+  "prompt_tokens": 1087,
+  "total_tokens": 1233,
+  "prompt_tokens_details": {
+   "cached_tokens": 922
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nSub-questions:\n1. [text] How does the appearance of the sphere differ between the re-synthesis using DAMs and the reference image?\nEvidence:\nE1 [text, Section Figure 1, page 1]: Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) . Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\nE2 [text, Section 1, page 1]: we move away from the pixel-based nature of implicit imagebased representations into a deep representation, but without any explicit reconstruction, as we do not target a direct mapping to any explicit reﬂectance model or illumination either. Still, we show that such a representation can be used to solve actual tasks, such as image synthesis, appearance acquisition and estimation-and-segmentation of appearance. This is enabled by four contributions: First, we will introduce a generalization of 2D reﬂectance maps [ 13 ] to 4D, which we call an Appearance Map (AM). AMs represent appearance for varying geometry under varying views. This allows freely changing the viewer and surface geometry, which is not possible for classic reﬂectance maps that ﬁx the relation between view and illumination (cf. Fig. 1 ). Second, while classic Reﬂectance Maps (RM) can be simply tabulated using a single 2D image, the full appearance is a 4D phenomenon that is more challenging to represent and process. Storing 4D appearance as a table, modestly resolving 10 degree features, would require storing (and somehow also capturing) 36 4 = 17 M ; impractical. Instead, we suggest using DAMs, neural networks that compactly represent AMs in only a couple of thousand parameters. This representation is efﬁcient, does not require any look-ups and\nE3 [text, Section 1, page 1]: The visual appearance of an object depends on the combination of four main factors: viewer, geometry, material and illumination. When capturing and processing appearance, one wishes to change one or more of those factors and predict what the new appearance is. This can be achieved using methods ranging from implicit image-based representations [ 6 , 13 ] to explicit Computer Graphics-like representations [ 27 ]. Implicit methods take a couple of photos as input and allow to predict high-quality imagery in a limited set of conditions, but modest ﬂexibility, e. g., interpolating an image between two photos but not extrapolating to new views. Explicit representations allow for more ﬂexibility when acquiring Phong parameters and HDR illumination maps [ 27 ], but incur substantial acquisition effort, e. g., taking a large number of calibrated (HDR) photos. DAMs propose a new direction to represent appearance:\nE4 [text, Section 5.2, page 6]: Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The appearance of the sphere differs between the re-synthesis using DAMs and the reference image."
+   }
+  ],
+  "uncovered": [
+   2,
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide specific details about how the appearance of the sphere differs between the re-synthesis using DAMs and the reference image. It only shows a comparison of frames from a video with a moving viewer, but does not quantify or describe the differences in appearance in detail",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 209,
+  "prompt_tokens": 671,
+  "total_tokens": 880,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Edges in the graph sketch $G_h$ are aggregated by mapping each edge $\rightarrow H(s), H(d)$ to a bucket in the row $h(s)$, column $h(d)$ of the matrix $X$. The edge is recorded with a fingerprint pair $[\rangle f(s), f(d) \rangle, w]$, where $w$ is the edge weight and $f(s), f(d)$ are fingerprints of the two endpoints.\" -- cites: E1 (Section front): quote \"Each edge −−−−−−−→ H ( s ) , H ( d ) in the graph sketch G h is mapped to a bucket in the row h ( s ) , column h ( d ) of the matrix X . We record [ ⟨ f ( s ) , f ( d ) ⟩ , w ] in the corresponding bucket of the matrix, where w is the edge weight and f ( s ) , f ( d ) are ﬁngerprints of the two endpoints.\"\n2. \"The adjacency list buffer $B$ records all left-over edges in $G_h$ whose expected positions in the matrix $X$ have been occupied by other previous inserted edges already.\" -- cites: E1 (Section front): quote \"Adjacency list buffer B records all left-over edges in G h , whose expected positions in the matrix X have been occupied by other previous inserted edges already.\"\n\nCited evidence:\n[E1] (text, Section front, page 4): 1) GSS consists of a size m × m adjacency matrix X and an adjacency list buffer B for left-over edges. 2) For each node H ( v ) in sketch graph G h , we deﬁne an address h ( v )(0 ⩽ h ( v ) ⩽ m ) and a ﬁngerprint f ( v )(0 ⩽ f ( v ) ⩽ F ) where M = m × F and h ( v ) = ⌊ H ( v ) F ⌋ , f ( v ) = H ( v )% F . 3) Each edge −−−−−−−→ H ( s ) , H ( d ) in the graph sketch G h is mapped to a bucket in the row h ( s ) , column h ( d ) of the matrix X . We record [ ⟨ f ( s ) , f ( d ) ⟩ , w ] in the corresponding bucket of the matrix, where w is the edge weight and f ( s ) , f ( d ) are ﬁngerprints of the two endpoints. 4) Adjacency list buffer B records all left-over edges in G h , whose expected positions in the matrix X have been occupied by other previous inserted edges already."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section front) states that each edge in the graph sketch $G_h$ is mapped to a bucket in the row $h(s)$, column $h(d)$ of the matrix $X$, and records the edge with a fingerprint pair $[⟨f(s), f(d)⟩, w]$, where $w$ is the edge weight and $f(s), f(d)$ are fingerprints of the two endpoints. This matches the claim exactly."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 (Section front) states that the adjacency list buffer $B$ records all left-over edges in $G_h$ whose expected positions in the matrix $X$ have been occupied by other previous inserted edges already. This matches the claim exactly."
+   }
+  ]
+ }
+}

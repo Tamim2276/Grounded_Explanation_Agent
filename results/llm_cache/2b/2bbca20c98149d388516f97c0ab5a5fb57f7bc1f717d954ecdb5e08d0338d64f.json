@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 321,
+  "prompt_tokens": 1352,
+  "total_tokens": 1673,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method appears to be most robust to the presence of outliers in the training data?\nEvidence:\n[E1] (text, Section 2, page 2): tions for classiﬁcation were studied [ 32 ], with the results showing that the mean absolute value of error is inherently robust to label noise. In other work [ 21 ], a robust loss function for deep regression tasks was proposed using Tukey’s biweight function with the median absolute deviation of the residuals. The last group focusses on using implicit or explicit regularization methods while training. Adding small label noises while training is known to be beneﬁcial to training, as it can be regarded as an effective regularization method [ 23 , 24 ]. Similar methods have been proposed to tackle noisy outputs. A bootstrapping method [ 22 ] which trains a neural network with a convex combination of the output of the current network and the noisy target was proposed. [ 25 ] proposed DisturbLabel, a simple method that randomly replaces a percentage of the labels with incorrect values for each iteration. Mixing both input and output data was also proposed [ 26 , 27 ]. One study [ 27 ] considered the image recognition problem under label noise and the other [ 26 ] focused on a sound recognition problem. The temporal ensemble was proposed in [ 30 ] where an unsupervised loss term of ﬁtting the output of an augmented input to the augmented target updated with an exponential moving average. [ 29 ] extends the temporal ensemble in [ 30 ] by introducing a consistency cost function that minimizes the distance between the weights of the student model and the teacher model. [ 28 ] presented a new regularization method based on virtual adversarial loss which measures the smoothness of conditional label distribution given input. Minimizing the virtual adversarial loss has a regularizing effect in that it makes the model smooth at each data point.\n[E2] (text, Section 2, page 2): Recently, robustness in deep learning has been actively studied [ 6 ] as deep neural networks are being applied to diverse tasks involving real-world applications such as autonomous driving [ 7 ] or medical diagnosis [ 8 ] where a simple malfunction can have catastrophic results [ 9 ]. Existing work for handing noisy training data can be categorized into four groups: small-loss tricks [ 10 – 13 ], estimating label corruptions [ 14 – 19 ], using robust loss functions [ 20 , 21 ], and explicit and implicit regularization methods [ 22 – 30 ]. Our proposed method is mostly related to the robust loss function approach but cannot fully be categorized into this group in that we present a novel architecture, a mixture of correlated densities network block, for achieving robustness based on the correlation estimation. First of all, the small-loss tricks selectively focus on training instances based on a certain criterion, such as having small cost values [ 12 ]. [ 13 ] proposed a meta-algorithm for tackling the noisy label problem by training two networks only when the predictions of the two networks disagree, where selecting a proper network from among the two networks can be done using an additional clean dataset. [ 11 ] reweighs the weight of each training instance using a small amount of clean validation data. MentorNet [ 10 ] concentrated on the training of an additional neural network, which assigns a weight to each instance of training data to supervise the training of a base network, termed StudentNet, to overcome the over-ﬁtting of corrupt training data. Recent work [ 12 ] presented Co-teaching by maintaining two separate networks where each network is trained with small-loss instances selected from its peer network.\n[E3] (text, Section 4.1, page 7): Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method. We compare our method with standard feedforward networks using four different loss functions: standard L 2 -loss, L 1 -loss which is known to be robust to outliers, a robust loss (RL) function proposed in [ 21 ], and a leaky robust loss (LeakyRL) function where the results are shown in Table 5 . Implementation details can be found in the supplementary material.\n[E4] (text, Section 1, page 1): Throughout this paper, we aim to address the following two questions: 1) How can we deﬁne (or measure) the quality of training data in a principled manner? 2) In the presence of inconsistent outputs, how can we infer the target distribution in a scalable manner? Traditionally, noisy outputs are handled by modeling additive random distributions, often leading to robust loss functions [ 3 ] or estimating the structures of label corruptions in classiﬁcations tasks [ 4 ] (for more details, refer to Section 2 ). To address the ﬁrst question, we leverage the concept of a correlation. Precisely, we deﬁne and measure the quality of training data using the correlation between the target distribution and the data generating distribution. However, estimating the correct correlation requires access to the target distribution, whereas learning the correct target distribution requires knowing the correlation between the distributions to be known, making it a chicken-and-egg problem. To address the second question, we present a novel method that simultaneously estimates the target distribution as well as the correlation in a fully differentiable manner using stochastic gradient descent methods."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The robustness of the proposed method is evaluated using the Boston Housing Dataset.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method."
+     }
+    ]
+   },
+   {
+    "text": "The L1-loss is known to be robust to outliers.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "L 1 -loss which is known to be robust to outliers."
+     }
+    ]
+   },
+   {
+    "text": "The proposed method is related to the robust loss function approach.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Our proposed method is mostly related to the robust loss function approach but cannot fully be categorized into this group in that we present a novel architecture, a mixture of correlated densities network block, for achieving robustness based on the correlation estimation."
+     }
+    ]
+   },
+   {
+    "text": "The robustness of the proposed method is evaluated using the Boston Housing Dataset.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method."
+     }
+    ]
+   }
+  ]
+ }
+}

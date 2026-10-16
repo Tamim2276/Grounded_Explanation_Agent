@@ -1,0 +1,44 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 136,
+  "prompt_tokens": 2178,
+  "total_tokens": 2314,
+  "prompt_tokens_details": {
+   "cached_tokens": 1207
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2), and how does its performance compare to other methods?\nSub-questions:\n1. [text] Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2)?\n2. [text] How does its performance compare to other methods?\nEvidence:\nE1 [text, Section Table 1, page 7]: Table 1: Results for the AFEW, HDM05 and PaSC datasets. PaSC1/PaSC2 are the control/handheld testings. Method AFEW HDM05 PaSC1 PaSC2 STM-ExpLet 31.73% – – – RSR-SPDML 30.12% 48.01%±3.38 – – DCC 25.78% 41.34%±1.05 75.83% 67.04% GDA 29.11% 46.25%±2.71 71.38% 67.49% GGDA 29.45% 46.87%±2.31 66.71% 68.41% PML 28.98% 47.12%±1.59 73.45% 68.32% VGGDeepFace – – 78.82% 68.24% DeepO2P 28.54% – 68.76% 60.14% SPDNet 34.23% 61.45%±1.12 80.12% 72.83% GrNet-0Block 25.34% 51.12%±3.55 68.52% 63.92% GrNet-1Block 32.08% 57.73%±2.24 80.15% 72.51% GrNet-2Blocks 34.23% 59.23%±1.78 80.52% 72.76%\nE2 [text, Section U, page 6]: Face Veriﬁcation : We employ one standard dataset named Point-and-Shoot Challenge (PaSC) (Beveridge et al. 2013). For 256 subjects, it owns 1,401 videos taken by control cameras, and 1,401 videos from handheld cameras. For the dataset, (Beveridge et al. 2013) designs control and handheld face veriﬁcation experiments. As done in (Beveridge, Zhang, and others 2015; Huang and Van Gool 2017), we use its 280 training videos and the COX data (Huang et al. 2015a) with 900 videos for training. Similarly, the training data are split\nE3 [text, Section U, page 6]: Action Recognition : We use the HDM05 database (M¨uller et al. 2007) that is one of the largest-scale skeleton-based human action datasets. The dataset consists of 2,337 sequences of 130 action classes, and provides 3D locations of 31 joints of the subjects. Following the protocol designed in (Huang and Van Gool 2017), we conduct 10 random evaluations, each of which randomly selected half of sequences for training and the rest for testing. For data augmentation, the training sequences are divided into around 18,000 small subsequences in each random evaluation. As done in (Harandi, Salzmann, and Hartley 2014; Huang and Van Gool 2017), we represent each sequence by a covariance descriptor of size 93 × 93 , which is computed by the second order statistics of the 3D coordinates of the 31 joints in each frame. Then, we apply SVD on the covariance descriptors to get linear subspaces of order 10, which form the data on a Grassmannian Gr (10 , 93) . For our GrNet-1Block, the sizes of the connection weights are set to 93 × 60 , while those of GrNet-2Blocks are ﬁxed as 93 × 80 , 40 × 30 respectively.\nE4 [text, Section U, page 5]: We compare four groups of exiting methods to evaluate the proposed GrNet for three visual classiﬁcation tasks: emotion recognition, action recognition and face veriﬁcation. Comparing methods : 1). General manifold learning methods: Expressionlets on Spatio-Temporal Manifold (STM- ExpLet) (Liu et al. 2014a) and Riemannian Sparse Representaion combining with Manifold Learning on the manifold of SPD matrices (RSR-SPDML) (Harandi, Salzmann, and Hartley 2014); 2). Grassmann learning methods : Discriminative Canonical Correlations (DCC) (Kim, Kittler, and Cipolla 2007), Grassmann Discriminant Analysis (GDA) (Hamm and Lee. 2008), Grassmannian Graph-Embedding Discriminant Analysis (GGDA) (Hamm and Lee 2009) and Projection Metric Learning (PML) (Huang et al. 2015b); 3). Regular convolutional networks : VGGDeepFace (Parkhiand, Vedaldi, and Zisserman 2015) and Deep Second-order Pooling (DeepO2P) (Ionescu, Vantzos, and Sminchisescu 2015); 4). Manifold network : Network on SPD manifolds (SPDNet) (Huang and Van Gool 2017) and DeepO2P that trains standard ConvNets with a manifold layer end-to-end We use source codes of all the comparing methods from authors with tuning their parameters as in the original papers. For our GrNet, we build its architecture with using i Projection-Pooling block(s) (named as GrNet- i Block) and one Output block, all of which are illustrated in Fig.1. The learning rate λ and the batch size are set to 0 . 01 and 30 respectively. The FRMap matrices are all initializ ...\nE5 [text, Section U, page 6]: to 12,529 small clips. To extract the state-of-the-art deep features, we perform the approach of (Parkhiand, Vedaldi, and Zisserman 2015) on the normalized face images of size 224 × 224 . To speed up the training, we employ PCA to reduce the deep features to 400-dimensional ones. Following (Huang and Van Gool 2017), a SPD matrix of size 401 × 401 is computed by fusing covariance matrix and mean for each video. As done in (Huang et al. 2015b) on each video, we ﬁnally compute a linear subspace of order 10, which lies on Gr (10 , 401) . We set the sizes of GrNet-1Block weights to 401 × 100 , while setting those to 401 × 300 and 150 × 100 for GrNet-2Blocks.\nE6 [text, Section U, page 6]: Table.1 presents the performances of the comparing methods for the three used datasets. The results show our GrNet with 2 blocks can outperform the existing general manifold learning, Grassmann learning methods and standard ConvNets (i.e., VGGDeepFace and DeepO2P). Particularly, on HDM05, we can observe that our GrNet outperforms the state-of-the-art Grassmann learning methods by a large margin (more than 11%). This veriﬁes that the proposed GrNet yields great improvements when the training data is large enough. For PaSC, although the used softmax output layer in the GrNet does not suit the veriﬁcation task well, we ﬁnd that it still reaches the highest performances in the case of 2 blocks, which learns more favorable Grassmannian representation. As studied in existing state-of-the-art Grassmann learning methods, the GrNet without Riemannian computing (i.e., ProjMap) and without geometry-aware learning (i.e., ReOrth) perform very badly (17.62% and 26.15% respectively for AFEW). Besides, the consistent improvement of stacking more GrNet blocks veriﬁes it can learn more discriminative Grassmannian representations and ﬁnally improve the classiﬁcation performances."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "GrNet-2Blocks"
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E6",
+    "fact": "GrNet with 2 blocks outperforms existing methods"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The performance comparison of GrNet-2Blocks to other methods is not explicitly stated in the provided evidence. Further details are needed to answer this sub-question fully.",
+  "sufficient": false
+ }
+}

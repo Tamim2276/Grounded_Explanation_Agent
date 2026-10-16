@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 142,
+  "total_tokens": 205,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model variant achieves the best performance on the CNSS dataset in terms of F1-score, and what are its key components?\nSub-goals:\n1. [text] Which model variant achieves the best performance on the CNSS dataset in terms of F1-score?\n2. [text] What are its key components?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "To find the model variant with the best F1-score on the CNSS dataset, I need to search through the text of the paper.",
+  "tool": "text",
+  "query": "model variant best performance CNSS dataset F1-score"
+ }
+}

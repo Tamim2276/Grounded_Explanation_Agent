@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 100,
+  "prompt_tokens": 159,
+  "total_tokens": 259,
+  "prompt_tokens_details": {
+   "cached_tokens": 63
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?\nSub-goals:\n1. [text] Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset?\n2. [text] How does its performance change as the corruption level increases?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the method that performs best under specific conditions and how its performance changes with increasing corruption levels. The 'text' tool is suitable for searching through the paper's content to find the relevant information.",
+  "tool": "text",
+  "query": "Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?"
+ }
+}

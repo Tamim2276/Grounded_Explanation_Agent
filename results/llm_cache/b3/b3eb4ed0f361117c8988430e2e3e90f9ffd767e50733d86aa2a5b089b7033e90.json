@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 173,
+  "total_tokens": 230,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the Similarity Ratio and AUC Increasing?\nSub-goals:\n1. [text] What is the relationship between the Similarity Ratio and AUC Increasing?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The relationship between the Similarity Ratio and AUC Increasing is not explicitly stated in the evidence provided. The evidence only mentions a positive correlation between the similarity ratio and the relative improvement in AUC, but does not directly state the relationship between the Similarity "
+  }
+ ],
+ "answer": {
+  "reason": "To find the explicit relationship between the Similarity Ratio and AUC Increasing, a more detailed search is needed.",
+  "tool": "text",
+  "query": "explicit relationship between Similarity Ratio and AUC Increasing"
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 80,
+  "prompt_tokens": 183,
+  "total_tokens": 263,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator achieves the highest accuracy on the CLEVR validation set?\nSub-goals:\n1. [text] Which estimator achieves the highest accuracy on the CLEVR validation set?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: No further evidence is provided to determine which estimator achieves the highest accuracy on the CLEVR validation set. The table only lists the accuracy for the 'Size' estimator as 100%, but it does not compare it to other estimators' accuracies directly. Additional information is needed to answer "
+  }
+ ],
+ "answer": {
+  "reason": "The table only lists the accuracy for the 'Size' estimator as 100%, but it does not compare it to other estimators' accuracies directly. Additional information is needed to answer the question.",
+  "tool": "text",
+  "query": "Which estimator achieves the highest accuracy on the CLEVR validation set?"
+ }
+}

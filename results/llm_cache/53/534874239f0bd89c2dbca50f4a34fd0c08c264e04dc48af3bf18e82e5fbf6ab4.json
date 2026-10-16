@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 42,
+  "prompt_tokens": 169,
+  "total_tokens": 211,
+  "prompt_tokens_details": {
+   "cached_tokens": 102
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic is most likely to be associated with a pro-immigration stance?\nSub-goals:\n1. [text] Which topic is most likely to be associated with a pro-immigration stance?\nAlready tried: sub-goal 1 with text\nStill missing: No further evidence is provided to answer the sub-question about which specific topic is most likely associated with a pro-immigration stance. The evidence provided discusses topics in general but does not specify a particular topic as being most associated with a pro-immigration stance. Additional,"
+  }
+ ],
+ "answer": {
+  "reason": "To find specific evidence related to the topic most likely associated with a pro-immigration stance.",
+  "tool": "text",
+  "query": "pro-immigration stance topic"
+ }
+}

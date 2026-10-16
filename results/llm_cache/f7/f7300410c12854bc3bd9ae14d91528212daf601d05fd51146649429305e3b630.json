@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 180,
+  "total_tokens": 238,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which pooling method is the most accurate for the AFEW database?\nSub-goals:\n1. [text] Which pooling method is the most accurate for the AFEW database?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide information about the accuracy of different pooling methods for the AFEW database. It only compares different methods and their performance on the AFEW database, but does not specify which method is the most accurate for the AFEW database. The evidence does not provide,"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not directly state which pooling method is the most accurate for the AFEW database.",
+  "tool": "text",
+  "query": "Which pooling method is the most accurate for the AFEW database?"
+ }
+}

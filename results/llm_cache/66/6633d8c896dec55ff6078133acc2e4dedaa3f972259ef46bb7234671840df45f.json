@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 120,
+  "total_tokens": 184,
+  "prompt_tokens_details": {
+   "cached_tokens": 61
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which step in the methodology resulted in the largest decrease in the size of the dataset?\nSub-goals:\n1. [text] Which step in the methodology resulted in the largest decrease in the size of the dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about a specific step in the methodology that caused a significant change in the dataset size, which can be directly addressed by searching through the text of the paper.",
+  "tool": "text",
+  "query": "step methodology dataset size decrease"
+ }
+}

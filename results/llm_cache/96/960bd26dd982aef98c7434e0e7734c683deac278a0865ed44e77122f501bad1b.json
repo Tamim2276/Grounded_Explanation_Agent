@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 126,
+  "prompt_tokens": 723,
+  "total_tokens": 849,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The robustness of the proposed method is evaluated using the Boston Housing Dataset.\" -- cites: E3 (Section 4.1): quote \"Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method.\"\n2. \"The proposed method is related to the robust loss function approach.\" -- cites: E2 (Section 2): quote \"Our proposed method is mostly related to the robust loss function approach but cannot fully be categorized into this group in that we present a novel architecture, a mixture of correlated densities network block, for achieving robustness based on the correlation estimation.\"\n\nCited evidence:\n[E2] (text, Section 2, page 2): Recently, robustness in deep learning has been actively studied [ 6 ] as deep neural networks are being applied to diverse tasks involving real-world applications such as autonomous driving [ 7 ] or medical diagnosis [ 8 ] where a simple malfunction can have catastrophic results [ 9 ]. Existing work for handing noisy training data can be categorized into four groups: small-loss tricks [ 10 – 13 ], estimating label corruptions [ 14 – 19 ], using robust loss functions [ 20 , 21 ], and explicit and implicit regularization methods [ 22 – 30 ]. Our proposed method is mostly related to the robust loss function approach but cannot fully be categorized into this group in that we present a novel architecture, a mixture of correlated densities network block, for achieving robustness based on the correlation estimation. First of all, the small-loss tricks selectively focus on training instances based on a certain criterion, such as having small cost values [ 12 ]. [ 13 ] proposed a meta-algorithm for tackling the noisy label problem by training two networks only when the predictions of the two networks disagree, where selecting a proper network from among the two networks can be done using an additional clean dataset. [ 11 ] reweighs the weight of each training instance using a small amount of clean validation data. MentorNet [ 10 ] concentrated on the training of an additional neural network, which assigns a weight to each instance of training data to supervise the training of a base network, termed StudentNet, to overcome the over-ﬁtting of corrupt training data. Recent work [ 12 ] presented Co-teaching by maintaining two separate networks where each network is trained with small-loss instances selected from its peer network.\n[E3] (text, Section 4.1, page 7): Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method. We compare our method with standard feedforward networks using four different loss functions: standard L 2 -loss, L 1 -loss which is known to be robust to outliers, a robust loss (RL) function proposed in [ 21 ], and a leaky robust loss (LeakyRL) function where the results are shown in Table 5 . Implementation details can be found in the supplementary material."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4.1) states that the Boston Housing Dataset is used to check the robustness of the proposed method, which directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 2) mentions that the proposed method is related to the robust loss function approach, which directly supports the claim."
+   }
+  ]
+ }
+}

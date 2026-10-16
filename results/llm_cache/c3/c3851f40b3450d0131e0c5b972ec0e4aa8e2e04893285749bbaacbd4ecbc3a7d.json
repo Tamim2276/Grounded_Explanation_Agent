@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 221,
+  "prompt_tokens": 563,
+  "total_tokens": 784,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"TFBA performs better than HardClust for the Shootings and NYT Sports datasets.\" -- cites: E2 (Section Table 5): quote \"TFBA performs better than HardClust for Shootings and NYT Sports datasets.\"\n2. \"HardClust achieves better results for the MUC dataset.\" -- cites: E2 (Section Table 5): quote \"Even though HardClust achieves better accuracy on MUC dataset, it has several limitations, see Section 4 for more details.\"\n\nCited evidence:\n[E2] (text, Section Table 5, page 8): Table 5: Higher-order RSI accuracies of various methods on the three datasets. Induced schemata for each dataset and method are evaluated by three human evaluators, E1, E2, and E3. TFBA performs better than HardClust for Shootings and NYT Sports datasets. Even though HardClust achieves better accuracy on MUC dataset, it has several limitations, see Section 4 for more details. Chambers-13 solves a slightly different problem called event schema induction, for more details about the comparison with Chambers-13 see Section 4.1 . Shootings NYT Sports MUC E1 E2 E3 Avg E1 E2 E3 Avg E1 E2 E3 Avg HardClust 0.64 0.70 0.64 0.66 0.42 0.28 0.52 0.46 0.64 0.58 0.52 0.58 Chambers-13 0.32 0.42 0.28 0.34 0.08 0.02 0.04 0.07 0.28 0.34 0.30 0.30 TFBA 0.82 0.78 0.68 0.76 0.86 0.6 0.64 0.70 0.58 0.38 0.48 0.48"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E2 (Section Table 5) states: 'TFBA performs better than HardClust for Shootings and NYT Sports datasets.' This directly supports the claim that TFBA performs better than HardClust for the Shootings and NYT Sports datasets."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in E2 (Section Table 5) states: 'Even though HardClust achieves better accuracy on MUC dataset, it has several limitations, see Section 4 for more details.' This indicates that HardClust achieves better results for the MUC dataset, but it does not explicitly state that HardClust achieves better results for the MUC dataset compared to TFBA. The claim is not fully supported by the evidence as it does not provide a direct comparison between TFBA and HardClust for the MUC dataset."
+   }
+  ]
+ }
+}

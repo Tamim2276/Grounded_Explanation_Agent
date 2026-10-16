@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 78,
+  "prompt_tokens": 126,
+  "total_tokens": 204,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best for the \"Representation\" task when the view is \"Novel\"?\nSub-goals:\n1. [text] Which method performs best for the 'Representation' task when the view is 'Novel'? -> table\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "To find the best-performing method for the 'Representation' task under the 'Novel' view, I need to search through the text to locate the relevant section that discusses performance metrics or results.",
+  "tool": "text",
+  "query": "Which method performs best for the 'Representation' task when the view is 'Novel'? table"
+ }
+}

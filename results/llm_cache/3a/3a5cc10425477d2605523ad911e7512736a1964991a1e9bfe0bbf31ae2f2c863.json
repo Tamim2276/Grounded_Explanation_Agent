@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 134,
+  "total_tokens": 205,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nSub-goals:\n1. [text] Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question is about identifying a specific explanation method based on its emphasis on localized features, which can be directly searched in the text of the paper.",
+  "tool": "text",
+  "query": "Which explanation method emphasizes specific, localized features rather than smooth, gradual changes in pixel intensity?"
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 199,
+  "prompt_tokens": 1291,
+  "total_tokens": 1490,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers) and how does its performance compare to the model that only uses answers?\nSub-questions:\n1. [text] On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers)?\n2. [text] How does its performance compare to the model that only uses answers?\nEvidence:\nE1 [text, Section D.2, page 14]: For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset\nE2 [text, Section E, page 15]: As mentioned in Sect. 5.2 of the main text, we provide details on user studies. Fig. 6 shows our user interface. We perform the studies using Amazon Mechanic Turk (AMT) on Visual7W ( Zhu et al. , 2016 ), VQA ( Antol et al. , 2015 ) and Visual Genome (VG) ( Krishna et al. , 2017 ). We mainly evaluate on our IoU-decoys and QoUdecoys (combined together). For each dataset, we randomly sample 1,000 image-question-target triplets together with the corresponding IoU-decoys and QoU-decoys to evaluate human performance. For each of these triplets, three workers are assigned to select the most correct candidate answer according to the image and the question. We compute the average accuracy of these workers and report them in Table 3, 4 and 5 of the main text and Table 7 . We also conduct human evaluation using the Orig decoys of Visual7W so as to investigate the difference between human-generated and automatically generated decoys. We also study how humans will perform given only partial information (i.e., images + candidate answers or questions + candidate answers), again using the Orig decoys of Visual7W. The corresponding interfaces are shown in Fig. 7 and 8 . For these studies, we use the same set of 1,000 triplets used to evaluate our created decoys for fair comparison. We make sure that no worker works on the same triplet across the four studies on Visual7W. Results are reported in Table 1 of the main text.\nE3 [text, Section 3.2, page 4]: Machines ﬁnd shortcuts Table 1 summarizes the performance of the learning models, together with the human studies we performed on a subset of 1,000 triplets (c.f. Sect. 5 for details). There are a few interesting observations. First, in the row of “A” where only the candidate answers (and whether they are right or wrong) are used to train a learning model, the model performs signiﬁcantly better than random guessing and humans (52.9% vs. 25%) — humans will deem each of the answers equally likely without looking at both the image and the question! Note that in this case, the information i in eq. ( 1 ) contains nothing. The model learns the speciﬁc statistics of the candidate answers in the dataset and exploits those. Adding the information about the image (i.e., the row of “I+A”), the machine improves signiﬁcantly and gets close to the performance when all information is used (62.4% vs. 65.7%). There is a weaker correlation between the question and the answers as “Q+A” improves over “A” only modestly. This is expected. In the Visual7W dataset, the decoys are generated by human annotators as plausible answers to the questions without being shown the images — thus, many decoy answers do not have visual groundings. For instance, a question of “what animal is running?” elicits equally likely answers such as “dog”, “tiger”, “lion”, or “cat”, while an image of a dog running in the park will immediately rule out all 3 but the “dog”, see Fig. 1 for a similar example. Thus, the performa ..."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The model that observes all three sources of information (images, questions, and answers) performs best."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "The model that observes all three sources of information outperforms the model that only uses answers."
+   }
+  ],
+  "uncovered": [
+   3,
+   4
+  ],
+  "missing": "The evidence does not provide the specific performance values or comparisons for the models on the VQAv2-2017 validation set. It only discusses the general trend and does not give the exact performance metrics or comparisons for the models in question. Therefore, the sub-questions 3 and 4 cannot be答",
+  "sufficient": false
+ }
+}

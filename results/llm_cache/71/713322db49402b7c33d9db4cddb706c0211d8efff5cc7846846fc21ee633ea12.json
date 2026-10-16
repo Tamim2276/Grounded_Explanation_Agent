@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 355,
+  "prompt_tokens": 966,
+  "total_tokens": 1321,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The accuracy of the model improved as the iterations progressed.\" -- cites: E4 (Section Table 9): quote \"iteration output loss accuracy 0 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2472 66.7 1 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2467 66.7 2 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2462 66.7 3 aaaaaazbaaazbzbaaazbzbzbzbzb 0.0 100.0\"\n2. \"The model's accuracy increased from 66.7% to 100.0% as the iterations progressed.\" -- cites: E4 (Section Table 9): quote \"iteration output loss accuracy 0 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2472 66.7 1 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2467 66.7 2 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2462 66.7 3 aaaaaazbaaazbzbaaazbzbzbzbzb 0.0 100.0\"\n3. \"The model's conversion rate improved from 75.2% to 82.4% as the iterations progressed.\" -- cites: E1 (Section 4): quote \"GBI achieves a conversion rate of 65.2% after 100 iterations, while also improving the accuracy on the failure-set from 75.2% to 82.4%. This synthetic experiment provides additional evidence in support of Q2 and Q3, on a simpler small-capacity network.\"\n\nCited evidence:\n[E1] (text, Section 4, page 6): GBI with a constraint loss g , a length-normalized quadratic (3 x a − y a ) 2 / ( m + n ) that is zero when the number of a ’s in the output ( y a ) is exactly three times the number in the input ( x a ) with m , n denoting input, output, respectively. GBI achieves a conversion rate of 65.2% after 100 iterations, while also improving the accuracy on the failure-set from 75.2% to 82.4%. This synthetic experiment provides additional evidence in support of Q2 and Q3, on a simpler small-capacity network. 4.4 GBI on wide range of reference models The foregoing experimental results provide evidence that GBI is a viable method for enforcing constraints. However, we hitherto study GBI on high quality reference networks such as SRL-100. To further bolster our conclusions, we now direct our investigation towards lower quality networks to understand GBI’s viability under a broader quality spectrum. We ask, how sensitive is GBI to the reference network’s performance (Q4)? To this end, we train poorer quality networks by restricting the amount of available training data or employing simpler architectures.\n[E4] (text, Section Table 9, page 10): Table 9: A sequence transduction example for which enforcing the constraints improves accuracy. Red indicates errors. iteration output loss accuracy 0 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2472 66.7 1 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2467 66.7 2 aaaaaazbaaazbaaazbzbzbzbaaazb 0.2462 66.7 3 aaaaaazbaaazbzbaaazbzbzbzbzb 0.0 100.0"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the accuracy of the model improved as the iterations progressed. The evidence in E4 (Section Table 9) shows the following accuracy values across iterations: 66.7%, 66.7%, 66.7%, and 100.0%. The accuracy does indeed improve from 66.7% to 100.0% as the iterations progress from 0 to 3."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the model's accuracy increased from 66.7% to 100.0% as the iterations progressed. The evidence in E4 (Section Table 9) shows the following accuracy values across iterations: 66.7%, 66.7%, 66.7%, and 100.0%. The accuracy does indeed increase from 66.7% to 100.0% as the iterations progress from 0 to 3."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim states that the model's conversion rate improved from 75.2% to 82.4% as the iterations progressed. The evidence in E1 (Section 4) mentions an accuracy improvement from 75.2% to 82.4% but does not specify a conversion rate. Therefore, the claim cannot be supported by the evidence provided."
+   }
+  ]
+ }
+}

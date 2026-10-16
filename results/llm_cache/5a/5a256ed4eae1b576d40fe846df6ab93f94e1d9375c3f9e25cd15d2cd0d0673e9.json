@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 143,
+  "prompt_tokens": 1013,
+  "total_tokens": 1156,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why might the authors claim that although BOSSNET achieves a lower BLEU score than Mem2Seq on the SMD dataset, it still performs better in conveying necessary entity information?\nSub-questions:\n1. [text] Why might the authors claim that although BOSSNET achieves a lower BLEU score than Mem2Seq on the SMD dataset, it still performs better in conveying necessary entity information?\nEvidence:\nE1 [text, Section 4.1, page 5]: In Table 2 , we report results on the real-world datasets. B O S S N ET greatly outperforms other models in both Entity F1 metric and BLEU scores on CamRest. On SMD, B O S S N ET achieves the best only in Entity F1. On further analysis of the generated responses we observe that B O S S - N ET responses often convey the necessary entity information from the KB. However, they consist of meaningful phrases with little lexical overlap with the gold response, reducing the BLEU scores. We investigate this further in our human evaluation. Human Evaluation: We summarize the human evaluation results for real-world datasets in Table 3 . B O S S N ET shows the best performance on Camrest, and is judged useful 77 times out of 100. Also, it has the highest average grammatical correctness score of 2.28 (very close to Seq2Seq and Mem2Seq). B O S S N ET performs on par with Mem2Seq and Seq2Seq in its ability to relay appropriate information to solve SMD dialog tasks, and has a slightly higher grammaticality score.\nE2 [text, Section 4.2, page 6]: the correct restaurant and infer its address. In the end, the system is forced to pick a random address – the probability of which being correct decreases The performance on the CamRest KA test sets is illustrated in Figures 1 and 5 . B O S S N ET has the best performance with even a slight increase in both BLEU and Entity F1 metrics as more OOV content is injected in the dialog, probably because it is clear that it needs to copy when processing unseen entities. Seq2Seq+Copy is unable to perform well in CamRest as the length of the input (dialog history + KB tuples) is long and the size of the training set is also small. We believe that Seq2Seq+Copy works best in an environment with an abundance of short dialog training data (e.g., bAbI task 1 in Figure 3 ). SMD consists of dialogs with a large KB and a highly varying response pattern. This makes it very difﬁcult to learn the language model – reﬂected in the low BLEU scores for all the systems. B O S S - N ET still provides the best F1 entity score due to\nE3 [text, Section 4.2, page 7]: its ability to inference efﬁciently on the large KB (Figure 6 ). Mem2Seq shows the best BLEU score performance on the original test set, but its performance drop of 42.5%, from 10.3 at 0% unseen to 5.93 at 100% unseen, is a lot heavier than that of B O S S N ET which only drops 7.6% – 8.27 at 0% unseen to 7.64 at 100% unseen. Human Evaluation: We summarize the human evaluation results for real-world datasets on the 50% unseen KA test set in Table 5 . B O S S N ET again outperforms the baselines and is labeled successful twice more often than the next best model on both Camrest and SMD. Seq2Seq appears to produce better sentence structures on the SMD dataset, primarily because it does not attempt to learn inference on the KB, allowing it to solely focus on learning the language model better."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "BOSSNET responses often convey the necessary entity information from the KB."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The reason why BOSSNET achieves a lower BLEU score than Mem2Seq on the SMD dataset is not explicitly stated in the provided evidence. The evidence focuses on BOSSNET's ability to convey necessary entity information and its grammatical correctness, but it does not explain the lower BLEU score in the ",
+  "sufficient": false
+ }
+}

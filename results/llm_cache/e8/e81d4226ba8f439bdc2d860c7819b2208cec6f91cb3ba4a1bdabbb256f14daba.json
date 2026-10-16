@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 168,
+  "prompt_tokens": 713,
+  "total_tokens": 881,
+  "prompt_tokens_details": {
+   "cached_tokens": 150
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The C&W and C&W-hc attacks are more time-consuming compared to other iterative methods.\" -- cites: E4 (Section B.2): quote \"C&W-family attacks are extremely time consuming compared to other iterative methods.\"\n2. \"The C&W and C&W-hc attacks generate adversarial examples with higher confidence than the C&W attack.\" -- cites: E1 (Section 4.2): quote \"The C&W-hc attack can generate adversarial examples with the conﬁdence higher than 0 . 99 , and previous work has shown that the adversarial examples crafted by C&W-hc are stronger and more difﬁcult to defend than those crafted by C&W [ 2 , 3 ].\"\n\nCited evidence:\n[E1] (text, Section 4.2, page 7): d , where x ∗ is the generated adversarial example and each pixel feature is rescaled to be in the interval [0 , 255] . We set the step size in the C&W attacks at 0.01, and set binary search rounds of c to be 9 with the maximal iteration steps at 10,000 in each round. Moreover, to make our investigation more convincing, we introduce the high-conﬁdence version of the C&W attack (abbr. to C&W-hc) that sets the parameter κ in the C&W attack to be 10 in our experiments. The C&W-hc attack can generate adversarial examples with the conﬁdence higher than 0 . 99 , and previous work has shown that the adversarial examples crafted by C&W-hc are stronger and more difﬁcult to defend than those crafted by C&W [ 2 , 3 ]. The results are shown in Fig. 2b. We can see that the C&W and C&W-hc attacks need much larger minimal distortions to successfully attack the networks trained by RCE than those trained by CE. Similar phenomenon is also observed under the white-box attack.\n[E4] (text, Section B.2, page 16): Our experiments are done on NVIDIA Tesla P100 GPUs. We set the binary search steps to be 9 and the maximal iteration steps to be 10,000 in C&W-family attacks (i.e., C&W, C&W-hc and C&W-wb), which promises large enough searching capacity for these attacks. We set the maximal iteration steps to be 100 for JSMA, which means that JSMA perturbs at most 100 pixels on each image. Table 5 demonstrates the average time costs on crafting each adversarial example via different attacks. We can ﬁnd that C&W-family attacks are extremely time consuming compared to other iterative methods. Furthermore, C&W-family attacks usually take longer time to attack the networks trained by the RCE than those trained by the CE."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 states that 'C&W-family attacks are extremely time consuming compared to other iterative methods,' which directly supports the claim that the C&W and C&W-hc attacks are more time-consuming compared to other iterative methods."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E1 states that 'The C&W-hc attack can generate adversarial examples with the conﬁdence higher than 0.99,' which directly supports the claim that the C&W and C&W-hc attacks generate adversarial examples with higher confidence than the C&W attack."
+   }
+  ]
+ }
+}

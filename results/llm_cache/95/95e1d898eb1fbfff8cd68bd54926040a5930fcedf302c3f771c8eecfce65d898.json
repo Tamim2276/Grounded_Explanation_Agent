@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 134,
+  "total_tokens": 202,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the initial value of V2 in the interval [0.35, 0.67]?\nSub-goals:\n1. [text] What is the initial value of V2 in the interval [0.35, 0.67]?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a specific value within a given interval, which can be directly searched in the text of the paper.",
+  "tool": "text",
+  "query": "initial value of V2 in the interval [0.35, 0.67]"
+ }
+}

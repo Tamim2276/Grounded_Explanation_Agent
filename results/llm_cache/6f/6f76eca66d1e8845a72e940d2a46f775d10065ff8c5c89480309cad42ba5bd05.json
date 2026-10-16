@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 270,
+  "prompt_tokens": 344,
+  "total_tokens": 614,
+  "prompt_tokens_details": {
+   "cached_tokens": 145
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The relationship between gloss and representation error is illustrated in Figure 10.\" -- cites: E1 (Section Figure 10): quote \"Figure 10. Relation of gloss and representation error.\"\n2. \"The figure in Figure 10 shows the relationship between gloss and representation error.\" -- cites: E1 (Section Figure 10): quote \"Figure 10. Relation of gloss and representation error.\"\n3. \"The figure in Figure 10 illustrates the relationship between gloss and representation error.\" -- cites: E1 (Section Figure 10): quote \"Figure 10. Relation of gloss and representation error.\"\n4. \"The evidence does not provide enough information to support the claim that the relationship between gloss and representation error is illustrated in Figure 10.\" -- cites: E1 (Section Figure 10): quote \"Figure 10. Relation of gloss and representation error.\"\n\nCited evidence:\n[E1] (text, Section Figure 10, page 7): Figure 10. Relation of gloss and representation error. .125 0 DSSIM Gloss High Low Test Total Train"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states 'Figure 10. Relation of gloss and representation error.' which directly supports the claim that the relationship between gloss and representation error is illustrated in Figure 10."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence states 'Figure 10. Relation of gloss and representation error.' which directly supports the claim that the figure in Figure 10 shows the relationship between gloss and representation error."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence states 'Figure 10. Relation of gloss and representation error.' which directly supports the claim that the figure in Figure 10 illustrates the relationship between gloss and representation error."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence states 'Figure 10. Relation of gloss and representation error.' which does not provide enough information to support the claim that the evidence does not provide enough information to support the claim. The evidence itself supports the relationship being illustrated in Figure 10."
+   }
+  ]
+ }
+}

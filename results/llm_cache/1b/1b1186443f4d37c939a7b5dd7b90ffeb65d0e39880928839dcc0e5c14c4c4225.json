@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 48,
+  "prompt_tokens": 112,
+  "total_tokens": 160,
+  "prompt_tokens_details": {
+   "cached_tokens": 66
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the LSTM network in the model architecture?\nSub-goals:\n1. [text] What is the role of the LSTM network in the model architecture?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The text search tool is appropriate for finding specific information within the paper's text.",
+  "tool": "text",
+  "query": "What is the role of the LSTM network in the model architecture?"
+ }
+}

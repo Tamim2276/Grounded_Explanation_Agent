@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 101,
+  "prompt_tokens": 184,
+  "total_tokens": 285,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers) and how does its performance compare to the model that only uses answers?\nSub-goals:\n1. [text] On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers)?\n2. [text] How does its performance compare to the model that only uses answers?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the performance of a model on the VQAv2-2017 validation set considering all three sources of information. The text search tool is suitable for finding this information within the paper.",
+  "tool": "text",
+  "query": "On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers)?"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 175,
+  "prompt_tokens": 345,
+  "total_tokens": 520,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The learning-to-learn task maps an image to a DAM representation, as described in Figure 3b.\" -- cites: E3 (Section Figure 3): quote \"In a learning-to-learn task a network maps an image to a DAM representation.\"\n2. \"The segmentation-and-estimation task maps an image to multiple DAMs and multiple segmentation networks, as described in Figure 3c.\" -- cites: E3 (Section Figure 3): quote \"Finally, in the segmentation-and-estimation task, a network maps an image to multiple DAMs and multiple segmentation networks.\"\n\nCited evidence:\n[E3] (text, Section Figure 3, page 4): Figure 3. Different appearance processing tasks that we address using our deep appearance maps. a) The ﬁrst task simply reproduces a given appearance, i. e., it maps from normal and view directions to RGB values using a NN. b) In a learning-to-learn task a network maps an image to a DAM representation. c) Finally, in the segmentation-and-estimation task, a network maps an image to multiple DAMs and multiple segmentation networks. "
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E3 (Section Figure 3) states that 'In a learning-to-learn task a network maps an image to a DAM representation,' which directly supports the claim that the learning-to-learn task maps an image to a DAM representation."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 (Section Figure 3) states that 'Finally, in the segmentation-and-estimation task, a network maps an image to multiple DAMs and multiple segmentation networks,' which directly supports the claim that the segmentation-and-estimation task maps an image to multiple DAMs and multiple segmentation networks."
+   }
+  ]
+ }
+}

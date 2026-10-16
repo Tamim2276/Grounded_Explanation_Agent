@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 171,
+  "total_tokens": 243,
+  "prompt_tokens_details": {
+   "cached_tokens": 144
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the IMDB dataset for classifying documents with categorical labels, and how much better did it perform compared to the SLDA model?\nSub-goals:\n1. [text] Which model performed best on the IMDB dataset for classifying documents with categorical labels?\n2. [text] How much better did it perform compared to the SLDA model?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: the judge named no item that backs sub-goal 2"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison in performance between two models, so a search for the specific performance metrics of the best model and its comparison to SLDA is needed.",
+  "tool": "text",
+  "query": "performance of the best model on the IMDB dataset compared to SLDA"
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 196,
+  "prompt_tokens": 546,
+  "total_tokens": 742,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The CDAN model has the fastest convergence.\" -- cites: E2 (Section 4.3): quote \"CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM).\"\n2. \"The CDAN model performs the best in terms of test error.\" -- cites: E2 (Section 4.3): quote \"CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM).\"\n3. \"The CDAN model has the smallest distribution discrepancy.\" -- cites: E2 (Section 4.3): quote \"dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively.\"\n\nCited evidence:\n[E2] (text, Section 4.3, page 9): Distribution Discrepancy The A -distance is a measure for distribution discrepancy [ 4 , 33 ], deﬁned as dist A = 2 (1 − 2 ϵ ) , where ϵ is the test error of a classiﬁer trained to discriminate the source from target. Figure 2(c) shows dist A on tasks A → W , W → D with features of ResNet, DANN, and CDAN. We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively. As domains W and D are similar, dist A of task W → D is smaller than that of A → W , implying higher accuracies. Convergence We testify the convergence of ResNet, DANN, and CDANs, with the test errors on task A → W shown in Figure 2(d). CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM). Note that CDAN (M) constitutes high-dimensional multilinear map, which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DANN."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence states that CDAN enjoys faster convergence than DANN, and CDAN (M) converges faster than CDAN (RM). It does not compare CDAN to other models in terms of convergence speed."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence does not provide any information about the test error of the CDAN model. It only mentions the convergence of ResNet, DANN, and CDANs."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence states that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively."
+   }
+  ]
+ }
+}

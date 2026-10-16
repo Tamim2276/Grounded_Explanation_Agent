@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 390,
+  "prompt_tokens": 592,
+  "total_tokens": 982,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The LSTM network in the model architecture is a type of artificial neural network that uses sequential information and maintains history through its intermediate layers.\" -- cites: E1 (Section abstract): quote \"3.1 Bidirectional LSTM with Attention Recurrent Neural Network (RNN) is a class of artificial neural networks which utilizes sequential information and maintains history through its intermediate layers.\"\n2. \"The LSTM network is a component of the model architecture, as shown in Figure 1.\" -- cites: E3 (Section Figure 1): quote \"Figure 1: Model Architecture\"\n3. \"The LSTM network is used in the model architecture as part of a hybrid approach to clickbait detection.\" -- cites: E2 (Section abstract): quote \"We first explain the three individual components followed by their fusion, which is our proposed model. These components are (1) BiLSTM with attention, (2) Siamese Network on Text Embeddings,\"\n\nCited evidence:\n[E1] (text, Section abstract, page 2): We now go into detail about the components of the model, individual and combined, and how the parameters are learned. 3.1 Bidirectional LSTM with Attention Recurrent Neural Network (RNN) is a class of artiﬁcial neural networks which utilizes sequential information and maintains history through its intermediate layers. A standard RNN has an internal state whose output at every time-step which can be expressed in terms of that of previous time-steps. However, it has been seen that standard RNNs suffer from a problem of vanishing gradients [ 9 ]. This means it will not be able to efﬁciently model dependencies and interactions between words that are a few steps apart. LSTMs are able to tackle this issue by their use of gating mechanisms. For each record in the dataset, the content of the post as well as the content\n[E2] (text, Section abstract, page 2): 3. MODEL ARCHITECTURE In this section, we present our hybrid approach to clickbait detection. We ﬁrst explain the three individual components followed by their fusion, which is our proposed model. These components are (1) BiLSTM with attention, (2) Siamese Network on Text Embeddings,\n[E3] (text, Section Figure 1, page 2): Figure 1: Model Architecture "
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that the LSTM network is a type of artificial neural network that uses sequential information and maintains history through its intermediate layers. The evidence provided in E1 states that '3.1 Bidirectional LSTM with Attention Recurrent Neural Network (RNN) is a class of artificial neural networks which utilizes sequential information and maintains history through its intermediate layers.' The claim is partially supported, but it is not clear if the claim refers to 'Bidirectional LSTM with Attention Recurrent Neural Network' or just 'LSTM network.' The evidence does not explicitly state that LSTM network is a type of artificial neural network, it only refers to a specific type of LSTM network."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that the LSTM network is a component of the model architecture, as shown in Figure 1. The evidence provided in E3 states that 'Figure 1: Model Architecture.' The claim is not supported because the evidence does not explicitly mention the LSTM network as a component of the model architecture. It only shows the model architecture."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim states that the LSTM network is used in the model architecture as part of a hybrid approach to clickbait detection. The evidence provided in E2 states that 'We first explain the three individual components followed by their fusion, which is our proposed model. These components are (1) BiLSTM with attention, (2) Siamese Network on Text Embeddings,' but it does not mention the LSTM network as part of a hybrid approach to clickbait detection. The evidence only lists the three individual components and their fusion."
+   }
+  ]
+ }
+}

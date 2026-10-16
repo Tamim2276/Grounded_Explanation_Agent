@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 176,
+  "total_tokens": 246,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the purpose of the audio encoder in the proposed conditional recurrent adversarial video generation network structure?\nSub-goals:\n1. [text] What is the purpose of the audio encoder in the proposed conditional recurrent adversarial video generation network structure?\nAlready tried: sub-goal 1 with text\nStill missing: The purpose of the audio encoder in the proposed conditional recurrent adversarial video generation network structure is not explicitly stated in the provided evidence. The evidence describes the process of extracting audio features but does not mention the purpose of the audio encoder within the网络的"
+  }
+ ],
+ "answer": {
+  "reason": "The purpose of the audio encoder in the proposed conditional recurrent adversarial video generation network structure is not explicitly stated in the provided evidence.",
+  "tool": "text",
+  "query": "What is the purpose of the audio encoder in the proposed conditional recurrent adversarial video generation network structure?"
+ }
+}

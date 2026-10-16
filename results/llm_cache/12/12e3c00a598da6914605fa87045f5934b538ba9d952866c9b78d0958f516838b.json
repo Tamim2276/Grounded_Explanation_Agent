@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 116,
+  "total_tokens": 173,
+  "prompt_tokens_details": {
+   "cached_tokens": 61
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the knowledge gates in the KEHNN architecture?\nSub-goals:\n1. [text] What is the role of the knowledge gates in the KEHNN architecture?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about a specific term within a scientific paper, which can be effectively searched using a text search tool.",
+  "tool": "text",
+  "query": "What is the role of the knowledge gates in the KEHNN architecture?"
+ }
+}

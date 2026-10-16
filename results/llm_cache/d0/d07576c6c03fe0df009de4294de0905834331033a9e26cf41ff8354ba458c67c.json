@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 13.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 811,
+  "prompt_tokens": 1024,
+  "total_tokens": 1835,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\nEvidence:\n[E1] (text, Section 1, page 3): returns the desired answer. The answering process consists of two stages (see Figure 2 for a scheme): 1. Question mapping into a graph representation - First, a representation of the question as a directed graph is generated, where nodes represent objects and edges represent relations between objects. Graph components include objects classes, properties and relations. The node representation includes all the object visual requirements needed to answer the question, which is a combination of the following (see examples in the supplement, section 1) : • Object class c ( e.g .’horse’). • Object property p ( e.g .’red’). • Queried object property f ( e.g .’color’). • Queried set property g ( e.g .’number’). • Quantiﬁers ( e.g .’all’, ’two’). • Quantity relative to another node ( e.g . same). • Node type: regular or SuperNode: OR of nodes (with optional additional requirements). 2. Answering procedure - In this stage, a recursive procedure ﬁnds valid assignments of the graph in the image. The number of required assignments for each node is determined by its quantiﬁers. The procedure follows the graph, invoking relevant sub-procedures and integrates the information to provide the answer. Importantly, it depends only on the abstract structure of the question graph, where the particular object classes, properties and relations are parameters, used to apply the corresponding visual estimators ( e.g . which property to extract). The invoked sub-procedures are selected from a pool of the following basic procedures , which are simple visual procedures used to compose the full answering procedure: • Detect object of a certain class c . • Check the existence of object property p . • Return an object property of type f . • Return an object’s set property of type g . • Check the existence of relation r between two objects. Our construction of a question graph and using its abstract structure to guide the answering procedure leads to our ability to handle novel domains by adding visual estimators but using the same answering procedure. In our method we only train the question-to-graph mappers and the required visual estimators. Unlike QA training, we use independent trainings, which may utilize existing methods and be developed separately. This also simpliﬁes domain extension ( e.g . automatic modiﬁcation is simpler for questiongraph examples than for question-image-answer examples).\n[E2] (text, Section 1, page 4): 3.3. Answering Procedure In this stage a recursive procedure seeks valid assignments (see Section 3.1 ) between the question graph and the\n[E3] (text, Section Table 6, page 6): Table 6. Question answering ac- curacy of CLEVR-Humans test set for state-of-the-art meth- ods, with and without ﬁnetuning (FT). Method No FT FT IEP-18k 54.0 66.6 FiLM 56.6 75.9 MAC 57.4 81.5 NS-VQA - 67.0 UnCoRd-None B 60.46 E 60.59 UnCoRd-Min B 48.24 E 52.23 UnCoRd-Ext B 43.97 E 52.83 UnCoRd-VG B 43.47 E 48.71 Table 6. Question answering ac- Q: What color is the item to the far left? (GT: purple) None-E A: brown, VG-E A: purple IEP-Str A (No FT): blue, IEP-Hum A (FT): purple"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The answering process consists of two stages: 1. Question mapping into a graph representation - First, a representation of the question as a directed graph is generated, where nodes represent objects and edges represent relations between objects. Graph components include objects classes, properties and relations. The node representation includes all the object visual requirements needed to answer the question, which is a combination of the following: • Object class c (e.g., 'horse'). • Object property p (e.g., 'red'). • Queried object property f (e.g., 'color'). • Queried set property g (e.g., 'number'). • Quantiﬁers (e.g., 'all', 'two'). • Quantity relative to another node (e.g., same). • Node type: regular or SuperNode: OR of nodes (with optional additional requirements). 2. Answering procedure - In this stage, a recursive procedure ﬁnds valid assignments of the graph in the image. The number of required assignments for each node is determined by its quantiﬁers. The procedure follows the graph, invoking relevant sub-procedures and integrates the information to provide the answer.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The answering process consists of two stages: 1. Question mapping into a graph representation - First, a representation of the question as a directed graph is generated, where nodes represent objects and edges represent relations between objects. Graph components include objects classes, properties and relations. The node representation includes all the object visual requirements needed to answer the question, which is a combination of the following: • Object class c (e.g., 'horse'). • Object property p (e.g., 'red'). • Queried object property f (e.g., 'color'). • Queried set property g (e.g., 'number'). • Quantiﬁers (e.g., 'all', 'two'). • Quantity relative to another node (e.g., same). • Node type: regular or SuperNode: OR of nodes (with optional additional requirements). 2. Answering procedure - In this stage, a recursive procedure ﬁnds valid assignments of the graph in the image. The number of required assignments for each node is determined by its quantiﬁers. The procedure follows the graph, invoking relevant sub-procedures and integrates the information to provide the answer."
+     }
+    ]
+   },
+   {
+    "text": "The answering procedure depends only on the abstract structure of the question graph, where the particular object classes, properties and relations are parameters, used to apply the corresponding visual estimators (e.g., which property to extract). The invoked sub-procedures are selected from a pool of the following basic procedures, which are simple visual procedures used to compose the full answering procedure: • Detect object of a certain class c. • Check the existence of object property p. • Return an object property of type f. • Return an object’s set property of type g. • Check the existence of relation r between two objects.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The answering procedure depends only on the abstract structure of the question graph, where the particular object classes, properties and relations are parameters, used to apply the corresponding visual estimators (e.g., which property to extract). The invoked sub-procedures are selected from a pool of the following basic procedures, which are simple visual procedures used to compose the full answering procedure: • Detect object of a certain class c. • Check the existence of object property p. • Return an object property of type f. • Return an object’s set property of type g. • Check the existence of relation r between two objects."
+     }
+    ]
+   }
+  ]
+ }
+}

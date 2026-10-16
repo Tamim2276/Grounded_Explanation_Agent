@@ -1,0 +1,44 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 168,
+  "prompt_tokens": 1806,
+  "total_tokens": 1974,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre in the SRL-NW network has the lowest failure rate and how does its inference time compare to other genres within the same network?\nSub-questions:\n1. [text] Which genre in the SRL-NW network has the lowest failure rate?\n2. [text] How does its inference time compare to other genres within the same network?\nEvidence:\nE1 [text, Section 4, page 7]: out-of-genre data with the highest being 26.86% for BC (vs. 18.10% NW). Further, by enforcing constraints, we see signiﬁcant gains on the failure set in terms of F1 score across all genres (ranging from 9.39-16.5 F1), thus, providing additional evidences for answering Q5. As we did for SRL, we train a GMNT seq2seq model on the WSJ NW section in OntoNotes v5.0 Treebank 4 which shares the same genre classiﬁcation with PropBank. The F1 on the within-genre data (test set of WSJ) is 85.03, but the F1 on these genres is much lower, ranging from the midforties on BC (46.2–78.5 depending on the subcategory) to the low-eighties on BN (68.3–81.3. depending on the subcategory). Indeed, we ﬁnd that overall the F1 is lower and in some cases, like WB, the failure rate is much higher (17.6% for WB vs. 11.9% for WSJ). Following the same experimental protocol as on the PTB data, we report the results in Table 5 (aggregating over all subcategories in each genre). We see that across all genres, the algorithm has high conversion rates (sometimes close to 100%), and that in each case, enforcing the constraints improves the F1. Again, we ﬁnd support for Q2, Q3 and Q5.\nE2 [text, Section 4, page 4]: 4.1 Semantic Role Labeling We employ the AllenNLP (Gardner et al. 2017) SRL network with ELMo embeddings, which is a multi-layer highway bi-LSTM that produces BIO output predictions for each input token (Peters et al. 2018). For data we use OntoNotes v5.0, which has ground-truth for both SRL and syntactic parsing (Pradhan et al. 2013). We evaluate GBI on the testset (25.6k examples), out of which consistent parse information is available for 81.25% examples (we only include side-information in terms of constraints for this subset). We repeat the same experimental procedure over multiple networks, SRL-X, while varying the portion (X%) of the training dataset. In Table 1, we see that GBI is able to convert 42.25 % of failure set, and this boosts the overall F1 measure by 1.23 point over the SOTA network (SRL-100) which does not incorporate the constraints (they report 84.6 F1, we obtain a similar 84.4 F1 with their network, and achieve 85.63 after enforcing constraints with our inference). Further, to address (Q1) we measure the sentence-level failure rate as well as span-level disagreement rate (i.e., the ratio of predicted spans in a sentence that disagree with the spans implied by the true syntactic parse of the sentence). To address (Q2) we evaluate our method on the failure set (i.e., the set of sentences for which disagreement rate is nonzero) and measure our method’s avgerage disagreement rate. Finally, to address (Q3), we evaluate the quality (F1 and exact match) of the ...\nE3 [text, Section Table 1, page 5]: Table 1: Comparison of the GBI vs. A * inference procedure for SRL. We report the avg. disagreement rate, F1-scores and exact match for the failure set (columns 5-10) and F1-score for the whole test set (last 2 columns). Also, we report performances on a wide range of reference models SRL-X, where X denotes % of dataset used for training. We employ Viterbi decoding as a base inference strategy (before) and apply GBI (after) in combination with Viterbi. Network Failure Inference Conv Failure set Test set Average (%) F1 Exact Match F1 rate(%) rate(%) Disagreement (%) before after before after before after before after SRL-100 9.82 GBI 42.25 44.85 24.92 48.00 59.70 (+11.7) 0.0 19.90 84.40 85.63 (+1.23) A* 40.40 33.91 48.83 (+0.83) 13.79 84.51 (+0.11) SRL-70 10.54 GBI 46.22 45.54 23.02 47.81 59.37 (+11.56) 0.0 19.57 83.55 84.83 (+1.28) A* 44.42 32.32 50.49 (+2.68) 16.12 83.90 (+0.35) SRL-40 11.06 GBI 47.89 45.71 22.42 46.53 58.83 (+12.3) 0.0 19.45 82.57 84.03 (+1.46) A* 44.74 32.17 46.53 (+2.88) 15.15 82.98 (+0.41) SRL-10 14.15 GBI 44.28 47.14 24.88 44.19 54.78 (+10.59) 0.0 15.28 78.56 80.18 (+1.62) A* 43.66 32.80 45.93 (+1.74) 12.28 78.87 (+0.31) SRL-1 21.90 GBI 52.85 50.38 21.45 37.90 49.00 (+11.10) 0.0 12.83 67.28 69.97 (+2.69) A* 48.96 30.28 41.59 (+3.69) 11.25 67.97 (+0.69)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "SRL-100 has the lowest failure rate"
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E3",
+    "fact": "SRL-100 has the lowest inference time"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The inference time comparison for other genres within the same network is not provided in the evidence. The evidence only compares the inference time of SRL-100 to other methods (SRL-X) but does not provide a direct comparison to other genres within the SRL-NW network.",
+  "sufficient": false
+ }
+}

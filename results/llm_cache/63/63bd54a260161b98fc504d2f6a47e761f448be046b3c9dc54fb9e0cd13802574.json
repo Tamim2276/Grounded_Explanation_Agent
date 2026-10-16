@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 123,
+  "prompt_tokens": 728,
+  "total_tokens": 851,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?\nSub-questions:\n1. [text] How do the reconstructions compare to the original samples?\nEvidence:\nE1 [text, Section Figure 5, page 5]: Figure 5. Two samples from four variants of our data set. \nE2 [text, Section 3.3, page 4]: The input to the network is a 256 × 256 RGB, normal and view direction images I showing the appearance of a single material Fig. 4 , c. Using an image instead of a plain list of samples allows the network to reason about spatial arrangement of values, e. g., detecting shapes and relations of highlights. The output is a 3360-dimensional vector Θ( I | φ ) that describes the internal parameters of a network producing the appearance of I . The network Θ has eight layers, reducing resolution until a fully-connected layer. Training now minimizes for\nE3 [text, Section 4, page 5]: the real world is to take many photos at many exposure settings of many geometric objects under varying illuminations. Regrettably, this does not scale well to a high number of samples due to the curse of dimensionality encountered with so many parameters (the product of geometry, material, illumination and view). Also it would be difﬁcult to manually decorate them with ground-truth material segmentation. Instead, we suggest to use photo-realistically rendered imagery. We acquired ﬁve production-quality 3D objects from a model repository. As most of our architectures consider images simply as a list of 4D samples, without spatial layout, this comparatively low number of models appears adequate. Each model was assigned multiple (three) or one physicallyplausible (layered GGX shading) materials organized on the objects surface in a complex and natural spatial arrangement. Before rendering, we randomize the hue of the diffuse component. For illumination, we used 20 different HDR environment maps. For each model, 32 different but equidistant view points on a circle around the object, with a random elevation, were used. Overall, this results in 5 × 20 × 32=3200 images. Note, the number of photos that would be required to exhaustively cover 4D; an order of magnitude higher. As the views and materials are randomized, no sharing between test and train sets exists. Geometry i. e., certain combinations of normals and view directions, might occur both in test and training data. We perfo ..."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Figure 5 shows two samples from four variants of the data set."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The evidence does not provide a comparison between reconstructions and original samples. It only shows a figure with samples from the data set. Further evidence is needed to compare reconstructions to the original samples to answer the question fully.",
+  "sufficient": false
+ }
+}

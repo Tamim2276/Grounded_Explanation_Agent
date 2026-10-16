@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 171,
+  "prompt_tokens": 1513,
+  "total_tokens": 1684,
+  "prompt_tokens_details": {
+   "cached_tokens": 1167
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best at predicting the delexicalised constituency tree of an example, and how much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nSub-questions:\n1. [text] Which model performs the best at predicting the delexicalised constituency tree of an example?\n2. [text] How much better does it perform compared to the baseline model in terms of unlabelled F1 score?\nEvidence:\nE1 [text, Section 4, page 4]: We ﬁrst investigate how much information AMR contains about possible syntactic realisations. We train two seq2seq models of the above architecture to predict the delexicalised constituency tree of an example given either the AMR graph or the text. We then evaluate both models on labelled and unlabelled F1 score on the dev split of the corpus. As neither model is guaranteed to produce trees with the right number of terminals, we ﬁrst run an insert/delete aligner between the predicted and reference terminals (i.e. POS tags) before calculating span F1s. We also report the results of running our aligner on the most probable parse tree as estimated by an unconditional LSTM as a baseline both to control for our aligner and also to see how much extra signal is in the AMR graph. The results in Table 1 show that predicting a syntactic structure from an AMR graph is a much harder task than predicting from the text, but there is information in the AMR graph to improve over a blind baseline.\nE2 [text, Section 4, page 5]: We selected the ﬁrst 50 AMR graphs in the dev set on linearised length between 15 and 40 with coherent reference realisations and generated 5 different realisations with our joint model and our baseline model. For our joint model, we ﬁrst sampled 3 parse structures from the syntax model with temperature 0.3. This means we divide the pertimestep logits of the syntax decoder by 0.3; this serves to sharpen the outputs of the syntax model and constrains the sampling process to produce relatively high-probability syntactic structures for the given AMR. Then, we realised each parse deterministically with the lexicalisation model. For the baseline model, we sample 3 realisations from the decoder with the same temperature. This gave us 100 examples in total. We then crowdsourced acceptability judgments for each example from 100 annotators: we showed the reference realisation of an AMR graph, together with model realisations, and asked each annotator to mark all the grammatical realisations which have the same meaning as the reference realisation. Each annotator was presented 30 examples selected randomly. Our results in Table 2 show that the joint model can generate more meaning-preserving realisations compared to a syntax-agnostic baseline. This shows the utility of separating out syntactic and lexical variation: we model explicitly meaning-preserving invariances, and can therefore generate better paraphrases.\nE3 [text, Section 2, page 2]: coreferent entities. Edges in the graph represent relations between entities in the text. See Figure 1 for an example of an AMR graph, together with sample realisations. Konstas et al. ( 2017 ) outline a set of preprocessing procedures for AMR graphs to both render them suitable for sequence-to-sequence learning and to ameliorate data sparsity; we follow the same pipeline. We train our models on the two most recent AMR releases. LDC2017T10 has roughly 36k training sentences, while LDC2015E86 is about half this size. Both share dev and test sets, facilitating comparison. Constituency syntax While there are many syntactic annotation formalisms, we use delexicalised Penn treebank-style constituency trees to represent syntax. Constituency trees have the advantage of a well-deﬁned linearization order compared to dependency trees. Further, constituency trees may be easier to realise, as they effectively correspond to a bracketing of the surface form. Unfortunately, AMR annotated data does not come with syntactic annotation. We therefore parse the training and dev splits of both corpora with the Stanford parser ( Manning et al. , 2014 ) to provide silver-standard reference parse trees. We then delexicalise the parse trees by trimming the trees of the surface words; after this stage, the leaves of the tree are the preterminal POS tags. After this, we linearise the delexicalised constituency trees with depth-ﬁrst traversal, following Vinyals et al. ( 2015b ).\nE4 [text, Section 4, page 4]: AMR-to-text model with the same architecture as above to control for the extra regularisation in our model compared to previous work. Our results show that adding syntax into the model dramatically boosts performance, resulting in state-ofthe-art single model performance on both datasets without using external training data. As an oracle experiment, we also generate from the realisation model conditioned on the ground truth parse. The outstanding result here – BLEU scores in the 50s – demonstrates that being able to predict the gold reference parse tree is a bottleneck in the performance of our model. However, given the inherent difﬁculty of predicting a single syntax realisation (cf. Section 4 ), we suspect that there is an intrinsic limit to how well generating from an AMR graph can replicate the reference realisation. We further note that we do not use models tailored to graph-structured data or characterlevel features as in Song et al. ( 2018 ); Beck et al. ( 2018 ), or additional unlabelled data to perform semi-supervised learning ( Konstas et al. , 2017 ). We believe that we can improve our results even further if we use these techniques.\nE5 [text, Section Table 1, page 4]: Table 1: Parsing scores on LDC2017T10 dev set. Model Unlabelled F1 Labelled F1 Text-to-parse 87.5 85.8 AMR-to-parse 60.4 54.8 Unconditional 38.5 31.7"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "AMR-to-text model"
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E5",
+    "fact": "Unlabelled F1 score of AMR-to-parse model is 60.4"
+   }
+  ],
+  "uncovered": [
+   2,
+   3
+  ],
+  "missing": "The evidence does not provide the unlabelled F1 score for the AMR-to-text model or the baseline model, nor does it compare the performance of the AMR-to-text model to the baseline model in terms of unlabelled F1 score.",
+  "sufficient": false
+ }
+}

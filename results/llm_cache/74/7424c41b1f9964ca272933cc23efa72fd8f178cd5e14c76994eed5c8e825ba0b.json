@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 144,
+  "total_tokens": 202,
+  "prompt_tokens_details": {
+   "cached_tokens": 100
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the encoder understand the last user utterance?\nSub-goals:\n1. [text] How does the encoder understand the last user utterance?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide specific details about how the encoder processes the last user utterance or the exact method of computation of the reduced representation."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the encoder's understanding of the last user utterance, which requires a more detailed analysis of the paper's content.",
+  "tool": "text",
+  "query": "encoder last user utterance understanding"
+ }
+}

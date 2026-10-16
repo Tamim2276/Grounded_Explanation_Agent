@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 140,
+  "total_tokens": 216,
+  "prompt_tokens_details": {
+   "cached_tokens": 61
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset?\nSub-goals:\n1. [text] Which method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question is about finding a specific method's accuracy in a scientific paper, which can be directly addressed using a text search.",
+  "tool": "text",
+  "query": "Which method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset?"
+ }
+}

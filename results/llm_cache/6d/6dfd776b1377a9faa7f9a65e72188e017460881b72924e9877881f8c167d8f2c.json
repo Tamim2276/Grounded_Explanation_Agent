@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 95,
+  "prompt_tokens": 217,
+  "total_tokens": 312,
+  "prompt_tokens_details": {
+   "cached_tokens": 142
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually, and how does its performance compare to humans?\nSub-goals:\n1. [text] Which model performs the best on qaVG when considering both image understanding (IU) and question understanding (QU) individually?\n2. [text] How does its performance compare to humans?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide a direct comparison of the model's performance to humans on qaVG. It only compares the model's performance to humans on Visual Genome and mentions a 17.4% improvement by humans, but it does not specify the model's performance relative to humans on qaVG."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a direct comparison of the model's performance to humans on qaVG. It only compares the model's performance to humans on Visual Genome and mentions a 17.4% improvement by humans, but it does not specify the model's performance relative to humans on qaVG.",
+  "tool": "text",
+  "query": "performance of the model on qaVG compared to humans"
+ }
+}

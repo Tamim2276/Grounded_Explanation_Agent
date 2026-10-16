@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 195,
+  "prompt_tokens": 1567,
+  "total_tokens": 1762,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?\nSub-questions:\n1. [text] Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset?\n2. [text] How does its performance change as the corruption level increases?\nEvidence:\nE1 [text, Section Table 15, page 21]: Table 15: Test accuracies on the Large Movie Review dataset with different corruption probabilities. Corruption p 0% 10% 20% 30% 40% ChoiceNet 79.43 79.50 78.66 77.1 73.98 Mixup 79.77 78.73 77.58 75.85 69.63 MLP 79.04 77.88 75.70 69.05 62.83 VAT 76.40 72.50 69.20 65.20 58.30 B.3. Ablation Study on MNIST Above figures show the results of ablation study when varying the number of mixture K and the expected measurement variance τ −1. Left two figures indicate test accuracies using the MNIST dataset where 90% of train labels are randomly shuffled and right two figures are RMSEs using a synthetic one-dimensional regression problem in Section 4.1. We observe that having bigger K is beneficial to the classification accuracies. In fact, the results achieved here with K equals 15 and 20 are better than the ones reported in the submitted manuscript. τ −1 does not affect much unless it is exceedingly large. 21\nE2 [text, Section Table 11, page 17]: Table 11: Test accuracies on the MNIST dataset with corrupt label. Corruption p Configuration Best Last 50% ConvNet 97.1 95.9 ConvNet+Mixup 98.0 97.8 ChoiceNet 99.1 99.0 80% ConvNet 90.6 79.0 ConvNet+Mixup 95.3 95.1 ChoiceNet 98.3 98.3 90% ConvNet 76.1 54.1 ConvNet+Mixup 78.6 42.4 ChoiceNet 95.9 95.2 95% ConvNet 50.2 31.3 ConvNet+Mixup 53.2 26.6 ChoiceNet 84.5 66.0 3. Random permutation experiments where we replace the percentage of the labels based on the label permutation matrix where we follow the random permutation in [22]. The best and final accuracies on the intact test dataset for biased label experiments are shown in Table 10. In all corruption rates, ChoiceNet achieves the best performance compared to two baseline methods. The learning curves of the biased label experiments are depicted in Figure 11. Particularly, we observe unstable learning curves regarding the test accuracies of ConvNet and Mixup. As training accuracies of such methods show stable learning behaviors, this can be interpreted as the networks are simply memorizing noisy labels. In the contrary, the learning curves of ChoiceNet show stable behaviors which clearly indicates the robustness of the proposed method. The experimental results and learning curves of the random shuffle experiments are shown in Table 11 and Figure 12. The convolutional neural networks trained with Mixup show robust learning behaviors when 80% of the training labels are uniformly shuffled. However, given an extremely noisy datas ...\nE3 [text, Section Table 9, page 16]: Table 9: Test accuracies on the MNIST datasets with corrupt labels. Corruption p Configuration Best Last 50% ConvNet 95.4 89.5 ConvNet+Mixup 97.2 96.8 ConvNet+CN 99.2 99.2 MDN 97.7 97.7 80% ConvNet 86.3 76.9 ConvNet+Mixup 87.2 87.2 ConvNet+CN 98.2 97.6 MDN 85.2 78.7 90% ConvNet 76.1 69.8 ConvNet+Mixup 74.7 74.7 ConvNet+CN 94.7 89.0 MDN 61.4 50.2 95% ConvNet 72.5 64.4 ConvNet+Mixup 69.2 68.2 ConvNet+CN 88.5 80.0 MDN 31.2 25.9 MNIST For MNIST experiments, we randomly shuffle a percentage of the labels with the corruption probability p from 50% to 95% and compare median accuracies after five runs for each configuration following the setting in [27]. We construct two networks: a network with two residual blocks [49] with 3 × 3 × 64 convolutional layers followed by a fully-connected layer with 256 output units (ConvNet) and ChoiceNet with the same two residual blocks followed by the MCDN block (ConvNet+CN). We train each network for 50 epochs with a fixed learning rate of 1e-5. We train each network for 300 epochs with a minibatch size of 256. We begin with a learning rate of 0.1, and it decays by 1/10 after 150 and 225 epochs. We apply random horizontal flip and random crop with 4−pixel-padding and use a weight decay of 0.0001 for the baseline network as [49]. The classification results are shown in Table 9 where ChoiceNet consistently outperforms ConvNet and ConvNet+Mixup by a significant margin, and the difference between the accuracies of ChoiceNet and the others becomes more  ..."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "ChoiceNet performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "ChoiceNet's performance decreases as the corruption level increases."
+   }
+  ],
+  "uncovered": [
+   2,
+   3
+  ],
+  "missing": "The evidence does not provide information about how ChoiceNet's performance changes as the corruption level increases. It only shows the performance at p = 0% and at different corruption levels (10%, 20%, 30%, 40%). The performance change as the corruption level increases is not explicitly stated in",
+  "sufficient": false
+ }
+}

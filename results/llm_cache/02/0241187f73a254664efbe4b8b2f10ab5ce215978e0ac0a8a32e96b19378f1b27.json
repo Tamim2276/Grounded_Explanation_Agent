@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 214,
+  "total_tokens": 289,
+  "prompt_tokens_details": {
+   "cached_tokens": 139
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which genre shows the **largest absolute improvement** in F1 score on the failure set after applying GBI for **both** syntactic parsing and SRL?\nSub-goals:\n1. [text] Which genre shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: No evidence provided for sub-question 2, which asks about the genre showing the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL. The evidence provided only lists the improvement for each genre, but does not specify which genre had the"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the genre with the largest absolute improvement in F1 score, which requires a comparison across genres.",
+  "tool": "text",
+  "query": "Which genre shows the largest absolute improvement in F1 score on the failure set after applying GBI for both syntactic parsing and SRL?"
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 102,
+  "prompt_tokens": 382,
+  "total_tokens": 484,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The study found that education had almost negligible influence on the performance of the participants.\" -- cites: E3 (Section 5.1): quote \"Whereas education had almost negligible influence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was.\"\n\nCited evidence:\n[E3] (text, Section 5.1, page 8): To evaluate human upper bounds for the task, we sampled 100 random questions (such as those presented in Section 4.4 ) from the test set and distributed them among 173 participants of an AMT survey. Every participant had to answer 10 questions. We also asked the participants about their highest completed education (six categories) and the amount of formal training they have in reasoning, logic, or argumentation (no training, some, or extensive). In addition, they speciﬁed for each question how familiar they were with the topic (3- point scale). How Hard is the Task for Humans? It depends, as shown in Figure 4 . Whereas education had almost negligible inﬂuence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was. Overall, 30 of the 173 participants scored 100%. The mean score for those with extensive"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence states that 'education had almost negligible influence on the performance,' but the claim states that 'education had almost negligible influence on the performance of the participants.' The evidence does not specify the influence on the performance of the participants, only on the performance itself. Therefore, the claim is not supported by the evidence."
+   }
+  ]
+ }
+}

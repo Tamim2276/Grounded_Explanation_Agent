@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 544,
+  "prompt_tokens": 1144,
+  "total_tokens": 1688,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The re-synthesis using DAMs allows for freely changing the viewer and surface geometry, which is not possible for classic reflectance maps that fix the relation between view and illumination.\" -- cites: E1 (Section Figure 1): quote \"Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\"\n2. \"The appearance of the sphere in the re-synthesis using DAMs differs from the reference image in that it allows for more flexibility in changing the viewer and surface geometry, which is not possible with classic reflectance maps.\" -- cites: E1 (Section Figure 1): quote \"Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) . Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\"\n3. \"The re-synthesis using DAMs shows a lower DSSIM error compared to the reference image, indicating a better representation of the sphere's appearance.\" -- cites: E4 (Section 5.2): quote \"Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views.\"\n4. \"The appearance of the sphere in the re-synthesis using DAMs is more flexible and can be changed in terms of viewer and surface geometry, which is not possible with classic reflectance maps.\" -- cites: E1 (Section Figure 1): quote \"Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\"\n\nCited evidence:\n[E1] (text, Section Figure 1, page 1): Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) . Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5\n[E4] (text, Section 5.2, page 6): Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that re-synthesis using DAMs allows for freely changing the viewer and surface geometry, which is not possible for classic reflectance maps. The evidence provided in E1 (Section Figure 1) does not explicitly state that DAMs allow for freely changing the viewer and surface geometry. Instead, it compares the re-synthesis using DAMs to reflectance maps and shows frames from a video with a moving viewer. The evidence does not provide information about the flexibility of changing viewer and surface geometry."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that the appearance of the sphere in the re-synthesis using DAMs differs from the reference image in that it allows for more flexibility in changing the viewer and surface geometry, which is not possible with classic reflectance maps. The evidence provided in E1 (Section Figure 1) does not explicitly state that the appearance of the sphere in DAMs allows for more flexibility in changing the viewer and surface geometry. The evidence shows frames from a video with a moving viewer comparing DAMs to reflectance maps and does not provide information about the flexibility of changing viewer and surface geometry."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim states that the re-synthesis using DAMs shows a lower DSSIM error compared to the reference image, indicating a better representation of the sphere's appearance. The evidence provided in E4 (Section 5.2) shows that the method has a lower DSSIM error across the data set, but it does not specifically compare the re-synthesis using DAMs to the reference image. The evidence does not provide information about the DSSIM error of the re-synthesis using DAMs compared to the reference image."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The claim states that the appearance of the sphere in the re-synthesis using DAMs is more flexible and can be changed in terms of viewer and surface geometry, which is not possible with classic reflectance maps. The evidence provided in E1 (Section Figure 1) does not explicitly state that the appearance of the sphere in DAMs is more flexible and can be changed in terms of viewer and surface geometry. The evidence shows frames from a video with a moving viewer comparing DAMs to reflectance maps and does not provide information about the flexibility of changing viewer and surface geometry."
+   }
+  ]
+ }
+}

@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 169,
+  "total_tokens": 232,
+  "prompt_tokens_details": {
+   "cached_tokens": 98
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the virtual environment in the proposed approach?\nSub-goals:\n1. [text] What is the role of the virtual environment in the proposed approach?\nAlready tried: sub-goal 1 with text\nStill missing: The role of the virtual environment in the proposed approach is to collect demonstrations of ADL manipulation tasks. The evidence item E2 provides this information. The sub-question 2 is still uncovered and requires more information to be answered fully. The role of the virtual environment in the 's"
+  }
+ ],
+ "answer": {
+  "reason": "The previous text search did not fully address the role of the virtual environment in the proposed approach.",
+  "tool": "text",
+  "query": "The role of the virtual environment in the proposed approach is to collect demonstrations of ADL manipulation tasks."
+ }
+}

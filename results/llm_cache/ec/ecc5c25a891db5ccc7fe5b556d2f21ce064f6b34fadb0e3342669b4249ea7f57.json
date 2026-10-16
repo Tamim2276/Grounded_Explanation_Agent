@@ -1,0 +1,63 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 387,
+  "prompt_tokens": 809,
+  "total_tokens": 1196,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between testing domain adaptation and testing sensor fusion?\nEvidence:\n[E1] (text, Section 1, page 3): We make the following two contributions: (1) To the best of our knowledge, our proposed method, ZDDA, is the ﬁrst deep learning based method performing domain adaptation between one source image modality and another diﬀerent target image modality (not just diﬀerent datasets in the same modality such as the Oﬃce dataset [32]) without using the task-relevant target-domain training data . We show ZDDA’s eﬃcacy using the MNIST [27], Fashion-MNIST [46], NIST [18], EMNIST [9], and SUN RGB-D [36] datasets with cross validation. (2) Given no task-relevant target-domain training data , we show that ZDDA can perform sensor fusion and that ZDDA is more robust to noisy testing data in either source or target or both domains compared with a naive fusion approach in the scene classiﬁcation task from the SUN RGB-D [36] dataset.\n[E2] (text, Section 3, page 4): Given a task of interest (TOI), a source domain D s , and a target domain D t , our proposed method, zero-shot deep domain adaptation (ZDDA), is designed to achieve the following two goals: 1) Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable. We assume that we have access to the T-R labeled training data in D s and the T-I dual-domain pairs in D s and D t . 2) Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available. The testing data in either D s or D t can be noisy. We assume that there is no prior knowledge available about the type of noise and which domain gives noisy data at testing time.\n[E3] (text, Section Figure 1, page 2): Fig. 1. We propose zero-shot deep domain adaptation (ZDDA) for domain adapta- tion and sensor fusion. ZDDA learns from the task-irrelevant dual-domain pairs when the task-relevant target-domain training data is unavailable. In this example domain adaptation task (MNIST [27] → MNIST-M [13]), the task-irrelevant gray-RGB pairs are from the Fashion-MNIST [46] dataset and the Fashion-MNIST-M dataset (the colored version of the Fashion-MNIST [46] dataset with the details in Sec. 4.1) 2 K.-C. Peng, Z. Wu, and J. Ernst"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Domain adaptation involves deriving solutions for both the source and target domains when the task-relevant target-domain training data is unavailable.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable."
+     }
+    ]
+   },
+   {
+    "text": "Sensor fusion involves deriving the solution of the task of interest when the testing data in both the source and target domains is available, even if the data is noisy.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available. The testing data in either D s or D t can be noisy."
+     }
+    ]
+   },
+   {
+    "text": "The key difference is that domain adaptation requires the absence of task-relevant target-domain training data, while sensor fusion requires the availability of testing data in both domains.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable."
+     },
+     {
+      "evidence": "E2",
+      "quote": "Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available."
+     }
+    ]
+   }
+  ]
+ }
+}

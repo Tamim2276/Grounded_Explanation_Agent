@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 157,
+  "prompt_tokens": 537,
+  "total_tokens": 694,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The largest decrease in the size of the dataset occurred in Step 6, where the weakest 30% of instances were discarded.\" -- cites: E1 (Section Table 1): quote \"Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded.\"\n2. \"The methodology did not specify which step resulted in the largest decrease in the size of the dataset.\" -- cites: E1 (Section Table 1): quote \"Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded.\"\n\nCited evidence:\n[E1] (text, Section Table 1, page 8): Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code. 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each configuration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars)."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that in Step 6, the weakest 30% of instances were discarded, which implies a decrease in the size of the dataset. This aligns with the claim that the largest decrease occurred in Step 6."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence does not provide information about which step resulted in the largest decrease in the size of the dataset. It only mentions that Step 6 resulted in the weakest 30% being discarded. Therefore, the claim cannot be supported by the evidence."
+   }
+  ]
+ }
+}

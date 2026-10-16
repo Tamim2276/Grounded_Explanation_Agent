@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 292,
+  "prompt_tokens": 1059,
+  "total_tokens": 1351,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"CDAN+E (w/ uniform sampling) performs the best across the randomized variants.\" -- cites: E1 (Section 4.3): quote \"We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants.\"\n2. \"CDAN+E (w/ uniform sampling) outperforms CDAN+E (w/ gaussian sampling) and CDAN+E (w/o random sampling) in terms of average accuracy.\" -- cites: E2 (Section Table 5): quote \"Table 5: Accuracy (%) of CDAN variants on Office-31 for unsupervised domain adaptation (ResNet) Method A →W D →W W →D A →D D →A W →A Avg CDAN+E (w/ gaussian sampling) 93.0±0.2 98.4±0.2 100.0±.0 89.2±0.3 70.2±0.4 67.4±0.4 86.4 CDAN+E (w/ uniform sampling) 94.0±0.2 98.4±0.2 100.0±.0 89.8±0.3 70.1±0.4 69.4±0.4 87.0 CDAN+E (w/o random sampling) 94.1±0.1 98.6±0.1 100.0±.0 92.9±0.2 71.0±0.3 69.3±0.3 87.7\"\n3. \"The performance of CDAN+E variants that use random sampling is not directly compared to CDAN+E (w/ uniform sampling) in the given evidence.\" -- cites: E1 (Section 4.3): quote \"We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively.\"\n\nCited evidence:\n[E1] (text, Section 4.3, page 8): Ablation Study We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. Table 1 ∼ 4 shows that CDAN+E outperforms CDAN , proving that entropy conditioning can prioritize easy-to-transfer examples and encourage certain predictions. Conditioning Strategies Besides multilinear conditioning, we investigate DANN-[f,g] with the domain discriminator imposed on the concatenation of f and g , DANN-f and DANN-g with the\n[E2] (text, Section Table 5, page 9): Table 5: Accuracy (%) of CDAN variants on Ofﬁce-31 for unsupervised domain adaptation (ResNet) Method A →W D →W W →D A →D D →A W →A Avg CDAN+E (w/ gaussian sampling) 93.0±0.2 98.4±0.2 100.0±.0 89.2±0.3 70.2±0.4 67.4±0.4 86.4 CDAN+E (w/ uniform sampling) 94.0±0.2 98.4±0.2 100.0±.0 89.8±0.3 70.1±0.4 69.4±0.4 87.0 CDAN+E (w/o random sampling) 94.1±0.1 98.6±0.1 100.0±.0 92.9±0.2 71.0±0.3 69.3±0.3 87.7"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence states that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. The claim misinterprets the evidence by stating that CDAN+E (w/ uniform sampling) performs the best across the randomized variants."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in Table 5 shows that CDAN+E (w/ uniform sampling) has an average accuracy of 87.0, which is higher than the average accuracy of CDAN+E (w/ gaussian sampling) (86.4) and CDAN+E (w/o random sampling) (87.7)."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence does not directly compare the performance of CDAN+E variants that use random sampling to CDAN+E (w/ uniform sampling). The evidence only states that CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) use random matrices sampled only once from Gaussian and Uniform distributions, respectively. The claim misinterprets the evidence by suggesting that the performance is not directly compared."
+   }
+  ]
+ }
+}

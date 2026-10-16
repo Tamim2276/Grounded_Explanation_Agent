@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 190,
+  "total_tokens": 260,
+  "prompt_tokens_details": {
+   "cached_tokens": 140
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2), and how does its performance compare to other methods?\nSub-goals:\n1. [text] Which method performs best on the PaSC dataset for the handheld testing scenario (PaSC2)?\n2. [text] How does its performance compare to other methods?\nAlready tried: sub-goal 1 with text, sub-goal 2 with text\nStill missing: The comparison of GrNet-2Blocks' performance to other methods is not provided in the evidence. Further details are needed to answer how its performance compares to other methods."
+  }
+ ],
+ "answer": {
+  "reason": "The comparison of GrNet-2Blocks' performance to other methods is not provided in the evidence. Further details are needed to answer how its performance compares to other methods.",
+  "tool": "text",
+  "query": "performance comparison of GrNet-2Blocks to other methods"
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 105,
+  "prompt_tokens": 441,
+  "total_tokens": 546,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The higher-order tensor X is constructed out of the tuples in T.\" -- cites: E3 (Section 3.2): quote \"The 4-mode tensor X is constructed out of T.\"\n\nCited evidence:\n[E3] (text, Section 3.2, page 4): • X 1 ∈ R n 2 × n 3 × m + constructed out of the tuples in T by dropping the subject argument and aggregating resulting tuples i.e., X 1 The proposed framework TFBA for inducing higher order schemata involves the following two steps. • Step 1 : In this step, TFBA factorizes multiple lower-order overlapping tensors, X 1 , X 2 , and X 3 , derived from X to induce binary schemata. This step is illustrated in Figure 1 and we discuss details in Section 3.2.1 . • Step 2 : In this step, TFBA connects multiple binary schemata identiﬁed above to induce higher-order schemata. The method accomplishes this by solving a constrained clique problem. This step is illustrated in Figure 2 and we discuss the details in Section 3.2.2 . 3.2.1 Step 1: Back-off Tensor Factorization A schematic overview of this step is shown in Figure 1 . TFBA ﬁrst preprocesses the corpus and extracts OpenIE tuple set T out of it. The 4-mode tensor X is constructed out of T . Instead of performing factorization of the higher-order tensor X as in Section 3.1 , TFBA creates three tensors out of X : X 1"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states that 'The higher-order tensor X is constructed out of the tuples in T.' However, the evidence states that 'The 4-mode tensor X is constructed out of T.' The subject 'higher-order tensor' and '4-mode tensor' are not the same, and the evidence does not support the claim as written."
+   }
+  ]
+ }
+}

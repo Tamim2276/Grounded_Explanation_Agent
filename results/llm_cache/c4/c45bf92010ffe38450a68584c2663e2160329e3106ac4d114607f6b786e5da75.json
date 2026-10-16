@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 215,
+  "prompt_tokens": 625,
+  "total_tokens": 840,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The reconstructions are more accurate in novel view settings than in same view settings.\" -- cites: E4 (Section 5.2): quote \"The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW .\"\n2. \"The reconstructions are learned using a DAM model, which is differentiable and can be learned effectively from images.\" -- cites: E6 (Section 1): quote \"is differentiable. In addition, it can be learned effectively from images or video frames with a known viewer position and surface orientation.\"\n\nCited evidence:\n[E4] (text, Section 5.2, page 6): Tbl. 1 , top part, shows results as mean error across the data set. We see that for all data sets our method is a better representation in terms of having a lower DSSIM error. The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW . A detailed plot of error distribution is seen in Fig. 6 , left. This is, as classic reﬂectance map captures appearance for a ﬁxed viewer location, for changing geometry, but does not generalize when the viewer moves. Arguably, classic RMs look qualitatively plausible without a reference, but only have low quantitative similarity (SSIM) in novel views.\n[E6] (text, Section 1, page 2): is differentiable. In addition, it can be learned effectively from images or video frames with a known viewer position and surface orientation. Applying this representation to new view positions and surface orientations can be done at speed competitive to classic rendering or RMs, i. e., within milliseconds for full images. Acquiring a DAM requires learning a deep model for every new appearance in practice. This would incur substantial computational effort, i. e., running an optimization compared to capturing a RM image in seconds. Addressing this, our third contribution suggests to use another deep (convolutional) neural network to map images showing an appearance to a DAM ([ 17 , 34 , 14 ], one-shot learning [ 8 ], “life-long”, or “continual” learning). This capture requires Fourth, the DAM representation can be used for joint material estimation-and-segmentation, a generalization of the previous objective. Here the input is an image with a known number of n materials, and output is n different DAMs, and a segmentation network that maps every pixel to a n weights."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 (Section 5.2) states: 'The difference in error is more pronounced for N OVEL V IEW than for S AME V IEW.' This directly supports the claim that reconstructions are more accurate in novel view settings than in same view settings."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in E6 (Section 1) states: 'is differentiable. In addition, it can be learned effectively from images or video frames with a known viewer position and surface orientation.' This evidence supports the claim that the DAM model is differentiable and can be learned effectively from images, but it does not specify that the reconstructions are learned using a DAM model. The claim also includes the term 'DAM model,' which is not directly supported by the evidence provided."
+   }
+  ]
+ }
+}

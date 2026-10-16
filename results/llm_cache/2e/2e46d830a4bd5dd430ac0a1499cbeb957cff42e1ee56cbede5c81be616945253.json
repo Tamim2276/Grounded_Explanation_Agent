@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 154,
+  "prompt_tokens": 897,
+  "total_tokens": 1051,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The NVDM model achieves the lowest NPMI scores (both internal and external) in the unsupervised setting.\" -- cites: E2 (Section Table 1): quote \"Ppl. NPMI NPMI Sparsity Model ↓ (int.) ↑ (ext.) ↑ ↑ LDA 1508 0.13 0.14 0 SAGE 1767 0.12 0.12 0.79 NVDM 1748 0.06 0.04 0\"\n2. \"The NVDM model exhibits a trade-off among the scores, as it attains very high levels of sparsity but at the cost of worse perplexity and coherence than LDA.\" -- cites: E1 (Section 4.1): quote \"SAGE, by contrast, attains very high levels of sparsity, but at the cost of worse perplexity and coherence than LDA.\"\n\nCited evidence:\n[E1] (text, Section 4.1, page 7): Although the emphasis of this work is on incorporating observed labels and/or covariates, we brieﬂy report on experiments in the unsupervised setting. Recall that, without metadata, SCHOLAR equates to ProdLDA, but with an explicit background term. 15 We therefore use the same experimental setup as Srivastava and Sutton ( 2017 ) (learning rate, momentum, batch size, and number of epochs) and ﬁnd the same general patterns as they reported (see Table 1 and supplementary material): our model returns more coherent topics than LDA, but at the cost of worse perplexity. SAGE, by contrast, attains very high levels of sparsity, but at the cost of worse perplexity and coherence than LDA. As expected, the NVDM produces relatively low perplexity, but very poor coherence, due to its lack of constraints on θ . Further experimentation revealed that the VAE framework involves a tradeoff among the scores; running for more epochs tends to result in better perplexity on held-out data, but at the cost of worse coherence. Adding regularization to encourage sparse topics has a similar effect as in SAGE, leading to worse perplexity and coherence, but it does create sparse topics. Interestingly, initializing the encoder with pretrained word2vec embeddings, and not updating them returned a model with the best internal coherence of any model we considered for IMDB and Yahoo answers, and the second-best for 20 newsgroups.\n[E2] (text, Section Table 1, page 7): Table 1: Performance of our various models in an unsupervised setting (i.e., without labels or co- variates) on the IMDB dataset using a 5,000-word vocabulary and 50 topics. The supplementary ma- terials contain additional results for 20 newsgroups and Yahoo answers. Ppl. NPMI NPMI Sparsity Model ↓ (int.) ↑ (ext.) ↑ ↑ LDA 1508 0.13 0.14 0 SAGE 1767 0.12 0.12 0.79 NVDM 1748 0.06 0.04 0 SCHOLAR −B.G. 1889 0.09 0.13 0 SCHOLAR 1905 0.14 0.13 0 SCHOLAR + W.V. 1991 0.18 0.17 0 SCHOLAR + REG. 2185 0.10 0.12 0.58"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E2 (Section Table 1) shows that the NVDM model has the lowest NPMI scores both internally and externally compared to other models in the unsupervised setting."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence in E1 (Section 4.1) mentions that SAGE attains very high levels of sparsity but at the cost of worse perplexity and coherence than LDA. The claim incorrectly attributes this to NVDM, which is not supported by the evidence."
+   }
+  ]
+ }
+}

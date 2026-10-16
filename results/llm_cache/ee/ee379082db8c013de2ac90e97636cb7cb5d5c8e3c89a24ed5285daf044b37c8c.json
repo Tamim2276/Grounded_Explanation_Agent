@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 231,
+  "prompt_tokens": 613,
+  "total_tokens": 844,
+  "prompt_tokens_details": {
+   "cached_tokens": 336
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"LIME results in a more 'shattered' image, suggesting it focuses on a smaller set of features rather than smooth, gradual changes in pixel intensity.\" -- cites: E1 (Section 8): quote \"LIME, while generally agreeing with the other two, results in a more 'shattered' image.\"\n2. \"The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly.\" -- cites: E1 (Section 8): quote \"The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly.\"\n3. \"The Parzen vector and MIM vector differ in their emphasis on neighboring pixels having similar influence, indicating a focus on smooth, gradual changes in pixel intensity.\" -- cites: E1 (Section 8): quote \"Seemingly it’s better for a classiﬁer to focus it’s weights on a smaller set of features, while for MIM and Parzen you can see that neighbouring pixels actually have similar inﬂuence.\"\n\nCited evidence:\n[E1] (text, Section 8, page 15): the measures indicate that the brighter (darker) the pixel in the original image, the more ‘happy’ (‘sad’) the face. The third, ﬁfth and seventh column show the point of interest shifted according to the respective inﬂuence vector, i.e. the pixels with positive inﬂuence were brightened, and darkened if their inﬂuence was negative. According to the MIM inﬂuence vector, the factors that contribute to this face looking happy, are a bright mouth with darkened corners, bright eyebrows, bright tone of the face, and a darkened background. Shifting the picture along the inﬂuence vector seems to make the person in the picture smile wider, and open their mouth slightly. The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly. LIME, while generally agreeing with the other two, results in a more ’shattered’ image. Seemingly it’s better for a classiﬁer to focus it’s weights on a smaller set of features, while for MIM and Parzen you can see that neighbouring pixels actually have similar inﬂuence."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that LIME results in a more 'shattered' image, which aligns with the claim that it focuses on a smaller set of features rather than smooth, gradual changes in pixel intensity."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence directly states that the Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly, which supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence mentions that for MIM and Parzen, neighboring pixels actually have similar influence, indicating a focus on smooth, gradual changes in pixel intensity. However, the claim incorrectly attributes this to the Parzen vector and MIM vector differing in their emphasis on neighboring pixels having similar influence. The evidence does not support the claim as written."
+   }
+  ]
+ }
+}

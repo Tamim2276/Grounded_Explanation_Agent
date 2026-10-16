@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 274,
+  "prompt_tokens": 430,
+  "total_tokens": 704,
+  "prompt_tokens_details": {
+   "cached_tokens": 253
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The algorithm must generate images of 128 × 128 pixels.\" -- cites: E4 (Section Figure 12): quote \"The size of the generated image is of 128 × 128 pixels.\"\n2. \"The proposed algorithm must generate images of 128 × 128 pixels.\" -- cites: E4 (Section Figure 12): quote \"The size of the generated image is of 128 × 128 pixels.\"\n3. \"The proposed algorithm must generate images with three local patches.\" -- cites: E1 (Section 6.2): quote \"In the manuscript, we show image generation with three local patches using the proposed algorithm.\"\n\nCited evidence:\n[E1] (text, Section 6.2, page 11): In the manuscript, we show image generation with three local patches using the proposed algorithm. Figure 13 shows generated images based on two local patches. The results show that the network can be trained with different number of input patches.\n[E4] (text, Section Figure 12, page 12): Figure 12: Results of the proposed algorithm on the CompCars dataset when input patches are from different cars. Input 1 and Input 2 are patches from Real 1. Input 3 is a local region of Real 2. Given inputs, the proposed algorithm generates the image (Gen) and mask (Gen M). The size of the generated image is of 128 × 128 pixels. "
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E4 (Section Figure 12) states, 'The size of the generated image is of 128 × 128 pixels.' This directly supports the claim that the algorithm must generate images of 128 × 128 pixels."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E4 (Section Figure 12) states, 'The size of the generated image is of 128 × 128 pixels.' This directly supports the claim that the proposed algorithm must generate images of 128 × 128 pixels."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E1 (Section 6.2) states, 'In the manuscript, we show image generation with three local patches using the proposed algorithm.' This supports the claim that the algorithm generates images with three local patches, but it does not specify that the proposed algorithm must generate images with three local patches. The evidence does not provide a requirement for the number of local patches."
+   }
+  ]
+ }
+}

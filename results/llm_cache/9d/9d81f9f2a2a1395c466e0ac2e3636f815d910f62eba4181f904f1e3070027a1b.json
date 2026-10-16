@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 143,
+  "prompt_tokens": 819,
+  "total_tokens": 962,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the Similarity Ratio and AUC Increasing?\nSub-questions:\n1. [text] What is the relationship between the Similarity Ratio and AUC Increasing?\nEvidence:\nE1 [text, Section Figure 3, page 7]: Figure 3. Linear regression of AUC improvement on Similarity Ratio for all novel classes Category LR (No Transfer) VAGER (Transfer) Jeep 0.8034 0.9469 Zebra 0.8472 0.9393 Hen 0.7763 0.8398 Lemon 0.6854 0.9583 Bubble 0.7455 0.7041 Pineapple 0.7364 0.8623 Lion 0.8305 0.9372 Screen 0.7801 0.9056 Drum 0.6510 0.6995 Restaurant 0.7806 0.8787 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0 Similarity Ratio 0.1 0.0 0.1 0.2 0.3 AUC Increasing\nE2 [text, Section 4.3, page 7]: Here the similarity of two classes is calculated by Equation 1 . Intuitively, if a new class is similar with the top- K base classes, while dissimilar with the remained base classes, its Similarity Ratio will be high, meaning that this new class can beneﬁt more from the base classes. For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10 . The dependent variable indicates the success degree of generalization. And we set K = 10 . We plot the similarity ratio and relative improvement of all novel classes in Figure 3 . We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% conﬁdence interval for the correlation coefﬁcient range between 0 . 124 and 0 . 169 and R 2 = 0 . 45 , showing that the SR ratio could explain 45% of the dependent variable.\nE3 [text, Section 3.2, page 3]: We deﬁne a graph G = ( V, E ) where V is the vertex set of the graph, with each vertex representing a base class and | V | = n . E is the edge set of the graph, each edge represents visual analogy relationship between two classes with the edge weight depicting the similarity degree. We"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "The relative improvement in AUC is positively correlated with the similarity ratio of the new class."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The relationship between the Similarity Ratio and AUC Increasing is positively correlated, but the exact numerical value or range of the correlation coefficient is not provided in the evidence items. The R² value indicates that the similarity ratio explains 45% of the dependent variable, but the R²,",
+  "sufficient": false
+ }
+}

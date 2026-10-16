@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 240,
+  "prompt_tokens": 979,
+  "total_tokens": 1219,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator performs best in the presence of noisy confounders and how does it compare to the Covariate Control (CC) estimator?\nEvidence:\n[E1] (text, Section Figure 8, page 15): Figure 8: Performance of diﬀerent ATETR estimators when noisy confounders are observed. Estimators are Adversarial Balancing (AB), Covariate Control (CC), Entrophy Balancing (EB), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Regression (OR). Similar to the results in Ta- ble 4, EB and CC outperform across all measures. IPW suﬀers from large variance, OR performs worse than naive estimator. \n[E2] (text, Section Table 5, page 15): Table 5: Performance of diﬀerent ATETR estimators when noisy confounders are observed. Estimators are Adversarial Balancing (AB), Covariate Control (CC), Entrophy Balancing (EB), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Regression (OR). Similar to the results in Ta- ble 4, EB outperforms across all measures. Similar to Table 4, simple CC estimator provides a comparable performance to EB. Estimator Bias MAE MSE AB 4.1 × 10−2 4.1 × 10−2 2.5 × 10−3 CC 2.6 × 10−2 2.8 × 10−2 1.5 × 10−3 EB 1.7 × 10−2 2.3 × 10−2 1.2 × 10−3 IPW −3.3 × 10−1 3.1 × 10−2 5.8 × 10−1 Naive comparison 7.1 × 10−2 7.1 × 10−2 5.8 × 10−3 OR 1.2 × 10−1 1.2 × 10−1 1.6 × 10−2\n[E3] (text, Section Table 4, page 14): Table 4: Performance of diﬀerent ATETR estimators when true confounders are fully observed. Estimators are Adversarial Balancing (AB), Covariate Control (CC), Entrophy Balancing (EB), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Regression (OR). EB has the best performance followed by simple CC estimator. Estimator Bias MAE MSE AB 3.2 × 10−2 3.3 × 10−2 1.7 × 10−3 CC 7.7 × 10−3 1.9 × 10−2 7.8 × 10−4 EB 4.3 × 10−3 1.8 × 10−2 7.1 × 10−4 IPW 7.7 × 10−3 1.9 × 10−2 1.0 × 10−3 Naive comparison 7.1 × 10−2 7.1 × 10−2 5.8 × 10−3 OR 7.8 × 10−2 7.8 × 10−2 6.8 × 10−3"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "EB and CC outperform across all measures.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "EB and CC outperform across all measures."
+     }
+    ]
+   },
+   {
+    "text": "EB outperforms across all measures.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "EB outperforms across all measures."
+     }
+    ]
+   },
+   {
+    "text": "Simple CC estimator provides a comparable performance to EB.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Similar to Table 4, simple CC estimator provides a comparable performance to EB."
+     }
+    ]
+   },
+   {
+    "text": "The question cannot be fully answered with the given evidence.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "EB and CC outperform across all measures."
+     }
+    ]
+   }
+  ]
+ }
+}

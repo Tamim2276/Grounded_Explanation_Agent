@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 302,
+  "prompt_tokens": 688,
+  "total_tokens": 990,
+  "prompt_tokens_details": {
+   "cached_tokens": 349
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Training on more diverse data allows better generalization across domains.\" -- cites: E1 (Section Table 4): quote \"As expected, training on more diverse data allows better generalization across domains.\"\n2. \"The 'Extended' models perform well on their corresponding data, indicating substantial extensions are possible in question-to-graph mapping.\" -- cites: E3 (Section 4.1): quote \"The high performance of the ’Extended’ models on their corresponding data illustrates that substantial extensions are possible in question-to-graph mapping without requiring any new training images.\"\n3. \"The 'VG' models' lower accuracy is expected due to the unsuitable elements in its data.\" -- cites: E3 (Section 4.1): quote \"VG models’ lower accuracy is expected due to the unsuitable elements in its data (see Section 3.2.2 ).\"\n4. \"The paper does not provide specific evidence on the effect of training on more diverse data on the accuracy of graph representation for VQA.\" -- cites: E1 (Section Table 4): quote \"Table 4. Accuracy of graph representation for VQA [ 8 ] sample, given for the different UnCoRd mappers. As expected, training on more diverse data allows better generalization across domains.\"\n\nCited evidence:\n[E1] (text, Section Table 4, page 6): Table 4. Accuracy of graph representation for VQA [ 8 ] sample, given for the different UnCoRd mappers. As expected, training on more diverse data allows better generalization across domains. None Minimal Extended VG B E B E B E B E 1 0 12 12 22 22 34 50 4. Accuracy of graph representation for VQA [8] s\n[E3] (text, Section 4.1, page 5): Results demonstrate that models perform well on data with lower variability than their training data. The high performance of the ’Extended’ models on their corresponding data illustrates that substantial extensions are possible in question-to-graph mapping without requiring any new training images. VG models’ lower accuracy is expected due to the unsuitable elements in its data (see Section 3.2.2 ). Additional tests are required to check possible advantages of VG models for different domains. We report such a test next. 4.2.2 VQA Representation In this experiment, representation capabilities are tested for a different dataset. Since normally, annotations corresponding to our graph representation are not provided, we sampled 100 questions of the VQA [ 8 ] validation set and manually examined the results for the eight question-to-graph models (see Section 4.2.1 ). The results in Table 4 express the large gaps in the abilities of models to represent new domains. Models trained"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section Table 4) states, 'As expected, training on more diverse data allows better generalization across domains,' which directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4.1) states, 'The high performance of the ’Extended’ models on their corresponding data illustrates that substantial extensions are possible in question-to-graph mapping without requiring any new training images,' which directly supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4.1) states, 'VG models’ lower accuracy is expected due to the unsuitable elements in its data (see Section 3.2.2 ),' which directly supports the claim."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence in E1 (Section Table 4) states, 'As expected, training on more diverse data allows better generalization across domains,' but it does not provide specific evidence on the effect of training on more diverse data on the accuracy of graph representation for VQA. The claim goes beyond the evidence provided."
+   }
+  ]
+ }
+}

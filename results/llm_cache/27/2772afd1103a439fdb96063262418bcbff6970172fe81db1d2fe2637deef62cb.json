@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 197,
+  "total_tokens": 267,
+  "prompt_tokens_details": {
+   "cached_tokens": 130
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the decline probability of an expert and whether or not they have a \"friend\" who has already declined?\nSub-goals:\n1. [text] What is the relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The specific relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined is not explicitly stated in the evidence provided. The evidence only shows a comparison of decline probabilities across different datasets and conditions, but does'"
+  }
+ ],
+ "answer": {
+  "reason": "The question seeks a specific relationship that is not directly stated in the evidence, so a more detailed search is needed.",
+  "tool": "text",
+  "query": "relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined"
+ }
+}

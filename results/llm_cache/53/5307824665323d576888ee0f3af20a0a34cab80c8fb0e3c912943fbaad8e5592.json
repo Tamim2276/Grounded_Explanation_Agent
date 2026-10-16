@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 383,
+  "prompt_tokens": 959,
+  "total_tokens": 1342,
+  "prompt_tokens_details": {
+   "cached_tokens": 835
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the LIVR framework decompose semantic features into different places?\nEvidence:\n[E1] (text, Section Figure 2, page 2): Figure 2. Framework of LIVR. Given the segmentation map, we decompose the semantic features into different places and extract place-based feature descriptions individually, then dynamically aggregate them at inference time according to the topology of the scene. ⊙ denotes the masking operation for spatial decomposition. \"NN\" stands for neural network. <person, move+toward+ (home), walkway> NN\" street NN\" sidewalk NN \"lawn NN\" walkway street sidewalk walkway lawn Topological+Feature+ Aggregation Semantic+Feature+Decomposition Place based Feature Descriptions Distance based Place Discretization … Figure 2. Framework of LIVR. Given the segmentation map, we\n[E2] (text, Section 3.2, page 3): Segmentation Maps Semantic Feature Decomposition utilizes a segmentation map of each place to decompose features and cause the network to extract place-based feature descriptions individually. The segmentation maps can be manually constructed using a mobile app we developed 2 to annotate each place by drawing points to construct polygons. This is reasonable since most smart home customers have only one or two cameras in their home. We employ human annotations because automatic semantic segmentation methods segment places based on appearance ( e.g., color, texture, etc. ), while our task requires differentiation between places with similar appearance based on function-\n[E3] (text, Section 1, page 2): The ﬁrst two components require semantic feature decomposition (Fig. 2 ). We utilize bitmaps encoded with the semantic labels of places to decompose video representations into different places and train models to learn placebased feature descriptions. This decomposition encourages the network to learn features of generic place-based motion patterns that are independent of scene layouts. As part of the semantic feature decomposition, we encode scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform w.r.t. another place. Fig. 2 (brown) shows the discretized bitmaps of walkway w.r.t. porch . As illustrated in Fig. 3(a) , features decomposed by those discretized bitmaps capture moving agents in spatial-temporal order, which reveals the moving direction, and can be generalized to different scene layouts. The actions occurring in one place may be projected\n\nThese claims are already verified and kept:\n- The LIVR framework decomposes semantic features into different places by utilizing a segmentation map of each place.\n- The segmentation maps are manually constructed using a mobile app to annotate each place by drawing points to construct polygons.\n- The LIVR framework dynamically aggregates the decomposed features at inference time according to the topology of the scene.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The framework encodes scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform.\": support check: The evidence in E3 supports the claim that the framework encodes scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform. However, the claim states that the framework encodes scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform w.r.t. another place, which is not explicitly stated in the evidence. The evidence only mentions discretizing a place into parts based on a quantized distance transform w.r.t. another place in the context of semantic feature decomposition, not in the context of encoding scene geometry to model moving directions."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The LIVR framework decomposes semantic features into different places by utilizing a segmentation map of each place.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Given the segmentation map, we decompose the semantic features into different places and extract place-based feature descriptions individually, then dynamically aggregate them at inference time according to the topology of the scene."
+     }
+    ]
+   },
+   {
+    "text": "The segmentation maps are manually constructed using a mobile app to annotate each place by drawing points to construct polygons.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "The segmentation maps can be manually constructed using a mobile app we developed to annotate each place by drawing points to construct polygons."
+     }
+    ]
+   },
+   {
+    "text": "The LIVR framework dynamically aggregates the decomposed features at inference time according to the topology of the scene.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Given the segmentation map, we decompose the semantic features into different places and extract place-based feature descriptions individually, then dynamically aggregate them at inference time according to the topology of the scene."
+     }
+    ]
+   },
+   {
+    "text": "The framework encodes scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "As part of the semantic feature decomposition, we encode scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform w.r.t. another place."
+     }
+    ]
+   }
+  ]
+ }
+}

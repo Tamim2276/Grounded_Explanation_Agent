@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 281,
+  "prompt_tokens": 923,
+  "total_tokens": 1204,
+  "prompt_tokens_details": {
+   "cached_tokens": 346
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The evidence does not provide a direct comparison of the methods' performance at exactly 50 shots.\" -- cites: E1 (Section Figure 2): quote \"Figure 2. The change of performance as the number of shots in- creases in binary classiﬁcation. 1 2 3 4 5 10 20 50 Shots 0.75 0.80 0.85 0.90 0.95 1.00 AUC VAGER+Voting VAGER LR Weighted LR MRN\"; E2 (Section Figure 5): quote \"Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\"\n2. \"The AUC of our method reaches 0.9 with only 2 shots, while LR needs 20 shots to reach the same AUC.\" -- cites: E3 (Section 4.2): quote \"LR needs about 20 shots to reach AUC 0.9, while we only need 2 shots, indicating that we can save 90% training data.\"\n3. \"The performance of Weighted-LR does not change as the shot number increases, indicating that the heuristic rule is not flexible enough to incorporate new information.\" -- cites: E3 (Section 4.2): quote \"The main reason is that the heuristic rule is not flexible enough to incorporate new information, which demonstrates the importance of learning to learn, rather than rulebased learning.\"\n\nCited evidence:\n[E1] (text, Section Figure 2, page 6): Figure 2. The change of performance as the number of shots in- creases in binary classiﬁcation. 1 2 3 4 5 10 20 50 Shots 0.75 0.80 0.85 0.90 0.95 1.00 AUC VAGER+Voting VAGER LR Weighted LR MRN\n[E2] (text, Section Figure 5, page 8): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\n[E3] (text, Section 4.2, page 6): Furthermore, we compare the performances of these methods in different low-shot settings, and the results are shown in Figure 2 . Our method consistently performs the best in all settings, and the advantage of our method is more obvious when the novel classes have less training samples. Especially, by comparing our method and LR, we can see that LR needs about 20 shots to reach AUC 0.9, while we only need 2 shots, indicating that we can save 90% training data. An interesting phenomenon is that the performance of Weighted-LR does not change as the shot number increases. The main reason is that the heuristic rule is not ﬂexible enough to incorporate new information, which demonstrates the importance of learning to learn, rather than rulebased learning."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 and E2 shows the change of performance as the number of shots increases for different methods, including VAGER+Voting, VAGER, LR, Weighted LR, and MRN. The data for 50 shots is present in both figures, indicating that the evidence does provide a comparison of the methods' performance at exactly 50 shots."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 states that LR needs about 20 shots to reach an AUC of 0.9, while the method in question (presumably the authors' method) only needs 2 shots. This directly supports the claim that the AUC of the method reaches 0.9 with only 2 shots, while LR needs 20 shots to reach the same AUC."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E3 explicitly states that the performance of Weighted-LR does not change as the shot number increases, which directly supports the claim that the heuristic rule is not flexible enough to incorporate new information."
+   }
+  ]
+ }
+}

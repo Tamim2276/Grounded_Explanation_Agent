@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 201,
+  "total_tokens": 266,
+  "prompt_tokens_details": {
+   "cached_tokens": 126
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the \"All\" category of Visual7W, and how did its performance compare to human performance?\nSub-goals:\n1. [text] Which model performed best on the 'All' category of Visual7W?\n2. [text] How did its performance compare to human performance?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide a direct comparison of the Attention model's performance to human performance on the 'All' category of Visual7W. It only shows the performance of the Attention model and the human performance on the 'All' category of Visual7W, but not the comparison between the two."
+  }
+ ],
+ "answer": {
+  "reason": "To find the comparison of the Attention model's performance to human performance on the 'All' category of Visual7W.",
+  "tool": "text",
+  "query": "Attention model performance on 'All' category of Visual7W compared to human performance"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 137,
+  "prompt_tokens": 2108,
+  "total_tokens": 2245,
+  "prompt_tokens_details": {
+   "cached_tokens": 1540
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the accuracy of the model change as the value of c increases?\nSub-questions:\n1. [text] How does the accuracy of the model change as the value of c increases?\nEvidence:\nE1 [text, Section Table 2, page 7]: Table 2: AUC-scores ( 10 − 2 ) of adversarial examples. The model of target networks is Resnet-32. Values are calculated on the examples which are correctly classiﬁed as normal examples and then misclassiﬁed as adversarial counterparts. Bandwidths used when calculating K-density are σ 2 Attack Obj. MNIST CIFAR-10 Confidence non-ME K-density Confidence non-ME K-density FGSM CE 79.7 66.8 98.8 (-) 71.5 66.9 99.7 (-) RCE 98.8 98.6 99.4 (*) 92.6 91.4 98.0 (*) BIM CE 88.9 70.5 90.0 (-) 0.0 64.6 100.0 (-) RCE 91.7 90.6 91.8 (*) 0.7 70.2 100.0 (*) ILCM CE 98.4 50.4 96.2 (-) 16.4 37.1 84.2 (-) RCE 100.0 97.0 98.6 (*) 64.1 77.8 93.9 (*) JSMA CE 98.6 60.1 97.7 (-) 99.2 27.3 85.8 (-) RCE 100.0 99.4 99.0 (*) 99.5 91.9 95.4 (*) C&W CE 98.6 64.1 99.4 (-) 99.5 50.2 95.3 (-) RCE 100.0 99.5 99.8 (*) 99.6 94.7 98.2 (*) C&W-hc CE 0.0 40.0 91.1 (-) 0.0 28.8 75.4 (-) RCE 0.1 93.4 99.6 (*) 0.2 53.6 91.8 (*) 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy MNIST 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy CIFAR-10 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy 0 0.04 0.08 0.12 0.16 0.2 Perturbation 0 0.2 0.4 0.6 0.8 1 Accuracy FGSM(RCE) FGSM(CE) BIM(RCE) BIM(CE) ILCM(RC ...\nE2 [text, Section 4.5, page 8]: For complete analysis, we investigate the robustness under the black-box attack. The success of the black-box attack is based on the transferability of adversarial examples among different models [ 12 ]. We set the trained Resnet-56 networks as the target models. Adversaries intend to attack them but do not have access to their parameters. Thus we set the trained Resnet-32 networks to be the substitute models that adversaries actually attack on and then feed the crafted adversarial examples into the target models. Since adversaries know the existence of the K-density detectors, we apply the C&W-wb attack. We ﬁnd that the adversarial examples crafted by the C&W-wb attack have poor transferability, where less than 50% of them can make the target model misclassify on MNIST and less than 15% on CIFAR-10. Table 4 shows the AUC-scores in four different cases of the black-box attack on CIFAR-10, and the AUC-scores in the same cases on MNIST are all higher than 95%. Note that in our experiments the target models and the substitute models have very similar structures, and the C&W-wb attack becomes ineffective even under this quite ‘white’ black-box attack.\nE3 [text, Section B.5, page 20]: Usually there is a binary search mechanism of the parameter c in C&W attacks to obtain minimal adversarial perturbation. In Fig. 7 we show the extended experiment result of classiﬁcation accuracy under C&W attacks with different values of c .\nE4 [text, Section 4.2, page 7]: d , where x ∗ is the generated adversarial example and each pixel feature is rescaled to be in the interval [0 , 255] . We set the step size in the C&W attacks at 0.01, and set binary search rounds of c to be 9 with the maximal iteration steps at 10,000 in each round. Moreover, to make our investigation more convincing, we introduce the high-conﬁdence version of the C&W attack (abbr. to C&W-hc) that sets the parameter κ in the C&W attack to be 10 in our experiments. The C&W-hc attack can generate adversarial examples with the conﬁdence higher than 0 . 99 , and previous work has shown that the adversarial examples crafted by C&W-hc are stronger and more difﬁcult to defend than those crafted by C&W [ 2 , 3 ]. The results are shown in Fig. 2b. We can see that the C&W and C&W-hc attacks need much larger minimal distortions to successfully attack the networks trained by RCE than those trained by CE. Similar phenomenon is also observed under the white-box attack.\nE5 [text, Section 4.4, page 8]: We test our method under the white-box attack, which is the most difﬁcult threat model and no effective defense exits yet. We apply the white-box version of the C&W attack (abbr. to C&W-wb) introduced in [ 3 ], which is constructed specially to fool the K-density detectors. C&W-wb is also a white-box attack for our method, since it does not exploit information of the training objective. C&W-wb introduces a new loss term f 2 ( x ∗ ) = max( − log( KD ( x ∗ )) − η, 0) that penalizes the adversarial example x ∗ being detected by the K-density detectors, where η is set to be the median of − log( KD ( · )) on the training set. Table 3 shows the average minimal distortions and the ratios of f 2 ( x ∗ ) > 0 on the adversarial examples crafted by C&W-wb, where a higher ratio indicates that the detector is more robust and harder to be fooled. We ﬁnd that nearly all the adversarial examples generated on Resnet-32 (CE) have f 2 ( x ∗ ) ≤ 0 , which means that the values of K-density on them are greater than half of the values on the training data. This result is consistent with previous work [3]."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "The accuracy of the model changes as the value of c increases."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide specific information about how the accuracy of the model changes as the value of c increases. It only shows that there is a binary search mechanism for the parameter c in C&W attacks to obtain minimal adversarial perturbation, but it does not specify the direction or a ",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 291,
+  "prompt_tokens": 763,
+  "total_tokens": 1054,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The mean score for those with extensive formal training in reasoning was 100%.\" -- cites: E1 (Section Figure 4): quote \"1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\"\n2. \"The study found that education had almost negligible influence on the performance of the participants.\" -- cites: E1 (Section Figure 4): quote \"1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\"\n3. \"The study suggests that formal training in reasoning, logic, or argumentation has a significant effect on argument reasoning comprehension accuracy for people with graduate degrees.\" -- cites: E1 (Section Figure 4): quote \"1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\"\n4. \"The study did not provide a direct comparison of the effect of formal training on argument reasoning comprehension accuracy for people with graduate degrees versus those with other educational levels.\" -- cites: E1 (Section Figure 4): quote \"1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\"\n\nCited evidence:\n[E1] (text, Section Figure 4, page 8): Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each conﬁguration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars). 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim states '100%' as the mean score for those with extensive formal training in reasoning, but the evidence shows '100%' as the accuracy for 'Graduate degree+' and 'Extensive' training, not the mean score for those with extensive training."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The claim states that education had 'almost negligible influence,' but the evidence does not provide a comparison of the influence of education on performance across different levels of education or training. The evidence only shows accuracy for different levels of education and training."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence shows that 'Graduate degree+' and 'Extensive' training have the highest accuracy (100%), which suggests a significant effect on argument reasoning comprehension accuracy for people with graduate degrees."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence does not provide a direct comparison of the effect of formal training on argument reasoning comprehension accuracy for people with graduate degrees versus those with other educational levels. It only shows the accuracy for different levels of education and training."
+   }
+  ]
+ }
+}

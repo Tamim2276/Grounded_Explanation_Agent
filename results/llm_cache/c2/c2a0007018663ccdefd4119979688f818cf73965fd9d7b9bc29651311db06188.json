@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 498,
+  "prompt_tokens": 1354,
+  "total_tokens": 1852,
+  "prompt_tokens_details": {
+   "cached_tokens": 1202
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the Similarity Ratio and AUC Increasing?\nEvidence:\n[E1] (text, Section Figure 3, page 7): Figure 3. Linear regression of AUC improvement on Similarity Ratio for all novel classes Category LR (No Transfer) VAGER (Transfer) Jeep 0.8034 0.9469 Zebra 0.8472 0.9393 Hen 0.7763 0.8398 Lemon 0.6854 0.9583 Bubble 0.7455 0.7041 Pineapple 0.7364 0.8623 Lion 0.8305 0.9372 Screen 0.7801 0.9056 Drum 0.6510 0.6995 Restaurant 0.7806 0.8787 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0 Similarity Ratio 0.1 0.0 0.1 0.2 0.3 AUC Increasing\n[E2] (text, Section 4.3, page 7): Here the similarity of two classes is calculated by Equation 1 . Intuitively, if a new class is similar with the top- K base classes, while dissimilar with the remained base classes, its Similarity Ratio will be high, meaning that this new class can beneﬁt more from the base classes. For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10 . The dependent variable indicates the success degree of generalization. And we set K = 10 . We plot the similarity ratio and relative improvement of all novel classes in Figure 3 . We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% conﬁdence interval for the correlation coefﬁcient range between 0 . 124 and 0 . 169 and R 2 = 0 . 45 , showing that the SR ratio could explain 45% of the dependent variable.\n[E3] (text, Section 3.2, page 3): We deﬁne a graph G = ( V, E ) where V is the vertex set of the graph, with each vertex representing a base class and | V | = n . E is the edge set of the graph, each edge represents visual analogy relationship between two classes with the edge weight depicting the similarity degree. We\n[E4] (text, Section 1, page 1): and judgment accordingly. An intuitive example is that a baby learner can learn to recognize a wolf with only a few sample images provided that he/she has been able to successfully recognize a dog. The key mystery making the difference is that people have strong prior knowledge to generalize across different categories [ 13 ]. It means that people do not need to learn a new classiﬁer ( e.g. wolf) from scratch as most machine learning methods, but generalize and adapt the previously learned classiﬁers ( e.g. dog) towards the new category. A major way to acquire the prior knowledge is through learning to learn from previous experience. In the image classiﬁcation scenario, learning to learn refers to the mechanism that learning to recognize a new concept can be accelerated by previously learned other related concepts. A typical image classiﬁer is constituted by representation and classiﬁcation steps, leading to two fundamental problems in learning to learn image classiﬁers: (1) how to generalize the representations from previous concepts to a new concept, and (2) how to generalize the classiﬁcation parameters of previous concepts to a new concept. In literature, transfer learning and domain adaptation methods [ 14 ] are proposed with a similar notion, mainly focusing on the problem of representation generalization across different domains and tasks. With the development of CNN-based image classiﬁcation models, the high-level representations learned from very large scale labeled dataset are demonstrated to have good transferability across different concepts or even different datasets [ 26 ], which signiﬁcantly alleviate the representation generalization problem. However, how to generalize the classiﬁcation parameters in deep models ( e.g. the fc7 layer in AlexNet) from well-trained concepts to a new concept (with only a few samples) is largely ignored by previous studies.\n\nThese claims are already verified and kept:\n- The relationship between the Similarity Ratio and AUC Increasing is positively correlated, as indicated by the linear regression in Figure 3.\n- The Similarity Ratio is calculated by Equation 1, which measures the similarity between a new class and the top-K base classes.\n- The AUC Increasing is the relative improvement in AUC of the method over the non-transfer method LR in a 1-shot setting.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The Similarity Ratio can explain 45% of the dependent variable, as indicated by the R² value of 0.45 in the linear regression.\": the quote is not in E1"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The relationship between the Similarity Ratio and AUC Increasing is positively correlated, as indicated by the linear regression in Figure 3.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% confidence interval for the correlation coefficient range between 0.124 and 0.169 and R² = 0.45, showing that the SR ratio could explain 45% of the dependent variable."
+     }
+    ]
+   },
+   {
+    "text": "The Similarity Ratio is calculated by Equation 1, which measures the similarity between a new class and the top-K base classes.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Here the similarity of two classes is calculated by Equation 1."
+     }
+    ]
+   },
+   {
+    "text": "The AUC Increasing is the relative improvement in AUC of the method over the non-transfer method LR in a 1-shot setting.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10."
+     }
+    ]
+   },
+   {
+    "text": "The Similarity Ratio can explain 45% of the dependent variable, as indicated by the R² value of 0.45 in the linear regression.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% confidence interval for the correlation coefficient range between 0.124 and 0.169 and R² = 0.45, showing that the SR ratio could explain 45% of the dependent variable."
+     }
+    ]
+   }
+  ]
+ }
+}

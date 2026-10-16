@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 108,
+  "prompt_tokens": 757,
+  "total_tokens": 865,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nSub-questions:\n1. [text] Does formal training in reasoning, logic, or argumentation seem to have a significant effect on argument reasoning comprehension accuracy for people with graduate degrees?\nEvidence:\nE1 [text, Section Figure 4, page 8]: Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each conﬁguration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars). 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive\nE2 [text, Section 6, page 10]: Based on the dataset, we evaluated human performance in argument reasoning comprehension. Our ﬁndings suggest that the task is harder for people without formal argumentation training, while being solvable without knowing the topic. We also found that neural attention models outperform language models on the task. In the short run, we plan to draw more attention to this topic by running a SemEval 2018 shared task. 12 A deep qualitative analysis of the warrants from the theoretical perspective of reasoning\nE3 [text, Section 5.1, page 8]: To evaluate human upper bounds for the task, we sampled 100 random questions (such as those presented in Section 4.4 ) from the test set and distributed them among 173 participants of an AMT survey. Every participant had to answer 10 questions. We also asked the participants about their highest completed education (six categories) and the amount of formal training they have in reasoning, logic, or argumentation (no training, some, or extensive). In addition, they speciﬁed for each question how familiar they were with the topic (3- point scale). How Hard is the Task for Humans? It depends, as shown in Figure 4 . Whereas education had almost negligible inﬂuence on the performance, the more extensive formal training in reasoning the participants had, the higher their score was. Overall, 30 of the 173 participants scored 100%. The mean score for those with extensive"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Formal training in reasoning, logic, or argumentation has a significant effect on argument reasoning comprehension accuracy for people with graduate degrees."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine the specific effect size or direction of the effect for people with graduate degrees.",
+  "sufficient": true
+ }
+}

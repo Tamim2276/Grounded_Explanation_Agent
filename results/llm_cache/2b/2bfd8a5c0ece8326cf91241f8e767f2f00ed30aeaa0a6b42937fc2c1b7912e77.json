@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 158,
+  "total_tokens": 226,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the representation task and the learning-to-learn task?\nSub-goals:\n1. [text] What is the difference between the representation task and the learning-to-learn task?\nAlready tried: sub-goal 1 with text\nStill missing: The difference between the representation task and the learning-to-learn task is not explicitly stated in the provided evidence. The evidence describes the tasks but does not provide a direct comparison or difference between them."
+  }
+ ],
+ "answer": {
+  "reason": "The text search has already been used to find the difference between the representation task and the learning-to-learn task, but the information is not directly available in the provided evidence.",
+  "tool": "text",
+  "query": "representation task and learning-to-learn task"
+ }
+}

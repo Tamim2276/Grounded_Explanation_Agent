@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 86,
+  "prompt_tokens": 173,
+  "total_tokens": 259,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the model capture different perspectives on immigration when considering tone as a covariate?\nSub-goals:\n1. [text] How does the model capture different perspectives on immigration when considering tone as a covariate?\nAlready tried: sub-goal 1 with text\nStill missing: The evidence does not provide specific details on how the model captures different perspectives on immigration when considering tone as a covariate, such as the exact words or phrases used to represent these perspectives in the model. It only describes the general approach and the resulting topics. "
+  }
+ ],
+ "answer": {
+  "reason": "The current search needs to focus on specific details or phrases within the text that describe how the model captures different perspectives on immigration when considering tone as a covariate.",
+  "tool": "text",
+  "query": "How does the model capture different perspectives on immigration when considering tone as a covariate? specific details or phrases used to represent these perspectives in the model."
+ }
+}

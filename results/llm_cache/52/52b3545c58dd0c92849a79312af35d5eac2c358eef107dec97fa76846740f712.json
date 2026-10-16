@@ -1,0 +1,57 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 302,
+  "prompt_tokens": 981,
+  "total_tokens": 1283,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nEvidence:\n[E1] (text, Section Table 1, page 3): Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG) problem conditions UDA MVL DG ZDDA given T-R target-domain training data? Y Y N N given T-R training data in multiple (>1) domains/views? N Y Y N example prior work [33] [42] [28] N/A\n[E2] (text, Section 2, page 3): Other problems related to ZDDA include unsupervised domain adaptation (UDA), multi-view learning (MVL), and domain generalization (DG), and we compare their problem settings in Table 1, which shows that the ZDDA problem setting is diﬀerent from those of UDA, MVL, and DG. In UDA and MVL, T-R target-domain training data is given. In MVL and DG, T-R training data in multiple domains is given. However, in ZDDA, T-R target-domain training data\n[E3] (text, Section Table 5, page 10): Table 5. The overall / average per class accuracy (%) of the domain adaptation tasks (gray scale images → RGB images) formed by the datasets in Table 3, where we introduce the dataset IDs and use them to refer to the datasets here. The middle four rows show the performance of ZDDA 2 . The color of each cell reﬂects the performance ranking in each column, where darker is better. The number in the parenthesis of the middle four rows is the semantic similarity between the T-R and T-I datasets measured by word2vec [29], where larger numbers represent higher semantic similarity. The T-R target-domain training data is only available for the row “target only” T-I DM →DM-M DF →DF -M DN →DN-M DE →DE-M data → → → → source only 39.04/39.31 33.77/33.77 8.59/8.79 33.70/33.70 DM, DM-M N/A 51.55/51.55 (0.049) 34.25/33.35 (0.174) 71.20/71.20 (0.178) DF , DF -M 73.15/72.96 (0.049) N/A 21.93/21.24 (0.059) 46.93/46.93 (0.053) DN, DN-M 91.99/92.00 (0.174) 43.87/43.87 (0.059) N/A N/A DE, DE-M 94.84/94.82 (0.178) 65.30/65.30 (0.053) N/A N/A target only 97.33/97.34 84.44/84.44 62.13/61.99 89.52/89.52"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ZDDA requires T-R target-domain training data, while UDA and MVL do not.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "given T-R target-domain training data? Y Y N N"
+     },
+     {
+      "evidence": "E2",
+      "quote": "In UDA and MVL, T-R target-domain training data is given. In MVL and DG, T-R training data in multiple domains is given. However, in ZDDA, T-R target-domain training data"
+     }
+    ]
+   },
+   {
+    "text": "ZDDA and UDA/MVL differ in the availability of T-R target-domain training data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "given T-R target-domain training data? Y Y N N"
+     },
+     {
+      "evidence": "E2",
+      "quote": "In UDA and MVL, T-R target-domain training data is given. In MVL and DG, T-R training data in multiple domains is given. However, in ZDDA, T-R target-domain training data"
+     }
+    ]
+   }
+  ]
+ }
+}

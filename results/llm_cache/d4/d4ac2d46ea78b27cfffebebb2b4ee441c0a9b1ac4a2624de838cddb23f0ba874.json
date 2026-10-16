@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 168,
+  "total_tokens": 231,
+  "prompt_tokens_details": {
+   "cached_tokens": 98
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs better in terms of classification accuracy?\nSub-goals:\n1. [text] Which method performs better in terms of classification accuracy?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide a direct comparison of the methods' performance in terms of classification accuracy for the sub-questions 2 and 3. The evidence only provides performance comparisons for different methods and modalities but does not specify which method performs better in terms of the '"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a direct comparison of the methods' performance in terms of classification accuracy for the sub-questions 2 and 3.",
+  "tool": "text",
+  "query": "Which method performs better in terms of classification accuracy?"
+ }
+}

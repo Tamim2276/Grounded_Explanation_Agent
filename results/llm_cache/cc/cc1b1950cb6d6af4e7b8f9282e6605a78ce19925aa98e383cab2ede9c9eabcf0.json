@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 2.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 41,
+  "prompt_tokens": 153,
+  "total_tokens": 194,
+  "prompt_tokens_details": {
+   "cached_tokens": 104
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which loss function combination is most important for generating realistic mouth movements?\nSub-goals:\n1. [text] Which loss function combination is most important for generating realistic mouth movements?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The specific loss function combination is not explicitly stated in the provided evidence. Further details are needed to determine which loss function combination is most important for generating realistic mouth movements."
+  }
+ ],
+ "answer": {
+  "reason": "To find the specific loss function combination mentioned in the paper.",
+  "tool": "text",
+  "query": "loss function combination most important for generating realistic mouth movements"
+ }
+}

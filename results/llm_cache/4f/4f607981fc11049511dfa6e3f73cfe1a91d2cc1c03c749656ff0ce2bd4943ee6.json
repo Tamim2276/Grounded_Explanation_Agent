@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 99,
+  "prompt_tokens": 171,
+  "total_tokens": 270,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed best according to the P@1 metric for the QA-Expert task, and how much better did it perform compared to the average P@1 score of the D2V method? \nSub-goals:\n1. [text] Which method performed best according to the P@1 metric for the QA-Expert task?\n2. [text] How much better did it perform compared to the average P@1 score of the D2V method?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the method that performed best according to the P@1 metric for the QA-Expert task, which requires identifying the specific method and its performance. The text search tool is suitable for this purpose as it can scan through the paper's content to find the relevant information.",
+  "tool": "text",
+  "query": "Which method performed best according to the P@1 metric for the QA-Expert task?"
+ }
+}

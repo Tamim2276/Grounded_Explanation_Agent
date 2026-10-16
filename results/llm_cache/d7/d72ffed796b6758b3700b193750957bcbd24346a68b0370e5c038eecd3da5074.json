@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 417,
+  "prompt_tokens": 909,
+  "total_tokens": 1326,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the IMDB dataset for classifying documents with categorical labels, and how much better did it perform compared to the SLDA model?\nEvidence:\n[E1] (text, Section Table 1, page 7): Table 1: Performance of our various models in an unsupervised setting (i.e., without labels or co- variates) on the IMDB dataset using a 5,000-word vocabulary and 50 topics. The supplementary ma- terials contain additional results for 20 newsgroups and Yahoo answers. Ppl. NPMI NPMI Sparsity Model ↓ (int.) ↑ (ext.) ↑ ↑ LDA 1508 0.13 0.14 0 SAGE 1767 0.12 0.12 0.79 NVDM 1748 0.06 0.04 0 SCHOLAR −B.G. 1889 0.09 0.13 0 SCHOLAR 1905 0.14 0.13 0 SCHOLAR + W.V. 1991 0.18 0.17 0 SCHOLAR + REG. 2185 0.10 0.12 0.58\n[E2] (text, Section Table 2, page 8): Table 2: Accuracy of various models on three datasets with categorical labels. 20news IMDB Yahoo Vocabulary size 2000 5000 5000 Number of topics 50 50 250 SLDA 0.60 0.64 0.65 SCHOLAR (labels) 0.67 0.86 0.73 SCHOLAR (covariates) 0.71 0.87 0.72 Logistic regression 0.70 0.87 0.76\n[E3] (text, Section 4.2, page 7): We next consider the utility of our model in the context of categorical labels, and consider them alternately as observed covariates and as labels generated conditional on the latent representation. We use the same setup as above, but tune number of training epochs for our model using a random 20% of training data as a development set, and similarly tune regularization for logistic regression. Table 2 summarizes the accuracy of various models on three datasets, revealing that our model offers competitive performance, both as a joint model of words and labels (Eq. 9 ), and a model which conditions on covariates (Eq. 10 ). Although SCHOLAR is comparable to the logistic regression baseline, our purpose here is not to attain state-of-the-art performance on text classiﬁcation. Rather, the high accuracies we obtain demonstrate that we are learning low-dimensional representations of documents that are relevant to the label of interest, outperforming SLDA, and have the same attractive properties as topic models. Further, any neural network that is successful for text classiﬁcation could be incorporated into f y and trained end-to-end along with topic discovery."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The SCHOLAR model performed best on the IMDB dataset for classifying documents with categorical labels, achieving an accuracy of 0.86.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Table 2: Accuracy of various models on three datasets with categorical labels. 20news IMDB Yahoo Vocabulary size 2000 5000 5000 Number of topics 50 50 250 SLDA 0.60 0.64 0.65 SCHOLAR (labels) 0.67 0.86 0.73 SCHOLAR (covariates) 0.71 0.87 0.72 Logistic regression 0.70 0.87 0.76"
+     }
+    ]
+   },
+   {
+    "text": "The SCHOLAR model performed 0.22 points better than the SLDA model on the IMDB dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Table 2: Accuracy of various models on three datasets with categorical labels. 20news IMDB Yahoo Vocabulary size 2000 5000 5000 Number of topics 50 50 250 SLDA 0.60 0.64 0.65 SCHOLAR (labels) 0.67 0.86 0.73 SCHOLAR (covariates) 0.71 0.87 0.72 Logistic regression 0.70 0.87 0.76"
+     }
+    ]
+   }
+  ]
+ }
+}

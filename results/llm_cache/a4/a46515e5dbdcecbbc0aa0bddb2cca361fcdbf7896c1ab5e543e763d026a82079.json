@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 182,
+  "total_tokens": 255,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the novel class and the top-3 most similar base classes?\nSub-goals:\n1. [text] What is the relationship between the novel class and the top-3 most similar base classes?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The relationship between the top-3 most similar base classes and the novel class is not explicitly stated in the provided evidence. The evidence focuses on the relationship between the similarity ratio and the relative improvement in AUC, but does not provide a direct comparison or relationship with"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not explicitly state the relationship between the top-3 most similar base classes and the novel class, so a direct text search is needed to find this information.",
+  "tool": "text",
+  "query": "relationship between the novel class and the top-3 most similar base classes"
+ }
+}

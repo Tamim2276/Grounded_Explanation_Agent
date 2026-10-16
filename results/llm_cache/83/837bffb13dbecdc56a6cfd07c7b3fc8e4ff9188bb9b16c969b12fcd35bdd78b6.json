@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 134,
+  "prompt_tokens": 748,
+  "total_tokens": 882,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different types of features used by the Layout-induced Video Representation Network?\nSub-questions:\n1. [text] What are the different types of features used by the Layout-induced Video Representation Network?\nEvidence:\nE1 [text, Section Figure 4, page 3]: Figure 4. Layout-induced Video Representation Network: The dashed blue box indicates a shared 3D ConvNet to extract low- level features. We utilize the segmentation maps to decompose features into different places, and the solid blue boxes indicate that we train place-based models to extract place-based feature descriptions. When relevant to the activities of interest, we con- duct distance-based place discretization to model moving direc- tions; ﬁnally, we leverage the connectivity of places to aggregate the place-based feature descriptions at inference level. NN-­‐ sidewalk NN-­‐ street NN-­‐ porch NN-­‐ shared frame differencing ….. Topological Feature Aggregation ….. <vehicle, move along, street> <person, stay, porch> Semantic Feature Decomposition porch walkway street sidewalk NN-­‐w1 NN-­‐w2 NN-­‐w3 Place based Feature Descriptions <person, move toward (home), walkway> Distance based Place Discretization\nE2 [text, Section abstract, page 1]: We address scene layout modeling for recognizing agentin-place actions, which are actions associated with agents who perform them and the places where they occur, in the context of outdoor home surveillance. We introduce a novel representation to model the geometry and topology of scene layouts so that a network can generalize from the layouts observed in the training scenes to unseen scenes in the test set. This Layout-Induced Video Representation (LIVR) abstracts away low-level appearance variance and encodes geometric and topological relationships of places to explicitly model scene layout. LIVR partitions the semantic features of a scene into different places to force the network to learn generic place-based feature descriptions which are independent of speciﬁc scene layouts; then, LIVR dynamically aggregates features based on connectivities of places in each speciﬁc scene to model its layout. We introduce a new Agent-in-Place Action (APA) dataset 1 to show that our method allows neural network models to generalize signiﬁ- cantly better to unseen scenes.\nE3 [text, Section 3.1, page 3]: The network architecture of layout-induced video representation is shown in Fig. 4 . For each video, we stack sampled frames of a video clip into a 4-D tensor. Our backbone network is similar to the architecture of ReMotENet [ 50 ],"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The different types of features used by the Layout-induced Video Representation Network are: 3D ConvNet, place-based models, distance-based place discretization, and connectivity of places."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not provide specific types of features used by the Layout-induced Video Representation Network. It describes the process of feature extraction and aggregation but does not list the types of features explicitly.",
+  "sufficient": false
+ }
+}

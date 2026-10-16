@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 10.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 596,
+  "prompt_tokens": 994,
+  "total_tokens": 1590,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the task-irrelevant data in ZDDA?\nEvidence:\n[E1] (text, Section 5, page 11): Second, in Table 6, we compare ZDDA 2 with the existing DA methods because the DA task D M → D M -M is considered as one of the standard experiments in recent works [7, 14, 20, 33, 34]. Although this is not a fair comparison (because ZDDA 2 has no access to the T-R target-domain training data), we ﬁnd\n[E2] (text, Section 5, page 11): use, ZDDA 2 signiﬁcantly outperforms the baseline (source only). To see how the semantic similarity between the T-R dataset (denoted as D T − R ) and T-I dataset (denoted as D T − I ) aﬀects the performance, we are inspired by [12] and use the word2vec [29] to compute the mean similarity (denoted as S ) of any two labels from D T − R and D T − I (one from each). We report S ( D T − R , D T − I ) in the parenthesis of the middle four rows of Table 5, where higher S represents higher semantic similarity. Given Table 5 and the following reference S values: S (object, scene)=0.192, S (animal, fruit)=0.171, and S (cat, dog)=0.761, we ﬁnd that: (1) For all the listed DA tasks except D F → D F -M, higher S corresponds to better performance, which is consistent with our intuition that using more relevant data as the T-I data improves the performance more. (2) All the listed S s in Table 5 are close to or lower than S (animal, fruit)=0.171, which we believe shows that our T-I data is highly irrelevant to the T-R data.\n[E3] (text, Section 1, page 2): The state-of-the-art DA methods such as [1, 14–16, 25, 30, 35, 37, 39–41, 43, 44, 47, 50] are proposed to solve DA tasks under the assumption that the taskrelevant data , the data directly applicable and related to the TOI (regardless of whether it is labeled or not), in the target domain is available at training time, which is not always true in practice. For instance, in real business use cases, acquiring the task-relevant target-domain training data can be infeasible due to the combination of the following reasons: 1) Unsuitable tools at the ﬁeld. 2) Product development timeline. 3) Budget limitation. 4) Data import/export regulations. Such impractical assumption is also assumed true in the existing works of sensor fusion such as [31,48], where the goal is to obtain a dual-domain (source and target) TOI solution which is robust to noise in either domain. This unsolved issue motivates us to propose zero-shot deep domain adaptation (ZDDA), a DA and sensor fusion approach which learns from the task-irrelevant dual-domain training pairs without using the task-relevant target-domain training data, where we use the term task-irrelevant data to refer to the data which is not task-relevant. In the rest of the paper, we use T-R and T-I as the shorthand of task-relevant and task-irrelevant, respectively."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The role of the task-irrelevant data in ZDDA is to provide a dual-domain training pair without using the task-relevant target-domain training data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "This unsolved issue motivates us to propose zero-shot deep domain adaptation (ZDDA), a DA and sensor fusion approach which learns from the task-irrelevant dual-domain training pairs without using the task-relevant target-domain training data, where we use the term task-irrelevant data to refer to the data which is not task-relevant."
+     }
+    ]
+   },
+   {
+    "text": "The task-irrelevant data in ZDDA is highly irrelevant to the task-relevant data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "All the listed S s in Table 5 are close to or lower than S (animal, fruit)=0.171, which we believe shows that our T-I data is highly irrelevant to the T-R data."
+     }
+    ]
+   },
+   {
+    "text": "The task-irrelevant data in ZDDA is used to compute the mean semantic similarity between the task-relevant and task-irrelevant datasets.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "To see how the semantic similarity between the T-R dataset (denoted as D T − R ) and T-I dataset (denoted as D T − I ) affects the performance, we are inspired by [12] and use the word2vec [29] to compute the mean similarity (denoted as S ) of any two labels from D T − R and D T − I (one from each)."
+     }
+    ]
+   },
+   {
+    "text": "The task-irrelevant data in ZDDA is used to compare ZDDA 2 with existing DA methods in a fair comparison.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Second, in Table 6, we compare ZDDA 2 with the existing DA methods because the DA task D M → D M -M is considered as one of the standard experiments in recent works [7, 14, 20, 33, 34]. Although this is not a fair comparison (because ZDDA 2 has no access to the T-R target-domain training data), we ﬁnd"
+     }
+    ]
+   }
+  ]
+ }
+}

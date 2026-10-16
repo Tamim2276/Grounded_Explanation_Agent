@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 296,
+  "prompt_tokens": 807,
+  "total_tokens": 1103,
+  "prompt_tokens_details": {
+   "cached_tokens": 230
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The proposed metric of non-ME is a reliable metric for detecting adversarial examples, although not as good as the K-density metric.\" -- cites: E3 (Section 4.2): quote \"non-ME itself is also a pretty reliable metric, although not as good as K-density.\"\n2. \"The proposed metric of non-ME helps detect adversarial examples by distinguishing between noisy examples and adversarial examples.\" -- cites: E3 (Section 4.2): quote \"Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3.\"\n3. \"The metric of non-ME is defined as the entropy of normalized non-maximal elements in F(x), which is more pertinent and helpful for detecting adversarial examples.\" -- cites: E2 (Section 3.1): quote \"Therefore, we construct another metric which is more pertinent and helpful to our goal. Namely, we define the metric of non-ME —the entropy of normalized non-maximal elements in F ( x ) , as:\"\n\nCited evidence:\n[E2] (text, Section 3.1, page 3): Due to the difﬁculty of correctly classifying adversarial examples [ 2 , 3 ] and the generality of their existence [ 7 , 9 ], we design a method to detect them instead, which could help in real world applications. For example, in semi-autonomous systems, the detection of adversarial examples would allow disabling autonomous operation and requesting human intervention [26]. A detection method relies on some metrics to decide whether an input x is adversarial or not for a given classiﬁer F ( X ) . A potential candidate is the conﬁdence F ( x ) ˆ y on the predicted label ˆ y , which inherently conveys the degree of certainty on a prediction and is widely used [ 11 ]. However, previous work shows that the conﬁdence score is unreliable in the adversarial setting [ 12 , 28 ]. Therefore, we construct another metric which is more pertinent and helpful to our goal. Namely, we deﬁne the metric of non-ME —the entropy of normalized non-maximal elements in F ( x ) , as:\n[E3] (text, Section 4.2, page 7): We further activate the thresholding test strategy with the K-density metric, and also test the performance of conﬁdence or non-ME being the metric for a more complete analysis. We construct simple binary classiﬁers to decide whether an example is adversarial or not by thresholding with the metrics, and then calculate the AUC-scores of ROC curves on these binary classiﬁers. Table 2 shows the AUC-scores calculated under different combinations of training procedures and thresholding metrics on both datasets. From Table 2, we can see that our method (RCE training + K-density detector) performs the best in almost all cases, and non-ME itself is also a pretty reliable metric, although not as good as K-density. The classiﬁers trained by RCE also return more reliable conﬁdence scores, which veriﬁes the conclusion in Theorem 1. Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4.2) states: 'non-ME itself is also a pretty reliable metric, although not as good as K-density.' This aligns with the claim that the non-ME metric is a reliable metric for detecting adversarial examples, although not as good as the K-density metric."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 4.2) states: 'Furthermore, we also show that our method can better distinguish between noisy examples and adversarial examples, as demonstrated in Appendix B.3.' This supports the claim that the non-ME metric helps distinguish between noisy examples and adversarial examples."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 3.1) states: 'Therefore, we construct another metric which is more pertinent and helpful to our goal. Namely, we define the metric of non-ME —the entropy of normalized non-maximal elements in F ( x ) , as:' This supports the claim that the metric of non-ME is defined as the entropy of normalized non-maximal elements in F(x)."
+   }
+  ]
+ }
+}

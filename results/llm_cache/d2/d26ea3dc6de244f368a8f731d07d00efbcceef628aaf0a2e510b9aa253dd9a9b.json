@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 184,
+  "prompt_tokens": 514,
+  "total_tokens": 698,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The paper does not directly compare the robustness of density estimation and mixture of classifiers to outliers.\" -- cites: E1 (Section 4.1): quote \"More experimental results using synthetic data and behavior cloning scenarios in MuJoCo environments where the demonstrations are collected and mixed from both expert and adversarial policies as well as detailed experimental settings can be found in the supplementary material.\"\n2. \"The paper does not provide a direct comparison of the robustness of density estimation and mixture of classifiers to outliers.\" -- cites: E1 (Section 4.1): quote \"More experimental results using synthetic data and behavior cloning scenarios in MuJoCo environments where the demonstrations are collected and mixed from both expert and adversarial policies as well as detailed experimental settings can be found in the supplementary material.\"\n\nCited evidence:\n[E1] (text, Section 4.1, page 7): outliers. More experimental results using synthetic data and behavior cloning scenarios in MuJoCo environments where the demonstrations are collected and mixed from both expert and adversarial policies as well as detailed experimental settings can be found in the supplementary material. Synthetic Data In order to evaluate the robustness of the proposed method, we use three different 1 -D target functions. Particularly, we use the following target functions: cosexp , linear , and step functions as shown in Figure 6(d) - 6(f) , respectively, and collected 1 , 000 points per each function while replacing a certain portion of outputs to random values uniformly sampled between − 1 . 5 and 2 . 5 . We compared our proposed method with a mixture density network (MDN) [ 38 ] and fully connected layers with an L 2 -loss (MLP) and a robust loss (Robust) proposed in [ 21 ]. We use three-layers with 64 units and ReLU activations, and for both the proposed method and an MDN, ﬁve mixtures are used."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence does not directly compare the robustness of density estimation and mixture of classifiers to outliers. Instead, it mentions a comparison with a mixture density network (MDN) and fully connected layers with an L2-loss (MLP) and a robust loss (Robust) proposed in [21]."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence does not directly compare the robustness of density estimation and mixture of classifiers to outliers. Instead, it mentions a comparison with a mixture density network (MDN) and fully connected layers with an L2-loss (MLP) and a robust loss (Robust) proposed in [21]."
+   }
+  ]
+ }
+}

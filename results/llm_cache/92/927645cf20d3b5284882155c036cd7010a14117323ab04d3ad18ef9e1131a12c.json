@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 122,
+  "total_tokens": 192,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between an \"agent-in-place\" action and a generic action category?\nSub-goals:\n1. [text] What is the difference between an 'agent-in-place' action and a generic action category?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a specific definition or explanation of 'agent-in-place' actions versus generic action categories, which can be found within the text of the scientific paper.",
+  "tool": "text",
+  "query": "What is the difference between an 'agent-in-place' action and a generic action category?"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 117,
+  "prompt_tokens": 1016,
+  "total_tokens": 1133,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method appears to be most robust to the presence of outliers in the training data?\nSub-questions:\n1. [text] Which method appears to be most robust to the presence of outliers in the training data?\nEvidence:\nE1 [text, Section 2, page 2]: tions for classiﬁcation were studied [ 32 ], with the results showing that the mean absolute value of error is inherently robust to label noise. In other work [ 21 ], a robust loss function for deep regression tasks was proposed using Tukey’s biweight function with the median absolute deviation of the residuals. The last group focusses on using implicit or explicit regularization methods while training. Adding small label noises while training is known to be beneﬁcial to training, as it can be regarded as an effective regularization method [ 23 , 24 ]. Similar methods have been proposed to tackle noisy outputs. A bootstrapping method [ 22 ] which trains a neural network with a convex combination of the output of the current network and the noisy target was proposed. [ 25 ] proposed DisturbLabel, a simple method that randomly replaces a percentage of the labels with incorrect values for each iteration. Mixing both input and output data was also proposed [ 26 , 27 ]. One study [ 27 ] considered the image recognition problem under label noise and the other [ 26 ] focused on a sound recognition problem. The temporal ensemble was proposed in [ 30 ] where an unsupervised loss term of ﬁtting the output of an augmented input to the augmented target updated with an exponential moving average. [ 29 ] extends the temporal ensemble in [ 30 ] by introducing a consistency cost function that minimizes the distance between the weights of the student model and the teacher model. [ 28 ] presen ...\nE2 [text, Section 2, page 2]: Recently, robustness in deep learning has been actively studied [ 6 ] as deep neural networks are being applied to diverse tasks involving real-world applications such as autonomous driving [ 7 ] or medical diagnosis [ 8 ] where a simple malfunction can have catastrophic results [ 9 ]. Existing work for handing noisy training data can be categorized into four groups: small-loss tricks [ 10 – 13 ], estimating label corruptions [ 14 – 19 ], using robust loss functions [ 20 , 21 ], and explicit and implicit regularization methods [ 22 – 30 ]. Our proposed method is mostly related to the robust loss function approach but cannot fully be categorized into this group in that we present a novel architecture, a mixture of correlated densities network block, for achieving robustness based on the correlation estimation. First of all, the small-loss tricks selectively focus on training instances based on a certain criterion, such as having small cost values [ 12 ]. [ 13 ] proposed a meta-algorithm for tackling the noisy label problem by training two networks only when the predictions of the two networks disagree, where selecting a proper network from among the two networks can be done using an additional clean dataset. [ 11 ] reweighs the weight of each training instance using a small amount of clean validation data. MentorNet [ 10 ] concentrated on the training of an additional neural network, which assigns a weight to each instance of training data to supervise the training of a base n ...\nE3 [text, Section 4.1, page 7]: Boston Housing Dataset A Boston housing price dataset is used to check the robustness of the proposed method. We compare our method with standard feedforward networks using four different loss functions: standard L 2 -loss, L 1 -loss which is known to be robust to outliers, a robust loss (RL) function proposed in [ 21 ], and a leaky robust loss (LeakyRL) function where the results are shown in Table 5 . Implementation details can be found in the supplementary material."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Tukey’s biweight function with the median absolute deviation of the residuals"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to determine which method is most robust to outliers in the training data. The text discusses various methods but does not explicitly state which one is the most robust based on the given evidence.",
+  "sufficient": false
+ }
+}

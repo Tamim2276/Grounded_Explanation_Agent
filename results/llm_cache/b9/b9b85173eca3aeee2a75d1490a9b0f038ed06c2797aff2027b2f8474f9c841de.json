@@ -1,0 +1,77 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 466,
+  "prompt_tokens": 1167,
+  "total_tokens": 1633,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best overall on VQA-2014val, and how does its performance compare to human performance on the same dataset?\nEvidence:\n[E1] (text, Section Table 4, page 8): Table 4: Accuracy (%) on the validation set in VQA. Method Orig IoU QoU IoU +QoU All MLP-A 31.2 39.9 45.7 31.2 27.4 MLP-IA 42.0 39.8 55.1 34.1 28.7 MLP-QA 58.0 84.7 55.1 54.4 50.0 MLP-IQA 64.6 85.2 65.4 63.7 58.9 HieCoAtt∗ 63.0 - - 63.7 - Attntion∗ 66.0 - - 66.7 - Human 88.5† - - 89.0 - Random 5.6 25.0 25.0 14.3 4.2 ∗: based on our implementation or modification †: taken from (Antol et al., 2015)\n[E2] (text, Section E, page 15): As mentioned in Sect. 5.2 of the main text, we provide details on user studies. Fig. 6 shows our user interface. We perform the studies using Amazon Mechanic Turk (AMT) on Visual7W ( Zhu et al. , 2016 ), VQA ( Antol et al. , 2015 ) and Visual Genome (VG) ( Krishna et al. , 2017 ). We mainly evaluate on our IoU-decoys and QoUdecoys (combined together). For each dataset, we randomly sample 1,000 image-question-target triplets together with the corresponding IoU-decoys and QoU-decoys to evaluate human performance. For each of these triplets, three workers are assigned to select the most correct candidate answer according to the image and the question. We compute the average accuracy of these workers and report them in Table 3, 4 and 5 of the main text and Table 7 . We also conduct human evaluation using the Orig decoys of Visual7W so as to investigate the difference between human-generated and automatically generated decoys. We also study how humans will perform given only partial information (i.e., images + candidate answers or questions + candidate answers), again using the Orig decoys of Visual7W. The corresponding interfaces are shown in Fig. 7 and 8 . For these studies, we use the same set of 1,000 triplets used to evaluate our created decoys for fair comparison. We make sure that no worker works on the same triplet across the four studies on Visual7W. Results are reported in Table 1 of the main text.\n[E3] (text, Section 5.3, page 8): it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 )."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Attention method performs best overall on VQA-2014val with an accuracy of 66.7% on the combined IoU +QoU-decoys.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Attention∗ 66.0 - - 66.7 -"
+     }
+    ]
+   },
+   {
+    "text": "The human performance on VQA-2014val is 89.0% on the combined IoU +QoU-decoys.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Human 88.5† - - 89.0 -"
+     }
+    ]
+   },
+   {
+    "text": "The Attention method outperforms MLP-IQA by 3% on the combined IoU +QoU-decoys.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Attention∗ 66.0 - - 66.7 -"
+     },
+     {
+      "evidence": "E1",
+      "quote": "MLP-IQA 64.6 85.2 65.4 63.7 58.9"
+     }
+    ]
+   },
+   {
+    "text": "The performance of the Attention method is 20.3% lower than human performance on the combined IoU +QoU-decoys.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Attention∗ 66.0 - - 66.7 -"
+     },
+     {
+      "evidence": "E1",
+      "quote": "Human 88.5† - - 89.0 -"
+     }
+    ]
+   }
+  ]
+ }
+}

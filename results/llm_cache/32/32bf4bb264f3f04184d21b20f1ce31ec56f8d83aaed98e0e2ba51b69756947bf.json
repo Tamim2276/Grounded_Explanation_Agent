@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 178,
+  "total_tokens": 244,
+  "prompt_tokens_details": {
+   "cached_tokens": 106
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the number of classes affect the setup and online time for the Softmax?\nSub-goals:\n1. [text] How does the number of classes affect the setup and online time for the Softmax?\nAlready tried: sub-goal 1 with text\nStill missing: The specific effect of the number of classes on the setup and online time for the Softmax is not detailed in the provided evidence. The evidence only mentions that the runtime cost and communication overhead grow with the number of classes, but it does not specify the exact effect on the setup and在线"
+  }
+ ],
+ "answer": {
+  "reason": "The evidence provided does not specify the exact effect of the number of classes on the setup and online time for the Softmax.",
+  "tool": "text",
+  "query": "How does the number of classes affect the setup and online time for the Softmax?"
+ }
+}

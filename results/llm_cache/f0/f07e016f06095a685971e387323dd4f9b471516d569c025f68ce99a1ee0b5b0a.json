@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 190,
+  "total_tokens": 262,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The `SubsetGate` function is not explicitly defined or described in the provided evidence.\" -- cites: E3 (Section 5.3): quote \"Listing 4: Function description of our max pooling and ReLU.\"\n\nCited evidence:\n[E3] (text, Section 5.3, page 10): Listing 4: Function description of our max pooling and ReLU."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence only mentions a function description for max pooling and ReLU, not the `SubsetGate` function. Therefore, the claim is not supported by the evidence."
+   }
+  ]
+ }
+}

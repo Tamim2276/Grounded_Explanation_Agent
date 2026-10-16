@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 83,
+  "prompt_tokens": 169,
+  "total_tokens": 252,
+  "prompt_tokens_details": {
+   "cached_tokens": 96
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic has the highest internal coherence value?\nSub-goals:\n1. [text] Which topic has the highest internal coherence value?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The internal coherence values for the other topics are not provided in the evidence. The question asks for the topic with the highest internal coherence value, but the evidence only provides information about a specific model's performance on the 20 newsgroups dataset. Therefore, the answer to the '"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for the topic with the highest internal coherence value, but the evidence only provides information about a specific model's performance on the 20 newsgroups dataset. Therefore, the answer to the question cannot be derived from the given evidence.",
+  "tool": "text",
+  "query": "Which topic has the highest internal coherence value?"
+ }
+}

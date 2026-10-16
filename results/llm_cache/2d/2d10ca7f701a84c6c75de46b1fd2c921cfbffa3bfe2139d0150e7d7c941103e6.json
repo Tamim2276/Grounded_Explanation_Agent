@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 166,
+  "total_tokens": 225,
+  "prompt_tokens_details": {
+   "cached_tokens": 102
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the sequential and recurrent generation schemes?\nSub-goals:\n1. [text] What is the difference between the sequential and recurrent generation schemes?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The difference between the sequential and recurrent generation schemes is not explicitly stated in the evidence provided. The evidence describes the differences between the sequential and frame-to-frame schemes, but the recurrent scheme is not directly compared to the sequential scheme in the given."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence provided does not directly compare the sequential and recurrent generation schemes, so a text search is needed to find the relevant information.",
+  "tool": "text",
+  "query": "difference between the sequential and recurrent generation schemes"
+ }
+}

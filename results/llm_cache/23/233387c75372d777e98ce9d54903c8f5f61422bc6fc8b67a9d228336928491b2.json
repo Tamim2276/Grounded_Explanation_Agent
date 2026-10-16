@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 87,
+  "prompt_tokens": 565,
+  "total_tokens": 652,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Concept Interaction Graph (CIG) is a weighted graph where each vertex represents a concept, which is a keyword or a set of highly correlated keywords.\" -- cites: E2 (Section 2): quote \"Given a document D, a CIG is a graph G D, where each vertex in G D is called a concept, which is a keyword or a set of highly correlated keywords in document D.\"\n\nCited evidence:\n[E2] (text, Section 2, page 2): In this section, we present our Concept Interaction Graph (CIG) to represent a document as an undirected weighted graph , which decomposes a document into subsets of sentences, each subset focusing on a different concept . Given a document D , a CIG is a graph G D , where each vertex in G D is called a concept , which is a keyword or a set of highly correlated keywords in document D . Each sentence in D will be attached to the single concept vertex that it is the most related to, which most frequently is the concept the sentence mentions. Hence, vertices will have their own sentence sets, which are disjoint. The weight of the edge between a pair of concepts denotes how much the two concepts are related to each other and can be determined in various ways. As an example, Fig. 1 illustrates how we convert a document into a Concept Interaction Graph. We can extract keywords Rick , Morty , Summer , and Candy Planet from the document using standard keyword extraction algorithms, e.g., TextRank ( Mihalcea and Tarau , 2004 ). These keywords are further clustered into three concepts, where each concept is a subset of highly correlated keywords. After grouping keywords into concepts, we attach each sentence in the document to its most related concept vertex. For example, in Fig. 1 , sentences 1 and 2 are mainly talking about the relationship between Rick and Morty , and are thus attached to the concept ( Rick , Morty ). Other sentences are attached to vertices in a similar way. The attachment of sentences to concepts naturally dissects the original document into multiple disjoint sentence subsets. As a result, we have represented the original document with a graph of key concepts, each with a sentence subset, as well as"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence from E2 (Section 2) explicitly states that a CIG is a graph where each vertex represents a concept, which is a keyword or a set of highly correlated keywords in the document D. This matches the claim exactly."
+   }
+  ]
+ }
+}

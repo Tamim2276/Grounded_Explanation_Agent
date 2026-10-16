@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 228,
+  "prompt_tokens": 862,
+  "total_tokens": 1090,
+  "prompt_tokens_details": {
+   "cached_tokens": 736
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset?\nEvidence:\n[E1] (text, Section Table 8, page 8): Table 8. Answering accuracy for 100 questions sampled from VQA v2 dataset (on terms with visual estimators in UnCoRd). Method Yes/No WH Overall Pythia [85] 90.0 68.3 77.0 UnCoRd-VG-E 97.5 88.3 92.0 e 8. Answering accuracy for 100 questions sampled\n[E2] (text, Section Table 7, page 7): Table 7. Answering accuracy for 100 questions outside the VQA v2 domain (including quantiﬁers, comparisons, multiple relation chains and multiple relations and properties) on COCO images. Method Yes/No WH Overall Pythia [85] 56.0 14.0 35.0 UnCoRd-VG-E 88.0 64.0 76.0 7. Answering accuracy for 100 questions outside the\n[E3] (text, Section 4.1, page 8): also gives the method some capacity to explain its answers and suggest alternatives when question is not grounded in the image. Based on this approach, our answering system achieves near perfect results on a challenging dataset, without using any question-answer examples. We have demonstrated that question representation and answering capabilities can be extended outside the scope of the data used in training, preserving good results for the original domain. Substantial work is required to obtain a system that will be able to perform well on entirely general images and questions. The main immediate bottleneck is obtaining question-to-graph mapping with general representation capabilities for a broad range of questions. Question graph representation may also be enhanced to support questions with more complex logic, as well as extending the scope of the supported visual categories ( e.g . global scene types). Any general VQA requires vast estimation capabilities, as any visual category can be queried. In UnCoRd they are modularly incremented and automatically integrated with existing questions. Additional basic areas that current schemes, including ours, have only begun to address, are the use of external, non-visual knowledge in the answering process, and the composition of detailed, informative answers, integrating the language and visual aspects of VQA.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The UnCoRd-VG-E method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset, with an accuracy of 92.0%.\": the number 100 is in no citation\n- \"The Pythia method has an overall accuracy of 77.0% for answering questions about images on the 100 questions sampled from VQA v2 dataset.\": the number 100 is in no citation"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The UnCoRd-VG-E method has the highest overall accuracy for answering questions about images on the 100 questions sampled from VQA v2 dataset, with an accuracy of 92.0%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "UnCoRd-VG-E 97.5 88.3 92.0"
+     }
+    ]
+   },
+   {
+    "text": "The Pythia method has an overall accuracy of 77.0% for answering questions about images on the 100 questions sampled from VQA v2 dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Pythia [85] 90.0 68.3 77.0"
+     }
+    ]
+   }
+  ]
+ }
+}

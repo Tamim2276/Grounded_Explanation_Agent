@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 306,
+  "prompt_tokens": 1547,
+  "total_tokens": 1853,
+  "prompt_tokens_details": {
+   "cached_tokens": 1343
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the novel class and the top-3 most similar base classes?\nEvidence:\n[E1] (text, Section 4.3, page 7): Here the similarity of two classes is calculated by Equation 1 . Intuitively, if a new class is similar with the top- K base classes, while dissimilar with the remained base classes, its Similarity Ratio will be high, meaning that this new class can beneﬁt more from the base classes. For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10 . The dependent variable indicates the success degree of generalization. And we set K = 10 . We plot the similarity ratio and relative improvement of all novel classes in Figure 3 . We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% conﬁdence interval for the correlation coefﬁcient range between 0 . 124 and 0 . 169 and R 2 = 0 . 45 , showing that the SR ratio could explain 45% of the dependent variable.\n[E2] (text, Section 4.3, page 7): The results fully demonstrate that our method is consistent with the notion of human-like learning: First, we can learn a new concept faster if it is more similar to some previously learned concepts. ( i.e. Leading to the increase of the numerator of the Similarity Ratio). Second, we can learn a new concept faster if we have learned more diversiﬁed concepts ( i.e. Leading to the decrease of the denominator of the Similarity Ratio). This principle can also be used to guide the generalization process and help to determine whether a new class is ﬁt for generalization. Finally, we validate whether the generalization process is explainable. Here we randomly select 5 novel classes, and for each novel class, we visualize the top-3 base classes that are most similar with the novel class in the visual analogy graph, as shown in Figure 4 . In our method, these base classes have a large impact on the formation of the new classiﬁer. We can see that the top-3 base classes are visually correlated with the novel classes, and the generalization process can be very intuitive and explainable.\n[E3] (text, Section 4.1, page 6): Logistic Regression (LR) Common logistic regression model on novel classes. In the setting of multi-class classiﬁcation, it becomes Softmax Regression. Note that LR is also equivalent to ﬁne-tune the last layer of AlexNet. Weighted Logistic Regression (Weighted-LR) Here we use the weighted average of the base classiﬁers’ parameters as the classiﬁcation parameters for a new class. The weights are calculated by an L 2 -normalized cosine similarities between the features of the novel class and 10 most similar base classes. This method can also be regarded as a visual analogy approach, but the transferring process is heuristic. VAGER This is the VAGER algorithm without parameter reﬁnement step. VAGER(-Mapping) We directly learn the embedding by Equation 2 without the ﬁrst regression term. Then we use the above weighted-LR method in the embedding space instead of the original feature space. This method is used to evaluate the effectiveness of the mapping function. VAGER(-Embedding) We directly train a regression model from the original feature space to the classiﬁcation parameter space without the visual analogy graph embedding. This method is used to demonstrate the effectiveness of class node embedding over the visual analogy network.\n[E4] (text, Section Figure 3, page 7): Figure 3. Linear regression of AUC improvement on Similarity Ratio for all novel classes Category LR (No Transfer) VAGER (Transfer) Jeep 0.8034 0.9469 Zebra 0.8472 0.9393 Hen 0.7763 0.8398 Lemon 0.6854 0.9583 Bubble 0.7455 0.7041 Pineapple 0.7364 0.8623 Lion 0.8305 0.9372 Screen 0.7801 0.9056 Drum 0.6510 0.6995 Restaurant 0.7806 0.8787 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0 Similarity Ratio 0.1 0.0 0.1 0.2 0.3 AUC Increasing\n\nThese claims are already verified and kept:\n- The similarity of two classes is calculated by Equation 1.\n- The results fully demonstrate that our method is consistent with the notion of human-like learning.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The relationship between the novel class and the top-3 most similar base classes is positively correlated with the similarity ratio of the new class, as shown in Figure 3.\": support check: The evidence in E1 (Section 4.3) states: 'We plot the similarity ratio and relative improvement of all novel classes in Figure 3. We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% confidence interval for the correlation coefficient range between 0.124 and 0.169 and R² = 0.45, showing that the SR ratio could explain 45% of the dependent variable.' This evidence supports the claim that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, but it does not mention the top-3 most similar base classes. Therefore, the claim is not fully supported by the evidence.\n- \"The top-3 most similar base classes have a large impact on the formation of the new classifier, as shown in Figure 4.\": the number 4 is in no citation"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The relationship between the novel class and the top-3 most similar base classes is positively correlated with the similarity ratio of the new class, as shown in Figure 3.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "We plot the similarity ratio and relative improvement of all novel classes in Figure 3. We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% confidence interval for the correlation coefficient range between 0.124 and 0.169 and R² = 0.45, showing that the SR ratio could explain 45% of the dependent variable."
+     }
+    ]
+   },
+   {
+    "text": "The top-3 most similar base classes have a large impact on the formation of the new classifier, as shown in Figure 4.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "In our method, these base classes have a large impact on the formation of the new classifier. Then we use the above weighted-LR method in the embedding space instead of the original feature space. This method is used to evaluate the effectiveness of the mapping function."
+     }
+    ]
+   }
+  ]
+ }
+}

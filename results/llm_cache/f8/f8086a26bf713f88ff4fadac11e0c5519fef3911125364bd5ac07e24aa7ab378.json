@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 115,
+  "prompt_tokens": 909,
+  "total_tokens": 1024,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation is not explicitly stated in the provided evidence.\" -- cites: E1 (Section 4.3): quote \"Deciding on the number of workers per task is a trade-off between the desired quality and the budget.\"; E2 (Section Figure 3): quote \"As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing reliability, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement).\"; E3 (Section 4.3): quote \"Given a number of noisy workers, MACE outputs best estimates, outperforming simple majority votes. At least five workers are recommended for a crowdsourcing task, but how reliable is the output really? We hence collected 18 assignments per item and split them into two groups (9+9) based on their submission time.\"\n\nCited evidence:\n[E1] (text, Section 4.3, page 7): Figure 3 shows the Cohen’s κ agreement for stance annotation with respect to the crowd size computed by our method. As MACE also includes a threshold for keeping only the most conﬁdent predictions in order to beneﬁt precision, we tuned this parameter, too. Deciding on the number of workers per task is a trade-off between the desired quality and the budget. For example, reason span annotation is a harder task; however, the results for six workers are comparable to those for the expert annotations of Habernal and Gurevych ( 2017 ). 9\n[E2] (text, Section Figure 3, page 7): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement). 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds\n[E3] (text, Section 4.3, page 7): To strictly assess quality in the entire crowdsourcing process, we propose an evaluation method that enables ‘classic’ inter-annotator agreement measures for crowdsourcing, such as Fleiss’ κ or Krippendorff’s α . Applying κ and α directly to crowdsourced data has been disputed ( Passonneau and Carpenter , 2014 ). For estimating gold labels from the crowd, several models have been proposed; we rely on MACE ( Hovy et al. , 2013 ). Given a number of noisy workers, MACE outputs best estimates, outperforming simple majority votes. At least ﬁve workers are recommended for a crowdsourcing task, but how reliable is the output really? We hence collected 18 assignments per item and split them into two groups (9+9) based on their submission time. We then considered each group as an independent crowdsourcing experiment and estimated gold labels using MACE for each group, thus yielding two ‘experts from the crowd.’ Having two independent ‘experts’ from the crowd allowed us to compute standard agreement scores. We also varied the size of the sub-sample from each group from 1 to 9 by repeated random sampling of assignments. This revealed how the score varies with respect to the crowd size per ‘expert’."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence does not explicitly state the relationship between the number of workers per 'expert' and Cohen's kappa agreement for stance annotation. The evidence discusses the trade-off between quality and budget, and the choice of 5 annotators and a threshold of 0.95 for a task, but it does not provide a direct relationship between the number of workers and Cohen's kappa agreement."
+   }
+  ]
+ }
+}

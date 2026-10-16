@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 80,
+  "prompt_tokens": 165,
+  "total_tokens": 245,
+  "prompt_tokens_details": {
+   "cached_tokens": 108
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs the best when the number of shots is 50?\nSub-goals:\n1. [text] Which method performs the best when the number of shots is 50?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide a specific method or its performance for a shot number of 50. It only compares methods across different settings and does not specify the best method for 50 shots explicitly."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide a specific method or its performance for a shot number of 50. It only compares methods across different settings and does not specify the best method for 50 shots explicitly.",
+  "tool": "text",
+  "query": "Which method performs the best when the number of shots is 50?"
+ }
+}

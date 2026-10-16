@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 324,
+  "prompt_tokens": 867,
+  "total_tokens": 1191,
+  "prompt_tokens_details": {
+   "cached_tokens": 299
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The intra-warrant attention mechanism is shown in Figure 5. Only the attention vector for the warrant W 1 is shown; the attention vector for W 0 is constructed analogously.\" -- cites: E1 (Section Figure 5): quote \"Figure 5: Intra-warrant attention. Only the attention vector for the warrant W 1 is shown; the attention vector for W 0 is constructed analogously. Grey areas represent a modification with additional context.\"\n2. \"The intra-warrant attention mechanism is used in the more elaborated version of the neural model, as shown in Figure 5.\" -- cites: E3 (Section 5.2): quote \"Our more elaborated version used intra-warrant attention, as shown in Figure 5.\"\n3. \"The intra-warrant attention mechanism is designed to focus on the warrant itself rather than comparing it with another warrant.\" -- cites: E1 (Section Figure 5): quote \"Figure 5: Intra-warrant attention. Only the attention vector for the warrant W 1 is shown; the attention vector for W 0 is constructed analogously. Grey areas represent a modiﬁcation with additional context.\"\n4. \"The intra-warrant attention mechanism is part of a more complex model that includes context information, as shown in the figure.\" -- cites: E1 (Section Figure 5): quote \"Figure 5: Intra-warrant attention. Only the attention vector for the warrant W 1 is shown; the attention vector for W 0 is constructed analogously. Grey areas represent a modification with additional context.\"\n\nCited evidence:\n[E1] (text, Section Figure 5, page 9): Figure 5: Intra-warrant attention. Only the attention vector for the warrant W 1 is shown; the attention vector for W 0 is constructed analogously. Grey areas represent a modiﬁcation with additional context. \n[E3] (text, Section 5.2, page 9): To assess the complexity of computationally approaching argument reasoning comprehension, we carried out ﬁrst experiments with systems based on the following models. The simplest considered model was the random baseline , which chooses either of the candidate warrants of an instance by chance. As another baseline, we used a 4-gram Modiﬁed Kneser-Ney language model trained on 500M tokens (100k vocabulary) from the C4Corpus ( Habernal et al. , 2016 ). The effectiveness of language models was demonstrated by Rudinger et al. ( 2015 ) for the narrative cloze test where they achieved state-ofthe-art results. We computed log-likelihood of the candidate warrants and picked the one with lower score. 10 To speciﬁcally appoach the given task, we implemented two neural models based on a bidirectional LSTM. In the standard attention version, we encoded the reason and claim using a BiL- STM and provided it as an attention vector after max-pooling to LSTM layers from the two available warrants W 0 and W 1 (corresponding to W and AW , see below). Our more elaborated version used intra-warrant attention , as shown in Figure 5 . Both versions were also extended with the debate title and description added as context to the attention layer ( w/ context ). We trained the resulting four models using the ADAM optimizer, with heavy dropout (0.9) and early stopping (5 epochs), tuned on the development set. Input embeddings were pre-trained word2vec’s ( Mikolov et al. , 2013 ). We ran each model three times with random initializations."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section Figure 5) states that only the attention vector for the warrant W 1 is shown, and the attention vector for W 0 is constructed analogously. This supports the claim that only the attention vector for W 1 is shown and that the attention vector for W 0 is constructed analogously."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E3 (Section 5.2) states that the more elaborated version used intra-warrant attention, as shown in Figure 5. This supports the claim that the intra-warrant attention mechanism is used in the more elaborated version of the neural model."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence in E1 (Section Figure 5) does not provide information about the mechanism focusing on the warrant itself rather than comparing it with another warrant. The evidence only describes the attention vectors for W 1 and W 0 and their construction."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence in E1 (Section Figure 5) does not mention the inclusion of context information in the intra-warrant attention mechanism. The evidence only describes the attention vectors for W 1 and W 0 and their construction."
+   }
+  ]
+ }
+}

@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 343,
+  "prompt_tokens": 1580,
+  "total_tokens": 1923,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers) and how does its performance compare to the model that only uses answers?\nEvidence:\n[E1] (text, Section D.2, page 14): For both datasets, we conduct the same experiments as in Sect. 5.3 of the main text using the MLP-based models. As shown in Table 8 , we clearly see that with only answers being visible to the model (MLP-A), the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA). Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information. Results in Table 9 also shows a similar trend. These empirical observations meet our expectation and again verify the effectiveness of our proposed methods for creating decoys. Besides, we also perform a more in-depth experiment on VQA2, removing triplets with Yes/No as the target. We name this subset as VQA2 − . Table 10 shows the experimental results on VQA2 − . Comparing to Table 9 , we see that the overall performance for each model decreases as the dataset\n[E2] (text, Section E, page 15): As mentioned in Sect. 5.2 of the main text, we provide details on user studies. Fig. 6 shows our user interface. We perform the studies using Amazon Mechanic Turk (AMT) on Visual7W ( Zhu et al. , 2016 ), VQA ( Antol et al. , 2015 ) and Visual Genome (VG) ( Krishna et al. , 2017 ). We mainly evaluate on our IoU-decoys and QoUdecoys (combined together). For each dataset, we randomly sample 1,000 image-question-target triplets together with the corresponding IoU-decoys and QoU-decoys to evaluate human performance. For each of these triplets, three workers are assigned to select the most correct candidate answer according to the image and the question. We compute the average accuracy of these workers and report them in Table 3, 4 and 5 of the main text and Table 7 . We also conduct human evaluation using the Orig decoys of Visual7W so as to investigate the difference between human-generated and automatically generated decoys. We also study how humans will perform given only partial information (i.e., images + candidate answers or questions + candidate answers), again using the Orig decoys of Visual7W. The corresponding interfaces are shown in Fig. 7 and 8 . For these studies, we use the same set of 1,000 triplets used to evaluate our created decoys for fair comparison. We make sure that no worker works on the same triplet across the four studies on Visual7W. Results are reported in Table 1 of the main text.\n[E3] (text, Section 3.2, page 4): Machines ﬁnd shortcuts Table 1 summarizes the performance of the learning models, together with the human studies we performed on a subset of 1,000 triplets (c.f. Sect. 5 for details). There are a few interesting observations. First, in the row of “A” where only the candidate answers (and whether they are right or wrong) are used to train a learning model, the model performs signiﬁcantly better than random guessing and humans (52.9% vs. 25%) — humans will deem each of the answers equally likely without looking at both the image and the question! Note that in this case, the information i in eq. ( 1 ) contains nothing. The model learns the speciﬁc statistics of the candidate answers in the dataset and exploits those. Adding the information about the image (i.e., the row of “I+A”), the machine improves signiﬁcantly and gets close to the performance when all information is used (62.4% vs. 65.7%). There is a weaker correlation between the question and the answers as “Q+A” improves over “A” only modestly. This is expected. In the Visual7W dataset, the decoys are generated by human annotators as plausible answers to the questions without being shown the images — thus, many decoy answers do not have visual groundings. For instance, a question of “what animal is running?” elicits equally likely answers such as “dog”, “tiger”, “lion”, or “cat”, while an image of a dog running in the park will immediately rule out all 3 but the “dog”, see Fig. 1 for a similar example. Thus, the performance of “I+A” implies that many IQA triplets can be solved by object, attribute or concept detection on the image, without understanding the questions. This is indeed the case also for humans — humans can achieve 75.3% by considering “I+A” and not “Q”. Note that the difference between ma-\n[E4] (text, Section 3.2, page 4): chine and human on “I+A” are likely due to their difference in understanding visual information. Note that human improves signiﬁcantly from “I+A” to “I+Q+A” with “Q” added, while the machine does so only marginally. The difference can be attributed to the difference in understanding the question and correlating with the answers between the two. Since each image corresponds to multiple questions or have multiple objects, solely relying on the image itself will not work well in principle. Such difference clearly indicates that in the Visual QA model, the language component is weak as the model cannot fully exploit the information in “Q”, making a smaller relative improvement 5.3% (from 62.4% to 65.7%) where humans improved relatively 17.4%. Shortcuts are due to design deﬁciencies We probe deeper on how the decoy answers have impacted the performance of learning models. As explained above, the decoys are drawn from all plausible answers to a question, irrespective of whether they are visually grounded or not. We have also discovered that the targets (i.e., correct answers) are infrequently used as decoys."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The model that observes all three sources of information (images, questions, and answers) performs best on the VQAv2-2017 validation set.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Meanwhile, models that can observe either images and answers (MLP-IA) or questions and answers (MLP-QA) fail to predict as good as the model that observe all three sources of information."
+     }
+    ]
+   },
+   {
+    "text": "The model that only uses answers (MLP-A) performs significantly worse than the model that observes all three sources of information.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA)."
+     }
+    ]
+   },
+   {
+    "text": "The performance of the model that only uses answers is close to random, indicating poor performance.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "the performance is close to random (on the column of IoU +QoU-decoys), and far from observing all three sources of information (MLP-IQA)."
+     }
+    ]
+   }
+  ]
+ }
+}

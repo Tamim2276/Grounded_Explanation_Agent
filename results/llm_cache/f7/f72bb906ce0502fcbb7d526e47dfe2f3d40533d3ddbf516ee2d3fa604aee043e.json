@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 214,
+  "total_tokens": 276,
+  "prompt_tokens_details": {
+   "cached_tokens": 148
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy, and how does its performance differ between the two test sets?\nSub-goals:\n1. [text] Which model performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy?\n2. [text] How does its performance differ between the two test sets?\nAlready tried: sub-goal 1 with text, sub-goal 2 with text\nStill missing: The performance difference between the non-OOV and OOV test sets for BOSSNET is not explicitly stated in the provided evidence. Further analysis or additional evidence would be needed to determine how BOSSNET's performance differs between the two test sets."
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a comparison of performance between two specific test sets, which requires a search for explicit performance data.",
+  "tool": "text",
+  "query": "performance BOSSNET T3 T3-OOV per-dialog accuracy"
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 186,
+  "prompt_tokens": 777,
+  "total_tokens": 963,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The square hashing process works by mapping each edge to multiple buckets and storing it in the first empty one among them.\" -- cites: E3 (Section front): quote \"In this technique each edge is mapped to multiple buckets, and stored in the first empty one among them.\"\n2. \"The square hashing technique is motivated by the need to handle the skewness in node degrees, which leads to crowding in certain rows and columns of the adjacency matrix.\" -- cites: E2 (Section A): quote \"We further notice the skewness in node degrees. In the real-world graphs, node degrees usually follow the power law distribution. In other words, a few nodes have very high degrees, while most nodes have small degrees.\"\n\nCited evidence:\n[E2] (text, Section A, page 6): In the basic version, an edge is pushed into buffer B if and only if its mapped position in the matrix X has been occupied. The most intuitive solution is to ﬁnd another bucket for it. Then where to ﬁnd an empty bucket? We further notice the skewness in node degrees. In the real-world graphs, node degrees usually follow the power law distribution. In other words, a few nodes have very high degrees, while most nodes have small degrees. Consider a node v that has A out-going edges in the graph sketch G h . For a m × m adjacency matrix X in GSS (see Deﬁnition 5), there are at least A − m edges that should be inserted into buffer B , as these A edges must be mapped to the same row (in X ) due to the same source vertex v . These high degree nodes lead to crowed rows and result in most left-over edges in buffer B . On the other hand, many other rows are uncrowded. We have the same observation for columns of matrix X . Is it possible to make use of the unoccupied positions in uncrowded rows/columns? It is the motivation of our ﬁrst technique, called square hashing .\n[E3] (text, Section front, page 2): In GSS, the memory cost and update speed are greatly inﬂuenced by the size of the buffer B . As the buffer takes additional memory, and update speed in an adjacency list is linear with its size. In order to restrict its size, we propose a technique called square hashing. In this technique each edge is mapped to multiple buckets, and stored in the ﬁrst empty one among them. This enlarges the chance that an edge ﬁnds an empty bucket. Besides, a few nodes in a sparse graph may still have very high degrees. If one node emits a lot of edges, these edges have high probability to evict each other when stored in one row. To solve this problem, In square hashing edges with source node v are no longer mapped to one row, but r rows, sharing memory with other source nodes. The higher degree a node has, the more buckets it may take. It is similar in the view of columns and destination nodes. This helps to ease the congestion brought by the skewness in node degrees. Experiments show that after this modiﬁcation the buffer only stores less than 0 . 01% of the edges in the graph stream."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence from E3 (Section front) states: 'In this technique each edge is mapped to multiple buckets, and stored in the first empty one among them.' This matches the claim exactly."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The cited evidence from E2 (Section A) discusses the skewness in node degrees and how it leads to crowding in certain rows and columns of the adjacency matrix. However, the claim states that the square hashing technique is motivated by the need to handle the skewness in node degrees, which is not directly supported by the evidence. The evidence does not explicitly state that the motivation is to handle the skewness in node degrees."
+   }
+  ]
+ }
+}

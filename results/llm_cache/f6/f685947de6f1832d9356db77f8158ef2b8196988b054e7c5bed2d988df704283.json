@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 173,
+  "total_tokens": 234,
+  "prompt_tokens_details": {
+   "cached_tokens": 131
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average number of answers per question differ between the training and development sets? What might be a possible explanation for this difference?\nSub-goals:\n1. [text] How does the average number of answers per question differ between the training and development sets?\n2. [text] What might be a possible explanation for this difference?\nAlready tried: sub-goal 1 with text\nStill missing: The explanation for the difference in the average number of answers per question between the training and development sets is not provided in the evidence items."
+  }
+ ],
+ "answer": {
+  "reason": "The explanation for the difference in the average number of answers per question between the training and development sets is not provided in the evidence items.",
+  "tool": "text",
+  "query": "What might be a possible explanation for this difference?"
+ }
+}

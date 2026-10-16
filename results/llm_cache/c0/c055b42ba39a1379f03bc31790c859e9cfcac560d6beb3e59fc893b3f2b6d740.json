@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 190,
+  "total_tokens": 256,
+  "prompt_tokens_details": {
+   "cached_tokens": 116
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the GDU and HFLU modules in the FAKEDETECTOR framework?\nSub-goals:\n1. [text] What is the role of the GDU and HFLU modules in the FAKEDETECTOR framework?\nAlready tried: sub-goal 1 with text\nStill missing: The role of the GDU and HFLU modules in the FAKEDETECTOR framework is described, but the specific contributions or functions of these modules are not detailed in the provided evidence. The evidence only describes their structure and inputs/outputs, not their roles or functions within the framework."
+  }
+ ],
+ "answer": {
+  "reason": "To find the specific roles and functions of the GDU and HFLU modules within the FAKEDETECTOR framework.",
+  "tool": "text",
+  "query": "role of GDU and HFLU modules in FAKEDETECTOR framework"
+ }
+}

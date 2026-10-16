@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 118,
+  "prompt_tokens": 834,
+  "total_tokens": 952,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic is most likely to be associated with a pro-immigration stance?\nSub-questions:\n1. [text] Which topic is most likely to be associated with a pro-immigration stance?\nEvidence:\nE1 [text, Section Table 3, page 9]: Table 3: Top words for topics (left) and the corresponding anti-immigration (middle) and pro-immigration (right) variations when treating tone as a covariate, with interactions. Base topics (each row is a topic) Anti-immigration interactions Pro-immigration interactions ice customs agency enforcement homeland criminal customs arrested detainees detention center agency population born percent americans english jobs million illegals taxpayers english newcomers hispanic city judge case court guilty appeals attorney guilty charges man charged asylum court judge case appeals patrol border miles coast desert boat guard patrol border agents boat died authorities desert border bodies licenses drivers card visa cards applicants foreign sept visas system green citizenship card citizen apply island story chinese ellis international smuggling federal charges island school ellis english story guest worker workers bush labor bill bill border house senate workers tech skilled farm labor benefits bill welfare republican state senate republican california gov state law welfare students tuition\nE2 [text, Section 4.3, page 8]: Tone as a label. We ﬁrst consider using the annotations as a label , and train a joint model to infer topics relevant to the tone of the article (pro- or anti-immigration). Figure 2 shows a set of topics learned in this way, along with the predicted probability of an article being pro-immigration conditioned on the given topic. All topics are coherent, and the predicted probabilities have strong face validity, e.g., “arrested charged charges agents operation” is least associated with pro-immigration. Tone as a covariate. Next we consider using tone as a covariate , and build a model using both tone and tone-topic interactions. Table 3 shows a set of topics learned from the immigration data, along with the most highly-weighted words in the corresponding tone-topic interaction terms. As can be seen, these interaction terms tend to capture different frames (e.g., “criminal” vs. “detainees”, and “illegals” vs. “newcomers”, etc). Combined model with temporal metadata. Finally, we incorporate both the tone annotations and the year of publication of each article, treating the former as a label and the latter as a covariate. In this model, we also include an embedding matrix, W c , to project the one-hot year vectors down to a\nE3 [text, Section Figure 2, page 8]: Figure 2: Topics inferred by a joint model of words and tone, and the corresponding probability of pro- immigration tone for each topic. A topic is repre- sented by the top words sorted by word probability throughout the paper. 0 1 p(pro-immigration | topic) arrested charged charges agents operation state gov benefits arizona law bill bills bush border president bill republicans labor jobs workers percent study wages asylum judge appeals deportation court visas visa applications students citizenship boat desert died men miles coast haitian english language city spanish community"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Immigration"
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "No further evidence is provided to answer the sub-question about which specific topic is most likely associated with a pro-immigration stance. The evidence provided discusses topics in general but does not specify a particular topic as being most associated with a pro-immigration stance. Additional,",
+  "sufficient": false
+ }
+}

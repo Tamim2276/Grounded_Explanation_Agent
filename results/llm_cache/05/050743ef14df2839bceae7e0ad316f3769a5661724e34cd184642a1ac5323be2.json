@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 98,
+  "prompt_tokens": 214,
+  "total_tokens": 312,
+  "prompt_tokens_details": {
+   "cached_tokens": 138
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5)?\nSub-goals:\n1. [text] Which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5)?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide specific information about which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5). It only mentions that GBI improves the accuracy of state-of-the-art networks and that it satisfies a large ("
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not provide specific information about which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5). It only mentions that GBI improves the accuracy of state-of-the-art networks and that it satisfies a large",
+  "tool": "text",
+  "query": "inference method highest F1 score failure set across all three networks"
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 9.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 407,
+  "prompt_tokens": 2430,
+  "total_tokens": 2837,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?\nEvidence:\n[E1] (text, Section Table 15, page 21): Table 15: Test accuracies on the Large Movie Review dataset with different corruption probabilities. Corruption p 0% 10% 20% 30% 40% ChoiceNet 79.43 79.50 78.66 77.1 73.98 Mixup 79.77 78.73 77.58 75.85 69.63 MLP 79.04 77.88 75.70 69.05 62.83 VAT 76.40 72.50 69.20 65.20 58.30 B.3. Ablation Study on MNIST Above figures show the results of ablation study when varying the number of mixture K and the expected measurement variance τ −1. Left two figures indicate test accuracies using the MNIST dataset where 90% of train labels are randomly shuffled and right two figures are RMSEs using a synthetic one-dimensional regression problem in Section 4.1. We observe that having bigger K is beneficial to the classification accuracies. In fact, the results achieved here with K equals 15 and 20 are better than the ones reported in the submitted manuscript. τ −1 does not affect much unless it is exceedingly large. 21\n[E2] (text, Section Table 11, page 17): Table 11: Test accuracies on the MNIST dataset with corrupt label. Corruption p Configuration Best Last 50% ConvNet 97.1 95.9 ConvNet+Mixup 98.0 97.8 ChoiceNet 99.1 99.0 80% ConvNet 90.6 79.0 ConvNet+Mixup 95.3 95.1 ChoiceNet 98.3 98.3 90% ConvNet 76.1 54.1 ConvNet+Mixup 78.6 42.4 ChoiceNet 95.9 95.2 95% ConvNet 50.2 31.3 ConvNet+Mixup 53.2 26.6 ChoiceNet 84.5 66.0 3. Random permutation experiments where we replace the percentage of the labels based on the label permutation matrix where we follow the random permutation in [22]. The best and final accuracies on the intact test dataset for biased label experiments are shown in Table 10. In all corruption rates, ChoiceNet achieves the best performance compared to two baseline methods. The learning curves of the biased label experiments are depicted in Figure 11. Particularly, we observe unstable learning curves regarding the test accuracies of ConvNet and Mixup. As training accuracies of such methods show stable learning behaviors, this can be interpreted as the networks are simply memorizing noisy labels. In the contrary, the learning curves of ChoiceNet show stable behaviors which clearly indicates the robustness of the proposed method. The experimental results and learning curves of the random shuffle experiments are shown in Table 11 and Figure 12. The convolutional neural networks trained with Mixup show robust learning behaviors when 80% of the training labels are uniformly shuffled. However, given an extremely noisy dataset (90% and 95%), the test accuracies of baseline methods decrease as the number of epochs increases. ChoiceNet shows outstanding robustness to the noisy dataset in that the test accuracies do not drop even after 50 epochs for the cases where the corruption rates are below 90%. For the 95% case, however, over-fitting is occured in all methods. Table 12 and Figure 13 illustrate the results of the random permutation experiments. Specifically, we change the labels of randomly selected training data using a permutation rule: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) →(7, 9, 0, 4, 2, 1, 3, 5, 6, 8) following [22]. We argue that this setting is more arduous than the random shuffle case in that we are intentionally changing the labels based on predefined permutation rules. CIFAR-10 When using the CIFAR-10 dataset, we followed two different settings from [27] and [12] for more comprehensive comparisons. Note that the setting in [12] incorporates both symmetric and asymmetric noises. For the first scenari ...\n[E3] (text, Section Table 9, page 16): Table 9: Test accuracies on the MNIST datasets with corrupt labels. Corruption p Configuration Best Last 50% ConvNet 95.4 89.5 ConvNet+Mixup 97.2 96.8 ConvNet+CN 99.2 99.2 MDN 97.7 97.7 80% ConvNet 86.3 76.9 ConvNet+Mixup 87.2 87.2 ConvNet+CN 98.2 97.6 MDN 85.2 78.7 90% ConvNet 76.1 69.8 ConvNet+Mixup 74.7 74.7 ConvNet+CN 94.7 89.0 MDN 61.4 50.2 95% ConvNet 72.5 64.4 ConvNet+Mixup 69.2 68.2 ConvNet+CN 88.5 80.0 MDN 31.2 25.9 MNIST For MNIST experiments, we randomly shuffle a percentage of the labels with the corruption probability p from 50% to 95% and compare median accuracies after five runs for each configuration following the setting in [27]. We construct two networks: a network with two residual blocks [49] with 3 × 3 × 64 convolutional layers followed by a fully-connected layer with 256 output units (ConvNet) and ChoiceNet with the same two residual blocks followed by the MCDN block (ConvNet+CN). We train each network for 50 epochs with a fixed learning rate of 1e-5. We train each network for 300 epochs with a minibatch size of 256. We begin with a learning rate of 0.1, and it decays by 1/10 after 150 and 225 epochs. We apply random horizontal flip and random crop with 4−pixel-padding and use a weight decay of 0.0001 for the baseline network as [49]. The classification results are shown in Table 9 where ChoiceNet consistently outperforms ConvNet and ConvNet+Mixup by a significant margin, and the difference between the accuracies of ChoiceNet and the others becomes more clear as the corruption probability increases. Here, we also present additional experimental results using the MNIST dataset on following three different scenarios: 1. Biased label experiments where we randomly assign the percentage of the training labels to label 0. 2. Random shuffle experiments where we randomly replace the percentage of the training labels from the uniform multinomial distribution. 16\n[E4] (text, Section 4, page 6): In this section, we validate the performance of ChoiceNet on both regression problems in Section B.1 and classiﬁcation problems in Section B.2 where we mainly focus on evaluating the robustness of the proposed method.\n[E5] (text, Section 3.4, page 6): Here, we provide synthetic examples in both regression and classiﬁcation to illustrate how the proposed method can be used to robustly learn the underlying target distribution given a noisy training dataset. Regression Task We ﬁrst focus on how the proposed method can distinguish between the target distribution and noise distributions in a regression task and show empirical evidence that our method can achieve this by estimating the target distribution and the correlation of noise distribution simultaneously. We train on two datasets with the same target function but with different types of corruptions by replacing 50% of the output values whose input values are within 0 to 2 : one uniformly sampled from − 1 to 3 and the other from a ﬂipped target function as shown in Figure 4(a) and 4(c) . Throughout this experiment, we set K = 2 for better visualization. As shown in Figure 4 , ChoiceNet successfully estimates the target function with partial corruption. To further understand how ChoiceNet works, we also plot the correlation of each mixture at each input with different colors. When using the ﬁrst dataset where we ﬂip the outputs whose inputs are between 0 and 2 , the correlations of the second mixture at the corrupt region becomes − 1 (see Figure 4(b) ). This is exactly what we wanted ChoiceNet to behave in that having − 1 correlation will simply ﬂip the output. In other words, the second mixture takes care of the noisy (ﬂipped) data by assigning − 1 correlation while the ﬁrst mixture component reserved for the target distribution is less affected by the noisy training data.\n[E6] (text, Section 3.4, page 6): When using the second dataset, the correlations of the second mixture at the corrupt region are not − 1 but decreases as the input increase from 0 to 2 (see Figure 4(d) ). Intuitively speaking, this is because the average deviations between the noisy output and the target output increases as the input increases. Since decreasing the correlation from 1 to 0 will increase the output variance as shown in ( 6 ), the correlation of the second mixture tends to decrease as the input increase between 0 to 2 . This clearly shows the capability of ChoiceNet to distinguish the target distribution from noisy distributions."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ChoiceNet performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "ChoiceNet 79.43 79.50 78.66 77.1 73.98"
+     }
+    ]
+   },
+   {
+    "text": "As the corruption level increases, ChoiceNet's performance decreases but remains the best among the methods tested.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "ChoiceNet 79.43 79.50 78.66 77.1 73.98"
+     }
+    ]
+   },
+   {
+    "text": "The performance of ChoiceNet degrades more slowly than other methods as the corruption level increases.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "ChoiceNet 79.43 79.50 78.66 77.1 73.98"
+     }
+    ]
+   },
+   {
+    "text": "The performance of ChoiceNet is not directly compared to other methods in the Large Movie Review dataset with 0% corruption.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "ChoiceNet 79.43 79.50 78.66 77.1 73.98"
+     }
+    ]
+   }
+  ]
+ }
+}

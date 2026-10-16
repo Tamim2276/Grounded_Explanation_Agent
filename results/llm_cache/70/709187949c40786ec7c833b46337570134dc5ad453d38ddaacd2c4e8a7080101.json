@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 131,
+  "prompt_tokens": 1046,
+  "total_tokens": 1177,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys? Was there a significant difference in performance compared to the other methods?\nSub-questions:\n1. [text] Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys?\n2. [text] Was there a significant difference in performance compared to the other methods?\nEvidence:\nE1 [text, Section E, page 15]: In summary, 169 workers are involved in our studies. The total cost is $215 — the rate for every 20 triplets is $0.25. On our IoU-decoys and QoU-decoys, humans achieve 84.1%, 89.0%, and 82.5% on Visual7W, VQA, and VG, respectively. Compared to the human performance on the Orig decoys that involve human effort in creation (i.e., 88.4% on Visual7W, and 88.5% on VQA as reported in ( Antol et al. , 2015 )), these results suggest that the ways we create the decoys and the ﬁltering steps mentioned in Sect. 4.2 lead to high-quality datasets with limited ambiguity. F Analysis on different question and answer embeddings We consider G LO V E ( Pennington et al. , 2014 ) and the embedding learned from translation ( McCann et al. , 2017 ) on both question and answer embeddings. The results on Visual7W (IoU + QoU, compared to Table 3 of the main text that uses\nE2 [text, Section 5.3, page 8]: it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 ).\nE3 [text, Section Table 12, page 17]: Table 12: Test accuracy (%) on Visual7W, compar- ing different random decoy strategies to our methods: (A) Orig + uniformly random decoys from unique cor- rect answers, (B) Orig + weighted random decoys w.r.t. their frequencies, and All (Orig+IoU +QoU). Method (A) (B) All MLP-A 39.6 11.6 15.6 MLP-IA 53.4 40.3 22.2 MLP-QA 52.3 50.3 31.9 MLP-IQA 61.5 60.2 45.1 Random 10.0 10.0 10.0"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "MLP-IQA"
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E3",
+    "fact": "Significant difference in performance"
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide specific performance metrics or comparisons for other embedding methods to determine if there was a significant difference in performance compared to the other methods.",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 373,
+  "prompt_tokens": 1742,
+  "total_tokens": 2115,
+  "prompt_tokens_details": {
+   "cached_tokens": 1542
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following statements about the training procedure of ZDDA is true?\n\n(a) ZDDA simulates the target-domain representation using the source-domain data. (b) ZDDA builds a joint network with the supervision from the target domain. (c) ZDDA trains a sensor fusion network in step 1. (d) ZDDA trains a sensor fusion network in step 2.\nEvidence:\n[E1] (text, Section Table 8, page 12): Table 8. Validation of ZDDA’s performance (in mean classiﬁcation accuracy (%)) with diﬀerent training/testing splits and choices of classes in scene classiﬁcation. GN stands for GoogleNet [38]. The deﬁnition of P RGB-D and the representation of the cell color in each column are the same as those in Table 7 training testing validation on validation on method modality modality train/test splits class choices GN D D 52.63±1.76 53.98±1.68 ZDDA2 D+PRGB-D D 56.89±2.13 62.05±1.97 ZDDA3 D+PRGB-D D 58.37±3.08 62.49±1.74 GN D RGB 31.26±1.76 32.60±2.37 ZDDA2 D+PRGB-D RGB 44.47±2.50 45.47±2.57 GN RGB RGB 66.26±1.60 67.95±2.20 ZDDA3 D+PRGB-D RGB-D 58.68±3.10 62.13±1.50 # of classes / # of folds 10 / 5 9 / 10\n[E2] (text, Section 5, page 11): Second, in Table 6, we compare ZDDA 2 with the existing DA methods because the DA task D M → D M -M is considered as one of the standard experiments in recent works [7, 14, 20, 33, 34]. Although this is not a fair comparison (because ZDDA 2 has no access to the T-R target-domain training data), we ﬁnd\n[E3] (text, Section 5, page 13): To test the consistency of the performance of ZDDA compared to that of the baseline, we perform the following three experiments. First, we conduct 5-fold cross validation with diﬀerent training/testing splits for the 10-scene classiﬁcation. Second, we perform 10-fold validation with diﬀerent selections of classes for the 9-scene classiﬁcation (leave-one-class-out experiment out of the 10 selected scenes introduced in Sec. 4.1). Third, we validate ZDDA’s performance with different base network architectures. The results of the ﬁrst two experiments are presented in Table 8, and the result of the third experiment is shown in Table 9. The results of Table 7, Table 8, and Table 9 are consistent. In Table 7, Table 8, and Table 9, the classiﬁcation accuracy is reported under the condition of noise-free training and testing data. To let ZDDA be more robust to noisy input, we train ZDDA 3 step 3 with noisy training data (we use p train = 20 as explained in Sec. 4.2), and evaluate the classiﬁcation accuracy under diﬀerent noise conditions for both RGB and depth testing data. The result is presented in Fig. 4, where ZDDA 3 (Fig. 4b) outperforms the naive fusion method (Fig. 4a) under most conditions, and the performance improvement is shown in Fig. 4c. Both Fig. 4a and Fig. 4b show that the performance degradation caused by the noisy depth testing data is larger than that caused by the noisy RGB testing data, which supports that the trained RGB-D classiﬁer relies more on the depth domain. Traditionally, training a fusion model requires the T-R training data in both modalities. However, we show that without the T-R training data in the RGB domain, we can still train an RGB-D fusion model, and that the performance degrades smoothly when the noise increases. In addition to using black images as the noise model, we evaluate the same trained joint classiﬁer in ZDDA 3 using another noise model (adding a black rectangle with a random location and size to the clean image) at testing time, and the result also supports that ZDDA 3 outperforms the naive fusion method. Although we only\n[E4] (text, Section Figure 2, page 5): Fig. 2. An overview of the ZDDA training procedure. We use the images from the SUN RGB-D [36] dataset for illustration. ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network. In step 1, we choose to train s 1 and ﬁx t , but we can also train t and ﬁx s 1 to simulate the target-domain representation. In step 2, t can also be trainable instead of being ﬁxed, but we choose to ﬁx it to make the number of trainable parameters manageable. The details are explained in Sec. 3 Zero-Shot Deep Domain Adaptation 5\n[E5] (text, Section Figure 3, page 6): Fig. 3. An overview of the ZDDA testing procedure. We use the SUN RGB-D [36] images for illustration. Diﬀerent from the color coding in Fig. 2, the colors here are purely used to distinguish diﬀerent CNNs/classiﬁers/predictions 6 K.-C. Peng, Z. Wu, and J. Ernst (a) testing domain adaptation (b) testing sensor fusion\n\nThese claims are already verified and kept:\n- ZDDA simulates the target-domain representation using the source-domain data.\n- ZDDA builds a joint network with the supervision from the source domain.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"ZDDA trains a sensor fusion network in step 1.\": support check: The evidence mentions that in step 1, ZDDA can train s1 and fix t, or train t and fix s1 to simulate the target-domain representation. It does not specify that ZDDA trains a sensor fusion network in step 1. The claim goes beyond the evidence.\n- \"ZDDA trains a sensor fusion network in step 2.\": support check: The evidence mentions that in step 2, t can be trainable instead of being fixed, but it does not state that ZDDA trains a sensor fusion network in step 2. The claim goes beyond the evidence."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ZDDA simulates the target-domain representation using the source-domain data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network."
+     }
+    ]
+   },
+   {
+    "text": "ZDDA builds a joint network with the supervision from the source domain.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "ZDDA simulates the target-domain representation using the source-domain data, builds a joint network with the supervision from the source domain, and trains a sensor fusion network."
+     }
+    ]
+   },
+   {
+    "text": "ZDDA trains a sensor fusion network in step 1.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "In step 1, we choose to train s1 and fix t, but we can also train t and fix s1 to simulate the target-domain representation."
+     }
+    ]
+   },
+   {
+    "text": "ZDDA trains a sensor fusion network in step 2.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "In step 2, t can also be trainable instead of being fixed, but we choose to fix it to make the number of trainable parameters manageable."
+     }
+    ]
+   }
+  ]
+ }
+}

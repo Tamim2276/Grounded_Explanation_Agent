@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 341,
+  "prompt_tokens": 1508,
+  "total_tokens": 1849,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model variant achieves the best performance on the CNSS dataset in terms of F1-score, and what are its key components?\nEvidence:\n[E1] (text, Section Table 2, page 7): Table 2: Accuracy and F1-score results of different algorithms on CNSE and CNSS datasets. Baselines CNSE CNSS Our models CNSE CNSS Acc F1 Acc F1 Acc F1 Acc F1 I. ARC-I 53.84 48.68 50.10 66.58 XI. CIG-Siam 74.47 73.03 75.32 78.58 II. ARC-II 54.37 36.77 52.00 53.83 XII. CIG-Siam-GCN 74.58 73.69 78.91 80.72 III. DUET 55.63 51.94 52.33 60.67 XIII. CIGcd-Siam-GCN 73.25 73.10 76.23 76.94 IV. DSSM 58.08 64.68 61.09 70.58 XIV. CIG-Sim 72.58 71.91 75.16 77.27 V. C-DSSM 60.17 48.57 52.96 56.75 XV. CIG-Sim-GCN 83.35 80.96 87.12 87.57 VI. MatchPyramid 66.36 54.01 62.52 64.56 XVI. CIGcd-Sim-GCN 81.33 78.88 86.67 87.00 VII. BM25 69.63 66.60 67.77 70.40 XVII. CIG-Sim&Siam-GCN 84.64 82.75 89.77 90.07 VIII. LDA 63.81 62.44 62.98 69.11 XVIII. CIG-Sim&Siam-GCN-Simg 84.21 82.46 90.03 90.29 IX. SimNet 71.05 69.26 70.78 74.50 XIX. CIG-Sim&Siam-GCN-BERTg 84.68 82.60 89.56 89.97 X. BERT fine-tuning 81.30 79.20 86.64 87.08 XX. CIG-Sim&Siam-GCN-Simg&BERTg 84.61 82.59 89.47 89.71\n[E2] (text, Section Table 1, page 6): Table 1: Description of evaluation datasets. Dataset Pos Samples Neg Samples Train Dev Test CNSE 12865 16198 17438 5813 5812 CNSS 16887 16616 20102 6701 6700\n[E3] (text, Section 4, page 7): vertex, “Siam” indicates the use of Siamese encoder, while “Sim” indicates the use of term-based similarity encoder, as shown in Fig. 2 . “GCN” means that we convolve the local matching vectors on vertices through GCN layers. Finally, “BERT g ” or “Sim g ” indicates the use of additional global features given by BERT or the ﬁve termbased similarity metrics mentioned in Sec. 3 , appended to the graphically merged matching vector m AB , for ﬁnal classiﬁcation. Implementation Details . We use Stanford CoreNLP ( Manning et al. , 2014 ) for word segmentation (on Chinese text) and named entity recognition. For Concept Interaction Graph construction with community detection, we set the minimum community size (number of keywords contained in a concept vertex) to be 2, and the maximum size to be 6. Our neural network model consists of word embedding layer, Siamese encoding layer, Graph transformation layers, and classiﬁcation layer. For embedding, we load the pre-trained word vectors and ﬁx it during training. The embeddings of out of vocabulary words are set to be zero vectors. For the Siamese encoding network, we use 1-D convolution with number of ﬁlters 32 , followed by an ReLU layer and Max Pooling layer. For graph transformation, we utilize 2 layers of GCN ( Kipf and Welling , 2016 ) for experiments on the CNSS dataset, and 3 layers of GCN for experiments on the CNSE dataset. When the vertex encoder is the ﬁve-dimensional features, we set the output size of GCN layers to be 16. When the vertex encoder is the Siamese network encoder, we set the output size of GCN layers to be 128 except the last layer. For the last GCN layer, the output size is always set to be 16 . For the classiﬁcation module, it consists of a linear layer with output size 16 , an ReLU layer, a second linear layer, and ﬁnally a Sigmoid layer. Note that this classiﬁcation module is also"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The model variant CIG-Sim&Siam-GCN-Simg&BERTg achieves the best performance on the CNSS dataset in terms of F1-score with a score of 90.29.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "XIX. CIG-Sim&Siam-GCN-Simg&BERTg 84.68 82.60 89.56 89.97"
+     }
+    ]
+   },
+   {
+    "text": "The key components of the CIG-Sim&Siam-GCN-Simg&BERTg model include the use of Siamese and term-based similarity encoders, GCN layers, and BERT global features.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "vertex, “Siam” indicates the use of Siamese encoder, while “Sim” indicates the use of term-based similarity encoder, as shown in Fig. 2 . “GCN” means that we convolve the local matching vectors on vertices through GCN layers. Finally, “BERT g ” or “Sim g ” indicates the use of additional global features given by BERT or the five term-based similarity metrics mentioned in Sec. 3 , appended to the graphically merged matching vector m AB , for final classification."
+     }
+    ]
+   }
+  ]
+ }
+}

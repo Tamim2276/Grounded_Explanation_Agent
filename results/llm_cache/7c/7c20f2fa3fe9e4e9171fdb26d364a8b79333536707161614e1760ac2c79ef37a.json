@@ -1,0 +1,73 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 384,
+  "prompt_tokens": 1001,
+  "total_tokens": 1385,
+  "prompt_tokens_details": {
+   "cached_tokens": 806
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which approach performs best on the development set?\nEvidence:\n[E1] (text, Section Table 2, page 10): Table 2: Accuracy of each approach (humans and sys- tems) on the development set and test set, respectively. Approach Dev (±) Test (±) Human average .798 .162 Human w/ training in reasoning .909 .114 Random baseline .473 .039 .491 .031 Language model .617 .500 Attention .488 .006 .513 .012 Attention w/ context .502 .031 .512 .014 Intra-warrant attention .638 .024 .556 .016 Intra-warrant attent. w/ context .637 .040 .560 .055\n[E2] (text, Section 5, page 8): bate they were taken from: 2011–2015 became the training set (1,210 instances), 2016 the development set (316 instances), and 2017 the test set (444 instances). This follows the paradigm of learning on past data and predicting on new ones. In addition, it removes much lexical and topical overlap.\n[E3] (text, Section 5.2, page 9): results of all approaches (humans and systems) are shown in Table 2 . Intra-warrant attention with rich context outperforms standard neural models with a simple attention, but it only slightly beats the language model on the dev set. The language model is basically random on the test set. A manual error analysis of 50 random wrong predictions (a single run of the best-performing system on the dev set) revealed no explicit pattern of encountered errors. Drawing any conclusions is hard given the diversity of included topics and the variety of reasoning patterns. A possible approach would be to categorize warrants using, e.g., argumentation schemes ( Walton et al. , 2008 ) and break down errors accordingly. However, this is beyond the scope here and thus left for future work. Can We Beneﬁt from Alternative Warrants and Opposite Claims? Since the reasoning chain R → AW →¬ C is correct, too, we also tried adding respective instances to the training set (thus doubling the size). In this conﬁguration, however, the neural models failed to learn anything better than a random guess. The reason behind is probably that the opposing claims are lexically very close, usually negated, and the models cannot pick this up. This underlines that argument reasoning comprehension cannot be solved by simply looking at the occurring words or phrases.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The 'Attention w/ context' approach performs best on the development set with an accuracy of 0.512.\": the number 0.512 is in no citation\n- \"The 'Intra-warrant attention' approach performs second best on the development set with an accuracy of 0.638.\": the number 0.638 is in no citation\n- \"The 'Language model' approach performs the worst on the development set with an accuracy of 0.617.\": the number 0.617 is in no citation\n- \"The 'Intra-warrant attention with rich context' approach performs slightly better than the 'Attention' approach on the development set, with an accuracy of 0.637.\": the number 0.637 is in no citation"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The 'Attention w/ context' approach performs best on the development set with an accuracy of 0.512.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Attention w/ context .502 .031"
+     }
+    ]
+   },
+   {
+    "text": "The 'Intra-warrant attention' approach performs second best on the development set with an accuracy of 0.638.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Intra-warrant attention .638 .024"
+     }
+    ]
+   },
+   {
+    "text": "The 'Language model' approach performs the worst on the development set with an accuracy of 0.617.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Language model .617 .500"
+     }
+    ]
+   },
+   {
+    "text": "The 'Intra-warrant attention with rich context' approach performs slightly better than the 'Attention' approach on the development set, with an accuracy of 0.637.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Intra-warrant attent. w/ context .637 .040"
+     },
+     {
+      "evidence": "E1",
+      "quote": "Attention .488 .006"
+     }
+    ]
+   }
+  ]
+ }
+}

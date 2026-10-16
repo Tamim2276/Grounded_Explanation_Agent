@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 225,
+  "prompt_tokens": 567,
+  "total_tokens": 792,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The algorithm must generate images of 128 × 128 pixels.\" -- cites: E4 (Section Figure 12): quote \"The size of the generated image is of 128 × 128 pixels.\"\n2. \"The proposed algorithm must generate images of 128 × 128 pixels.\" -- cites: E4 (Section Figure 12): quote \"The size of the generated image is of 128 × 128 pixels.\"\n3. \"The proposed algorithm must generate images with three local patches.\" -- cites: E1 (Section 6.2): quote \"In the manuscript, we show image generation with three local patches using the proposed algorithm.\"\n4. \"The proposed algorithm must handle rare cases of input patches.\" -- cites: E2 (Section L): quote \"It is difficult to generate images when detected key input patches include less informative regions (column 1 and 2) or rare cases (column 3).\"\n\nCited evidence:\n[E1] (text, Section 6.2, page 11): In the manuscript, we show image generation with three local patches using the proposed algorithm. Figure 13 shows generated images based on two local patches. The results show that the network can be trained with different number of input patches.\n[E2] (text, Section L, page 8): Figure 11 shows failure cases of the proposed algorithm. It is difﬁcult to generate images when detected key input patches include less informative regions (column 1 and 2) or rare cases (column 3). In addition, when input patches have conﬂicting information, e.g., the same nose-mouth patches\n[E4] (text, Section Figure 12, page 12): Figure 12: Results of the proposed algorithm on the CompCars dataset when input patches are from different cars. Input 1 and Input 2 are patches from Real 1. Input 3 is a local region of Real 2. Given inputs, the proposed algorithm generates the image (Gen) and mask (Gen M). The size of the generated image is of 128 × 128 pixels. "
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence states that the size of the generated image is 128 × 128 pixels, which matches the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence states that the size of the generated image is 128 × 128 pixels, which matches the claim."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence states that the manuscript shows image generation with three local patches using the proposed algorithm, which matches the claim."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence discusses difficulty in generating images when key input patches are in less informative regions or rare cases, but it does not specify that the algorithm must handle rare cases of input patches. The claim goes beyond the evidence provided."
+   }
+  ]
+ }
+}

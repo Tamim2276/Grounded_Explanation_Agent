@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 117,
+  "prompt_tokens": 705,
+  "total_tokens": 822,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The paper does not provide a direct answer to the effect of enforcing syntactic constraints on the semantic role labeling output.\" -- cites: E1 (Section 4): quote \"We evaluate GBI on the testset (25.6k examples), out of which consistent parse information is available for 81.25% examples (we only include side-information in terms of constraints for this subset).\"\n\nCited evidence:\n[E1] (text, Section 4, page 4): 4.1 Semantic Role Labeling We employ the AllenNLP (Gardner et al. 2017) SRL network with ELMo embeddings, which is a multi-layer highway bi-LSTM that produces BIO output predictions for each input token (Peters et al. 2018). For data we use OntoNotes v5.0, which has ground-truth for both SRL and syntactic parsing (Pradhan et al. 2013). We evaluate GBI on the testset (25.6k examples), out of which consistent parse information is available for 81.25% examples (we only include side-information in terms of constraints for this subset). We repeat the same experimental procedure over multiple networks, SRL-X, while varying the portion (X%) of the training dataset. In Table 1, we see that GBI is able to convert 42.25 % of failure set, and this boosts the overall F1 measure by 1.23 point over the SOTA network (SRL-100) which does not incorporate the constraints (they report 84.6 F1, we obtain a similar 84.4 F1 with their network, and achieve 85.63 after enforcing constraints with our inference). Further, to address (Q1) we measure the sentence-level failure rate as well as span-level disagreement rate (i.e., the ratio of predicted spans in a sentence that disagree with the spans implied by the true syntactic parse of the sentence). To address (Q2) we evaluate our method on the failure set (i.e., the set of sentences for which disagreement rate is nonzero) and measure our method’s avgerage disagreement rate. Finally, to address (Q3), we evaluate the quality (F1 and exact match) of the output predictions on the network’s failure-set both before and after applying our method. From Table 1, we can see that by applying GBI on SRL-100, the avgerage disagreement rate on the failure set goes down from 44.85% to 24.92% which results in an improvement of 11.7 F1 and 19.90% in terms of exact match on the same set. These improvements answer Q1-3 favorably."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence does not directly address the effect of enforcing syntactic constraints on the semantic role labeling output. Instead, it discusses the evaluation of GBI on the testset and the improvements in F1 and exact match measures after applying GBI on SRL-100. The evidence does not provide a direct answer to the effect of enforcing syntactic constraints on the semantic role labeling output."
+   }
+  ]
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 149,
+  "prompt_tokens": 927,
+  "total_tokens": 1076,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the IMDB dataset for classifying documents with categorical labels, and how much better did it perform compared to the SLDA model?\nSub-questions:\n1. [text] Which model performed best on the IMDB dataset for classifying documents with categorical labels?\n2. [text] How much better did it perform compared to the SLDA model?\nEvidence:\nE1 [text, Section Table 1, page 7]: Table 1: Performance of our various models in an unsupervised setting (i.e., without labels or co- variates) on the IMDB dataset using a 5,000-word vocabulary and 50 topics. The supplementary ma- terials contain additional results for 20 newsgroups and Yahoo answers. Ppl. NPMI NPMI Sparsity Model ↓ (int.) ↑ (ext.) ↑ ↑ LDA 1508 0.13 0.14 0 SAGE 1767 0.12 0.12 0.79 NVDM 1748 0.06 0.04 0 SCHOLAR −B.G. 1889 0.09 0.13 0 SCHOLAR 1905 0.14 0.13 0 SCHOLAR + W.V. 1991 0.18 0.17 0 SCHOLAR + REG. 2185 0.10 0.12 0.58\nE2 [text, Section Table 2, page 8]: Table 2: Accuracy of various models on three datasets with categorical labels. 20news IMDB Yahoo Vocabulary size 2000 5000 5000 Number of topics 50 50 250 SLDA 0.60 0.64 0.65 SCHOLAR (labels) 0.67 0.86 0.73 SCHOLAR (covariates) 0.71 0.87 0.72 Logistic regression 0.70 0.87 0.76\nE3 [text, Section 4.2, page 7]: We next consider the utility of our model in the context of categorical labels, and consider them alternately as observed covariates and as labels generated conditional on the latent representation. We use the same setup as above, but tune number of training epochs for our model using a random 20% of training data as a development set, and similarly tune regularization for logistic regression. Table 2 summarizes the accuracy of various models on three datasets, revealing that our model offers competitive performance, both as a joint model of words and labels (Eq. 9 ), and a model which conditions on covariates (Eq. 10 ). Although SCHOLAR is comparable to the logistic regression baseline, our purpose here is not to attain state-of-the-art performance on text classiﬁcation. Rather, the high accuracies we obtain demonstrate that we are learning low-dimensional representations of documents that are relevant to the label of interest, outperforming SLDA, and have the same attractive properties as topic models. Further, any neural network that is successful for text classiﬁcation could be incorporated into f y and trained end-to-end along with topic discovery."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2",
+    "fact": "SCHOLAR (labels) performed best on the IMDB dataset."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E2",
+    "fact": "SCHOLAR (labels) performed 0.22 better than SLDA on the IMDB dataset."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide the specific performance metrics or comparison values for the models on the IMDB dataset.",
+  "sufficient": true
+ }
+}

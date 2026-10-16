@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 78,
+  "prompt_tokens": 160,
+  "total_tokens": 238,
+  "prompt_tokens_details": {
+   "cached_tokens": 102
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which node in the generative model represents the latent variable?\nSub-goals:\n1. [text] Which node in the generative model represents the latent variable?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not specify which node in the generative model represents the latent variable. It only indicates that double circles represent deterministic transformations of parent nodes, which is not sufficient to identify the latent variable node specifically."
+  }
+ ],
+ "answer": {
+  "reason": "The evidence does not specify which node in the generative model represents the latent variable. It only indicates that double circles represent deterministic transformations of parent nodes, which is not sufficient to identify the latent variable node specifically.",
+  "tool": "text",
+  "query": "Which node in the generative model represents the latent variable?"
+ }
+}

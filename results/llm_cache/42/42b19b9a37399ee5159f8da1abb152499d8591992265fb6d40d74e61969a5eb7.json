@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 449,
+  "prompt_tokens": 936,
+  "total_tokens": 1385,
+  "prompt_tokens_details": {
+   "cached_tokens": 877
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which ATE estimator is most affected by the presence of noisy confounders?\nEvidence:\n[E1] (text, Section Figure 6, page 13): Figure 6: Performance of diﬀerent ATE estimators when noisy confounders are observed. Increase in variances of OR and DR, AB retains performance characteristics. \n[E2] (text, Section Table 3, page 12): Table 3: Performance of diﬀerent ATE estimators when noisy confounders are observed. Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Re- gression (OR). In contrast to Table 2, the performance of OR drops signiﬁcantly while AB continues to provide a balance between variance and bias. Estimator Bias MAE MSE AB 3.4 × 10−2 3.4 × 10−2 1.8 × 10−3 DR 6.2 × 10−3 9.6 × 10−2 2.0 × 10−2 IPW 5.9 × 10−2 6.0 × 10−2 6.6 × 10−3 Naive comparison 7.1 × 10−2 7.1 × 10−2 5.8 × 10−3 OR 3.0 × 10−2 1.0 × 10−1 2.4 × 10−2\n[E3] (text, Section Table 5, page 15): Table 5: Performance of diﬀerent ATETR estimators when noisy confounders are observed. Estimators are Adversarial Balancing (AB), Covariate Control (CC), Entrophy Balancing (EB), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Regression (OR). Similar to the results in Ta- ble 4, EB outperforms across all measures. Similar to Table 4, simple CC estimator provides a comparable performance to EB. Estimator Bias MAE MSE AB 4.1 × 10−2 4.1 × 10−2 2.5 × 10−3 CC 2.6 × 10−2 2.8 × 10−2 1.5 × 10−3 EB 1.7 × 10−2 2.3 × 10−2 1.2 × 10−3 IPW −3.3 × 10−1 3.1 × 10−2 5.8 × 10−1 Naive comparison 7.1 × 10−2 7.1 × 10−2 5.8 × 10−3 OR 1.2 × 10−1 1.2 × 10−1 1.6 × 10−2\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The Outcome Regression (OR) estimator is most affected by the presence of noisy confounders, as its performance drops significantly compared to other estimators.\": the quote is not in E2"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Outcome Regression (OR) estimator is most affected by the presence of noisy confounders, as its performance drops significantly compared to other estimators.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Re- gression (OR). In contrast to Table 2, the performance of OR drops signifi- cantly while AB continues to provide a balance between variance and bias."
+     }
+    ]
+   },
+   {
+    "text": "The Outcome Regression (OR) estimator is the most affected by the presence of noisy confounders, as its performance drops significantly compared to other estimators.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Re- gression (OR). In contrast to Table 2, the performance of OR drops signifi- cantly while AB continues to provide a balance between variance and bias."
+     }
+    ]
+   },
+   {
+    "text": "The Outcome Regression (OR) estimator is the most affected by the presence of noisy confounders, as its performance drops significantly compared to other estimators.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Estimators are Adversarial Balancing (AB), Doubly Robust (DR), Inverse Propensity Weighing (IPW), Naive mean comparison and Outcome Re- gression (OR). In contrast to Table 2, the performance of OR drops signifi- cantly while AB continues to provide a balance between variance and bias."
+     }
+    ]
+   }
+  ]
+ }
+}

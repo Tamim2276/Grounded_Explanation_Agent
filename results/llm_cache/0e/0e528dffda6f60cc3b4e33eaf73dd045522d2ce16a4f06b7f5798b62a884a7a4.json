@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 106,
+  "prompt_tokens": 584,
+  "total_tokens": 690,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The evidence does not provide a direct comparison of the methods' performance at exactly 50 shots.\" -- cites: E1 (Section Figure 2): quote \"Figure 2. The change of performance as the number of shots in- creases in binary classiﬁcation. 1 2 3 4 5 10 20 50 Shots 0.75 0.80 0.85 0.90 0.95 1.00 AUC VAGER+Voting VAGER LR Weighted LR MRN\"; E2 (Section Figure 5): quote \"Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\"\n\nCited evidence:\n[E1] (text, Section Figure 2, page 6): Figure 2. The change of performance as the number of shots in- creases in binary classiﬁcation. 1 2 3 4 5 10 20 50 Shots 0.75 0.80 0.85 0.90 0.95 1.00 AUC VAGER+Voting VAGER LR Weighted LR MRN\n[E2] (text, Section Figure 5, page 8): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence provided in E1 and E2 shows the change of performance as the number of shots increases for different methods in binary and multi-class classification problems. The figures include data points for 50 shots, which directly supports the claim that the evidence does not provide a direct comparison of the methods' performance at exactly 50 shots."
+   }
+  ]
+ }
+}

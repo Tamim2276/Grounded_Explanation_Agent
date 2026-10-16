@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 165,
+  "prompt_tokens": 692,
+  "total_tokens": 857,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The similarity of two classes is calculated by Equation 1.\" -- cites: E1 (Section 4.3): quote \"Here the similarity of two classes is calculated by Equation 1.\"\n2. \"The results fully demonstrate that our method is consistent with the notion of human-like learning.\" -- cites: E2 (Section 4.3): quote \"The results fully demonstrate that our method is consistent with the notion of human-like learning:\"\n\nCited evidence:\n[E1] (text, Section 4.3, page 7): Here the similarity of two classes is calculated by Equation 1 . Intuitively, if a new class is similar with the top- K base classes, while dissimilar with the remained base classes, its Similarity Ratio will be high, meaning that this new class can beneﬁt more from the base classes. For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10 . The dependent variable indicates the success degree of generalization. And we set K = 10 . We plot the similarity ratio and relative improvement of all novel classes in Figure 3 . We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% conﬁdence interval for the correlation coefﬁcient range between 0 . 124 and 0 . 169 and R 2 = 0 . 45 , showing that the SR ratio could explain 45% of the dependent variable.\n[E2] (text, Section 4.3, page 7): The results fully demonstrate that our method is consistent with the notion of human-like learning: First, we can learn a new concept faster if it is more similar to some previously learned concepts. ( i.e. Leading to the increase of the numerator of the Similarity Ratio). Second, we can learn a new concept faster if we have learned more diversiﬁed concepts ( i.e. Leading to the decrease of the denominator of the Similarity Ratio). This principle can also be used to guide the generalization process and help to determine whether a new class is ﬁt for generalization. Finally, we validate whether the generalization process is explainable. Here we randomly select 5 novel classes, and for each novel class, we visualize the top-3 base classes that are most similar with the novel class in the visual analogy graph, as shown in Figure 4 . In our method, these base classes have a large impact on the formation of the new classiﬁer. We can see that the top-3 base classes are visually correlated with the novel classes, and the generalization process can be very intuitive and explainable."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the similarity of two classes is calculated by Equation 1, which is directly supported by the evidence in E1 (Section 4.3): 'Here the similarity of two classes is calculated by Equation 1.'"
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the results fully demonstrate that the method is consistent with the notion of human-like learning, which is directly supported by the evidence in E2 (Section 4.3): 'The results fully demonstrate that our method is consistent with the notion of human-like learning.'"
+   }
+  ]
+ }
+}

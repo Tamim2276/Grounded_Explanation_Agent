@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 235,
+  "prompt_tokens": 1099,
+  "total_tokens": 1334,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The schema Win <A4, B3, C2> is induced from the tri-partite graph formed from the columns of matrices A, B, and C.\" -- cites: E2 (Section Figure 2): quote \"Figure 2: Overview of Step 2 of TFBA. Induction of higher-order schemata from the tri-partite graph formed from the columns of matrices A, B, and C.\"\n2. \"The induced schema Win <A4, B3, C2> represents a 3-ary schema.\" -- cites: E1 (Section Table 4): quote \"Table 4: Examples of schemata induced by TFBA. Please note that some of them are 3-ary while others are 4-ary.\"\n\nCited evidence:\n[E1] (text, Section Table 4, page 8): Table 4: Examples of schemata induced by TFBA. Please note that some of them are 3-ary while others are 4-ary. For details about schema induction, please refer to Section 3.2 . Relation Schema NPs from the induced categories Evaluator Judgment (Human) Suggested Label Shootings leave⟨A6, B0, C7⟩ A6: shooting, shooting incident, double shooting valid < shooting > B0: one person, two people, three people < people > C7: dead, injured, on edge <injured > identify⟨A1, B1, C5, C6⟩ A1: police, officers, huntsville police valid < police > B1: man, victims, four victims < victim(s)> C5: sunday, shooting staurday, wednesday afternoon <day/time > C6: apartment, bedroom, building in the neighborhood <place > shoot⟨A7, B6, C1⟩ A7: gunman, shooter, smith valid < perpetrator > B6: freeman, slain woman, victims <victim > C1: friday, friday night, early monday morning < time> shoot⟨A4, B2, C13⟩ A4: <num>-year-old man, <num>-year-old george reavis, <num>-year-old brockton man valid < victim> B2: in the leg, in the head, in the neck < body part> C13: in macon, in chicago, in an alley < location > say⟨A1, B1, C5⟩ A1: police, officers, huntsville police invalid – B1: man, victims, four victims C5: sunday, shooting staurday, wednesday afternoon NYT sports spend⟨A0, B16, C3⟩ A0: yankees, mets, jets valid < team > B14: $ <num> million, $ <num>, $ <num> billion < money > C3: <num>, year, last season < year > win⟨A2, B10, C3⟩ A2: red sox, team, yankees valid < team > B10: world series, title, world cup < championship > C3: <num>, year, last season < year > get⟨A4, B4, C1⟩ A4: umpire, mike cameron, andre agassi invalid – B4: ball, lives, grounder C1: back, forward, <num>-yard line MUC tell⟨A7, B2, C0⟩ A7: medardo gomez, jose azcona, gregorio roza chavez valid < politician > B2: media, reporters, newsmen <media > C0: today, at <num>, tonight < day/time > occur⟨A9, B5, C10⟩ A9: bomb, blast, explosion valid < bombing > B5: near san salvador, here in madrid, in the same office < place > C10: at <num>, this time, simultaneously < time > suffer⟨A5, B4, C4) A5: justice maria elena diaz, vargas escobar, judge sofia de roldan invalid – B4: casualties , car bomb, grenade C4: settlement of refugees, in san roman, now\n[E2] (text, Section Figure 2, page 4): Figure 2: Overview of Step 2 of TFBA . Induction of higher-order schemata from the tri-partite graph formed from the columns of matrices A , B , and C . Triangles in this graph (solid) represent a 3-ary schema, n-ary schemata for n > 3 can be induced from the 3-ary schemata. Please refer to Section 3.2.2 for details. "
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The citation from E2 (Section Figure 2) states that the higher-order schemata are induced from the tri-partite graph formed from the columns of matrices A, B, and C. This directly supports the claim that the schema Win <A4, B3, C2> is induced from the tri-partite graph formed from the columns of matrices A, B, and C."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The citation from E1 (Section Table 4) only mentions that some of the schemata are 3-ary while others are 4-ary. It does not provide information about the specific schema Win <A4, B3, C2> or its representation as a 3-ary schema. Therefore, the claim that the induced schema Win <A4, B3, C2> represents a 3-ary schema is not supported by the evidence."
+   }
+  ]
+ }
+}

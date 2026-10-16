@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 191,
+  "prompt_tokens": 668,
+  "total_tokens": 859,
+  "prompt_tokens_details": {
+   "cached_tokens": 381
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The Multilinear Conditioning architecture is applicable to lower-dimensional scenarios, while the Randomized Multilinear Conditioning architecture is fit to higher-dimensional scenarios.\" -- cites: E1 (Section Figure 1): quote \"(a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classifier prediction g via multi-linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, fit to higher-dimensional scenario, where D is conditioned on classifier prediction g via randomized multilinear map √ 1 loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R\"\n2. \"The Randomized Multilinear Conditioning architecture uses a randomized multilinear map when the dimension of the multilinear map T ⊗ exceeds 4096 units, which is the largest number of units in typical deep networks.\" -- cites: E2 (Section 2): quote \"where 4096 is the largest number of units in typical deep networks (e.g. AlexNet), and if dimension of the multilinear map T ⊗ is larger than 4096, then we will choose randomized multilinear map T ⊙ .\"\n\nCited evidence:\n[E1] (text, Section Figure 1, page 4): Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1 loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\n[E2] (text, Section 2, page 5): where 4096 is the largest number of units in typical deep networks (e.g. AlexNet), and if dimension of the multilinear map T ⊗ is larger than 4096 , then we will choose randomized multilinear map T ⊙ ."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 clearly states that the Multilinear (M) Conditioning architecture is applicable to lower-dimensional scenarios, and the Randomized Multilinear (RM) Conditioning architecture is fit to higher-dimensional scenarios. This directly supports the claim."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 states that if the dimension of the multilinear map T ⊗ exceeds 4096 units, which is the largest number of units in typical deep networks, then a randomized multilinear map T ⊙ is chosen. This supports the claim that the Randomized Multilinear Conditioning architecture uses a randomized multilinear map when the dimension of the multilinear map exceeds 4096 units."
+   }
+  ]
+ }
+}

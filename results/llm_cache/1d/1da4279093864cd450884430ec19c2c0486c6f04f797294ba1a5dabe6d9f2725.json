@@ -1,0 +1,45 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 196,
+  "prompt_tokens": 880,
+  "total_tokens": 1076,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the \"All\" category of Visual7W, and how did its performance compare to human performance?\nSub-questions:\n1. [text] Which model performed best on the 'All' category of Visual7W?\n2. [text] How did its performance compare to human performance?\nEvidence:\nE1 [text, Section 3.1, page 3]: We investigate how well a learning algorithm can perform when supplied with different modalities of information. We concentrate on the one hiddenlayer MLP model proposed in ( Jabri et al. , 2016 ), which has achieved state-of-the-art results on the dataset Visual7W. The model computes a scoring function f ( c, i )\nE2 [text, Section 5.3, page 8]: it difﬁcult to compare different models. By eliminating the shortcuts (i.e., on the combined IoU +QoU-decoys), the advantage of using sophisticated models becomes obvious ( Attention outperforms MLP-IQA by 3% in Table 4 ), indicating the importance to design advanced models for achieving human-level performance on Visual QA. For completeness, we include the results on the Visual Genome dataset in Table 5 . This dataset has no “Orig” decoys, and we have created a multiplechoice based dataset qaVG from it for the task — it has over 1 million triplets, the largest dataset on this task to our knowledge. On the combined IoU +QoU-decoys, we again clearly see that machines need to use all the information to succeed. With qaVG , we also investigate whether it can help improve the multiple-choice performances on the other two datasets. We use the MLP-IQA trained on qaVG with both IoU and QoU decoys to initialize the models for the Visual7W and VQA datasets. We report the accuracies before and after ﬁne-tuning, together with the best results learned solely on those two datasets. As shown in Table 6 , ﬁne-tuning largely improves the performance, justifying the ﬁnding by Fukui et al. ( 2016 ).\nE3 [text, Section Table 3, page 7]: Table 3: Test accuracy (%) on Visual7W. Method Orig IoU QoU IoU +QoU All MLP-A 52.9 27.0 34.1 17.7 15.6 MLP-IA 62.4 27.3 55.0 23.6 22.2 MLP-QA 58.2 84.1 40.7 37.8 31.9 MLP-IQA 65.7 84.1 57.6 52.0 45.1 HieCoAtt∗ 63.9 - - 51.5 - Attntion∗ 65.9 - - 52.8 - Human 88.4 - - 84.1 - Random 25.0 25.0 25.0 14.3 10.0 ∗: based on our implementation or modification"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "Attention model performed best on the 'All' category of Visual7W."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E3",
+    "fact": "Attention model performed 52.8% on the 'All' category of Visual7W, compared to human performance of 84.1%."
+   }
+  ],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The evidence does not provide a direct comparison of the Attention model's performance to human performance on the 'All' category of Visual7W. It only shows the performance of the Attention model and the human performance on the 'All' category of Visual7W, but not the comparison between the two.",
+  "sufficient": false
+ }
+}

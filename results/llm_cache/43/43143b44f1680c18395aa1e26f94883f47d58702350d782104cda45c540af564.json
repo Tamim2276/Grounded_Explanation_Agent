@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 211,
+  "total_tokens": 272,
+  "prompt_tokens_details": {
+   "cached_tokens": 114
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the shape of the tensor $x^1$ for the Shootings dataset?\nSub-goals:\n1. [text] What is the shape of the tensor $x^1$ for the Shootings dataset?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: No evidence for the shape of the tensor $x^1$ for the Shootings dataset in sub-question 2. The evidence provided only lists the shapes of tensors $x^1$, $x^2$, and $x^3$ for the Shootings dataset, not $x^1$ specifically. Further information is needed to determine the shape of $x^1$ for the Shootings"
+  }
+ ],
+ "answer": {
+  "reason": "The previous text searches did not provide the specific shape of the tensor $x^1$ for the Shootings dataset.",
+  "tool": "text",
+  "query": "shape of the tensor x^1 for the Shootings dataset"
+ }
+}

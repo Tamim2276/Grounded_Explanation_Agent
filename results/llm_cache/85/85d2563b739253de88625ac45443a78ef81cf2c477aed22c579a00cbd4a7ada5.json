@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 270,
+  "prompt_tokens": 778,
+  "total_tokens": 1048,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the model capture different perspectives on immigration when considering tone as a covariate?\nEvidence:\n[E1] (text, Section 4.3, page 8): Tone as a label. We ﬁrst consider using the annotations as a label , and train a joint model to infer topics relevant to the tone of the article (pro- or anti-immigration). Figure 2 shows a set of topics learned in this way, along with the predicted probability of an article being pro-immigration conditioned on the given topic. All topics are coherent, and the predicted probabilities have strong face validity, e.g., “arrested charged charges agents operation” is least associated with pro-immigration. Tone as a covariate. Next we consider using tone as a covariate , and build a model using both tone and tone-topic interactions. Table 3 shows a set of topics learned from the immigration data, along with the most highly-weighted words in the corresponding tone-topic interaction terms. As can be seen, these interaction terms tend to capture different frames (e.g., “criminal” vs. “detainees”, and “illegals” vs. “newcomers”, etc). Combined model with temporal metadata. Finally, we incorporate both the tone annotations and the year of publication of each article, treating the former as a label and the latter as a covariate. In this model, we also include an embedding matrix, W c , to project the one-hot year vectors down to a\n[E2] (text, Section 4.3, page 7): We demonstrate how our model might be used to explore an annotated corpus of articles about immigration, and adapt to different assumptions about the data. We only use a small number of topics in this part ( K = 8 ) for compact presentation.\n[E3] (text, Section Table 3, page 9): Table 3: Top words for topics (left) and the corresponding anti-immigration (middle) and pro-immigration (right) variations when treating tone as a covariate, with interactions. Base topics (each row is a topic) Anti-immigration interactions Pro-immigration interactions ice customs agency enforcement homeland criminal customs arrested detainees detention center agency population born percent americans english jobs million illegals taxpayers english newcomers hispanic city judge case court guilty appeals attorney guilty charges man charged asylum court judge case appeals patrol border miles coast desert boat guard patrol border agents boat died authorities desert border bodies licenses drivers card visa cards applicants foreign sept visas system green citizenship card citizen apply island story chinese ellis international smuggling federal charges island school ellis english story guest worker workers bush labor bill bill border house senate workers tech skilled farm labor benefits bill welfare republican state senate republican california gov state law welfare students tuition"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The model captures different perspectives on immigration by using tone as a covariate, which allows it to learn interaction terms that reflect various frames of reference, such as 'criminal' vs. 'detainees', and 'illegals' vs. 'newcomers'.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "As can be seen, these interaction terms tend to capture different frames (e.g., “criminal” vs. “detainees”, and “illegals” vs. “newcomers”, etc)."
+     }
+    ]
+   },
+   {
+    "text": "The model treats tone as a covariate to infer topics relevant to the tone of the article, which is pro- or anti-immigration.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "We ﬁrst consider using the annotations as a label, and train a joint model to infer topics relevant to the tone of the article (pro- or anti-immigration)."
+     }
+    ]
+   }
+  ]
+ }
+}

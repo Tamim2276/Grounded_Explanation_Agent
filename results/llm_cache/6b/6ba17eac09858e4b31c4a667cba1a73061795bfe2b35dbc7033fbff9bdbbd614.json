@@ -1,0 +1,59 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 351,
+  "prompt_tokens": 717,
+  "total_tokens": 1068,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the frequency reduction process create multiple trajectories from a single demonstration?\nEvidence:\n[E1] (text, Section abstract, page 3): The second observation was that by recording the demonstration at 33Hz but presenting the training trajectories at only 4Hz, we have extra trajectory points. These trajectory points can be used to generate multiple independent trajectories at a lower temporal resolution. The process of the trajectory generation by frequency reduction is shown in Figure 2. Table 1 describes the size of the ﬁnal dataset.\n[E2] (text, Section Figure 2, page 3): Figure 2: Creating multiple trajectories from a demonstra- tion recorded at a higher frequency. ⚫ ▲ ⬛ ◉ ⬟ � ▢ ◇ ⚫ ▲ ⬛ ◉ ⬟ � ▢ ◇ ⚫ ... Original trajectory ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ... ⚫ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ... ▲ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ... ▢ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ... ◇ . . . 8 generated trajectories Waypoints\n[E3] (text, Section abstract, page 3): times the grasp was unsuccessful, or the user dropped the object in an incorrect position and had to pick it up again. After ﬁnishing a demonstration, the user was immediately presented with a new instance of the problem, with randomly generated initial conditions. All the experiments had been recorded in the trajectory representation format presented above, at a recording frequency of 33Hz. However, we found that the neural network controller can be trained more efﬁ- ciently if the trajectories are sampled at a lower rate, with a rate of 4Hz to giving the best results. To improve learning, we extended our training data by exploiting both the properties of the individual tasks and trajectory recording technique. First, we noticed that in the pick and place task the user can put the object to any location on the shelf. Thus we were able to generate new synthetic training data by shifting the existing demonstration trajectories parallel with the shelf. As the pushing to desired pose task requires a speciﬁc coordinate and pose to succeed, this approach is not possible for the second task."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The frequency reduction process creates multiple trajectories from a single demonstration by recording the demonstration at a higher frequency (33Hz) and then presenting the training trajectories at a lower frequency (4Hz), which results in extra trajectory points that can be used to generate multiple independent trajectories at a lower temporal resolution.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The second observation was that by recording the demonstration at 33Hz but presenting the training trajectories at only 4Hz, we have extra trajectory points. These trajectory points can be used to generate multiple independent trajectories at a lower temporal resolution."
+     }
+    ]
+   },
+   {
+    "text": "The process of trajectory generation by frequency reduction is visualized in Figure 2, which shows the original trajectory and the 8 generated trajectories.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Figure 2: Creating multiple trajectories from a demonstration recorded at a higher frequency."
+     }
+    ]
+   },
+   {
+    "text": "The frequency reduction process allows for the creation of multiple trajectories from a single demonstration by exploiting the properties of the individual tasks and trajectory recording technique.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Thus we were able to generate new synthetic training data by shifting the existing demonstration trajectories parallel with the shelf."
+     }
+    ]
+   }
+  ]
+ }
+}

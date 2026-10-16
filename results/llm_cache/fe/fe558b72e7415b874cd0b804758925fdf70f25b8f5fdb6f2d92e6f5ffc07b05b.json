@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 259,
+  "prompt_tokens": 1222,
+  "total_tokens": 1481,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy.\" -- cites: E1 (Section 4.4): quote \"Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are.\"\n2. \"The performance of VAGER+Voting is consistently higher than other methods across all groups in Table 3.\" -- cites: E3 (Section Table 3): quote \"Table 3. Top-1 Accuracy for m classes 1-shot problem Algorithm 10 cls/G1 10 cls/G2 10 cls/G3 10 cls/G4 10 cls/G5 30 cls/G1 50 cls/G1 100 cls/G1 VAGER+Voting 67.59% 63.96% 58.02% 51.27% 56.24% 40.73% 38.69% 28.38%\"\n3. \"The figure shows that VAGER+Voting consistently outperforms other methods as the shot number increases.\" -- cites: E2 (Section Figure 5): quote \"Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classification problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\"\n\nCited evidence:\n[E1] (text, Section 4.4, page 8): test categories and learn to distinguish these 10 categories on the 1-shot setting. We repeat random selections ﬁve times and the result is shown on the ﬁrst 5 columns in Table 3 . Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are.\n[E2] (text, Section Figure 5, page 8): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem. 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\n[E3] (text, Section Table 3, page 8): Table 3. Top-1 Accuracy for m classes 1-shot problem Algorithm 10 cls/G1 10 cls/G2 10 cls/G3 10 cls/G4 10 cls/G5 30 cls/G1 50 cls/G1 100 cls/G1 VAGER+Voting 67.59% 63.96% 58.02% 51.27% 56.24% 40.73% 38.69% 28.38% LR 61.97% 59.72% 52.97% 47.51% 52.01% 37.32% 34.75% 23.94% Weighted-LR 63.13% 60.09% 50.32% 46.13% 49.81% 36.77% 34.64% 23.60% MRN 64.55% 61.82% 54.74% 48.85% 54.54% 39.43% 37.78% 27.16% MatchingNet 65.69% 61.74% 57.13% 48.56% 54.34% 39.04% 37.05% 27.21% ProtoNet 47.98% 47.18% 40.20% 35.86% 41.55% 30.15% 28.12% 21.28% ActivationNet 65.04% 62.42% 55.62% 48.61% 53.85% 40.15% 37.41% 27.68%"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim cites E1, which states that 'Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy,' which matches the claim exactly."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim cites E3, which provides the table with the top-1 accuracy for different algorithms across various groups. The table shows that VAGER+Voting consistently has higher accuracy than other methods across all groups, which supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The claim cites E2, which shows a figure with the change of performance as the shot number increases. However, the figure does not explicitly state that VAGER+Voting consistently outperforms other methods as the shot number increases. The figure only shows the performance of VAGER+Voting and other methods across different shot numbers, but it does not provide a comparison of performance across all methods for each shot number."
+   }
+  ]
+ }
+}

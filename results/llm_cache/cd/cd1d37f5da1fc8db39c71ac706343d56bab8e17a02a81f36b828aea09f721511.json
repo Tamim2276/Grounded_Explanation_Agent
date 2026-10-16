@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 118,
+  "total_tokens": 188,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nSub-goals:\n1. [text] What is the effect of enforcing syntactic constraints on the semantic role labeling output?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks about the effect of syntactic constraints on semantic role labeling, which is a specific topic within the paper. A text search is appropriate to find this information directly within the paper's content.",
+  "tool": "text",
+  "query": "enforcing syntactic constraints on the semantic role labeling output"
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 7.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 368,
+  "prompt_tokens": 603,
+  "total_tokens": 971,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The model that only observes answers (MLP-A) performs significantly worse than the model that observes all three sources of information (MLP-IQA) on the COCOQA dataset.\" -- cites: E2 (Section Table 8): quote \"MLP-A 70.3 31.7 26.6\"; E2 (Section Table 8): quote \"MLP-IQA 93.1 78.3 75.9\"\n2. \"The model that only observes answers (MLP-A) attains about the chance-level accuracy on the COCOQA dataset.\" -- cites: E2 (Section Table 8): quote \"MLP-A 70.3 31.7 26.6\"\n3. \"The model that observes only images and answers (MLP-IA) performs better than the model that only observes answers (MLP-A) but worse than the model that observes all three sources of information (MLP-IQA) on the COCOQA dataset.\" -- cites: E2 (Section Table 8): quote \"MLP-IA 73.4 73.3 60.7\"; E2 (Section Table 8): quote \"MLP-IQA 93.1 78.3 75.9\"\n4. \"The model that observes all three sources of information (images, questions, and answers) performs the best on the COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU).\" -- cites: E2 (Section Table 8): quote \"MLP-IQA 93.1 78.3 75.9\"\n\nCited evidence:\n[E2] (text, Section Table 8, page 15): Table 8: Test accuracy (%) on COCOQA. Method IoU QoU IoU +QoU MLP-A 70.3 31.7 26.6 MLP-IA 73.4 73.3 60.7 MLP-QA 91.5 52.5 51.4 MLP-IQA 93.1 78.3 75.9 Random 25.0 25.0 14.3"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence shows that MLP-A has an IoU accuracy of 70.3%, QoU accuracy of 31.7%, and IoU + QoU accuracy of 26.6%, while MLP-IQA has an IoU accuracy of 93.1%, QoU accuracy of 78.3%, and IoU + QoU accuracy of 75.9%. The claim is supported by the evidence."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The evidence does not provide a chance-level accuracy for MLP-A. The claim is not supported by the evidence."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence shows that MLP-IA has an IoU accuracy of 73.4%, QoU accuracy of 73.3%, and IoU + QoU accuracy of 60.7%, while MLP-A has an IoU accuracy of 70.3%, QoU accuracy of 31.7%, and IoU + QoU accuracy of 26.6%. The claim is supported by the evidence."
+   },
+   {
+    "claim": 4,
+    "supported": true,
+    "reason": "The evidence shows that MLP-IQA has the highest IoU accuracy of 93.1%, QoU accuracy of 78.3%, and IoU + QoU accuracy of 75.9%. The claim is supported by the evidence."
+   }
+  ]
+ }
+}

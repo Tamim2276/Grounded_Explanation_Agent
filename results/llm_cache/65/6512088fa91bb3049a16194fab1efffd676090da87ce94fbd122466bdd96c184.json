@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 111,
+  "prompt_tokens": 713,
+  "total_tokens": 824,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the LIVR framework decompose semantic features into different places?\nSub-questions:\n1. [text] How does the LIVR framework decompose semantic features into different places?\nEvidence:\nE1 [text, Section Figure 2, page 2]: Figure 2. Framework of LIVR. Given the segmentation map, we decompose the semantic features into different places and extract place-based feature descriptions individually, then dynamically aggregate them at inference time according to the topology of the scene. ⊙ denotes the masking operation for spatial decomposition. \"NN\" stands for neural network. <person, move+toward+ (home), walkway> NN\" street NN\" sidewalk NN \"lawn NN\" walkway street sidewalk walkway lawn Topological+Feature+ Aggregation Semantic+Feature+Decomposition Place based Feature Descriptions Distance based Place Discretization … Figure 2. Framework of LIVR. Given the segmentation map, we\nE2 [text, Section 3.2, page 3]: Segmentation Maps Semantic Feature Decomposition utilizes a segmentation map of each place to decompose features and cause the network to extract place-based feature descriptions individually. The segmentation maps can be manually constructed using a mobile app we developed 2 to annotate each place by drawing points to construct polygons. This is reasonable since most smart home customers have only one or two cameras in their home. We employ human annotations because automatic semantic segmentation methods segment places based on appearance ( e.g., color, texture, etc. ), while our task requires differentiation between places with similar appearance based on function-\nE3 [text, Section 1, page 2]: The ﬁrst two components require semantic feature decomposition (Fig. 2 ). We utilize bitmaps encoded with the semantic labels of places to decompose video representations into different places and train models to learn placebased feature descriptions. This decomposition encourages the network to learn features of generic place-based motion patterns that are independent of scene layouts. As part of the semantic feature decomposition, we encode scene geometry to model moving directions by discretizing a place into parts based on a quantized distance transform w.r.t. another place. Fig. 2 (brown) shows the discretized bitmaps of walkway w.r.t. porch . As illustrated in Fig. 3(a) , features decomposed by those discretized bitmaps capture moving agents in spatial-temporal order, which reveals the moving direction, and can be generalized to different scene layouts. The actions occurring in one place may be projected"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Decomposes semantic features into different places and extracts place-based feature descriptions individually"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "How the LIVR framework dynamically aggregates these features at inference time according to the topology of the scene and what specific method or mechanism is used for this dynamic aggregation process.",
+  "sufficient": true
+ }
+}

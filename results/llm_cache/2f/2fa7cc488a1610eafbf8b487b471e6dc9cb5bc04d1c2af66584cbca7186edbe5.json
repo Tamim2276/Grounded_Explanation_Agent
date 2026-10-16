@@ -1,0 +1,39 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 179,
+  "prompt_tokens": 712,
+  "total_tokens": 891,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The GrNet-2Blocks method achieves the highest accuracy of 80.52% on the PaSC-Han dataset.\" -- cites: E1 (Section Table 1): quote \"GrNet-2Blocks 34.23% 59.23%±1.78 80.52% 72.76%\"\n2. \"The evidence does not provide a comparison of the GrNet-2Blocks method's accuracy on the AFEW database.\" -- cites: E1 (Section Table 1): quote \"GrNet-2Blocks 34.23% 59.23%±1.78 80.52% 72.76%\"\n\nCited evidence:\n[E1] (text, Section Table 1, page 7): Table 1: Results for the AFEW, HDM05 and PaSC datasets. PaSC1/PaSC2 are the control/handheld testings. Method AFEW HDM05 PaSC1 PaSC2 STM-ExpLet 31.73% – – – RSR-SPDML 30.12% 48.01%±3.38 – – DCC 25.78% 41.34%±1.05 75.83% 67.04% GDA 29.11% 46.25%±2.71 71.38% 67.49% GGDA 29.45% 46.87%±2.31 66.71% 68.41% PML 28.98% 47.12%±1.59 73.45% 68.32% VGGDeepFace – – 78.82% 68.24% DeepO2P 28.54% – 68.76% 60.14% SPDNet 34.23% 61.45%±1.12 80.12% 72.83% GrNet-0Block 25.34% 51.12%±3.55 68.52% 63.92% GrNet-1Block 32.08% 57.73%±2.24 80.15% 72.51% GrNet-2Blocks 34.23% 59.23%±1.78 80.52% 72.76%"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence in E1 (Section Table 1) shows that the GrNet-2Blocks method achieves an accuracy of 80.52% on the PaSC-Han dataset (PaSC2), which is the same subject, row, column, setting, and number as stated in the claim."
+   },
+   {
+    "claim": 2,
+    "supported": false,
+    "reason": "The cited evidence in E1 (Section Table 1) does not provide a comparison of the GrNet-2Blocks method's accuracy on the AFEW database. The table only includes results for the AFEW, HDM05, and PaSC datasets."
+   }
+  ]
+ }
+}

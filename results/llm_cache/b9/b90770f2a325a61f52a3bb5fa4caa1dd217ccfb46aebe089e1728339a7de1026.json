@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 12.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 701,
+  "prompt_tokens": 1384,
+  "total_tokens": 2085,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average precision of TCM(256*memory) compare to the other two algorithms in the email-EuAll dataset?\nEvidence:\n[E1] (text, Section Figure 10, page 13): Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll 700 800 900 1000 1100 1200 Width 0.7 0.8 0.9 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (b) cit-HepPh 700 800 900 1000 1100 1200 Width 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(256*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(16*memory) (e) Caida-networkflow Fig. 10. Average Precision of 1-hop Successor Queries\n[E2] (text, Section Figure 9, page 12): Fig. 9. Average Precision of 1-hop Precursor Queries 700 800 900 1000 1100 1200 Width 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll 700 800 900 1000 1100 1200 Width 0.7 0.8 0.9 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (b) cit-HepPh 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(256*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(16*memory) (e) Caida-networkflow Fig. 9. Average Precision of 1-hop Precursor Queries\n[E3] (text, Section D, page 12): per Second (Mips). From the ﬁgure we can see that the speed of GSS is similar to TCM, because though more memory accesses are needed, GSS computes less hash functions. Both of them are much higher than the adjacency list. We also show the speed of GSS without candidate bucket sampling. We can see that the speed without candidate sampling is lower than the full optimized one. The gap is not very large because most edges ﬁnd empty bucket in few searches. I. Experiment on Other Compound Queries We compare GSS with state-of-the-art graph processing algorithms in triangle counting and subgraph matching in this Section. We compare GSS with TRIEST [23] in triangle counting with the same memory. We use relative error between the reported results and the true value as evaluation metrics. TRIEST does not support multiple edges. Therefore we unique the edges in the dataset for it. The results are shown in Figure"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The average precision of TCM(256*memory) is shown in the email-EuAll dataset in Figure 10(a).",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll"
+     }
+    ]
+   },
+   {
+    "text": "The email-EuAll dataset is used to compare the average precision of TCM(256*memory) with other algorithms.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll"
+     }
+    ]
+   },
+   {
+    "text": "The email-EuAll dataset is used to compare the average precision of TCM(256*memory) with other algorithms.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "Fig. 9. Average Precision of 1-hop Precursor Queries 700 800 900 1000 1100 1200 Width 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll"
+     }
+    ]
+   },
+   {
+    "text": "The email-EuAll dataset is used to compare the average precision of TCM(256*memory) with other algorithms.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Fig. 10. Average Precision of 1-hop Successor Queries 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 146,
+  "prompt_tokens": 1134,
+  "total_tokens": 1280,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the 3D ConvNet in the distance-based place discretization process?\nSub-questions:\n1. [text] What is the role of the 3D ConvNet in the distance-based place discretization process?\nEvidence:\nE1 [text, Section Figure 5, page 4]: Figure 5. The process of distance-based place discretization. f ∆ L,p,i(XL) = XL ⊙I[ML = p ∧M∆ L = i] (3) where ⊙is the tiled element-wise multiplication. Features 3D ConvNet 3D ConvNet 3D ConvNet DT Results walkway Concate 3D ConvNet porch Place-­based Feature Descriptions\nE2 [text, Section 3.2, page 4]: where M L ∈ I w L × h L × 1 is the segmentation index map and ⊙ is a tiled element-wise multiplication which tiles the tensors to match their dimensions. Place descriptions can be extracted from different levels of feature maps. L = 0 means the input level; L > 0 means after the L th 3D-conv blocks. A higher L generally allows the 3D ConvNet to observe more context and to abstract features. We treat L as a hyper-parameter and study its effect in Sec. 5 . Distance-based Place Discretization (DD). Many actions are naturally associated with moving directions w.r.t. some scene element ( e.g., the house in home surveillance). To learn general patterns of the motion direction in different scenes, we further discretize the place segmentation into several parts, and extract features from each part and aggregate them to construct the place-based feature description of this place. For illustration, we use porch as the anchor place (shown in Fig. 5 ). We compute the distance between each pixel and the porch in a scene (distance transform), and segment a place into k parts based on their distances to porch . The left bottom map in 5 shows the porch distance transform of a scene. Let D L ( x ) be the distance transform of a pixel location x in the L th layer. The value of a pixel x in the part indexing map M ∆\nE3 [text, Section Table 1, page 6]: Table 1. The Path from Traditional 3D ConvNets to our Methods. B/L1 and B/L2 are baseline models with raw pixels and and ConcateMap as input, respectively. For our proposed models: V1 uses segmentation maps to extract place-based feature descriptions only. V3 applies distance-based place discretization for some places. Both V1 and V3 use a FC layer to aggregate place features; V2 and V4 uses topological feature aggregation. H and FPS2 indicates using higher resolutions and FPS, and MF means using more ﬁlters per conv layer. Besides our baselines, we also compare LIVR with two state-of-the-art action recognition methods: [ 50 , 43 ]. Network Architecture B/L1 B/L2 B/L2 +MF LIVR- V1 LIVR- V2 LIVR- V3 LIVR- V4 LIVR- V4+H LIVR- V4+MF LIVR- V4+FPS2 TSN [43] ReMotENet [50] 3D ConvNet? ✓ ✓ ✓ ✓ ✓ ✓ ✓ ✓ ✓ ✓ - - ConcateMap? ✓ ✓ - - place-based feature description? ✓ ✓ ✓ ✓ ✓ ✓ ✓ - - distance-based place discretization? ✓ ✓ ✓ ✓ ✓ - - topological feature aggregation? ✓ ✓ ✓ ✓ ✓ - - higher resolutions? ✓ - - more filters? ✓ ✓ - - higher FPS? ✓ - - Observed scenes mAP 51.09 54.12 53.02 55.69 57.12 58.02 59.71 59.64 59.52 59.01 56.71 55.92 Unseen scenes mAP 19.21 21.16 20.45 41.57 43.78 47.76 50.65 49.03 50.98 49.56 23.21 22.05"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The 3D ConvNet is used to extract features from each part of the place and aggregate them to construct the place-based feature description."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The role of the 3D ConvNet in the distance-based place discretization process is not explicitly stated in the provided evidence. The evidence describes the use of 3D ConvNet in feature extraction and aggregation but does not specify its role in the distance-based place discretization process.",
+  "sufficient": false
+ }
+}

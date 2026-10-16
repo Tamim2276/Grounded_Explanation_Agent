@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 177,
+  "total_tokens": 235,
+  "prompt_tokens_details": {
+   "cached_tokens": 102
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method achieves the highest accuracy on the Shootings dataset?\nSub-goals:\n1. [text] Which method achieves the highest accuracy on the Shootings dataset?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: No further evidence is provided to determine which method achieves the highest accuracy on the Shootings dataset. The evidence only indicates that TFBA performs better than HardClust on the Shootings dataset, but it does not specify the exact accuracy values for TFBA or HardClust on the Shootings or"
+  }
+ ],
+ "answer": {
+  "reason": "The text search has already been used to find the method that achieves the highest accuracy on the Shootings dataset.",
+  "tool": "text",
+  "query": "Which method achieves the highest accuracy on the Shootings dataset?"
+ }
+}

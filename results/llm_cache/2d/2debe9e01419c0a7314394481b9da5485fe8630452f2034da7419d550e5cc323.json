@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 79,
+  "prompt_tokens": 136,
+  "total_tokens": 215,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nSub-goals:\n1. [text] Which attack method is the most effective at reducing the accuracy of the Resnet-32 model on the MNIST dataset?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a specific attack method that reduces the accuracy of the ResNet-32 model on the MNIST dataset. A text search is suitable for finding this information within the paper.",
+  "tool": "text",
+  "query": "most effective attack method reducing ResNet-32 model accuracy on MNIST"
+ }
+}

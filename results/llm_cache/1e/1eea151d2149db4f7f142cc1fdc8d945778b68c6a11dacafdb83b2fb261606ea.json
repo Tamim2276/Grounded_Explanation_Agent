@@ -1,0 +1,40 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 115,
+  "prompt_tokens": 828,
+  "total_tokens": 943,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method has the highest overall accuracy?\nSub-questions:\n1. [text] Which method has the highest overall accuracy?\nEvidence:\nE1 [text, Section Table 2, page 5]: Table 2. CLEVR QA accuracy for state-of-the-art methods Method Exist Count Comp. Query Comp. Overall Overall Num. Att. Att. test set val. set IEP-strong [31] 97.1 92.7 98.7 98.1 98.9 96.9 FiLM [56] 99.3 94.3 93.4 99.3 99.3 97.6 DDRprog [63] 98.8 96.5 98.4 99.1 99.0 98.3 MAC [27] 99.5 97.1 99.1 99.5 99.5 98.9 TbD [52] 99.2 97.6 99.4 99.5 99.6 99.1 HAN [50] 99.6 97.2 96.9 99.6 99.6 98.8 NS-VQA [81]a 99.9 99.7 99.9 99.8 99.8 - 99.8 UnCoRdNone-B 99.89 99.54 99.91 99.74 99.80 99.74 99.8 Table 2. CLEVR QA accuracy for state-of-the-art methods\nE2 [text, Section Table 8, page 8]: Table 8. Answering accuracy for 100 questions sampled from VQA v2 dataset (on terms with visual estimators in UnCoRd). Method Yes/No WH Overall Pythia [85] 90.0 68.3 77.0 UnCoRd-VG-E 97.5 88.3 92.0 e 8. Answering accuracy for 100 questions sampled\nE3 [text, Section Table 7, page 7]: Table 7. Answering accuracy for 100 questions outside the VQA v2 domain (including quantiﬁers, comparisons, multiple relation chains and multiple relations and properties) on COCO images. Method Yes/No WH Overall Pythia [85] 56.0 14.0 35.0 UnCoRd-VG-E 88.0 64.0 76.0 7. Answering accuracy for 100 questions outside the"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "UnCoRdNone-B has the highest overall accuracy of 99.89."
+   }
+  ],
+  "uncovered": [
+   2,
+   3
+  ],
+  "missing": "The evidence does not provide the overall accuracy for the methods in Tables 8 and 7, which are relevant to answering the question about the highest overall accuracy method.",
+  "sufficient": false
+ }
+}

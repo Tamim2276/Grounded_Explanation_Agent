@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 72,
+  "prompt_tokens": 151,
+  "total_tokens": 223,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the main difference between the Multilinear Conditioning architecture and the Randomized Multilinear Conditioning architecture?\nSub-goals:\n1. [text] What is the main difference between the Multilinear Conditioning architecture and the Randomized Multilinear Conditioning architecture?\nAlready tried: sub-goal 1 with text\nStill missing: The main difference between the two architectures in terms of their specific mechanisms or performance metrics is not provided in the evidence items."
+  }
+ ],
+ "answer": {
+  "reason": "The text search has already been used to find the main difference between the two architectures, but the specific mechanisms or performance metrics are not provided.",
+  "tool": "text",
+  "query": "What is the main difference between the Multilinear Conditioning architecture and the Randomized Multilinear Conditioning architecture?"
+ }
+}

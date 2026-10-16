@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 181,
+  "total_tokens": 245,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the purpose of the `SubsetGate` function in the MaxPooling function?\nSub-goals:\n1. [text] What is the purpose of the `SubsetGate` function in the MaxPooling function?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The purpose of the `SubsetGate` function in the MaxPooling function is not explicitly stated in the provided evidence. The evidence describes the process of max pooling and ReLU but does not specify the purpose of the `SubsetGate` function within the MaxPooling function."
+  }
+ ],
+ "answer": {
+  "reason": "The purpose of the `SubsetGate` function in the MaxPooling function is not explicitly stated in the provided evidence.",
+  "tool": "text",
+  "query": "What is the purpose of the `SubsetGate` function in the MaxPooling function?"
+ }
+}

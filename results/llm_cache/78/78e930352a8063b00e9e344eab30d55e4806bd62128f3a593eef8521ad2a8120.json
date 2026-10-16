@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 130,
+  "prompt_tokens": 929,
+  "total_tokens": 1059,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the decline probability of an expert and whether or not they have a \"friend\" who has already declined?\nSub-questions:\n1. [text] What is the relationship between the decline probability of an expert and whether or not they have a 'friend' who has already declined?\nEvidence:\nE1 [text, Section Figure 1, page 2]: Figure 1: Decline probability of an expert conditioned on whether or not the expert has a correlated “friend” who has already declined on two datasets: QA-Expert and Paper-Reviewer, and our online evalu- ation of journal reviewer recommendation. QA-Expert Paper-Reviewer Online Evaluation 0.4 0.5 0.6 0.7 Decline Probability without with\nE2 [text, Section 1, page 2]: The ranking score S qi was deﬁned by only considering the expertise matching degree between q and the expert e i (Cf. the ﬁrst term in Eq. (1)). One method is to use language models [Zhai and Lafferty, 2001], which estimates the generative probability of a query given each document (expert-related document here) using a smoothed word distribution. Afterwards, topic models have been used to model latent topics in order to improve the matching accuracy [Mimno and McCallum, 2007; Riahi et al. , 2012; Tang et al. , 2008]. However, all these models do not consider the probability that expert e i accepts to answer the query q . Algorithmically, the difﬁculty is how to deﬁne the second term in Eq. (1). Another challenge, in practical scenarios, is the lack of sufﬁcient labeled data. One potential solution to this end is weakly supervised learning [Crandall and Huttenlocher, 2006], which essentially leverages some kind of correlation between training instances to propagate the labeled information to unlabeled instances. Widely used correlations include similarity and links (e.g., friend or coauthor relationships). Figure 1 shows the decline probability of an expert, conditioned on whether or not the expert has a “friend” who has already declined. We see correlation indeed exists in all the datasets used in our experiments (Cf. § 4 for details of the datasets).\nE3 [text, Section 1, page 2]: or expertise. Methods using probabilistic model [Mimno and McCallum, 2007], network analysis [Zhang et al. , 2007], and embedding [Han et al. , 2016] have been developed. However, they did not consider the experts’ acceptance probability. A few systems have been developed to make reviewer recommendations, e.g., AMiner [Tang et al. , 2008]. Toutiao organized a data challenge to predict the probability that an expert would accept the invitation to answer speciﬁc questions. 3 Methodologies Given a query (e.g., question/paper) q , our goal is to ﬁnd experts with sufﬁcient knowledge who are willing to answer the question or review the paper, with limited amount of labeled data. Let us consider a set of N candidate experts E = { e 1 , · · · , e N } . The general problem can be then formalized as seeking a ranking function to quantify each expert e i ’s expertise degree and acceptance probability simultaneously."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "The decline probability of an expert is higher when they have a 'friend' who has already declined."
+   }
+  ],
+  "uncovered": [
+   1
+  ],
+  "missing": "The specific numerical values or a detailed explanation of the relationship between the decline probability and the presence of a 'friend' who has already declined are not provided in the evidence. The figure only shows a qualitative comparison of decline probabilities without providing exact values",
+  "sufficient": false
+ }
+}

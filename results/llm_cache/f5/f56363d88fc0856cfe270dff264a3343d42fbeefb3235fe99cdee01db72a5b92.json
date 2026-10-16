@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 193,
+  "total_tokens": 264,
+  "prompt_tokens_details": {
+   "cached_tokens": 112
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best for response selection, and how can we tell?\nSub-goals:\n1. [text] Which model performs the best for response selection?\n2. [text] How can we tell?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The evidence does not provide a direct comparison of Arc2 and MatchPyramid against KEHNN or other models in terms of performance metrics. It only states that Arc2 and MatchPyramid are better than Arc1. The question asks for the best model and how to tell, which requires a comparison of KEHNN against"
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a comparison of KEHNN against other models, which is not directly addressed in the text. Therefore, a search for the specific comparison is needed.",
+  "tool": "text",
+  "query": "comparison of KEHNN against other models in terms of performance metrics"
+ }
+}

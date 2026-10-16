@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 195,
+  "total_tokens": 277,
+  "prompt_tokens_details": {
+   "cached_tokens": 126
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nSub-goals:\n1. [text] Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nAlready tried: sub-goal 1 with text, sub-goal 1 with text\nStill missing: The explanation method that places the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity is not explicitly stated in the provided evidence. The text discusses LIME and Parzen, but does not specify which one emphasizes localized features more than L1"
+  }
+ ],
+ "answer": {
+  "reason": "The question requires a specific method that emphasizes localized features, and the text provides information about LIME and Parzen, but does not explicitly state which one is more localized.",
+  "tool": "text",
+  "query": "Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?"
+ }
+}

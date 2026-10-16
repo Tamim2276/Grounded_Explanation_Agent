@@ -1,0 +1,30 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 146,
+  "total_tokens": 219,
+  "prompt_tokens_details": {
+   "cached_tokens": 60
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5)?\nSub-goals:\n1. [text] Which inference method consistently leads to the highest F1 score on the failure set across all three networks (Net3, Net4, and Net5)?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The question asks for a specific inference method that consistently achieves the highest F1 score across multiple networks. A text search is suitable for finding this information within the paper.",
+  "tool": "text",
+  "query": "inference method highest F1 score failure set Net3 Net4 Net5"
+ }
+}

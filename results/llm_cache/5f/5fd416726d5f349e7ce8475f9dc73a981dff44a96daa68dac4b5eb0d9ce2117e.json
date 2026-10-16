@@ -1,0 +1,69 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 8.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 448,
+  "prompt_tokens": 1213,
+  "total_tokens": 1661,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic has the highest internal coherence value?\nEvidence:\n[E1] (text, Section F, page 12): main paper, except that word vectors do not improve internal coherence on this dataset, perhaps because of the presence of relatively more names and specialized terminology. Also, although the NVDM still has worse perplexity than LDA, the effects are not as dramatic as reported in ( Srivastava and Sutton , 2017 ). Regularization is also more beneﬁcial for this data, with both SAGE and our regularized model obtaining better coherence than LDA. The topics from SCHOLAR for this dataset are also shown in Table 6 . Table 5 shows the equivalent results for the Yahoo answers dataset, using 250 topics, and a 5,000- word vocabulary. These results closely match those for the IMDB dataset, with our model having higher perplexity but also higher internal coherence than LDA. As with IMDB, the use of word vectors improves coherence, both internally and externally, but again at the cost of worse perplexity. Surprisingly, our model without a background term actually has the best external coherence on this dataset, but as described in the main paper, these tend to give high weight primarily to common words, and are more repetitive as a result.\n[E2] (text, Section Table 6, page 13): Table 6: Topics from the unsupervised SCHOLAR on the 20 newsgroups dataset, and the corresponding internal coherence values. NPMI Topic 0.77 turks armenian armenia turkish roads escape soviet muslim mountain soul 0.52 escrow clipper encryption wiretap crypto keys secure chip nsa key 0.49 jesus christ sin bible heaven christians church faith god doctrine 0.43 fbi waco batf clinton children koresh compound atf went fire 0.41 players teams player team season baseball game fans roger league 0.39 guns gun weapons criminals criminal shooting police armed crime defend 0.37 playoff rangers detroit cup wings playoffs montreal toronto minnesota games 0.36 ftp images directory library available format archive graphics package macintosh 0.33 user server faq archive users ftp unix applications mailing directory 0.32 bike car cars riding ride engine rear bmw driving miles 0.32 study percent sexual medicine gay studies april percentage treatment published 0.32 israeli israel arab peace rights policy islamic civil adam citizens 0.30 morality atheist moral belief existence christianity truth exist god objective 0.28 space henry spencer international earth nasa orbit shuttle development vehicle 0.27 bus motherboard mhz ram controller port drive card apple mac 0.25 windows screen files button size program error mouse colors microsoft 0.24 sale shipping offer brand condition sell printer monitor items asking 0.21 driver drivers card video max advance vga thanks windows appreciated 0.19 cleveland advance thanks reserve ohio looking nntp western host usa 0.04 banks gordon univ keith soon pittsburgh michael computer article ryan\n[E3] (text, Section 4.1, page 7): Although the emphasis of this work is on incorporating observed labels and/or covariates, we brieﬂy report on experiments in the unsupervised setting. Recall that, without metadata, SCHOLAR equates to ProdLDA, but with an explicit background term. 15 We therefore use the same experimental setup as Srivastava and Sutton ( 2017 ) (learning rate, momentum, batch size, and number of epochs) and ﬁnd the same general patterns as they reported (see Table 1 and supplementary material): our model returns more coherent topics than LDA, but at the cost of worse perplexity. SAGE, by contrast, attains very high levels of sparsity, but at the cost of worse perplexity and coherence than LDA. As expected, the NVDM produces relatively low perplexity, but very poor coherence, due to its lack of constraints on θ . Further experimentation revealed that the VAE framework involves a tradeoff among the scores; running for more epochs tends to result in better perplexity on held-out data, but at the cost of worse coherence. Adding regularization to encourage sparse topics has a similar effect as in SAGE, leading to worse perplexity and coherence, but it does create sparse topics. Interestingly, initializing the encoder with pretrained word2vec embeddings, and not updating them returned a model with the best internal coherence of any model we considered for IMDB and Yahoo answers, and the second-best for 20 newsgroups."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The NVDM still has worse perplexity than LDA, but the effects are not as dramatic as reported in (Srivastava and Sutton, 2017).",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Also, although the NVDM still has worse perplexity than LDA, the effects are not as dramatic as reported in (Srivastava and Sutton, 2017)."
+     }
+    ]
+   },
+   {
+    "text": "The NVDM produces relatively low perplexity, but very poor coherence, due to its lack of constraints on θ.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Further experimentation revealed that the NVDM produces relatively low perplexity, but very poor coherence, due to its lack of constraints on θ."
+     }
+    ]
+   },
+   {
+    "text": "The model without a background term actually has the best external coherence on this dataset.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Surprisingly, our model without a background term actually has the best external coherence on this dataset, but as described in the main paper, these tend to give high weight primarily to common words, and are more repetitive as a result."
+     }
+    ]
+   },
+   {
+    "text": "The model with pretrained word2vec embeddings and not updating them returned a model with the best internal coherence of any model we considered for IMDB and Yahoo answers, and the second-best for 20 newsgroups.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Interestingly, initializing the encoder with pretrained word2vec embeddings, and not updating them returned a model with the best internal coherence of any model we considered for IMDB and Yahoo answers, and the second-best for 20 newsgroups."
+     }
+    ]
+   }
+  ]
+ }
+}

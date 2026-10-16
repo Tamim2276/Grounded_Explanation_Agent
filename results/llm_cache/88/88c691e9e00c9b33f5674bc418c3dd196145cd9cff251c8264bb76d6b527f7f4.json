@@ -1,0 +1,34 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 97,
+  "prompt_tokens": 361,
+  "total_tokens": 458,
+  "prompt_tokens_details": {
+   "cached_tokens": 144
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The VQA2− dataset is challenging because it lacks the 'Orig' decoys, which makes it more difficult for models to distinguish between true triplets and decoys.\" -- cites: E2 (Section 4.1): quote \"We assume that each image in the dataset is coupled with “multiple” QT pairs, which is the case in nearly all the existing datasets.\"\n\nCited evidence:\n[E2] (text, Section 4.1, page 5): Main ideas Our procedures operate on a dataset that already contains image-question-target (IQT) triplets, i.e., we do not assume it has decoys already. For instance, we have used our procedures to create a multiple-choice dataset from the Visual Genome dataset which has no decoy. We assume that each image in the dataset is coupled with “multiple” QT pairs, which is the case in nearly all the existing datasets. Given an IQT triplet (I, Q, T), we create two sets of decoy answers. • QoU-decoys . We search among all other triplets that have similar questions to Q. The targets of those triplets are then collected as the decoys for T. As the targets to similar questions are likely"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence does not mention the 'Orig' decoys or the difficulty in distinguishing between true triplets and decoys. Instead, it discusses the creation of decoys for a dataset and the assumption that each image is coupled with multiple QT pairs. The claim is not supported by the evidence."
+   }
+  ]
+ }
+}

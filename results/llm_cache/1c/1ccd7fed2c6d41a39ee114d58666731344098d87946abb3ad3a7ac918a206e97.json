@@ -1,0 +1,49 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 298,
+  "prompt_tokens": 1335,
+  "total_tokens": 1633,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"CDAN-fg is evidently better than CDAN-f.\" -- cites: E2 (Section 4.3): quote \"They are aligned better and categories are discriminated better by CDAN-f, while CDAN-fg is evidently better than CDAN-f.\"\n2. \"CDAN-fg shows better alignment and category discrimination than CDAN-f.\" -- cites: E2 (Section 4.3): quote \"They are aligned better and categories are discriminated better by CDAN-f, while CDAN-fg is evidently better than CDAN-f.\"\n3. \"CDAN-fg is more effective at reducing the domain gap than ResNet and DANN.\" -- cites: E4 (Section 4.3): quote \"We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively.\"\n4. \"The effectiveness of the methods cannot be definitively determined from the given evidence.\" -- cites: E1 (Section Figure 3): quote \"Figure 3: T-SNE of (a) ResNet, (b) DANN, (c) CDAN-f, (d) CDAN-fg (red: A ; blue: W ). which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DA (a) ResNet (b) DANN (c) CDAN-f (d) CDAN-fg\"; E2 (Section 4.3): quote \"The source and target are not aligned well with ResNet, better aligned with DANN but categories are not discriminated well. They are aligned better and categories are discriminated better by CDAN-f, while CDAN-fg is evidently better than CDAN-f.\"; E3 (Section 4.2): quote \"The CDAN models significantly outperform all comparison methods on most transfer tasks, where CDAN+E is a top-performing variant and CDAN performs slightly worse.\"; E4 (Section 4.3): quote \"We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively.\"\n\nCited evidence:\n[E1] (text, Section Figure 3, page 9): Figure 3: T-SNE of (a) ResNet, (b) DANN, (c) CDAN- f , (d) CDAN- fg (red: A ; blue: W ). which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DA (a) ResNet (b) DANN (c) CDAN-f (d) CDAN-fg\n[E2] (text, Section 4.3, page 9): Visualization We visualize by t-SNE [ 32 ] in Figures 3(a)–3(d) the representations of task A → W (31 classes) by ResNet, DANN, CDAN-f, and CDAN-fg. The source and target are not aligned well with ResNet, better aligned with DANN but categories are not discriminated well. They are aligned better and categories are discriminated better by CDAN-f, while CDAN-fg is evidently better than CDAN-f. This shows the beneﬁt of conditioning adversarial adaptation on discriminative predictions.\n[E3] (text, Section 4.2, page 7): The results on Ofﬁce-31 based on AlexNet and ResNet are reported in Table 1, with results of baselines directly reported from the original papers if protocol is the same. The CDAN models signiﬁcantly outperform all comparison methods on most transfer tasks, where CDAN+E is a top-performing variant and CDAN performs slightly worse. It is desirable that CDAN promotes the classiﬁcation accuracies substantially on hard transfer tasks, e.g. A → W and A → D , where the source and target domains are substantially different [ 42 ]. Note that, CDAN+E even outperforms generative pixel-level domain adaptation method GTA, which has a very complex design in both architecture and objectives. The results on the ImageCLEF-DA dataset are reported in Table 2. The CDAN models outperform the comparison methods on most transfer tasks, but with smaller rooms of improvement. This is reasonable since the three domains in ImageCLEF-DA are of equal size and balanced in each category, and are visually more similar than Ofﬁce-31 , making the former dataset easier for domain adaptation.\n[E4] (text, Section 4.3, page 9): Distribution Discrepancy The A -distance is a measure for distribution discrepancy [ 4 , 33 ], deﬁned as dist A = 2 (1 − 2 ϵ ) , where ϵ is the test error of a classiﬁer trained to discriminate the source from target. Figure 2(c) shows dist A on tasks A → W , W → D with features of ResNet, DANN, and CDAN. We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively. As domains W and D are similar, dist A of task W → D is smaller than that of A → W , implying higher accuracies. Convergence We testify the convergence of ResNet, DANN, and CDANs, with the test errors on task A → W shown in Figure 2(d). CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM). Note that CDAN (M) constitutes high-dimensional multilinear map, which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DANN."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The evidence states that CDAN-f is better at aligning and discriminating categories, while CDAN-fg is better than CDAN-f. This does not support the claim that CDAN-fg is better than CDAN-f."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence states that CDAN-f is better at aligning and discriminating categories, while CDAN-fg is better than CDAN-f, which supports the claim."
+   },
+   {
+    "claim": 3,
+    "supported": false,
+    "reason": "The evidence compares the A-distance (a measure of distribution discrepancy) and states that CDAN features can reduce the domain gap more effectively than ResNet and DANN features. This does not directly compare the effectiveness of CDAN-fg to ResNet and DANN in reducing the domain gap."
+   },
+   {
+    "claim": 4,
+    "supported": false,
+    "reason": "The evidence provides various comparisons and observations, but it does not definitively state that the effectiveness of the methods cannot be determined from the given evidence. The evidence suggests that CDAN models outperform comparison methods, but it does not conclusively state that the effectiveness cannot be determined."
+   }
+  ]
+ }
+}

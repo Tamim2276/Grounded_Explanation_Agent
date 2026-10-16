@@ -1,0 +1,49 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 6.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 259,
+  "prompt_tokens": 931,
+  "total_tokens": 1190,
+  "prompt_tokens_details": {
+   "cached_tokens": 881
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which step in the methodology resulted in the largest decrease in the size of the dataset?\nEvidence:\n[E1] (text, Section Table 1, page 8): Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded. A more detailed description is available in the readme ﬁle of the source code. 1 12 29 7 30 8 2 19 7 39 8 2 1 5 3 <Hgh. s. deg. High school degree College (no degree) Associate degree Bachelor degree Graduate degree+ 70% 80% 90% 100% Accuracy No training Some training Extensive Figure 4: Human upper bounds on the argument rea- soning comprehension task with respect to education and formal training in reasoning, logic, or argumenta- tion. For each configuration, the mean values are dis- played together with the number of participants (above the bar) and with their standard deviations (error bars).\n[E2] (text, Section 5.2, page 9): To evaluate all systems, each instance in our dataset is represented as a tuple ( R , C , W 0 , W 1 ) with a label (0 or 1). If the label is 0, W 0 is the correct warrant, otherwise W 1 . Recall that we have two warrants W and AW whose correctness depends on the claim: W is correct for R and the original claim C , whereas AW would be correct for R and the opposite claim ¬ C . We thus doubled the training data by adding a permuted instance ( R , C , W 1 , W 0 ) with the respective correct label; this led to increased performance. The overall\n[E3] (text, Section Figure 3, page 7): Figure 3: Cohen’s κ agreement for stance annotation on 98 comments. As a trade-off between reducing costs (i.e., discarding fewer instances) and increasing relia- bility, we chose 5 annotators and a threshold of 0.95 for this task, which resulted in κ = 0.58 (moderate to substantial agreement). 1 2 3 4 5 6 7 8 9 Workers per \"expert\" 0.3 0.4 0.5 0.6 0.7 0.8 Cohen's kappa MACE Threshold 0.85 0.9 0.95 1.0 Error bars = std. dev; only shown for two thresholds\n\nThese claims are already verified and kept:\n- The largest decrease in the size of the dataset occurred in Step 6, where the weakest 30% of instances were discarded.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The methodology did not specify which step resulted in the largest decrease in the size of the dataset.\": support check: The evidence does not explicitly state which step resulted in the largest decrease in the size of the dataset. It only mentions that Step 6 resulted in the weakest 30% being discarded. Therefore, the claim cannot be supported by the evidence."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The largest decrease in the size of the dataset occurred in Step 6, where the weakest 30% of instances were discarded.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded."
+     }
+    ]
+   },
+   {
+    "text": "The methodology did not specify which step resulted in the largest decrease in the size of the dataset.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Table 1: Details and statistics of the datasets resulting from the eight steps of our methodology implemented in a crowdsourcing process. *Input instances were ﬁltered by their ‘logic score’ assigned in Step 6, such that the weakest 30% were discarded."
+     }
+    ]
+   }
+  ]
+ }
+}

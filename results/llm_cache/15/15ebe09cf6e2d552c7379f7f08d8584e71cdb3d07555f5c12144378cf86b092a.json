@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 253,
+  "prompt_tokens": 507,
+  "total_tokens": 760,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The BC genre has the lowest failure rate of 26.86%.\" -- cites: E4 (Section Table 11): quote \"26.86\"\n2. \"The BC genre's inference time is 23 minutes, which is the lowest among the genres.\" -- cites: E4 (Section Table 11): quote \"23\"\n3. \"The BC genre has the lowest failure rate and the shortest inference time among the genres.\" -- cites: E4 (Section Table 11): quote \"26.86\"; E4 (Section Table 11): quote \"23\"\n\nCited evidence:\n[E4] (text, Section Table 11, page 11): Table 11: Comparison of runtime for difference inference procedures in the noise-free constraint setting: Viterbi, A * (He et al. 2017) and GBI. For SRL-100 refer Table 1 and SRL-NW is a model trained on NW genre. E Analyzing the runtime of different inference procedures with varying dataset sizes and genres Network Genre(s) No. of examples Failure Inference time (approx. mins) rate (%) Viterbi GBI A* SRL-100 All 25.6k 9.82 109 288 377 SRL-NW BC 4.9k 26.86 23 110 117 BN 3.9K 18.51 18 64 100 PT 2.8k 10.01 8 19 15 TC 2.2k 19.01 5 23 20 WB 2.3k 20.32 12 49 69"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The claim states that the BC genre has the lowest failure rate of 26.86%. The evidence from E4 (Section Table 11) shows that the failure rate for the BC genre is indeed 26.86%."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The claim states that the BC genre's inference time is 23 minutes, which is the lowest among the genres. The evidence from E4 (Section Table 11) shows that the inference time for the BC genre is 23 minutes."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The claim states that the BC genre has the lowest failure rate and the shortest inference time among the genres. The evidence from E4 (Section Table 11) shows that the failure rate for the BC genre is 26.86% and the inference time is 23 minutes, which are both the lowest among the genres."
+   }
+  ]
+ }
+}

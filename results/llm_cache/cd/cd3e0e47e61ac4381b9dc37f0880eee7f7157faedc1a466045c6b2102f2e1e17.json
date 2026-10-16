@@ -1,0 +1,44 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 5.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 216,
+  "prompt_tokens": 1042,
+  "total_tokens": 1258,
+  "prompt_tokens_details": {
+   "cached_tokens": 4
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The relationship between the Similarity Ratio and AUC Increasing is positively correlated, as indicated by the linear regression in Figure 3.\" -- cites: E1 (Section Figure 3): quote \"Figure 3. Linear regression of AUC improvement on Similarity Ratio for all novel classes Category LR (No Transfer) VAGER (Transfer) Jeep 0.8034 0.9469 Zebra 0.8472 0.9393 Hen 0.7763 0.8398 Lemon 0.6854 0.9583 Bubble 0.7455 0.7041 Pineapple 0.7364 0.8623 Lion 0.8305 0.9372 Screen 0.7801 0.9056 Drum 0.6510 0.6995 Restaurant 0.7806 0.8787 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0 Similarity Ratio 0.1 0.0 0.1 0.2 0.3 AUC Increasing\"\n2. \"The Similarity Ratio is calculated by Equation 1, which measures the similarity between a new class and the top-K base classes.\" -- cites: E2 (Section 4.3): quote \"Here the similarity of two classes is calculated by Equation 1.\"\n3. \"The AUC Increasing is the relative improvement in AUC of the method over the non-transfer method LR in a 1-shot setting.\" -- cites: E2 (Section 4.3): quote \"For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10.\"\n\nCited evidence:\n[E1] (text, Section Figure 3, page 7): Figure 3. Linear regression of AUC improvement on Similarity Ratio for all novel classes Category LR (No Transfer) VAGER (Transfer) Jeep 0.8034 0.9469 Zebra 0.8472 0.9393 Hen 0.7763 0.8398 Lemon 0.6854 0.9583 Bubble 0.7455 0.7041 Pineapple 0.7364 0.8623 Lion 0.8305 0.9372 Screen 0.7801 0.9056 Drum 0.6510 0.6995 Restaurant 0.7806 0.8787 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0 Similarity Ratio 0.1 0.0 0.1 0.2 0.3 AUC Increasing\n[E2] (text, Section 4.3, page 7): Here the similarity of two classes is calculated by Equation 1 . Intuitively, if a new class is similar with the top- K base classes, while dissimilar with the remained base classes, its Similarity Ratio will be high, meaning that this new class can beneﬁt more from the base classes. For each new class, we calculate the relative improvement in AUC of our method over non-transfer method LR in 1-shot setting, and do linear regression over its Similarity Ratio with K = 10 . The dependent variable indicates the success degree of generalization. And we set K = 10 . We plot the similarity ratio and relative improvement of all novel classes in Figure 3 . We can see that the relative improvement in a new class is positively correlated with the similarity ratio of the new class, with 95% conﬁdence interval for the correlation coefﬁcient range between 0 . 124 and 0 . 169 and R 2 = 0 . 45 , showing that the SR ratio could explain 45% of the dependent variable."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence in E1 (Section Figure 3) shows a linear regression of AUC improvement on Similarity Ratio for all novel classes, which supports the claim that the relationship between the Similarity Ratio and AUC Increasing is positively correlated."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 4.3) states that the similarity of two classes is calculated by Equation 1, which supports the claim that the Similarity Ratio is calculated by Equation 1."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "The evidence in E2 (Section 4.3) defines AUC Increasing as the relative improvement in AUC of the method over the non-transfer method LR in a 1-shot setting, which supports the claim."
+   }
+  ]
+ }
+}
