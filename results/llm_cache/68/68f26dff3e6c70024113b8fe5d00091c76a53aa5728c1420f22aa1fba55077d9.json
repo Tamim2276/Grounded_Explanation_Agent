@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 155,
+  "total_tokens": 218
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question:  How many negative samples are there in the training set of the CNSE dataset?\nSub-goals:\n1. [figure] How many negative samples are there in the training set of the CNSE dataset?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The evidence does not provide the specific number of negative samples in the training set of the CNSE dataset."
+  }
+ ],
+ "answer": {
+  "reason": "Since text and figure searches did not yield the number of negative samples in the training set, I will check the data statistics presented in the paper's tables.",
+  "tool": "table",
+  "query": "CNSE dataset training set negative samples"
+ }
+}

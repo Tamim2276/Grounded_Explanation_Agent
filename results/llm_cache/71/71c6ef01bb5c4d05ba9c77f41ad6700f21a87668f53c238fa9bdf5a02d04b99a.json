@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 167,
+  "total_tokens": 229
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does explicitly modeling meaning-preserving invariances impact the generation of paraphrases?\nSub-goals:\n1. [figure] How does explicitly modeling meaning-preserving invariances impact the generation of paraphrases?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence items only show an example AMR graph and two sample realisations differing in syntax, but do not provide any facts or data about how explicitly modeling meaning-preserving invariances impacts the generation of paraphrases."
+  }
+ ],
+ "answer": {
+  "reason": "I will search the text paragraphs to find the experimental results and discussion on how explicitly modeling meaning-preserving invariances impacts the generation of paraphrases.",
+  "tool": "text",
+  "query": "meaning-preserving invariances paraphrases generation impact"
+ }
+}

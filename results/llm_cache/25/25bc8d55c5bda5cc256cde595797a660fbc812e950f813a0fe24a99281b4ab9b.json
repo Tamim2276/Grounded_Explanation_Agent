@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 11.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 121,
+  "total_tokens": 176
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which ATE estimator is most affected by the presence of noisy confounders?\nSub-goals:\n1. [figure] Which ATE estimator is most affected by the presence of noisy confounders?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will examine the figures in the paper to find the comparison of ATE estimators under the influence of noisy confounders.",
+  "tool": "figure",
+  "query": "ATE estimator noisy confounders performance comparison"
+ }
+}

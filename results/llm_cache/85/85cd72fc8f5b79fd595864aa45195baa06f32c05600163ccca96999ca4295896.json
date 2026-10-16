@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 197,
+  "total_tokens": 259
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seem to affect the influence vectors?\nSub-goals:\n1. [figure] How does increasing the parameter value (ρ for LIME with Euclidean distance, μ for LIME with cosine similarity, and σ for Parzen) seem to affect the influence vectors?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence items show Figure 1 regarding Parzen violating monotonicity, but do not provide any information or figures showing how increasing the parameter values affect the influence vectors."
+  }
+ ],
+ "answer": {
+  "reason": "I will search the text paragraphs to find explanations of how increasing the parameter values affect the influence vectors since the figure search did not provide this information.",
+  "tool": "text",
+  "query": "increasing the parameter value influence vectors rho mu sigma"
+ }
+}

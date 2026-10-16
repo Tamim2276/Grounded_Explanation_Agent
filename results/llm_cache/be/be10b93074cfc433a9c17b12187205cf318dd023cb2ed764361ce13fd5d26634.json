@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 81,
+  "prompt_tokens": 185,
+  "total_tokens": 266
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers) and how does its performance compare to the model that only uses answers?\nSub-goals:\n1. [table] On the VQAv2-2017 validation set, which model performs best when considering all three sources of information (images, questions, and answers) and how does its performance compare to the model that only uses answers?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will search the tables to find the performance comparison of different models on the VQAv2-2017 validation set, specifically looking at those using all three sources of information versus those using only answers.",
+  "tool": "table",
+  "query": "VQAv2-2017 validation set results images questions answers"
+ }
+}

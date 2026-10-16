@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 178,
+  "total_tokens": 240
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the shape of the tensor $x^1$ for the Shootings dataset?\nSub-goals:\n1. [figure] What is the shape of the tensor $x^1$ for the Shootings dataset?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence shows tensors X1, X2, X3 in an overview figure for a generic text corpus example (Tennis/Federer/Nadal), but does not mention the Shootings dataset or the shape of its tensor x^1."
+  }
+ ],
+ "answer": {
+  "reason": "I will search the text paragraphs to find the specific tensor shape for x^1 in the Shootings dataset since the figure overview did not provide it.",
+  "tool": "text",
+  "query": "Shootings dataset tensor x^1 shape"
+ }
+}

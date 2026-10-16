@@ -1,0 +1,30 @@
+{
+ "name": "n1_sub_goals",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 49.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 291,
+  "total_tokens": 366
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You prepare questions about one scientific paper for a search agent. Split the question into sub-questions only when it clearly asks two or three different things; most questions stay ONE sub-question. For each, decide where in the paper its answer is most likely PRINTED:\n- table: numbers that compare methods, models, datasets or settings -- scores, accuracy, error, counts, statistics, or which one is best, worst, highest or lowest;\n- figure: anything SHOWN as a picture -- how something changes as another thing varies (curves, plots, bars), the architecture, framework or pipeline of a method and its parts, and visual examples or qualitative results;\n- text: definitions, reasons and explanations that are only written in prose.\nExamples:\n'What accuracy does the proposed model reach on ImageNet?' -> table\n'Which baseline performs worst on the test set?' -> table\n'How does the validation loss change during training?' -> figure\n'Which modules make up the proposed network?' -> figure\n'How do the generated samples look compared with the baselines?' -> figure\n'Why do the authors normalise the inputs?' -> text\nKeep the question's own words."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performed best according to the P@1 metric for the QA-Expert task, and how much better did it perform compared to the average P@1 score of the D2V method? "
+  }
+ ],
+ "answer": {
+  "sub_goals": [
+   {
+    "text": "Which method performed best according to the P@1 metric for the QA-Expert task, and how much better did it perform compared to the average P@1 score of the D2V method?",
+    "modality": "table"
+   }
+  ]
+ }
+}

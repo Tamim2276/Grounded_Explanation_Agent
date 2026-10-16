@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 181,
+  "total_tokens": 238
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average number of answers per question differ between the training and development sets? What might be a possible explanation for this difference?\nSub-goals:\n1. [figure] How does the average number of answers per question differ between the training and development sets?\n2. [figure] What might be a possible explanation for this difference?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: No evidence discusses the average number of answers per question or compares it between the training and development sets."
+  }
+ ],
+ "answer": {
+  "reason": "Since text and figure searches did not yield results for the training and development sets, tables may contain statistical summaries comparing these datasets.",
+  "tool": "table",
+  "query": "average number of answers per question training development"
+ }
+}

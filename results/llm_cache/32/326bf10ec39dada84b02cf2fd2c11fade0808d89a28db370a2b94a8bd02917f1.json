@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 1386,
+  "total_tokens": 1459
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The provided evidence shows images of pick and place in simulation and pick and place in the real world, but does not state the difference between them.\" -- cites: E1 (Figure 4): quote \"Figure 4: A sequence of images showing the autonomous execution of pick and place in simulation (ﬁrst row), pick and place in real world (second row), pushing in simulation (third row), and pushing in real world (fourth row).\"\n\nCited evidence:\n[E1] (figure, Figure 4, page 6) (image attached): Figure 4: A sequence of images showing the autonomous execution of pick and place in simulation (ﬁrst row), pick and place in real world (second row), pushing in simulation (third row), and pushing in real world (fourth row). The robot is controlled by a mixture density network with 3 layers of LSTM. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence shows images of pick and place in simulation and in the real world (rows 1 and 2), and does not state any differences between them."
+   }
+  ]
+ }
+}

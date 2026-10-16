@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 97,
+  "prompt_tokens": 459,
+  "total_tokens": 556
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The provided text does not contain information comparing whether there was a significant difference in performance between the embedding methods on the Visual7W dataset with IoU + QoU decoys.\" -- cites: E1 (Table 11): quote \"Table 11: Test accuracy (%) on Visual7W, comparing different embeddings for questions and answers. The results are reported for the IoU +QoU-decoys.\"\n\nCited evidence:\n[E1] (table, Table 11, page 15): Table 11: Test accuracy (%) on Visual7W, comparing different embeddings for questions and answers. The results are reported for the IoU +QoU-decoys.\nValues (cite as cells):\n  row 'MLP-A': 'GLOVE' = 18.0; 'Translation' = 18.0; 'WORD2VEC' = 17.7\n  row 'MLP-IA': 'GLOVE' = 23.6; 'Translation' = 23.2; 'WORD2VEC' = 23.6\n  row 'MLP-QA': 'GLOVE' = 38.1; 'Translation' = 38.3; 'WORD2VEC' = 37.8\n  row 'MLP-IQA': 'GLOVE' = 52.5; 'Translation' = 51.4; 'WORD2VEC' = 52.0\n  row 'Random': 'GLOVE' = 14.3; 'Translation' = 14.3; 'WORD2VEC' = 14.3"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited table (Table 11) provides test accuracy values comparing different embedding methods (GLOVE, Translation, WORD2VEC) on the Visual7W dataset with IoU + QoU-decoys, directly contradicting the claim that the text does not contain this information."
+   }
+  ]
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 18.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 115,
+  "prompt_tokens": 2518,
+  "total_tokens": 2633
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why might CDAN+E be considered a more versatile method for unsupervised domain adaptation compared to UNIT, CyCADA, and GTA?\nSub-questions:\n1. [figure] Why might CDAN+E be considered a more versatile method for unsupervised domain adaptation compared to UNIT, CyCADA, and GTA?\nEvidence:\nE1 [figure, Figure 1, page 4] (image attached): Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1\nWords printed in the figure: loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\nE2 [figure, Figure 1, page 4]: Zoomed view (300 dpi) of: Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1\nWords printed in the figure: loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\nE3 [text, Section 4.2, page 8]: The results on Ofﬁce-Home are reported in Table 3. The CDAN models substantially outperform the comparison methods on most transfer tasks, and with larger rooms of improvement. An interpretation is that the four domains in Ofﬁce-Home are with more categories, are visually more dissimilar with each other, and are difﬁcult in each domain with much lower in-domain classiﬁcation accuracy [ 53 ]. Since domain alignment is category agnostic in previous work, it is possible that the aligned domains are not classiﬁcation friendly in the presence of large number of categories. It is desirable that CDAN models yield larger boosts on such difﬁcult domain adaptation tasks, which highlights the power of adversarial domain adaptation by exploiting complex multimodal structures in classiﬁer predictions. Strong results are also achieved on the digits datasets and synthetic to real datasets as reported in Table 4. Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are speciﬁcally tailored to the digits and synthetic to real adaptation tasks. This explains why the previous feature-level adaptation method JAN performs fairly weakly. To our knowledge, CDAN+E is the only approach that works reasonably well on all ﬁve datasets, and remains a simple discriminative model.\nE4 [text, Section 4.2, page 7]: The results on Ofﬁce-31 based on AlexNet and ResNet are reported in Table 1, with results of baselines directly reported from the original papers if protocol is the same. The CDAN models signiﬁcantly outperform all comparison methods on most transfer tasks, where CDAN+E is a top-performing variant and CDAN performs slightly worse. It is desirable that CDAN promotes the classiﬁcation accuracies substantially on hard transfer tasks, e.g. A → W and A → D , where the source and target domains are substantially different [ 42 ]. Note that, CDAN+E even outperforms generative pixel-level domain adaptation method GTA, which has a very complex design in both architecture and objectives. The results on the ImageCLEF-DA dataset are reported in Table 2. The CDAN models outperform the comparison methods on most transfer tasks, but with smaller rooms of improvement. This is reasonable since the three domains in ImageCLEF-DA are of equal size and balanced in each category, and are visually more similar than Ofﬁce-31 , making the former dataset easier for domain adaptation.\nE5 [text, Section 3, page 3]: In unsupervised domain adaptation, we are given a source domain D s = { ( x s i =1 of n s labeled examples and a target domain D t = { x t j =1 of n t unlabeled examples. The source domain and target domain are sampled from joint distributions P ( x s , y s ) and Q ( x t , y t ) respectively, and the i.i.d. assumption is violated as P ̸ = Q . The goal of this paper is to design a deep network G : x 7→ y which formally reduces the shifts in the data distributions across domains, such that the target risk ϵ t ( G ) = E ( x t , y t ) ∼ Q [ G ( x t ) ̸ = y t ] can be bounded by the source risk ϵ s ( G ) = E ( x s , y s ) ∼ P [ G ( x s ) ̸ = y s ] plus the distribution discrepancy disc( P, Q ) quantiﬁed by a novel conditional domain discriminator. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E3",
+    "fact": "CDAN+E is the only approach that works reasonably well on all five datasets while remaining a simple discriminative model, whereas UNIT, CyCADA, and GTA are generative pixel-level adaptation methods specifically tailored to digits and synthetic-to-real adaptation tasks."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

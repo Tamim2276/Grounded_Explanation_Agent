@@ -1,0 +1,46 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 263,
+  "prompt_tokens": 1968,
+  "total_tokens": 2231
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the network's focus change as the training epoch increases?\nEvidence:\n[E1] (figure, Figure 8, page 7) (image attached): Figure 8: For each generated image in the green box, near- est neighbors in the corresponding training dataset are dis- played.\n[E2] (figure, Figure 8, page 7): a zoomed view of Figure 8 (image attached)\n[E3] (text, Section L, page 5): Table 1 shows detailed description of the proposed network for 128 × 128 × 3 pixels image. The input parts are encoded into a 100-dimensional vector E . A mask is predicted using E , while an image is generated based on a 200-dimensional vector which is a concatenation of E and a 100-dimensional random noise vector z . The part encoding network uses the leaky ReLU [ 15 ] with a slope of 0.2 as an activation function. The discriminator uses the same leaky ReLU except for the last layer which uses a sigmoid function. The mask prediction and image generation networks use ReLU except for the last layer which uses a sigmoid function and tanh , respectively. The ﬁlters in the network are initialized with a zero mean Gaussian distribution with a standard deviation of 0.02. We train the network with a learning rate of 0.0002. As the epoch increases, we decrease λ 1 and λ 2 in ( 1 ). With this training strategy, the network focuses on predicting a mask in the beginning, while it becomes more important to generate realistic images in the end. The mini-batch size is 64, and the momentum of the Adam optimizer [ 7 ] is set to 0.5. During training, we ﬁrst update the discriminator network and then update the generator network twice. More results\n[E4] (text, Section abstract, page 3): We use three losses to train the network. The ﬁrst loss is the spatial loss L S . It compares the inferred mask and real mask which represents the cropped region of the input patches. The second loss is the appearance loss L A , which maintains input key patches in the generated image without much modiﬁcation. The third loss is the adversarial loss L R to distinguish fake and real images. The whole network is\n[E5] (text, Section L, page 7): The ceramic dataset is made up of 9,311 side-view images (see Figure 6 (f)). Images of both Eastern-style and Western-style potteries are collected from the internet. The network is trained for 800 epochs. 4.2. Image Generation Results Figure 7 shows generation results as the training epoch is increased. At the start, the network focuses on predicting a good mask. As the epoch is increased, input parts become sharper. At the end of the epoch, the network concentrates on generating realistic images. In the case of the CelebA dataset, it is relatively easy to ﬁnd the mask since the im- [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The network focuses on predicting a mask in the beginning, while it becomes more important to generate realistic images in the end as the epoch increases.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "As the epoch increases, we decrease λ 1 and λ 2 in ( 1 ). With this training strategy, the network focuses on predicting a mask in the beginning, while it becomes more important to generate realistic images in the end."
+     }
+    ]
+   },
+   {
+    "text": "At the start, the network focuses on predicting a good mask, and as the epoch is increased, input parts become sharper until the network concentrates on generating realistic images at the end.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E5",
+      "quote": "At the start, the network focuses on predicting a good mask. As the epoch is increased, input parts become sharper. At the end of the epoch, the network concentrates on generating realistic images."
+     }
+    ]
+   }
+  ]
+ }
+}

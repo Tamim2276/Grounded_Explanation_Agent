@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 166,
+  "prompt_tokens": 897,
+  "total_tokens": 1063
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"CDAN+E without random sampling achieves the highest average accuracy across all domain adaptation tasks on Office-31.\" -- cites: E1 (Table 5): row 'CDAN+E (w/o random sampling)', column 'Avg' = 87.7; E4 (Section 4.3): quote \"Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants.\"\n2. \"Among the variants using random sampling, uniform sampling yields a higher average accuracy of 87.0 compared to gaussian sampling which achieves 86.4.\" -- cites: E1 (Table 5): row 'CDAN+E (w/ uniform sampling)', column 'Avg' = 87.0; E1 (Table 5): row 'CDAN+E (w/ gaussian sampling)', column 'Avg' = 86.4\n\nCited evidence:\n[E1] (table, Table 5, page 9): Table 5: Accuracy (%) of CDAN variants on Ofﬁce-31 for unsupervised domain adaptation (ResNet)\nValues (cite as cells):\n  row 'CDAN+E (w/ gaussian sampling)': 'A →W' = 93.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.2±0.3; 'D →A' = 70.2±0.4; 'W →A' = 67.4±0.4; 'Avg' = 86.4\n  row 'CDAN+E (w/ uniform sampling)': 'A →W' = 94.0±0.2; 'D →W' = 98.4±0.2; 'W →D' = 100.0±.0; 'A →D' = 89.8±0.3; 'D →A' = 70.1±0.4; 'W →A' = 69.4±0.4; 'Avg' = 87.0\n  row 'CDAN+E (w/o random sampling)': 'A →W' = 94.1±0.1; 'D →W' = 98.6±0.1; 'W →D' = 100.0±.0; 'A →D' = 92.9±0.2; 'D →A' = 71.0±0.3; 'W →A' = 69.3±0.3; 'Avg' = 87.7\n[E4] (text, Section 4.3, page 8): Ablation Study We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. Table 1 ∼ 4 shows that CDAN+E outperforms CDAN , proving that entropy conditioning can prioritize easy-to-transfer examples and encourage certain predictions. Conditioning Strategies Besides multilinear conditioning, we investigate DANN-[f,g] with the domain discriminator imposed on the concatenation of f and g , DANN-f and DANN-g with the"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Table 5 shows the average accuracy for CDAN+E (w/o random sampling) is 87.7, which is the highest in the table, and Section 4.3 confirms that CDAN+E (w/o random sampling) performs best."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "Table 5 shows the average accuracy for CDAN+E (w/ uniform sampling) is 87.0 and for CDAN+E (w/ gaussian sampling) is 86.4."
+   }
+  ]
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 146,
+  "total_tokens": 216
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which policy learning method achieved the lowest regret in Ex. 2?\nSub-goals:\n1. [table] Which policy learning method achieved the lowest regret in Ex. 2?\nAlready tried: sub-goal 1 with table\nStill missing: The evidence only provides results for Ex. 3 (Table 2), but the question asks about Ex. 2."
+  }
+ ],
+ "answer": {
+  "reason": "Since the table search was already used and did not provide information for Ex. 2, I need to search the main text paragraphs for mentions of Experiment 2 and the corresponding policy learning regret results.",
+  "tool": "text",
+  "query": "Experiment 2 policy learning regret"
+ }
+}

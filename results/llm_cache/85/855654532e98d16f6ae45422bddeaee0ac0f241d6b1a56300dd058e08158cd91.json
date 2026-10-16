@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 91,
+  "prompt_tokens": 476,
+  "total_tokens": 567
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"LIME results in a more shattered image, indicating that it focuses its weights on a smaller set of features rather than showing that neighboring pixels have similar influence.\" -- cites: E3 (Section 8): quote \"LIME, while generally agreeing with the other two, results in a more ’shattered’ image. Seemingly it’s better for a classiﬁer to focus it’s weights on a smaller set of features, while for MIM and Parzen you can see that neighbouring pixels actually have similar inﬂuence.\"\n\nCited evidence:\n[E3] (text, Section 8, page 15): the measures indicate that the brighter (darker) the pixel in the original image, the more ‘happy’ (‘sad’) the face. The third, ﬁfth and seventh column show the point of interest shifted according to the respective inﬂuence vector, i.e. the pixels with positive inﬂuence were brightened, and darkened if their inﬂuence was negative. According to the MIM inﬂuence vector, the factors that contribute to this face looking happy, are a bright mouth with darkened corners, bright eyebrows, bright tone of the face, and a darkened background. Shifting the picture along the inﬂuence vector seems to make the person in the picture smile wider, and open their mouth slightly. The Parzen vector differs from the MIM vector mainly in that it suggests dark eyes as indicative of the label and does not indicate the eyebrows as strongly. LIME, while generally agreeing with the other two, results in a more ’shattered’ image. Seemingly it’s better for a classiﬁer to focus it’s weights on a smaller set of features, while for MIM and Parzen you can see that neighbouring pixels actually have similar inﬂuence."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text in E3 explicitly states that LIME results in a more 'shattered' image and compares it by noting that for MIM and Parzen, neighboring pixels have similar influence, while LIME focuses its weights on a smaller set of features."
+   }
+  ]
+ }
+}

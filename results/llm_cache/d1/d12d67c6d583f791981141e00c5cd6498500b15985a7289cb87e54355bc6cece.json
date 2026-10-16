@@ -1,0 +1,50 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 248,
+  "prompt_tokens": 1477,
+  "total_tokens": 1725
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the model capture different perspectives on immigration when considering tone as a covariate?\nEvidence:\n[E1] (figure, Figure 2, page 8) (image attached): Figure 2: Topics inferred by a joint model of words and tone, and the corresponding probability of pro- immigration tone for each topic. A topic is repre- sented by the top words sorted by word probability throughout the paper.\nWords printed in the figure: 0 1 p(pro-immigration | topic) arrested charged charges agents operation state gov benefits arizona law bill bills bush border president bill republicans labor jobs workers percent study wages asylum judge appeals deportation court visas visa applications students citizenship boat desert died men miles coast haitian english language city spanish community\n[E2] (figure, Figure 2, page 8): a zoomed view of Figure 2 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The model uses a \"joint model of words and tone\" to infer \"Topics\" and determine the \"probability of pro- immigration tone for each topic\".",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Topics inferred by a joint model of words and tone, and the corresponding probability of pro- immigration tone for each topic."
+     }
+    ]
+   },
+   {
+    "text": "Each topic is represented by \"top words sorted by word probability throughout the paper\", as shown alongside the \"p(pro-immigration | topic)\".",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "A topic is repre- sented by the top words sorted by word probability throughout the paper."
+     },
+     {
+      "evidence": "E1",
+      "quote": "p(pro-immigration | topic)"
+     }
+    ]
+   }
+  ]
+ }
+}

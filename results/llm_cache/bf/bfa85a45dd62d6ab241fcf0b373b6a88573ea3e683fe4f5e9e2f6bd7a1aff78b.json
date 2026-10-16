@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 19.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 193,
+  "total_tokens": 256
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting, and what trade-off does this model exhibit compared to other models?\nSub-goals:\n1. [table] Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting?\n2. [figure] What trade-off does this model exhibit compared to other models?\nAlready tried: sub-goal 1 with table, sub-goal 2 with figure\nStill missing: The figure and text do not discuss the trade-offs of the model achieving the best NPMI scores."
+  }
+ ],
+ "answer": {
+  "reason": "I need to search the main text to find the discussion regarding the trade-offs exhibited by the best-performing model in the unsupervised setting.",
+  "tool": "text",
+  "query": "unsupervised setting NPMI score trade-off best model"
+ }
+}

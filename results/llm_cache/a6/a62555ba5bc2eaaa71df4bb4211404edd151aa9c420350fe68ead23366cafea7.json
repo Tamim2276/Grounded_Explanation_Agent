@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 46,
+  "prompt_tokens": 424,
+  "total_tokens": 470
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three goals that the proposed algorithm must achieve simultaneously?\nSub-questions:\n1. [figure] What are the three goals that the proposed algorithm must achieve simultaneously?\nEvidence:\nE1 [text, Section 6.2, page 11]: In the manuscript, we show image generation with three local patches using the proposed algorithm. Figure 13 shows generated images based on two local patches. The results show that the network can be trained with different number of input patches.\nE2 [text, Section L, page 8]: Figure 11 shows failure cases of the proposed algorithm. It is difﬁcult to generate images when detected key input patches include less informative regions (column 1 and 2) or rare cases (column 3). In addition, when input patches have conﬂicting information, e.g., the same nose-mouth patches\nE3 [text, Section 6.1, page 11]: Figure 12 shows generated images and masks when input patches are from different cars. Overall, the proposed algorithm generates reasonable images despite large variations of input patches."
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence does not state the three goals that the proposed algorithm must achieve simultaneously.",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 14.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 124,
+  "prompt_tokens": 769,
+  "total_tokens": 893
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the three different network architectures used in the comparison study?\nSub-questions:\n1. [figure] What are the three different network architectures used in the comparison study?\nEvidence:\nE1 [text, Section E, page 5]: Experimental study In the following we describe a series of experiments and observations justifying the three claims we made in the abstract of this paper. The beneﬁts of LSTM and MDN Our network architecture uses LSTM layers and an MDNbased error signal. These choices need to be validated, as many researchers reported success on similar tasks with a simpler network - without recurrent layers and using mean squared error (MSE) as an error signal. For instance, (Levine et al. 2016) use convolutional layers (for extracting poses\nE2 [text, Section E, page 5]: LSTM-MDN: Mixture density network containing 3 layers of LSTM with 50 memory states in each layer. The mixture contains 20 Gaussian kernels. The LSTM-MDN network is described in Figure 3, while the architectures of the other approaches are shown in Figure 5. Each network had been separately trained for the pick and place and the push to desired pose respectively, in effect creating 8 different controllers. The resulting controllers had been tested in the virtual environment by requiring the robot to perform randomly generated tasks 20 times. If it can not complete the task in a limited time (1 minute for the ﬁrst task and 2 minutes for the second one), we count the try as a failure and reset the position of the box. The numerical success rates are shown in the following table:\nE3 [text, Section E, page 5]: from images) followed by feedforward layers to give a unimodal prediction about the next waypoint in the trajectory. As our controller is not end-to-end (in real world experiments we are using an off-the-shelf solution for computer vision), we can only compare our controller with the part of the controller from (Levine et al. 2016) that follows the convolutional layers used for image processing. In order to be able to perform a rough comparison, we implemented a feedforward network that closely matches that controller, but replaces the convolutional layers with a direct position input. With this, we have four choices for the controller structure: FeedForward-MSE: 3 layers of fully connected feedforward network with 100 neurons in each layer and mean squared error as the cost function. LSTM-MSE: 3 layers of LSTM with 50 memory states in each layer and mean squared error as the cost function. FeedForward-MDN: Mixture density network containing 3 fully connected feedforward layers with 100 neurons in each layer. The mixture contains 20 Gaussian kernels."
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E2 and E3",
+    "fact": "The three network architectures compared are LSTM-MDN, FeedForward-MSE, LSTM-MSE, and FeedForward-MDN (four choices are described in total, but specific architectures include LSTM-MDN, FeedForward-MSE, and FeedForward-MDN or LSTM-MSE)."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

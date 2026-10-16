@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 126,
+  "prompt_tokens": 381,
+  "total_tokens": 507
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The average number of answers per question is 6.36 in the training set and 5.48 in the development set.\" -- cites: E6 (Table 2): row 'Training', column '#answers per question' = 6.36; E6 (Table 2): row 'Dev', column '#answers per question' = 5.48\n2. \"The provided evidence does not contain a possible explanation for the difference in the average number of answers per question between the training and development sets.\" -- cites: E6 (Table 2): quote \"Table 2: Statistics of the answer selection data set\"\n\nCited evidence:\n[E6] (table, Table 2, page 5): Table 2: Statistics of the answer selection data set\nValues (cite as cells):\n  row 'Training': '#question' = 2600; '#answer' = 16541; '#answers per question' = 6.36\n  row 'Dev': '#question' = 300; '#answer' = 1645; '#answers per question' = 5.48\n  row 'Test': '#question' = 329; '#answer' = 1976; '#answers per question' = 6.00"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Table 2 explicitly lists the average number of answers per question as 6.36 for the Training set and 5.48 for the Dev set."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence (Table 2 caption) only provides dataset statistics and does not contain any explanation for the difference between the sets."
+   }
+  ]
+ }
+}

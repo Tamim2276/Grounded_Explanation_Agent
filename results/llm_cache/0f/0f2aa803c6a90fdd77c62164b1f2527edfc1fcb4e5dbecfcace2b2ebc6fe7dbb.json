@@ -1,0 +1,56 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 301,
+  "prompt_tokens": 836,
+  "total_tokens": 1137
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best overall on VQA-2014val, and how does its performance compare to human performance on the same dataset?\nEvidence:\n[E1] (table, Table 4, page 8): Table 4: Accuracy (%) on the validation set in VQA.\nValues (cite as cells):\n  row 'MLP-A': 'Orig' = 31.2; 'IoU' = 39.9; 'QoU' = 45.7; 'IoU +QoU' = 31.2; 'All' = 27.4\n  row 'MLP-IA': 'Orig' = 42.0; 'IoU' = 39.8; 'QoU' = 55.1; 'IoU +QoU' = 34.1; 'All' = 28.7\n  row 'MLP-QA': 'Orig' = 58.0; 'IoU' = 84.7; 'QoU' = 55.1; 'IoU +QoU' = 54.4; 'All' = 50.0\n  row 'MLP-IQA': 'Orig' = 64.6; 'IoU' = 85.2; 'QoU' = 65.4; 'IoU +QoU' = 63.7; 'All' = 58.9\n  row 'HieCoAtt∗': 'Orig' = 63.0; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 63.7; 'All' = -\n  row 'Attntion∗': 'Orig' = 66.0; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 66.7; 'All' = -\n  row 'Human': 'Orig' = 88.5†; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 89.0; 'All' = -\n  row 'Random': 'Orig' = 5.6; 'IoU' = 25.0; 'QoU' = 25.0; 'IoU +QoU' = 14.3; 'All' = 4.2\n  row '∗: based †:': 'Orig' = on our taken; 'IoU' = implementation from; 'QoU' = (Antol et; 'IoU +QoU' = or modiﬁcation al., 2015); 'All' = "
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Among the methods listed in the table, the 'Attntion*' method achieves the highest performance with an accuracy of 66.0 on 'Orig' and 66.7 on 'IoU +QoU', while human performance is 88.5† on 'Orig' and 89.0 on 'IoU +QoU'.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Attntion*",
+      "col": "Orig",
+      "value": "66.0"
+     },
+     {
+      "evidence": "E1",
+      "row": "Attntion*",
+      "col": "IoU +QoU",
+      "value": "66.7"
+     },
+     {
+      "evidence": "E1",
+      "row": "Human",
+      "col": "Orig",
+      "value": "88.5†"
+     },
+     {
+      "evidence": "E1",
+      "row": "Human",
+      "col": "IoU +QoU",
+      "value": "89.0"
+     }
+    ]
+   }
+  ]
+ }
+}

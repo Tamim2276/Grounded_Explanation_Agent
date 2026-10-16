@@ -1,0 +1,36 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 17.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 128,
+  "prompt_tokens": 2298,
+  "total_tokens": 2426
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting, and what trade-off does this model exhibit compared to other models?\nSub-questions:\n1. [table] Which model achieves the best NPMI scores (both internal and external) in the unsupervised setting?\n2. [figure] What trade-off does this model exhibit compared to other models?\nEvidence:\nE1 [table, Table 5, page 12]: Table 5: Performance of various models on the Yahoo answers dataset with 250 topics and a 5,000- word vocabulary. SAGE did not ﬁnish in 72 hours so we omit it from this table.\nModel | Ppl. ↓ | NPMI (int.) ↑ | NPMI (ext.) ↑ | Sparsity ↑\nLDA | 1035 | 0.29 | 0.15 | 0\nNVDM | 4588 | 0.20 | 0.09 | 0\nSCHOLAR - B.G. | 1589 | 0.27 | 0.16 | 0\nSCHOLAR | 1596 | 0.33 | 0.13 | 0\nSCHOLAR + W.V. | 1780 | 0.37 | 0.15 | 0\nSCHOLAR + REG. | 1840 | 0.34 | 0.13 | 0.44\nE2 [figure, Figure 2, page 8] (image attached): Figure 2: Topics inferred by a joint model of words and tone, and the corresponding probability of pro- immigration tone for each topic. A topic is repre- sented by the top words sorted by word probability throughout the paper.\nWords printed in the figure: 0 1 p(pro-immigration | topic) arrested charged charges agents operation state gov benefits arizona law bill bills bush border president bill republicans labor jobs workers percent study wages asylum judge appeals deportation court visas visa applications students citizenship boat desert died men miles coast haitian english language city spanish community\nE3 [figure, Figure 2, page 8]: Zoomed view (300 dpi) of: Figure 2: Topics inferred by a joint model of words and tone, and the corresponding probability of pro- immigration tone for each topic. A topic is repre- sented by the top words sorted by word probability throughout the paper.\nWords printed in the figure: 0 1 p(pro-immigration | topic) arrested charged charges agents operation state gov benefits arizona law bill bills bush border president bill republicans labor jobs workers percent study wages asylum judge appeals deportation court visas visa applications students citizenship boat desert died men miles coast haitian english language city spanish community\nE4 [text, Section 3.3, page 6]: This approach works well in practice (as we show in § 4.2 ), but does not scale to large numbers of labels, or other types of prediction problems, such as multi-class classiﬁcation or regression. The choice to include metadata as covariates, labels, or both, depends on the data. The key point is that we can incorporate metadata in two very different ways, depending on what we want from the model. Labels guide the model to infer topics that are relevant to those labels, whereas covariates induce explicit deviations, leaving the latent variables to account for the rest of the content.\nE5 [text, Section E, page 12]: For the external evaluation of NPMI, we use the co-occurrence statistics from all New York Times articles in the English Gigaword published from the start of 2000 to the end of 2009, processed in the same way as our data. For the text classiﬁcation experiments, we use the scikit-learn implementation of logistic regression. We give it access to the same input data as our model (using the same vocabulary), and tune the strength of l 2 regularization using crossvalidation. For our model, we only tune the number of epochs, evaluating on development data. Our models for this task did not use regularization or word vectors.\nE6 [text, Section 3.1, page 4]: We can choose to ignore various parts of this model, if, for example, we don’t have any labels or observed covariates, or we don’t wish to use interactions or sparsity. 8 Other generator networks could also be considered, with additional layers to represent more complex interactions, although this might involve some loss of interpretability. In the absence of metadata, and without sparsity, our model is equivalent to the ProdLDA model of Srivastava and Sutton ( 2017 ) with an explicit background term, and ProdLDA is, in turn, a [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "SCHOLAR + W.V. achieves the best internal NPMI (0.37) and SCHOLAR - B.G. achieves the best external NPMI (0.16)."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The trade-off exhibited by the model compared to other models is not provided in the evidence.",
+  "sufficient": false
+ }
+}

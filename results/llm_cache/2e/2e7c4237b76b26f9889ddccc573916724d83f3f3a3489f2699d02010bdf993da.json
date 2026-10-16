@@ -1,0 +1,39 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 151,
+  "prompt_tokens": 602,
+  "total_tokens": 753
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which sampling strategy for random matrices in CDAN+E leads to the highest average accuracy across all domain adaptation tasks on Office-31? How does this compare to the performance of CDAN+E variants that use random sampling?\nSub-questions:\n1. [table] Which sampling strategy for random matrices in CDAN+E leads to the highest average accuracy across all domain adaptation tasks on Office-31?\n2. [figure] How does this compare to the performance of CDAN+E variants that use random sampling?\nEvidence:\nE1 [table, Table 5, page 9]: Table 5: Accuracy (%) of CDAN variants on Ofﬁce-31 for unsupervised domain adaptation (ResNet)\nMethod | A →W | D →W | W →D | A →D | D →A | W →A | Avg\nCDAN+E (w/ gaussian sampling) | 93.0±0.2 | 98.4±0.2 | 100.0±.0 | 89.2±0.3 | 70.2±0.4 | 67.4±0.4 | 86.4\nCDAN+E (w/ uniform sampling) | 94.0±0.2 | 98.4±0.2 | 100.0±.0 | 89.8±0.3 | 70.1±0.4 | 69.4±0.4 | 87.0\nCDAN+E (w/o random sampling) | 94.1±0.1 | 98.6±0.1 | 100.0±.0 | 92.9±0.2 | 71.0±0.3 | 69.3±0.3 | 87.7"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "CDAN+E (w/o random sampling) achieves the highest average accuracy of 87.7."
+   },
+   {
+    "sub_question": 2,
+    "evidence": "E1",
+    "fact": "CDAN+E without random sampling achieves 87.7 avg accuracy, outperforming uniform sampling (87.0) and gaussian sampling (86.4)."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

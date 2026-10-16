@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 178,
+  "prompt_tokens": 855,
+  "total_tokens": 1033
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"SCHOLAR + W.V. achieves the highest internal NPMI score of 0.37 and SCHOLAR - B.G. achieves the highest external NPMI score of 0.16 among the listed models.\" -- cites: E1 (Table 5): row 'SCHOLAR + W.V.', column 'NPMI (int.) ↑' = 0.37; E1 (Table 5): row 'SCHOLAR - B.G.', column 'NPMI (ext.) ↑' = 0.16\n2. \"However, SCHOLAR + W.V. has a higher perplexity trade-off of 1780 compared to 1589 for SCHOLAR - B.G., while both maintain a sparsity of 0.\" -- cites: E1 (Table 5): row 'SCHOLAR + W.V.', column 'Ppl. ↓' = 1780; E1 (Table 5): row 'SCHOLAR - B.G.', column 'Ppl. ↓' = 1589; E1 (Table 5): row 'SCHOLAR + W.V.', column 'Sparsity ↑' = 0; E1 (Table 5): row 'SCHOLAR - B.G.', column 'Sparsity ↑' = 0\n\nCited evidence:\n[E1] (table, Table 5, page 12): Table 5: Performance of various models on the Yahoo answers dataset with 250 topics and a 5,000- word vocabulary. SAGE did not ﬁnish in 72 hours so we omit it from this table.\nValues (cite as cells):\n  row 'LDA': 'Ppl. ↓' = 1035; 'NPMI (int.) ↑' = 0.29; 'NPMI (ext.) ↑' = 0.15; 'Sparsity ↑' = 0\n  row 'NVDM': 'Ppl. ↓' = 4588; 'NPMI (int.) ↑' = 0.20; 'NPMI (ext.) ↑' = 0.09; 'Sparsity ↑' = 0\n  row 'SCHOLAR - B.G.': 'Ppl. ↓' = 1589; 'NPMI (int.) ↑' = 0.27; 'NPMI (ext.) ↑' = 0.16; 'Sparsity ↑' = 0\n  row 'SCHOLAR': 'Ppl. ↓' = 1596; 'NPMI (int.) ↑' = 0.33; 'NPMI (ext.) ↑' = 0.13; 'Sparsity ↑' = 0\n  row 'SCHOLAR + W.V.': 'Ppl. ↓' = 1780; 'NPMI (int.) ↑' = 0.37; 'NPMI (ext.) ↑' = 0.15; 'Sparsity ↑' = 0\n  row 'SCHOLAR + REG.': 'Ppl. ↓' = 1840; 'NPMI (int.) ↑' = 0.34; 'NPMI (ext.) ↑' = 0.13; 'Sparsity ↑' = 0.44"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Table 5 shows SCHOLAR + W.V. has an internal NPMI of 0.37 and SCHOLAR - B.G. has an external NPMI of 0.16, which are indeed the highest values in their respective columns among all listed models."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "Table 5 confirms SCHOLAR + W.V. has Ppl = 1780, SCHOLAR - B.G. has Ppl = 1589, and both have a Sparsity value of 0."
+   }
+  ]
+ }
+}

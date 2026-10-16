@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 19.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 180,
+  "total_tokens": 233
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What does the induced schema Win <A4, B3, C2> represent?\nSub-goals:\n1. [table] What does the induced schema Win <A4, B3, C2> represent?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: The provided evidence contains examples of schemata like win⟨A2, B10, C3⟩, but does not list or represent the specific induced schema Win <A4, B3, C2>."
+  }
+ ],
+ "answer": {
+  "reason": "I will search the figures to see if the induced schema Win <A4, B3, C2> is illustrated or represented in a diagram.",
+  "tool": "figure",
+  "query": "Win A4 B3 C2 schema"
+ }
+}

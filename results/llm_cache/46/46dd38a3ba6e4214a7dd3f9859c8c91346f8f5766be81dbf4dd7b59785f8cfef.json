@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 54.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 53,
+  "prompt_tokens": 392,
+  "total_tokens": 445
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The results show that the proposed algorithm is able to deal with certain amount of noise when generating realistic images.\" -- cites: E3 (Section L): quote \"The results show that the proposed algorithm is able to deal with certain amount of noise when generating realistic images.\"\n\nCited evidence:\n[E3] (text, Section L, page 8): Figure 9 shows the results when input patches are degraded by noises. We apply the mean zero Gaussian noise at each pixel of the third input patch with the standard deviation of 0.1 (column 1-4) and 0.5 (column 5-8). The results show that the proposed algorithm is able to deal with certain amount of noise when generating realistic images. Figure 10 shows generated images and masks when input patches are obtained from different persons. The results show that the proposed algorithm can handle a wide scope of input patch variations. For example, inputs contain different skin colors in the ﬁrst column. In this case, it is not desirable to exactly preserve inputs since it will generate a face image with two different skin colors. The proposed algorithm generates an image with a reasonable skin color as well as the overall shape. Other cases include with or without sunglasses (column 2), different skin textures (column 3), hairstyle variations (column 4 and 5), and various expressions and orientations. Despite large variations, the proposed algorithm is able to generate realistic images."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence E3 contains the exact quote matching the claim."
+   }
+  ]
+ }
+}

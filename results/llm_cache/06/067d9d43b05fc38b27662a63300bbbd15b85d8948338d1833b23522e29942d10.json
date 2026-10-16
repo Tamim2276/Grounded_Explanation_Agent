@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 149,
+  "prompt_tokens": 1504,
+  "total_tokens": 1653
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 3 shows T-SNE visualizations for (a) ResNet, (b) DANN, (c) CDAN- f , and (d) CDAN- fg with red representing class A and blue representing class W.\" -- cites: E1 (Figure 3): quote \"Figure 3: T-SNE of (a) ResNet, (b) DANN, (c) CDAN- f , (d) CDAN- fg (red: A ; blue: W ).\"\n2. \"Among the four methods shown, CDAN-fg is the most effective at separating the two classes of data points, as it forms distinct, well-separated clusters where the red and blue data points are grouped closely together within separate localized structures.\" -- cites: E1 (Figure 3): quote \"(d) CDAN-fg\"; E2 (Figure 3): observation \"CDAN-fg shows multiple distinct, well-separated clusters containing tight groups of red and blue data points.\"\n\nCited evidence:\n[E1] (figure, Figure 3, page 9) (image attached): Figure 3: T-SNE of (a) ResNet, (b) DANN, (c) CDAN- f , (d) CDAN- fg (red: A ; blue: W ).\nWords printed in the figure: which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DA (a) ResNet (b) DANN (c) CDAN-f (d) CDAN-fg\n[E2] (figure, Figure 3, page 9): a zoomed view of Figure 3 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence directly matches the statement that Figure 3 shows T-SNE visualizations for ResNet, DANN, CDAN-f, and CDAN-fg with red representing A and blue representing W."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence and figure observation confirm that CDAN-fg forms distinct, well-separated clusters containing tight groups of red and blue data points, making it the most effective among the four methods."
+   }
+  ]
+ }
+}

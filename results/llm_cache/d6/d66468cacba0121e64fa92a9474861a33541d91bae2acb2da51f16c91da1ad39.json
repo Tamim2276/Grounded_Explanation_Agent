@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 98,
+  "prompt_tokens": 1854,
+  "total_tokens": 1952
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The shortcuts in the Visual7W dataset can be remedied by procedures named QoU and IoU that create alternative decoys making both the correct answer and the decoys highly likely when examining either the image or the question alone.\" -- cites: E1 (Figure 1): quote \"Our two procedures — QoU and IoU (cf. Sect. 4 ) — create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the question alone .\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 1) (image attached): Figure 1: An illustration of how the shortcuts in the Vi- sual7W dataset ( Zhu et al. , 2016 ) should be remedied. In the original dataset, the correct answer “A train” is easily selected by a machine as it is far often used as the correct answer than the other decoy (negative) an- swers. (The numbers in the brackets are probability scores computed using eq. ( 2 )). Our two procedures — QoU and IoU (cf. Sect. 4 ) — create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the ques- tion alone . In these cases, machines make mistakes un- less they consider all information together . Thus, the alternative decoys suggested our procedures are better designed to gauge how well a learning algorithm can understand all information equally well.\nWords printed in the figure: Wei-Lun Chao∗, Hexiang Hu∗, Fei Sha University of Southern California Los Angeles, California, USA weilunchao760414@gmail.com, hexiang.frank.hu@gmail.com, feisha@usc.edu Abstract al question answering (Visual QA) has at- ed a lot of attention lately, seen essentially form of (visual) Turing test that artificial igence should strive to achieve. In this r, we study a crucial component of this how can we design good datasets for ask? We focus on the design of multiple- ce based datasets where the learner has to t the right answer from a set of candi- ones including the target (i.e. the correct and the decoys (i.e. the incorrect ones). Question: What vehicle is pictured? Image only Unresolvable (IoU) a. Overcast. (0.5455) b. Daytime. (0.4941) c. A building. (0.4829) d. A train. (0.5363) Question only Unresolvable (QoU) a. A bicycle. (0.2813) b. A truck. (0.5364) c. A boat. (0.4631) d. A train. (0.5079) Original a. A car. (0.2083) b. A bus. (0.6151) c. A cab. (0.5000) d. A train. (0.7328) Candidate Answers: [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence (Figure 1 caption) explicitly states that the procedures QoU and IoU create alternative decoys such that both the correct answer and the decoys are highly likely by examining either the image or the question alone, and illustrates how shortcuts in Visual7W should be remedied."
+   }
+  ]
+ }
+}

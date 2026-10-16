@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 172,
+  "total_tokens": 227
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nSub-goals:\n1. [figure] Which explanation method seems to place the most emphasis on specific, localized features rather than smooth, gradual changes in pixel intensity?\nAlready tried: sub-goal 1 with figure\nStill missing: The provided figure showing Parzen violation of monotonicity does not mention or compare explanation methods regarding their emphasis on specific localized features versus smooth gradual changes in pixel intensity."
+  }
+ ],
+ "answer": {
+  "reason": "Since the figure search did not provide the comparison of explanation methods regarding localized features, we must now search the text paragraphs.",
+  "tool": "text",
+  "query": "explanation method localized features pixel intensity smooth"
+ }
+}

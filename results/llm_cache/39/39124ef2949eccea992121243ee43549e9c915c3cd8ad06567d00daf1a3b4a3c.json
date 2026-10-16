@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 1131,
+  "total_tokens": 1186
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best in terms of test error?\nSub-questions:\n1. [figure] Which model performs the best in terms of test error?\nEvidence:\nE1 [text, Section 4.3, page 8]: Ablation Study We examine the sampling strategies of the random matrices in Equation (6) . We testify CDAN+E (w/ gaussian sampling) and CDAN+E (w/ uniform sampling) with their random matrices sampled only once from Gaussian and Uniform distributions, respectively. Table 5 shows that CDAN+E (w/o random sampling) performs best while CDAN+E (w/ uniform sampling) performs the best across the randomized variants. Table 1 ∼ 4 shows that CDAN+E outperforms CDAN , proving that entropy conditioning can prioritize easy-to-transfer examples and encourage certain predictions. Conditioning Strategies Besides multilinear conditioning, we investigate DANN-[f,g] with the domain discriminator imposed on the concatenation of f and g , DANN-f and DANN-g with the\nE2 [text, Section 4.3, page 9]: Distribution Discrepancy The A -distance is a measure for distribution discrepancy [ 4 , 33 ], deﬁned as dist A = 2 (1 − 2 ϵ ) , where ϵ is the test error of a classiﬁer trained to discriminate the source from target. Figure 2(c) shows dist A on tasks A → W , W → D with features of ResNet, DANN, and CDAN. We observe that dist A on CDAN features is smaller than dist A on both ResNet and DANN features, implying that CDAN features can reduce the domain gap more effectively. As domains W and D are similar, dist A of task W → D is smaller than that of A → W , implying higher accuracies. Convergence We testify the convergence of ResNet, DANN, and CDANs, with the test errors on task A → W shown in Figure 2(d). CDAN enjoys faster convergence than DANN, while CDAN (M) converges faster than CDAN (RM). Note that CDAN (M) constitutes high-dimensional multilinear map, which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DANN.\nE3 [text, Section 4.1, page 6]: Digits We investigate three digits datasets: MNIST , USPS , and Street View House Numbers ( SVHN ). We adopt the evaluation protocol of CyCADA [ 22 ] with three transfer tasks: USPS to MNIST ( U → M ), MNIST to USPS ( M → U ), and SVHN to MNIST ( S → M ). We train our model using the training sets: MNIST (60,000), USPS (7,291), standard SVHN train (73,257). Evaluation is reported on the standard test sets: MNIST (10,000), USPS (2,007) (the numbers of images are in parentheses).\nE4 [table, Table 5, page 9]: Table 5: Accuracy (%) of CDAN variants on Ofﬁce-31 for unsupervised domain adaptation (ResNet)\nMethod | A →W | D →W | W →D | A →D | D →A | W →A | Avg\nCDAN+E (w/ gaussian sampling) | 93.0±0.2 | 98.4±0.2 | 100.0±.0 | 89.2±0.3 | 70.2±0.4 | 67.4±0.4 | 86.4\nCDAN+E (w/ uniform sampling) | 94.0±0.2 | 98.4±0.2 | 100.0±.0 | 89.8±0.3 | 70.1±0.4 | 69.4±0.4 | 87.0\nCDAN+E (w/o random sampling) | 94.1±0.1 | 98.6±0.1 | 100.0±.0 | 92.9±0.2 | 71.0±0.3 | 69.3±0.3 | 87.7"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "None of the evidence items contain a figure showing test error rates to determine which model performs the best in terms of test error.",
+  "sufficient": false
+ }
+}

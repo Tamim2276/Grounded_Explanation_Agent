@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 135,
+  "total_tokens": 189
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the different stages involved in constructing the Concept Interaction Graph (CIG) from a pair of documents?\nSub-goals:\n1. [figure] What are the different stages involved in constructing the Concept Interaction Graph (CIG) from a pair of documents?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "The figure tool is appropriate for finding visual representations and overviews of workflow stages like the construction of the Concept Interaction Graph.",
+  "tool": "figure",
+  "query": "Concept Interaction Graph construction stages framework"
+ }
+}

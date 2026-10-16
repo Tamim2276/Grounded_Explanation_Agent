@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 84,
+  "prompt_tokens": 491,
+  "total_tokens": 575
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"LIME is parameterized by a variable rho governing the behavior of a distance function, and increasing rho makes LIME assign influence to points further away from the point of interest.\" -- cites: E5 (Section 8.1): quote \"increasing ρ makes LIME assign inﬂuence to points further away from the point of interest.\"\n\nCited evidence:\n[E5] (text, Section 8.1, page 15): Tables 2 and 3 present additional experimental results on the dataset from (Goodfellow et al., 2013), with inﬂuence vectors computed similarly as in Section 8 of the main paper. In Table 2 depicted are ﬁve happy and ﬁve sad labeled images, their inﬂuence vector and the images shifted along the vector to ‘enhance’ their label as suggested by the inﬂuence vector; we use MIM, Parzen and LIME to compute inﬂuence. MIM and Parzen produce similar vectors, while the outputs of LIME are visibly more jagged, introducing much more noise to the shifted image. As one might expect, inﬂuence vectors for opposing labels tend to have similar but inverted direction. In Section 8, we test LIME and Parzen with certain parameter choices. LIME is parameterized by a variable ρ governing the behavior of a distance function α ρ (see the deﬁnition of LIME in Equation (14) of the main paper); increasing ρ makes LIME assign inﬂuence to points further away from the point of interest. We also consider LIME with (inverse) cosine similarity as our choice of α in Equation (14) of the main paper; this is again parameterized by a µ parameter controlling the amount of weight placed on points further away from the point of interest. Parzen is parameterized by the choice of σ in Equation (13) in the main paper."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly states: 'LIME is parameterized by a variable ρ governing the behavior of a distance function...; increasing ρ makes LIME assign inﬂuence to points further away from the point of interest.'"
+   }
+  ]
+ }
+}

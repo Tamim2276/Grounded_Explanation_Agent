@@ -1,0 +1,36 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 18.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 145,
+  "prompt_tokens": 2064,
+  "total_tokens": 2209
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why is the number of demonstrations after the shift not available for the \"Push to Pose\" task?\nEvidence:\n[E1] (figure, Figure 2, page 3) (image attached): Figure 2: Creating multiple trajectories from a demonstra- tion recorded at a higher frequency.\nWords printed in the figure: ⚫ ▲ ⬛ ◉ ⬟ � ▢ ◇ ⚫ ▲ ⬛ ◉ ⬟ � ▢ ◇ ⚫ ... Original trajectory ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ⚫ ... ⚫ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ... ▲ ▢ ▢ ▢ ▢ ▢ ▢ ▢ ... ▢ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ... ◇ . . . 8 generated trajectories Waypoints\n[E2] (figure, Figure 2, page 3): a zoomed view of Figure 2 (image attached)\n[E3] (text, Section E, page 7): Another reason for the lower performance in the physical world is due to the differences in the size, shape, physical attributes such as friction, etc. of the gripper and objects between the simulation and real world. As we discussed when introducing the problems, the push-to-pose tasks is more dependent of the physics (such as the friction between the object and the table determines the way the object moves when pushed). This creates a bigger difference between the virtual and the physical environment compared to the pick and place task, where after a successful grasp the robot is essentially in control of the environment. Thus, the push to pose task shows a stronger decrease in success rate when moving to the physical world. Imperfect demonstrations teach the robot how to self-correct The conventional wisdom in any learning from demonstration system is that the better the demonstrations, the better\n[E4] (text, Section abstract, page 3): times the grasp was unsuccessful, or the user dropped the object in an incorrect position and had to pick it up again. After ﬁnishing a demonstration, the user was immediately presented with a new instance of the problem, with randomly generated initial conditions. All the experiments had been recorded in the trajectory representation format presented above, at a recording frequency of 33Hz. However, we found that the neural network controller can be trained more efﬁ- ciently if the trajectories are sampled at a lower rate, with a rate of 4Hz to giving the best results. To improve learning, we extended our training data by exploiting both the properties of the individual tasks and trajectory recording technique. First, we noticed that in the pick and place task the user can put the object to any location on the shelf. Thus we were able to generate new synthetic training data by shifting the existing demonstration trajectories parallel with the shelf. As the pushing to desired pose task requires a speciﬁc coordinate and pose to succeed, this approach is not possible for the second task.\n[E5] (text, Section E, page 7): In this paper we have developed a technique through which a robotic arm can be taught to perform certain manipulation tasks. We focused on two tasks that are frequently required of robots that assist disabled users in activities of daily living: pick and place and push to desired pose. As disabled users can not generate large numbers of demonstrations on physical robots, we designed an approach where the user demonstrates the task in a virtual environment. These virtual demonstrations are used to teach a deep neural network based robot controller. Then, the controller is transferred to the physical robot. We found that the best performance was obtained using a network with LSTM layers and a mixture density network based error signal. We also found that having imperfect demonstrations, where users occasionally make mistakes but correct them, allows the controller to correct the inevitable mistakes it makes when transferred to a physical environment. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "For the pick and place task, new synthetic training data can be generated by shifting existing demonstration trajectories parallel with the shelf, whereas \"As the pushing to desired pose task requires a speciﬁc coordinate and pose to succeed, this approach is not possible for the second task.\"",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "As the pushing to desired pose task requires a speciﬁc coordinate and pose to succeed, this approach is not possible for the second task."
+     }
+    ]
+   }
+  ]
+ }
+}

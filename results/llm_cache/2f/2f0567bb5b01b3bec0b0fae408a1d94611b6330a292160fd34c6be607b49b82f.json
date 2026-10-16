@@ -1,0 +1,36 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 124,
+  "prompt_tokens": 461,
+  "total_tokens": 585
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys, and why?\nSub-questions:\n1. [table] Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys?\n2. [figure] why?\nEvidence:\nE1 [table, Table 6, page 8]: Table 6: Using models trained on qaVG to improve Vi- sual7W and VQA (Accuracy in %).\nDatasets | Decoys | Best w/o | qaVG | model\n |  | using qaVG | initial | ﬁne-tuned\n | Orig | 65.7 | 60.5 | 69.1\nVisual7W | IoU +QoU | 52.0 | 58.1 | 58.7\n | All | 45.1 | 48.9 | 51.0\n | Orig | 64.6 | 42.2 | 65.6\nVQA | IoU +QoU | 63.7 | 47.9 | 64.1\n | All | 58.9 | 37.5 | 59.4"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "Visual7W (specifically the 'All' decoys row showing the lowest accuracy of 45.1% best w/o using qaVG and lowest fine-tuned/initial accuracies compared to VQA)"
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "The figure or text explaining why this dataset presents the biggest challenge.",
+  "sufficient": false
+ }
+}

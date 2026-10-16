@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 116,
+  "prompt_tokens": 835,
+  "total_tokens": 951
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Table 5 shows the accuracy on different length of text for the Ubuntu dataset.\" -- cites: E1 (Table 5): quote \"Table 5: Accuracy on different length of text\"; E1 (Table 5): row '', column '[30, 60)' = Ubuntu dataset\n2. \"Table 5 shows the accuracy on different length of text\" -- cites: E1 (Table 5): quote \"Table 5: Accuracy on different length of text\"\n\nCited evidence:\n[E1] (table, Table 5, page 6): Table 5: Accuracy on different length of text\nValues (cite as cells):\n  row '#Pair': '[0, 30)' = 203; '[30, 60)' = 689; '[60, 90)' = 579; '[90, ∞)' = 505; '[0, 30)' = 253578; '[30, 60)' = 207772; '[60, 90)' = 33618; '[90, ∞)' = 5032\n  row 'LSTM': '[0, 30)' = 0.768; '[30, 60)' = 0.705; '[60, 90)' = 0.728; '[90, ∞)' = 0.726; '[0, 30)' = 0.707; '[30, 60)' = 0.748; '[60, 90)' = 0.732; '[90, ∞)' = 0.718\n  row 'MV-LSTM': '[0, 30)' = 0.788; '[30, 60)' = 0.708; '[60, 90)' = 0.746; '[90, ∞)' = 0.739; '[0, 30)' = 0.726; '[30, 60)' = 0.752; '[60, 90)' = 0.725; '[90, ∞)' = 0.694\n  row 'KEHNN': '[0, 30)' = 0.792; '[30, 60)' = 0.721; '[60, 90)' = 0.765; '[90, ∞)' = 0.746; '[0, 30)' = 0.724; '[30, 60)' = 0.774; '[60, 90)' = 0.785; '[90, ∞)' = 0.791\n  row '': '[0, 30)' = (b); '[30, 60)' = Ubuntu dataset\n  row 'Length': '[0, 30)' = [0, 30); '[30, 60)' = [30, 60); '[60, 90)' = [60, 90); '[90, ∞)' = [90, ∞)"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly shows Table 5 is about accuracy on different length of text and contains the Ubuntu dataset entry in the specified row and column."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence matches the title of Table 5 exactly ('Accuracy on different length of text')."
+   }
+  ]
+ }
+}

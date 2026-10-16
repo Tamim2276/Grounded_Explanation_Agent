@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 145,
+  "total_tokens": 204
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the knowledge gates in the KEHNN architecture?\nSub-goals:\n1. [figure] What is the role of the knowledge gates in the KEHNN architecture?\nAlready tried: sub-goal 1 with figure\nStill missing: The provided figure diagrams show the components of knowledge gates but do not explicitly state their role or function in text."
+  }
+ ],
+ "answer": {
+  "reason": "I need to search the main text to find a detailed explanation of the role and function of the knowledge gates in the KEHNN architecture.",
+  "tool": "text",
+  "query": "knowledge gates role KEHNN architecture"
+ }
+}

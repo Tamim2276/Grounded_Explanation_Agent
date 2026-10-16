@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 776,
+  "total_tokens": 835
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Human performance on the same dataset reaches 'Orig' = 88.5† and 'IoU +QoU' = 89.0.\" -- cites: E1 (Table 4): row 'Human', column 'Orig' = 88.5†; E1 (Table 4): row 'Human', column 'IoU +QoU' = 89.0\n\nCited evidence:\n[E1] (table, Table 4, page 8): Table 4: Accuracy (%) on the validation set in VQA.\nValues (cite as cells):\n  row 'MLP-A': 'Orig' = 31.2; 'IoU' = 39.9; 'QoU' = 45.7; 'IoU +QoU' = 31.2; 'All' = 27.4\n  row 'MLP-IA': 'Orig' = 42.0; 'IoU' = 39.8; 'QoU' = 55.1; 'IoU +QoU' = 34.1; 'All' = 28.7\n  row 'MLP-QA': 'Orig' = 58.0; 'IoU' = 84.7; 'QoU' = 55.1; 'IoU +QoU' = 54.4; 'All' = 50.0\n  row 'MLP-IQA': 'Orig' = 64.6; 'IoU' = 85.2; 'QoU' = 65.4; 'IoU +QoU' = 63.7; 'All' = 58.9\n  row 'HieCoAtt∗': 'Orig' = 63.0; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 63.7; 'All' = -\n  row 'Attntion∗': 'Orig' = 66.0; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 66.7; 'All' = -\n  row 'Human': 'Orig' = 88.5†; 'IoU' = -; 'QoU' = -; 'IoU +QoU' = 89.0; 'All' = -\n  row 'Random': 'Orig' = 5.6; 'IoU' = 25.0; 'QoU' = 25.0; 'IoU +QoU' = 14.3; 'All' = 4.2\n  row '∗: based †:': 'Orig' = on our taken; 'IoU' = implementation from; 'QoU' = (Antol et; 'IoU +QoU' = or modiﬁcation al., 2015); 'All' = "
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence shows row 'Human' with column 'Orig' = 88.5† and column 'IoU +QoU' = 89.0, exactly as stated in the claim."
+   }
+  ]
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 42.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 143,
+  "total_tokens": 200
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method achieves the highest accuracy on the Shootings dataset?\nSub-goals:\n1. [table] Which method achieves the highest accuracy on the Shootings dataset?\nAlready tried: sub-goal 1 with table\nStill missing: Evidence only shows tensor dimensions for the Shootings dataset in Table 2, but does not provide experimental accuracy results for any methods."
+  }
+ ],
+ "answer": {
+  "reason": "Since the tables do not contain accuracy results, I will search the text to find which method achieves the highest accuracy on the Shootings dataset.",
+  "tool": "text",
+  "query": "Shootings dataset accuracy method"
+ }
+}

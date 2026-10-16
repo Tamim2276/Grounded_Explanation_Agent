@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 141,
+  "prompt_tokens": 1488,
+  "total_tokens": 1629
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The decline probability of an expert is conditioned on whether or not the expert has a correlated \"friend\" who has already declined.\" -- cites: E1 (Figure 1): quote \"Decline probability of an expert conditioned on whether or not the expert has a correlated “friend” who has already declined\"\n2. \"Based on the bar charts, the decline probability is higher when the expert has a friend who has already declined (\"with\") compared to when they do not (\"without\").\" -- cites: E2 (Figure 1): observation \"In the bar chart for all three categories (QA-Expert, Paper-Reviewer, and Online Evaluation), the orange bar representing \"with\" is taller than the blue bar representing \"without\".\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 2) (image attached): Figure 1: Decline probability of an expert conditioned on whether or not the expert has a correlated “friend” who has already declined on two datasets: QA-Expert and Paper-Reviewer, and our online evalu- ation of journal reviewer recommendation.\nWords printed in the figure: QA-Expert Paper-Reviewer Online Evaluation 0.4 0.5 0.6 0.7 Decline Probability without with\n[E2] (figure, Figure 1, page 2): a zoomed view of Figure 1 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The text in E1 explicitly states 'Decline probability of an expert conditioned on whether or not the expert has a correlated “friend” who has already declined'."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "Looking at E2 (Figure 1), for all three categories (QA-Expert, Paper-Reviewer, Online Evaluation), the orange bar ('with') is higher than the blue bar ('without')."
+   }
+  ]
+ }
+}

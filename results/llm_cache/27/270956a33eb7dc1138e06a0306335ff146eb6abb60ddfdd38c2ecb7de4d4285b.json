@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 143,
+  "total_tokens": 203
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the decline probability of an expert and whether or not they have a \"friend\" who has already declined?\nSub-goals:\n1. [figure] What is the relationship between the decline probability of an expert and whether or not they have a \"friend\" who has already declined?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I am using the figure tool to find visual data illustrating the relationship between an expert's decline probability and the presence of a friend who has already declined.",
+  "tool": "figure",
+  "query": "decline probability friend declined"
+ }
+}

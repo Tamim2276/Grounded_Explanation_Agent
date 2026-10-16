@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 10.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 138,
+  "prompt_tokens": 530,
+  "total_tokens": 668
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are specifically tailored to the digits and synthetic to real adaptation tasks.\" -- cites: E3 (Section 4.2): quote \"Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are speciﬁcally tailored to the digits and synthetic to real adaptation tasks.\"\n2. \"To our knowledge, CDAN+E is the only approach that works reasonably well on all five datasets, and remains a simple discriminative model.\" -- cites: E3 (Section 4.2): quote \"To our knowledge, CDAN+E is the only approach that works reasonably well on all ﬁve datasets, and remains a simple discriminative model.\"\n\nCited evidence:\n[E3] (text, Section 4.2, page 8): The results on Ofﬁce-Home are reported in Table 3. The CDAN models substantially outperform the comparison methods on most transfer tasks, and with larger rooms of improvement. An interpretation is that the four domains in Ofﬁce-Home are with more categories, are visually more dissimilar with each other, and are difﬁcult in each domain with much lower in-domain classiﬁcation accuracy [ 53 ]. Since domain alignment is category agnostic in previous work, it is possible that the aligned domains are not classiﬁcation friendly in the presence of large number of categories. It is desirable that CDAN models yield larger boosts on such difﬁcult domain adaptation tasks, which highlights the power of adversarial domain adaptation by exploiting complex multimodal structures in classiﬁer predictions. Strong results are also achieved on the digits datasets and synthetic to real datasets as reported in Table 4. Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are speciﬁcally tailored to the digits and synthetic to real adaptation tasks. This explains why the previous feature-level adaptation method JAN performs fairly weakly. To our knowledge, CDAN+E is the only approach that works reasonably well on all ﬁve datasets, and remains a simple discriminative model."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly states: Note that the generative pixel-level adaptation methods UNIT, CyCADA, and GTA are specifically tailored to the digits and synthetic to real adaptation tasks."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence explicitly states: To our knowledge, CDAN+E is the only approach that works reasonably well on all five datasets, and remains a simple discriminative model."
+   }
+  ]
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 10.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 143,
+  "prompt_tokens": 456,
+  "total_tokens": 599
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The provided evidence states that Bonaparte teaches children to become good leaders with a concentration on outdoor physical activities, manoeuvers, strategies, and specialties like horse riding and lances swords.\" -- cites: E6 (Table 1): quote \"Both are good schools but Bonaparte will teach your kids to become a good leader but they concentrate mainly on outdoor physical activities, manoeuvers, strategies. Horse riding and lances swords are their speciality.\"\n2. \"In contrast, the Voltaire school makes children more of philosophers, encourages independent thinking, concentrates mainly on indoor activities, and inculcates good moral values.\" -- cites: E6 (Table 1): quote \"On the other hand Voltaire will make your child more of a philosopher! They encourage independent thinking...and mainly concentrates on indoor activities! They inculcate good moral values in the child and he will surely grow up to be a thinking person!\"\n\nCited evidence:\n[E6] (table, Table 1, page 1): Table 1: A difﬁcult example from QA Question : Which school is better Voltaire or Bonaparte? Answer : Both are good schools but Bonaparte will teach your kids to become a good leader but they concentrate mainly on outdoor physical activities, manoeuvers, strategies. Horse riding and lances swords are their speciality.... On the other hand Voltaire will make your child more of a philosopher! They encourage independent thinking...and mainly concentrates on indoor activities! They inculcate good moral values in the child and he will surely grow up to be a thinking person!\nab of Software Development Environment, Beihang University, B ‡ Microsoft Research, Beijing, China {wuyu,lizj}@buaa.edu.cn {wuwei,mingzhou}@microsoft.com"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence from Table 1 states that Bonaparte teaches kids to become good leaders and concentrates mainly on outdoor physical activities, manoeuvers, strategies, with horse riding and lances swords as their specialty."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence from Table 1 states that Voltaire makes children more of a philosopher, encourages independent thinking, concentrates mainly on indoor activities, and inculcates good moral values."
+   }
+  ]
+ }
+}

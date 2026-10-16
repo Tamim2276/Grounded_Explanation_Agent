@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 65,
+  "prompt_tokens": 163,
+  "total_tokens": 228
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method achieves the highest accuracy on the Shootings dataset?\nSub-goals:\n1. [table] Which method achieves the highest accuracy on the Shootings dataset?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: The collected evidence discusses TFBA and HardClust performance generally or gives percentage agreement, but does not provide specific accuracy values or state which method achieves the highest accuracy on the Shootings dataset."
+  }
+ ],
+ "answer": {
+  "reason": "Since table and text searches have failed to locate the specific accuracy comparison for the Shootings dataset, I will search the figures to see if a chart displays the accuracy results for various methods.",
+  "tool": "figure",
+  "query": "Shootings dataset accuracy"
+ }
+}

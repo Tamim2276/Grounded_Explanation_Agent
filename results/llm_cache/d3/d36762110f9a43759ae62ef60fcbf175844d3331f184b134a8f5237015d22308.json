@@ -1,0 +1,46 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 9.6,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 197,
+  "prompt_tokens": 2064,
+  "total_tokens": 2261
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the knowledge gates in the KEHNN architecture?\nEvidence:\n[E1] (figure, Figure 1, page 4) (image attached): Figure 1: Architecture of KEHNN\nWords printed in the figure: BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e\n[E2] (figure, Figure 1, page 4): a zoomed view of Figure 1 (image attached)\n[E3] (text, Section abstract, page 2): Knowledge Gate Inspired by the powerful gate mechanism (Hochreiter and Schmidhuber 1997; Chung et al. 2014) which controls information in and out when processing sequential data with recurrent neural networks (RNN), we propose using knowledge gates to incorporate prior knowledge into matching. The underlying motivation is that we want to use the prior knowledge to ﬁlter out noise and highlight the useful information to matching in a piece of text. Formally, let e w ∈ R d denote the embedding of a word w in text S x and k x ∈ R n\n[E4] (text, Section abstract, page 4): where N in the number of instances in D , and C is the number of values of labels in D . P c ( g ( S x,i , S y,i ) returns the c - th element from the C -dimensional vector g ( S x,i , S y,i ) , and P g c ( l i ) is 1 or 0 , indicating whether l i equals to c or not. We optimize the objective function using back-propagation and the parameters are updated by stochastic gradient descent with Adam algorithm (Kingma and Ba 2014). As regularization, we employ early-stopping (Lawrence and Giles 2000) and dropout (Srivastava et al. 2014) with rate of 0.5. We set the initial learning rate and the batch size as 0 . 01 and 50 respectively. Prior Knowledge Acquisition Prior knowledge plays a key role to the success of our model. As described above, in learning, we expect prior knowledge to represent global context of input. In practice, we can use\n[E5] (text, Section abstract, page 3): Matching with Multiple Channels With the knowledge enhanced representations, we propose a knowledge enhanced hybrid neural network (KEHNN) which conducts matching with multiple channels. Figure 1 gives the architecture of our model. Given a pair ( S x , S y ) , the model looks up an embedding table and represents S x and S y as S x = [ e x, 0 , . . . , e x,i , . . . , e x,I ] and S y = [ e y, 0 , . . . , e y,i , . . . , e y,J ] respectively, where e x,i , e y,i ∈ R d are the embeddings of the i -th word of S x and S y respectively. S x and S y are used to create three similarity matrices, each of which is regarded as an input channel of a convolutional neural network (CNN). CNN extracts high level features from the similarity matrices. All features are ﬁnally concatenated and synthesized by a multilayer perceptron (MLP) to form a matching score. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The knowledge gates are proposed to incorporate prior knowledge into matching within the KEHNN architecture.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "we propose using knowledge gates to incorporate prior knowledge into matching."
+     }
+    ]
+   },
+   {
+    "text": "The underlying motivation for using knowledge gates is to filter out noise and highlight useful information for matching in a piece of text.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "The underlying motivation is that we want to use the prior knowledge to ﬁlter out noise and highlight the useful information to matching in a piece of text."
+     }
+    ]
+   }
+  ]
+ }
+}

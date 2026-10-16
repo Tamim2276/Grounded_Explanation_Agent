@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 48,
+  "prompt_tokens": 190,
+  "total_tokens": 238
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why might CDAN+E be considered a more versatile method for unsupervised domain adaptation compared to UNIT, CyCADA, and GTA?\nSub-goals:\n1. [figure] Why might CDAN+E be considered a more versatile method for unsupervised domain adaptation compared to UNIT, CyCADA, and GTA?\nAlready tried: sub-goal 1 with figure\nStill missing: The provided evidence figures only show CDAN architectures (multilinear and randomized multilinear conditioning) and do not contain information explaining why CDAN+E is more versatile compared to UNIT, CyCADA, and GTA."
+  }
+ ],
+ "answer": {
+  "reason": "Searching the text for performance comparisons and characteristics of CDAN+E versus UNIT, CyCADA, and GTA.",
+  "tool": "text",
+  "query": "CDAN+E versatile UNIT CyCADA GTA"
+ }
+}

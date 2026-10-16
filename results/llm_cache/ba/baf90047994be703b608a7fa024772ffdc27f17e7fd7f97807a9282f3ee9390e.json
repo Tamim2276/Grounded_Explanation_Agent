@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 239,
+  "total_tokens": 305
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which sampling strategy for random matrices in CDAN+E leads to the highest average accuracy across all domain adaptation tasks on Office-31? How does this compare to the performance of CDAN+E variants that use random sampling?\nSub-goals:\n1. [table] Which sampling strategy for random matrices in CDAN+E leads to the highest average accuracy across all domain adaptation tasks on Office-31?\n2. [figure] How does this compare to the performance of CDAN+E variants that use random sampling?\nAlready tried: sub-goal 1 with table, sub-goal 2 with figure\nStill missing: The second sub-question asking how this compares to CDAN+E variants using random sampling is not fully answered because the exact comparison text or details are not provided in the evidence beyond the table values."
+  }
+ ],
+ "answer": {
+  "reason": "I need to search the main text paragraphs to find the comparative analysis and discussion of CDAN+E variants using random sampling versus the best strategy.",
+  "tool": "text",
+  "query": "CDAN+E random sampling average accuracy Office-31 comparison"
+ }
+}

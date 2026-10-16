@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 129,
+  "prompt_tokens": 490,
+  "total_tokens": 619
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Recurrent Neural Networks (RNN) utilize sequential information and maintain history through intermediate layers, but standard RNNs suffer from vanishing gradients and cannot efficiently model dependencies and interactions between words that are a few steps apart.\" -- cites: E3 (Section abstract): quote \"Recurrent Neural Network (RNN) is a class of artiﬁcial neural networks which utilizes sequential information and maintains history through its intermediate layers. A standard RNN has an internal state whose output at every time-step which can be expressed in terms of that of previous time-steps. However, it has been seen that standard RNNs suffer from a problem of vanishing gradients [ 9 ]. This means it will not be able to efﬁciently model dependencies and interactions between words that are a few steps apart.\"\n2. \"LSTMs tackle the vanishing gradient issue of standard RNNs by their use of gating mechanisms.\" -- cites: E3 (Section abstract): quote \"LSTMs are able to tackle this issue by their use of gating mechanisms.\"\n\nCited evidence:\n[E3] (text, Section abstract, page 2): We now go into detail about the components of the model, individual and combined, and how the parameters are learned. 3.1 Bidirectional LSTM with Attention Recurrent Neural Network (RNN) is a class of artiﬁcial neural networks which utilizes sequential information and maintains history through its intermediate layers. A standard RNN has an internal state whose output at every time-step which can be expressed in terms of that of previous time-steps. However, it has been seen that standard RNNs suffer from a problem of vanishing gradients [ 9 ]. This means it will not be able to efﬁciently model dependencies and interactions between words that are a few steps apart. LSTMs are able to tackle this issue by their use of gating mechanisms. For each record in the dataset, the content of the post as well as the content"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text explicitly states that RNNs utilize sequential information, maintain history through intermediate layers, suffer from vanishing gradients, and cannot efficiently model dependencies and interactions between words that are a few steps apart."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited text explicitly states that LSTMs tackle this issue (vanishing gradients) by their use of gating mechanisms."
+   }
+  ]
+ }
+}

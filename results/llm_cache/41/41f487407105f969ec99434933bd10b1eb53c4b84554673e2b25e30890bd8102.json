@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 1548,
+  "total_tokens": 1637
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"During the training, the LSTM network is unrolled for a specific number of time-steps, and inputs and outputs are used to calculate and backpropagate the error to update the weights.\" -- cites: E1 (Figure 3): quote \"During the training the LSTM network is unrolled for 50 time-steps. The gripper pose and status (open/close) e t and the pose of relevant objects q t at time-step t is used as input and output of the network to calculate and backpropagate the error to update the weights.\"\n\nCited evidence:\n[E1] (figure, Figure 3, page 5) (image attached): Figure 3: The training and evaluation phase. During the training the LSTM network is unrolled for 50 time-steps. The gripper pose and status (open/close) e t and the pose of relevant objects q t at time-step t is used as input and output of the network to calculate and backpropagate the error to update the weights. During the evaluation phase, the mixture density parameters are used to form a mixture of Gaussians and draw a sample from it. The sample is used to control the robot arm.\nWords printed in the figure: Training the LSTM-MDN network unrolled through time LSTM-MDN network performing the task in a closed loop et, qt Mixture density parameters LSTM LSTM LSTM Multivariate Mixture of Gaussians et+1 draw a sample Inverse kinematics Joint angles Negative log likelihood cost et, qt Mixture density parameters LSTM LSTM LSTM et+1 Negative log likelihood cost et+1, qt+1 Mixture density parameters LSTM LSTM LSTM et+2 … Negative log likelihood cost et+49, qt+49 Mixture density parameters LSTM LSTM LSTM et+50 Dataset M C H1 H2 H3 Softmax Exp � � Softmax Exp � � Softmax Exp � � � � � [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly states that during training the LSTM network is unrolled for 50 time-steps, and inputs/outputs (e_t and q_t) are used to calculate and backpropagate the error to update weights."
+   }
+  ]
+ }
+}

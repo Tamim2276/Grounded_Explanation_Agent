@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 188,
+  "total_tokens": 258
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"OpenIE processes the Unlabeled Text Corpus and outputs Tuples in Step 1 of TFBA.\" -- cites: E2 (Figure 1): observation \"OpenIE is positioned between the Unlabeled Text Corpus and Tuples, receiving input from the corpus and pointing down to the Tuples storage cylinder.\"\n\nCited evidence:\n[E2] (figure, Figure 1, page 3): a zoomed view of Figure 1"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Figure 1 shows OpenIE processing the Unlabeled Text Corpus and outputting Tuples in Step 1 of TFBA as stated in the observation."
+   }
+  ]
+ }
+}

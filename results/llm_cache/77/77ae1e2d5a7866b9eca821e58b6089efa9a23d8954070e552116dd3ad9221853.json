@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 22.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 92,
+  "prompt_tokens": 2449,
+  "total_tokens": 2541
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the shape of the tensor $x^1$ for the Shootings dataset?\nSub-questions:\n1. [figure] What is the shape of the tensor $x^1$ for the Shootings dataset?\nEvidence:\nE1 [figure, Figure 1, page 3] (image attached): Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\nE2 [figure, Figure 1, page 3]: Zoomed view (300 dpi) of: Figure 1: Overview of Step 1 of TFBA . Rather than factorizing the higher-order tensor X , TFBA performs joint Tucker decomposition of multiple 3-mode tensors, X 1 , X 2 , and X 3 , derived out of X . This joint factorization is performed using shared latent factors A , B , and C . This results in binary schemata, each of which is stored as a cell in one of the core tensors G 1 , G 2 , and G 3 . Please see Section 3.2.1 for details.\nE3 [text, Section B, page 5]: Q represents elementwise division and I is the identity matrix. Initialization : For initializing the component matrices A , B , and C , we ﬁrst perform a nonnegative Tucker2 Decomposition of the individual input tensors X 1 , X 2 , and X 3 . Then compute the average of component matrices obtained from each individual decomposition for initialization. We initialize the core tensors G 1 , G 2 , and G 3 with the core tensors obtained from the individual decompositions. 3.2.2 Step 2: Binary to Higher-Order Schema Induction In this section, we describe how a higher-order schema is constructed from the factorization described in the previous sub-section. Each relation k has three representations given by the slices G 1 k from each core tensor. We need a principled way to produce a joint schema from these representations. For a relation, we select top- n indices ( i, j ) with highest values from each matrix. The indices i and j from G 3\nE4 [text, Section 4, page 6]: In this section, we evaluate the performance of TFBA for the task of HRSI. We also propose a baseline model for HRSI called HardClust. HardClust : We propose a baseline model called the Hard Clustering Baseline (HardClust) for the task of higher order relation schema induction. This model induces schemata by grouping perrelation NP arguments from OpenIE extractions. In other words, for each relation, all the Noun Phrases (NPs) in ﬁrst argument form a cluster that represents the subject of the relation, all the NPs in the second argument form a cluster that represents object and so on. Then from each cluster, the top most frequent NPs are chosen as the representative NPs for the argument type. We note that this method is only able to induce one schema per relation. Datasets: We run our experiments on three datasets. The ﬁrst dataset (Shootings) is a collection of 1,335 documents constructed from a publicly available database of mass shootings in the United States. The second is New York Times Sports (NYT Sports) dataset which is a collection of 20,940 sports documents from the period 2005 and 2007. And the third dataset (MUC) is a set of 1300 Latin American newswire documents about terrorism events. After performing the processing steps described in Section 3 , we obtained 357,914 unique OpenIE extractions from the NYT Sports dataset, 10,847 from Shootings dataset, and 8,318 from the MUC dataset. However, in order to properly analyze and evaluate the model, we consider only th ...\nE5 [text, Section 3.2, page 4]: n 1 × n 2 × m . TFBA performs a coupled non-negative Tucker factorization of the input tensors X 1 , X 2 and X 3\nE6 [table, Table 2, page 7]: Table 2: Details of dimensions of tensors constructed for each dataset used in the experiments.\nDataset | X 1shape | X 2shape | X 3shape\nShootings | 3365 × 1295 × 50 | 2569 × 1295 × 50 | 2569 × 3365 × 50\nNYT Sports | 57, 820 × 20, 356 × 50 | 49, 659 × 20, 356 × 50 | 49, 659 × 57, 820 × 50\nMUC | 2825 × 962 × 50 | 2555 × 962 × 50 | 2555 × 2825 × 50 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E6",
+    "fact": "The shape of the tensor x^1 for the Shootings dataset is 3365 x 1295 x 50"
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

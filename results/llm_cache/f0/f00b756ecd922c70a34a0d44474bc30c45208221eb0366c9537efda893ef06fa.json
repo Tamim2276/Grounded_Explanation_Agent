@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 118,
+  "prompt_tokens": 1480,
+  "total_tokens": 1598
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 1a presents the generative story of our model where shaded nodes are observed and others are unshaded.\" -- cites: E1 (Figure 1): quote \"Figure 1a presents the generative story of our model.\"; E1 (Figure 1): quote \"Shaded nodes are observed\"\n2. \"In the generative model diagram (Figure 1a), the unshaded nodes representing latent variables include alpha, r, B, and the double-circled deterministic transformations theta and eta.\" -- cites: E2 (Figure 1): observation \"In the generative model subfigure (a), the unshaded nodes are alpha at the top, r below it, B to the right, and double-circled nodes theta and eta.\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 4) (image attached): Figure 1: Figure 1a presents the generative story of our model. Figure 1b illustrates the inference net- work using the reparametrization trick to perform variational inference on our model. Shaded nodes are observed; double circles indicate deterministic transformations of parent nodes.\nWords printed in the figure: w y η θ r α c B Ni D (a) Generative model r µ σ π c y w ϵ linear linear D (b) Inference model\n[E2] (figure, Figure 1, page 4): a zoomed view of Figure 1 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence directly states that Figure 1a presents the generative story and that shaded nodes are observed."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The evidence confirms that in Figure 1a the unshaded nodes are alpha, r, B, and the double-circled deterministic transformations theta and eta."
+   }
+  ]
+ }
+}

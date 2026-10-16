@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 5.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 79,
+  "prompt_tokens": 383,
+  "total_tokens": 462
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the highest value for the hyperparameter  λa?\nSub-questions:\n1. [table] Which dataset has the highest value for the hyperparameter Εa?\nEvidence:\nE1 [table, Table 3, page 7]: Table 3: Details of hyper-parameters set for dif- ferent datasets.\nDataset | (r1, r2, r3) | (λa, λb, λc)\nShootings | (10, 20,15) | (0.3, 0.1, 0.7)\nNYT Sports | (20, 15, 15) | (0.9, 0.5, 0.7)\nMUC | (15, 12, 12) | (0.7, 0.7, 0.4)"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "NYT Sports has the highest value for lambda_a with 0.9"
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

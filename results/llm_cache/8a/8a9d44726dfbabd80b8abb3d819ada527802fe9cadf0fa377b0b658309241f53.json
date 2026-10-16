@@ -1,0 +1,36 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 196,
+  "prompt_tokens": 1565,
+  "total_tokens": 1761
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the main difference between the Multilinear Conditioning architecture and the Randomized Multilinear Conditioning architecture?\nEvidence:\n[E1] (figure, Figure 1, page 4) (image attached): Figure 1: Architectures of Conditional Domain Adversarial Networks ( CDAN ) for domain adaptation, where domain-speciﬁc feature representation f and classiﬁer prediction g embody the cross-domain gap to be reduced jointly by the conditional domain discriminator D . (a) Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map √ 1\nWords printed in the figure: loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D × × (a) Multilinear Conditioning loss xs xt gt gs fs ft ys yt DNN: AlexNet ResNet …… D f R f R g R g R (b) Randomized Multilinear Conditioning\n[E2] (figure, Figure 1, page 4): a zoomed view of Figure 1 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Multilinear Conditioning is \"applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g\", whereas Randomized Multilinear Conditioning is \"ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map\"",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Multilinear (M) Conditioning, applicable to lower-dimensional scenario, where D is conditioned on classiﬁer prediction g via multi- linear map f ⊗ g ; (b) Randomized Multilinear (RM) Conditioning, ﬁt to higher-dimensional scenario, where D is conditioned on classiﬁer prediction g via randomized multilinear map"
+     }
+    ]
+   }
+  ]
+ }
+}

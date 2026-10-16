@@ -1,0 +1,28 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 28,
+  "prompt_tokens": 83,
+  "total_tokens": 111
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the main difference between the Multilinear Conditioning architecture and the Randomized Multilinear Conditioning architecture?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "Multilinear Conditioning",
+   "Randomized Multilinear Conditioning"
+  ]
+ }
+}

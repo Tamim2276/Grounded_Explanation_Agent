@@ -1,0 +1,50 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 6.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 305,
+  "prompt_tokens": 1449,
+  "total_tokens": 1754
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the four methods (ResNet, DANN, CDAN-f, CDAN-fg) is most effective at separating the two classes of data points?\nEvidence:\n[E1] (figure, Figure 3, page 9) (image attached): Figure 3: T-SNE of (a) ResNet, (b) DANN, (c) CDAN- f , (d) CDAN- fg (red: A ; blue: W ).\nWords printed in the figure: which is slightly more costly than CDAN (RM), while CDAN (RM) has similar cost as DA (a) ResNet (b) DANN (c) CDAN-f (d) CDAN-fg\n[E2] (figure, Figure 3, page 9): a zoomed view of Figure 3 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Figure 3 shows T-SNE visualizations for (a) ResNet, (b) DANN, (c) CDAN- f , and (d) CDAN- fg with red representing class A and blue representing class W.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 3: T-SNE of (a) ResNet, (b) DANN, (c) CDAN- f , (d) CDAN- fg (red: A ; blue: W )."
+     }
+    ]
+   },
+   {
+    "text": "Among the four methods shown, CDAN-fg is the most effective at separating the two classes of data points, as it forms distinct, well-separated clusters where the red and blue data points are grouped closely together within separate localized structures.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "(d) CDAN-fg"
+     },
+     {
+      "evidence": "E2",
+      "observation": "CDAN-fg shows multiple distinct, well-separated clusters containing tight groups of red and blue data points."
+     }
+    ]
+   }
+  ]
+ }
+}

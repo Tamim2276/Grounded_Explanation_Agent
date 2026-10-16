@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 206.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 122,
+  "prompt_tokens": 1365,
+  "total_tokens": 1487
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Input 1 and 2 are local patches from the image Real.\" -- cites: E1 (Figure 13): quote \"Input 1 and 2 are local patches from the image Real.\"\n2. \"The generated images (Gen) are the result of image generation using two input patches (Input 1 and Input 2).\" -- cites: E1 (Figure 13): quote \"Figure 13: Image generation results with two input patches. Input 1 and 2 are local patches from the image Real.\"\n\nCited evidence:\n[E1] (figure, Figure 13, page 14) (image attached): Figure 13: Image generation results with two input patches. Input 1 and 2 are local patches from the image Real.\nWords printed in the figure: (c) [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly states: 'Input 1 and 2 are local patches from the image Real.'"
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence caption states: 'Figure 13: Image generation results with two input patches. Input 1 and 2 are local patches from the image Real.'"
+   }
+  ]
+ }
+}

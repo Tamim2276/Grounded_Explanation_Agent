@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 16.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 48,
+  "prompt_tokens": 109,
+  "total_tokens": 157
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which topic has the highest internal coherence value?\nSub-goals:\n1. [figure] Which topic has the highest internal coherence value?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I am searching the figures to find the chart or plot illustrating the internal coherence values for each topic.",
+  "tool": "figure",
+  "query": "internal coherence value topic"
+ }
+}

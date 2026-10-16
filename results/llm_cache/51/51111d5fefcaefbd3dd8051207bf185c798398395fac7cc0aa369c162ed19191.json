@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 975,
+  "total_tokens": 1057
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The KEHNN model performs the best for response selection, achieving evaluation results of R2@1 = 0.786, R10@1 = 0.460, R10@2 = 0.591, and R10@5 = 0.819.\" -- cites: E1 (Table 4): row 'KEHNN', column 'R2@1' = 0.786; E1 (Table 4): row 'KEHNN', column 'R10@1' = 0.460; E1 (Table 4): row 'KEHNN', column 'R10@2' = 0.591; E1 (Table 4): row 'KEHNN', column 'R10@5' = 0.819\n\nCited evidence:\n[E1] (table, Table 4, page 6): Table 4: Evaluation results on response selection\nValues (cite as cells):\n  row 'MLP': 'R2@1' = 0.651; 'R10@1' = 0.256; 'R10@2' = 0.380; 'R10@5' = 0.703\n  row 'DeepMatchtopic': 'R2@1' = 0.593; 'R10@1' = 0.345; 'R10@2' = 0.376; 'R10@5' = 0.693\n  row 'Arc1': 'R2@1' = 0.665; 'R10@1' = 0.221; 'R10@2' = 0.360; 'R10@5' = 0.684\n  row 'Arc2': 'R2@1' = 0.736; 'R10@1' = 0.380; 'R10@2' = 0.534; 'R10@5' = 0.777\n  row 'CNTN': 'R2@1' = 0.743; 'R10@1' = 0.349; 'R10@2' = 0.512; 'R10@5' = 0.797\n  row 'MatchPyramid': 'R2@1' = 0.743; 'R10@1' = 0.420; 'R10@2' = 0.554; 'R10@5' = 0.786\n  row 'LSTM': 'R2@1' = 0.725; 'R10@1' = 0.361; 'R10@2' = 0.494; 'R10@5' = 0.801\n  row 'LSTMa': 'R2@1' = 0.758; 'R10@1' = 0.381; 'R10@2' = 0.545; 'R10@5' = 0.801\n  row 'MV-LSTM': 'R2@1' = 0.767; 'R10@1' = 0.410; 'R10@2' = 0.565; 'R10@5' = 0.800\n  row 'KEHNN': 'R2@1' = 0.786; 'R10@1' = 0.460; 'R10@2' = 0.591; 'R10@5' = 0.819"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited table E1 shows row 'KEHNN' with R2@1 = 0.786, R10@1 = 0.460, R10@2 = 0.591, and R10@5 = 0.819 as stated."
+   }
+  ]
+ }
+}

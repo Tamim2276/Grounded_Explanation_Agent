@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 19.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 78,
+  "prompt_tokens": 455,
+  "total_tokens": 533
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"For the Shootings dataset, the shape of the tensor X1 is 3365 × 1295 × 50.\" -- cites: E6 (Table 2): row 'Shootings', column 'X 1shape' = 3365 × 1295 × 50\n\nCited evidence:\n[E6] (table, Table 2, page 7): Table 2: Details of dimensions of tensors constructed for each dataset used in the experiments.\nValues (cite as cells):\n  row 'Shootings': 'X 1shape' = 3365 × 1295 × 50; 'X 2shape' = 2569 × 1295 × 50; 'X 3shape' = 2569 × 3365 × 50\n  row 'NYT Sports': 'X 1shape' = 57, 820 × 20, 356 × 50; 'X 2shape' = 49, 659 × 20, 356 × 50; 'X 3shape' = 49, 659 × 57, 820 × 50\n  row 'MUC': 'X 1shape' = 2825 × 962 × 50; 'X 2shape' = 2555 × 962 × 50; 'X 3shape' = 2555 × 2825 × 50"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited Table 2 explicitly states that for the Shootings dataset, the shape of X 1shape is 3365 × 1295 × 50."
+   }
+  ]
+ }
+}

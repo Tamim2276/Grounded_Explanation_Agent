@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 48,
+  "prompt_tokens": 118,
+  "total_tokens": 166
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset has the highest value for the hyperparameter  λa?\nSub-goals:\n1. [table] Which dataset has the highest value for the hyperparameter Εa?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I need to search the tables to find the hyperparameter values for each dataset.",
+  "tool": "table",
+  "query": "hyperparameter lambda_a dataset values"
+ }
+}

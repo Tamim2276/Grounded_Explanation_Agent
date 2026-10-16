@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 195,
+  "total_tokens": 253
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)? How does this compare to the performance of the model that only observes answers?\nSub-goals:\n1. [table] Which model performs the best on COCOQA dataset when considering the combined accuracy of identifying irrelevant image-question pairs (IU) and irrelevant question-answer pairs (QU)?\n2. [figure] How does this compare to the performance of the model that only observes answers?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will search the tables to find the model with the highest combined accuracy on IU and QU for the COCOQA dataset.",
+  "tool": "table",
+  "query": "COCOQA IU QU combined accuracy best model"
+ }
+}

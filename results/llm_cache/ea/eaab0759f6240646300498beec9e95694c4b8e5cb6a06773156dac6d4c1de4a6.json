@@ -1,0 +1,31 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 11.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 69,
+  "prompt_tokens": 1600,
+  "total_tokens": 1669
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average number of answers per question differ between the training and development sets? What might be a possible explanation for this difference?\nSub-questions:\n1. [figure] How does the average number of answers per question differ between the training and development sets?\n2. [figure] What might be a possible explanation for this difference?\nEvidence:\nE1 [figure, Figure 1, page 4] (image attached): Figure 1: Architecture of KEHNN\nWords printed in the figure: BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e\nE2 [figure, Figure 1, page 4]: Zoomed view (300 dpi) of: Figure 1: Architecture of KEHNN\nWords printed in the figure: BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e [image]"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1,
+   2
+  ],
+  "missing": "The provided evidence only contains the architecture diagram of KEHNN and does not mention any statistics about the average number of answers per question in training and development sets or explanations for them.",
+  "sufficient": false
+ }
+}

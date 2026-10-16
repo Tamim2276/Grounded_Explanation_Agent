@@ -1,0 +1,28 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 15,
+  "prompt_tokens": 110,
+  "total_tokens": 125
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which sampling strategy for random matrices in CDAN+E leads to the highest average accuracy across all domain adaptation tasks on Office-31? How does this compare to the performance of CDAN+E variants that use random sampling?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "CDAN+E",
+   "Office-31"
+  ]
+ }
+}

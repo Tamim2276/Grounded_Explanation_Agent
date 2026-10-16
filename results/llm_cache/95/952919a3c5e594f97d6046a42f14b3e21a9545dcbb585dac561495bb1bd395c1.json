@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 163,
+  "total_tokens": 225
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the shape of the tensor $x^1$ for the Shootings dataset?\nSub-goals:\n1. [figure] What is the shape of the tensor $x^1$ for the Shootings dataset?\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The specific dimensions or shape of the tensor x^1 for the Shootings dataset are not mentioned in the provided text or figures."
+  }
+ ],
+ "answer": {
+  "reason": "Since the shape of the tensor is not found in text or figures, I will now search the tables to find the specific dimensions for the Shootings dataset.",
+  "tool": "table",
+  "query": "Shootings dataset tensor x1 shape"
+ }
+}

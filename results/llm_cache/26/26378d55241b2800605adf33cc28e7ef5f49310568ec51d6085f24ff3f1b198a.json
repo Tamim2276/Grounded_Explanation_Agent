@@ -1,0 +1,36 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 119,
+  "prompt_tokens": 2558,
+  "total_tokens": 2677
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average number of answers per question differ between the training and development sets? What might be a possible explanation for this difference?\nSub-questions:\n1. [figure] How does the average number of answers per question differ between the training and development sets?\n2. [figure] What might be a possible explanation for this difference?\nEvidence:\nE1 [figure, Figure 1, page 4] (image attached): Figure 1: Architecture of KEHNN\nWords printed in the figure: BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e\nE2 [figure, Figure 1, page 4]: Zoomed view (300 dpi) of: Figure 1: Architecture of KEHNN\nWords printed in the figure: BiGRU x S y S 2 M 3 M BiGRU BiGRU Score MLP CNN Construct Interaction Matrices 1 M Pooling Conv Channel 1 Channel 2 Channel 3 K  1    [ , ] i i i h h h  BiGRU Knowledge Gates we w e Knowledge Gates Knowledge Gates Knowledge Gates x k y k BiGRU 3, ,i j e 2, ,i j e 1, ,i j e\nE3 [text, Section abstract, page 5]: The goal of answer selection is to recognize high quality answers in answer candidates of a question. We used a public data set of answer selection in SemEval 2015 (AlessandroMoschitti, Glass, and Randeree 2015), which collects question-answer pairs from Qatar Living Forum 2 and requires to classify the answers into 3 categories (i.e. C = 3 in our model) including good, potential and bad. The ratio of the three categories is 51 : 10 : 39 . The statistics of the data set is summarized in Table 2. We used classiﬁcation accuracy as an evaluation metric.\nE4 [text, Section abstract, page 5]: Speciﬁc Setting In this task, we regarded question categories tagged by askers as prior knowledge (both k x and k y ). There are 27 categories in the Qatar Living data. Knowledge vector k was initialized by averaging the embeddings of words in the category. For all baselines and our model, the word embedding and the topic model (in DeepMatch topic ) were trained on a Qatar living raw text provided by SemEval-2015 3 . We ﬁxed the word embedding during the training process, and set h in Equation (3), (8), (9) as ReLU. Results JAIST, the champion of the task in SemEval15, used 12 features and an SVM classiﬁer and achieved an accuracy of 0 . 725 . From Table 3, we can see that advanced neural networks, such as CNTN, MV-LSTM, LSTM a and KEHNN, outperform JAIST’s model, indicating that handcrafted features are less powerful than deep learning methods. Models that match text pairs by interaction representations like Arc2 and MatchPyramid are not better than models that perform matching with sentence embeddings like Arc1. This is because the training data is small and we ﬁxed the word embedding in learning. LSTM based models in general performs better than CNN based models, because they can capture sequential information in sentences. KEHNN leverages both the sequential information and the prior knowledge from categories in matching by a CNN with multiple channels. Therefore, it outperforms all other methods, and the improvement is statistically signiﬁcant (t-test with p-value ≤ 0 .  ...\nE5 [text, Section abstract, page 6]: the last two utterances as we study text pair matching and ignore context information. We used the data pre-processed by Xu et al. (Xu et al. 2016) 4 , in which all urls and numbers were replaced by “ url ” and “ number ” respectively to alleviate the sparsity issue. The training set contains 1 million message-response pairs with a ratio 1 : 1 between positive and negative responses, and both the validation set and the test set have 0 . 5 million message-response pairs with a ratio 1 : 9 between positive and negative responses. We followed Lowe et al. (Lowe et al. 2015) and employed recall at position k in n candidates as evaluation metrics and denoted the metrics as R n @ k . R n @ k indicates if the correct response is in the top k results from n candidates. Speciﬁc Setting In this task, we trained a topic model to generate topics for both messages and responses as prior knowledge. We crawled 8 million questions (question and description) from the ”Computers & Internet” category in Yahoo! Answers, and utilized these data to train a Twitter LDA model (Zhao et al. 2011) with 100 topics. In order to construct k x,i and k y,i , we separately assigned a topic to a message and a response by the inference algorithm of Twitter LDA. Then we transformed the topic to a vector by averaging the embeddings of top 20 words under the topic. Word embedding tables were initialized using the public word vectors available at http://nlp.stanford. edu/projects/glove (trained on Twitter) and upda ...\nE6 [table, Table 2, page 5]: Table 2: Statistics of the answer selection data set\nData | #question | #answer | #answers per question\nTraining | 2600 | 16541 | 6.36\nDev | 300 | 1645 | 5.48\nTest | 329 | 1976 | 6.00 [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E6",
+    "fact": "The average number of answers per question is 6.36 for the training set and 5.48 for the development set."
+   }
+  ],
+  "uncovered": [
+   2
+  ],
+  "missing": "An explanation for the difference in the average number of answers per question between the training and development sets is not provided.",
+  "sufficient": false
+ }
+}

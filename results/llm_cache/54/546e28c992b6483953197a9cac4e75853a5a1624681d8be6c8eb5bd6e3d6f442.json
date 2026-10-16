@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 375,
+  "total_tokens": 451
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The dataset NYT Sports has the highest value for the hyperparameter λa among the listed datasets.\" -- cites: E1 (Table 3): row 'NYT Sports', column '(λa, λb, λc)' = (0.9, 0.5, 0.7)\n\nCited evidence:\n[E1] (table, Table 3, page 7): Table 3: Details of hyper-parameters set for dif- ferent datasets.\nValues (cite as cells):\n  row 'Shootings': '(r1, r2, r3)' = (10, 20,15); '(λa, λb, λc)' = (0.3, 0.1, 0.7)\n  row 'NYT Sports': '(r1, r2, r3)' = (20, 15, 15); '(λa, λb, λc)' = (0.9, 0.5, 0.7)\n  row 'MUC': '(r1, r2, r3)' = (15, 12, 12); '(λa, λb, λc)' = (0.7, 0.7, 0.4)"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "NYT Sports has λa = 0.9, which is higher than Shootings (0.3) and MUC (0.7) in Table 3."
+   }
+  ]
+ }
+}

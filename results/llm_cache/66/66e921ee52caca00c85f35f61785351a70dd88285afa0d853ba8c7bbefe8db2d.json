@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 367,
+  "total_tokens": 449
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The provided text defines an Nth-order non-negative tensor as X belonging to Rn1×n2×...×nN +.\" -- cites: E6 (Table 1): row 'X ∈Rn1×n2×...×nN +', column 'Deﬁnition' = N th -order non-negative tensor.\n\nCited evidence:\n[E6] (table, Table 1, page 3): Table 1: Notations used in the paper.\nValues (cite as cells):\n  row 'R+': 'Deﬁnition' = Set of non-negative reals.\n  row 'X ∈Rn1×n2×...×nN +': 'Deﬁnition' = N th -order non-negative tensor.\n  row 'X(i)': 'Deﬁnition' = mode-i matricization of tensor X . Please see (Kolda and Bader, 2009) for details.\n  row 'A ∈Rn×r +': 'Deﬁnition' = Non-negative matrix of order n × r.\n  row '∗': 'Deﬁnition' = Hadamard product: (A ∗B)i,j = Ai,j × Bi,j."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Table 1 explicitly defines the row 'X ∈Rn1×n2×...×nN +' as 'N th -order non-negative tensor' under the 'Deﬁnition' column."
+   }
+  ]
+ }
+}

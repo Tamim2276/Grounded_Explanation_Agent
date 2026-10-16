@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 143,
+  "total_tokens": 198
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator performs best in the presence of noisy confounders and how does it compare to the Covariate Control (CC) estimator?\nSub-goals:\n1. [figure] Which estimator performs best in the presence of noisy confounders and how does it compare to the Covariate Control (CC) estimator?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I am using the figure tool to find performance comparisons of estimators under noisy confounders as visualized in the charts.",
+  "tool": "figure",
+  "query": "noisy confounders estimator performance comparison Covariate Control"
+ }
+}

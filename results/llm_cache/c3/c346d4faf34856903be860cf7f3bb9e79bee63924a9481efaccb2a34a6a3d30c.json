@@ -1,0 +1,46 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 7.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 290,
+  "prompt_tokens": 2091,
+  "total_tokens": 2381
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the LSTM network in the model architecture?\nEvidence:\n[E1] (figure, Figure 1, page 2) (image attached): Figure 1: Model Architecture\n[E2] (figure, Figure 1, page 2): a zoomed view of Figure 1 (image attached)\n[E3] (text, Section abstract, page 2): We now go into detail about the components of the model, individual and combined, and how the parameters are learned. 3.1 Bidirectional LSTM with Attention Recurrent Neural Network (RNN) is a class of artiﬁcial neural networks which utilizes sequential information and maintains history through its intermediate layers. A standard RNN has an internal state whose output at every time-step which can be expressed in terms of that of previous time-steps. However, it has been seen that standard RNNs suffer from a problem of vanishing gradients [ 9 ]. This means it will not be able to efﬁciently model dependencies and interactions between words that are a few steps apart. LSTMs are able to tackle this issue by their use of gating mechanisms. For each record in the dataset, the content of the post as well as the content\n[E4] (text, Section abstract, page 2): 3. MODEL ARCHITECTURE In this section, we present our hybrid approach to clickbait detection. We ﬁrst explain the three individual components followed by their fusion, which is our proposed model. These components are (1) BiLSTM with attention, (2) Siamese Network on Text Embeddings,\n[E5] (text, Section abstract, page 2): and (3) Siamese Network on Visual Embeddings. An overview of the architecture can be seen in Figure 1. We start with an explanation of the features used in the ﬁrst component of the model. Distributed Word Embeddings Considering the effectiveness of distributional semantics in modeling language data, we use a pre-trained 300 dimensional Word2Vec [ 12 ] model trained over 100 billion words in the Google News corpus using the Continuous Bag of Words architecture. These map the words in a language to a high dimensional real-valued vectors to capture hidden semantic and syntactic properties of words, and are typically learned from large, unannotated text corpora. For each word in the title, we obtain its equivalent Word2Vec embeddings using the model described above. Character Level Word Embeddings Character level word embeddings [ 7 ] capture the orthographic and morphological features of a word. Apart from this, using them is a step toward mitigating the problem of out-of-vocabulary (OoV) words. In such a case, the word can be embedded by its characters using character level embedding. We follow [ 1 ] and ﬁrst initialize a vector for every character in the corpus. The vector representation of each word is learned by applying 3 layers of a 1-dimensional Convolutional Neural Network [ 5 ] with ReLU non-linearity on each vector of character sequence of that word and ﬁnally max-pooling the sequence for each convolutional feature.\n[E6] (table, Table 1, page 4): Table 1: Model Performance Comparison\nValues (cite as cells):\n  row 'Proposed Hybrid Approach': 'F1 Score' = 0.65; 'Accuracy' = 83.53%\n  row 'BiLSTM [1]': 'F1 Score' = 0.61; 'Accuracy' = 83.28%\n  row 'Feature Engineering Baseline [14]': 'F1 Score' = 0.55; 'Accuracy' = 83.24%\n  row 'Concatenated NN Architecture [18]': 'F1 Score' = 0.39; 'Accuracy' = 74% [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Recurrent Neural Networks (RNN) utilize sequential information and maintain history through intermediate layers, but standard RNNs suffer from vanishing gradients and cannot efficiently model dependencies and interactions between words that are a few steps apart.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "Recurrent Neural Network (RNN) is a class of artiﬁcial neural networks which utilizes sequential information and maintains history through its intermediate layers. A standard RNN has an internal state whose output at every time-step which can be expressed in terms of that of previous time-steps. However, it has been seen that standard RNNs suffer from a problem of vanishing gradients [ 9 ]. This means it will not be able to efﬁciently model dependencies and interactions between words that are a few steps apart."
+     }
+    ]
+   },
+   {
+    "text": "LSTMs tackle the vanishing gradient issue of standard RNNs by their use of gating mechanisms.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E3",
+      "quote": "LSTMs are able to tackle this issue by their use of gating mechanisms."
+     }
+    ]
+   }
+  ]
+ }
+}

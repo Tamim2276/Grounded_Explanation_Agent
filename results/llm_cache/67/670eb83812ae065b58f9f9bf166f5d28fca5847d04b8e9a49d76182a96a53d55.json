@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 59,
+  "prompt_tokens": 165,
+  "total_tokens": 224
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys, and why?\nSub-goals:\n1. [table] Which dataset presents the biggest challenge for a model trying to distinguish true triplets from decoys?\n2. [figure] why?\nAlready tried: sub-goal 1 with table\nStill missing: figure evidence for sub-goal 2 (rule floor); The figure or text explaining why this dataset presents the biggest challenge."
+  }
+ ],
+ "answer": {
+  "reason": "I need to examine the figures to understand the performance characteristics and why a specific dataset poses the biggest challenge for the model.",
+  "tool": "figure",
+  "query": "performance comparison of models on triplets and decoys across datasets"
+ }
+}

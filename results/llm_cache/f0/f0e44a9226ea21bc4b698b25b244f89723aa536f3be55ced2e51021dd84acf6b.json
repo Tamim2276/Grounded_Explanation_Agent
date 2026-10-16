@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 67,
+  "prompt_tokens": 206,
+  "total_tokens": 273
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain why the \"Last contact\" feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\nSub-goals:\n1. [figure] Explain why the Last contact feature has a significant positive influence on the SSL score in both examples, even though it is not directly used by the SSL algorithm.\nAlready tried: sub-goal 1 with figure, sub-goal 1 with text\nStill missing: The provided text mentions that the latest date of contact with the police has a significant positive influence on the SSL score despite not being used by the algorithm, but it does not explain why this positive influence occurs."
+  }
+ ],
+ "answer": {
+  "reason": "Since the figure and text search tools have already been exhausted, I will now search the tables for quantitative or correlational data explaining the indirect influence of the Last contact feature on the SSL score.",
+  "tool": "table",
+  "query": "Last contact SSL score influence"
+ }
+}

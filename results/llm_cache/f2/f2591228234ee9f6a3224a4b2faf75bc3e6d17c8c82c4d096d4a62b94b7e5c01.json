@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 97,
+  "prompt_tokens": 420,
+  "total_tokens": 517
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Meanwhile, the events of 9/11 dominate the vertical direction, with the words sept , hijackers , and attacks increasing in probability as we move up in the space.\" -- cites: E4 (Section 4.3): quote \"Meanwhile, the events of 9/11 dominate the vertical direction, with the words sept ,\"; E2 (Section 4.3): quote \"hijackers , and attacks increasing in probability as we move up in the space.\"\n\nCited evidence:\n[E2] (text, Section 4.3, page 8): hijackers , and attacks increasing in probability as we move up in the space. If we wanted to look at each year individually, we could drop the embedding of years, and learn a sparse set of topic-year interactions, similar to tone in Table 3 .\n[E4] (text, Section 4.3, page 8): two-dimensional continuous space, with a learned deviation for each dimension. We omit the topics in the interest of space, but Figure 3 shows the learned embedding for each year, along with the top terms of the corresponding deviations. As can be seen, the model learns that adjacent years tend to produce similar deviations, even though we have not explicitly encoded this information . The leftright dimension roughly tracks a temporal trend with positive deviations shifting from the years of Clinton and INS on the left, to Obama and ICE on the right. 16 Meanwhile, the events of 9/11 dominate the vertical direction, with the words sept ,"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence E4 states 'Meanwhile, the events of 9/11 dominate the vertical direction, with the words sept ,' and E2 continues with 'hijackers , and attacks increasing in probability as we move up in the space.' Together they match the claim exactly."
+   }
+  ]
+ }
+}

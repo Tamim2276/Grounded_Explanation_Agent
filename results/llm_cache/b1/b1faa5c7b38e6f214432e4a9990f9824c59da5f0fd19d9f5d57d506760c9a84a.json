@@ -1,0 +1,36 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 44.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 140,
+  "prompt_tokens": 1456,
+  "total_tokens": 1596
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the pick and place task in simulation and the real world?\nEvidence:\n[E1] (figure, Figure 4, page 6) (image attached): Figure 4: A sequence of images showing the autonomous execution of pick and place in simulation (ﬁrst row), pick and place in real world (second row), pushing in simulation (third row), and pushing in real world (fourth row). The robot is controlled by a mixture density network with 3 layers of LSTM.\n[E2] (figure, Figure 4, page 6): a zoomed view of Figure 4 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The provided evidence shows images of pick and place in simulation and pick and place in the real world, but does not state the difference between them.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 4: A sequence of images showing the autonomous execution of pick and place in simulation (ﬁrst row), pick and place in real world (second row), pushing in simulation (third row), and pushing in real world (fourth row)."
+     }
+    ]
+   }
+  ]
+ }
+}

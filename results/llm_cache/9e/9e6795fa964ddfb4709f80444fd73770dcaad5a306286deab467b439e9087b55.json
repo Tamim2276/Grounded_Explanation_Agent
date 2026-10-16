@@ -1,0 +1,28 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 8.9,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 28,
+  "prompt_tokens": 103,
+  "total_tokens": 131
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which embedding method performed the best overall across all model architectures on the Visual7W dataset with IoU + QoU decoys? Was there a significant difference in performance compared to the other methods?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "Visual7W",
+   "IoU + QoU"
+  ]
+ }
+}
