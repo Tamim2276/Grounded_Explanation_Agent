@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.9,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 1792,
+  "total_tokens": 1854
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\nSub-questions:\n1. [figure] Explain how the answering procedure works.\nEvidence:\nE1 [figure, Figure 9, page 8] (image attached): Figure 9. Examples of UnCoRd failures in answering questions outside the VQA v2 domain on COCO images.\nWords printed in the figure: Q: What color is the kite closest to the Q: There is a bottle that is left of a bottle; yellow kite that is left of the orange kite? how many wine glasses are right of it? UnCoRd A: no valid orange kite, Pythia A: blue UnCoRd A: no bottle, Pythia A: 5 Q: What color is the kite closest to the Q: There is a bottle that is right of a bottle; yellow kite that is right of the how many wine glasses are left of it? orange kite? UnCoRd A: no bottle, Pythia A: 5 UnCoRd A: no valid orange kite, Pythia A: blue Failure source: wrong color estimation [70] Failure source: failed object detection (below: failed object in the red box above) (below: mask R-CNN results [24]) Object pixels Predicted pixels’ colors (yellow instead of orange)\nE2 [figure, Figure 9, page 8]: Zoomed view (300 dpi) of: Figure 9. Examples of UnCoRd failures in answering questions outside the VQA v2 domain on COCO images.\nWords printed in the figure: Q: What color is the kite closest to the Q: There is a bottle that is left of a bottle; yellow kite that is left of the orange kite? how many wine glasses are right of it? UnCoRd A: no valid orange kite, Pythia A: blue UnCoRd A: no bottle, Pythia A: 5 Q: What color is the kite closest to the Q: There is a bottle that is right of a bottle; yellow kite that is right of the how many wine glasses are left of it? orange kite? UnCoRd A: no bottle, Pythia A: 5 UnCoRd A: no valid orange kite, Pythia A: blue Failure source: wrong color estimation [70] Failure source: failed object detection (below: failed object in the red box above) (below: mask R-CNN results [24]) Object pixels Predicted pixels’ colors (yellow instead of orange) [image]"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The provided evidence only shows examples of UnCoRd failures (wrong color estimation and failed object detection), but does not explain the full answering procedure of the method.",
+  "sufficient": false
+ }
+}

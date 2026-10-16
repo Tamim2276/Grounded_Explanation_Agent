@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 69,
+  "prompt_tokens": 224,
+  "total_tokens": 293
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: If you are performing domain adaptation with ZDDA using AlexNet as the base network architecture and $D_F$ as the target domain, which layers of the network would be considered part of the source CNN and which would be part of the source classifier?\nSub-goals:\n1. [table] If you are performing domain adaptation with ZDDA using AlexNet as the base network architecture and $D_F$ as the target domain, which layers of the network would be considered part of the source CNN and which would be part of the source classifier?\nAlready tried: sub-goal 1 with table\nStill missing: The evidence does not mention which layers of AlexNet are considered part of the source CNN versus the source classifier when using ZDDA."
+  }
+ ],
+ "answer": {
+  "reason": "Since the table search did not yield the specific layer division for AlexNet under ZDDA, I will search the text paragraphs for architecture details regarding the source CNN and classifier layers.",
+  "tool": "text",
+  "query": "ZDDA AlexNet source CNN source classifier layers"
+ }
+}

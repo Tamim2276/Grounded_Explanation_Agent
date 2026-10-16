@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 120,
+  "prompt_tokens": 748,
+  "total_tokens": 868
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Table 8 presents root mean square lane deviation distances of compared methods on straight lanes.\" -- cites: E1 (Table 8): quote \"Table 8: Root mean square lane deviation distances (m) of compared methods on straight lanes.\"\n2. \"ChoiceNet appears to be the safest method across most outlier levels because it achieves the lowest root mean square lane deviation distances at 10%, 20%, and 40% outlier levels, and ties for the lowest at 30%.\" -- cites: E1 (Table 8): row '10%', column 'ChoiceNet' = 0.352; E1 (Table 8): row '20%', column 'ChoiceNet' = 0.349; E1 (Table 8): row '30%', column 'ChoiceNet' = 0.368; E1 (Table 8): row '40%', column 'ChoiceNet' = 0.370\n\nCited evidence:\n[E1] (table, Table 8, page 15): Table 8: Root mean square lane deviation distances (m) of compared methods on straight lanes.\nValues (cite as cells):\n  row '0%': 'ChoiceNet' = 0.314; 'MDN' = 0.723; 'MLP' = 0.300; 'GPR' = 0.356; 'LGPR' = 0.349; 'RGPR' = 0.424\n  row '10%': 'ChoiceNet' = 0.352; 'MDN' = 0.387; 'MLP' = 0.438; 'GPR' = 0.401; 'LGPR' = 0.446; 'RGPR' = 0.673\n  row '20%': 'ChoiceNet' = 0.349; 'MDN' = 0.410; 'MLP' = 0.513; 'GPR' = 0.418; 'LGPR' = 0.419; 'RGPR' = 0.725\n  row '30%': 'ChoiceNet' = 0.368; 'MDN' = 0.368; 'MLP' = 0.499; 'GPR' = 0.455; 'LGPR' = 0.476; 'RGPR' = 0.740\n  row '40%': 'ChoiceNet' = 0.370; 'MDN' = 0.574; 'MLP' = 0.453; 'GPR' = 0.453; 'LGPR' = 0.453; 'RGPR' = 0.636"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Table 8 title and content match the description of presenting root mean square lane deviation distances of compared methods on straight lanes."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "ChoiceNet achieves the lowest values at 10% (0.352), 20% (0.349), and 40% (0.370), and ties for the lowest with MDN at 30% (0.368)."
+   }
+  ]
+ }
+}

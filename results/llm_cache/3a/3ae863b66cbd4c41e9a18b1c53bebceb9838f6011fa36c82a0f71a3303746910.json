@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 70,
+  "prompt_tokens": 142,
+  "total_tokens": 212
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the filter in the convolution operation?\nSub-goals:\n1. [figure] What is the role of the filter in the convolution operation?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence items only show the figure of a convolution operation with generic labels but do not explain the specific role of the filter."
+  }
+ ],
+ "answer": {
+  "reason": "Since the figure only shows a visual representation without explaining the filter's role, I need to search the main text paragraphs for the textual description of how the filter functions in a convolution operation.",
+  "tool": "text",
+  "query": "role of the filter in the convolution operation"
+ }
+}

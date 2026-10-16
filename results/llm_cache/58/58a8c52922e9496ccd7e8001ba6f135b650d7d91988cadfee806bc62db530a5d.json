@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 86,
+  "prompt_tokens": 2498,
+  "total_tokens": 2584
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the function of the ReOrth Layer in the Projection Block of the Grassmann Network architecture?\nSub-questions:\n1. [figure] What is the function of the ReOrth Layer in the Projection Block of the Grassmann Network architecture?\nEvidence:\nE1 [figure, Figure 1, page 3] (image attached): Figure 1: Conceptual illustration of the proposed Grassmann Network (GrNet) architecture. The rectangles in blue represent three basic blocks, i.e., Projection, Pooling and Output blocks, respectively.\nWords printed in the figure: … ���� ��� ����� ������������ ��������� � ProjMap Layer FC&Softmax Layers ���� �������� ���� ���, … � FRMap Layer �� Input Orth ��� ��� ReOrth Layer ��� ��� ����������� ������� ��� ��� ��� ��� ��� ��� ProjMap Layer ProjPooling Layer OrthMap Layer �������� ����� � ���������� �, … �� �����������,�:� ��������� � Projection Block Pooling Block Output Block\nE2 [figure, Figure 1, page 3]: Zoomed view (300 dpi) of: Figure 1: Conceptual illustration of the proposed Grassmann Network (GrNet) architecture. The rectangles in blue represent three basic blocks, i.e., Projection, Pooling and Output blocks, respectively.\nWords printed in the figure: … ���� ��� ����� ������������ ��������� � ProjMap Layer FC&Softmax Layers ���� �������� ���� ���, … � FRMap Layer �� Input Orth ��� ��� ReOrth Layer ��� ��� ����������� ������� ��� ��� ��� ��� ��� ��� ProjMap Layer ProjPooling Layer OrthMap Layer �������� ����� � ���������� �, … �� �����������,�:� ��������� � Projection Block Pooling Block Output Block\nE3 [text, Section U, page 7]: This paper introduced the ﬁrst network architecture to perform deep learning over Grassmann manifolds. Essentially, it is a natural exploration of convolutional networks to perform fully connected convolution, normalization, pooling and Remannian computing on Grassmannian data. In three typical visual classiﬁcation evaluations, our Grassmann networks signiﬁcantly outperformed existing Grassmann learning methods, and performed comparably with state-of-theart methods. Directions for future work include extending the current GrNet to an end-to-end ConvNet+GrNet training system and applying it to other computer vision problems. Acknowledgement: This work is supported by EU Framework Seven project ReMeDi (grant 610902).\nE4 [text, Section abstract, page 4]: Output Layers As shown in Fig.1, after applying the ProjMap layer, the outputs (i.e., the projection matrices) lie in Euclidean space, and thus can be converted into vector forms. Hence, on the top of the ProjMap layer, classical Euclidean network layers can be employed. For instance, the regular fully connected (FC) layer could be used after the ProjMap layer. The dimensionality of the ﬁlters in the FC layer is typically set to d k × d k − 1 , where d k and d k − 1 are the class number and the dimensionality of the input vector forms respectively. Finally, the common softmax layer can be used for visual classiﬁcation. Training Grassmann Network As most layers in the GrNet model are expressed with complex matrix factorization functions, they cannot be simply reduced to a constructed bottom-up from element-wise calculations. In other words, the matrix backpropgation (backprop) cannot be derived by using traditional matrix that treats element-wise operations in matrix form. As a result, simply using the traditional backprop will break down in the setting. To solve the problem, (Huang and Van Gool 2017; Ionescu, Vantzos, and Sminchisescu 2015) introduced manifold-valued connection weight update rule and matrix backprop respectively. Furthermore, the convergence of the stochastic gradient descent (SGD) algorithm on Riemannian manifolds has also been studied well in (Bottou 2010; Bonnabel 2013). Accordingly, we exploit the training procedure for the proposed GrNet upon these exist ...\nE5 [text, Section abstract, page 2]: idea (Huang et al. 2015b), the FRMap layers are proposed to ﬁrstly perform transformations on input orthonormal matrices of subspaces to generate new matrices by adopting a full rank mapping scheme. Then, the ReOrth layers are developed to normalize the output matrices of the FRMap layers so that they can keep the basic orthogonality. In other words, the normalized data become orthonormal matrices that reside on Stiefel manifold 1 . As well-studied in (Edelman, Arias, and Smith 1998; Hamm and Lee. 2008), the projection metric performing on orthonormal matrices can represent linear subspaces and respect the geometry of Grassmann manifolds, which is actually a quotient manifold of the Stiefel manifold. Accordingly, we develop projection mapping (ProjMap) layers to maintain the Grassmannian property of the resulting data. Meanwhile, the ProjMap layers are able to transfer the resulting Grassmannian data into Euclidean data, which enables the regular Euclidean layers such as softmax layers for classiﬁcation. The ProjMap and softmax layers forms the Output block for GrNet. Additionally, since traditional pooling layers can reduce the network complexity, we also study projection pooling (ProjPooling) layers on the projection matrix form of the resulting orthonormal matrices. As it is non-trivial to perform pooling on non-Euclidean data directly, we develop a Pooling block to combine ProMap, ProjPooling and orthonormal mapping (OrthMap) layers, which respectively achieves Euclidean  ... [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E5",
+    "fact": "ReOrth layers are developed to normalize the output matrices of the FRMap layers so that they can keep the basic orthogonality."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

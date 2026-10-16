@@ -1,0 +1,36 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 183,
+  "prompt_tokens": 1240,
+  "total_tokens": 1423
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of VAGER+Voting compare to other VAGER variants in the 1-shot and 20-shot settings?\nEvidence:\n[E1] (table, Table 2, page 7): Table 2. Comparison of VAGER and LR over novel classes with 1-shot binary classiﬁcation setting\nValues (cite as cells):\n  row 'Jeep': 'LR (No Transfer)' = 0.8034; 'VAGER (Transfer)' = 0.9469\n  row 'Zebra': 'LR (No Transfer)' = 0.8472; 'VAGER (Transfer)' = 0.9393\n  row 'Hen': 'LR (No Transfer)' = 0.7763; 'VAGER (Transfer)' = 0.8398\n  row 'Lemon': 'LR (No Transfer)' = 0.6854; 'VAGER (Transfer)' = 0.9583\n  row 'Bubble': 'LR (No Transfer)' = 0.7455; 'VAGER (Transfer)' = 0.7041\n  row 'Pineapple': 'LR (No Transfer)' = 0.7364; 'VAGER (Transfer)' = 0.8623\n  row 'Lion': 'LR (No Transfer)' = 0.8305; 'VAGER (Transfer)' = 0.9372\n  row 'Screen': 'LR (No Transfer)' = 0.7801; 'VAGER (Transfer)' = 0.9056\n  row 'Drum': 'LR (No Transfer)' = 0.6510; 'VAGER (Transfer)' = 0.6995\n  row 'Restaurant': 'LR (No Transfer)' = 0.7806; 'VAGER (Transfer)' = 0.8787\n  row '0.2 Increasing 0.1 AUC': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row 'AUC 0.0': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '0.1': 'LR (No Transfer)' = ; 'VAGER (Transfer)' = \n  row '1.4 1.6': 'LR (No Transfer)' = 1.8 2.0 2.2 2.4 Similarity Ratio; 'VAGER (Transfer)' = 2.6 2.8 3.0\n[E2] (text, Section 4.2, page 6): In this section, we evaluate how well the classiﬁers learned by our method and other baselines can perform in novel classes on binary classiﬁcation setting. The results are shown in Table 1 . In all low-shot settings, our method VAGER+Voting consistently performs the best in both AUC and F1 metrics. In contrast, LR performs the worst in 1-shot setting, which demonstrates the importance of generalization from base classes when the new class has very few samples. MRN does not work well in most settings, demonstrating that its basic hypothesis that the classiﬁcation parameters trained by large samples and small samples respectively are correlated does not necessarily hold in real data. By comparing VAGER+Voting with the other ﬁve variant versions of our method, we can safely draw the conclusion that the major ingredients in our method, including network embedding for low dimensional representations, mapping function for transforming embedding space to classiﬁcation parameter space, as well as the reﬁnement strategy are necessary and effective and the results support that the Voting strategy performs the best in our sce-\n[E3] (text, Section 4.4, page 8): test categories and learn to distinguish these 10 categories on the 1-shot setting. We repeat random selections ﬁve times and the result is shown on the ﬁrst 5 columns in Table 3 . Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are.\n[E4] (text, Section 4.1, page 5): The evaluating metric in our experiment is the Area Under Curve (AUC) of the Receiver Operating Characteristic (ROC) and the F1-score, which are widely used in binary classiﬁcation. We report the average AUC and F1-score across all test classes. As to the m -way k -shot classiﬁcation, we use average top-1 accuracy across m novel classes. We compare our method with the baselines below. The complete version of our method is VAGER+Voting."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "By comparing VAGER+Voting with the other five variant versions of our method, we can safely draw the conclusion that the major ingredients in our method, including network embedding for low dimensional representations, mapping function for transforming embedding space to classification parameter space, as well as the refinement strategy are necessary and effective and the results support that the Voting strategy performs the best in our sce-",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E2",
+      "quote": "By comparing VAGER+Voting with the other ﬁve variant versions of our method, we can safely draw the conclusion that the major ingredients in our method, including network embedding for low dimensional representations, mapping function for transforming embedding space to classiﬁcation parameter space, as well as the reﬁnement strategy are necessary and effective and the results support that the Voting strategy performs the best in our sce-"
+     }
+    ]
+   }
+  ]
+ }
+}

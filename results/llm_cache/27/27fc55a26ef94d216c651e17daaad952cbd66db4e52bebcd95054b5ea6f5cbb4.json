@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 159,
+  "total_tokens": 225
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy, and how does its performance differ between the two test sets?\nSub-goals:\n1. [table] Which model performs best on tasks T3 and T3-OOV in terms of per-dialog accuracy, and how does its performance differ between the two test sets?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will search the tables to find the model performance metrics on tasks T3 and T3-OOV in terms of per-dialog accuracy.",
+  "tool": "table",
+  "query": "T3 T3-OOV per-dialog accuracy model performance"
+ }
+}

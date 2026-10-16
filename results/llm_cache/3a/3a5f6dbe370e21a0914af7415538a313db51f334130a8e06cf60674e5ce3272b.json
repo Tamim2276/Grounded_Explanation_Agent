@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 71,
+  "prompt_tokens": 219,
+  "total_tokens": 290
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the performance of VAGER is worse than LR for the \"Bubble\" class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nSub-goals:\n1. [table] Can you explain why the performance of VAGER is worse than LR for the Bubble class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nAlready tried: sub-goal 1 with table, sub-goal 1 with text\nStill missing: The evidence shows that generalization plays a negative role for the Bubble class in Table 2, but it does not provide the specific explanation or reason why VAGER's performance is worse than LR for this class."
+  }
+ ],
+ "answer": {
+  "reason": "I am searching the figures to see if any visual representation or analysis explains the anomaly of VAGER performing worse than LR for the Bubble class in the 1-shot binary classification setting.",
+  "tool": "figure",
+  "query": "Bubble class performance VAGER LR 1-shot"
+ }
+}

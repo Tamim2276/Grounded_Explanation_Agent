@@ -1,0 +1,30 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 24,
+  "prompt_tokens": 106,
+  "total_tokens": 130
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the BOSSNET with multi-hop encoder performs better on bAbI tasks 3 and 5 compared to the 1-hop encoder, and how this relates to the tasks themselves?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "BOSSNET",
+   "multi-hop encoder",
+   "bAbI",
+   "1-hop encoder"
+  ]
+ }
+}

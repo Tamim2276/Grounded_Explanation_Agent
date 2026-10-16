@@ -1,0 +1,28 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 32,
+  "prompt_tokens": 92,
+  "total_tokens": 124
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the average precision of TCM(256*memory) compare to the other two algorithms in the email-EuAll dataset?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "TCM(256*memory)",
+   "email-EuAll"
+  ]
+ }
+}

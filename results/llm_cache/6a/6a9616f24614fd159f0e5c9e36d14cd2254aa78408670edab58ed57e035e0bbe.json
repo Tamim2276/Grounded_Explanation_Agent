@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 92,
+  "prompt_tokens": 469,
+  "total_tokens": 561
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Why might the authors claim that although BOSSNET achieves a lower BLEU score than Mem2Seq on the SMD dataset, it still performs better in conveying necessary entity information?\nSub-questions:\n1. [table] Why might the authors claim that although BOSSNET achieves a lower BLEU score than Mem2Seq on the SMD dataset, it still performs better in conveying necessary entity information?\nEvidence:\nE1 [table, Table 13, page 14]: Table 13: Example from SMD with 50% OOV. The OOV entity present in the dialog is { pittsburgh }\n | KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm\n | today—monday\nusr-1 sys-1 usr-2 | is the weather cloudy right now ? what city do you want the weather for ? pittsburgh\nGold | there are no clouds in pittsburgh right now\nSeq2Seq+Copy | which is no\nSeq2Seq | it is currently raining in san francisco right now\nMem2Seq | it will not be cloudy in in\nBOSSNET | it will be cloudy on sunday in pittsburgh"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "BOSSNET correctly generates the OOV entity 'pittsburgh' and the correct weather context, whereas Mem2Seq fails and repeats 'in in'."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

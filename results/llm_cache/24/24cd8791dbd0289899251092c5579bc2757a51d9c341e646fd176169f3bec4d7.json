@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 55,
+  "prompt_tokens": 137,
+  "total_tokens": 192
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nSub-goals:\n1. [table] What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will search the tables for a comparison of training data availability between ZDDA and UDA or MVL.",
+  "tool": "table",
+  "query": "ZDDA UDA MVL training data"
+ }
+}

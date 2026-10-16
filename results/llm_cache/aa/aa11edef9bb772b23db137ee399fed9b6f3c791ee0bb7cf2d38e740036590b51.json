@@ -1,0 +1,36 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 113,
+  "prompt_tokens": 2580,
+  "total_tokens": 2693
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How are edges aggregated in the graph sketch $G_h$?\nEvidence:\n[E1] (figure, Figure 1, page 3) (image attached): Fig. 1. A sample graph stream\nWords printed in the figure: Graph stream S Streaming graph G (a, b; t1; 1) (a, c; t2; 1) (b, d; t3; 1) (a, c; t4; 1) (a, f; t5; 1) (c, f; t6; 1) (a, e; t7; 1) (a, c; t8; 3) (c, f; t9; 1) (d, a; t10; 1) ( d, f; t11; 1) (f, e; t12; 3) (a, g; t13; 1) (e, b; t14, 2) (d, a; t15; 1) g a c f d b e 1 1 1 1 1 2 2 3 1 5 2 Fig. 1. A sample graph stream\n[E2] (figure, Figure 1, page 3): a zoomed view of Figure 1 (image attached)\n[E3] (text, Section front, page 4): 1) GSS consists of a size m × m adjacency matrix X and an adjacency list buffer B for left-over edges. 2) For each node H ( v ) in sketch graph G h , we deﬁne an address h ( v )(0 ⩽ h ( v ) ⩽ m ) and a ﬁngerprint f ( v )(0 ⩽ f ( v ) ⩽ F ) where M = m × F and h ( v ) = ⌊ H ( v ) F ⌋ , f ( v ) = H ( v )% F . 3) Each edge −−−−−−−→ H ( s ) , H ( d ) in the graph sketch G h is mapped to a bucket in the row h ( s ) , column h ( d ) of the matrix X . We record [ ⟨ f ( s ) , f ( d ) ⟩ , w ] in the corresponding bucket of the matrix, where w is the edge weight and f ( s ) , f ( d ) are ﬁngerprints of the two endpoints. 4) Adjacency list buffer B records all left-over edges in G h , whose expected positions in the matrix X have been occupied by other previous inserted edges already.\n[E4] (text, Section front, page 2): H ( v ) . Nodes with the same hash value are combined into one node in G h , and the edges connected to them are also aggregated. An example of the graph stream and the graph sketch can be referred in Fig.1 and Fig.2. The compression rate can be controlled by the size of the value range of H ( · ) , which we represent with M . The higher the compression rate is, the lower the accuracy is, as more nodes and edges will be combined. Different from TCM which uses an adjacency matrix to store the graph sketch G h , GSS uses a novel data structure to store it. This data structure is specially designed for sparse graphs and can store a much bigger graph sketch with the same space. As the graph is sparse, the number of nodes is large, but each node is connected to few edges. Therefore, different from adjacency matrix which stores edges with the same source node / destination node in one row / column, we store edges with different source nodes / destination nodes in the one row / column, and distinguish them with ﬁngerprints. Each edge in the graph sketch is mapped to a bucket in the matrix depending on its endpoints, and marked with a ﬁngerprint pair. If the bucket it is mapped is already occupied by other edges, we store this edge in a buffer B , which is composed of adjacency lists. With a m × m matrix we can represent a graph sketch with at most m × F nodes in GSS, where F is the size of the value range of the ﬁngerprint (for example, a 16-bit ﬁngerprint has F = 65536 ). On the other hand, the adjacency matrix can only store a a graph sketch with at most m nodes. With a much larger graph sketch, the accuracy is also much higher compared to TCM.\n[E5] (text, Section A, page 8): As stated above, GSS has O ( | E | ) memory cost and constant update speed. The memory cost of GSS is O ( | E h | + | B | ) , to be precise, where | E h | is the number of edges in the graph sketch G h and | B | is the size of buffer. When we use hash table to store the original ID, additional O ( | V | ) memory is needed, but the overall memory cost is still O ( | E | ) . The update time cost is O ( k + | B | | E h | | B | ) , where k is the number of sampled buckets and is a small constant. When an edge is stored in the matrix, we only need to check at most k candidate buckets, which takes O ( k ) time. Each edge has probability | B | | E h | to be stored in the buffer. When it is stored in the buffer, the update takes additional O ( | B | ) time, as the buffer is an adjacency list. In implementations the buffer stores 0 edges in most cases, which will be shown in section VI-D and VII-G. Therefore | B | | E h | | B | is also a small constant. When it is necessary to store the ID of nodes in applications, one insertion to the hash table is needed, which also takes constant time. Overall, the update time cost is O (1) . [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Nodes with the same hash value are combined into one node in G_h, and the edges connected to them are also aggregated.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E4",
+      "quote": "Nodes with the same hash value are combined into one node in G h , and the edges connected to them are also aggregated."
+     }
+    ]
+   }
+  ]
+ }
+}

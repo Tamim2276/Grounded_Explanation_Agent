@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 32.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 1560,
+  "total_tokens": 1628
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The figure illustrates a sample graph stream represented as a table labeled Graph stream S and a graph sketch labeled Streaming graph G.\" -- cites: E1 (Figure 1): quote \"Graph stream S Streaming graph G\"; E2 (Figure 1): observation \"The figure shows a table at the top labeled Graph stream S and a network graph with labeled nodes and directed edges at the bottom labeled Streaming graph G.\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 3) (image attached): Fig. 1. A sample graph stream\nWords printed in the figure: Graph stream S Streaming graph G (a, b; t1; 1) (a, c; t2; 1) (b, d; t3; 1) (a, c; t4; 1) (a, f; t5; 1) (c, f; t6; 1) (a, e; t7; 1) (a, c; t8; 3) (c, f; t9; 1) (d, a; t10; 1) ( d, f; t11; 1) (f, e; t12; 3) (a, g; t13; 1) (e, b; t14, 2) (d, a; t15; 1) g a c f d b e 1 1 1 1 1 2 2 3 1 5 2 Fig. 1. A sample graph stream\n[E2] (figure, Figure 1, page 3): a zoomed view of Figure 1 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence E1 and E2 confirm the table is labeled Graph stream S and the graph at the bottom is labeled Streaming graph G."
+   }
+  ]
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 316,
+  "prompt_tokens": 1450,
+  "total_tokens": 1766
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the ChoiceNet model perform on datasets with uniform corruptions?\nEvidence:\n[E1] (figure, Figure 4, page 6) (image attached): Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions.\nWords printed in the figure: (a) (b) (c) (d)\n[E2] (figure, Figure 4, page 6): a zoomed view of Figure 4 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Figure 4 shows fitting results on datasets with uniform corruptions and the resulting correlations of two components with uniform corruptions.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions."
+     }
+    ]
+   },
+   {
+    "text": "On datasets with uniform corruptions, ChoiceNet is able to fit the underlying clean curve while ignoring the scattered uniform noise points, as shown in the fitting result and correlation plots.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions."
+     },
+     {
+      "evidence": "E2",
+      "observation": "In the third subfigure labeled Fitting result, the red ChoiceNet curve follows the ground truth sinusoidal pattern despite the dense uniform scatter of points in the positive input region, and in the fourth subfigure (d) correlations show component 1 maintains a high correlation of one across almost all inputs."
+     }
+    ]
+   }
+  ]
+ }
+}

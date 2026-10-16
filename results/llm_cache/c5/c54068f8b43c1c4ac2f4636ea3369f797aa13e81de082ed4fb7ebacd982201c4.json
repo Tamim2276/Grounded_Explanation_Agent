@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 82,
+  "prompt_tokens": 491,
+  "total_tokens": 573
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The initial value of V2 in the interval [0.35, 0.67] is 0.35.\" -- cites: E6 (Table 2): row 'V2', column '[0.35, 0.67]' = 0.35\n\nCited evidence:\n[E6] (table, Table 2, page 29): Table 2: Initial conﬁguration for envy-free lower bound.\nValues (cite as cells):\n  row 'V1': '[0, 0.34]' = 0.35; '[0.34, 0.35]' = 0.01; '[0.35, 0.67]' = 0.35; '[0.67, 0.68]' = 0.01; '[0.68, 1]' = 0.28\n  row 'V2': '[0, 0.34]' = 0.28; '[0.34, 0.35]' = 0.01; '[0.35, 0.67]' = 0.35; '[0.67, 0.68]' = 0.01; '[0.68, 1]' = 0.35\n  row 'V3': '[0, 0.34]' = 0.35; '[0.34, 0.35]' = 0.01; '[0.35, 0.67]' = 0.28; '[0.67, 0.68]' = 0.01; '[0.68, 1]' = 0.35"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited table E6 (Table 2) lists row 'V2' under column '[0.35, 0.67]' as 0.35, which matches the claim."
+   }
+  ]
+ }
+}

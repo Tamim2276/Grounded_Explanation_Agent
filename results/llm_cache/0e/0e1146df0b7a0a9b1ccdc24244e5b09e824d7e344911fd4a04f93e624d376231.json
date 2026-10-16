@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 54,
+  "prompt_tokens": 1394,
+  "total_tokens": 1448
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the performance of VAGER is worse than LR for the \"Bubble\" class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nSub-questions:\n1. [table] Can you explain why the performance of VAGER is worse than LR for the Bubble class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nEvidence:\nE1 [table, Table 2, page 7]: Table 2. Comparison of VAGER and LR over novel classes with 1-shot binary classiﬁcation setting\nCategory | LR (No Transfer) | VAGER (Transfer)\nJeep | 0.8034 | 0.9469\nZebra | 0.8472 | 0.9393\nHen | 0.7763 | 0.8398\nLemon | 0.6854 | 0.9583\nBubble | 0.7455 | 0.7041\nPineapple | 0.7364 | 0.8623\nLion | 0.8305 | 0.9372\nScreen | 0.7801 | 0.9056\nDrum | 0.6510 | 0.6995\nRestaurant | 0.7806 | 0.8787\n0.2 Increasing 0.1 AUC |  | \nAUC 0.0 |  | \n0.1 |  | \n1.4 1.6 | 1.8 2.0 2.2 2.4 Similarity Ratio | 2.6 2.8 3.0\nE2 [text, Section 4.2, page 6]: In this section, we evaluate how well the classiﬁers learned by our method and other baselines can perform in novel classes on binary classiﬁcation setting. The results are shown in Table 1 . In all low-shot settings, our method VAGER+Voting consistently performs the best in both AUC and F1 metrics. In contrast, LR performs the worst in 1-shot setting, which demonstrates the importance of generalization from base classes when the new class has very few samples. MRN does not work well in most settings, demonstrating that its basic hypothesis that the classiﬁcation parameters trained by large samples and small samples respectively are correlated does not necessarily hold in real data. By comparing VAGER+Voting with the other ﬁve variant versions of our method, we can safely draw the conclusion that the major ingredients in our method, including network embedding for low dimensional representations, mapping function for transforming embedding space to classiﬁcation parameter space, as well as the reﬁnement strategy are necessary and effective and the results support that the Voting strategy performs the best in our sce-\nE3 [text, Section 4.4, page 8]: test categories and learn to distinguish these 10 categories on the 1-shot setting. We repeat random selections ﬁve times and the result is shown on the ﬁrst 5 columns in Table 3 . Our VAGER+Voting performs the best in all 5 groups, with promotion of around 2% of average top-1 accuracy, which demonstrates that our method is robust whatever the novel classes are.\nE4 [text, Section 4.3, page 6]: Although our method performs the best in different settings, the failure cases are easy to ﬁnd. We are interested in the following questions: (1) What are the typical failure cases? (2) What is the driving factor that controls the success of generalization? (3) Whether the generalization process is explainable? In order to answer the above questions, we further conduct an insightful analysis. We randomly select 10 novel classes, and list the performance of our method compared with LR in one-shot setting on these classes, as shown in Table 2 . It’s obvious that the effect of generalization is notable in 9 of them, but in the bubble class, the generalization plays a negative role. To discover the driving factor controlling success or failure of the generalization, we deﬁne and calculate the similarity ratio (SR) of a novel class with the base classes by: SR = Average Top - K Similarity with Base Classes\nE5 [figure, Figure 5, page 8] (image attached): Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem.\nWords printed in the figure: 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet\nE6 [figure, Figure 5, page 8]: Zoomed view (300 dpi) of: Figure 5. Change of performance as shot number increases in 10 classes 1-shot multi-class classiﬁcation problem.\nWords printed in the figure: 1 2 3 4 5 10 20 50 Shots 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 Top-1 Accuracy VAGER+Voting LR Weighted LR MRN MatchingNet ProtoNet ActivationNet"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence shows that VAGER performs worse on the Bubble class than LR, but it does not explain why this happens.",
+  "sufficient": false
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 4.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 137,
+  "prompt_tokens": 1536,
+  "total_tokens": 1673
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 4 shows fitting results on datasets with uniform corruptions and the resulting correlations of two components with uniform corruptions.\" -- cites: E1 (Figure 4): quote \"Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions.\"\n2. \"On datasets with uniform corruptions, ChoiceNet is able to fit the underlying clean curve while ignoring the scattered uniform noise points, as shown in the fitting result and correlation plots.\" -- cites: E1 (Figure 4): quote \"Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions.\"; E2 (Figure 4): observation \"In the third subfigure labeled Fitting result, the red ChoiceNet curve follows the ground truth sinusoidal pattern despite the dense uniform scatter of points in the positive input region, and in the fourth subfigure (d) correlations show component 1 maintains a high correlation of one across almost all inputs.\"\n\nCited evidence:\n[E1] (figure, Figure 4, page 6) (image attached): Figure 4: Fitting results on datasets with (a) ﬂipped function and (c) uniform corruptions. Resulting correlations of two components with (b) ﬂipped function and (d) uniform corruptions.\nWords printed in the figure: (a) (b) (c) (d)\n[E2] (figure, Figure 4, page 6): a zoomed view of Figure 4 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly confirms Figure 4 shows fitting results on datasets with uniform corruptions and the resulting correlations of two components with uniform corruptions."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence confirms that the fitting result shows ChoiceNet fits the underlying curve despite the noise, and the correlation plot (d) shows component 1 maintains a high correlation of one across almost all inputs."
+   }
+  ]
+ }
+}

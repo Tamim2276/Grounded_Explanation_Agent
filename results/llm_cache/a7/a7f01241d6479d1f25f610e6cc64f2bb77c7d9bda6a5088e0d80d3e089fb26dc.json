@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 45,
+  "prompt_tokens": 1290,
+  "total_tokens": 1335
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The evidence states that \"The distance from a connected equitable and proportional allocation is b − a \".\" -- cites: E1 (Figure 2): quote \"The distance from a connected equitable and proportional allocation is b − a\"\n\nCited evidence:\n[E1] (figure, Figure 2, page 10) (image attached): Figure 2: Construction for equitable lower bound. The distance from a connected equitable and proportional allocation is b − a , where 0 < a < b < 0 . 5 and 0 < x < y < 1. [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text in Figure 2 explicitly states that 'The distance from a connected equitable and proportional allocation is b - a'."
+   }
+  ]
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 40,
+  "prompt_tokens": 609,
+  "total_tokens": 649
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Table 5 presents the performance comparison on MNIST and CIFAR-10.\" -- cites: E1 (Table 5): quote \"Table 5: Performance Comparison on MNIST and CIFAR- 10.\"\n\nCited evidence:\n[E1] (table, Table 5, page 13): Table 5: Performance Comparison on MNIST and CIFAR- 10.\nValues (cite as cells):\n  row 'CNN': '' = Framework; '' = setup; 'Time (s)' = online; '' = total; '' = setup; 'Comm (MB)' = online; '' = total\n  row '': '' = MiniONN; '' = 3.58; 'Time (s)' = 5.74; '' = 9.32; '' = 20.9; 'Comm (MB)' = 636.6; '' = 657.5; '' = FALCON; '' = 0.63; 'Time (s)' = 0.21; '' = 0.84; '' = 77.0; 'Comm (MB)' = 15.5; '' = 92.5; '' = MiniONN; '' = 472; 'Time (s)' = 72; '' = 544; '' = 3046; 'Comm (MB)' = 6226; '' = 9272; '' = FALCON; '' = 7.20; 'Time (s)' = 2.88; '' = 10.1; '' = 1194; 'Comm (MB)' = 265; '' = 1459\n  row 'MNIST': '' = GAZELLE; '' = 0.48; 'Time (s)' = 0.33; '' = 0.81; '' = 47.5; 'Comm (MB)' = 22.5; '' = 70.0\n  row 'CIFAR-10': '' = GAZELLE; '' = 9.34; 'Time (s)' = 3.56; '' = 12.9; '' = 940; 'Comm (MB)' = 296; '' = 1236"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence Table 5 is explicitly titled Performance Comparison on MNIST and CIFAR-10."
+   }
+  ]
+ }
+}

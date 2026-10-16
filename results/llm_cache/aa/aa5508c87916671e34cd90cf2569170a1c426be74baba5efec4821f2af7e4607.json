@@ -1,0 +1,54 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 238,
+  "prompt_tokens": 1031,
+  "total_tokens": 1269
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which pooling method is the most accurate for the AFEW database?\nEvidence:\n[E1] (table, Table 1, page 7): Table 1: Results for the AFEW, HDM05 and PaSC datasets. PaSC1/PaSC2 are the control/handheld testings.\nValues (cite as cells):\n  row 'STM-ExpLet': 'AFEW' = 31.73%; 'HDM05' = –; 'PaSC1' = –; 'PaSC2' = –\n  row 'RSR-SPDML': 'AFEW' = 30.12%; 'HDM05' = 48.01%±3.38; 'PaSC1' = –; 'PaSC2' = –\n  row 'DCC': 'AFEW' = 25.78%; 'HDM05' = 41.34%±1.05; 'PaSC1' = 75.83%; 'PaSC2' = 67.04%\n  row 'GDA': 'AFEW' = 29.11%; 'HDM05' = 46.25%±2.71; 'PaSC1' = 71.38%; 'PaSC2' = 67.49%\n  row 'GGDA': 'AFEW' = 29.45%; 'HDM05' = 46.87%±2.31; 'PaSC1' = 66.71%; 'PaSC2' = 68.41%\n  row 'PML': 'AFEW' = 28.98%; 'HDM05' = 47.12%±1.59; 'PaSC1' = 73.45%; 'PaSC2' = 68.32%\n  row 'VGGDeepFace': 'AFEW' = –; 'HDM05' = –; 'PaSC1' = 78.82%; 'PaSC2' = 68.24%\n  row 'DeepO2P': 'AFEW' = 28.54%; 'HDM05' = –; 'PaSC1' = 68.76%; 'PaSC2' = 60.14%\n  row 'SPDNet': 'AFEW' = 34.23%; 'HDM05' = 61.45%±1.12; 'PaSC1' = 80.12%; 'PaSC2' = 72.83%\n  row 'GrNet-0Block': 'AFEW' = 25.34%; 'HDM05' = 51.12%±3.55; 'PaSC1' = 68.52%; 'PaSC2' = 63.92%\n  row 'GrNet-1Block': 'AFEW' = 32.08%; 'HDM05' = 57.73%±2.24; 'PaSC1' = 80.15%; 'PaSC2' = 72.51%\n  row 'GrNet-2Blocks': 'AFEW' = 34.23%; 'HDM05' = 59.23%±1.78; 'PaSC1' = 80.52%; 'PaSC2' = 72.76%"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Table 1 shows the results for the AFEW, HDM05 and PaSC datasets.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Table 1: Results for the AFEW, HDM05 and PaSC datasets."
+     }
+    ]
+   },
+   {
+    "text": "The evidence does not provide information about pooling methods; it only gives results for methods such as STM-ExpLet, RSR-SPDML, DCC, GDA, GGDA, PML, VGGDeepFace, DeepO2P, SPDNet, and GrNet on the AFEW database, where the highest accuracy listed for AFEW is SPDNet and GrNet-2Blocks at 34.23%.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "SPDNet",
+      "col": "AFEW",
+      "value": "34.23%"
+     },
+     {
+      "evidence": "E1",
+      "row": "GrNet-2Blocks",
+      "col": "AFEW",
+      "value": "34.23%"
+     }
+    ]
+   }
+  ]
+ }
+}

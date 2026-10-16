@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 126,
+  "prompt_tokens": 1520,
+  "total_tokens": 1646
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The evidence does not explain how the square hashing process works, but shows \"Fig. 5. The square hashing\" alongside hash functions like \"h1(d)\", \"h2(d)\", \"h3(d)\", \"h1(s)\", \"h2(s)\", \"h3(s)\", a \"Fingerprint < f(s), f(d) >\", an \"Index\", and a grid with mapped, occupied, and empty buckets.\" -- cites: E1 (Figure 5): quote \"Fig. 5. The square hashing\"; E1 (Figure 5): quote \"Fingerprint < f(s), f(d) >\"; E2 (Figure 5): observation \"A grid showing rows for h1(s), h2(s), h3(s) and columns for h1(d), h2(d), h3(d) with legend items for Mapped Bucket, Occupied Bucket, and Empty Bucket.\"\n\nCited evidence:\n[E1] (figure, Figure 5, page 6) (image attached): Fig. 5. The square hashing\nWords printed in the figure: h1(d) h2(d) h3(d) h1(s) h2(s) h3(s) Fingerprint < f(s), f(d) > Index <1, 3> Mapped Bucket Occupied Bucket Empty Bucket\n[E2] (figure, Figure 5, page 6): a zoomed view of Figure 5 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence (Figure 5) displays the title 'Fig. 5. The square hashing', hash functions h1(d), h2(d), h3(d), h1(s), h2(s), h3(s), the Fingerprint < f(s), f(d) >, the Index, and a grid showing mapped, occupied, and empty buckets as stated in the claim."
+   }
+  ]
+ }
+}

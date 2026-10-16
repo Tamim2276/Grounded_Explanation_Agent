@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 58,
+  "prompt_tokens": 425,
+  "total_tokens": 483
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"For the email-EuAll dataset, GSS has the highest update speed of 2.2887 MIPS, making it the fastest data structure for updating among the evaluated ones.\" -- cites: E6 (Table I): row 'GSS', column 'email-EuAll' = 2.2887\n\nCited evidence:\n[E6] (table, Table I, page 12): TABLE I U PDATE S PEED (M IPS )\nValues (cite as cells):\n  row 'GSS': 'email-EuAll' = 2.2887; 'cit-HepPh' = 2.61057; 'web- NotreDame' = 2.40976\n  row 'GSS(no sampling)': 'email-EuAll' = 2.1245; 'cit-HepPh' = 2.49191; 'web- NotreDame' = 2.32015\n  row 'TCM': 'email-EuAll' = 2.10417; 'cit-HepPh' = 2.5498; 'web- NotreDame' = 2.07403\n  row 'Adjacency Lists': 'email-EuAll' = 0.578596; 'cit-HepPh' = 0.3384; 'web- NotreDame' = 0.52147"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The table E6 shows that for the email-EuAll dataset, GSS has an update speed of 2.2887 MIPS, which is the highest among all listed rows for that column."
+   }
+  ]
+ }
+}

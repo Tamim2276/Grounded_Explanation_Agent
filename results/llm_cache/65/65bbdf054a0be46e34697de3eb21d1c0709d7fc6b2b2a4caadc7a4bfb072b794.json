@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 56,
+  "prompt_tokens": 139,
+  "total_tokens": 195
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\nSub-goals:\n1. [figure] Explain how the answering procedure works.\nAlready tried: sub-goal 1 with figure\nStill missing: The provided evidence only shows examples of UnCoRd failures (wrong color estimation and failed object detection), but does not explain the full answering procedure of the method."
+  }
+ ],
+ "answer": {
+  "reason": "Since the figure search did not provide the full textual explanation of the answering procedure, I will search the main text paragraphs to understand the method details.",
+  "tool": "text",
+  "query": "answering procedure"
+ }
+}

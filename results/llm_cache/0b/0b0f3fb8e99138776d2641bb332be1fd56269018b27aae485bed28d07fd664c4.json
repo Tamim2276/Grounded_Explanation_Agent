@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 90,
+  "prompt_tokens": 915,
+  "total_tokens": 1005
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The provided evidence does not contain a textual statement explaining the comparison between BOSSNET and Mem2Seq regarding BLEU scores and entity information, but shows an example where BOSSNET generates 'it will be cloudy on sunday in pittsburgh' containing the correct entity 'pittsburgh', whereas Mem2Seq generates 'it will not be cloudy in in'.\" -- cites: E1 (Table 13): quote \"Table 13: Example from SMD with 50% OOV. The OOV entity present in the dialog is { pittsburgh }\"; E1 (Table 13): row 'Mem2Seq', column 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = it will not be cloudy in in; E1 (Table 13): row 'BOSSNET', column 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = it will be cloudy on sunday in pittsburgh\n\nCited evidence:\n[E1] (table, Table 13, page 14): Table 13: Example from SMD with 50% OOV. The OOV entity present in the dialog is { pittsburgh }\nValues (cite as cells):\n  row '': 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = today—monday\n  row 'usr-1 sys-1 usr-2': 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = is the weather cloudy right now ? what city do you want the weather for ? pittsburgh\n  row 'Gold': 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = there are no clouds in pittsburgh right now\n  row 'Seq2Seq+Copy': 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = which is no\n  row 'Seq2Seq': 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = it is currently raining in san francisco right now\n  row 'Mem2Seq': 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = it will not be cloudy in in\n  row 'BOSSNET': 'KB (location—day—weather) mountain view—sunday—foggy mountain view—monday—overcast pittsburgh—sunday—overcast pittsburgh—monday—warm downtown chicago—sunday—foggy downtown chicago—monday—warm' = it will be cloudy on sunday in pittsburgh"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence matches the text of Table 13 where the OOV entity is pittsburgh, Mem2Seq generates 'it will not be cloudy in in', and BOSSNET generates 'it will be cloudy on sunday in pittsburgh'."
+   }
+  ]
+ }
+}

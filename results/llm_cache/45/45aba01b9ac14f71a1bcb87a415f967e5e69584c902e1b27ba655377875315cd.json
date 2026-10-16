@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 83,
+  "prompt_tokens": 397,
+  "total_tokens": 480
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The method with the highest overall accuracy on the 100 questions sampled from the VQA v2 dataset is UnCoRd-VG-E with an Overall accuracy of 92.0, compared to Pythia which has an Overall accuracy of 77.0.\" -- cites: E1 (Table 8): row 'UnCoRd-VG-E', column 'Overall' = 92.0; E1 (Table 8): row 'Pythia [85]', column 'Overall' = 77.0; E1 (Table 8): quote \"Table 8. Answering accuracy for 100 questions sampled from VQA v2 dataset (on terms with visual estimators in UnCoRd).\"\n\nCited evidence:\n[E1] (table, Table 8, page 8): Table 8. Answering accuracy for 100 questions sampled from VQA v2 dataset (on terms with visual estimators in UnCoRd).\nValues (cite as cells):\n  row 'Pythia [85]': 'Yes/No' = 90.0; 'WH' = 68.3; 'Overall' = 77.0\n  row 'UnCoRd-VG-E': 'Yes/No' = 97.5; 'WH' = 88.3; 'Overall' = 92.0"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Table 8 shows UnCoRd-VG-E with an Overall accuracy of 92.0 and Pythia [85] with an Overall accuracy of 77.0, confirming the claim."
+   }
+  ]
+ }
+}

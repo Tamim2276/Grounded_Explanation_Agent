@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 32.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 112,
+  "prompt_tokens": 613,
+  "total_tokens": 725
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ChoiceNet achieves a collision rate of 0% across 10%, 20%, and 30% settings, and only 0.83% at the 40% setting, indicating it is the safest method among those compared.\" -- cites: E5 (Table 7): row '10%', column 'ChoiceNet' = 0%; E5 (Table 7): row '20%', column 'ChoiceNet' = 0%; E5 (Table 7): row '30%', column 'ChoiceNet' = 0%; E5 (Table 7): row '40%', column 'ChoiceNet' = 0.83%\n\nCited evidence:\n[E5] (table, Table 7, page 15): Table 7: Collision rates of compared methods on straight lanes.\nValues (cite as cells):\n  row '0%': 'MDN' = 50.83%; 'GPR' = 0.83%; 'LGPR' = 4.17%; 'RGPR' = 3.33%\n  row '10%': 'ChoiceNet' = 0%; 'MDN' = 38.33%; 'MLP' = 0%; 'GPR' = 2.5%; 'LGPR' = 1.67%; 'RGPR' = 4.17%\n  row '20%': 'ChoiceNet' = 0%; 'MDN' = 41.67%; 'MLP' = 0%; 'GPR' = 7.5%; 'LGPR' = 6.67%; 'RGPR' = 10%\n  row '30%': 'ChoiceNet' = 0%; 'MDN' = 66.67%; 'MLP' = 1.67%; 'GPR' = 4.17%; 'LGPR' = 1.67%; 'RGPR' = 7.5%\n  row '40%': 'ChoiceNet' = 0.83%; 'MDN' = 35%; 'MLP' = 3.33%; 'GPR' = 6.67%; 'LGPR' = 6.67%; 'RGPR' = 24.17%"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The cited evidence shows that MLP also achieves 0% collision rate at 10% and 20% settings, so ChoiceNet is not the only method with 0% across those settings, and the claim goes beyond the evidence by declaring ChoiceNet as the safest method among those compared based solely on its own numbers without showing comparisons for all methods."
+   }
+  ]
+ }
+}

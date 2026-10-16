@@ -1,0 +1,25 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 5,
+  "prompt_tokens": 74,
+  "total_tokens": 79
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: How do the reconstructions compare to the original samples?"
+  }
+ ],
+ "answer": {
+  "names": []
+ }
+}

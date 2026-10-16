@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 98,
+  "prompt_tokens": 1850,
+  "total_tokens": 1948
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"In the email-EuAll dataset, the average precision of TCM(256*memory) is lower than that of the other two algorithms, GSS(fsize=12) and GSS(fsize=16).\" -- cites: E1 (Figure 9): quote \"Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll\"; E2 (Figure 9): observation \"In subfigure (a) email-EuAll, the blue line with circle markers representing TCM(256*memory) stays significantly lower across the width range compared to the green and red lines representing GSS(fsize=12) and GSS(fsize=16).\"\n\nCited evidence:\n[E1] (figure, Figure 9, page 12) (image attached): Fig. 9. Average Precision of 1-hop Precursor Queries\nWords printed in the figure: 700 800 900 1000 1100 1200 Width 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (a) email-EuAll 700 800 900 1000 1100 1200 Width 0.7 0.8 0.9 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (b) cit-HepPh 700 800 900 1000 1100 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision GSS(fsize=12) GSS(fsize=16) TCM(256*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(256*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 1.0 Average Precision fsize=12 fsize=16 TCM(16*memory) (e) Caida-networkflow Fig. 9. Average Precision of 1-hop Precursor Queries\n[E2] (figure, Figure 9, page 12): a zoomed view of Figure 9 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited figure 9(a) for email-EuAll shows that the blue line representing TCM(256*memory) stays significantly lower than the lines representing GSS(fsize=12) and GSS(fsize=16) across the width range."
+   }
+  ]
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 243,
+  "total_tokens": 304
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the following statements about the training procedure of ZDDA is true?\n\n(a) ZDDA simulates the target-domain representation using the source-domain data. (b) ZDDA builds a joint network with the supervision from the target domain. (c) ZDDA trains a sensor fusion network in step 1. (d) ZDDA trains a sensor fusion network in step 2.\nSub-goals:\n1. [table] Which of the following statements about the training procedure of ZDDA is true?\nAlready tried: sub-goal 1 with text\nStill missing: table evidence for sub-goal 1 (rule floor); None of the evidence items describe the complete training procedure of ZDDA to determine which of the statements (a), (b), (c), or (d) is true."
+  }
+ ],
+ "answer": {
+  "reason": "Searching the tables for detailed information about the steps in the training procedure of ZDDA to verify statements a, b, c, and d.",
+  "tool": "table",
+  "query": "ZDDA training procedure steps sensor fusion network"
+ }
+}

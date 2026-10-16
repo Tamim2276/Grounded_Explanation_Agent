@@ -1,0 +1,36 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.8,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 97,
+  "prompt_tokens": 1491,
+  "total_tokens": 1588
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the distance from equitability for the allocation that can be obtained by cutting at $x$ with the player order $(1,2)$?\nEvidence:\n[E1] (figure, Figure 2, page 10) (image attached): Figure 2: Construction for equitable lower bound. The distance from a connected equitable and proportional allocation is b − a , where 0 < a < b < 0 . 5 and 0 < x < y < 1.\n[E2] (figure, Figure 2, page 10): a zoomed view of Figure 2 (image attached)\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The evidence does not mention the distance from equitability for the allocation obtained by cutting at x with the player order (1,2), but states that \"The distance from a connected equitable and proportional allocation is b − a\"\": the number 1,2 is in no citation [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The evidence states that \"The distance from a connected equitable and proportional allocation is b − a \".",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "The distance from a connected equitable and proportional allocation is b − a"
+     }
+    ]
+   }
+  ]
+ }
+}

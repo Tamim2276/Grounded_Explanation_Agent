@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 69,
+  "prompt_tokens": 1623,
+  "total_tokens": 1692
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the encoder understand the last user utterance?\nSub-questions:\n1. [figure] How does the encoder understand the last user utterance?\nEvidence:\nE1 [figure, Figure 2, page 2] (image attached): Figure 2: The dialog history and KB tuples stored in the memory have memory cell representations and to- ken representations. The encoder understands the last user utterance using only the memory cell representa- tions. The decoder generates the next response using both representations.\nWords printed in the figure: Dialog History KB Tuples Encoder Decoder Memory Cell Representations Token Representations what is the food type they serve ? they serve indian food . Bag-of-Sequences (BoSs) Memory 𝑐\" # 𝑐\" $ {𝑐& $,𝑐& #, ⋯𝑐\")& $ ,𝑐\")& # } {𝑘𝑏&, 𝑘𝑏-, ⋯𝑘𝑏.}\nE2 [figure, Figure 2, page 2]: Zoomed view (300 dpi) of: Figure 2: The dialog history and KB tuples stored in the memory have memory cell representations and to- ken representations. The encoder understands the last user utterance using only the memory cell representa- tions. The decoder generates the next response using both representations.\nWords printed in the figure: Dialog History KB Tuples Encoder Decoder Memory Cell Representations Token Representations what is the food type they serve ? they serve indian food . Bag-of-Sequences (BoSs) Memory 𝑐\" # 𝑐\" $ {𝑐& $,𝑐& #, ⋯𝑐\")& $ ,𝑐\")& # } {𝑘𝑏&, 𝑘𝑏-, ⋯𝑘𝑏.} [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "using only the memory cell representations"
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

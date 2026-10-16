@@ -1,0 +1,56 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 209,
+  "prompt_tokens": 678,
+  "total_tokens": 887
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method appears to be the safest for autonomous driving on straight lanes with different levels of outlier vehicles?\nEvidence:\n[E1] (table, Table 8, page 15): Table 8: Root mean square lane deviation distances (m) of compared methods on straight lanes.\nValues (cite as cells):\n  row '0%': 'ChoiceNet' = 0.314; 'MDN' = 0.723; 'MLP' = 0.300; 'GPR' = 0.356; 'LGPR' = 0.349; 'RGPR' = 0.424\n  row '10%': 'ChoiceNet' = 0.352; 'MDN' = 0.387; 'MLP' = 0.438; 'GPR' = 0.401; 'LGPR' = 0.446; 'RGPR' = 0.673\n  row '20%': 'ChoiceNet' = 0.349; 'MDN' = 0.410; 'MLP' = 0.513; 'GPR' = 0.418; 'LGPR' = 0.419; 'RGPR' = 0.725\n  row '30%': 'ChoiceNet' = 0.368; 'MDN' = 0.368; 'MLP' = 0.499; 'GPR' = 0.455; 'LGPR' = 0.476; 'RGPR' = 0.740\n  row '40%': 'ChoiceNet' = 0.370; 'MDN' = 0.574; 'MLP' = 0.453; 'GPR' = 0.453; 'LGPR' = 0.453; 'RGPR' = 0.636"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ChoiceNet achieves the lowest root mean square lane deviation distances at 10%, 20%, 30%, and 40% outlier vehicle levels on straight lanes.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "10%",
+      "col": "ChoiceNet",
+      "value": "0.352"
+     },
+     {
+      "evidence": "E1",
+      "row": "20%",
+      "col": "ChoiceNet",
+      "value": "0.349"
+     },
+     {
+      "evidence": "E1",
+      "row": "30%",
+      "col": "ChoiceNet",
+      "value": "0.368"
+     },
+     {
+      "evidence": "E1",
+      "row": "40%",
+      "col": "ChoiceNet",
+      "value": "0.370"
+     }
+    ]
+   }
+  ]
+ }
+}

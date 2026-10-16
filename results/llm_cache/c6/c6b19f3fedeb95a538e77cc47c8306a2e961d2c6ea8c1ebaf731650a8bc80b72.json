@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 66,
+  "prompt_tokens": 2994,
+  "total_tokens": 3060
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which data structure is the fastest for updating on the email-EuAll dataset?\nSub-questions:\n1. [figure] Which data structure is the fastest for updating on the email-EuAll dataset?\nEvidence:\nE1 [figure, Figure 8, page 12] (image attached): Fig. 8. Average Relative Error of Edge Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0.00 0.01 0.02 0.03 0.04 0.05 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0.004 0.003 0.002 0.001 0.000 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0.00 0.01 0.02 0.03 0.04 Edge query ARE fsize=12 fsize=16 TCM(8*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow Fig. 8. Average Relative Error of Edge Queries\nE2 [figure, Figure 8, page 12]: Zoomed view (300 dpi) of: Fig. 8. Average Relative Error of Edge Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0.00 0.01 0.02 0.03 0.04 0.05 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0.004 0.003 0.002 0.001 0.000 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0.00 0.01 0.02 0.03 0.04 Edge query ARE fsize=12 fsize=16 TCM(8*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow Fig. 8. Average Relative Error of Edge Queries\nE3 [text, Section D, page 11]: decreases, and the precision increases with the growth of the width of the matrix. This trend is not very signiﬁcant in GSS as the accuracy is high and there are no errors in most experiments. Also, when the length of ﬁngerprint becomes longer, the accuracy of GSS increases. E. Experiments on Node Query In this section, we evaluate the performance of GSS in estimating the accuracy of node query. A node query for a node v is to compute the summary of the weights of all edges with source node v . For each dataset, node query set contains all nodes in the graph stream. Figure 11 shows the ARE of node queries in data sets email-EuAll, cit-HepPh and web- NotreDame, respectively. The ﬁgure shows that although we unfairly ﬁx the ratio of memory used by TCM and GSS, GSS still can achieve better performance than TCM. F. Experiments on Reachability Query\nE4 [text, Section A, page 10]: edge and the edge weight represents the appearance times in the stream. 2) cit-HepPh 4 .It is the Arxiv HEP-PH (high energy physics phenomenology) citation graph. If a paper src cites paper dst , the data set contains a directed edge from src to dst . The data set covers 34,546 papers as nodes with 421,578 edges. The edge weights are also added using Zipﬁan distribution. 3) web-NotreDame 5 .It is a web graph collected from the University of Notre Dame. Nodes represent web pages and directed edges represent hyperlinks between pages. The data set contains 325729 nodes and 1497134 edges. We use the Zipﬁan distribution to generate weights for the edges in the data set, and insert the edges into the data structure one by one to simulate the procedure of real-world incremental updating. 4) lkml-reply 6 .It is a collection of communication records in the network of the Linux kernel mailing list. It contains 63399 email addresses (nodes) and 1096440 communication records(edges). Each edge is weighted by its frequency in the data set, and has a timestamp indicating the communication time. We feed the data items to the data structure according to their timestamps to simulate a graph stream.\nE5 [text, Section A, page 10]: We choose three real world data sets. Details of three data sets are described as follows: 1) email-EuAll 3 .This data set is communication network data generated using email data from a large European research institution for a period of 18 months. Each node in the directed graph corresponds to an email address. Each edge between node src and dst represents src sent at least one email to dst . The directed graph contains 265214 nodes and 420045 edges. We use the Zipﬁan distribution to add the weight to each [image]"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The provided evidence discusses error rates (ARE) for edge and node queries on the email-EuAll dataset, but does not provide updating speed or throughput performance for any data structure.",
+  "sufficient": false
+ }
+}

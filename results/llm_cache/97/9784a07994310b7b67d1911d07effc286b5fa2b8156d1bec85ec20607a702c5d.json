@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 138,
+  "total_tokens": 201
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between testing domain adaptation and testing sensor fusion?\nSub-goals:\n1. [figure] What is the difference between testing domain adaptation and testing sensor fusion?\nAlready tried: sub-goal 1 with figure\nStill missing: The evidence only discusses domain adaptation and does not provide information or a comparison regarding testing sensor fusion."
+  }
+ ],
+ "answer": {
+  "reason": "Since the figure search did not yield results for sensor fusion, I will now search the main text to find a definition or comparison regarding testing sensor fusion versus domain adaptation.",
+  "tool": "text",
+  "query": "sensor fusion domain adaptation testing difference"
+ }
+}

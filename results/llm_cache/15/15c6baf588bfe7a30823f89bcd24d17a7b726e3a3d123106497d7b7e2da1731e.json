@@ -1,0 +1,62 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 348,
+  "prompt_tokens": 431,
+  "total_tokens": 779
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nEvidence:\n[E1] (table, Table 1, page 3): Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG)\nValues (cite as cells):\n  row 'given T-R target-domain training data?': 'UDA' = Y; 'MVL' = Y; 'DG' = N; 'ZDDA' = N\n  row 'given T-R training data in multiple (>1) domains/views?': 'UDA' = N; 'MVL' = Y; 'DG' = Y; 'ZDDA' = N\n  row 'example prior work': 'UDA' = [33]; 'MVL' = [42]; 'DG' = [28]; 'ZDDA' = N/A"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The key difference regarding given T-R target-domain training data is that UDA is given this data, whereas ZDDA is not given target-domain training data.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "given T-R target-domain training data?",
+      "col": "UDA",
+      "value": "Y"
+     },
+     {
+      "evidence": "E1",
+      "row": "given T-R target-domain training data?",
+      "col": "ZDDA",
+      "value": "N"
+     }
+    ]
+   },
+   {
+    "text": "Furthermore, in terms of given T-R training data in multiple (>1) domains/views, MVL is given this data while ZDDA is not given training data in multiple domains/views.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "given T-R training data in multiple (>1) domains/views?",
+      "col": "MVL",
+      "value": "Y"
+     },
+     {
+      "evidence": "E1",
+      "row": "given T-R training data in multiple (>1) domains/views?",
+      "col": "ZDDA",
+      "value": "N"
+     }
+    ]
+   }
+  ]
+ }
+}

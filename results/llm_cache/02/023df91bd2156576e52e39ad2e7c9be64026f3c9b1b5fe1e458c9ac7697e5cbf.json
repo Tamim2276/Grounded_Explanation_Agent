@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 73,
+  "prompt_tokens": 238,
+  "total_tokens": 311
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The runtime cost and communication overhead of the setup and online phases for the softmax function grow with the number of classes.\" -- cites: E3 (Section 6.1): quote \"As shown in Table 4, the runtime cost and communication overhead of setup and online phases grow with the accuracy and the number of classes.\"\n\nCited evidence:\n[E3] (text, Section 6.1, page 12): We tested the performance of our proposed protocol for softmax function in different settings. As shown in Table 4, the runtime cost and communication overhead of setup and online phases grow with the accuracy and the number of classes. The runtime and communication overhead of our"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly states that the runtime cost and communication overhead of setup and online phases grow with the accuracy and the number of classes, which fully supports the claim."
+   }
+  ]
+ }
+}

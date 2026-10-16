@@ -1,0 +1,41 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 196,
+  "prompt_tokens": 1949,
+  "total_tokens": 2145
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 8 displays five subgraphs labeled (a) through (e) showing the average relative error of edge queries for methods including GSS and TCM(8*memory).\" -- cites: E1 (Figure 8): quote \"Fig. 8. Average Relative Error of Edge Queries\"\n2. \"Across all graphs in Figure 8, TCM(8*memory) shows higher error rates than the GSS methods, indicating that it does not achieve an improvement in accuracy compared to GSS(fsize=12).\" -- cites: E1 (Figure 8): quote \"Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll\"\n3. \"Since TCM(8*memory) has higher error values and lower accuracy than GSS across all subgraphs, none of the graphs show an improvement in accuracy for TCM(8*memory) compared to GSS(fsize=12).\" -- cites: E1 (Figure 8): quote \"Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow\"\n\nCited evidence:\n[E1] (figure, Figure 8, page 12) (image attached): Fig. 8. Average Relative Error of Edge Queries\nWords printed in the figure: 650 700 750 800 850 900 950 1000 Width 600 0.00 0.01 0.02 0.03 0.04 0.05 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (a) email-EuAll 500 600 800 900 1000 700 Width 400 0.004 0.003 0.002 0.001 0.000 Edge query ARE GSS(fsize=12) GSS(fsize=16) TCM(8*memory) (b) cit-HepPh 850 900 950 1000 1050 1100 1150 1200 Width 800 0.00 0.01 0.02 0.03 0.04 Edge query ARE fsize=12 fsize=16 TCM(8*memory) (c) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.00 0.02 0.04 0.06 0.08 0.10 0.12 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (d) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.0 0.2 0.4 0.6 0.8 Edge Query ARE fsize=12 fsize=16 TCM(8*memory) (e) Caida-networkflow Fig. 8. Average Relative Error of Edge Queries [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Figure 8 is titled 'Average Relative Error of Edge Queries' and contains five subgraphs labeled (a) through (e) comparing GSS and TCM(8*memory)."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "In Figure 8, TCM(8*memory) shows consistently higher error values compared to GSS methods across the displayed graphs."
+   },
+   {
+    "claim": 3,
+    "supported": true,
+    "reason": "TCM(8*memory) exhibits higher average relative error across all subgraphs including (e) Caida-networkflow, meaning it has lower accuracy and no improvement compared to GSS."
+   }
+  ]
+ }
+}

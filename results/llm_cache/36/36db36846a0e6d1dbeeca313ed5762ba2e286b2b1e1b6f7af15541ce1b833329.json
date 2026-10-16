@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 63,
+  "prompt_tokens": 165,
+  "total_tokens": 228
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of the different models change as the corruption level increases? Which model appears to be the most robust to label corruption?\nSub-goals:\n1. [figure] How does the performance of the different models change as the corruption level increases?\n2. [table] Which model appears to be the most robust to label corruption?\nAlready tried: sub-goal 1 with figure\nStill missing: table evidence for sub-goal 2 (rule floor)"
+  }
+ ],
+ "answer": {
+  "reason": "Since the figure search was already used for performance trends, I will now use the table tool to find exact robustness comparisons and identify the most robust model against label corruption.",
+  "tool": "table",
+  "query": "model robustness label corruption accuracy table"
+ }
+}

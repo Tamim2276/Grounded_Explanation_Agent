@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 75,
+  "prompt_tokens": 554,
+  "total_tokens": 629
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Nodes with the same hash value are combined into one node in G_h, and the edges connected to them are also aggregated.\" -- cites: E4 (Section front): quote \"Nodes with the same hash value are combined into one node in G h , and the edges connected to them are also aggregated.\"\n\nCited evidence:\n[E4] (text, Section front, page 2): H ( v ) . Nodes with the same hash value are combined into one node in G h , and the edges connected to them are also aggregated. An example of the graph stream and the graph sketch can be referred in Fig.1 and Fig.2. The compression rate can be controlled by the size of the value range of H ( · ) , which we represent with M . The higher the compression rate is, the lower the accuracy is, as more nodes and edges will be combined. Different from TCM which uses an adjacency matrix to store the graph sketch G h , GSS uses a novel data structure to store it. This data structure is specially designed for sparse graphs and can store a much bigger graph sketch with the same space. As the graph is sparse, the number of nodes is large, but each node is connected to few edges. Therefore, different from adjacency matrix which stores edges with the same source node / destination node in one row / column, we store edges with different source nodes / destination nodes in the one row / column, and distinguish them with ﬁngerprints. Each edge in the graph sketch is mapped to a bucket in the matrix depending on its endpoints, and marked with a ﬁngerprint pair. If the bucket it is mapped is already occupied by other edges, we store this edge in a buffer B , which is composed of adjacency lists. With a m × m matrix we can represent a graph sketch with at most m × F nodes in GSS, where F is the size of the value range of the ﬁngerprint (for example, a 16-bit ﬁngerprint has F = 65536 ). On the other hand, the adjacency matrix can only store a a graph sketch with at most m nodes. With a much larger graph sketch, the accuracy is also much higher compared to TCM."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text in E4 explicitly states: 'Nodes with the same hash value are combined into one node in G h , and the edges connected to them are also aggregated.'"
+   }
+  ]
+ }
+}

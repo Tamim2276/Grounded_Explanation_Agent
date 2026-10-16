@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 127,
+  "total_tokens": 188
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the novel class and the top-3 most similar base classes?\nSub-goals:\n1. [figure] What is the relationship between the novel class and the top-3 most similar base classes?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I am using the figure tool to find the relationship and visual representation between the novel class and its top-3 most similar base classes.",
+  "tool": "figure",
+  "query": "relationship novel class top-3 most similar base classes"
+ }
+}

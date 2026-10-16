@@ -1,0 +1,38 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 104,
+  "prompt_tokens": 822,
+  "total_tokens": 926
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which estimator achieves the highest accuracy on the CLEVR validation set?\nEvidence:\n[E1] (table, Table 1, page 5): Table 1. CLEVR estimators results on CLEVR validation set\nValues (cite as cells):\n  row 'Ins. seg.': '' = 99.0; 'Acc.' = \n  row 'Material': '' = ; 'Acc.' = 99.97\n  row 'Size': '' = ; 'Acc.' = 100\n[E2] (text, Section 4.1, page 5): We trained a question-to-graph model for CLEVR (’None’-’Basic’, as denoted in Section 4.2.1 ), which generated 100% perfect graphs on its validation set. The visual estimators, described in Section 3.3.1 were also trained and provided the results given in Table 1 . CLEVR relations were estimated by simple rules using the objects’ coordinates.\n[E3] (text, Section 4.1, page 5): As can be seen, our model achieves state-of-the-art results without training for the visual question answering task and not using any answers GT, as other methods. In addition UnCoRd can elaborate and explain answers and failures using intermediate results, and extend the handled domain with no need of images and related QA examples, as demonstrated in Section 4.2 and Figure 6 . On a sample of 10,000 validation set examples, all mistakes were due to wrong visual estimators’ predictions, mainly miss detection of a highly occluded object. Hence, accurate annotation of object coordinates (as performed in NS-VQA [ 81 ]) may even further reduce the small number of errors. Note that NS-VQA requires full scene analysis, which is not scalable for domain extension with a large number of objects and relations. It also uses images with question-answer pairs to train the programs, coupling the method to the speciﬁc\n[E4] (text, Section 4.1, page 6): speciﬁcally on CLEVR do not generalize at all to the untrained domain. As the models are trained on more diverse data, results improve substantially, peaking clearly for VG- Enhanced model by a large margin from other models. This is also evident in the example given in Figure 5 where adequacy of the graph increases in a similar manner. This result is interesting as using this model provides high accuracy for CLEVR as well (see Table 5 ). The fact that substantial performance gain is achieved for a data domain that was not used in training (the VQA dataset domain), while preserving good results on the original data (CLEVR), demonstrates the potential of the approach to provide a general answering system for visual questions. Further investigation is required for means to enrich question description examples and produce further signiﬁcant improvements."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The Size estimator achieves the highest accuracy on the CLEVR validation set with an accuracy of 100.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "Size",
+      "col": "Acc.",
+      "value": "100"
+     }
+    ]
+   }
+  ]
+ }
+}

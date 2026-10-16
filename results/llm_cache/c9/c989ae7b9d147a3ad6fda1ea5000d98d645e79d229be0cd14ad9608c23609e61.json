@@ -1,0 +1,27 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 6,
+  "prompt_tokens": 94,
+  "total_tokens": 100
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the distance from equitability for the allocation that can be obtained by cutting at $x$ with the player order $(1,2)$?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "x"
+  ]
+ }
+}

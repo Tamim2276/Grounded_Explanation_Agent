@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.3,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 69,
+  "prompt_tokens": 1388,
+  "total_tokens": 1457
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"ZDDA 3 outperforms the naive fusion under most conditions in terms of classification accuracy.\" -- cites: E1 (Figure 4): quote \"ZDDA 3 outperforms the naive fusion under most conditions\"\n\nCited evidence:\n[E1] (figure, Figure 4, page 14) (image attached): Fig. 4. Performance comparison between the two sensor fusion methods with black images as the noisy images. We compare the classiﬁcation accuracy (%) of (a) naive fusion and (b) ZDDA 3 under diﬀerent noise levels in both RGB and depth testing data. (c) shows that ZDDA 3 outperforms the naive fusion under most conditions\nWords printed in the figure: 14 K.-C. Peng, Z. Wu, and J. Ernst (a) naive fusion (b) ZDDA3 (c) accuracy diff. ((b)-(a)) [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence explicitly states in the caption of Figure 4(c) that ZDDA 3 outperforms the naive fusion under most conditions."
+   }
+  ]
+ }
+}

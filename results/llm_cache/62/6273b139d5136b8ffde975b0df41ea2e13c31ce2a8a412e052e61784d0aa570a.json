@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 147,
+  "prompt_tokens": 1603,
+  "total_tokens": 1750
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 1 compares frames from a video with a moving viewer showing a re-synthesis using deep appearance maps (DAMs) (top) and reflectance maps (RMs) (bottom) to a photo reference of a decorative sphere (middle).\" -- cites: E1 (Figure 1): quote \"Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle)\"\n2. \"In the comparison images, the reference sphere exhibits small surface imperfections or speckles (such as small dark blemishes) that are smoothed out or missing in the re-synthesis using DAMs shown in the top row.\" -- cites: E1 (Figure 1): observation \"In the reference row, the sphere displays small dark blemishes or spots on its surface which are absent in the smoother appearance of the sphere in the 'Ours' (DAMs) top row across the various views.\"\n\nCited evidence:\n[E1] (figure, Figure 1, page 1) (image attached): Figure 1. Frames from a video with a moving viewer (columns) comparing a re-synthesis using our novel deep appearance maps (DAMs) (top) and reﬂectance maps (RMs) (bottom) to a photo reference of a decorative sphere with a complex material under natural illumination (middle) .\nWords printed in the figure: Deep Appearance Maps Leal-Taix´e al University unich Mario Fritz CISPA Helmholtz Center for Information Security Tobias Ritschel University College London appearance, i. e., viewer position, aches have used e representations (e. g., Phong) or s). We suggest to etwork we call a D generalization View 1 Reference Ours Refl. maps View 2 View 3 View 4 View 5 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text and figure directly show frames comparing re-synthesis using deep appearance maps (top), reflectance maps (bottom), and a photo reference (middle) of a decorative sphere."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The reference row in the figure displays small dark blemishes that are absent in the smoother appearance of the sphere in the top row (Ours/DAMs), which is supported by both the observation and the image evidence."
+   }
+  ]
+ }
+}

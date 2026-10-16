@@ -1,0 +1,27 @@
+{
+ "name": "n2_names",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 19,
+  "prompt_tokens": 98,
+  "total_tokens": 117
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "List the specific names a question about a scientific paper is about: datasets, methods or models, metrics, variables, settings -- exactly as written in the question. Leave out general words such as 'method', 'model', 'dataset', 'performance' or 'paper'. An empty list is fine."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best when there is no label corruption (p = 0%) on the Large Movie Review dataset and how does its performance change as the corruption level increases?"
+  }
+ ],
+ "answer": {
+  "names": [
+   "Large Movie Review"
+  ]
+ }
+}

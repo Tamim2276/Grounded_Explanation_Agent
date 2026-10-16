@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 76,
+  "prompt_tokens": 531,
+  "total_tokens": 607
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The FAKEDETECTOR framework uses the HFLU feature learning unit model and a gated diffusive unit (GDU) model.\" -- cites: E3 (Section C): quote \"Besides the HFLU feature learning unit model, F AKE D ETEC - TOR also uses a gated diffusive unit (GDU) model\"\n\nCited evidence:\n[E3] (text, Section C, page 6): The overall architecture of F AKE D ETECTOR corresponding to the case study shown in Figure 3 is provided in Figure 5. Besides the HFLU feature learning unit model, F AKE D ETEC - TOR also uses a gated diffusive unit (GDU) model for effective relationship modeling among news articles, creators and subjects, whose structure is illustrated in Figure 4. Formally, the GDU model accepts multiple inputs from different sources simultaneously, i.e., x i , z i and t i , and outputs its learned hidden state h i to the output layer and other unit models in the diffusive network architecture. Here, let’s take news articles as an example. Formally, among all the inputs of the GDU model, x i denotes the extracted feature vector from HFLU for news articles, z i represents the input from other GDUs corresponding to subjects, and t i represents the input from other GDUs about creators. Considering that the GDU for each news article may be connected to multiple GDUs of subjects and creators, the mean ( · ) of the outputs from the GDUs corresponding to these subjects and creators will be computed as the inputs z i and t i instead respectively, which is also indicated by the GDU architecture illustrated in Figure 4. For the inputs from the subjects, GDU has a gate called the “forget gate”, which may update some content of z i to forget. The forget gate is important, since in the real world, different news articles may focus on different aspects about the subjects and “forgetting” part of the input from the subjects is necessary in modeling. Formally, we can represent the “forget gate” together with the updated input as"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text explicitly states that 'Besides the HFLU feature learning unit model, F AKE D ETEC - TOR also uses a gated diffusive unit (GDU) model'."
+   }
+  ]
+ }
+}

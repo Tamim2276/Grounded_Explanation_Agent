@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.7,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 132,
+  "prompt_tokens": 1760,
+  "total_tokens": 1892
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 13 shows \"Buffer Percentage\" as a function of \"Width\" for three different datasets: (a) web-NotreDame, (b) lkml-reply, and (c) Caida-networkflow.\" -- cites: E1 (Figure 13): quote \"Fig. 13. Buffer Percentage\"; E1 (Figure 13): quote \"Width\"; E1 (Figure 13): quote \"(a) web-NotreDame\"; E1 (Figure 13): quote \"(b) lkml-reply\"\n2. \"As observed in the plots, the buffer percentage decreases as the width increases across all configurations.\" -- cites: E1 (Figure 13): quote \"Buffer Percentage\"; E1 (Figure 13): quote \"Width\"; E2 (Figure 13): observation \"In all three subplots (a), (b), and (c), the curves for Room=1, Room=2, Room=1(NoSquareHash), and Room=2(NoSquareHash) show a downward trend as the width value on the x-axis increases.\"\n\nCited evidence:\n[E1] (figure, Figure 13, page 14) (image attached): Fig. 13. Buffer Percentage\nWords printed in the figure: 800 850 900 950 1000 1050 1100 1150 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (a) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.1 0.2 0.3 0.4 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (b) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.00 0.02 0.04 0.06 0.08 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (c) Caida-networkflow Fig. 13. Buffer Percentage\n[E2] (figure, Figure 13, page 14): a zoomed view of Figure 13 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": false,
+    "reason": "The claim cites E1 for three datasets, but E1 only provides quotes for web-NotreDame and lkml-reply and omits the quote for Caida-networkflow in the citation list."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The cited evidence correctly shows that the buffer percentage decreases as the width increases across all configurations in all three subplots."
+   }
+  ]
+ }
+}

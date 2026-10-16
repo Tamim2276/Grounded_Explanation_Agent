@@ -1,0 +1,50 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 304,
+  "prompt_tokens": 1461,
+  "total_tokens": 1765
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method appears to be most robust to the presence of outliers in the training data?\nEvidence:\n[E1] (figure, Figure 6, page 7) (image attached): Figure 6: (a-c) Average ﬁtting errors while varying the outlier rates and (e-f) ﬁtting results of the compared methods with 60% outliers using cosexp , linear , and step functions.\nWords printed in the figure: (a) (b) (c) (d) (e) (f)\n[E2] (figure, Figure 6, page 7): a zoomed view of Figure 6 (image attached) [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Figure 6 shows the average fitting errors while varying the outlier rates for cosexp, linear, and step functions.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 6: (a-c) Average ﬁtting errors while varying the outlier rates and (e-f) ﬁtting results of the compared methods with 60% outliers using cosexp , linear , and step functions."
+     }
+    ]
+   },
+   {
+    "text": "In the average error plots (a-c), the proposed method maintains the lowest average error across varying outlier rates for all tested functions.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Figure 6: (a-c) Average ﬁtting errors while varying the outlier rates"
+     },
+     {
+      "evidence": "E2",
+      "observation": "In subfigures (a), (b), and (c), the blue line representing the Proposed method stays lowest and flattest as the Outlier rate increases from 0.0 to 0.6 compared to MDN, MLP, and Robust methods."
+     }
+    ]
+   }
+  ]
+ }
+}

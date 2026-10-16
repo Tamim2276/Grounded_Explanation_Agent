@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 97,
+  "prompt_tokens": 426,
+  "total_tokens": 523
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Testing domain adaptation involves deriving the solutions of the task of interest for both the source and target domains, whereas testing sensor fusion involves deriving the solution of the task of interest when the testing data in both domains is available.\" -- cites: E4 (Section 3): quote \"1) Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable.\"; E4 (Section 3): quote \"2) Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available.\"\n\nCited evidence:\n[E4] (text, Section 3, page 4): Given a task of interest (TOI), a source domain D s , and a target domain D t , our proposed method, zero-shot deep domain adaptation (ZDDA), is designed to achieve the following two goals: 1) Domain adaptation : Derive the solutions of the TOI for both D s and D t when the T-R training data in D t is unavailable. We assume that we have access to the T-R labeled training data in D s and the T-I dual-domain pairs in D s and D t . 2) Sensor fusion : Given the previous assumption, derive the solution of TOI when the testing data in both D s and D t is available. The testing data in either D s or D t can be noisy. We assume that there is no prior knowledge available about the type of noise and which domain gives noisy data at testing time."
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited evidence E4 states that domain adaptation involves deriving the solutions of the TOI for both Ds and Dt when T-R training data in Dt is unavailable, and sensor fusion involves deriving the solution of TOI when testing data in both Ds and Dt is available."
+   }
+  ]
+ }
+}

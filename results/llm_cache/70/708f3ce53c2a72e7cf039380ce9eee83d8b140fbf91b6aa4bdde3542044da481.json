@@ -1,0 +1,44 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 143,
+  "prompt_tokens": 470,
+  "total_tokens": 613
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model achieved the highest combined score for informativeness and grammatical correctness on the CamRest dataset?\nEvidence:\n[E1] (table, Table 5, page 7): Table 5: AMT Evaluations on CamRest and SMD (50% unseen) KA datasets\nValues (cite as cells):\n  row '': '' = Info; 'CamRest' = Grammar; '' = Info; 'SMD' = Grammar\n  row 'Seq2Seq': '' = 26; 'CamRest' = 2.28; '' = 22; 'SMD' = 2.44\n  row 'Seq2Seq+Copy': '' = 22; 'CamRest' = 1.22; '' = 16; 'SMD' = 1.04\n  row 'Mem2Seq': '' = 35; 'CamRest' = 2.06; '' = 26; 'SMD' = 1.9\n  row 'BOSSNET': '' = 80; 'CamRest' = 2.44; '' = 51; 'SMD' = 2.28"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "BOSSNET achieved the highest scores for both informativeness and grammatical correctness on the CamRest dataset.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "BOSSNET",
+      "col": "",
+      "value": "80"
+     },
+     {
+      "evidence": "E1",
+      "row": "BOSSNET",
+      "col": "CamRest",
+      "value": "2.44"
+     }
+    ]
+   }
+  ]
+ }
+}

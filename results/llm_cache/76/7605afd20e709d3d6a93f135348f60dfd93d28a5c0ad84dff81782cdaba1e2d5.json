@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 80,
+  "prompt_tokens": 143,
+  "total_tokens": 223
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the upper bound on the query complexity for finding an ε-perfect allocation with minimum cuts for 3 or more players?\nSub-goals:\n1. [figure] What is the upper bound on the query complexity for finding an ε-perfect allocation with minimum cuts for 3 or more players?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "Since the previous attempt used the figure tool and it is not available or we need to try text based on the plan, let's use the text tool to search for the upper bound on query complexity in the paper.",
+  "tool": "text",
+  "query": "upper bound query complexity epsilon perfect allocation minimum cuts 3 players"
+ }
+}

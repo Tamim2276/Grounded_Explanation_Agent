@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 91,
+  "prompt_tokens": 494,
+  "total_tokens": 585
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The key difference regarding given T-R target-domain training data is that UDA is given this data, whereas ZDDA is not given target-domain training data.\" -- cites: E1 (Table 1): row 'given T-R target-domain training data?', column 'UDA' = Y; E1 (Table 1): row 'given T-R target-domain training data?', column 'ZDDA' = N\n2. \"Furthermore, in terms of given T-R training data in multiple (>1) domains/views, MVL is given this data while ZDDA is not given training data in multiple domains/views.\" -- cites: E1 (Table 1): row 'given T-R training data in multiple (>1) domains/views?', column 'MVL' = Y; E1 (Table 1): row 'given T-R training data in multiple (>1) domains/views?', column 'ZDDA' = N\n\nCited evidence:\n[E1] (table, Table 1, page 3): Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG)\nValues (cite as cells):\n  row 'given T-R target-domain training data?': 'UDA' = Y; 'MVL' = Y; 'DG' = N; 'ZDDA' = N\n  row 'given T-R training data in multiple (>1) domains/views?': 'UDA' = N; 'MVL' = Y; 'DG' = Y; 'ZDDA' = N\n  row 'example prior work': 'UDA' = [33]; 'MVL' = [42]; 'DG' = [28]; 'ZDDA' = N/A"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "E1 Table 1 shows UDA is Y and ZDDA is N for given T-R target-domain training data."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "E1 Table 1 shows MVL is Y and ZDDA is N for given T-R training data in multiple domains/views."
+   }
+  ]
+ }
+}

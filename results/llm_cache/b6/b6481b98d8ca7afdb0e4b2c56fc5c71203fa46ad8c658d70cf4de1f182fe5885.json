@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.7,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 51,
+  "prompt_tokens": 141,
+  "total_tokens": 192
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the \"All\" category of Visual7W, and how did its performance compare to human performance?\nSub-goals:\n1. [table] Which model performed best on the \"All\" category of Visual7W, and how did its performance compare to human performance?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will search the tables for model performance results on the Visual7W dataset and human benchmarks.",
+  "tool": "table",
+  "query": "Visual7W All category model performance human"
+ }
+}

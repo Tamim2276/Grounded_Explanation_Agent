@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 61,
+  "prompt_tokens": 587,
+  "total_tokens": 648
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the performance of VAGER is worse than LR for the \"Bubble\" class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nSub-questions:\n1. [table] Can you explain why the performance of VAGER is worse than LR for the Bubble class in the 1-shot binary classification setting, while it performs better for the other nine classes?\nEvidence:\nE1 [table, Table 2, page 7]: Table 2. Comparison of VAGER and LR over novel classes with 1-shot binary classiﬁcation setting\nCategory | LR (No Transfer) | VAGER (Transfer)\nJeep | 0.8034 | 0.9469\nZebra | 0.8472 | 0.9393\nHen | 0.7763 | 0.8398\nLemon | 0.6854 | 0.9583\nBubble | 0.7455 | 0.7041\nPineapple | 0.7364 | 0.8623\nLion | 0.8305 | 0.9372\nScreen | 0.7801 | 0.9056\nDrum | 0.6510 | 0.6995\nRestaurant | 0.7806 | 0.8787\n0.2 Increasing 0.1 AUC |  | \nAUC 0.0 |  | \n0.1 |  | \n1.4 1.6 | 1.8 2.0 2.2 2.4 Similarity Ratio | 2.6 2.8 3.0"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The evidence provides the performance numbers in Table 2 showing VAGER is worse than LR for the Bubble class, but it does not explain why this happens.",
+  "sufficient": false
+ }
+}

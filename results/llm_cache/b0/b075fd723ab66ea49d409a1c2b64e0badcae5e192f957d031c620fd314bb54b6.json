@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 62,
+  "prompt_tokens": 374,
+  "total_tokens": 436
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"epsilon-perfect allocations with the minimum number of cuts can be computed with O ( n 3 /epsilon ) queries.\" -- cites: E1 (Section 5): quote \"ϵ -perfect allocations with the minimum number of cuts can be computed with O ( n 3 /ϵ ) queries.\"\n\nCited evidence:\n[E1] (text, Section 5, page 9): As mentioned in Corollary 1 , ϵ -perfect allocations with the minimum number of cuts can be computed with O ( n 3 /ϵ ) queries. For n = 2 players, the problem of computing ϵ -perfect allocations can be solved more eﬃciently by simulating Austin’s moving procedure in the RW model. The proofs for this section are in Appendix C . Theorem 5.1. An ϵ -perfect allocation for two players can be computed with O (log 1 Theorem 5.2. Computing an ϵ -perfect allocation with the minimum number of cuts for two players requires Ω We prove the lower bound by maintaining throughout the execution of any protocol two intervals in which the cuts of the perfect allocation must be situated, such that the distance to a perfect partition cannot decrease too much with any cut query. Lemma 5. Let ϵ > 0 . Consider a two player instance consistent with Figure 1 , where"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The cited text in E1 explicitly states that Ε -perfect allocations with the minimum number of cuts can be computed with O ( n 3 /Ε ) queries."
+   }
+  ]
+ }
+}

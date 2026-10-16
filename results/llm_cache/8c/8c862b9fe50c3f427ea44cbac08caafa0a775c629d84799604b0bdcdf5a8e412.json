@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 110,
+  "prompt_tokens": 2459,
+  "total_tokens": 2569
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the compared methods is most likely to be the safest?\nSub-questions:\n1. [figure] Which of the compared methods is most likely to be the safest?\nEvidence:\nE1 [figure, Figure 7, page 14] (image attached): Figure 7: Reference function and ﬁtting results of compared methods on different outlier rates, 0% , 20% 40% , 80% , and 90% ).\nE2 [text, Section 2, page 2]: tions for classiﬁcation were studied [ 32 ], with the results showing that the mean absolute value of error is inherently robust to label noise. In other work [ 21 ], a robust loss function for deep regression tasks was proposed using Tukey’s biweight function with the median absolute deviation of the residuals. The last group focusses on using implicit or explicit regularization methods while training. Adding small label noises while training is known to be beneﬁcial to training, as it can be regarded as an effective regularization method [ 23 , 24 ]. Similar methods have been proposed to tackle noisy outputs. A bootstrapping method [ 22 ] which trains a neural network with a convex combination of the output of the current network and the noisy target was proposed. [ 25 ] proposed DisturbLabel, a simple method that randomly replaces a percentage of the labels with incorrect values for each iteration. Mixing both input and output data was also proposed [ 26 , 27 ]. One study [ 27 ] considered the image recognition problem under label noise and the other [ 26 ] focused on a sound recognition problem. The temporal ensemble was proposed in [ 30 ] where an unsupervised loss term of ﬁtting the output of an augmented input to the augmented target updated with an exponential moving average. [ 29 ] extends the temporal ensemble in [ 30 ] by introducing a consistency cost function that minimizes the distance between the weights of the student model and the teacher model. [ 28 ] presen ...\nE3 [text, Section 1, page 1]: The cornerstone of the proposed method is a Cholesky Block in which we employ the Cholesky transform for sampling the weights of a neural network that enables us to model correlated outputs. Similar to Bayesian neural networks [ 5 ], we maintain the probability distributions over the weights, but we also leverage mixture distributions to handle the inconsistencies in a dataset. To the best of our knowledge, this is the ﬁrst approach simultaneously to infer the target distribution and the output correlations using a neural network in an end-to-end manner. We will refer to this framework as ChoiceNet . ChoiceNet is ﬁrst applied to synthetic regression tasks and a real-world regression task where we demonstrate its robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions. Subsequently, we move on to image classiﬁcation tasks using a number of benchmark datasets where we show that it shows comparable or superior performances compared to existing baseline\nE4 [text, Section 4.2, page 8]: Table 14 shows the test accuracy of compared methods under different noise settings. Our proposed method outperforms all compared methods on the symmetric noise settings with a large margin over 10%p. On asymmetric noise settings (Pair- 45% ), our method shows the second best performance, and this reveals the weakness of the proposed method. As Pair- 45% assigns 45% of each label to its next label, The Cholesky Block fails to infer the dominant label distributions correctly. However, we would like to note that Co-teaching [ 12 ] is complementary to our method where one can combine these two methods by using two ChoiceNets and update each network using Co-teaching. Generalization to Other Datasets We conduct additional experiments to investigate how our method works on other image datasets. We adopt the structure of WideResNet [ 45 ] and design a baseline network with a depth of 22 and a widen factor of 4 . We also construct ChoiceNet by replacing the last two layers (‘average pooling‘ and ‘linear‘) with the Cholesky Block . We train the networks on CIFAR-10, CIFAR-100, FMNIST, MNIST and SVHN datasets with noisy labels. We generate noisy datasets with symmetric noise setting and vary corruption ratios from 20% to 50% . We would like to emphasize that we use the same hyper-parameters, which\nE5 [table, Table 7, page 15]: Table 7: Collision rates of compared methods on straight lanes.\nOutliers | ChoiceNet | MDN | MLP | GPR | LGPR | RGPR\n0% | 0% | 50.83% | 0% | 0.83% | 4.17% | 3.33%\n10% | 0% | 38.33% | 0% | 2.5% | 1.67% | 4.17%\n20% | 0% | 41.67% | 0% | 7.5% | 6.67% | 10%\n30% | 0% | 66.67% | 1.67% | 4.17% | 1.67% | 7.5%\n40% | 0.83% | 35% | 3.33% | 6.67% | 6.67% | 24.17% [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E5",
+    "fact": "ChoiceNet has the lowest collision rates (0% for 0%, 10%, 20%, 30% outliers, and 0.83% for 40% outliers) making it the safest method."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

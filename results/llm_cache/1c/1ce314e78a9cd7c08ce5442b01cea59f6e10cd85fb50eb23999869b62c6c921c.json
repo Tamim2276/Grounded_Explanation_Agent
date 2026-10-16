@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 73.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 50,
+  "prompt_tokens": 123,
+  "total_tokens": 173
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the purpose of the `SubsetGate` function in the MaxPooling function?\nSub-goals:\n1. [figure] What is the purpose of the `SubsetGate` function in the MaxPooling function?\nAlready tried: nothing yet\nStill missing: nothing checked yet"
+  }
+ ],
+ "answer": {
+  "reason": "I will examine the figures to understand the structural architecture and role of the SubsetGate function within the MaxPooling mechanism.",
+  "tool": "figure",
+  "query": "SubsetGate MaxPooling function"
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "name": "plan",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 64,
+  "prompt_tokens": 137,
+  "total_tokens": 201
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You plan retrieval for questions about one scientific paper. Pick ONE tool: 'text' searches paragraphs, 'table' searches tables, 'figure' searches charts. Do not repeat a tool already tried for the same sub-goal. Give a one-sentence reason, then the tool, then a short search query."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method achieves the highest overall accuracy on the validation set?\nSub-goals:\n1. [table] Which method achieves the highest overall accuracy on the validation set?\nAlready tried: sub-goal 1 with table\nStill missing: The evidence does not show all methods and their overall accuracies to determine which achieves the highest overall accuracy."
+  }
+ ],
+ "answer": {
+  "reason": "I need to search the main text to find a comprehensive comparison of all methods and their overall accuracies on the validation set since the table did not contain all the necessary data.",
+  "tool": "text",
+  "query": "validation set overall accuracy highest method"
+ }
+}

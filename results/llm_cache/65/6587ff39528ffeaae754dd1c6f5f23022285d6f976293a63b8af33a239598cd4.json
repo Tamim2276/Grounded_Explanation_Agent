@@ -1,0 +1,58 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.2,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 268,
+  "prompt_tokens": 1800,
+  "total_tokens": 2068
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the buffer percentage and the width of the room?\nEvidence:\n[E1] (figure, Figure 13, page 14) (image attached): Fig. 13. Buffer Percentage\nWords printed in the figure: 800 850 900 950 1000 1050 1100 1150 1200 Width 0.0 0.2 0.4 0.6 0.8 1.0 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (a) web-NotreDame 300 400 500 600 700 800 900 1000 Width 0.0 0.1 0.2 0.3 0.4 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (b) lkml-reply 5000 6000 7000 8000 9000 10000 Width 0.00 0.02 0.04 0.06 0.08 Buffer Percentage Room=1 Room=2 Room=1(NoSquareHash) Room=2(NoSquareHash) (c) Caida-networkflow Fig. 13. Buffer Percentage\n[E2] (figure, Figure 13, page 14): a zoomed view of Figure 13 (image attached)\n\nThese claims are already verified and kept:\n- As observed in the plots, the buffer percentage decreases as the width increases across all configurations.\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"Figure 13 shows \"Buffer Percentage\" as a function of \"Width\" for three different datasets: (a) web-NotreDame, (b) lkml-reply, and (c) Caida-networkflow.\": support check: The claim cites E1 for three datasets, but E1 only provides quotes for web-NotreDame and lkml-reply and omits the quote for Caida-networkflow in the citation list. [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "Figure 13 shows Buffer Percentage as a function of Width for datasets including web-NotreDame and lkml-reply.",
+    "conclusion": false,
+    "cites": [
+     {
+      "evidence": "E1",
+      "quote": "Buffer Percentage"
+     },
+     {
+      "evidence": "E1",
+      "quote": "Width"
+     },
+     {
+      "evidence": "E1",
+      "quote": "(a) web-NotreDame"
+     },
+     {
+      "evidence": "E1",
+      "quote": "(b) lkml-reply"
+     }
+    ]
+   },
+   {
+    "text": "As observed in the plots, the buffer percentage decreases as the width increases across all configurations.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "observation": "In all three subplots of Figure 13, the plotted lines for Buffer Percentage show a downward trend as Width increases from left to right."
+     }
+    ]
+   }
+  ]
+ }
+}

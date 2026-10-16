@@ -1,0 +1,31 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 32.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 987,
+  "total_tokens": 1064
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The method with the highest overall test set accuracy is UnCoRdNone-B, and the methods with the highest overall val. set accuracy include UnCoRdNone-B and NS-VQA [81]a.\" -- cites: E1 (Table 2): row 'UnCoRdNone-B', column 'Overall test set' = 99.74; E1 (Table 2): row 'UnCoRdNone-B', column 'Overall val. set' = 99.8; E1 (Table 2): row 'NS-VQA [81]a', column 'Overall val. set' = 99.8\n\nCited evidence:\n[E1] (table, Table 2, page 5): Table 2. CLEVR QA accuracy for state-of-the-art methods\nValues (cite as cells):\n  row 'IEP-strong [31]': 'Exist' = 97.1; 'Count' = 92.7; 'Comp. Num.' = 98.7; 'Query Att.' = 98.1; 'Comp. Att.' = 98.9; 'Overall test set' = 96.9; 'Overall val. set' = \n  row 'FiLM [56]': 'Exist' = 99.3; 'Count' = 94.3; 'Comp. Num.' = 93.4; 'Query Att.' = 99.3; 'Comp. Att.' = 99.3; 'Overall test set' = 97.6; 'Overall val. set' = \n  row 'DDRprog [63]': 'Exist' = 98.8; 'Count' = 96.5; 'Comp. Num.' = 98.4; 'Query Att.' = 99.1; 'Comp. Att.' = 99.0; 'Overall test set' = 98.3; 'Overall val. set' = \n  row 'MAC [27]': 'Exist' = 99.5; 'Count' = 97.1; 'Comp. Num.' = 99.1; 'Query Att.' = 99.5; 'Comp. Att.' = 99.5; 'Overall test set' = 98.9; 'Overall val. set' = \n  row 'TbD [52]': 'Exist' = 99.2; 'Count' = 97.6; 'Comp. Num.' = 99.4; 'Query Att.' = 99.5; 'Comp. Att.' = 99.6; 'Overall test set' = 99.1; 'Overall val. set' = \n  row 'HAN [50]': 'Exist' = 99.6; 'Count' = 97.2; 'Comp. Num.' = 96.9; 'Query Att.' = 99.6; 'Comp. Att.' = 99.6; 'Overall test set' = 98.8; 'Overall val. set' = \n  row 'NS-VQA [81]a': 'Exist' = 99.9; 'Count' = 99.7; 'Comp. Num.' = 99.9; 'Query Att.' = 99.8; 'Comp. Att.' = 99.8; 'Overall test set' = -; 'Overall val. set' = 99.8\n  row 'UnCoRdNone-B': 'Exist' = 99.89; 'Count' = 99.54; 'Comp. Num.' = 99.91; 'Query Att.' = 99.74; 'Comp. Att.' = 99.80; 'Overall test set' = 99.74; 'Overall val. set' = 99.8"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "The evidence shows UnCoRdNone-B has the highest Overall test set accuracy of 99.74, and both UnCoRdNone-B and NS-VQA [81]a share the highest Overall val. set accuracy of 99.8."
+   }
+  ]
+ }
+}

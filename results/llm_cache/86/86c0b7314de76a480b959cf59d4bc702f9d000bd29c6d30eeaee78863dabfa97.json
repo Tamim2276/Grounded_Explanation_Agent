@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.1,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 153,
+  "prompt_tokens": 1483,
+  "total_tokens": 1636
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"Figure 6 displays the average fitting errors while varying outlier rates and fitting results of the compared methods.\" -- cites: E1 (Figure 6): quote \"Figure 6: (a-c) Average ﬁtting errors while varying the outlier rates and (e-f) ﬁtting results of the compared methods with 60% outliers using cosexp , linear , and step functions.\"\n2. \"Based on the average error plots across different outlier rates, the Proposed method achieves the lowest error when there are many outliers.\" -- cites: E2 (Figure 6): observation \"In the subplots (a), (b), and (c), the blue solid line representing the Proposed method maintains the lowest average error as the outlier rate increases up to 0.6.\"\n\nCited evidence:\n[E1] (figure, Figure 6, page 7) (image attached): Figure 6: (a-c) Average ﬁtting errors while varying the outlier rates and (e-f) ﬁtting results of the compared methods with 60% outliers using cosexp , linear , and step functions.\nWords printed in the figure: (a) (b) (c) (d) (e) (f)\n[E2] (figure, Figure 6, page 7): a zoomed view of Figure 6 [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Figure 6 caption directly confirms that subplots (a-c) show average fitting errors while varying outlier rates, and subplots (e-f) [and d] show fitting results of the compared methods."
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "Evidence E2 confirms that in subplots (a), (b), and (c), the Proposed method's solid blue line maintains the lowest average error as the outlier rate increases up to 0.6."
+   }
+  ]
+ }
+}

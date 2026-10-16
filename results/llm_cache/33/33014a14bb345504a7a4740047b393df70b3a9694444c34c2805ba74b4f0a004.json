@@ -1,0 +1,30 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 32.8,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 60,
+  "prompt_tokens": 803,
+  "total_tokens": 863
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs the best when the number of shots is 50?\nSub-questions:\n1. [table] Which method performs the best when the number of shots is 50?\nEvidence:\nE1 [table, Table 3, page 8]: Table 3. Top-1 Accuracy for m classes 1-shot problem\nAlgorithm | 10 cls/G1 | 10 cls/G2 | 10 cls/G3 | 10 cls/G4 | 10 cls/G5 | 30 cls/G1 | 50 cls/G1 | 100 cls/G1\nVAGER+Voting | 67.59% | 63.96% | 58.02% | 51.27% | 56.24% | 40.73% | 38.69% | 28.38%\nLR | 61.97% | 59.72% | 52.97% | 47.51% | 52.01% | 37.32% | 34.75% | 23.94%\nWeighted-LR | 63.13% | 60.09% | 50.32% | 46.13% | 49.81% | 36.77% | 34.64% | 23.60%\nMRN | 64.55% | 61.82% | 54.74% | 48.85% | 54.54% | 39.43% | 37.78% | 27.16%\nMatchingNet | 65.69% | 61.74% | 57.13% | 48.56% | 54.34% | 39.04% | 37.05% | 27.21%\nProtoNet | 47.98% | 47.18% | 40.20% | 35.86% | 41.55% | 30.15% | 28.12% | 21.28%\nActivationNet | 65.04% | 62.42% | 55.62% | 48.61% | 53.85% | 40.15% | 37.41% | 27.68%"
+  }
+ ],
+ "answer": {
+  "answers": [],
+  "uncovered": [
+   1
+  ],
+  "missing": "The provided evidence only shows results for the 1-shot problem in Table 3, but does not provide performance results for 50 shots.",
+  "sufficient": false
+ }
+}

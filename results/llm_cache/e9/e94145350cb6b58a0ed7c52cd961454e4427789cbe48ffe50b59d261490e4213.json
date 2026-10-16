@@ -1,0 +1,36 @@
+{
+ "name": "g2_support",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 3.4,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 117,
+  "prompt_tokens": 1399,
+  "total_tokens": 1516
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check claims about a scientific paper against the evidence each one cites. A claim is supported only if the cited evidence says it AS WRITTEN: the same subject, row, column, setting and number. A correct value attached to the wrong subject or row is NOT supported, and neither is a claim that goes beyond its evidence. Judge only from the cited evidence; figure images are attached where a claim cites a figure. Give a verdict for every claim."
+  },
+  {
+   "role": "user",
+   "content": "Claims:\n1. \"The relationship of gloss and representation error is shown in Figure 10.\" -- cites: E1 (Figure 10): quote \"Figure 10. Relation of gloss and representation error.\"\n2. \"The plot of DSSIM versus Gloss shows that as gloss decreases from high to low, the Test, Total, and Train representation errors also decrease.\" -- cites: E1 (Figure 10): quote \"DSSIM\"; E1 (Figure 10): quote \"Gloss\"; E1 (Figure 10): quote \"High\"; E1 (Figure 10): quote \"Low\"\n\nCited evidence:\n[E1] (figure, Figure 10, page 7) (image attached): Figure 10. Relation of gloss and representation error.\nWords printed in the figure: .125 0 DSSIM Gloss High Low Test Total Train [image]"
+  }
+ ],
+ "answer": {
+  "verdicts": [
+   {
+    "claim": 1,
+    "supported": true,
+    "reason": "Figure 10's caption states 'Relation of gloss and representation error.'"
+   },
+   {
+    "claim": 2,
+    "supported": true,
+    "reason": "The plot in Figure 10 shows DSSIM versus Gloss, and as gloss decreases from High to Low, the curves for Test, Total, and Train all decrease."
+   }
+  ]
+ }
+}

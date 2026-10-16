@@ -1,0 +1,56 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.5,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 260,
+  "prompt_tokens": 2623,
+  "total_tokens": 2883
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the compared methods is most likely to be the safest?\nEvidence:\n[E1] (figure, Figure 7, page 14) (image attached): Figure 7: Reference function and ﬁtting results of compared methods on different outlier rates, 0% , 20% 40% , 80% , and 90% ).\n[E2] (text, Section 2, page 2): tions for classiﬁcation were studied [ 32 ], with the results showing that the mean absolute value of error is inherently robust to label noise. In other work [ 21 ], a robust loss function for deep regression tasks was proposed using Tukey’s biweight function with the median absolute deviation of the residuals. The last group focusses on using implicit or explicit regularization methods while training. Adding small label noises while training is known to be beneﬁcial to training, as it can be regarded as an effective regularization method [ 23 , 24 ]. Similar methods have been proposed to tackle noisy outputs. A bootstrapping method [ 22 ] which trains a neural network with a convex combination of the output of the current network and the noisy target was proposed. [ 25 ] proposed DisturbLabel, a simple method that randomly replaces a percentage of the labels with incorrect values for each iteration. Mixing both input and output data was also proposed [ 26 , 27 ]. One study [ 27 ] considered the image recognition problem under label noise and the other [ 26 ] focused on a sound recognition problem. The temporal ensemble was proposed in [ 30 ] where an unsupervised loss term of ﬁtting the output of an augmented input to the augmented target updated with an exponential moving average. [ 29 ] extends the temporal ensemble in [ 30 ] by introducing a consistency cost function that minimizes the distance between the weights of the student model and the teacher model. [ 28 ] presented a new regularization method based on virtual adversarial loss which measures the smoothness of conditional label distribution given input. Minimizing the virtual adversarial loss has a regularizing effect in that it makes the model smooth at each data point.\n[E3] (text, Section 1, page 1): The cornerstone of the proposed method is a Cholesky Block in which we employ the Cholesky transform for sampling the weights of a neural network that enables us to model correlated outputs. Similar to Bayesian neural networks [ 5 ], we maintain the probability distributions over the weights, but we also leverage mixture distributions to handle the inconsistencies in a dataset. To the best of our knowledge, this is the ﬁrst approach simultaneously to infer the target distribution and the output correlations using a neural network in an end-to-end manner. We will refer to this framework as ChoiceNet . ChoiceNet is ﬁrst applied to synthetic regression tasks and a real-world regression task where we demonstrate its robustness to extreme outliers and its ability to distinguish the target distribution and noise distributions. Subsequently, we move on to image classiﬁcation tasks using a number of benchmark datasets where we show that it shows comparable or superior performances compared to existing baseline\n[E4] (text, Section 4.2, page 8): Table 14 shows the test accuracy of compared methods under different noise settings. Our proposed method outperforms all compared methods on the symmetric noise settings with a large margin over 10%p. On asymmetric noise settings (Pair- 45% ), our method shows the second best performance, and this reveals the weakness of the proposed method. As Pair- 45% assigns 45% of each label to its next label, The Cholesky Block fails to infer the dominant label distributions correctly. However, we would like to note that Co-teaching [ 12 ] is complementary to our method where one can combine these two methods by using two ChoiceNets and update each network using Co-teaching. Generalization to Other Datasets We conduct additional experiments to investigate how our method works on other image datasets. We adopt the structure of WideResNet [ 45 ] and design a baseline network with a depth of 22 and a widen factor of 4 . We also construct ChoiceNet by replacing the last two layers (‘average pooling‘ and ‘linear‘) with the Cholesky Block . We train the networks on CIFAR-10, CIFAR-100, FMNIST, MNIST and SVHN datasets with noisy labels. We generate noisy datasets with symmetric noise setting and vary corruption ratios from 20% to 50% . We would like to emphasize that we use the same hyper-parameters, which\n[E5] (table, Table 7, page 15): Table 7: Collision rates of compared methods on straight lanes.\nValues (cite as cells):\n  row '0%': 'MDN' = 50.83%; 'GPR' = 0.83%; 'LGPR' = 4.17%; 'RGPR' = 3.33%\n  row '10%': 'ChoiceNet' = 0%; 'MDN' = 38.33%; 'MLP' = 0%; 'GPR' = 2.5%; 'LGPR' = 1.67%; 'RGPR' = 4.17%\n  row '20%': 'ChoiceNet' = 0%; 'MDN' = 41.67%; 'MLP' = 0%; 'GPR' = 7.5%; 'LGPR' = 6.67%; 'RGPR' = 10%\n  row '30%': 'ChoiceNet' = 0%; 'MDN' = 66.67%; 'MLP' = 1.67%; 'GPR' = 4.17%; 'LGPR' = 1.67%; 'RGPR' = 7.5%\n  row '40%': 'ChoiceNet' = 0.83%; 'MDN' = 35%; 'MLP' = 3.33%; 'GPR' = 6.67%; 'LGPR' = 6.67%; 'RGPR' = 24.17% [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "ChoiceNet achieves a collision rate of 0% across 10%, 20%, and 30% settings, and only 0.83% at the 40% setting, indicating it is the safest method among those compared.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E5",
+      "row": "10%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     },
+     {
+      "evidence": "E5",
+      "row": "20%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     },
+     {
+      "evidence": "E5",
+      "row": "30%",
+      "col": "ChoiceNet",
+      "value": "0%"
+     },
+     {
+      "evidence": "E5",
+      "row": "40%",
+      "col": "ChoiceNet",
+      "value": "0.83%"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 106,
+  "prompt_tokens": 382,
+  "total_tokens": 488
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nSub-questions:\n1. [table] What is the key difference between ZDDA and UDA/MVL in terms of the available training data?\nEvidence:\nE1 [table, Table 1, page 3]: Table 1. Problem setting comparison between ZDDA, unsupervised domain adap- tation (UDA), multi-view learning (MVL), and domain generalization (DG)\nproblem conditions | UDA | MVL | DG | ZDDA\ngiven T-R target-domain training data? | Y | Y | N | N\ngiven T-R training data in multiple (>1) domains/views? | N | Y | Y | N\nexample prior work | [33] | [42] | [28] | N/A"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E1",
+    "fact": "ZDDA is not given target-domain training data and not given training data in multiple domains/views, whereas UDA is given target-domain training data and MVL is given training data in multiple domains/views."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

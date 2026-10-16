@@ -1,0 +1,38 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 121,
+  "prompt_tokens": 2413,
+  "total_tokens": 2534
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the initial value of V2 in the interval [0.35, 0.67]?\nEvidence:\n[E1] (figure, Figure 4, page 21) (image attached): Figure 4: Case 2 of the simulation.\n[E2] (figure, Figure 4, page 21): a zoomed view of Figure 4 (image attached)\n[E3] (text, Section C, page 34): If k < x − ϵ or k > x + a + ϵ , the discrepancy between the valuations of the players for [ k, ℓ ] holds by the lemma’s statement. If k ∈ [ x − ϵ, x ], note the change in the density of player 2 on the interval [ y, p ] compared to Case 1.a is constant, thus a similar argument works when ϵ < 0 . 001 a . If k ∈ [ x + a, x + a + ϵ ], the claim also follows from Case 1.a, where the interval [ q, y + a ] had the same length and higher value density for player 2 than here. The remaining cases are:\n[E4] (text, Section 2, page 28): Case 2 : α ∈ ( ℓ 3 + 2 k/ 3 , ℓ 3 + k ). We will hide the interval at the left of the point x + 2 k/ 3. Deﬁne m = x + 2 k/ 3 − 0 . 01 k , n = x + 2 k/ 3, p = y + k/ 3, and q = y + k/ 3 + 0 . 01 k . Set I ′ = [ m, n ], J ′ = [ p, q ]. Let the values of all the players be 0 . 01 k for the entire intervals I ′ and J ′ . Again all densities are uniform on I ′ and J ′ . Set the density of player 3 uniform on all the new intervals and update ℓ ′ 3 = ℓ 3 + 2 k/ 3 − 0 . 01 k and m ′ 3 = m 3 + 2 k/ 6. The goal is to ﬁnd the appropriate values for players 1 and 2, or equivalently, 0 < λ, µ, φ, ψ < 0 . 99 as in the next matrix.\n[E5] (text, Section 2, page 5): A piece of cake is a ﬁnite union of disjoint intervals. A piece is connected if it consists of a single interval. An allocation A = ( A 1 , . . . , A n ) is a partition of the cake among the players, such that each player i receives the piece A i , the pieces are disjoint, and S i ∈ N A i = [0 , 1]. We say that a value density v is: ( i ) hungry if v ( x ) > 0 for all x ∈ [0 , 1], ( ii ) uniform on an interval [ a, b ] if v ( x ) = 1 for all x ∈ [ a, b ], and ( iii ) bounded on interval [ a, b ] if there exists a constant D > 0 such that v ( x ) ≥ D for all x ∈ [ a, b ] (or simply bounded if a = 0 and b = 1). We will sometimes to refer to a valuation (or player) as hungry to simply mean that the corresponding density is strictly positive.\n[E6] (table, Table 2, page 29): Table 2: Initial conﬁguration for envy-free lower bound.\nValues (cite as cells):\n  row 'V1': '[0, 0.34]' = 0.35; '[0.34, 0.35]' = 0.01; '[0.35, 0.67]' = 0.35; '[0.67, 0.68]' = 0.01; '[0.68, 1]' = 0.28\n  row 'V2': '[0, 0.34]' = 0.28; '[0.34, 0.35]' = 0.01; '[0.35, 0.67]' = 0.35; '[0.67, 0.68]' = 0.01; '[0.68, 1]' = 0.35\n  row 'V3': '[0, 0.34]' = 0.35; '[0.34, 0.35]' = 0.01; '[0.35, 0.67]' = 0.28; '[0.67, 0.68]' = 0.01; '[0.68, 1]' = 0.35 [image]"
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The initial value of V2 in the interval [0.35, 0.67] is 0.35.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E6",
+      "row": "V2",
+      "col": "[0.35, 0.67]",
+      "value": "0.35"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "name": "g1_sufficiency",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 2.0,
+ "images": 1,
+ "usage": {
+  "completion_tokens": 99,
+  "prompt_tokens": 2062,
+  "total_tokens": 2161
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You check whether the evidence collected so far is enough to answer a question about a scientific paper. Say sufficient only if, for EVERY sub-question, some evidence item contains the specific fact, number or picture that answers it -- not merely the same topic. The fact must BE the answer: for 'which X' it names the X; for 'how does A affect B' or 'what is the effect of A' it states the direction or size of the change; for 'how many' or 'what value' it gives the number. A fact that only restates the question or describes the topic does not answer it. First give, for each sub-question you can answer, the id of the item (E1, E2, ...) and the answering fact in a few words; then list the numbers of the sub-questions still uncovered, say in a few words what is missing, and only then decide."
+  },
+  {
+   "role": "user",
+   "content": "Question: Can you explain why the BOSSNET with multi-hop encoder performs better on bAbI tasks 3 and 5 compared to the 1-hop encoder, and how this relates to the tasks themselves?\nSub-questions:\n1. [figure] Can you explain why the BOSSNET with multi-hop encoder performs better on bAbI tasks 3 and 5 compared to the 1-hop encoder, and how this relates to the tasks themselves?\nEvidence:\nE1 [figure, Figure 4, page 8] (image attached): Figure 4: bAbI Task 5: Per-response accuracy compar- ison on KA sets\nE2 [figure, Figure 4, page 8]: Zoomed view (300 dpi) of: Figure 4: bAbI Task 5: Per-response accuracy compar- ison on KA sets\nE3 [text, Section 4.1, page 5]: tasks 3 and 4 is attributed to an error in the bAbI dataset construction, due to which, the non-OOV and OOV test conditions are the same for these tasks (see Appendix). A simple generative model (Seq2Seq) achieves accuracies comparable to the multi-hop retrieval models. Enabling it with the ability to copy from the context (Seq2Seq+Copy) shows a considerable increase in performance, especially on the OOV test sets (and non-OOV tests for tasks 3 and 4). The strong performance of simple sequence encoders when compared with multi-hop encoders (in retrieval models) raises a question about the value of multi-hop inference. Mem2Seq answers this question, by obtaining improvements in several tasks, speciﬁcally on their OOV test sets. This clearly shows that multi-hop inference and the copy mechanism are essentials for task-oriented dialogs. Despite gains from the Mem2Seq model, the performance difference between the non-OOV and OOV test sets remains large. B O S S N ET succeeds to bridge this gap with its ability to better interpret unseen words, using their surrounding context. It obtains signiﬁcant improvements on average of about 34% per-dialog accuracy and 10% per-response accuracy for the bAbI OOV test sets.\nE4 [text, Section F, page 12]: Table 14 shows the performance of bAbI tasks and CamRest on two B O S S N ET encoder settings. Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant. We also see substantial improvements on CamRest in both BLEU and entity F1 metric.\nE5 [text, Section 3.5, page 5]: We train B O S S N ET using an Adam optimizer ( Kingma and Ba , 2014 ) and apply gradient clipping with a clip-value of 40. We identify hyperparameters based on the evaluation of the held-out validation sets. We sample word embedding, hidden layer, and cell sizes from { 64, 128, 256 } and learning rates from { 10 − 3 , 5 × 10 − 4 , 10 − 4 } . The hyper-parameter γ in the loss function is chosen between [0-1.5]. The Disentangle Label Dropout rate is sampled from { 0.1, 0.2 } . The number of hops for multi-hop attention in the encoder is sampled from { 1, 3, 6 } . The best hyper-parameter setting for each dataset is reported in the Appendix. [image]"
+  }
+ ],
+ "answer": {
+  "answers": [
+   {
+    "sub_question": 1,
+    "evidence": "E4",
+    "fact": "Multi-hops in encoder helps in bAbI task 3 and 5, as they require inferencing over the KB tuples (sorting restaurants by rating) to recommend a restaurant."
+   }
+  ],
+  "uncovered": [],
+  "missing": "",
+  "sufficient": true
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "name": "n9_claims",
+ "prompt_version": "v7",
+ "model": "gemini-3.5-flash-lite",
+ "seconds": 1.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 240,
+  "prompt_tokens": 1106,
+  "total_tokens": 1346
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You answer a question about a scientific paper using ONLY the evidence items given (E1, E2, ...); you know nothing else about the paper. Write 1 to 4 short claims. Every claim cites the items it rests on, in one of three ways:\n- quote: copy exact words from an item (a paragraph, a caption, or a figure's printed words);\n- cell: ONE value of a table or chart, by its exact row and column names, with the value copied (cite several cells for several values);\n- observation: what you see in an attached figure image, in words (figures only).\nNever write a number that is not in a quote or cell you cite: do not read exact numbers off images. The 'Values (cite as cells)' lines are not text of the paper: cite them as cells, never quote them. Mark the claim that directly answers the question with conclusion = true. If the evidence does not answer the question, say so in one claim that quotes the closest item."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method has the highest overall accuracy?\nEvidence:\n[E1] (table, Table 2, page 5): Table 2. CLEVR QA accuracy for state-of-the-art methods\nValues (cite as cells):\n  row 'IEP-strong [31]': 'Exist' = 97.1; 'Count' = 92.7; 'Comp. Num.' = 98.7; 'Query Att.' = 98.1; 'Comp. Att.' = 98.9; 'Overall test set' = 96.9; 'Overall val. set' = \n  row 'FiLM [56]': 'Exist' = 99.3; 'Count' = 94.3; 'Comp. Num.' = 93.4; 'Query Att.' = 99.3; 'Comp. Att.' = 99.3; 'Overall test set' = 97.6; 'Overall val. set' = \n  row 'DDRprog [63]': 'Exist' = 98.8; 'Count' = 96.5; 'Comp. Num.' = 98.4; 'Query Att.' = 99.1; 'Comp. Att.' = 99.0; 'Overall test set' = 98.3; 'Overall val. set' = \n  row 'MAC [27]': 'Exist' = 99.5; 'Count' = 97.1; 'Comp. Num.' = 99.1; 'Query Att.' = 99.5; 'Comp. Att.' = 99.5; 'Overall test set' = 98.9; 'Overall val. set' = \n  row 'TbD [52]': 'Exist' = 99.2; 'Count' = 97.6; 'Comp. Num.' = 99.4; 'Query Att.' = 99.5; 'Comp. Att.' = 99.6; 'Overall test set' = 99.1; 'Overall val. set' = \n  row 'HAN [50]': 'Exist' = 99.6; 'Count' = 97.2; 'Comp. Num.' = 96.9; 'Query Att.' = 99.6; 'Comp. Att.' = 99.6; 'Overall test set' = 98.8; 'Overall val. set' = \n  row 'NS-VQA [81]a': 'Exist' = 99.9; 'Count' = 99.7; 'Comp. Num.' = 99.9; 'Query Att.' = 99.8; 'Comp. Att.' = 99.8; 'Overall test set' = -; 'Overall val. set' = 99.8\n  row 'UnCoRdNone-B': 'Exist' = 99.89; 'Count' = 99.54; 'Comp. Num.' = 99.91; 'Query Att.' = 99.74; 'Comp. Att.' = 99.80; 'Overall test set' = 99.74; 'Overall val. set' = 99.8\n\nThese claims failed the checks; write corrected claims to replace them:\n- \"The method with the highest overall test set accuracy is UnCoRdNone-B, and the method with the highest overall val. set accuracy is NS-VQA [81]a.\": support check: The cited evidence shows that both NS-VQA [81]a and UnCoRdNone-B have an overall val. set accuracy of 99.8, so UnCoRdNone-B also achieves the highest overall val. set accuracy, meaning the claim goes beyond the evidence by stating NS-VQA [81]a uniquely has the highest."
+  }
+ ],
+ "answer": {
+  "claims": [
+   {
+    "text": "The method with the highest overall test set accuracy is UnCoRdNone-B, and the methods with the highest overall val. set accuracy include UnCoRdNone-B and NS-VQA [81]a.",
+    "conclusion": true,
+    "cites": [
+     {
+      "evidence": "E1",
+      "row": "UnCoRdNone-B",
+      "col": "Overall test set",
+      "value": "99.74"
+     },
+     {
+      "evidence": "E1",
+      "row": "UnCoRdNone-B",
+      "col": "Overall val. set",
+      "value": "99.8"
+     },
+     {
+      "evidence": "E1",
+      "row": "NS-VQA [81]a",
+      "col": "Overall val. set",
+      "value": "99.8"
+     }
+    ]
+   }
+  ]
+ }
+}
