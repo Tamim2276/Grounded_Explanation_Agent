@@ -158,3 +158,15 @@ the values in a table or chart, or a description in the text", named 'what is th
 questions, and made `evidence` an enum of the buffer's ids (v7 once wrote "E1, E2, E5, E6"). On
 dev: 5 right, 2 partly, **3 wrong**, 10 none (v7: 6, 1, **0**, 13). **v7 restored**, and tuning
 stopped (`notes/error_analysis_dev.md`).
+
+## The accuracy judge, j1 (2026-10-17, Day 8.3; not part of the agent)
+
+`scripts/judge.py` (`SYSTEM`, `SCHEMA`; `JUDGE_VERSION = "j1"`). The local Qwen2.5-VL-7B compares
+each published answer with SPIQA's gold answer: **correct** = the main point of the gold answer
+(the value, name, trend or comparison asked for) and nothing contradicting it; extra detail,
+rounding, wording and missing secondary details are fine. **Wrong** = a different value or name,
+the opposite trend, a contradiction, or too vague to answer. "Judge only against the reference,
+not your own knowledge." The reason (max 400 characters) comes before the boolean verdict, the
+G1 lesson. The judge sees the answer without N12's best-effort mark, so a hedge is not graded.
+Abstentions get no model call. The rule is the same as the one shown to the human grader in
+`annotate.html` (the 30-answer agreement check).

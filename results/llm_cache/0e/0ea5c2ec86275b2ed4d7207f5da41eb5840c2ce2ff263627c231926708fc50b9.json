@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 100,
+  "prompt_tokens": 341,
+  "total_tokens": 441,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: How does the performance of VAGER+Voting compare to other VAGER variants in the 1-shot and 20-shot settings?\n\nReference answer: VAGER+Voting consistently outperforms all other VAGER variants in both 1-shot and 20-shot settings, achieving the highest AUC and F1 scores.\n\nSystem's answer: In the 1-shot setting, VAGER+Voting outperforms LR with an average top-1 accuracy of 0.9469 compared to LR's 0.8034."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer states that VAGER+Voting consistently outperforms all other VAGER variants in both 1-shot and 20-shot settings, achieving the highest AUC and F1 scores. The system's answer, however, only compares VAGER+Voting to LR in the 1-shot setting and provides an average top-1 accuracy score, which is not mentioned in the reference answer.",
+  "correct": false
+ }
+}

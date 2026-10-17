@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.2,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 77,
+  "prompt_tokens": 310,
+  "total_tokens": 387,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the role of the frame discriminator in the proposed method?\n\nReference answer: The frame discriminator is used to detect whether the generated frame and audio are matched or not.\n\nSystem's answer: The Frame Discriminator is fed by the pairs of the real frame and audio clip { f i , a i } , or the pairs of the generated frame and corresponding audio clip { ˆ f i , a i } ."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer states that the frame discriminator is used to detect whether the generated frame and audio are matched or not. The system's answer describes how the Frame Discriminator is fed with pairs of real and generated frames with corresponding audio clips, which aligns with the reference's description of its function.",
+  "correct": true
+ }
+}
