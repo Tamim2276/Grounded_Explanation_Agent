@@ -189,3 +189,5 @@
   150 each). Gemini took three sittings (stops on "could not be reached": 429 or 503, not told apart); the
   last 25 questions used a second free-tier key. Status counts in results_for_paper.md §4e. Step 6 (photo
   claim boxes, 78 claims) not run yet: the user's other job (B01_effnetv2s) held 8 GB of GPU.
+- 2026-10-17: step 6 done (78 photo-claim vectors, 2 min; reboxed: full 19 q/24 boxes, single-pass 31/49,
+  text-only 0, strict 7/9, Gemini 6/6). Evaluation complete (6113d04). Day 7 finished; next: Day 8 scoring.

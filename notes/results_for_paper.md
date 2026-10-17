@@ -660,9 +660,20 @@ stopped twice on "the model could not be reached". The runner counts HTTP 429 (q
 question was redone. The last 25 questions used a second free-tier API key; the model, the
 prompts and the settings were unchanged (the freeze check passed).
 
-**Still to do:** step 6 (the claims about photos boxed by their own map: 78 claims) did not run
-on 2026-10-16. The user's other job held the GPU (8 GB). Run `bash scripts/resume_eval.sh` again
-when it is free.
+**The second pass (2026-10-17): claims about photos boxed by their own map.** 78 such claims
+over the five runs. Their ColQwen2 vectors were cached in one pass (about 2 minutes, after the
+model server had stopped), then each run was replayed from the model cache with `--rebox`. No
+model call was made, so no answer changed, only boxes.
+
+| run | questions reboxed | boxes now from the claim's own map |
+|---|---|---|
+| full | 19 | 24 |
+| single-pass | 31 | 49 |
+| text-only | 0 | 0 (it never cites a photo region) |
+| full, strict (ablation) | 7 | 9 |
+| full, Gemini | 6 | 6 |
+
+The evaluation is complete on 2026-10-17 (commit `6113d04`, "evaluation complete on test").
 
 ---
 
