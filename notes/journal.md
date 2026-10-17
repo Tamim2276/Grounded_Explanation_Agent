@@ -185,3 +185,7 @@
   strict 6/1/0/13. Every tool in round 1 tried and dropped (7/5/6/2). Strict run kept as --ablation strict.
   A MemoryError hit my own pytest while the user's Cricket tests and the test run shared the PC (their jobs
   survived): run only light tests while other jobs run.
+- 2026-10-16: all five test runs complete (full, strict ablation, single-pass, text-only, full with Gemini;
+  150 each). Gemini took three sittings (stops on "could not be reached": 429 or 503, not told apart); the
+  last 25 questions used a second free-tier key. Status counts in results_for_paper.md §4e. Step 6 (photo
+  claim boxes, 78 claims) not run yet: the user's other job (B01_effnetv2s) held 8 GB of GPU.

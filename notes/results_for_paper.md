@@ -624,6 +624,46 @@ qids.
 - On the test split, the runner prints no question or answer text, and refuses to start unless the
   settings equal `eval/frozen_config.json`.
 
+### The five test runs: what each system did (2026-10-16; no answer read) → Results
+
+All 150 test questions per run, from the run files' status fields only. Right/wrong is Day 8.
+
+| system (`results/runs/`) | answered | – confident | – flagged | all claims withheld | abstained | claims kept / drafted | reference in buffer | calls / q | rounds / q | median s / q |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **full** (`full_test`) | **97** | 22 | 75 | 45 | 8 | 189 / 378 | 109 | 11.6 | 2.72 | 27 |
+| full, strict G1 (ablation, `full_strict_test`) | 22 | 22 | 0 | 11 | 117 | 43 / 82 | 109 | 8.4 | 2.72 | 34 |
+| single-pass (`single_pass_test`) | 150 | – | – | 0 | 0 | 438 unchecked | 116 | 3.0 | 1 | 11 |
+| text-only (`text_only_test`) | 100 | 14 | 86 | 49 | 1 | 210 / 450 | 0* | 12.5 | 2.79 | 42 |
+| full, Gemini 3.5 Flash-Lite (`full_gemini_test`) | **121** | 117 | 4 | 5 | 24 | 168 / 191 | 98 | 7.9 | 1.87 | 55** |
+
+"Answered" = at least one claim published. "Confident" = G1 convinced; "flagged" = best effort
+after the budget. "All claims withheld" = G2 rejected every claim (the reader sees no answer).
+Fallbacks (a node used its rules): full 2 questions, strict 1, text-only 1, others 0. Errors: 0.
+\* text-only never retrieves a table or figure as a region, so the reference cannot be in its
+buffer by design. \** Gemini's seconds include network and free-tier waits; not comparable.
+
+First reading (to be confirmed by Day 8's scoring):
+
+- **Best effort works as intended:** the strict ablation answered 22 questions; the re-frozen
+  design 97. The 22 confident answers are the same number in both runs (the change only touches
+  questions where G1 stayed unconvinced).
+- **G2 is the bottleneck with the 7B model:** it withheld half of the full system's claims
+  (189 of 378 kept), and every claim on 45 questions.
+- **A stronger model passes both gates far more often:** with Gemini, G1 was convinced on 117
+  questions (vs 22 with the 7B), in fewer rounds (1.87 vs 2.72), and G2 kept 88% of claims
+  (vs 50%). Same graph, same prompts, same settings: the gates are not the problem, the 7B's
+  reading and quoting are.
+
+**The Gemini run** took three sittings on 2026-10-16 (questions 1–68, 69–125, 126–150). It
+stopped twice on "the model could not be reached". The runner counts HTTP 429 (quota) and 503
+("high demand") alike, so which of the two stopped it is not known. Each stop lost nothing: the
+question was redone. The last 25 questions used a second free-tier API key; the model, the
+prompts and the settings were unchanged (the freeze check passed).
+
+**Still to do:** step 6 (the claims about photos boxed by their own map: 78 claims) did not run
+on 2026-10-16. The user's other job held the GPU (8 GB). Run `bash scripts/resume_eval.sh` again
+when it is free.
+
 ---
 
 ## 5. The agent design on the stub → Implementation, *design validation* (Day 1)
