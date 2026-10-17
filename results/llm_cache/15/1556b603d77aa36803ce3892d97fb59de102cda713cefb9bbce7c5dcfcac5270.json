@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 94,
+  "prompt_tokens": 323,
+  "total_tokens": 417,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the difference between the representation module and the learning-to-learn module?\n\nReference answer: The representation module takes an input image and outputs a feature representation. The learning-to-learn module takes a set of features and learns how to segment the image.\n\nSystem's answer: The representation module directly represents appearance itself as a network called a Deep Appearance Map (DAM), which is a 4D generalization over 2D reflectance maps, holding the view direction fixed."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer describes the representation module as taking an input image and outputting a feature representation, while the learning-to-learn module takes a set of features and learns how to segment the image. The system's answer, however, provides a detailed explanation of the representation module, stating that it directly represents appearance itself as a Deep Appearance Map (DAM), a 4",
+  "correct": false
+ }
+}

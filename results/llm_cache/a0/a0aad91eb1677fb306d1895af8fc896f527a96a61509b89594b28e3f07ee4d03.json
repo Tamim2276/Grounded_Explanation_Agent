@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.3,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 85,
+  "prompt_tokens": 353,
+  "total_tokens": 438,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which method performs best overall on VQA-2014val, and how does its performance compare to human performance on the same dataset?\n\nReference answer: MLP-IQA achieves the highest overall accuracy (46.5%) among the machine learning methods tested on VQA-2014val. However, this performance still falls short of human performance, which reaches an accuracy of 85.5% on the same dataset.\n\nSystem's answer: Human performance on the same dataset reaches 'Orig' = 88.5† and 'IoU +QoU' = 89.0."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer states that human performance on the VQA-2014val dataset is 85.5%, while the system's answer provides a different value, 'Orig' = 88.5† and 'IoU +QoU' = 89.0', which contradicts the reference.",
+  "correct": false
+ }
+}

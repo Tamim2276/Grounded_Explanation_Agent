@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 89,
+  "prompt_tokens": 306,
+  "total_tokens": 395,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the input patches and the generated images?\n\nReference answer: The input patches are used to generate the images. The generator network takes the input patches as input and generates new images that are similar to the input patches.\n\nSystem's answer: The generated images are created by combining key local patches from the input, which are deformed to fit the spatial arrangement of the target image."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer states that the generator network takes the input patches as input and generates new images that are similar to the input patches. The system's answer, however, describes a process where key local patches from the input are combined and deformed to fit the spatial arrangement of the target image, which is a more detailed and specific description of the generation process.",
+  "correct": false
+ }
+}

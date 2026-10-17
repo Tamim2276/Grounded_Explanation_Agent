@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.1,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 68,
+  "prompt_tokens": 309,
+  "total_tokens": 377,
+  "prompt_tokens_details": {
+   "cached_tokens": 223
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which of the compared methods is most likely to be the safest?\n\nReference answer: ChoiceNet\n\nSystem's answer: ChoiceNet is the method that shows the best performance in terms of robustness to label noise, as it achieves a collision rate of 0% in all tested outlier rates (0%, 10%, 20%, 30%, 40%) according to Table 7."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer states that ChoiceNet is the most likely method to be the safest, while the system's answer provides additional details about ChoiceNet's performance in terms of robustness to label noise, which aligns with the reference's statement about safety.",
+  "correct": true
+ }
+}

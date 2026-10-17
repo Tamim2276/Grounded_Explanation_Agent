@@ -1,0 +1,1291 @@
+{
+ "systems": {
+  "full": {
+   "all": {
+    "questions": 150,
+    "judged": 150,
+    "counts": {
+     "correct": 32,
+     "wrong": 65,
+     "abstained": 53,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.2133,
+     "ci95": [
+      0.1533,
+      0.28
+     ],
+     "n": 150
+    },
+    "wrong": {
+     "mean": 0.4333,
+     "ci95": [
+      0.3533,
+      0.5133
+     ],
+     "n": 150
+    },
+    "abstained": {
+     "mean": 0.3533,
+     "ci95": [
+      0.28,
+      0.4333
+     ],
+     "n": 150
+    },
+    "precision_when_answering": {
+     "mean": 0.3299,
+     "ci95": [
+      0.2371,
+      0.4227
+     ],
+     "n": 97
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 22,
+      "correct": 8,
+      "wrong": 14
+     },
+     "flagged": {
+      "answered": 75,
+      "correct": 24,
+      "wrong": 51
+     }
+    },
+    "hit_rate": {
+     "mean": 0.7267,
+     "ci95": [
+      0.6533,
+      0.8
+     ],
+     "n": 150
+    },
+    "rf": {
+     "mean": 0.44,
+     "ci95": [
+      0.39,
+      0.49
+     ],
+     "n": 150
+    },
+    "aes": {
+     "mean": 0.44,
+     "ci95": [
+      0.4056,
+      0.4767
+     ],
+     "n": 150
+    },
+    "search_calls_per_question": 2.72,
+    "model_calls_per_question": 11.65,
+    "median_seconds": 27.0,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   },
+   "multihop": {
+    "questions": 10,
+    "judged": 10,
+    "counts": {
+     "correct": 6,
+     "wrong": 2,
+     "abstained": 2,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.6,
+     "ci95": [
+      0.3,
+      0.9
+     ],
+     "n": 10
+    },
+    "wrong": {
+     "mean": 0.2,
+     "ci95": [
+      0.0,
+      0.5
+     ],
+     "n": 10
+    },
+    "abstained": {
+     "mean": 0.2,
+     "ci95": [
+      0.0,
+      0.5
+     ],
+     "n": 10
+    },
+    "precision_when_answering": {
+     "mean": 0.75,
+     "ci95": [
+      0.375,
+      1.0
+     ],
+     "n": 8
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 0,
+      "correct": 0,
+      "wrong": 0
+     },
+     "flagged": {
+      "answered": 8,
+      "correct": 6,
+      "wrong": 2
+     }
+    },
+    "hit_rate": {
+     "mean": 0.5,
+     "ci95": [
+      0.2,
+      0.8
+     ],
+     "n": 10
+    },
+    "rf": {
+     "mean": 0.25,
+     "ci95": [
+      0.1,
+      0.4
+     ],
+     "n": 10
+    },
+    "aes": {
+     "mean": 0.6667,
+     "ci95": [
+      0.6667,
+      0.6667
+     ],
+     "n": 10
+    },
+    "search_calls_per_question": 3.0,
+    "model_calls_per_question": 13.0,
+    "median_seconds": 42.0,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   }
+  },
+  "single_pass": {
+   "all": {
+    "questions": 150,
+    "judged": 150,
+    "counts": {
+     "correct": 51,
+     "wrong": 99,
+     "abstained": 0,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.34,
+     "ci95": [
+      0.2667,
+      0.4133
+     ],
+     "n": 150
+    },
+    "wrong": {
+     "mean": 0.66,
+     "ci95": [
+      0.5867,
+      0.7333
+     ],
+     "n": 150
+    },
+    "abstained": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 150
+    },
+    "precision_when_answering": {
+     "mean": 0.34,
+     "ci95": [
+      0.2667,
+      0.4133
+     ],
+     "n": 150
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 150,
+      "correct": 51,
+      "wrong": 99
+     },
+     "flagged": {
+      "answered": 0,
+      "correct": 0,
+      "wrong": 0
+     }
+    },
+    "hit_rate": {
+     "mean": 0.7733,
+     "ci95": [
+      0.7067,
+      0.84
+     ],
+     "n": 150
+    },
+    "rf": {
+     "mean": 0.41,
+     "ci95": [
+      0.37,
+      0.45
+     ],
+     "n": 150
+    },
+    "aes": {
+     "mean": 0.3556,
+     "ci95": [
+      0.3422,
+      0.3689
+     ],
+     "n": 150
+    },
+    "search_calls_per_question": 3.0,
+    "model_calls_per_question": 3.0,
+    "median_seconds": 10.6,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   },
+   "multihop": {
+    "questions": 10,
+    "judged": 10,
+    "counts": {
+     "correct": 4,
+     "wrong": 6,
+     "abstained": 0,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.4,
+     "ci95": [
+      0.1,
+      0.7
+     ],
+     "n": 10
+    },
+    "wrong": {
+     "mean": 0.6,
+     "ci95": [
+      0.3,
+      0.9
+     ],
+     "n": 10
+    },
+    "abstained": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 10
+    },
+    "precision_when_answering": {
+     "mean": 0.4,
+     "ci95": [
+      0.1,
+      0.7
+     ],
+     "n": 10
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 10,
+      "correct": 4,
+      "wrong": 6
+     },
+     "flagged": {
+      "answered": 0,
+      "correct": 0,
+      "wrong": 0
+     }
+    },
+    "hit_rate": {
+     "mean": 0.5,
+     "ci95": [
+      0.2,
+      0.8
+     ],
+     "n": 10
+    },
+    "rf": {
+     "mean": 0.25,
+     "ci95": [
+      0.1,
+      0.4
+     ],
+     "n": 10
+    },
+    "aes": {
+     "mean": 0.6667,
+     "ci95": [
+      0.6667,
+      0.6667
+     ],
+     "n": 10
+    },
+    "search_calls_per_question": 3.0,
+    "model_calls_per_question": 3.0,
+    "median_seconds": 12.1,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   }
+  },
+  "text_only": {
+   "all": {
+    "questions": 150,
+    "judged": 150,
+    "counts": {
+     "correct": 23,
+     "wrong": 77,
+     "abstained": 50,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.1533,
+     "ci95": [
+      0.1,
+      0.2133
+     ],
+     "n": 150
+    },
+    "wrong": {
+     "mean": 0.5133,
+     "ci95": [
+      0.4333,
+      0.5933
+     ],
+     "n": 150
+    },
+    "abstained": {
+     "mean": 0.3333,
+     "ci95": [
+      0.26,
+      0.4067
+     ],
+     "n": 150
+    },
+    "precision_when_answering": {
+     "mean": 0.23,
+     "ci95": [
+      0.15,
+      0.32
+     ],
+     "n": 100
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 14,
+      "correct": 3,
+      "wrong": 11
+     },
+     "flagged": {
+      "answered": 86,
+      "correct": 20,
+      "wrong": 66
+     }
+    },
+    "hit_rate": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 150
+    },
+    "rf": {
+     "mean": null,
+     "ci95": null,
+     "n": 0
+    },
+    "aes": {
+     "mean": 0.4222,
+     "ci95": [
+      0.3911,
+      0.4567
+     ],
+     "n": 150
+    },
+    "search_calls_per_question": 2.79,
+    "model_calls_per_question": 12.46,
+    "median_seconds": 41.9,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   },
+   "multihop": {
+    "questions": 10,
+    "judged": 10,
+    "counts": {
+     "correct": 2,
+     "wrong": 2,
+     "abstained": 6,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.2,
+     "ci95": [
+      0.0,
+      0.5
+     ],
+     "n": 10
+    },
+    "wrong": {
+     "mean": 0.2,
+     "ci95": [
+      0.0,
+      0.5
+     ],
+     "n": 10
+    },
+    "abstained": {
+     "mean": 0.6,
+     "ci95": [
+      0.3,
+      0.9
+     ],
+     "n": 10
+    },
+    "precision_when_answering": {
+     "mean": 0.5,
+     "ci95": [
+      0.0,
+      1.0
+     ],
+     "n": 4
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 0,
+      "correct": 0,
+      "wrong": 0
+     },
+     "flagged": {
+      "answered": 4,
+      "correct": 2,
+      "wrong": 2
+     }
+    },
+    "hit_rate": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 10
+    },
+    "rf": {
+     "mean": null,
+     "ci95": null,
+     "n": 0
+    },
+    "aes": {
+     "mean": 0.7,
+     "ci95": [
+      0.6667,
+      0.7667
+     ],
+     "n": 10
+    },
+    "search_calls_per_question": 2.8,
+    "model_calls_per_question": 13.0,
+    "median_seconds": 48.6,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   }
+  },
+  "full_strict": {
+   "all": {
+    "questions": 150,
+    "judged": 150,
+    "counts": {
+     "correct": 8,
+     "wrong": 14,
+     "abstained": 128,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.0533,
+     "ci95": [
+      0.02,
+      0.0933
+     ],
+     "n": 150
+    },
+    "wrong": {
+     "mean": 0.0933,
+     "ci95": [
+      0.0467,
+      0.14
+     ],
+     "n": 150
+    },
+    "abstained": {
+     "mean": 0.8533,
+     "ci95": [
+      0.7933,
+      0.9067
+     ],
+     "n": 150
+    },
+    "precision_when_answering": {
+     "mean": 0.3636,
+     "ci95": [
+      0.1818,
+      0.5455
+     ],
+     "n": 22
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 22,
+      "correct": 8,
+      "wrong": 14
+     },
+     "flagged": {
+      "answered": 0,
+      "correct": 0,
+      "wrong": 0
+     }
+    },
+    "hit_rate": {
+     "mean": 0.7267,
+     "ci95": [
+      0.6533,
+      0.8
+     ],
+     "n": 150
+    },
+    "rf": {
+     "mean": 0.44,
+     "ci95": [
+      0.39,
+      0.49
+     ],
+     "n": 150
+    },
+    "aes": {
+     "mean": 0.44,
+     "ci95": [
+      0.4056,
+      0.4767
+     ],
+     "n": 150
+    },
+    "search_calls_per_question": 2.72,
+    "model_calls_per_question": 8.35,
+    "median_seconds": 34.0,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   },
+   "multihop": {
+    "questions": 10,
+    "judged": 10,
+    "counts": {
+     "correct": 0,
+     "wrong": 0,
+     "abstained": 10,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 10
+    },
+    "wrong": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 10
+    },
+    "abstained": {
+     "mean": 1.0,
+     "ci95": [
+      1.0,
+      1.0
+     ],
+     "n": 10
+    },
+    "precision_when_answering": {
+     "mean": null,
+     "ci95": null,
+     "n": 0
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 0,
+      "correct": 0,
+      "wrong": 0
+     },
+     "flagged": {
+      "answered": 0,
+      "correct": 0,
+      "wrong": 0
+     }
+    },
+    "hit_rate": {
+     "mean": 0.5,
+     "ci95": [
+      0.2,
+      0.8
+     ],
+     "n": 10
+    },
+    "rf": {
+     "mean": 0.25,
+     "ci95": [
+      0.1,
+      0.4
+     ],
+     "n": 10
+    },
+    "aes": {
+     "mean": 0.6667,
+     "ci95": [
+      0.6667,
+      0.6667
+     ],
+     "n": 10
+    },
+    "search_calls_per_question": 3.0,
+    "model_calls_per_question": 8.0,
+    "median_seconds": 33.0,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   }
+  },
+  "full_gemini": {
+   "all": {
+    "questions": 150,
+    "judged": 150,
+    "counts": {
+     "correct": 45,
+     "wrong": 76,
+     "abstained": 29,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.3,
+     "ci95": [
+      0.2267,
+      0.3733
+     ],
+     "n": 150
+    },
+    "wrong": {
+     "mean": 0.5067,
+     "ci95": [
+      0.4267,
+      0.5867
+     ],
+     "n": 150
+    },
+    "abstained": {
+     "mean": 0.1933,
+     "ci95": [
+      0.1333,
+      0.26
+     ],
+     "n": 150
+    },
+    "precision_when_answering": {
+     "mean": 0.3719,
+     "ci95": [
+      0.2893,
+      0.4628
+     ],
+     "n": 121
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 117,
+      "correct": 43,
+      "wrong": 74
+     },
+     "flagged": {
+      "answered": 4,
+      "correct": 2,
+      "wrong": 2
+     }
+    },
+    "hit_rate": {
+     "mean": 0.6533,
+     "ci95": [
+      0.58,
+      0.7267
+     ],
+     "n": 150
+    },
+    "rf": {
+     "mean": 0.5467,
+     "ci95": [
+      0.4767,
+      0.6167
+     ],
+     "n": 150
+    },
+    "aes": {
+     "mean": 0.6967,
+     "ci95": [
+      0.6478,
+      0.7444
+     ],
+     "n": 150
+    },
+    "search_calls_per_question": 1.87,
+    "model_calls_per_question": 7.88,
+    "median_seconds": 55.1,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   },
+   "multihop": {
+    "questions": 10,
+    "judged": 10,
+    "counts": {
+     "correct": 4,
+     "wrong": 3,
+     "abstained": 3,
+     "judge_error": 0
+    },
+    "correct": {
+     "mean": 0.4,
+     "ci95": [
+      0.1,
+      0.7
+     ],
+     "n": 10
+    },
+    "wrong": {
+     "mean": 0.3,
+     "ci95": [
+      0.0,
+      0.6
+     ],
+     "n": 10
+    },
+    "abstained": {
+     "mean": 0.3,
+     "ci95": [
+      0.0,
+      0.6
+     ],
+     "n": 10
+    },
+    "precision_when_answering": {
+     "mean": 0.5714,
+     "ci95": [
+      0.1429,
+      0.8571
+     ],
+     "n": 7
+    },
+    "confident_vs_flagged": {
+     "confident": {
+      "answered": 5,
+      "correct": 2,
+      "wrong": 3
+     },
+     "flagged": {
+      "answered": 2,
+      "correct": 2,
+      "wrong": 0
+     }
+    },
+    "hit_rate": {
+     "mean": 0.3,
+     "ci95": [
+      0.0,
+      0.6
+     ],
+     "n": 10
+    },
+    "rf": {
+     "mean": 0.15,
+     "ci95": [
+      0.0,
+      0.3
+     ],
+     "n": 10
+    },
+    "aes": {
+     "mean": 0.8333,
+     "ci95": [
+      0.7333,
+      0.9333
+     ],
+     "n": 10
+    },
+    "search_calls_per_question": 2.4,
+    "model_calls_per_question": 8.2,
+    "median_seconds": 75.0,
+    "cgs_all": "waiting for eval/annotations.csv",
+    "cgs_answered": null,
+    "cgs_at_least_0.5": null
+   }
+  }
+ },
+ "comparisons": {
+  "full - single_pass (all)": {
+   "correct": {
+    "diff": -0.1267,
+    "ci95": [
+     -0.22,
+     -0.04
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "wrong": {
+    "diff": -0.2267,
+    "ci95": [
+     -0.3267,
+     -0.1333
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "abstained": {
+    "diff": 0.3533,
+    "ci95": [
+     0.28,
+     0.4333
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "hit": {
+    "diff": -0.0467,
+    "ci95": [
+     -0.08,
+     -0.0133
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "rf": {
+    "diff": 0.03,
+    "ci95": [
+     0.0,
+     0.0601
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "aes": {
+    "diff": 0.0844,
+    "ci95": [
+     0.0522,
+     0.12
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "cgs": null
+  },
+  "full - single_pass (multihop)": {
+   "correct": {
+    "diff": 0.2,
+    "ci95": [
+     0.0,
+     0.5
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "wrong": {
+    "diff": -0.4,
+    "ci95": [
+     -0.7,
+     -0.1
+    ],
+    "n": 10,
+    "beyond_luck": true
+   },
+   "abstained": {
+    "diff": 0.2,
+    "ci95": [
+     0.0,
+     0.5
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "hit": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "rf": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "aes": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "cgs": null
+  },
+  "full - text_only (all)": {
+   "correct": {
+    "diff": 0.06,
+    "ci95": [
+     -0.02,
+     0.14
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "wrong": {
+    "diff": -0.08,
+    "ci95": [
+     -0.18,
+     0.02
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "abstained": {
+    "diff": 0.02,
+    "ci95": [
+     -0.0733,
+     0.12
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "hit": {
+    "diff": 0.7267,
+    "ci95": [
+     0.6533,
+     0.8
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "rf": null,
+   "aes": {
+    "diff": 0.0178,
+    "ci95": [
+     -0.03,
+     0.0656
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "cgs": null
+  },
+  "full - text_only (multihop)": {
+   "correct": {
+    "diff": 0.4,
+    "ci95": [
+     0.1,
+     0.7
+    ],
+    "n": 10,
+    "beyond_luck": true
+   },
+   "wrong": {
+    "diff": 0.0,
+    "ci95": [
+     -0.3,
+     0.3
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "abstained": {
+    "diff": -0.4,
+    "ci95": [
+     -0.7,
+     -0.1
+    ],
+    "n": 10,
+    "beyond_luck": true
+   },
+   "hit": {
+    "diff": 0.5,
+    "ci95": [
+     0.2,
+     0.8
+    ],
+    "n": 10,
+    "beyond_luck": true
+   },
+   "rf": null,
+   "aes": {
+    "diff": -0.0333,
+    "ci95": [
+     -0.1,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "cgs": null
+  },
+  "full - full_strict (all)": {
+   "correct": {
+    "diff": 0.16,
+    "ci95": [
+     0.1067,
+     0.22
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "wrong": {
+    "diff": 0.34,
+    "ci95": [
+     0.2667,
+     0.4133
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "abstained": {
+    "diff": -0.5,
+    "ci95": [
+     -0.58,
+     -0.42
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "hit": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "rf": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "aes": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "cgs": null
+  },
+  "full - full_strict (multihop)": {
+   "correct": {
+    "diff": 0.6,
+    "ci95": [
+     0.3,
+     0.9
+    ],
+    "n": 10,
+    "beyond_luck": true
+   },
+   "wrong": {
+    "diff": 0.2,
+    "ci95": [
+     0.0,
+     0.5
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "abstained": {
+    "diff": -0.8,
+    "ci95": [
+     -1.0,
+     -0.5
+    ],
+    "n": 10,
+    "beyond_luck": true
+   },
+   "hit": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "rf": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "aes": {
+    "diff": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "cgs": null
+  },
+  "full_gemini - full (all)": {
+   "correct": {
+    "diff": 0.0867,
+    "ci95": [
+     0.0,
+     0.1733
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "wrong": {
+    "diff": 0.0733,
+    "ci95": [
+     -0.02,
+     0.1667
+    ],
+    "n": 150,
+    "beyond_luck": false
+   },
+   "abstained": {
+    "diff": -0.16,
+    "ci95": [
+     -0.2467,
+     -0.0733
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "hit": {
+    "diff": -0.0733,
+    "ci95": [
+     -0.1267,
+     -0.02
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "rf": {
+    "diff": 0.1067,
+    "ci95": [
+     0.0567,
+     0.16
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "aes": {
+    "diff": 0.2567,
+    "ci95": [
+     0.2011,
+     0.3111
+    ],
+    "n": 150,
+    "beyond_luck": true
+   },
+   "cgs": null
+  },
+  "full_gemini - full (multihop)": {
+   "correct": {
+    "diff": -0.2,
+    "ci95": [
+     -0.6,
+     0.2
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "wrong": {
+    "diff": 0.1,
+    "ci95": [
+     -0.3,
+     0.5
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "abstained": {
+    "diff": 0.1,
+    "ci95": [
+     -0.3,
+     0.5
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "hit": {
+    "diff": -0.2,
+    "ci95": [
+     -0.5,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "rf": {
+    "diff": -0.1,
+    "ci95": [
+     -0.25,
+     0.0
+    ],
+    "n": 10,
+    "beyond_luck": false
+   },
+   "aes": {
+    "diff": 0.1667,
+    "ci95": [
+     0.0667,
+     0.2667
+    ],
+    "n": 10,
+    "beyond_luck": true
+   },
+   "cgs": null
+  }
+ },
+ "judge_check": "waiting for eval/judge_check.csv",
+ "map": "waiting for eval/attribution.csv",
+ "multihop_questions": 10,
+ "annotated_boxes": 0
+}

@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.0,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 57,
+  "prompt_tokens": 291,
+  "total_tokens": 348,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which step in the methodology resulted in the largest decrease in the size of the dataset?\n\nReference answer: Step 4, Reason disambiguation.\n\nSystem's answer: The methodology resulted in the largest decrease in the size of the dataset in Step 6, where the weakest 30% of instances were discarded."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer states that Step 4 resulted in the largest decrease in the size of the dataset, while the system's answer incorrectly identifies Step 6 as the step where the largest decrease occurred.",
+  "correct": false
+ }
+}

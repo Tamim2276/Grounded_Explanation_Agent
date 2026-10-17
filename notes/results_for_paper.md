@@ -739,6 +739,84 @@ The evaluation is complete on 2026-10-17 (commit `6113d04`, "evaluation complete
 - The rule's first version also matched "which explanation method…", which is not a reason
   question, so the rule now asks for "possible explanation".
 
+### Test results, judged by j1 (2026-10-17; before the human check) → Results, RQ1/RQ2; Discussion
+
+`scripts/judge.py` over all 750 test answers (`results/judged/`), then `scripts/score.py` →
+`results/summary.json`. **Status:** the judge has not yet been checked against the 30 hand
+grades, and CGS and MAP wait for the hand annotations. One power cut during the judge run:
+it resumed at question 89 of the first run, with nothing lost.
+
+| system (150 test questions) | correct | wrong | abstained | correct when answering | hit rate | RF | AES | search calls / q |
+|---|---|---|---|---|---|---|---|---|
+| **full** | 32 (21%) | 65 (43%) | 53 (35%) | 33% | 0.73 | 0.44 | 0.44 | 2.72 |
+| single-pass | 51 (34%) | 99 (66%) | 0 | 34% | 0.77 | 0.41 | 0.36 | 3.00 |
+| text-only | 23 (15%) | 77 (51%) | 50 (33%) | 23% | 0 | – | 0.42 | 2.79 |
+| full, strict G1 (ablation) | 8 (5%) | 14 (9%) | 128 (85%) | 36% | 0.73 | 0.44 | 0.44 | 2.72 |
+| full, Gemini 3.5 Flash-Lite | 45 (30%) | 76 (51%) | 29 (19%) | 37% | 0.65 | 0.55 | 0.70 | 1.87 |
+
+**Paired differences** (95% bootstrap; ✔ = beyond luck):
+
+| | correct | wrong | abstained |
+|---|---|---|---|
+| full − single-pass | −12.7 pts [−22, −4] ✔ | **−22.7 pts [−33, −13] ✔** | +35.3 [+28, +43] ✔ |
+| full − text-only | +6.0 [−2, +14] | −8.0 [−18, +2] | +2.0 [−7, +12] |
+| full − strict | +16.0 [+11, +22] ✔ | +34.0 [+27, +41] ✔ | −50.0 [−58, −42] ✔ |
+| Gemini − full (7B) | +8.7 [0, +17] | +7.3 [−2, +17] | −16.0 [−25, −7] ✔ |
+
+Also beyond luck: AES full 0.44 vs single-pass 0.36. Hit rate full 0.73 vs single-pass 0.77
+(−4.7 pts, single-pass fetches every kind every time). Hit rate full vs text-only +73 pts (by
+design). Gemini: RF +0.11 and AES +0.26 over the 7B, with fewer rounds.
+
+**Multi-hop subset (10 questions; indicative only):**
+
+| system | correct | wrong | abstained |
+|---|---|---|---|
+| full | 6 | 2 | 2 |
+| single-pass | 4 | 6 | 0 |
+| text-only | 2 | 2 | 6 |
+| strict | 0 | 0 | 10 |
+| Gemini | 4 | 3 | 3 |
+
+Full − single-pass: wrong −40 pts [−70, −10] ✔. Full − text-only: correct +40 pts [+10, +70] ✔.
+This is the subset where the plan expected the loop to matter most, but there are only 10
+questions.
+
+**Confident vs flagged (the dev finding did not hold on test):**
+- full: confident 8 correct / 14 wrong; flagged 24 / 51.
+- strict: its 22 answers are the same confident ones, 8 / 14.
+- On dev, every wrong answer carried the flag. On test, G1 being convinced does not make a 7B
+  answer more likely to be right (36% vs 32%).
+
+**Is abstention selective? (the key Discussion result):** compare single-pass's accuracy on the
+questions each system held back with its accuracy on those it answered.
+
+| system | single-pass correct on the questions held back | … on the questions answered |
+|---|---|---|
+| full (7B) | 40% (of 53) | 31% (of 97) |
+| strict (7B) | 36% (of 128) | 23% (of 22) |
+| **full with Gemini** | **14% (of 29)** | **39% (of 121)** |
+
+- With the 7B, the gates do not hold back the hard questions: they hold back easier ones about
+  as often. The full system answers correctly on 32 questions, single-pass on 51. 17 are correct
+  in both, 15 only in full, 34 only in single-pass.
+- **With Gemini behind the same graph and prompts, abstention is selective:** it holds back
+  mainly the questions that are hard for everyone.
+- So the design (search until sufficient, check every claim, abstain otherwise) works when the
+  model can judge sufficiency. A 4-bit 7B cannot judge it reliably. This agrees with the gate
+  pass rates of §4e (G1 convinced on 117 questions with Gemini vs 22 with the 7B).
+
+**What the thesis can claim (pending the human check of the judge):**
+- RQ1: the loop with gates makes the 7B wrong far less often than single-pass (43% vs 66%),
+  at the cost of correct answers (21% vs 34%). Its precision when answering is not higher
+  (33% vs 34%). The reduction comes from answering less, not from answering better. On
+  multi-hop questions it is fewer wrong and more right, but n = 10.
+- RQ2: seeing tables and figures (full vs text-only) changes little overall with the 7B: +6 pts
+  correct, −8 pts wrong, neither beyond luck. On multi-hop it is +40 pts correct.
+- The stronger model makes the gates useful (selective abstention, higher RF and AES). Model
+  capacity is the bottleneck, not the architecture: the main Discussion point.
+- All wrong rates are high partly because j1 counts incomplete answers as wrong (§ the judge's
+  dev check).
+
 ---
 
 ## 5. The agent design on the stub → Implementation, *design validation* (Day 1)

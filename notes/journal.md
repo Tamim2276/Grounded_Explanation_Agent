@@ -191,3 +191,9 @@
   claim boxes, 78 claims) not run yet: the user's other job (B01_effnetv2s) held 8 GB of GPU.
 - 2026-10-17: step 6 done (78 photo-claim vectors, 2 min; reboxed: full 19 q/24 boxes, single-pass 31/49,
   text-only 0, strict 7/9, Gemini 6/6). Evaluation complete (6113d04). Day 7 finished; next: Day 8 scoring.
+- 2026-10-17: Day 8. metrics.py (+10 tests), judge.py (j1; dev check vs hand labels 28/34, kappa 0.64; the
+  6 misses were "partly" answers, judge stricter, not tuned), annotate.html + 50 box / 30 grade sets, multi-hop
+  rule (10 questions), score.py -> results/summary.json. Judge on all 750 test answers (one power cut: resumed).
+  Headline (pending the human check): full 21/43/35 % correct/wrong/abstained vs single-pass 34/66/0; abstention
+  is NOT selective with the 7B but IS with Gemini behind the same graph. Server started with FORCE=1 (0.2 GB short
+  of the margin, user agreed; no other job ran); stopped after the judge.

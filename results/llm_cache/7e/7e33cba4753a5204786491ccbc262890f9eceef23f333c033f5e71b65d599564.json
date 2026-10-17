@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 83,
+  "prompt_tokens": 340,
+  "total_tokens": 423,
+  "prompt_tokens_details": {
+   "cached_tokens": 223
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: Which model performed best on the IMDB dataset for classifying documents with categorical labels, and how much better did it perform compared to the SLDA model?\n\nReference answer: Both the SCHOLAR (covariates) and Logistic Regression models achieved the highest accuracy of 0.87 on the IMDB dataset. This represents a 0.23 improvement over the SLDA model, which achieved an accuracy of 0.64.\n\nSystem's answer: The exact performance difference between SCHOLAR and SLDA is not provided in the given evidence."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer states that the SCHOLAR model achieved an accuracy of 0.87, which is 0.23 higher than the SLDA model's accuracy of 0.64. The system's answer, however, states that the performance difference is not provided, which contradicts the reference answer.",
+  "correct": false
+ }
+}

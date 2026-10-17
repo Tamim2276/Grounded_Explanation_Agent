@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.4,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 94,
+  "prompt_tokens": 297,
+  "total_tokens": 391,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: What is the relationship between the novel class and the top-3 most similar base classes?\n\nReference answer: The top-3 most similar base classes are the three classes that are most similar to the novel class, based on the embedding layer in a 5-shot setting.\n\nSystem's answer: The similarity of two classes is calculated by Equation 1."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer describes the top-3 most similar base classes as those that are most similar to the novel class, based on the embedding layer in a 5-shot setting. The system's answer, however, states that the similarity of two classes is calculated by Equation 1, which does not address the relationship between the novel class and the top-3 most similar base classes.",
+  "correct": false
+ }
+}

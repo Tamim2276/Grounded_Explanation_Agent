@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.6,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 96,
+  "prompt_tokens": 351,
+  "total_tokens": 447,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: What are the main differences between the educational philosophies of the Bonaparte and Voltaire schools?\n\nReference answer: The Bonaparte school focuses on outdoor physical activities, maneuvers, and strategies, with a specialization in horse riding, lances, and swords. They aim to develop students into good leaders. The Voltaire school, on the other hand, encourages independent thinking and focuses on indoor activities. They aim to instill good moral values and develop students into philosophical thinkers.\n\nSystem's answer: The Bonaparte school focuses on outdoor physical activities, manoeuvers, strategies, horse riding, and lances swords."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer describes the Bonaparte school as focusing on outdoor physical activities, maneuvers, strategies, with a specialization in horse riding, lances, and swords, aiming to develop students into good leaders. The system's answer correctly identifies the focus on outdoor activities, maneuvers, strategies, horse riding, and lances/swords, but it does not mention the aim to develop the",
+  "correct": false
+ }
+}

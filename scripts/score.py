@@ -159,7 +159,7 @@ def main():
     for name in RUNS:
         s = summary["systems"][name]["all"]
         m = lambda k: f"{s[k]['mean']:.2f}" if isinstance(s[k], dict) and s[k]["mean"] is not None else "  -"
-        print(f"{name:<12} {m('correct'):>8} {m('wrong'):>7} {m('abstained'):>8} {m('hit'):>6} {m('rf'):>6} "
+        print(f"{name:<12} {m('correct'):>8} {m('wrong'):>7} {m('abstained'):>8} {m('hit_rate'):>6} {m('rf'):>6} "
               f"{m('aes'):>6} {m('cgs_all'):>6}   (judged {s['judged']}/{s['questions']})")
     print("-> results/summary.json")
 

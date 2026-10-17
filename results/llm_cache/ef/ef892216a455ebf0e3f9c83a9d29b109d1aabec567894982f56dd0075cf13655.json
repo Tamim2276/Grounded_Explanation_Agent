@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 86,
+  "prompt_tokens": 555,
+  "total_tokens": 641,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\n\nReference answer: The answering procedure follows the question graph, searching for a valid assignment in the image. At each step, the handled node is set and objects (extracted using Mask R-CNN) are examined according to the node’s requirements (utilizing corresponding visual estimators). If successful, a new node is set (according to a DFS traversal) and the function is called again to handle the unassigned subgraph.\n\nSystem's answer: The answering process consists of two stages: 1. Question mapping into a graph representation - First, a representation of the question as a directed graph is generated, where nodes represent objects and edges represent relations between objects. Graph components include objects classes, properties and relations. The node representation includes all the object visual requirements needed to answer the question, which is a combination of the following: • Object class c (e.g., 'horse'). • Object property p (e.g., 'red'). • Queried object property f (e.g., 'color'). • Queried set property g (e.g., 'number'). • Quantiﬁers (e.g., 'all', 'two'). • Quantity relative to another node (e.g., same). • Node type: regular or SuperNode: OR of nodes (with optional additional requirements). 2. Answering procedure - In this stage, a recursive procedure finds valid assignments of the graph in the image. The number of required assignments for each node is determined by its quantiﬁers. The procedure follows the graph, invoking relevant sub-procedures and integrates the information to provide the answer."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer describes the answering procedure as a process that follows a question graph, examining objects and setting new nodes recursively. The system's answer, while providing a detailed explanation of the graph representation and the recursive procedure, does not contradict the reference. However, it elaborates on the graph representation and the recursive procedure in a more complex",
+  "correct": false
+ }
+}

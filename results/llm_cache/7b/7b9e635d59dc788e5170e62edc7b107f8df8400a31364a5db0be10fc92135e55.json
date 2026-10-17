@@ -1,0 +1,29 @@
+{
+ "name": "judge",
+ "prompt_version": "v7",
+ "model": "qwen2.5-vl-7b",
+ "seconds": 3.5,
+ "images": 0,
+ "usage": {
+  "completion_tokens": 88,
+  "prompt_tokens": 358,
+  "total_tokens": 446,
+  "prompt_tokens_details": {
+   "cached_tokens": 222
+  }
+ },
+ "messages": [
+  {
+   "role": "system",
+   "content": "You grade answers to questions about scientific papers.\nYou get a question, the reference answer written by the dataset's authors, and a system's answer.\nDecide whether the system's answer is correct with respect to the reference answer.\n\nCorrect: the system's answer contains the main point of the reference answer -- the value, the\nname, the trend or the comparison the question asks for -- and states nothing that contradicts\nthe reference. Extra details that do not contradict the reference are fine. Wording, rounding,\nunits and level of detail may differ. An answer that gives the main point but leaves out\nsecondary details is correct.\nWrong: the system's answer gives a different value or name, the opposite trend, a claim that\ncontradicts the reference, or it is so vague or off-topic that it does not answer the question.\n\nJudge only against the reference answer, not against your own knowledge of the paper.\nFirst write the reason in at most two sentences (what the reference says, what the system\nsays), then the verdict."
+  },
+  {
+   "role": "user",
+   "content": "Question: Explain how the answering procedure works.\n\nReference answer: The answering procedure follows the question graph, searching for a valid assignment in the image. At each step, the handled node is set and objects (extracted using Mask R-CNN) are examined according to the node’s requirements (utilizing corresponding visual estimators). If successful, a new node is set (according to a DFS traversal) and the function is called again to handle the unassigned subgraph.\n\nSystem's answer: In the answering procedure stage, a recursive procedure finds valid assignments of the graph in the image, where the number of required assignments for each node is determined by its quantifiers."
+  }
+ ],
+ "answer": {
+  "reason": "The reference answer describes the answering procedure as following a question graph, examining objects according to node requirements, and using a DFS traversal. The system's answer, however, describes a recursive procedure that determines the number of required assignments for each node based on its quantifiers. This contradicts the reference answer by describing a different mechanism for the 'd",
+  "correct": false
+ }
+}
