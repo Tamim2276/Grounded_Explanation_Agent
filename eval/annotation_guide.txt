@@ -51,12 +51,13 @@ confirm when a box covers almost the whole table or figure.)
   only in the main text), press "Can't box this…" and write the reason in one line.
 - Box what the correct answer says, even if you think the correct answer is wrong.
 
-Examples:
-  Q: Which model has the highest informativeness and grammar score on CamRest?
-     Answer: BoSsNet.  ->  box only BoSsNet's two CamRest cells (77 and 2.28),
-                           not the whole table.
-  Q: Which system performs best when the percentage of unseen information is high?
-     Answer: BoSsNet.  ->  box only the right end of BoSsNet's line in the chart.
+Examples (from other questions, not among your 50):
+  Q: Which dataset has the most 4-hop triples?
+     Answer: Bing-News, 6,322,548.  ->  box only that one cell (Bing-News row,
+                                        4-hop column), not the whole table.
+  Q: Which method is best when the amount of noise is high?
+     Answer: Method A.  ->  box only the right end of Method A's line in the chart,
+                            where the noise is high.
 
 Keys and buttons:
   Z ............ undo the last box          Clear ..... remove all boxes of this question
