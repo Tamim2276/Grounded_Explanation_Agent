@@ -30,6 +30,7 @@ SPLIT = cfg.PROJECT_ROOT / "eval" / "splits" / "test.jsonl"
 SET_FILE = cfg.PROJECT_ROOT / "eval" / "annotation_set.json"
 OUT = cfg.DATA_DIR / "annotate"
 TOOL = cfg.PROJECT_ROOT / "scripts" / "annotate_tool.html"
+GUIDE = cfg.PROJECT_ROOT / "eval" / "annotation_guide.txt"
 
 
 def choose_boxes(questions: list) -> list:
@@ -76,6 +77,7 @@ def main():
     atomic_write_text(OUT / "items.js", "const BOXES = " + json.dumps(items, ensure_ascii=False, indent=1)
                       + ";\nconst ANSWERS = " + json.dumps(blind, ensure_ascii=False, indent=1) + ";\n")
     shutil.copyfile(TOOL, OUT / "annotate.html")
+    shutil.copyfile(GUIDE, OUT / "HOW_TO.txt")       # the annotator's instructions travel with the tool
     tables = sum(i["kind"] == "table" for i in items)
     print(f"{len(items)} questions to box ({tables} tables, {len(items) - tables} figures), "
           f"{len(answers)} answers to grade -> {OUT}")

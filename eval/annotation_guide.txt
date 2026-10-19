@@ -1,0 +1,89 @@
+HOW TO DO THE ANNOTATION
+(about 1.5 to 2 hours; you can split it over several sittings)
+
+
+WHAT THIS IS
+
+I am testing a computer system that answers questions about research papers and
+shows where on the page its answer comes from. To score it, I need a person to do
+two things:
+
+  1. mark where the true answer is on 50 pages, and
+  2. say whether 30 answers are correct.
+
+You do not need to know the papers. The correct answer is shown every time.
+
+
+BEFORE YOU START
+
+- Use a laptop or PC with a mouse, in Chrome or Edge (not a phone).
+- Unzip the folder. Keep all files together; do not move or rename anything inside.
+- Double-click annotate.html. It works without internet.
+- Do PART 1 first, then PART 2.
+- Please work on your own: do not discuss the questions or answers with me or anyone
+  else until you have finished. The point is an independent check.
+
+
+PART 1: BOXES  (tab "1 · Boxes", 50 questions, about 1 hour)
+
+Each screen shows the question, the correct answer (yellow), and a page of the paper.
+The table or figure the question is about has a blue dashed outline.
+
+Your job: hold the left mouse button and drag a box around the part of the page that
+shows the correct answer.
+
+- Table:   box the cell(s) holding the answer, usually the number(s) in the right row
+           and column. If the answer compares two cells, draw two boxes.
+- Chart:   box the bar(s), line or point that show the answer: the data, not the
+           legend or the axis titles.
+- Diagram: box the block(s) or arrow(s) the answer talks about.
+- Picture: box the part of the picture the answer is about.
+- Keep boxes tight. Do not box a whole table when one cell is enough.
+- If the answer is only written in the caption, box that sentence of the caption.
+- If the answer cannot be seen anywhere on this page, press "Can't box this…" and
+  write the reason in one line.
+- Box what the correct answer says, even if you think the correct answer is wrong.
+
+Keys and buttons:
+  Z ............ undo the last box          Clear ..... remove all boxes of this question
+  + and − ...... zoom in and out (use it for small table cells)
+  Enter / Next . next question              Back ...... previous question
+  The small squares show progress: green = done, yellow = "can't box".
+  Click a square to jump to that question.
+
+
+PART 2: GRADE ANSWERS  (tab "2 · Grade answers", 30 answers, about 20 to 30 minutes)
+
+Each screen shows a question, the correct answer, and an answer written by a computer
+system. Decide:
+
+- Correct (key 1): the answer gives the main point of the correct answer (the value,
+  the name, the trend or the comparison) and says nothing that contradicts it.
+  Different wording, rounding, or extra details that are true are fine. An answer
+  that gives the main point but leaves out secondary details is correct.
+- Wrong (key 2): a different value or name, the opposite trend, something false, or
+  so vague or off-topic that it does not answer the question.
+- Can't tell (key 3): only if you really cannot decide. You can add a short note.
+
+Judge only against the correct answer shown, not against what you know or guess about
+the paper. Do not look anything up.
+
+
+SAVING
+
+- Your work is saved in the browser after every box and every grade. You can close
+  the page and continue later on the same PC, in the same browser.
+- Still, about every 10 questions press "Download CSV" as a backup.
+  The button saves the file of the tab you are on:
+    in tab 1 it saves  annotations.csv
+    in tab 2 it saves  judge_check.csv
+- If you change browser or PC: open annotate.html there, press "Load CSV" and choose
+  your latest downloaded file. You continue where you stopped.
+
+
+WHEN YOU FINISH
+
+Press "Download CSV" once in tab 1 (annotations.csv) and once in tab 2
+(judge_check.csv), and send me both files. They are small.
+
+Thank you!
