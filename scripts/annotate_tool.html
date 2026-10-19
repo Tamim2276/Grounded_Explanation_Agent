@@ -209,7 +209,15 @@ $("b-page").addEventListener("pointerup", ev => {
   const p = toPoints(ev), s = drag.start; drag.node.remove(); drag = null;
   const b = [pt(Math.min(s[0], p[0])), pt(Math.min(s[1], p[1])), pt(Math.max(s[0], p[0])), pt(Math.max(s[1], p[1]))];
   if (b[2] - b[0] < 2 || b[3] - b[1] < 2) return;           // a click, not a box
-  const e = entry(BOXES[state.bPos].qid); e.boxes.push(b); e.skip = null;
+  // A box over (nearly) the whole table or figure is usually a misunderstanding: the outline
+  // already marks it. Ask, do not forbid -- some answers do need the whole figure.
+  const it = BOXES[state.bPos], r = it.region;
+  const ix = Math.max(0, Math.min(b[2], r[2]) - Math.max(b[0], r[0]));
+  const iy = Math.max(0, Math.min(b[3], r[3]) - Math.max(b[1], r[1]));
+  if (ix * iy >= 0.8 * (r[2] - r[0]) * (r[3] - r[1]) &&
+      !confirm(`This box covers almost all of ${it.label}.\n\nUsually only a few cells, one line or one part ` +
+               `holds the answer: box just that.\n\nKeep this big box anyway (OK) or remove it (Cancel)?`)) return;
+  const e = entry(it.qid); e.boxes.push(b); e.skip = null;
   save(); showBox(false);
 });
 

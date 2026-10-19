@@ -32,17 +32,31 @@ The table or figure the question is about has a blue dashed outline.
 Your job: hold the left mouse button and drag a box around the part of the page that
 shows the correct answer.
 
+IMPORTANT: the blue outline already marks the whole table or figure. Your box should
+be SMALLER, inside it: only the part that holds the answer. (The tool asks you to
+confirm when a box covers almost the whole table or figure.)
+
 - Table:   box the cell(s) holding the answer, usually the number(s) in the right row
            and column. If the answer compares two cells, draw two boxes.
 - Chart:   box the bar(s), line or point that show the answer: the data, not the
-           legend or the axis titles.
+           legend or the axis titles. Only the part the question asks about
+           (e.g. "when X is high": only the right end of the line).
 - Diagram: box the block(s) or arrow(s) the answer talks about.
 - Picture: box the part of the picture the answer is about.
-- Keep boxes tight. Do not box a whole table when one cell is enough.
-- If the answer is only written in the caption, box that sentence of the caption.
-- If the answer cannot be seen anywhere on this page, press "Can't box this…" and
-  write the reason in one line.
+- "Why" questions: box the rows or parts of the table or figure that show what the
+           answer is about (e.g. the rows of the models that failed).
+- Box only inside the table or figure, or its caption. If the answer is only written
+  in the caption, box that sentence of the caption.
+- If the table, figure and caption do not show the answer at all (e.g. the reason is
+  only in the main text), press "Can't box this…" and write the reason in one line.
 - Box what the correct answer says, even if you think the correct answer is wrong.
+
+Examples:
+  Q: Which model has the highest informativeness and grammar score on CamRest?
+     Answer: BoSsNet.  ->  box only BoSsNet's two CamRest cells (77 and 2.28),
+                           not the whole table.
+  Q: Which system performs best when the percentage of unseen information is high?
+     Answer: BoSsNet.  ->  box only the right end of BoSsNet's line in the chart.
 
 Keys and buttons:
   Z ............ undo the last box          Clear ..... remove all boxes of this question
