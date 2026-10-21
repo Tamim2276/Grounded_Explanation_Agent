@@ -817,6 +817,24 @@ questions each system held back with its accuracy on those it answered.
 - All wrong rates are high partly because j1 counts incomplete answers as wrong (§ the judge's
   dev check).
 
+### The judge checked against a human grader (2026-10-22; `eval/judge_check.csv`)
+
+30 test answers, 6 per run, graded blind: the grader did not see the system or the verdict, and
+had the same rule as the judge.
+
+- **Graded 25 as correct/wrong, 5 "can't tell".**
+- **Agreement 22/25 (88%), Cohen's kappa 0.72 (substantial).**
+- All 3 disagreements were human correct, judge wrong. The judge never called an answer correct
+  that the human called wrong.
+- Of the 5 "can't tell": the judge said wrong on 4 and correct on 1. One grader note: "it listed
+  the key components correctly but missed the first question" (a two-part question, half
+  answered).
+- **For the thesis:** the judge is reliable and, if anything, strict. The reported correct rates
+  are conservative (the judge undercounts correct answers), and no system's accuracy is
+  inflated by it. This agrees with the dev check (28/34, kappa 0.64, all misses on "partly"
+  answers).
+- `results/summary.json` → `judge_check`.
+
 ---
 
 ## 5. The agent design on the stub → Implementation, *design validation* (Day 1)

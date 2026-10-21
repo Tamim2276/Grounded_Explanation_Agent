@@ -1284,7 +1284,14 @@
    "cgs": null
   }
  },
- "judge_check": "waiting for eval/judge_check.csv",
+ "judge_check": {
+  "graded": 25,
+  "unsure": 5,
+  "agreement": 0.88,
+  "cohen_kappa": 0.7191,
+  "human_correct": 9,
+  "judge_correct": 6
+ },
  "map": "waiting for eval/attribution.csv",
  "multihop_questions": 10,
  "annotated_boxes": 0
