@@ -11,8 +11,8 @@ import json
 from statistics import median
 
 from gea import config as cfg
-from gea.metrics import (aes, bootstrap_diff, bootstrap_mean, cgs, cohen_kappa, rf, search_calls,
-                         visual_labels)
+from gea.metrics import (aes, bootstrap_diff, bootstrap_mean, cgs, cohen_kappa, pointing, pointing_share, rf,
+                         search_calls, visual_labels)
 from gea.safeio import atomic_write_json, read_jsonl
 
 ROOT = cfg.PROJECT_ROOT
@@ -63,6 +63,8 @@ def per_question(name: str, multihop: set, gold: dict) -> list:
             "aes": aes(2 if qid in multihop else 1, search_calls(r)),
             "search_calls": search_calls(r), "model_calls": r["model_calls"], "seconds": r["seconds"],
             "cgs": cgs(r["boxes"], gold[qid]) if qid in gold else None,
+            "pointing": pointing(r["boxes"], gold[qid]) if qid in gold else None,
+            "pointing_share": pointing_share(r["boxes"], gold[qid]) if qid in gold else None,
             "answered": out in ("correct", "wrong"),
         })
     return rows
@@ -94,6 +96,10 @@ def summarise(rows: list) -> dict:
         "cgs_all": interval(r["cgs"] for r in boxed) if boxed else "waiting for eval/annotations.csv",
         "cgs_answered": interval(r["cgs"] for r in boxed if r["answered"]) if boxed else None,
         "cgs_at_least_0.5": round(sum(r["cgs"] >= 0.5 for r in boxed) / len(boxed), 4) if boxed else None,
+        # the pointing game (added after the IoU results; metrics.pointing says why)
+        "pointing_all": interval(r["pointing"] for r in boxed) if boxed else None,
+        "pointing_answered": interval(r["pointing"] for r in boxed if r["answered"]) if boxed else None,
+        "pointing_share": interval(r["pointing_share"] for r in boxed) if boxed else None,
     }
 
 
@@ -152,7 +158,7 @@ def main():
         for subset, keep in (("all", lambda x: True), ("multihop", lambda x: x["multihop"])):
             ra, rb = [x for x in rows[a] if keep(x)], [x for x in rows[b] if keep(x)]
             summary["comparisons"][f"{a} - {b} ({subset})"] = {
-                key: paired(ra, rb, key) for key in ("correct", "wrong", "abstained", "hit", "rf", "aes", "cgs")}
+                key: paired(ra, rb, key) for key in ("correct", "wrong", "abstained", "hit", "rf", "aes", "cgs", "pointing")}
     atomic_write_json(ROOT / "results" / "summary.json", summary)
 
     print(f"{'system':<12} {'correct':>8} {'wrong':>7} {'abstain':>8} {'hit':>6} {'RF':>6} {'AES':>6} {'CGS':>6}")

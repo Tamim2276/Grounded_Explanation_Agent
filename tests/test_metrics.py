@@ -2,7 +2,7 @@
 import pytest
 
 from gea.metrics import (FLAG, aes, answer_text, bootstrap_diff, bootstrap_mean, cgs, cohen_kappa, outcome,
-                         published, rf, search_calls, visual_labels)
+                         pointing, pointing_share, published, rf, search_calls, visual_labels)
 
 
 def record(claims=(), answer="", evidence=(), path=""):
@@ -43,6 +43,18 @@ def test_cgs_takes_the_best_box_on_the_same_page_and_0_without_one():
     assert cgs(boxes, [(4, (5, 0, 15, 10))]) == 1.0
     assert cgs(boxes, [(5, (5, 0, 15, 10))]) == 0.0        # nothing on the gold page
     assert cgs([], [(3, (0, 0, 10, 10))]) == 0.0            # an abstention
+
+
+def test_pointing_counts_a_centre_inside_a_hand_box():
+    cell = {"page": 2, "bbox": [207.8, 101.6, 251.2, 112.0]}       # a whole table cell
+    tight = [(2, (219.7, 102.5, 243.2, 113.3))]                      # hand box around the number
+    assert cgs([cell], tight) < 0.5                                  # IoU calls it a miss ...
+    assert pointing([cell], tight) == 1.0                            # ... the pointing game a hit
+    assert pointing([cell], [(3, (219.7, 102.5, 243.2, 113.3))]) == 0.0   # another page
+    assert pointing([], tight) == 0.0
+    elsewhere = {"page": 2, "bbox": [0, 0, 10, 10]}
+    assert pointing_share([cell, elsewhere], tight) == 0.5
+    assert pointing_share([], tight) is None
 
 
 def test_outcome_three_ways():

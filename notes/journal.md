@@ -197,3 +197,7 @@
   Headline (pending the human check): full 21/43/35 % correct/wrong/abstained vs single-pass 34/66/0; abstention
   is NOT selective with the 7B but IS with Gemini behind the same graph. Server started with FORCE=1 (0.2 GB short
   of the margin, user agreed; no other job ran); stopped after the judge.
+- 2026-10-22: hand work back. Judge vs human 22/25 (kappa 0.72; judge stricter). Boxes: 2 QC rounds (9 + 7 boxes
+  narrowed, chosen by rule, not by system boxes; 1 "can't box" fixed). CGS (IoU) very low (full 0.07); inspection:
+  not a bug, IoU punishes correct cells drawn at another size. Added the pointing game (disclosed as post-hoc):
+  full 0.28 of answered; proofs on the reference item land in the hand box 71% (cells 12/12).

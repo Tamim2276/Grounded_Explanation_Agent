@@ -64,6 +64,27 @@ def cgs(boxes: list, gold: list) -> float:
                default=0.0)
 
 
+def center_inside(box, gold_box) -> bool:
+    cx, cy = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
+    return gold_box[0] <= cx <= gold_box[2] and gold_box[1] <= cy <= gold_box[3]
+
+
+def pointing(boxes: list, gold: list) -> float:
+    # The pointing game: 1 when the centre of any proof box lies inside a hand-drawn box on the
+    # same page. Added after the IoU results (2026-10-22): IoU punishes a correct proof whose box
+    # is drawn at another size -- a whole table cell against a hand box tight around the number
+    # scores 0.43, a correct cell inside a hand box around the row 0.18.
+    return float(any(center_inside(b["bbox"], g) for b in boxes for page, g in gold if b["page"] == page))
+
+
+def pointing_share(boxes: list, gold: list):
+    # The share of a question's proof boxes whose centre lies inside a hand-drawn box: how
+    # focused the proofs are. None without boxes.
+    if not boxes:
+        return None
+    return sum(any(center_inside(b["bbox"], g) for page, g in gold if b["page"] == page) for b in boxes) / len(boxes)
+
+
 def bootstrap_mean(a, n: int = 10_000, seed: int = SEED) -> tuple:
     # The mean of per-question scores and its 95% interval: resample the questions with
     # replacement n times.

@@ -835,6 +835,74 @@ had the same rule as the judge.
   answers).
 - `results/summary.json` → `judge_check`.
 
+### The hand-drawn answer boxes: quality control (2026-10-22; `eval/annotations.csv`)
+
+- **Annotator:** *(to fill in: who drew the boxes and graded the answers, and their background)*.
+- **First return:** 49 questions boxed and 1 "can't box".
+  - 21 boxes covered at least 80% of the whole table or figure, against the guideline.
+  - 12 of those are legitimate: the question asks about the whole figure (steps of a pipeline,
+    a trend across a chart, reconstructions vs originals).
+- **Quality-control round 1:** 9 "which is best / how much better" questions with a whole-table
+  box, chosen by a rule (box ≥ 80% of the region and a question naming specific values),
+  without looking at any system box.
+  - Redrawn on the cells, bar or line part that the gold answer names.
+  - Also fixed: the "can't box" question (1811.08257v1#6), whose answer is visible in the figure
+    (the activation-layer block).
+- **Quality-control round 2:** 7 more questions about one block, label or row, narrowed.
+- **Final file:** 50/50 boxed, 91 boxes. 5 legitimate whole-figure boxes remain (#16, 34, 35, 44,
+  45). The returns are kept in `eval csv/`.
+
+### Box precision on the 50 annotated questions (RQ3) → Results, RQ3; Discussion
+
+**CGS as defined beforehand** (the best IoU of a proof box with a hand box; abstention = 0):
+
+| system | CGS, all 50 | CGS, answered | IoU ≥ 0.5 |
+|---|---|---|---|
+| full | 0.07 [0.02, 0.13] | 0.12 (n=29) | 6% |
+| single-pass | 0.15 [0.10, 0.22] | 0.15 (n=50) | 6% |
+| text-only | 0.00 | 0.01 (n=30) | 0% |
+| strict | 0.03 | 0.21 (n=6) | 2% |
+| Gemini | 0.05 | 0.06 (n=39) | 2% |
+
+**Why IoU is so low (inspected 2026-10-22):** IoU punishes a correct proof drawn at another size.
+- 1704.07121v2#6: the system's boxes are exactly the two right cells, but a cell box spans the
+  column (43 pt wide) while the hand box hugs the number (23 pt). IoU 0.43 and 0.46.
+- A correct cell inside a hand box around a whole row scores 0.18.
+- A correct cell inside a hand box around a table region scores 0.01.
+- The coordinates themselves agree; there is no bug.
+
+**Added after seeing the IoU results: the pointing game** (Zhang et al., 2016). A proof hits when
+its box's centre lies inside a hand box on the same page. `metrics.pointing`, tested.
+
+| system | pointing, all 50 | pointing, answered | share of a question's boxes that hit |
+|---|---|---|---|
+| full | 0.16 [0.06, 0.26] | 0.28 [0.14, 0.45] (n=29) | 0.23 |
+| single-pass | 0.40 [0.26, 0.54] | 0.40 (n=50) | 0.27 |
+| text-only | 0.04 | 0.07 (n=30) | 0.03 |
+| strict | 0.06 | 0.50 (n=6) | 0.33 |
+| Gemini | 0.20 | 0.26 (n=39) | 0.18 |
+
+Full − single-pass on all 50: −0.24 [−0.36, −0.12] ✔ (the full system answers fewer of them).
+
+**Where the proofs point (post-hoc analysis):** proof boxes on the reference table or figure vs on
+other sources.
+
+| system | proof boxes | on the reference | of those, inside the hand box | table cells inside | figure observations inside |
+|---|---|---|---|---|---|
+| full | 72 | 31 | **22 (71%)** | **12/12** | 8/13 |
+| single-pass | 181 | 85 | 53 (62%) | 30/44 | 22/36 |
+| Gemini | 68 | 28 | 13 (46%) | 6/6 | 2/4 (+ 5/18 quotes) |
+
+**For the thesis (RQ3):**
+- When a claim cites the right table or figure, the box is precise. **Every table-cell proof of
+  the full system lands on the answer.** Single-pass misses a third of its cells, because no G2
+  checks them.
+- The low per-question scores come from upstream. Proofs cite other sources (text quotes, other
+  tables: 41 of 72 for full), and many questions are abstained.
+- IoU against a hand box is the wrong yardstick when the two boxes are drawn at different
+  granularity. Report CGS as defined, then the pointing game, and say that the second was added
+  after seeing the first.
+
 ---
 
 ## 5. The agent design on the stub → Implementation, *design validation* (Day 1)
