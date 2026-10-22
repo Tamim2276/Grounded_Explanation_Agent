@@ -201,3 +201,10 @@
   narrowed, chosen by rule, not by system boxes; 1 "can't box" fixed). CGS (IoU) very low (full 0.07); inspection:
   not a bug, IoU punishes correct cells drawn at another size. Added the pointing game (disclosed as post-hoc):
   full 0.28 of answered; proofs on the reference item land in the hand box 71% (cells 12/12).
+- 2026-10-22 (deadline day): Day 9 in one go. scripts/make_thesis_tables.py writes paper/tables/tab_{main_results,
+  comparisons,multihop,selectivity,grounding,proof_sources}.tex, paper/figures/fig_outcomes.pdf and paper/numbers.tex
+  (macros for every number in the text). New chapters: relatedwork, implementation, results, discussion, conclusion;
+  abstract rewritten with results; methodology/architecture/Graph/introduction aligned with what was built (ColQwen2,
+  Qwen2.5-VL-7B 4-bit, claim links instead of integrated gradients, automatic zoom, best effort, the real setup).
+  MAP hand check skipped (automatic stand-in). PDF: 52 pages, builds clean. Lesson: never write LaTeX through a bash
+  heredoc -- the shell turned "\b" into a backspace; use the editor or a script file.
