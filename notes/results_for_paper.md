@@ -902,6 +902,13 @@ other sources.
 - IoU against a hand box is the wrong yardstick when the two boxes are drawn at different
   granularity. Report CGS as defined, then the pointing game, and say that the second was added
   after seeing the first.
+- **Tried: tighter cell boxes (a simulation only; the system was not changed).** Each cited cell's
+  box was shrunk to the printed words inside it.
+  - CGS: full 0.070 → 0.068, single-pass 0.153 → 0.154, Gemini 0.049 → 0.047.
+  - Some questions gain, where the hand box hugs the number. Others lose, where the hand box
+    covers a row.
+  - So box size does not limit CGS. Abstentions (21 of the 50 annotated questions have no answer
+    for full) and proofs on other sources (10 questions point only at other pages) limit it.
 
 ---
 
