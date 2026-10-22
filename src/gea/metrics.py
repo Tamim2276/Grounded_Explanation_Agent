@@ -64,6 +64,18 @@ def cgs(boxes: list, gold: list) -> float:
                default=0.0)
 
 
+def reference_attribution(record: dict):
+    # MAP, automatic stand-in (the hand check was skipped for time, 2026-10-22): the share of
+    # published claims that cite the question's reference table or figure. It undercounts claims
+    # that rightly cite supporting text. None when nothing was published.
+    labels = {e["id"]: e["label"] for e in record["evidence"]}
+    claims = [c for c in record["claims"] if not c["rejected"]]
+    if not claims:
+        return None
+    return sum(any(labels.get(cite.get("evidence")) == record["reference"] for cite in c["cites"] or [])
+               for c in claims) / len(claims)
+
+
 def center_inside(box, gold_box) -> bool:
     cx, cy = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
     return gold_box[0] <= cx <= gold_box[2] and gold_box[1] <= cy <= gold_box[3]

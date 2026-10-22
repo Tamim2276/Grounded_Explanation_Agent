@@ -2,7 +2,7 @@
 import pytest
 
 from gea.metrics import (FLAG, aes, answer_text, bootstrap_diff, bootstrap_mean, cgs, cohen_kappa, outcome,
-                         pointing, pointing_share, published, rf, search_calls, visual_labels)
+                         pointing, pointing_share, published, reference_attribution, rf, search_calls, visual_labels)
 
 
 def record(claims=(), answer="", evidence=(), path=""):
@@ -84,3 +84,12 @@ def test_cohen_kappa():
     assert cohen_kappa(["c", "w", "c", "w"], ["c", "w", "c", "w"]) == 1.0
     # observed 0.5, expected 0.5 -> no better than chance
     assert cohen_kappa(["c", "c", "w", "w"], ["c", "w", "c", "w"]) == 0.0
+
+
+def test_reference_attribution_counts_published_claims_citing_the_reference():
+    r = {"reference": "Table 3", "evidence": [{"id": "E1", "label": "Table 3"}, {"id": "E2", "label": "Section 2"}],
+         "claims": [{"rejected": False, "cites": [{"evidence": "E1"}]},
+                    {"rejected": False, "cites": [{"evidence": "E2"}]},
+                    {"rejected": True, "cites": [{"evidence": "E2"}]}]}            # withheld: not counted
+    assert reference_attribution(r) == 0.5
+    assert reference_attribution({**r, "claims": r["claims"][2:]}) is None

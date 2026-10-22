@@ -837,7 +837,12 @@ had the same rule as the judge.
 
 ### The hand-drawn answer boxes: quality control (2026-10-22; `eval/annotations.csv`)
 
-- **Annotator:** *(to fill in: who drew the boxes and graded the answers, and their background)*.
+- **Annotator:** Saad Al Abeed, co-author, Computer Science and Engineering, Islamic University of
+  Technology. He drew the boxes and graded the 30 answers.
+  - He was blind to the system and the judge's verdict when grading, but as a co-author he knew
+    the project's aims. Threat to validity: not a fully independent annotator; one annotator.
+  - Round 1 of the quality control below was redrawn by the first author, on the cells, bar or
+    line part that the gold answer names.
 - **First return:** 49 questions boxed and 1 "can't box".
   - 21 boxes covered at least 80% of the whole table or figure, against the guideline.
   - 12 of those are legitimate: the question asks about the whole figure (steps of a pipeline,
@@ -899,6 +904,12 @@ other sources.
   checks them.
 - The low per-question scores come from upstream. Proofs cite other sources (text quotes, other
   tables: 41 of 72 for full), and many questions are abstained.
+- **MAP: the hand check was skipped for time** (2026-10-22). An automatic stand-in is reported
+  instead: the share of published claims that cite the question's reference table or figure
+  (`metrics.reference_attribution`, over the questions with published claims).
+  - full 0.44 [0.34, 0.53] (n=97); single-pass 0.42 [0.36, 0.49] (n=150); text-only 0.00 (it never
+    cites a region); strict 0.61 [0.41, 0.80] (n=22); Gemini 0.55 [0.45, 0.63] (n=121).
+  - It undercounts claims that rightly cite supporting text. State it as a limitation.
 - IoU against a hand box is the wrong yardstick when the two boxes are drawn at different
   granularity. Report CGS as defined, then the pointing game, and say that the second was added
   after seeing the first.

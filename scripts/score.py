@@ -11,8 +11,8 @@ import json
 from statistics import median
 
 from gea import config as cfg
-from gea.metrics import (aes, bootstrap_diff, bootstrap_mean, cgs, cohen_kappa, pointing, pointing_share, rf,
-                         search_calls, visual_labels)
+from gea.metrics import (aes, bootstrap_diff, bootstrap_mean, cgs, cohen_kappa, pointing, pointing_share,
+                         reference_attribution, rf, search_calls, visual_labels)
 from gea.safeio import atomic_write_json, read_jsonl
 
 ROOT = cfg.PROJECT_ROOT
@@ -65,6 +65,7 @@ def per_question(name: str, multihop: set, gold: dict) -> list:
             "cgs": cgs(r["boxes"], gold[qid]) if qid in gold else None,
             "pointing": pointing(r["boxes"], gold[qid]) if qid in gold else None,
             "pointing_share": pointing_share(r["boxes"], gold[qid]) if qid in gold else None,
+            "map_auto": reference_attribution(r),
             "answered": out in ("correct", "wrong"),
         })
     return rows
@@ -88,7 +89,8 @@ def summarise(rows: list) -> dict:
         "precision_when_answering": interval(r["correct"] for r in answered),   # correct / answered
         "confident_vs_flagged": split,
         "hit_rate": interval(r["hit"] for r in rows),
-        "rf": interval(r["rf"] for r in rows),                                  # None: nothing visual fetched
+        "rf": interval(r["rf"] for r in rows),
+        "map_auto": interval(r["map_auto"] for r in rows),                      # over questions with claims                                  # None: nothing visual fetched
         "aes": interval(r["aes"] for r in rows),
         "search_calls_per_question": round(sum(r["search_calls"] for r in rows) / len(rows), 2),
         "model_calls_per_question": round(sum(r["model_calls"] for r in rows) / len(rows), 2),
