@@ -4,7 +4,7 @@
 \subsection{Overview}
 
 The system is built as a graph of nodes, each with a single task, in
-LangGraph~\cite{langgraph}. The flow of a question through the graph is shown in
+LangGraph. The flow of a question through the graph is shown in
 Fig.~\ref{fig:pipeline}. The question is first analysed; the planner then selects one
 retrieval tool per round, and the results are added to an evidence buffer. The
 sufficiency gate (G1) either sends control back to the planner for another round or
@@ -80,8 +80,8 @@ been used for a sub-goal may be called again only with a new query.
 \subsection{Retrieval Tools}
 
 Three tools can be selected by the planner. The text retriever ranks the paper's
-paragraphs by reciprocal rank fusion~\cite{cormack2009rrf} of two lists: SPECTER2
-embeddings~\cite{singh2023scirepeval} searched with FAISS~\cite{johnson2019faiss}, and
+paragraphs by reciprocal rank fusion of two lists: SPECTER2
+embeddings~\cite{singh2023scirepeval} searched with a FAISS index, and
 keyword overlap weighted by inverse document frequency. The keyword list was added
 because, within one paper, every paragraph shares the topic that the embedding
 captures, whereas SPIQA questions reuse the paper's own terms. The table retriever
