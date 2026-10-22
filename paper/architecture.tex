@@ -14,7 +14,7 @@ Figure~\ref{fig:architecture} illustrates the overall data flow. A user query en
         arrow/.style={-{Latex[length=2.5mm]}, thick}
     ]
 
-    \node[box] (ingest) {\textbf{Ingestion \& Indexing} \\ \small PDFs $\rightarrow$ ColPali + text index};
+    \node[box] (ingest) {\textbf{Ingestion \& Indexing} \\ \small PDFs $\rightarrow$ ColQwen2 + text index};
     \node[box, below=of ingest] (planner) {\textbf{Agentic Planner} \\ \small Iterative retrieval loop};
     \node[box, below=of planner] (gate) {\textbf{Evidence Sufficiency Gate} \\ \small Checks proof before answering};
     \node[box, below=of gate] (gen) {\textbf{Grounded Generator} \\ \small Answers from evidence only};
@@ -42,7 +42,7 @@ Figure~\ref{fig:architecture} illustrates the overall data flow. A user query en
 \end{figure}
 
 \section{Ingestion and Indexing Layer}
-Each PDF page in the corpus is rasterized into a page image, which is embedded using a visual document retriever (ColPali~\cite{faysse2025colpali}) to produce patch-level embeddings without requiring OCR or layout parsing. In parallel, narrative text is extracted and segmented into chunks, which are embedded using a retrieval-trained scientific text encoder (SPECTER2~\cite{singh2023scirepeval}) and stored in a FAISS~\cite{johnson2019faiss} index. This produces two complementary indexes:
+Each PDF page in the corpus is rasterized into a page image, which is embedded using a visual document retriever (ColQwen2, of the ColPali family~\cite{faysse2025colpali}) to produce patch-level embeddings without requiring OCR or layout parsing. In parallel, narrative text is extracted and segmented into chunks, which are embedded using a retrieval-trained scientific text encoder (SPECTER2~\cite{singh2023scirepeval}) and stored in a FAISS~\cite{johnson2019faiss} index. This produces two complementary indexes:
 \begin{itemize}
     \item \textbf{Visual index:} Page-level patch embeddings for retrieving tables, figures, and dense visual content.
     \item \textbf{Textual index:} Chunk-level embeddings for retrieving narrative claims and discussion.
@@ -53,24 +53,19 @@ The Agentic Planner is an LVLM-driven controller that operates an iterative reas
 \begin{itemize}
     \item \texttt{TextRetriever(query)}: dense retrieval over the textual index.
     \item \texttt{TableRetriever(query)}: locates a table through the visual index, then parses it with a table-structure recogniser~\cite{smock2022pubtables} into structured form, preserving the page coordinates of every cell.
-    \item \texttt{FigureRetriever(query)}: visual retrieval over the ColPali index, returning pages together with their patch-similarity scores.
-    \item \texttt{RegionZoom(page\_id, bbox)}: crops a sub-region of a retrieved page and re-encodes it at higher resolution for closer inspection of dense tables or charts.
+    \item \texttt{FigureRetriever(query)}: visual retrieval over the ColQwen2 page index (of the ColPali family), returning figures together with their patch-similarity scores.
 \end{itemize}
+A fourth tool, \texttt{RegionZoom}, re-renders a retrieved figure at higher resolution; it is not chosen by the planner but runs automatically when the figure covers less than 30\% of its page.
 Multi-hop navigation (for example, from a textual claim to its supporting table) requires no dedicated tool: it arises from the loop itself, since each retrieved observation informs the query the planner issues next. All tool invocations and their results are recorded in a structured scratchpad, which later serves as the auditable retrieval log referenced in Chapter~\ref{sec:introduction}.
 
 \section{Evidence Sufficiency Gate}
-After each retrieval round, the Evidence Sufficiency Gate determines whether the evidence accumulated in the scratchpad is sufficient to answer the query. Two candidate implementations are considered:
-\begin{itemize}
-    \item \textbf{LLM-as-judge gate:} A prompted model evaluates the query and current evidence, returning a structured judgment of sufficiency and any missing information.
-    \item \textbf{Learned gate:} A lightweight classifier trained on retrieval confidence scores and evidence coverage features.
-\end{itemize}
-If the gate reports insufficient evidence, control returns to the Agentic Planner for an additional retrieval iteration, bounded by a maximum iteration count to prevent unbounded looping. This mechanism directly implements Objective 3 and mitigates hallucination by preventing the system from answering without grounded proof.
+After each retrieval round, the Evidence Sufficiency Gate determines whether the evidence accumulated in the scratchpad is sufficient to answer the query. It is implemented as an LLM-as-judge: the prompted model first names the facts in the evidence that answer the question, citing their evidence identifiers, and only then returns its verdict, so that a verdict cannot precede its justification. (A learned gate, a classifier over retrieval-confidence features, was considered and not built: no training labels for sufficiency exist.) If the gate reports insufficient evidence, control returns to the Agentic Planner for an additional retrieval iteration, bounded by a maximum iteration count to prevent unbounded looping. This mechanism directly implements Objective 3 and mitigates hallucination by preventing the system from answering without grounded proof.
 
 \section{Grounded Generator and Faithfulness Gate}
-Once the Sufficiency Gate confirms sufficiency, an open-weight vision-language model run locally (such as Qwen2-VL~\cite{wang2024qwen2vl}) generates an answer strictly conditioned on the retrieved evidence pool; the generator has no other access to the corpus. Local weights are required so that token attribution can compute gradients through the generator. The Faithfulness Gate then decomposes the draft into individual claims and checks each against the evidence pool. Any unsupported claim sends the draft back to the generator for rewriting, again bounded by a maximum iteration count.
+Once the Sufficiency Gate confirms sufficiency, an open-weight vision-language model run locally (Qwen2.5-VL-7B~\cite{bai2025qwen25vl}, 4-bit) generates an answer strictly conditioned on the retrieved evidence pool; the generator has no other access to the corpus. It writes the answer as a list of claims, each citing its evidence (a quote, a table cell, or a figure observation). The Faithfulness Gate then checks each claim against the evidence it cites, first exactly and then with a support check by the model. Any unsupported claim sends the draft back to the generator for rewriting, again bounded by a maximum iteration count.
 
 \section{Attribution Layer}
-Visual attribution is produced from two sources preserved during retrieval: the cell coordinates recorded by \texttt{TableRetriever}, and the patch-level similarity scores from the ColPali retrieval step, which localize the most relevant region of a source figure. Together these yield bounding-box coordinates over the supporting table cell or figure region. This satisfies Objective 4 and provides the fine-grained visual grounding required for human verifiability (RQ3).
+Visual attribution prefers exact positions preserved during retrieval and ingestion: the cell coordinates recorded by \texttt{TableRetriever}, the bars of vector charts read from the PDF, and the positions of quoted sentences, captions and diagram labels on the page. Only for photographs, which have no printed words, are the patch-level similarity scores of ColQwen2 used to localise the most relevant region. Together these yield bounding-box coordinates over the supporting table cell or figure region. This satisfies Objective 4 and provides the fine-grained visual grounding required for human verifiability (RQ3).
 
 \section{Mapping to Research Objectives}
 Table~\ref{tab:objective-mapping} summarizes how each architectural component addresses the research objectives introduced in Chapter~\ref{sec:introduction}.

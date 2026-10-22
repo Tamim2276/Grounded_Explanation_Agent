@@ -1,0 +1,105 @@
+\chapter{Discussion}
+\label{sec:discussion}
+
+\section{The Model, Not the Architecture, Is the Bottleneck}
+
+The central argument of this thesis was that an agent which searches until its
+evidence suffices, checks every claim, and abstains otherwise, would turn confident
+errors into stated gaps. With the local 7B model, the first half of this happened and
+the second did not: the agent was wrong far less often than single-pass, but it held
+back easy questions about as readily as hard ones, so it also lost correct answers.
+
+Running the identical graph, prompts and settings with a stronger model separates the
+two explanations. With Gemini, the Sufficiency Gate was convinced about five times as
+often, the Faithfulness Gate rejected far fewer claims, and --- the decisive
+observation --- the questions it held back were the ones single-pass also got wrong.
+The gates behave as designed when the model behind them can judge sufficiency and
+read a table or chart reliably. A 4-bit 7B model cannot yet do either well enough:
+its judgements of sufficiency are not calibrated to difficulty, and half of its drafted
+claims fail verification. The architecture is therefore not refuted by the 7B
+results; its benefit is gated by model capacity. This also suggests a practical design
+for constrained settings: a small local model to read and write, and a stronger model
+only for the two judgements.
+
+\section{What the Development Error Analysis Showed}
+
+Before the test run, the full agent's answers on the 20 development questions were
+analysed by hand (Table~\ref{tab:dev-errors}). The two most frequent causes were fixed,
+after which tuning stopped, as planned.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{p{9.5cm}c}
+\toprule
+Cause (13 questions not answered correctly, prompt v6) & Count \\
+\midrule
+G2 too strict: a faithful quote rejected for PDF text quirks (``in- ference'', ``0 . 5\%'') & 4 \\
+G1 too lenient: ``sufficient'' with a fact that does not answer the question & 2 (+1) \\
+The writer misread the evidence or answered vaguely & 3 \\
+The wrong table or figure was chosen & 2 \\
+A table with a two-level header was read wrongly & 1 \\
+A computed ratio that cannot be checked against the evidence & 1 \\
+\bottomrule
+\end{tabular}
+\caption{Causes of the full agent's errors on the development questions, before the
+two fixes (normalised quote matching; a Sufficiency Gate that must name the answering
+fact before its verdict).}
+\label{tab:dev-errors}
+\end{table}
+
+The second fix overshot: the stricter gate produced no wrong answer on development but
+13 abstentions, and on test it abstained on more than three questions in four. One
+calibration step was tried and brought wrong answers back without reducing the
+abstentions, so the stricter gate was kept and the best-effort rule
+(Section~\ref{sec:best-effort}) was added instead. The lesson generalises: a gate that
+decides both \emph{when to stop searching} and \emph{whether to answer} is asked to
+make two different judgements with one threshold.
+
+\section{Measuring Grounding}
+
+IoU against a hand-drawn box is the natural measure of box precision, and it was
+fixed before the evaluation. It turned out to measure the agreement of two drawing
+conventions as much as the precision of a proof: a parsed table cell spans its
+column, a human box hugs the number, and a human asked to box ``the answer'' to a
+comparison may box a whole row. The pointing game is insensitive to these conventions
+and was therefore added; it is reported beside IoU, not instead of it, and it was added
+after the IoU results were seen. A cleaner protocol would fix the unit of annotation in
+advance --- for tables, whole cells --- so that both sides draw at the same
+granularity.
+
+\section{Practical Constraints}
+
+The system was built and evaluated under three constraints that shaped it. One
+consumer GPU with 12~GB of memory holds one large model at a time, so the page index
+was built before the language model started and ColQwen2 ran at question time only
+from cached vectors. Daily power cuts made every long job resumable and every file
+write atomic, and the model-reply cache, kept under version control, made a power cut
+cost at most one question. The PC was shared with other experiments, so every model
+load first checked free memory and GPU memory, after an early crash of another job
+when memory ran out. The stronger-model comparison used a free tier and took three
+sittings because of rate limits and busy servers; the last 25 questions used a second
+free-tier key, with the model, prompts and settings unchanged.
+
+\section{Threats to Validity}
+
+\begin{itemize}
+    \item \textbf{The judge is a model}, and the same model as the evaluated local
+    systems. Its agreement with a human grader was substantial (kappa \nJudgeKappa{} on
+    25 answers), and it erred towards strictness, but 30 graded answers is a small check.
+    \item \textbf{One annotator}, who is a co-author and knew the project's aims,
+    produced the boxes and the grades; the first quality-control round was redrawn by
+    the first author. The 50 annotated questions bound the precision of every grounding
+    number.
+    \item \textbf{Post-hoc decisions.} The best-effort rule was introduced after a first
+    test run, on development data only, and all systems were then re-run; the pointing
+    game was added after the IoU results. Both are disclosed, and the original
+    measures are reported.
+    \item \textbf{Scope.} 150 questions from 31 computer-science papers; retrieval
+    within a single known paper rather than across a corpus; a 4-bit model; one run per
+    system at temperature 0. The multi-hop subset has ten questions.
+    \item \textbf{MAP} was measured by an automatic stand-in that undercounts correct
+    citations of supporting text.
+    \item \textbf{Verifiability by humans} (RQ3's second half) was argued from the
+    precision of the proofs, not measured with a user study.
+\end{itemize}

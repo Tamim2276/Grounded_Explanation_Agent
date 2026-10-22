@@ -1,7 +1,7 @@
 \chapter{Methodology}
 \label{sec:methodology}
 
-This chapter describes how the proposed system works and how it will be evaluated.
+This chapter describes how the proposed system works and how it was evaluated.
 The presentation is deliberately ordered from intuition to formalism: each mechanism
 is first described in plain terms, then stated precisely. Every equation is followed
 by a reading of what it says in words, so that the formal notation documents the
@@ -92,10 +92,13 @@ structurally incapable of answering such questions.
 
 At each time step $t$ the agent selects one action $a_t$ from the action space:
 \begin{equation}
-    \mathcal{A} = \{\texttt{TextRetriever}, \texttt{TableRetriever}, \texttt{FigureRetriever}, \texttt{RegionZoom}\}
+    \mathcal{A} = \{\texttt{TextRetriever}, \texttt{TableRetriever}, \texttt{FigureRetriever}\}
 \end{equation}
 
-\noindent Executing $a_t$ returns an observation $o_t$, which is appended to the
+\noindent A fourth tool, \texttt{RegionZoom}, is not chosen by the agent: it runs
+automatically after the \texttt{FigureRetriever} whenever the retrieved figure covers
+less than 30\% of its page, because a small figure cannot be read at page resolution.
+Executing $a_t$ returns an observation $o_t$, which is appended to the
 evidence buffer. After $t$ steps the buffer therefore contains the accumulated
 result of every retrieval performed so far:
 \begin{equation}
@@ -127,11 +130,15 @@ generator to notice what was missing --- which is precisely the situation that
 produces fluent, confident, unsupported answers. The gate removes the opportunity to
 make that error rather than attempting to detect it afterwards.
 
-The loop is bounded by a maximum iteration count. If sufficiency is not reached
-before the bound is exhausted, the system reports that the evidence is inadequate
-rather than answering anyway. For a literature review tool this is the correct
-failure behaviour: a researcher can act on a stated gap, but cannot detect a
-fabrication.
+The loop is bounded by a maximum of three retrieval rounds. If sufficiency is not
+reached before the bound is exhausted, the system distinguishes two cases. If the
+gate found no fact that answers the question, the system reports that the evidence
+is inadequate rather than answering anyway: a researcher can act on a stated gap,
+but cannot detect a fabrication. If the gate did find answering facts but was not
+fully convinced, the system answers from those facts as a \emph{best effort}: every
+claim still passes the Faithfulness Gate, and the answer carries the visible flag
+``the evidence found may be incomplete''. Section~\ref{sec:best-effort} explains why
+this second case was added.
 
 \subsection{The Faithfulness Gate}
 
@@ -156,18 +163,19 @@ different kind of content and one for inspecting a page in finer detail. Each is
 exists as a separate tool.
 
 \begin{description}
-    \item[\texttt{TextRetriever}.] Performs dense semantic retrieval over chunked
-    narrative text using SPECTER2~\cite{singh2023scirepeval}, a model built on
-    SciBERT~\cite{beltagy2019scibert} and trained specifically for scientific
-    document retrieval. A retrieval-trained model is required because a
-    pre-trained language model such as SciBERT is not, on its own, trained to
-    place a query close to the passage that answers it; and a scientific model is
-    used rather than a general-purpose one because scientific vocabulary is
-    precisely where general embeddings are weakest.
+    \item[\texttt{TextRetriever}.] Retrieves paragraphs of the paper's narrative text
+    by combining two rankings with reciprocal rank fusion~\cite{cormack2009rrf}: dense
+    semantic retrieval with SPECTER2~\cite{singh2023scirepeval}, a model built on
+    SciBERT~\cite{beltagy2019scibert} and trained for scientific document retrieval,
+    and exact keyword overlap weighted by inverse document frequency. The keyword
+    ranking was added because, within a single paper, every paragraph shares the
+    topic that SPECTER2 encodes, while SPIQA questions reuse the paper's own terms;
+    on the development questions keyword search alone found a relevant paragraph more
+    often than SPECTER2 alone, and the fusion put a correct paragraph first most often.
 
-    \item[\texttt{TableRetriever}.] Works in two steps. First, it locates candidate
-    tables by querying the visual (ColPali) index and keeping pages whose
-    highest-scoring region is a table. Second, it runs a table-structure recogniser,
+    \item[\texttt{TableRetriever}.] Works in two steps. First, it ranks the paper's
+    tables by the words of their captions and by the visual (ColQwen2) score of the
+    page they sit on. Second, it runs a table-structure recogniser,
     such as the Table Transformer~\cite{smock2022pubtables}, on that region; this
     recovers rows, columns and a bounding box for every cell, and each cell's text
     is read from the PDF's text layer at that position. The result is a normalised
@@ -176,8 +184,9 @@ exists as a separate tool.
     survives parsing; a parser that returned a table as flat text would satisfy the
     reasoning requirement and silently destroy the attribution requirement.
 
-    \item[\texttt{FigureRetriever} (ColPali).] Embeds entire PDF pages as grids of
-    visual patches using ColPali~\cite{faysse2025colpali}, a vision-language model
+    \item[\texttt{FigureRetriever} (ColQwen2).] Embeds entire PDF pages as grids of
+    visual patches using ColQwen2, a member of the ColPali family~\cite{faysse2025colpali}
+    of vision-language retrievers
     that scores pages by late interaction between query tokens and page
     patches~\cite{khattab2020colbert}, locating charts,
     plots and diagrams without depending on OCR. This matters because OCR fails
@@ -185,11 +194,11 @@ exists as a separate tool.
     multi-column headers, merged cells, and axis labels. Treating the page as an
     image sidesteps that failure mode entirely.
 
-    \item[\texttt{RegionZoom}.] Crops a sub-region of a page already returned by
-    the \texttt{FigureRetriever} and re-encodes it at higher resolution. A
-    page-level match identifies which page holds a table or chart, but not which
-    row or data point answers the question; zooming supplies that finer level of
-    detail.
+    \item[\texttt{RegionZoom}.] Re-renders a figure already returned by the
+    \texttt{FigureRetriever} at 300~dpi (at most 1024 pixels on its long side). A
+    page-level match identifies which page holds a chart, but not which data point
+    answers the question; zooming supplies that finer level of detail. It runs
+    automatically for figures that cover less than 30\% of their page.
 \end{description}
 
 \section{Cross-Modal Evidence Fusion}
@@ -225,13 +234,16 @@ have been retrieved together.
 
 \section{Model Choice}
 
-Token attribution by integrated gradients (Section~\ref{sec:explainability})
-requires computing gradients of the generator's output with respect to its input,
-which is only possible with full access to the model's weights. The generator is
-therefore an open-weight vision-language model run locally, such as
-Qwen2-VL~\cite{wang2024qwen2vl}, rather than a model reached through a hosted API.
-For simplicity, the same model also serves as the planner and as the evaluator
-behind both gates.
+The language model is Qwen2.5-VL-7B-Instruct~\cite{bai2025qwen25vl}, an open-weight
+vision-language model, quantised to 4 bits and served locally with
+llama.cpp~\cite{llamacpp}. Three reasons decided this choice. It runs entirely on the
+available hardware (one consumer GPU with 12~GB of memory), so no evaluation depends
+on a paid service. Its weights are fixed, so every reported number can be
+reproduced. And it reads images, which the figure and table tools require. The same
+model serves as the question analyser, the planner, the writer, and the judge
+behind both gates. A stronger hosted model (Gemini~3.5 Flash-Lite, free tier) was
+run behind the identical graph as a comparison, to separate the contribution of the
+architecture from that of the model.
 
 \section{Grounded Multimodal Explainability}
 \label{sec:explainability}
@@ -242,18 +254,26 @@ phase therefore emits three audit artefacts alongside the natural-language respo
 Each answers a different verification question.
 
 \begin{enumerate}
-    \item \textbf{Text Token Attribution} --- \emph{``Which sentences did this come
-    from?''} Integrated gradients~\cite{sundararajan2017axiomatic}, computed on the open-weight generator, identify the source sentences that most influenced
-    each generated claim, which are returned as highlights in the original text.
+    \item \textbf{Claim Links} --- \emph{``Which evidence did this come from?''}
+    Every claim the writer produces must cite the evidence it rests on: a verbatim
+    quote from a paragraph, a cell of a parsed table (row, column and value), or an
+    observation about a figure. The Faithfulness Gate verifies each citation, so a
+    published claim is linked only to evidence that was checked to contain it. This
+    replaces the token attribution by integrated gradients~\cite{sundararajan2017axiomatic}
+    first planned: gradients cannot be computed through a quantised model served by
+    llama.cpp, and a verified citation states the source more directly than a
+    saliency score.
 
-    \item \textbf{Visual Saliency (Bounding Boxes)} --- \emph{``Where on the page is
+    \item \textbf{Visual Grounding (Bounding Boxes)} --- \emph{``Where on the page is
     the proof?''} Explicit coordinates $[x_{\min}, y_{\min}, x_{\max}, y_{\max}]$
-    mark the exact table cell or chart region the claim rests on. For tables, these
-    come directly from the cell coordinates preserved by the \texttt{TableRetriever};
-    for figures, they are obtained by thresholding the ColPali patch-similarity map
-    computed by the \texttt{FigureRetriever} (or \texttt{RegionZoom}) and taking
-    the enclosing box of the highest-scoring patches. This is the artefact that
-    discharges Objective~4.
+    mark the exact spot a claim rests on. Exact boxes are preferred whenever the
+    page offers them: the cell coordinates preserved by the \texttt{TableRetriever},
+    a bar of a vector chart read from the PDF, the quoted sentence found on the page,
+    the caption, or the diagram labels an observation names. Only for photographs,
+    which have no printed words, is the box obtained from ColQwen2's
+    patch-similarity map, computed for the claim's own text, by taking the enclosing
+    box of the highest-scoring patches. This is the artefact that discharges
+    Objective~4.
 
     \item \textbf{Retrieval DAG Trace} --- \emph{``How did the system get here?''} A
     logged execution graph recording which tools were called, in what order, and how
@@ -265,71 +285,130 @@ Together these mean a reader need not trust the system's answer. They can check 
 against the highlighted sentence, look at the boxed table cell, and inspect the path
 by which both were found.
 
-\section{Experimental Setup and Evaluation Plan}
+\section{Experimental Setup}
+\label{sec:setup}
 
 \subsection{Dataset}
 
-The framework will be evaluated on \textbf{SPIQA}~\cite{pramanick2024spiqa}, a dataset of over 270{,}000
-questions over computer-science papers whose answers depend on the papers' figures
-and tables. SPIQA is appropriate here because each question is tied to a reference
-figure or table, so the system must locate specific visual evidence rather than
-answer from narrative text alone. Each question is annotated with that reference
-figure or table, which provides figure-level ground truth for retrieval.
-
-SPIQA does not annotate \emph{regions} within a figure or table. Evaluating
-bounding-box precision (CGS, below) therefore requires a manually annotated subset
-in which the supporting cell or chart region is marked for each question.
-Similarly, since not every SPIQA question is multi-hop, results will also be
-reported separately on the subset of questions that require combining text with a
-figure or table, which is where the difference between iterative and single-pass
-retrieval is expected to be largest.
-
-\subsection{Baselines}
-
-Two baselines isolate the two contributions of this work:
+The framework was evaluated on \textbf{SPIQA}~\cite{pramanick2024spiqa}, a dataset of
+questions over computer-science papers whose answers depend on the papers' figures and
+tables. Each question is annotated with its reference figure or table, which provides
+figure-level ground truth for retrieval. The questions were drawn from SPIQA test-A
+(118 papers, 666 questions) with a fixed random seed (42). Papers, not questions, were
+assigned to splits, so that no paper contributes questions to both:
 
 \begin{itemize}
-    \item \textbf{Single-Pass Multimodal RAG} (e.g.\ a LLaVA-based~\cite{liu2023llava}
-    pipeline that retrieves once, then answers) --- multimodal but
-    not iterative. Comparison against this baseline isolates the contribution of
-    \emph{agency}: what is gained by being permitted to retrieve more than once.
-    \item \textbf{Text-Only Agentic Reasoning} (e.g.\ ReAct~\cite{yao2023react}) --- iterative but not
-    multimodal. Comparison against this baseline isolates the contribution of
-    \emph{visual retrieval}: what is gained by being able to see tables and figures
-    at all.
+    \item a \textbf{development split} of 20 questions from 5 papers (9 table, 11 figure),
+    used for every design decision, prompt and threshold;
+    \item a \textbf{test split} of 150 questions from 31 papers (71 table, 79 figure),
+    used once for the final evaluation, with at most 8 questions per paper so that a
+    few question-heavy papers cannot dominate.
 \end{itemize}
 
-\noindent Because each baseline holds one contribution fixed and removes the other,
-an improvement over both cannot be attributed to either factor alone.
+\noindent Before the test split was run, every setting of the system was written to a
+frozen configuration file, and the evaluation runner refuses to start on the test split
+unless the live settings equal it. One exception is documented in
+Section~\ref{sec:best-effort}.
 
-\subsection{Evaluation Metrics}
+SPIQA does not annotate \emph{regions} within a figure or table. Evaluating box
+precision therefore required a manually annotated subset: 50 test questions (25 with a
+table and 25 with a figure as reference), drawn at random before any system output was
+inspected, for which the part of the table or figure that holds the answer was boxed by
+hand (Section~\ref{sec:annotation}). Since not every SPIQA question is multi-hop,
+results are also reported on a \textbf{multi-hop subset}: the test questions that ask
+for a reason or an implication of a result (``why'', ``suggest(s)'', ``possible
+explanation''), whose result is in a table or figure and whose reason is in the text.
+The subset was chosen by this fixed rule over the question text alone and contains
+\nMultihopN{} questions.
 
-Four metrics are proposed. Accuracy alone is insufficient here, because a system may
-reach a correct answer through unverifiable means --- and such an answer does not
-satisfy the aims of this work.
+\subsection{Systems Compared}
+
+All systems use the same language model, the same retrieval tools, the same prompts
+and the same output layer; each removes one part of the design.
+
+\begin{itemize}
+    \item \textbf{Full}: the complete agent --- question analysis, the planner choosing
+    one tool per round (at most three rounds), both gates, the rewrite loop (at most two
+    rewrites), and best effort after the retrieval budget.
+    \item \textbf{Single-pass}: no planner, no loops and no gates. Every tool runs once
+    with the question, and the writer answers from what came back. Comparing Full with
+    Single-pass isolates the contribution of \emph{agency}.
+    \item \textbf{Text-only agentic}: the full graph with the text tool only; tables and
+    figures are available only as the plain text extracted from them. Comparing Full
+    with Text-only isolates the contribution of \emph{seeing} tables and figures.
+    \item \textbf{Full, strict G1} (ablation): the full system as first frozen, which
+    abstains whenever the Sufficiency Gate is not convinced after three rounds
+    (Section~\ref{sec:best-effort}).
+    \item \textbf{Full, Gemini}: the full system with Gemini~3.5 Flash-Lite behind every
+    model call instead of the local 7B model, on the free tier. It separates what the
+    architecture contributes from what the model contributes.
+\end{itemize}
+
+\subsection{Outcomes and the Accuracy Judge}
+\label{sec:judge}
+
+Accuracy alone hides the behaviour this work is about, so every question has one of
+three outcomes. A question is \textbf{answered} when at least one claim reaches the
+reader; it is then \textbf{correct} or \textbf{wrong}. It is \textbf{abstained} when
+the system reports that it could not confirm an answer, or when the Faithfulness Gate
+withheld every claim. A wrong answer is the hallucination this work tries to prevent:
+a system that turns wrong answers into abstentions is preferable for a researcher,
+who can act on a stated gap but cannot detect a confident error.
+
+Answers were judged against SPIQA's gold answer by the local model, prompted to call
+an answer correct when it gives the gold answer's main point (the value, name, trend
+or comparison asked for) and states nothing that contradicts it. The judge writes its
+reason before its verdict. To check the judge, 30 answers (6 from each system,
+shuffled) were graded by a human annotator who saw neither the system nor the judge's
+verdict, under the same rule.
+
+\subsection{Metrics}
 
 \begin{description}
-    \item[Retrieval Faithfulness (RF).] The precision of the retrieved evidence
-    against the ground-truth evidence for each question. A low score indicates the
-    system reached its answer without ever holding the material that justifies it.
-    \emph{Addresses RQ1 and RQ2.}
+    \item[Outcome rates.] The shares of correct, wrong and abstained answers, and the
+    precision when answering (correct / answered).
 
-    \item[Modality Attribution Precision (MAP).] How accurately generated content is
-    traced back to the correct source modality. A low score indicates the system
-    cannot reliably distinguish what it read in the text from what it read in a
-    figure. \emph{Addresses RQ2.}
+    \item[Retrieval Faithfulness (RF).] The share of the distinct tables and figures
+    in the evidence buffer that are the question's reference. It is undefined for the
+    text-only system, which retrieves no region. The \textbf{hit rate} reports
+    whether the reference was in the buffer at all. \emph{RQ1, RQ2.}
 
-    \item[Agent Efficiency Score (AES).] The ratio of necessary retrieval hops to
-    total tool calls. This guards against a degenerate solution in which the agent
-    achieves high accuracy by retrieving indiscriminately; such a system would be
-    accurate but neither efficient nor interpretable. \emph{Addresses RQ1.}
+    \item[Modality Attribution Precision (MAP).] Planned as a hand check of whether
+    each published claim cites the right source. For lack of time it was replaced by
+    an automatic stand-in: the share of published claims that cite the reference
+    table or figure. The stand-in undercounts claims that rightly cite supporting
+    text. \emph{RQ2.}
 
-    \item[Cross-modal Grounding Score (CGS).] Intersection-over-Union between
-    generated bounding boxes and ground-truth regions, measuring how precisely the
-    system localises its visual evidence. Computed on the manually annotated subset
-    described above. \emph{Addresses RQ3.}
+    \item[Agent Efficiency Score (AES).] Hops needed (1, or 2 on the multi-hop
+    subset) divided by search-tool calls, capped at 1. The automatic zoom is not a
+    choice and is not counted. \emph{RQ1.}
+
+    \item[Cross-modal Grounding Score (CGS).] Per annotated question, the best
+    intersection over union (IoU) between any proof box and any hand-drawn answer box on the
+    same page; a question without a box scores 0. Reported over all annotated
+    questions, over answered ones, and as the share with IoU $\geq 0.5$. Because IoU
+    proved to penalise correct proofs drawn at a different size
+    (Section~\ref{sec:rq3}), the \textbf{pointing game}~\cite{zhang2018pointing} is also
+    reported: a proof hits when the centre of its box lies inside a hand-drawn box.
+    This second measure was added after the IoU results were seen. \emph{RQ3.}
 \end{description}
 
-\noindent Taken together, RF and AES measure whether the agentic loop works, MAP
-measures whether cross-modal retrieval works, and CGS measures whether the
-attribution is precise enough to be genuinely verifiable by a human reader.
+\noindent Every rate is reported with a 95\% bootstrap interval over
+questions~\cite{efron1993bootstrap} (10{,}000 resamples). Differences between two
+systems are computed on the same questions, in the same order, and called beyond luck
+when their interval excludes zero.
+
+\subsection{Hand Annotation}
+\label{sec:annotation}
+
+The boxes and the 30 judge-check grades were produced by Saad Al Abeed, a co-author
+(Computer Science and Engineering, Islamic University of Technology), with an offline
+annotation page that showed each question, its gold answer, and the page with the
+reference table or figure outlined. Written guidelines asked for a box around only the
+part that holds the answer (the cell, the bar or line segment, the diagram block).
+Two rounds of quality control narrowed 16 boxes that covered the whole table or figure
+although the question named specific values; these were selected by a fixed rule and
+without looking at any system's boxes. In the first round (9 boxes) the boxes were
+redrawn by the first author on the values that the gold answer names; in the second
+(7 boxes) by the annotator. Five whole-figure boxes remain, for questions
+about an entire figure (the steps of a pipeline, a trend across a chart).

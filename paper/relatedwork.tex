@@ -1,0 +1,59 @@
+\chapter{Related Work}
+\label{sec:related}
+
+This work draws on four lines of research: question answering over documents with
+tables and figures, visual document retrieval, agentic and self-correcting
+retrieval-augmented generation, and the attribution and evaluation of generated
+answers.
+
+\section{Multimodal Document Question Answering}
+
+Document question answering moved from text to the visual content of documents with
+DocVQA~\cite{mathew2021docvqa}, which asks questions about images of document pages,
+and ChartQA~\cite{masry2022chartqa}, which requires reading values and trends from
+charts, often with arithmetic. SPIQA~\cite{pramanick2024spiqa} brings this to
+scientific papers: its questions are written so that the answer depends on a figure
+or table of the paper, each annotated with its reference. These benchmarks evaluate
+whether an answer is correct; none asks a system to show where on the page its answer
+comes from, which is the gap this thesis addresses with proof boxes.
+
+\section{Visual Document Retrieval}
+
+Late-interaction retrieval, introduced for text by ColBERT~\cite{khattab2020colbert},
+scores a query against a document by matching each query token to its most similar
+document token. ColPali~\cite{faysse2025colpali} applies it to page images: a
+vision-language model embeds each page as a grid of patch vectors, so pages can be
+retrieved without OCR, and its ColQwen2 variant is used here. VisRAG~\cite{yu2024visrag}
+and M3DocRAG~\cite{cho2024m3docrag} build retrieval-augmented generation on such page
+retrievers, passing retrieved page images to a vision-language generator. These
+systems retrieve once and answer; the present work retrieves pages and regions
+repeatedly under a planner, and reuses the retriever's patch similarities only as a
+last resort for locating a proof.
+
+\section{Agentic and Corrective Retrieval-Augmented Generation}
+
+Retrieval-augmented generation~\cite{lewis2020rag} conditions a generator on
+retrieved passages. ReAct~\cite{yao2023react} interleaves reasoning with tool calls,
+so that each observation informs the next action, which is the pattern of the planner
+here. Self-RAG~\cite{asai2024selfrag} trains a model to decide when to retrieve and to
+critique its own output with reflection tokens, and Corrective
+RAG~\cite{yan2024crag} adds an evaluator that grades retrieved documents and triggers
+further retrieval when they are poor. The two gates of this thesis play similar roles
+--- one judges the evidence before writing, one judges the claims after --- but are
+realised by prompting an off-the-shelf model, with no training, and they operate
+across modalities. Selective question answering~\cite{kamath2020selective} studies
+when a model should abstain; the selectivity analysis of Chapter~\ref{sec:results}
+applies its central question to the agent's abstentions.
+
+\section{Attribution and Evaluation of Generated Answers}
+
+ALCE~\cite{gao2023alce} asks language models to cite the passages that support each
+statement and measures citation quality; the claim links of this thesis follow the
+same idea but verify every citation before publishing it. RAGAS~\cite{es2024ragas}
+evaluates retrieval-augmented answers with a language model as the judge, and the
+reliability of such judges has been studied directly~\cite{zheng2023judge}; this
+thesis uses a model judge and checks it against a human grader. For visual
+attribution, saliency methods such as integrated
+gradients~\cite{sundararajan2017axiomatic} explain a model's input attention, and the
+pointing game~\cite{zhang2018pointing} evaluates whether a saliency map's peak falls on
+the annotated object; here the same test is applied to proof boxes.

@@ -24,7 +24,9 @@
 \definecolor{attgreen}{HTML}{DAECD0}  \definecolor{attline}{HTML}{4A7A2B}
 \definecolor{gatered}{HTML}{F8D7D7}   \definecolor{gateline}{HTML}{B32B2B}
 \definecolor{darkslate}{HTML}{D8DCE2} \definecolor{darkline}{HTML}{41505F}
+\usepackage{graphicx}
 \usepackage{titlesec}
+\input{numbers} % generated numbers quoted in the text (scripts/make_thesis_tables.py)
 \usepackage{hyperref} % hyperref should be loaded last
 
 % --- Styling for Chapter Headings ---
@@ -52,6 +54,7 @@
 
     {\Huge \textbf{Agentic Multimodal RAG with Grounded Explanations for Complex Scientific Reasoning}\par}
     \vspace{2cm}
+    % TODO: authors, student IDs, supervisor, department, university
 
     \vfill
     {\large \today\par}
@@ -59,7 +62,24 @@
 
 % --- Abstract ---
 \begin{abstract}
-As the volume of scientific literature grows, researchers increasingly rely on AI-assisted literature review systems. However, current multimodal Retrieval-Augmented Generation (RAG) models operate on a passive, single-pass paradigm, leading to severe factual hallucinations on complex, multi-hop scientific queries. Furthermore, these systems act as ``black boxes,'' providing no verifiable visual grounding for their claims. In this thesis, we propose an Agentic Multimodal RAG framework that utilizes an iterative reasoning loop to dynamically fetch text, tables, and figures. By integrating an Evidence Sufficiency Gate before generation, a Faithfulness Gate after it, and a Grounded Explainability Module, our system generates precise spatial bounding boxes and retrieval execution logs. We outline a methodology to benchmark this framework on the SPIQA dataset, establishing a new standard for trust and verifiability in AI-assisted scientific document understanding.
+Researchers increasingly rely on AI systems to answer questions about scientific
+papers, whose key results sit in tables and figures. Single-pass multimodal
+retrieval-augmented generation (RAG) answers every question, including those its
+evidence does not support, and shows no proof a reader could check. This thesis builds
+and evaluates an agentic multimodal RAG system that fetches text, tables and figures
+over several rounds, checks before writing whether its evidence suffices, verifies
+every claim against the evidence it cites, and marks each claim's proof with a box on
+the page. The system runs on consumer hardware with an open 4-bit 7B vision-language
+model. On 150 questions from the SPIQA benchmark, judged against gold answers by a
+model judge that agreed with a human grader on \nJudgeAgree{} answers (kappa
+\nJudgeKappa), the agent was wrong on \nFullWrong\% of the questions against
+\nSPWrong\% for a single-pass baseline, but also correct less often (\nFullCorrect\%
+against \nSPCorrect\%), because its abstentions did not single out the hard questions.
+Behind the identical graph, a stronger model made abstention selective. When a claim
+cited the right table or figure, its proof box pointed at the hand-annotated answer
+\nProofInsideFull\% of the time, and every checked table-cell proof did. The results
+show that the gates reduce confident errors and that their benefit is limited by the
+capacity of the model that makes their judgements.
 \end{abstract}
 
 % --- Table of Contents ---
@@ -68,9 +88,14 @@ As the volume of scientific literature grows, researchers increasingly rely on A
 
 % --- Main Content ---
 \input{introduction}
+\input{relatedwork}
 \input{methodology}
 \input{architecture}
 \input{Graph}
+\input{implementation}
+\input{results}
+\input{discussion}
+\input{conclusion}
 
 % --- References ---
 \cleardoublepage

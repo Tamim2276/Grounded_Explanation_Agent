@@ -1,0 +1,51 @@
+\chapter{Conclusion}
+\label{sec:conclusion}
+
+This thesis built and evaluated an agentic multimodal retrieval-augmented generation
+system for questions about scientific papers. A planner fetches text, tables and
+figures over several rounds; a Sufficiency Gate decides when the evidence suffices; a
+Faithfulness Gate verifies every claim against its cited evidence; and every published
+claim receives a proof box on the page and a place in an execution trace. The system
+was evaluated on 150 SPIQA questions against a single-pass and a text-only baseline,
+with a local 4-bit 7B model and, behind the identical graph, a stronger hosted model.
+
+\paragraph{RQ1.} With the 7B model, the agentic loop with its gates was wrong on
+\nFullWrong\% of the questions against \nSPWrong\% for single-pass, a reduction beyond
+luck; but it was also correct less often (\nFullCorrect\% against \nSPCorrect\%), because
+its abstentions did not single out the hard questions. On the small multi-hop subset it
+was both less often wrong and more often right. With a stronger model behind the same
+graph, abstention became selective.
+
+\paragraph{RQ2.} Visual retrieval located the reference table or figure for 73\% of the
+questions. Seeing tables and figures rather than their extracted text changed overall
+accuracy little with the 7B model, but helped clearly on multi-hop questions.
+
+\paragraph{RQ3.} When a claim cited the right table or figure, its proof box pointed at
+the answer \nProofInsideFull\% of the time, and every checked table-cell proof did. Grounding
+per question was limited by abstentions and by claims citing other sources, and IoU
+proved a poor yardstick when proof and annotation are drawn at different granularity.
+
+\section{Contributions}
+
+\begin{itemize}
+    \item An agentic multimodal RAG design with two gates and verified claim links,
+    implemented end to end and run on consumer hardware with an open model.
+    \item Exact proof boxes --- table cells, chart bars read from the PDF, quoted
+    sentences, captions and diagram labels --- with the retriever's similarity map
+    kept only for photographs.
+    \item A three-way evaluation (correct, wrong, abstained) with a checked model judge,
+    a selectivity analysis of abstention, and a grounding evaluation on hand-annotated
+    answer regions.
+    \item Evidence that the benefit of the gates depends on the capacity of the model
+    behind them, obtained by holding the architecture fixed and changing the model.
+\end{itemize}
+
+\section{Future Work}
+
+The results point to three directions. First, a hybrid in which the small local model
+reads and writes while a stronger model makes the two judgements; it should be tested
+on fresh questions from the unused SPIQA papers. Second, steering claims to cite the
+table or figure that holds the answer rather than surrounding text, which would raise
+grounding directly. Third, a user study measuring whether proof boxes and traces
+actually help researchers verify answers, and an extension beyond computer-science
+papers.

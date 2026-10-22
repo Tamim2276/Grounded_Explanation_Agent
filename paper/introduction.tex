@@ -28,9 +28,10 @@ Mapping to the research questions, this work aims to achieve the following:
 \end{itemize}
 
 \section{Contributions}
-By bridging visual document retrieval with iterative agentic reasoning, this thesis proposes a system designed to:
+By bridging visual document retrieval with iterative agentic reasoning, this thesis:
 \begin{itemize}
-    \item \textbf{Improve on Baselines:} Achieve higher QA accuracy on multi-hop scientific inquiries than single-pass multimodal and text-only agentic baselines.
-    \item \textbf{Reduce Hallucinations:} Employ active sufficiency and faithfulness checks so that answers rely strictly on retrieved context.
-    \item \textbf{Mitigate the Trust Gap:} Generate fine-grained visual attributions (exact bounding boxes) and an auditable retrieval log for every claim, making every answer verifiable by a human reader.
+    \item \textbf{Builds the system end to end} on consumer hardware with an open model: a planner over text, table and figure tools, a Sufficiency Gate, a Faithfulness Gate that verifies every claim's citation, and exact proof boxes with an execution trace.
+    \item \textbf{Reduces confident errors:} on 150 SPIQA questions the agent was wrong far less often than a single-pass baseline (\nFullWrong\% against \nSPWrong\%), at the cost of abstaining on questions the baseline answered correctly.
+    \item \textbf{Shows where the benefit is limited:} holding the architecture fixed and changing only the model, abstention became selective with a stronger model, so the gates' benefit depends on the model that makes their judgements.
+    \item \textbf{Mitigates the trust gap:} when a claim cites the right table or figure, its proof box points at the hand-annotated answer \nProofInsideFull\% of the time, and every checked table-cell proof does.
 \end{itemize}

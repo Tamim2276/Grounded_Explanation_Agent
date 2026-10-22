@@ -47,12 +47,12 @@ something up.
 \node[enc] (n1) at (0,0)       {\textbf{N1} Query Intake\\\scriptsize Parse \& decompose};
 \node[enc] (n2) at (4.6,0)     {\textbf{N2} Query Encoder\\\scriptsize Intent + filters};
 
-\node[ret] (n4) at (-4.6,-2.3) {\textbf{N4} Dual Index Build\\\scriptsize ColPali + SPECTER2};
+\node[ret] (n4) at (-4.6,-2.3) {\textbf{N4} Dual Index Build\\\scriptsize ColQwen2 + SPECTER2};
 \node[sup] (n5) at (0,-2.3)    {\textbf{N5} Agentic Planner\\\scriptsize ReAct state machine};
 
 \node[ret] (n6a) at (-4.6,-4.9){\textbf{N6a} TextRetriever\\\scriptsize Narrative chunks};
 \node[ret] (n6b) at (0,-4.9)   {\textbf{N6b} TableRetriever\\\scriptsize Locate + cell parser};
-\node[ret] (n6c) at (4.6,-4.9) {\textbf{N6c} FigureRetriever\\\scriptsize ColPali patches};
+\node[ret] (n6c) at (4.6,-4.9) {\textbf{N6c} FigureRetriever\\\scriptsize ColQwen2 patches};
 
 \node[ret] (n7) at (4.6,-6.9)  {\textbf{N7} Region Zoom\\\scriptsize Crop \& re-encode};
 
@@ -64,7 +64,7 @@ something up.
 
 \node[gate] (g2) at (0,-14.5)  {\textbf{G2} Faithfulness\\Gate};
 
-\node[att] (n10a) at (-4.6,-16.6){\textbf{N10a} Token Attrib.\\\scriptsize Integrated gradients};
+\node[att] (n10a) at (-4.6,-16.6){\textbf{N10a} Claim Links\\\scriptsize verified citations};
 \node[att] (n10b) at (0,-16.6)   {\textbf{N10b} Bounding Boxes\\\scriptsize Cell coords + patch sim.};
 \node[att] (n10c) at (4.6,-16.6) {\textbf{N10c} DAG Trace\\\scriptsize Retrieval log};
 
@@ -148,7 +148,7 @@ tables are exactly where OCR fails --- merged cells and multi-column headers bre
 text extraction. An image keeps the table's structure intact.
 
 \paragraph{N4 --- Dual Index Build.}
-Two search indexes are built from the same set of pages: one holds ColPali
+Two search indexes are built from the same set of pages: one holds ColQwen2
 visual embeddings of each page image (for finding tables and figures), the other
 holds SPECTER2 text embeddings of each chunk, stored in FAISS~\cite{johnson2019faiss}
 (for finding claims). Every retrieval tool (N6a--N6c, N7) reads from these two
@@ -193,17 +193,18 @@ where each cell sits on the page. This matters because the bounding boxes genera
 possible if this spatial position is kept --- a plain-text version of the table
 would lose it.
 
-\paragraph{N6c --- FigureRetriever (ColPali).}
+\paragraph{N6c --- FigureRetriever (ColQwen2).}
 Searches the visual index to find charts, plots, or dense tables without needing
 OCR. It also keeps the match scores it computed, because those scores are reused
 later to draw bounding boxes.
 
 \paragraph{N7 --- Region Zoom.}
-Crops in on part of a page and re-encodes it at higher resolution. This exists
-because finding the right page and reading a specific row inside it need different
-levels of detail --- a page-level match tells you which page has the table, not
-which row answers the question. On the running example, this runs after N6c finds
-the right page, zooming into the low-resource row so its cells become readable.
+Re-renders a retrieved figure at higher resolution. This exists because finding the
+right page and reading a specific data point inside it need different levels of
+detail --- a page-level match tells you which page has the chart, not which point
+answers the question. It is not chosen by the planner: it runs automatically after
+N6c whenever the figure covers less than 30\% of its page. On the running example
+the evidence is a table found by N6b, so N7 does not run.
 
 \subsection{Evidence Buffer and Sufficiency Gate (N8, G1)}
 
@@ -229,9 +230,9 @@ missing --- which is exactly how confident, wrong answers get produced.
 \subsection{Generation and Faithfulness Gate (N9, G2)}
 
 \paragraph{N9 --- Grounded Generator.}
-An open-weight vision-language model (such as Qwen2-VL) run locally, so that N10a
-can compute gradients through it. It writes the answer using only what is in the
-evidence buffer. It cannot search on
+An open-weight vision-language model (Qwen2.5-VL-7B, 4-bit) run locally. It writes
+the answer as a list of claims, each citing the evidence it rests on --- a quote, a
+table cell, or a figure observation --- using only what is in the evidence buffer. It cannot search on
 its own and cannot fill in numbers from memory --- everything it says has to trace
 back to something already retrieved.
 
@@ -245,15 +246,19 @@ the model might believe about the world.
 
 \subsection{Attribution and Output (N10--N12)}
 
-\paragraph{N10a --- Token Attribution.}
-Highlights which retrieved sentences most influenced each part of the answer, using
-integrated gradients computed through the N9 generator.
+\paragraph{N10a --- Claim Links.}
+Links each published claim to the evidence it cites, as verified by G2: the quoted
+sentence, the table cell, or the figure. This replaces the token attribution by
+integrated gradients first planned, which cannot be computed through a quantised
+model served by llama.cpp.
 
 \paragraph{N10b --- Bounding Boxes.}
 Draws a box --- $[x_{\min}, y_{\min}, x_{\max}, y_{\max}]$ --- around the exact spot
 on the page a claim came from. For a table cell, the box is the cell position N6b
-recorded; for a figure, it encloses the highest-scoring patches from N6c (or N7).
-This only works because N6b kept cell positions and N6c kept its match scores.
+recorded; for a figure, it is the bar read from the PDF, or the diagram labels or
+caption the claim names; for a quote, the sentence found on the page. Only for
+photographs does it enclose the highest-scoring patches of ColQwen2's similarity map.
+This only works because N6b kept cell positions and ingestion kept the page layout.
 
 \paragraph{N10c --- DAG Trace.}
 Logs what actually happened: which tools ran, in what order, and how many times the
