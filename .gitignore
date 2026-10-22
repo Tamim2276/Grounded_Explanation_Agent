@@ -31,3 +31,4 @@ PLAN.md
 
 # Secrets: the Gemini API key lives in .env, never in git
 .env
+paper_conference.zip

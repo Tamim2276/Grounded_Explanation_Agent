@@ -1,0 +1,43 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Question Answering over Document Images}
+
+Questions about the visual content of documents were made a benchmark task by
+DocVQA~\cite{mathew2021docvqa}, and ChartQA~\cite{masry2022chartqa} added questions that
+require values and trends to be read from charts. SPIQA~\cite{pramanick2024spiqa}
+carries the task to scientific papers and annotates the reference figure or table of
+each question. These benchmarks score whether an answer is correct; the location of
+its evidence is not asked for, which leaves the verification problem open.
+
+\subsection{Visual Document Retrieval}
+
+Late interaction, introduced for passages by ColBERT~\cite{khattab2020colbert}, scores
+a query by matching each of its tokens to the most similar document token.
+ColPali~\cite{faysse2025colpali} applies the same scoring to page images embedded as
+grids of patches, so that pages can be retrieved without OCR. On top of such
+retrievers, VisRAG~\cite{yu2024visrag} and M3DocRAG~\cite{cho2024m3docrag} pass the
+retrieved page images to a vision-language generator. In both systems retrieval is
+performed once, whereas in the present system pages and regions are retrieved
+repeatedly under the control of a planner.
+
+\subsection{Agentic and Self-Correcting RAG}
+
+In ReAct~\cite{yao2023react}, reasoning steps and tool calls are interleaved, so that
+each observation shapes the next action. Self-RAG~\cite{asai2024selfrag} trains a model
+to decide when to retrieve and to critique its own output, and Corrective
+RAG~\cite{yan2024crag} grades the retrieved documents and retrieves again when they are
+poor. The two gates used here play comparable roles, but they are realised by
+prompting an off-the-shelf model without training, and they judge evidence from three
+modalities. Abstention has been studied as selective question
+answering~\cite{kamath2020selective}; the same question, whether a system abstains on
+the right inputs, is asked here of the agent.
+
+\subsection{Attribution and Evaluation}
+
+ALCE~\cite{gao2023alce} measures how well generated statements are supported by the
+passages they cite. RAGAS~\cite{es2024ragas} uses a language model as the evaluator of
+RAG answers, and the reliability of such judges has been examined
+directly~\cite{zheng2023judge}. For visual attribution, the pointing
+game~\cite{zhang2018pointing} tests whether the peak of a saliency map falls on the
+annotated object; the same test is applied in this work to proof boxes.

@@ -1,0 +1,129 @@
+\section{Proposed System}
+\label{sec:method}
+
+\subsection{Overview}
+
+The system is built as a graph of nodes, each with a single task, in
+LangGraph~\cite{langgraph}. The flow of a question through the graph is shown in
+Fig.~\ref{fig:pipeline}. The question is first analysed; the planner then selects one
+retrieval tool per round, and the results are added to an evidence buffer. The
+sufficiency gate (G1) either sends control back to the planner for another round or
+releases the buffer to the writer. The writer drafts claims with citations, the
+faithfulness gate (G2) checks every claim and returns failed drafts for rewriting, and
+the accepted claims are grounded with proof boxes before the answer is returned. Two
+loops are therefore present, and both are bounded: at most three retrieval rounds and
+at most two rewrites are allowed.
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  node distance=3.2mm,
+  box/.style={draw=black!70, rounded corners=2pt, line width=0.6pt, align=center,
+              text width=4.6cm, minimum height=6.2mm, inner sep=2pt, fill=#1},
+  box/.default=white,
+  tool/.style={draw=black!70, rounded corners=2pt, line width=0.6pt, align=center,
+               text width=2.0cm, minimum height=6.2mm, inner sep=2pt, fill=orange!12},
+  gate/.style={box=red!10, line width=0.9pt},
+  arr/.style={-{Stealth[length=2mm]}, line width=0.6pt},
+  back/.style={-{Stealth[length=2mm]}, line width=0.6pt, dashed, red!70!black},
+  lab/.style={font=\footnotesize, align=left}
+]
+\node[box=gray!10] (q) {Question};
+\node[box=blue!8, below=of q] (ana) {Question analysis: sub-goals and\\ the kind of evidence each needs};
+\node[box=violet!10, below=of ana] (plan) {Planner: choose the next tool};
+\node[tool, below=4mm of plan] (tab) {Table\\ retriever};
+\node[tool, left=1.2mm of tab] (txt) {Text\\ retriever};
+\node[tool, right=1.2mm of tab] (fig) {Figure\\ retriever (+ zoom)};
+\node[box=teal!10, below=4mm of tab] (buf) {Evidence buffer (linked items)};
+\node[gate, below=of buf] (g1) {G1: is the evidence sufficient?};
+\node[box=orange!18, below=5mm of g1] (wr) {Writer: claims, each citing a\\ quote, a table cell or a figure};
+\node[gate, below=of wr] (g2) {G2: is every claim supported?};
+\node[box=green!12, below=of g2] (out) {Proof boxes, claim links and\\ trace $\rightarrow$ answer};
+
+\draw[arr] (q) -- (ana);
+\draw[arr] (ana) -- (plan);
+\draw[arr] (plan) -- (tab);
+\draw[arr] (plan.south) -- ++(0,-1.5mm) -| (txt.north);
+\draw[arr] (plan.south) -- ++(0,-1.5mm) -| (fig.north);
+\draw[arr] (tab) -- (buf);
+\draw[arr] (txt.south) -- ++(0,-1.5mm) -| (buf.north);
+\draw[arr] (fig.south) -- ++(0,-1.5mm) -| (buf.north);
+\draw[arr] (buf) -- (g1);
+\draw[arr] (g1) -- node[lab, right=1mm] {yes, or best effort (flagged)} (wr);
+\draw[arr] (wr) -- (g2);
+\draw[arr] (g2) -- node[lab, right=1mm] {yes} (out);
+% the two loops run outside the row of tools, with their labels on the horizontal segment
+\coordinate (xl) at (-3.75,0);
+\coordinate (xr) at (3.75,0);
+\draw[back] (g1.west) -- node[lab, above, midway] {no ($\leq$3)} (g1.west -| xl) |- (plan.west);
+\draw[back] (g2.east) -- node[lab, above, midway] {no ($\leq$2)} (g2.east -| xr) |- (wr.east);
+\end{tikzpicture}
+\caption{Flow of a question through the system. Solid arrows show the forward path.
+Dashed arrows show the two bounded loops: the sufficiency gate (G1) returns control to
+the planner for another round (at most three), and the faithfulness gate (G2) returns
+the draft to the writer (at most two rewrites).}
+\label{fig:pipeline}
+\end{figure}
+
+\subsection{Question Analysis and Planning}
+
+The question is split into sub-goals, and the names it mentions (datasets, methods,
+metrics) are extracted for later filtering. The kind of evidence each sub-goal needs,
+a table or a figure, is not left to the language model. It is decided by a vote of the
+nine most similar labelled SPIQA questions taken from papers that are used in neither
+the development nor the test split. On the development questions, this vote chose the
+reference's kind in 17 of 20 cases, whereas the model alone chose it in 8. The planner
+then selects one tool per round and writes the query for it; a tool that has already
+been used for a sub-goal may be called again only with a new query.
+
+\subsection{Retrieval Tools}
+
+Three tools can be selected by the planner. The text retriever ranks the paper's
+paragraphs by reciprocal rank fusion~\cite{cormack2009rrf} of two lists: SPECTER2
+embeddings~\cite{singh2023scirepeval} searched with FAISS~\cite{johnson2019faiss}, and
+keyword overlap weighted by inverse document frequency. The keyword list was added
+because, within one paper, every paragraph shares the topic that the embedding
+captures, whereas SPIQA questions reuse the paper's own terms. The table retriever
+ranks the paper's tables by their caption words and by the visual score of their page,
+and returns each table as cells recovered with Table Transformer~\cite{smock2022pubtables},
+each cell keeping its page coordinates. The figure retriever scores page images with
+ColQwen2, a model of the ColPali family~\cite{faysse2025colpali}, and returns the best
+figure. A fourth tool, a zoom that re-renders the figure at 300~dpi, is not chosen by
+the planner; it is run automatically when a figure covers less than 30\% of its page.
+Every retrieved item enters the evidence buffer with its page, tool and round, and
+items are linked when they share a page or when a sentence names a table or figure.
+
+\subsection{Sufficiency Gate}
+
+Before anything is written, the buffer is judged by G1. The gate is asked to name the
+facts in the buffer that answer the question, with their evidence identifiers, and to
+give its verdict only afterwards. The order matters because the reply is generated as
+JSON in schema order: when the verdict came first, it was justified only after it had
+been made. If G1 is not convinced after three rounds, two cases are separated. When no
+answering fact was found, the system abstains and reports what is missing. When such
+facts were found but judged incomplete, the answer is written from them as a
+\emph{best effort} and is marked as possibly incomplete. In this way, G1 decides when
+the search stops, while the decision to publish a claim is left to G2.
+
+\subsection{Writing and Faithfulness Gate}
+
+The writer receives the buffer as text, cells and figure images, and returns a list of
+claims. Every claim must cite its evidence as a verbatim quote, a table cell given by
+row, column and value, or an observation about a figure. Each citation is verified by
+G2 in two layers. First, a quote must occur in the cited paragraph and a cell value
+must equal the parsed cell; both sides are normalised beforehand for the artefacts of
+PDF text extraction, such as ligatures, line-end hyphens and spaced decimals. Second,
+the model is asked whether the cited evidence supports the claim as written. A failed
+draft is returned with the reason, and claims that still fail after two rewrites are
+withheld and listed as unconfirmed.
+
+\subsection{Grounding the Claims}
+
+Every published claim is given a box on the page, and exact sources are preferred: the
+cited table cell, the bar of a vector chart read directly from the PDF, the quoted
+sentence located on the page, the caption, or the labels of a diagram that the claim
+names. Only for photographs, which carry no printed words, is the box taken from the
+highest-scoring patches of the ColQwen2 similarity map computed for the claim's text.
+An execution trace, listing the tools called and every gate decision, is returned with
+the answer.

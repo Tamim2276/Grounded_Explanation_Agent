@@ -1,0 +1,52 @@
+\section{Introduction}
+\label{sec:intro}
+
+A large share of what a scientific paper reports is never written out in its running
+text. The decisive number sits in a table cell, and the trend that supports a claim is
+drawn in a chart. A question answering system for papers therefore has to read tables
+and figures, and benchmarks such as SPIQA~\cite{pramanick2024spiqa} were built for
+exactly this setting: each question is tied to the figure or table that holds its
+answer.
+
+Most retrieval-augmented generation (RAG) systems~\cite{lewis2020rag} retrieve once and
+then answer. When the retrieved material does not contain the answer, the generator
+still produces one, and a fluent but unsupported answer is hard to tell apart from a
+correct one. A second problem is verification. Even a correct answer is of limited use
+to a researcher if the cell or chart region it rests on cannot be located, since the
+answer then has to be checked by reading the paper anyway.
+
+In this work, both problems are approached with the same idea: the system is made to
+check before it answers. An agent gathers evidence over several rounds, choosing the
+next tool from a text, a table and a figure retriever. A sufficiency gate decides
+whether the evidence suffices before anything is written. Each claim of the draft must
+cite its evidence, and a faithfulness gate verifies every citation. Every published
+claim is then grounded by a box on the page: a table cell, a chart bar, a quoted
+sentence or a diagram label. When the evidence does not suffice, the system says so
+instead of guessing.
+
+Three research questions were studied:
+\begin{itemize}
+    \item \textbf{RQ1:} Does the agentic loop with its gates improve accuracy and reduce
+    wrong answers compared with single-pass retrieval?
+    \item \textbf{RQ2:} Can visual document retrieval bring the right tables and figures
+    to the agent, and does seeing them help?
+    \item \textbf{RQ3:} Can the agent ground its claims with precise boxes on the page?
+\end{itemize}
+
+The main contributions are as follows:
+\begin{itemize}
+    \item An agentic multimodal RAG design with two gates and verified claim
+    citations, implemented end to end with an open model on consumer hardware.
+    \item An exact grounding scheme that boxes cells, bars, sentences and labels read
+    from the PDF, with the retriever's similarity map kept only for photographs.
+    \item A three-way evaluation (correct, wrong, abstained) with a checked model judge,
+    an analysis of whether abstention is selective, and hand-annotated answer regions.
+    \item Evidence, obtained by keeping the graph fixed and changing only the model,
+    that the benefit of the gates is bounded by the model that makes their judgements.
+\end{itemize}
+
+The rest of the paper is organised as follows. Related work is reviewed in
+Section~\ref{sec:related}, and the system is described in Section~\ref{sec:method}. The
+experimental setup is given in Section~\ref{sec:setup}, the results are reported in
+Section~\ref{sec:results}, and they are discussed in Section~\ref{sec:discussion}.
+Section~\ref{sec:conclusion} concludes the paper.

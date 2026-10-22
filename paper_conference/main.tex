@@ -1,0 +1,53 @@
+\documentclass[conference,a4paper]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}               % sorts and compresses citations: [3]--[5], never [3][4][5]
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{times}
+\sloppy
+
+\setlength{\textfloatsep}{6pt plus 1pt minus 1pt}
+\setlength{\floatsep}{4pt plus 1pt minus 1pt}
+\setlength{\intextsep}{6pt plus 1pt minus 1pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{2pt}
+
+\input{numbers}   % numbers quoted in the text, generated from the results
+
+\begin{document}
+
+\title{Checking Before Answering: An Agentic Multimodal RAG with Verified,
+Box-Grounded Claims for Scientific Papers}
+
+% --- Author block. Remove it for a double-blind submission; check the venue's rules. ---
+%\author{
+%\IEEEauthorblockN{Md Tamim Hossain\IEEEauthorrefmark{1} and Saad Al Abeed\IEEEauthorrefmark{2}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}\textit{Department of Computer Science and Engineering},
+%\textit{Military Institute of Science and Technology (MIST)}, Dhaka, Bangladesh\\
+%\IEEEauthorrefmark{2}\textit{Department of Computer Science and Engineering},
+%\textit{Islamic University of Technology (IUT)}, Gazipur, Bangladesh\\
+%Email: TODO, TODO}
+%}
+
+\maketitle
+
+\input{abstract}
+\input{introduction}
+\input{related_work}
+\input{method}
+\input{experimental_setup}
+\input{results}
+\input{discussion}
+\input{conclusion}
+\input{acknowledgment}
+
+\bibliographystyle{IEEEtran_doi}  % IEEEtran.bst + the doi field (IEEE style requires DOIs)
+\bibliography{references}
+
+\end{document}

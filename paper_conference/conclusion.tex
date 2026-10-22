@@ -1,0 +1,15 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+An agentic multimodal RAG system was presented that gathers evidence over several
+rounds, checks the sufficiency of the evidence before writing, verifies every claim
+against its citation, and grounds each published claim with a box on the page. On 150
+SPIQA questions, wrong answers were reduced from \nSPWrong\% to \nFullWrong\% compared
+with single-pass retrieval, at the cost of abstentions that, with a 7B model, did not
+single out the hard questions; with a stronger model behind the same graph, abstention
+became selective. Where a claim cited the right table or figure, its proof box pointed
+at the answer in \nProofInsideFull\% of cases. In future work, a hybrid in which a small
+model reads and writes while a stronger model makes the two judgements will be
+evaluated on unused SPIQA papers, claims will be steered towards the table or figure
+that holds the answer, and the value of the proofs for human verification will be
+measured in a user study.

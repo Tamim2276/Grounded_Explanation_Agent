@@ -1,0 +1,25 @@
+\begin{abstract}
+Questions about scientific papers are often answered by tables and figures, yet
+single-pass multimodal retrieval-augmented generation (RAG) answers every question,
+supported or not, and gives the reader no way to check where a claim came from. In
+this paper, an agentic multimodal RAG system is presented that gathers text, tables and
+figures over several rounds, asks a sufficiency gate whether the gathered evidence is
+enough before any answer is written, verifies each claim against the evidence it cites,
+and draws a proof box on the page for every published claim. The system was built
+with an open 4-bit 7B vision-language model on a single consumer GPU and evaluated on
+150 questions from SPIQA against a single-pass and a text-only baseline. Answers were
+graded by a model judge that agreed with a human grader on \nJudgeAgree{} answers
+(kappa \nJudgeKappa). The agent was wrong on \nFullWrong\% of the questions, against
+\nSPWrong\% for single-pass, but it was also correct less often (\nFullCorrect\% against
+\nSPCorrect\%), because its abstentions did not fall on the harder questions. When the
+same graph was run with a stronger model, abstention became selective. Where a claim
+cited the correct table or figure, its proof box pointed at the hand-annotated answer
+in \nProofInsideFull\% of cases, and every checked table-cell proof did. The gates are
+therefore shown to cut confident errors, while their full benefit depends on the
+capacity of the model that makes the judgements.
+\end{abstract}
+
+\begin{IEEEkeywords}
+retrieval-augmented generation, multimodal question answering, agentic retrieval,
+answer attribution, hallucination, scientific documents
+\end{IEEEkeywords}

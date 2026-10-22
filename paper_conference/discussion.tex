@@ -1,0 +1,39 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{The Model Limits the Gates}
+
+The design rests on the expectation that a system which checks its evidence and its
+claims would turn confident errors into stated gaps. With the 7B model, only half of
+this expectation was met: wrong answers became far less frequent, but easy questions
+were held back as readily as hard ones. Because the graph, prompts and settings were
+kept identical when the model was exchanged, the two explanations can be separated.
+With the stronger model, G1 was convinced about five times as often, far fewer claims
+were rejected by G2, and the held-back questions were the hard ones. The gates
+therefore behave as intended when the model behind them can judge sufficiency and read
+tables and charts reliably, and a 4-bit 7B model cannot yet do so consistently. A
+practical arrangement follows from this result: a small local model can read and
+write, while the two judgements are delegated to a stronger model.
+
+\subsection{Measuring Grounding}
+
+IoU against a hand-drawn box was fixed as the grounding measure before the evaluation,
+but it was found to compare two drawing conventions as much as the precision of a
+proof. A cell box spans its column, while an annotator boxes the number, or a whole
+row for a comparison. The pointing game is insensitive to these conventions and is
+therefore reported next to IoU. In future annotation, the unit should be fixed in
+advance, for instance whole cells for tables.
+
+\subsection{Threats to Validity}
+
+The judge is the same model as the evaluated local systems; its agreement with a human
+grader was substantial, but it was checked on 25 answers only. The answer boxes were
+drawn by one annotator who, as a co-author, knew the aims of the work. The best-effort
+rule was introduced after a first test run, and the pointing game after the IoU
+results; both are disclosed, and the original measures are reported. The study covers
+150 questions from 31 computer-science papers, retrieval within a known paper, one
+quantised model run once at temperature 0, and a multi-hop subset of ten questions.
+Reference attribution, used in place of a hand check of each citation, undercounts
+claims that correctly cite supporting text. Finally, the benefit of proof boxes for
+human verification was argued from their precision and was not measured in a user
+study.
