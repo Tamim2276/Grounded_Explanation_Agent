@@ -29,8 +29,8 @@ the model is separated from that of the architecture.
 
 \subsection{Implementation}
 
-The language model is Qwen2.5-VL-7B-Instruct~\cite{bai2025qwen25vl}, quantised to
-4~bits and served by llama.cpp. All experiments were run offline on one
+Every model role was filled by Qwen2.5-VL-7B-Instruct~\cite{bai2025qwen25vl}, run as a
+4-bit quantised build behind a llama.cpp server. All experiments were run offline on one
 PC with an Intel Arc B580 GPU (12~GB) and 15.6~GB of RAM. Every model reply is
 constrained to a JSON schema, generated at temperature 0 with a fixed seed, and cached
 under a hash of the request, so that every answer can be reproduced exactly.
@@ -53,15 +53,16 @@ Retrieval faithfulness (RF) is the share of the distinct tables and figures in t
 buffer that are the reference, and the hit rate is the share of questions whose
 reference reached the buffer. The agent efficiency score (AES) is the number of hops
 needed (one, or two on the multi-hop subset) divided by the number of search calls,
-capped at one. The cross-modal grounding score (CGS) is the best intersection over union
-(IoU) between a proof box and a hand-drawn answer box, with zero for a question
-without a box. Since IoU was found to penalise correct proofs drawn at another size
+capped at one. For the cross-modal grounding score (CGS), each proof box of a question is
+laid over the hand-drawn answer boxes, and the largest ratio of their shared area to
+their combined area (IoU) is kept; a question left without a box scores zero. Since IoU was found to penalise correct proofs drawn at another size
 (Section~\ref{sec:rq3}), the pointing game~\cite{zhang2018pointing} is also reported: a
 proof counts as a hit when the centre of its box lies inside an answer box. This measure
 was added after the IoU results were seen. Finally, the share of published claims that
-cite the reference table or figure is reported as reference attribution. All rates are
-given with 95\% bootstrap intervals over questions (10{,}000
-resamples), and differences are paired by question.
+cite the reference table or figure is reported as reference attribution. Uncertainty
+is shown as a 95\% interval obtained by resampling the questions with replacement
+10{,}000 times; when two systems are compared, the same resampled questions are used
+for both.
 
 \subsection{Annotation}
 

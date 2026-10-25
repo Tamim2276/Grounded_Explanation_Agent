@@ -19,8 +19,8 @@ pages and regions are retrieved repeatedly under the control of a planner.
 Retrieval-augmented generation~\cite{lewis2020rag} conditions a generator on retrieved
 passages. In ReAct~\cite{yao2023react}, reasoning steps and tool calls are interleaved,
 so that each observation shapes the next action, which is the pattern followed by the
-planner here. Self-RAG~\cite{asai2024selfrag} trains a model to decide when to retrieve
-and to critique its own output with reflection tokens. The two gates used in this work
+planner here. In Self-RAG~\cite{asai2024selfrag}, special reflection tokens are learned, so that a
+single model can judge whether retrieval is needed and grade what it has generated. The two gates used in this work
 play comparable roles, one judging the evidence before writing and one judging the
 claims after it, but they are realised by prompting an off-the-shelf model without any
 training, and they judge evidence from three modalities.
