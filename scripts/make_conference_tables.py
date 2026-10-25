@@ -80,8 +80,10 @@ def main():
         "\\midrule", *rows, "\\bottomrule", "\\end{tabular}"])
 
     # Figure: outcomes, drawn at its printed size
+    # pdf.fonttype 42: embed TrueType fonts. matplotlib's default (3) writes Type 3 fonts, which
+    # IEEE (PDF eXpress) and the conference rules forbid.
     plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "Nimbus Roman", "DejaVu Serif"],
-                         "font.size": 8.5, "hatch.linewidth": 0.6})
+                         "font.size": 8.5, "hatch.linewidth": 0.6, "pdf.fonttype": 42, "ps.fonttype": 42})
     fig, ax = plt.subplots(figsize=(3.45, 2.15))
     order = list(reversed(SYSTEMS))
     for i, (k, name) in enumerate(order):
